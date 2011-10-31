@@ -1,12 +1,20 @@
-jQuery Mobile Framework
-=======================
-[Official Site: http://jquerymobile.com](http://jquerymobile.com)
+<pre>
+ATTENTION : Ce dépôt est une copie du dépôt officiel sur github du [Framework jQuery Mobile : https://github.com/jquery/jquery-mobile](https://github.com/jquery/jquery-mobile)
 
-[Demos and Documentation](http://jquerymobile.com/test/)
+Le but de ce dépôt est de permettre une traduction complète de la documentation de jQuery Mobile en français.
 
-How to build your own jQuery Mobile CSS and JS files
-====================================================
-Clone this repo and build the js and css files (you'll need Git and Make installed):
+Cette partie de la documentation est en cours de traduction. Cela signifie qu'elle est traduite de manière soit incomplète, soit inexacte. En attendant que cette traduction soit terminée, vous pouvez consulter la [version en anglais](https://github.com/jquery/jquery-mobile) pour des informations plus fiables.
+</pre>
+
+Framework jQuery Mobile (Traduction française)
+==============================================
+[Site Officiel: http://jquerymobile.com](http://jquerymobile.com)
+
+[Demos et Documentation](http://jquerymobile.com/test/)
+
+Comment construire vos propres fichiers JS et CSS pour jQuery Mobile CSS and JS files
+=====================================================================================
+Clonez ce dépôt et contruisez les fichiers js et css (vous aurez besoin que Git et Make soient installés) :
 
     git clone git://github.com/jquery/jquery-mobile.git
     cd jquery-mobile
