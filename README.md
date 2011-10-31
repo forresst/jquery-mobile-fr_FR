@@ -1,36 +1,36 @@
 ATTENTION ! ATTENTION ! ATTENTION !
 ===================================
-ATTENTION : Ce d√©p√¥t est une copie du d√©p√¥t officiel sur github du
+ATTENTION : Ce dÈpÙt est une copie du dÈpÙt officiel sur github du
 [Framework jQuery Mobile : https://github.com/jquery/jquery-mobile](https://github.com/jquery/jquery-mobile)
 
-Le but de ce d√©p√¥t est de permettre une traduction compl√®te de la documentation de jQuery Mobile en fran√ßais.
+Le but de ce dÈpÙt est de permettre une traduction complËte de la documentation de jQuery Mobile en franÁais.
 
-Cette partie de la documentation est en cours de traduction. Cela signifie qu'elle est traduite de mani√®re
-soit incompl√®te, soit inexacte. En attendant que cette traduction soit termin√©e, vous pouvez consulter la
+Cette partie de la documentation est en cours de traduction. Cela signifie qu'elle est traduite de maniËre
+soit incomplËte, soit inexacte. En attendant que cette traduction soit terminÈe, vous pouvez consulter la
 [version en anglais](https://github.com/jquery/jquery-mobile) pour des informations plus fiables.
 
-Framework jQuery Mobile (Traduction fran√ßaise)
-==============================================
+Framework jQuery Mobile
+=======================
 [Site Officiel: http://jquerymobile.com](http://jquerymobile.com)
 
 [Demos et Documentation](http://jquerymobile.com/test/)
 
 Comment construire vos propres fichiers JS et CSS pour jQuery Mobile CSS and JS files
 =====================================================================================
-Clonez ce d√©p√¥t et contruisez les fichiers js et css (vous aurez besoin que Git et Make soient install√©s) :
+Clonez ce dÈpÙt et contruisez les fichiers js et css (vous aurez besoin que Git et Make soient installÈs) :
 
     git clone git://github.com/jquery/jquery-mobile.git
     cd jquery-mobile
     make
 
-A full version and a minified version of the jQuery Mobile JavaScript and CSS files will be created 
-in a folder named "compiled". There is also now a Structure only css file so you can add your own theme on top of it.
+Une version compl√®te et une version minifi√©e du JavaScript de jQuery Mobile et des fichiers CSS seront cr√©√©s dans un dossier nomm√©
+"compiled". Il y a aussi maintenant une structure seulement pour les fichiers css ainsi vous pouvez ajouter vos propres th√®mes.
 
-Submitting bugs
-===============
-If you think you've found a bug, please report it by following these instructions:  
+Soumettre des bugs
+==================
+Si vous pensez que vous avez trouv√© un bug, s'il vous pla√Æt reportez le en suivant ces instructions :  
 
-1. Visit the [Issue tracker: https://github.com/jquery/jquery-mobile/issues](https://github.com/jquery/jquery-mobile/issues)
+1. Visitez le [Issue tracker: https://github.com/jquery/jquery-mobile/issues](https://github.com/jquery/jquery-mobile/issues)
 2. Create an issue explaining the problem and expected result
     - Be sure to include any relevant information for reproducing the issue
     - Include information such as:

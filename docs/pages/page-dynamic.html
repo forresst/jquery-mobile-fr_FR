@@ -217,51 +217,51 @@ function showCategory( urlObj, options )
 			// Le nombre d'éléments dans la catégorie.
 			numItems = cItems.length;
 
-		// Generate a list item for each item in the category
-		// and add it to our markup.
+		// Génère un élément de liste pour chaque élément dans la catégorie
+		// et l'ajoute à notre balisage.
 		for ( var i = 0; i &lt; numItems; i++ ) {
 			markup += "&lt;li&gt;" + cItems[i].name + "&lt;/li&gt;";
 		}
 		markup += "&lt;/ul&gt;";
 
-		// Find the h1 element in our header and inject the name of
-		// the category into it.
+		// Recherche l'élément h1 dans notre entête et injecte le nom de
+		// la catégorie à l'intérieur.
 		$header.find( "h1" ).html( category.name );
 
-		// Inject the category items markup into the content element.
+		// Injecte le balisage des éléments de la catégorie dans l'élément de contenu.
 		$content.html( markup );
 
-		// Pages are lazily enhanced. We call page() on the page
-		// element to make sure it is always enhanced before we
-		// attempt to enhance the listview markup we just injected.
-		// Subsequent calls to page() are ignored since a page/widget
-		// can only be enhanced once.
+		// Les pages sont paresseusement améliorées. Nous appelons page() sur l'élément de la
+		// page pour s'assurer qu'il est toujours amélioré avant que nous tentions
+		// d'améliorer le balisage de la vue de la liste que nous venons injecté.
+		// Les appels ultérieurs à page() sont ignorés afin qu'une page/widget
+		// ne puisse être améliorée qu'une fois.
 		$page.page();
 
-		// Enhance the listview we just injected.
+		// Améliore la vue de la liste que nous venons d'injecter.
 		$content.find( ":jqmData(role=listview)" ).listview();
 
-		// We don't want the data-url of the page we just modified
-		// to be the url that shows up in the browser's location field,
-		// so set the dataUrl option to the URL for the category
-		// we just loaded.
+		// Nous ne voulons pas que le data-url de la page que nous venons de modifié,
+		//  soit l'URL qui apparaît dans le champ d'adresse du navigateur,
+		// ainsi nous définissons l'option dataUrl à l'URL de la catégorie
+		// que nous venons de charger.
 		options.dataUrl = urlObj.href;
 
-		// Now call changePage() and tell it to switch to
-		// the page we just modified.
+		// Maintenant appelons changePage () et disons lui de
+		//  passer à la page que nous venons de modifier.
 		$.mobile.changePage( $page, options );
 	}
 }
 </code></pre>
-<p>In our sample app, the hash of the URL we handle contains 2 parts:</p>
+<p>Dans notre exemple d'application, le hash de l'URL que nous traitons contient 2 parties :</p>
 <pre><code>
 #category-items?category=vehicles
 </code></pre>
-<p>The first part, before the '?' is actually the id of the page to write content into, the part after the '?' is info the app uses to figure out what data it should use when generating the markup for the page. The first thing showCategory() does is deconstruct this hash to extract out the id of the page to write content into, and the name of the category it should use to get the correct set of data from our in-memory JavaScript category object. After it figures out what category data to use, it then generates the markup for the category, and then injects it into the header and content area of the page, wiping out any other markup that previously existed in those elements.</p>
-<p>After it injects the markup, it then calls the appropriate jQuery Mobile widget calls to enhance the list markup it just injected. This is what turns the normal list markup into a fully styled listview with all its behaviors.</p>
-<p>Once that's done, it then calls $.mobile.changePage(), passing it the DOM element of the page we just modified, to tell the framework that it wants to show that page.</p>
-<p>Now an interesting problem here is that jQuery Mobile typically updates the browser's location hash with the URL associated with the page it is showing. Because we are re-using the same page for each category, this wouldn't be ideal, because the URL for that page has no specific category info associated with it. To get around this problem, showCategory() simply sets the dataUrl property on the options object it passes into changePage() to tell it to display our original URL instead.</p>
-<p>That's the sample in a nutshell. It should be noted that this particular sample and its usage is not a very good example of an app that degrades gracefully when JavaScript is turned off. That means it probably won't work very well on C-Grade browsers. We will be posting other examples that demonstrate how to degrade gracefully in the future. Check this <a href="http://jquerymobile.com/test/docs/pages/dynamic-samples/">page</a> for updates.</p>
+<p>La première partie, avant le '?' est en fait l'id de la page pour écrire le contenu à l'intérieur, dans la partie après le '?', c'est l'info que l'application utilise pour faire figurer les données à prendre lors de la génération du balisage de la page. La première chose que showCategory () fait, c'est de déconstruire ce hash pour extraire l'id de la page pour écrire le contenu à l'intérieur, et le nom de la catégorie qu'il doit utiliser pour obtenir le bon jeu de données de notre objet JavaScript category en mémoire. Après qu'il ait récupérer les données de la catégorie à utiliser, il génère ensuite le balisage de la catégorie, puis l'injecte dans l'entête et dans la zone de contenu de la page, effaçant toute les autres balisages qui existaient déjà dans ces éléments.</p>
+<p>Après il injecte le balisage, il appelle alors le widget de jQuery Mobile approprié pour améliorer le balisage de la liste qu'il vient d'injecter. C'est ce qui transforme le balisage de la liste normale dans une vue de liste totalement stylisée avec tous ses comportements.</p>
+<p>Une fois cela fait, il appelle alors $.mobile.changePage(), en lui passant l'élément du DOM de la page que nous venons de modifier, pour dire au framework qu'il veut montrer la page.</p>
+<p>Maintenant un problème ici intéressant est que jQuery Mobile met généralement à jour le hash de location du navigateur avec l'URL associé à la page qu'il affiche. Parce que nous réutilisons la même page pour chaque catégorie, ce n'est l'idéal, parce que l'URL de cette page n'a pas d'info de catégorie spécifique qui lui est associé. Pour contourner ce problème, showCategory() définit simplement la propriété dataUrl sur l'objet options qu'elle passe dans changePage() pour lui dire d'afficher notre URL d'origine à la place.</p>
+<p>C'est l'exemple en un mot. Il est à noter que cet exemple particulier et son usage n'est pas un très bon exemple d'application car il se dégrade énormément lorsque le JavaScript est désactivé. Cela signifie qu'il ne fonctionnera probablement pas très bien sur des navigateurs de grade C. Plus tard, nous publierons d'autres exemples qui montreront comment dégrader de façon gracieuse. Cochez cette <a href="http://jquerymobile.com/test/docs/pages/dynamic-samples/">page</a> pour les mises à jour.</p>
       </div><!--/content-primary -->
 		
 
