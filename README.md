@@ -1,12 +1,15 @@
-<pre>
-ATTENTION : Ce dépôt est une copie du dépôt officiel sur github du [Framework jQuery Mobile : https://github.com/jquery/jquery-mobile](https://github.com/jquery/jquery-mobile)
+ATTENTION ! ATTENTION ! ATTENTION !
+===================================
+ATTENTION : Ce dÃ©pÃ´t est une copie du dÃ©pÃ´t officiel sur github du
+[Framework jQuery Mobile : https://github.com/jquery/jquery-mobile](https://github.com/jquery/jquery-mobile)
 
-Le but de ce dépôt est de permettre une traduction complète de la documentation de jQuery Mobile en français.
+Le but de ce dÃ©pÃ´t est de permettre une traduction complÃ¨te de la documentation de jQuery Mobile en franÃ§ais.
 
-Cette partie de la documentation est en cours de traduction. Cela signifie qu'elle est traduite de manière soit incomplète, soit inexacte. En attendant que cette traduction soit terminée, vous pouvez consulter la [version en anglais](https://github.com/jquery/jquery-mobile) pour des informations plus fiables.
-</pre>
+Cette partie de la documentation est en cours de traduction. Cela signifie qu'elle est traduite de maniÃ¨re
+soit incomplÃ¨te, soit inexacte. En attendant que cette traduction soit terminÃ©e, vous pouvez consulter la
+[version en anglais](https://github.com/jquery/jquery-mobile) pour des informations plus fiables.
 
-Framework jQuery Mobile (Traduction française)
+Framework jQuery Mobile (Traduction franÃ§aise)
 ==============================================
 [Site Officiel: http://jquerymobile.com](http://jquerymobile.com)
 
@@ -14,7 +17,7 @@ Framework jQuery Mobile (Traduction française)
 
 Comment construire vos propres fichiers JS et CSS pour jQuery Mobile CSS and JS files
 =====================================================================================
-Clonez ce dépôt et contruisez les fichiers js et css (vous aurez besoin que Git et Make soient installés) :
+Clonez ce dÃ©pÃ´t et contruisez les fichiers js et css (vous aurez besoin que Git et Make soient installÃ©s) :
 
     git clone git://github.com/jquery/jquery-mobile.git
     cd jquery-mobile
