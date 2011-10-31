@@ -1,0 +1,216 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Icônes des boutons</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1> Icônes des boutons</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		
+		<h2>Ajouter des icônes aux boutons</h2>
+		<p>Le framework jQuery Mobile comprend un ensemble choisi d'icônes les plus souvent nécessaires pour les applications mobiles. Afin de minimiser la taille du téléchargement, jQuery Mobile comprend un seul sprite icône blanc et ajoute automatiquement un cercle semi-transparent noir derrière l'icône afin de s'assurer qu'il a un bon contraste sur n'importe quelle couleur de fond.</p> 
+		
+			
+			<p>Une icône peut être ajouté à un bouton en ajoutant un attribut <code> data-icon</code> attribut sur le point d'ancrage en spécifiant l'icône à afficher. Par exemple, le balisage suivant :</p> 
+			
+			<code>
+			&lt;a href="index.html" data-role="button" <strong> data-icon="delete"</strong>&gt;Supprimer&lt;/a&gt;
+			</code>
+			
+			<p>Création de ce bouton avec une icône :</p>
+			<a href="index.html" data-role="button" data-icon="delete">Supprimer</a>
+			
+			<h2>Ensemble d'icône</h2>
+			
+			<p>Les attributs <code> data-icon</code> suivants peuvent être référencés pour créer les icônes ci-dessous :</p>
+			
+			<p><strong>Flèche gauche</strong> - data-icon="arrow-l"</p>
+			<a href="index.html" data-role="button" data-icon="arrow-l">Mon bouton</a>
+			<p><strong>Flèche droite</strong> - data-icon="arrow-r"</p>
+			<a href="index.html" data-role="button" data-icon="arrow-r">Mon bouton</a>
+			<p><strong>Flèche haut</strong> - data-icon="arrow-u"</p>
+			<a href="index.html" data-role="button" data-icon="arrow-u">Mon bouton</a>
+			<p><strong>Flèche bas</strong> - data-icon="arrow-d"</p>
+			<a href="index.html" data-role="button" data-icon="arrow-d">Mon bouton</a>
+			<p><strong>Supprimer</strong> - data-icon="delete"</p>
+			<a href="index.html" data-role="button" data-icon="delete">Mon bouton</a>
+			<p><strong>Plus</strong> - data-icon="plus"</p>
+			<a href="index.html" data-role="button" data-icon="plus">Mon bouton</a>
+			<p><strong>Moins</strong> - data-icon="minus"</p>
+			<a href="index.html" data-role="button" data-icon="minus">Mon bouton</a>
+			<p><strong>Coché</strong> - data-icon="check"</p>
+			<a href="index.html" data-role="button" data-icon="check">Mon bouton</a>
+			<p><strong>Mécanisme</strong> - data-icon="gear"</p>
+			<a href="index.html" data-role="button" data-icon="gear">Mon bouton</a>
+			<p><strong>Actualiser</strong> - data-icon="refresh"</p>
+			<a href="index.html" data-role="button" data-icon="refresh">Mon bouton</a>
+			<p><strong>Avancer</strong> - data-icon="forward"</p>
+			<a href="index.html" data-role="button" data-icon="forward">Mon bouton</a>
+			<p><strong>Reculer</strong> - data-icon="back"</p>
+			<a href="index.html" data-role="button" data-icon="back">Mon bouton</a>
+			<p><strong>Grille</strong> - data-icon="grid"</p>
+			<a href="index.html" data-role="button" data-icon="grid">Mon bouton</a>
+			<p><strong>Étoile</strong> - data-icon="star"</p>
+			<a href="index.html" data-role="button" data-icon="star">Mon bouton</a>
+			<p><strong>Alerte</strong> - data-icon="alert"</p>
+			<a href="index.html" data-role="button" data-icon="alert">Mon bouton</a>
+			<p><strong>Info</strong> - data-icon="info"</p>
+			<a href="index.html" data-role="button" data-icon="info">Mon bouton</a>
+			<p><strong>Accueil</strong> - data-icon="home"</p>
+			<a href="index.html" data-role="button" data-icon="home">Mon bouton</a>
+			<p><strong>Rechercher</strong> - data-icon="search"</p>
+			<a href="index.html" data-role="button" data-icon="search">Mon bouton</a>
+			
+
+		<h2>Positionnement d'icône</h2>
+		<p>Par défaut, toutes les icônes dans les boutons sont placés à la gauche du texte du bouton. </p>
+		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="left">Supprimer</a>
+		
+		<p>Ce défaut peut être modifiée en utilisant l'attribut <code> data-iconpos</code> pour définir l'icône à la droite (right), au-dessus (top) ou en dessous (bottom) du texte. Par exemple, le balisage :</p> 
+
+<code>
+&lt;a href="index.html" data-role="button" data-icon="delete"<strong> data-iconpos="right"</strong>&gt;Supprimer&lt;/a&gt;
+</code>
+
+		<p>Création de ce bouton avec l'icône aligné à droite :</p>
+		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="right">Supprimer</a>
+
+		<p>Les icônes peuvent également être positionné au-dessus du texte en précisant <code> data-iconpos="top"</code></p>
+		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="top">Supprimer</a>
+		
+		<p>Ou l'icône peut également être positionné en dessous du texte en spécifiant <code> data-iconpos="bottom"</code></p>
+		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="bottom">Supprimer</a>
+		
+		<p>Vous pouvez également créer un bouton icône seule, en définissant l'attribut  <code> data-iconpos</code> à <code>notext</code>. Le plugin bouton masquera le texte à l'écran, mais l'ajoutera comme un attribut <code>title</code> sur le lien pour fournir un contexte pour les lecteurs d'écran et les appareils qui supportent les infobulles. Par exemple, en remplaçant <code> data-iconpos="right"</code> sur l'exemple précédent avec <code> data-iconpos="notext""</code> :</p>
+
+<code>
+&lt;a href="index.html" data-role="button" data-icon="delete"<strong> data-iconpos="notext"</strong>&gt;Supprimer&lt;/a&gt;
+</code>
+
+		<p>Création de ce bouton avec une icône uniquement :</p>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Supprimer</a>
+
+		<h2>Icônes personnalisées</h2>
+		<p>Pour utiliser des icônes personnalisées, spécifiez une valeur <code> data-icon</code> qui a un nom unique, comme <code>myapp-email</code> et le plugin bouton générera une classe en préfixant <code>ui-icon-</code> à la valeur <code> data-icon</code> et l'appliquera au bouton. Vous pouvez alors écrire une règle CSS qui cible la classe <code>ui-icon-myapp-email</code> pour spécifier la source d'arrière plan de l'icône. Afin de maintenir une cohérence visuelle, créez une icône blanche de 18x18 pixels enregistrées au format PNG-8 avec transparence alpha.</p>
+			
+		 	
+		<h2>Les icônes et les thèmes</h2>
+		<p>Le demi-cercle noir transparent derrière l'icône blanche assure un bon contraste sur n'importe quelle couleur de fond de sorte qu'il fonctionne bien avec le système de thématisation de jQuery Mobile. Voici des exemples d'une même icône positionnée sur une gamme de différents échantillons de couleurs dans le thème.</p><!-- A themed -->
+		
+		
+		<p><strong>Échantillon "A"</strong> des boutons sur le thème</p>
+		<div data-role="controlgroup"  data-type="horizontal">
+		<a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="star" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="info" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+        <a href="index.html" data-role="button" data-icon="home" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+        <a href="index.html" data-role="button" data-icon="search" data-iconpos="notext" data-theme="a" data-inline="true">My button</a>
+		</div><!-- B themed -->
+		
+		
+		<p><strong>Échantillon "B"</strong> des boutons sur le thème</p>
+		<div data-role="controlgroup"  data-type="horizontal">
+		<a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="star" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="info" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+        <a href="index.html" data-role="button" data-icon="home" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+        <a href="index.html" data-role="button" data-icon="search" data-iconpos="notext" data-theme="b" data-inline="true">My button</a>
+		</div><!-- C themed -->
+		
+		
+		<p><strong>Échantillon "C"</strong> des boutons sur le thème</p>
+		<div data-role="controlgroup"  data-type="horizontal">
+		<a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="star" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		<a href="index.html" data-role="button" data-icon="info" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+        <a href="index.html" data-role="button" data-icon="home" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+        <a href="index.html" data-role="button" data-icon="search" data-iconpos="notext" data-theme="c" data-inline="true">My button</a>
+		</div>
+	
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Boutons</li>
+					<li><a href="buttons-types.html">Bases du bouton</a></li>
+					<li data-theme="a"><a href="buttons-icons.html"> Icônes des boutons</a></li>
+					<li><a href="buttons-inline.html">Alignement des boutons</a></li>
+					<li><a href="buttons-grouped.html">Groupement des boutons</a></li>
+					<li><a href="buttons-themes.html">Thématisation des boutons</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

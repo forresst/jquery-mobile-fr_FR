@@ -1,0 +1,143 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - formatage HTML</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Formatage HTML</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		<style>
+			table { width:100%; }
+			table caption { text-align:left;  }
+			table thead th { text-align:left; border-bottom-width:1px; border-top-width:1px; }
+			table th, td { text-align:left; padding:6px;} 
+		</style>
+		
+		
+	
+		
+		<p>L'approche par défaut pour styliser le contenu in jQuery Mobile est simple : Utilisez une main légère. Notre objectif est de laisser le rendu natif du navigateur prioritaire, nous avons ajouter un peu d'espacement pour une lisibilité plus confortable et d'utiliser le <a href="../api/themes.html">système de thématisation</a> pour appliquer les familles de polices et les couleurs. </p>
+		<p>Prendre une main légère avec un style de contenu permet aux concepteurs et aux développeurs de travailler avec une ardoise propre, plutôt que de lutter contre un grand nombre de style généraux complexes.</p>
+		
+		<h2>Balisage HTML par défaut du style</h2>
+		<p>Par défaut, les thèmes jQuery Mobiles utilisent les styles et les tailles de la norme HTML pour des éléments de balisage standard comme les entêtes, le contenu du paragraphe, les blocs de citation, des liens d'ancrage, des standards ordonnés et non ordonnée, les listes de définition et des tables - comme le montrent les exemples ci-dessous :</p>
+		<hr>
+		
+		<h1>Rubrique H1</h1>
+		<h2>Rubrique H2</h2>
+		<h3>Rubrique H3</h3>
+		<h4>Rubrique H4</h4>
+		<h5>Rubrique H5</h5>
+		<h6>Rubrique H6</h6>
+		
+		<p>Ceci est un paragraphe qui contient<strong>strong</strong>, <em>emphasized</em> et <a href="index.html">linked</a>. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu.</p>
+		
+		<blockquote>Que diriez-vous quelque action blockquote avec un <cite>cite</cite></blockquote>
+		
+		<p>Ceci est un autre paragraphe de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu. Ceci est un autre paragraphe de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu. Ceci est un autre paragraphe de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu.</p>
+		
+		<p>Nous ajoutons quelques styles <code>tables</code> et <code>fieldsets</code> pour les rendre plus lisibles, qui sont facilement remplacées avec des styles personnalisés.</p>
+		
+		<ul>
+			<li>Élément 1 d'une liste non ordonnée</li>
+			<li>Élément 1 d'une liste non ordonnée</li>
+			<li>Élément 1 d'une liste non ordonnée</li>
+		</ul>
+		
+		<ol>
+			<li>Élément 1 d'une liste ordonnée</li>
+			<li>Élément 1 d'une liste ordonnée</li>
+			<li>Élément 1 d'une liste ordonnée</li>
+		</ol>
+		
+		<dl title="Liste de définitions">
+			<dt>Terme de définition</dt>
+			<dd>Je suis le texte de définition</dd>
+			<dt>Terme de définition</dt>
+			<dd>Je suis le texte de définition</dd>
+		</dl>
+
+
+
+		<table summary="Ce tableau répertorie tous les vols de JetBlue.">
+		  <caption>Itinéraire de voyage</caption>
+		  <thead>
+		    <tr>
+		       <th scope="col">Vol :</th>  
+		      <th scope="col">De :</th>  
+		      <th scope="col">A :</th>  
+		    </tr>
+		  </thead>
+		  <tfoot>
+		    <tr>
+		      <td colspan="5">Total : 3 vols</td>
+		    </tr>
+		  </tfoot>
+		  <tbody>
+		  <tr>
+		    <th scope="row">JetBlue 983</th>
+		    <td>Boston (BOS)</td>
+		    <td>New York (JFK)</td>
+		  </tr>
+		  <tr>
+		    <th scope="row">JetBlue 354</th>
+		    <td>San Francisco (SFO)</td>
+		    <td>Los Angeles (LAX)</td>
+		  </tr>
+		<tr>
+		    <th scope="row">JetBlue 465</th>
+		    <td>New York (JFK)</td>
+		    <td>Portland (PDX)</td>
+		  </tr>
+		  </tbody>
+		</table>
+	
+	
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+						<li data-role="list-divider">Formatage de contenu</li>
+						<li data-theme="a"><a href="content-html.html">Styles HTML de base</a></li>
+						<li><a href="content-grids.html">Grille de mise en page (colonnes)</a></li>
+						<li><a href="content-collapsible.html">Blocs de contenu pliable</a></li>
+						<li><a href="content-collapsible-set.html">Ensembles pliable (accordéons)</a></li>
+						<li><a href="content-themes.html">Thématisation du contenu</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

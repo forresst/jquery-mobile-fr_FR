@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Sélection</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Menus de sélection</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+
+			<h2>Menus de sélection</h2>
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Bases</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
+			</ul>
+			
+			<p>Le menu de sélection est basée sur un élément <code>select</code> natif, qui est caché de la vue et remplacé par un bouton de sélection avec un style personnalisé qui correspond à l'aspect et à la convivialité du framework jQuery Mobile. Le menu de sélection est ARIA-enabled et accessible par le clavier sur un ordinateur de bureau.</p>
+			
+			<p>Par défaut, le framework s'appuie sur les options du menu natif de l'OS pour l'utiliser avec le bouton personnalisé. Lorsque le bouton est cliqué, le menu natif de l'OS va s'ouvrir. Quand une valeur est sélectionnée et que le menu se ferme, le texte du bouton personnalisé est mis à jour pour correspondre à la valeur sélectionnée.</p>
+
+			<p>Pour ajouter un menu de sélection sur votre page, commencez avec un élément standard <code>select</code> peuplé avec un ensemble d'élément <code>option</code>. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID du <code>select</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.  </p>
+			
+			<p>Le framework trouvera tous les éléments <code>select</code> et les améliorera automatiquement dans des menus de sélection, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique d'un select, ajouter l'attribut <code>data-role="none"</code> au <code>select</code>.</p>
+			
+			<pre><code>
+&lt;label for="select-choice-0" class="select"&gt;Mode de livraison :&lt;/label&gt;
+&lt;select name="select-choice-0" id="select-choice-1"&gt;
+   &lt;option value="standard"&gt;Lent : 7 jours&lt;/option&gt;
+   &lt;option value="rush"&gt;Rapide : 3 jours&lt;/option&gt;
+   &lt;option value="express"&gt;Express : le lendemain&lt;/option&gt;
+   &lt;option value="overnight"&gt;De nuit&lt;/option&gt;
+&lt;/select&gt;
+			</code></pre>
+
+			<p>Cela va produire un menu de sélection de base. Les styles par défaut définissent la largeur de champ de saisie à 100% du conteneur parent et empile les labels sur une ligne distincte.</p>
+
+				<label for="select-choice-0" class="select">Mode de livraison :</label>
+				<select name="select-choice-0" id="select-choice-1">
+					<option value="standard">Lent : 7 jours</option>
+					<option value="rush">Rapide : 3 jours</option>
+					<option value="express">Express : Le lendemain</option>
+					<option value="overnight">De nuit</option>
+				</select>
+
+			
+			<p>Optionnellement, enveloppez-les dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
+<pre><code>
+<strong>&lt;div data-role="fieldcontain"&gt;
+</strong>   &lt;label for="select-choice-1" class="select"&gt;Mode de livraison :&lt;/label&gt;
+   &lt;select name="select-choice-1" id="select-choice-1"&gt;
+      &lt;option value="standard"&gt;Lent : 7 jours&lt;/option&gt;
+      &lt;option value="rush"&gt;Rapide : 3 jours&lt;/option&gt;
+      &lt;option value="express"&gt;Express : le lendemain&lt;/option&gt;
+      &lt;option value="overnight"&gt;De nuit&lt;/option&gt;
+   &lt;/select&gt;
+<strong>&lt;/div&gt;
+</strong></code></pre>
+
+			<p>La zone de sélection est maintenant affichée comme ceci :</p>
+
+
+<div data-role="fieldcontain">
+	<label for="select-choice-1" class="select">Mode de livraison :</label>
+	<select name="select-choice-1" id="select-choice-1">
+		<option value="standard">Lent : 7 jours</option>
+		<option value="rush">Rapide : 3 jours</option>
+		<option value="express">Express : Le lendemain</option>
+		<option value="overnight">De nuit</option>
+	</select>
+</div>
+
+<p>Un exemple de sélection avec une longue liste d'options :</p>
+
+<div data-role="fieldcontain">
+	<label for="select-choice-2" class="select">Votre pays :</label>
+	<select name="select-choice-2" id="select-choice-2">
+		<option value="AL">Alabama</option>
+		<option value="AK">Alaska</option>
+		<option value="AZ">Arizona</option>
+		<option value="AR">Arkansas</option>
+		<option value="CA">California</option>
+		<option value="CO">Colorado</option>
+		<option value="CT">Connecticut</option>
+		<option value="DE">Delaware</option>
+		<option value="FL">Florida</option>
+		<option value="GA">Georgia</option>
+		<option value="HI">Hawaii</option>
+		<option value="ID">Idaho</option>
+		<option value="IL">Illinois</option>
+		<option value="IN">Indiana</option>
+		<option value="IA">Iowa</option>
+		<option value="KS">Kansas</option>
+		<option value="KY">Kentucky</option>
+		<option value="LA">Louisiana</option>
+		<option value="ME">Maine</option>
+		<option value="MD">Maryland</option>
+		<option value="MA">Massachusetts</option>
+		<option value="MI">Michigan</option>
+		<option value="MN">Minnesota</option>
+		<option value="MS">Mississippi</option>
+		<option value="MO">Missouri</option>
+		<option value="MT">Montana</option>
+		<option value="NE">Nebraska</option>
+		<option value="NV">Nevada</option>
+		<option value="NH">New Hampshire</option>
+		<option value="NJ">New Jersey</option>
+		<option value="NM">New Mexico</option>
+		<option value="NY">New York</option>
+		<option value="NC">North Carolina</option>
+		<option value="ND">North Dakota</option>
+		<option value="OH">Ohio</option>
+		<option value="OK">Oklahoma</option>
+		<option value="OR">Oregon</option>
+		<option value="PA">Pennsylvania</option>
+		<option value="RI">Rhode Island</option>
+		<option value="SC">South Carolina</option>
+		<option value="SD">South Dakota</option>
+		<option value="TN">Tennessee</option>
+		<option value="TX">Texas</option>
+		<option value="UT">Utah</option>
+		<option value="VT">Vermont</option>
+		<option value="VA">Virginia</option>
+		<option value="WA">Washington</option>
+		<option value="WV">West Virginia</option>
+		<option value="WI">Wisconsin</option>
+		<option value="WY">Wyoming</option>
+	</select>
+</div><!--
+<p>The following example organizes the options into <code>optgroup</code> elements:</p>
+
+<div data-role="fieldcontain">
+	<label for="select-choice-nc" class="select">Preferred delivery:</label>
+	<select name="select-choice-8" id="select-choice-nc">
+		<optgroup label="FedEx">
+			<option value="firstOvernight">First Overnight</option>
+			<option value="expressSaver">Express Saver</option>
+			<option value="ground">Ground</option>
+		</optgroup>
+		<optgroup label="UPS">
+			<option value="firstOvernight">First Overnight</option>
+			<option value="expressSaver">Express Saver</option>
+			<option value="ground">Ground</option>
+		</optgroup>
+		<optgroup label="US Mail">
+			<option value="standard">Standard: 7 day</option>
+			<option value="rush">Rush: 3 days</option>
+			<option value="express">Express: next day (disabled)</option>
+			<option value="overnight">Overnight</option>
+		</optgroup>
+	</select>
+</div>
+-->
+
+
+
+
+<h2>Zones de sélection regroupées verticalement</h2>
+
+<p>Pour créer un ensemble groupé de zones de sélection, ajoutez d'abord <code>select</code> et un <code>label</code> correspondant. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID du <code>select</code> ainsi ils sont sémantiquement liés.</p>
+
+<p>Parce que l'élément <code>label</code> sera associé à chaque zonde de sélection, nous recommandons l'enveloppement des sélections dans un élément <code>fieldset</code> qui a une <code>legend</code> qui agit comme un label combiné pour les saisies groupées.</p>
+
+<p>Enfin, on a besoin d'envelopper le <code>fieldset</code> dans un <code>div</code> avec l'attribut  <code> data-role="controlgroup"</code>, de sorte qu'il puisse être stylisé comme un groupe.</p>
+			
+<pre><code>	
+&lt;div data-role="fieldcontain"&gt;
+&lt;fieldset data-role="controlgroup"&gt;
+	&lt;legend&gt;Date de naissance :&lt;/legend&gt;
+
+    &lt;label for="select-choice-month"&gt;Month&lt;/label&gt;
+&lt;select name="select-choice-month" id="select-choice-month"&gt;
+	&lt;option&gt;Mois&lt;/option&gt;
+	&lt;option value="jan"&gt;Janvier&lt;/option&gt;
+	&lt;!-- etc. --&gt;
+&lt;/select&gt;
+
+	&lt;label for="select-choice-day"&gt;Day&lt;/label&gt;
+&lt;select name="select-choice-day" id="select-choice-day"&gt;
+	&lt;option&gt;Jour&lt;/option&gt;
+	&lt;option value="1"&gt;1&lt;/option&gt;
+	&lt;!-- etc. --&gt;
+&lt;/select&gt;
+
+&lt;label for="select-choice-year"&gt;Year&lt;/label&gt;
+&lt;select name="select-choice-year" id="select-choice-year"&gt;
+	&lt;option&gt;Année&lt;/option&gt;
+	&lt;option value="2011"&gt;2011&lt;/option&gt;
+	&lt;!-- etc. --&gt;
+&lt;/select&gt;
+&lt;/fieldset&gt;
+&lt;/div&gt;
+</code></pre>
+
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+		<legend>Date de naissance :</legend>
+		
+		<label for="select-choice-month">Mois</label>
+		<select name="select-choice-month" id="select-choice-month">
+			<option>Mois</option>
+			<option value="jan">Janvier</option>
+			<option value="dec">Décembre</option>
+			<option value="feb">Février</option>
+			<option value="mar">Mars</option>
+			<option value="apr">Avril</option>
+			<option value="may">Mai</option>
+			<option value="jun">Juin</option>
+			<option value="jul">Juillet</option>
+			<option value="aug">Août</option>
+			<option value="sep">Septembre</option>
+			<option value="oct">Octobre</option>
+			<option value="nov">Novembre</option>
+			<option value="dec">Décembre</option>
+		</select>
+
+		<label for="select-choice-day">Jour</label>
+		<select name="select-choice-day" id="select-choice-day">
+			<option>Jour</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+		</select>
+
+		<label for="select-choice-year">Année</label>
+		<select name="select-choice-year" id="select-choice-year">
+			<option>Année</option>
+			<option value="2011">2011</option>
+			<option value="2010">2010</option>
+			<option value="2009">2009</option>
+			<option value="2008">2008</option>
+			<option value="2007">2007</option>
+			<option value="2006">2006</option>
+			<option value="2005">2005</option>
+			<option value="2004">2004</option>
+		</select>
+	</fieldset>
+
+</div>
+
+<h2>Zones de sélection regroupées horizontalement</h2>
+<p>Les zones de sélection peuvent aussi être utilisées pour des ensembles groupés avec plus d'une des sélections connexes. Pour faire un ensemble de bouton horizontal, ajoutez <code> data-type="horizontal"</code> à <code>fieldset</code>. Notez que les boutons qui déclenchent les sélections seront redimensionner en fonction de la valeur de l'option actuellement sélectionnée. Notez que pour les navigateurs sans support pour <code>display: inline-block;</code> regroupera les sélections à la verticale, comme ci-dessus.</p>
+
+<code>
+
+&lt;fieldset data-role="controlgroup" <strong>data-type="horizontal"</strong>&gt;
+
+</code>
+
+<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup" data-type="horizontal">
+		<legend>Date de naissance :</legend>
+		
+		<label for="select-choice-month">Mois</label>
+		<select name="select-choice-month" id="select-choice-month">
+			<option>Mois</option>
+			<option value="jan">Janvier</option>
+			<option value="dec">Décembre</option>
+			<option value="feb">Février</option>
+			<option value="mar">Mars</option>
+			<option value="apr">Avril</option>
+			<option value="may">Mai</option>
+			<option value="jun">Juin</option>
+			<option value="jul">Juillet</option>
+			<option value="aug">Août</option>
+			<option value="sep">Septembre</option>
+			<option value="oct">Octobre</option>
+			<option value="nov">Novembre</option>
+			<option value="dec">Décembre</option>
+		</select>
+
+		<label for="select-choice-day">Jour</label>
+		<select name="select-choice-day" id="select-choice-day">
+			<option>Jour</option>
+			<option value="1">1</option>
+			<option value="2">2</option>
+			<option value="3">3</option>
+			<option value="4">4</option>
+			<option value="5">5</option>
+			<option value="6">6</option>
+			<option value="7">7</option>
+		</select>
+
+		<label for="select-choice-year">Année</label>
+		<select name="select-choice-year" id="select-choice-year">
+			<option>Année</option>
+			<option value="2011">2011</option>
+			<option value="2010">2010</option>
+			<option value="2009">2009</option>
+			<option value="2008">2008</option>
+			<option value="2007">2007</option>
+			<option value="2006">2006</option>
+			<option value="2005">2005</option>
+			<option value="2004">2004</option>
+		</select>
+	</fieldset>
+
+</div>
+
+
+<h2>Utilisation des menus personnalisés</h2>
+<p>the framework builds a custom menu based on the <code>select</code> element's list of options. Nous vous recommandons d'utiliser un menu personnalisé lorsque les sélections multiples sont nécessaires, comme, ou quand le menu lui-même doit être stylé avec CSS.</p>
+
+<p>Vous pouvez éventuellement utiliser des menus de sélection avec des styles personnalisés au lieu du menu OS natif. Le menu personnalisé supporte les options désactivées et la sélection multiple (alors que le support natif de l'OS du mobile pour les deux est incompatible), cela apporte une façon élégante de gérer les valeurs placeholder et reconstitue la fonctionnalité manquante sur certaines plateformes telles que le support de <code>optgroup</code> sur Android (tout est expliqué ci-dessous). En outre, le framework applique le thème du bouton personnalisé pour le menu afin de mieux correspondre à l'aspect et la convivialité, et fournit une cohérence visuelle entre les plateformes. Enfin, les menus personnalisés présentent souvent mieux sur les navigateurs de bureau, car les menus de bureau natifs sont plus petits que leurs homologues mobiles et ont tendance à être disproportionné.</p>
+
+	<p>Gardez à l'esprit qu'il y a une surcharge impliquée dans l'analyse du select natif  afin de construire un menu personnalisé. Si il y a beaucoup de sélection sur une page ou une sélection avec une longue liste d'options, ceci peut affecter les performances de la page, donc nous vous recommandons d'utiliser des menus personnalisés avec parcimonie. </p>
+	
+	<p>Pour utiliser les menus personnalisés sur un <code>select</code> particulier, ajoutez simplement l'attribut <code>data-native-menu="false"</code>. Alternativement, on peut aussi par programme définir l'option de configuration <code>nativeMenu</code> du menu de sélection à  <code>false</code> dans la fonction de rappel liée à l'événement <code>mobileinit</code> pour obtenir le même effet. Cela sera globalement fait sur tous les select afin d'utiliser le menu personnalisé par défaut. Les éléments suivants doivent être inclus dans la page après que jQuery soit chargé mais avant que jQuery mobile soit chargé.</p>
+	
+
+<code>
+<pre>
+$(document).bind('mobileinit',function(){
+   $.mobile.selectmenu.prototype.options.nativeMenu = false;
+});
+</pre>
+</code>
+
+			<p>Lorsque le <code>select</code> a un petit nombre d'options qui s'adapte à l'écran de l'appareil, le menu apparaîtra comme une petite fenêtre avec la transition pop :</p>
+
+			<div data-role="fieldcontain">
+				<label for="select-choice-custom" class="select">Mode de livraison :</label>
+				<select name="select-choice-1" id="select-choice-custom" data-native-menu="false">
+					<option value="standard">Lent : 7 jours</option>
+					<option value="rush">Rapide : 3 jours</option>
+					<option value="express">Express : Le lendemain</option>
+					<option value="overnight">De nuit</option>
+				</select>
+			</div>
+
+			<p>Quand il a trop d'options à afficher sur l'écran du périphérique, le framework va automatiquement créer une nouvelle "page" peuplé avec les options dans une <a href="../../lists/docs-lists.html">list view</a> standard. Cela nous permet d'utiliser le défilement natif inclus sur l'appareil pour se déplacer dans une longue liste. Le texte à l'intérieur du <code>label</code> est utilisé comme titre de cette page.</p>
+
+
+					<div data-role="fieldcontain">
+						<label for="select-choice-3" class="select">Votre pays :</label>
+						<select name="select-choice-3" id="select-choice-3" data-native-menu="false">
+							<option value="AL">Alabama</option>
+							<option value="AK">Alaska</option>
+							<option value="AZ">Arizona</option>
+							<option value="AR">Arkansas</option>
+							<option value="CA">California</option>
+							<option value="CO">Colorado</option>
+							<option value="CT">Connecticut</option>
+							<option value="DE">Delaware</option>
+							<option value="FL">Florida</option>
+							<option value="GA">Georgia</option>
+							<option value="HI">Hawaii</option>
+							<option value="ID">Idaho</option>
+							<option value="IL">Illinois</option>
+							<option value="IN">Indiana</option>
+							<option value="IA">Iowa</option>
+							<option value="KS">Kansas</option>
+							<option value="KY">Kentucky</option>
+							<option value="LA">Louisiana</option>
+							<option value="ME">Maine</option>
+							<option value="MD">Maryland</option>
+							<option value="MA">Massachusetts</option>
+							<option value="MI">Michigan</option>
+							<option value="MN">Minnesota</option>
+							<option value="MS">Mississippi</option>
+							<option value="MO">Missouri</option>
+							<option value="MT">Montana</option>
+							<option value="NE">Nebraska</option>
+							<option value="NV">Nevada</option>
+							<option value="NH">New Hampshire</option>
+							<option value="NJ">New Jersey</option>
+							<option value="NM">New Mexico</option>
+							<option value="NY">New York</option>
+							<option value="NC">North Carolina</option>
+							<option value="ND">North Dakota</option>
+							<option value="OH">Ohio</option>
+							<option value="OK">Oklahoma</option>
+							<option value="OR">Oregon</option>
+							<option value="PA">Pennsylvania</option>
+							<option value="RI">Rhode Island</option>
+							<option value="SC">South Carolina</option>
+							<option value="SD">South Dakota</option>
+							<option value="TN">Tennessee</option>
+							<option value="TX">Texas</option>
+							<option value="UT">Utah</option>
+							<option value="VT">Vermont</option>
+							<option value="VA">Virginia</option>
+							<option value="WA">Washington</option>
+							<option value="WV">West Virginia</option>
+							<option value="WI">Wisconsin</option>
+							<option value="WY">Wyoming</option>
+						</select>
+					</div>
+
+	<h3>Options désactivées</h3>
+	<p>jQuery Mobile sera automatiquement désactiver et les balises d'option de style seront avec l'attribut <code>disabled</code>. Dans la démo ci-dessous, la deuxième option "Rapide : 3 jours" a été désactivée.</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-7" class="select">Mode de livraison :</label>
+		<select name="select-choice-7" id="select-choice-7">
+			<option value="standard">Lent : 7 jours</option>
+			<option value="rush" disabled="disabled">Rapide : 3 jours</option>
+			<option value="express">Express : Le lendemain</option>
+			<option value="overnight">De nuit</option>
+		</select>
+	</div>
+	
+	<h3>Options placeholder</h3>
+	<p>Il est commun pour les développeurs d'inclure une option "null" dans leur élément select pour forcer un utilisateur à choisir une option. Si une option placeholder est présente dans votre balisage, jQuery Mobile le cachera dans le menu qui apparait, ne montrant que les choix valide pour l'utilisateur, et affichera le texte placeholder à l'intérieur du menu, comme une entête. L'option placeholder est ajoutée lorsque le framework trouve :</p>
+	<ul>
+		<li>Une option sans attribut de valeur (ou une valeur d'attribut vide)</li>
+		<li>Une option sans noeud de texte</li>
+		<li>Une option avec l'attribut <code>data-placeholder="true"</code>. (Cela vous permet d'utiliser une option qui a une valeur et un textnode comme une option placeholder).</li>
+	</ul>
+
+	<p>Vous pouvez désactiver cette fonction via l'option <code>hidePlaceholderMenuItems</code>du plugin selectmenu, comme ceci :</p>
+	<pre>
+	<code>
+$.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
+	</code>
+	</pre>
+
+	<p>Exemples de différentes options de placeholder :</p>
+
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-4" class="select">Mode de livraison :</label>
+		<select name="select-choice-4" id="select-choice-4" data-native-menu="false">
+			<option></option>
+			<option value="standard">Lent : 7 jours</option>
+			<option value="rush">Rapide : 3 jours</option>
+			<option value="express">Express : Le lendemain</option>
+			<option value="overnight">De nuit</option>
+		</select>
+	</div>
+
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-5" class="select">Mode de livraison :</label>
+		<select name="select-choice-5" id="select-choice-5" data-native-menu="false">
+			<option>Choisissez en un...</option>
+			<option value="standard">Lent : 7 jours</option>
+			<option value="rush">Rapide : 3 jours</option>
+			<option value="express">Express : Le lendemain</option>
+			<option value="overnight">De nuit</option>
+		</select>
+	</div>
+
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-6" class="select">Mode de livraison :</label>
+		<select name="select-choice-6" id="select-choice-6" data-native-menu="false">
+			<option value="choose-one" data-placeholder="true">Choisissez en un...</option>
+			<option value="standard">Lent : 7 jours</option>
+			<option value="rush">Rapide : 3 jours</option>
+			<option value="express">Express : Le lendemain</option>
+			<option value="overnight">De nuit</option>
+		</select>
+	</div>
+
+
+	<h3>Sélection multiple</h3>	
+	<p>Si l'attribut <code>multiple</code> est présent dans votre balisage, jQuery Mobile renforcera l'élément avec quelques considérations supplémentaires :</p>
+
+	<ul>
+	<li>Un élément entête sera créé à l'intérieur du menu et l'affichage du texte du placeholder et d'un bouton de fermeture.</li>
+	<li>En cliquant sur un élément à l'intérieur de la fenêtre, cela ne fermera pas le widget.</li>
+	<li>Une icône fantôme et non cochée apparaîtra à côté de chaque élément non sélectionné. Lorsque l'élément est sélectionné, l'icône va changer en une case à cochée. Aucune icône apparaît dans le cas d'une boîte d'une sélection unique.</li>
+	<li>Une fois que plus de deux éléments sont sélectionnés, un élément compteur avec le nombre total d'éléments sélectionnés apparait à l'intérieur du bouton.</li>
+	<li>Le texte de chaque élément sélectionné apparait à l'intérieur du bouton comme une liste. Si le bouton n'est pas assez large pour afficher toute la liste, il est tronqué avec une ellipse.</li>
+	<li>Si aucun élément n'est sélectionné, le texte du bouton sera par défaut le texte du placeholder.</li>
+	<li>Si aucun élément placeholder existe, le texte du bouton sera par défaut vide et l'entête apparaîtra avec juste un bouton de fermeture. Parce que ce n'est pas une expérience conviviale, nous vous recommandons de toujours spécifier un élément placeholder lorsque vous utilisez des boîtes de sélection multiple.</li>
+	</ul>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-9" class="select">Méthode(s) d'expédition :</label>
+		<select name="select-choice-9" id="select-choice-9" multiple="multiple" data-native-menu="false">
+			<option>Choisissez les options</option>
+			<option value="standard">Lent : 7 jours</option>
+			<option value="rush">Rapide : 3 jours</option>
+			<option value="express">Express : Le lendemain</option>
+			<option value="overnight">De nuit</option>
+		</select>
+	</div>
+
+	<p>Quand une sélection est assez longue, le menu sera ouvert dans une nouvelle page, le texte du placeholder est affiché dans le bouton lorsqu'aucuns éléments sont sélectionnés, et le texte du <code>label</code> est affiché dans l'entête du menu. Cela diffère des petits menus où le texte du placeholder est affiché à la fois sur le bouton et l'entête, et dans le cas d'une pleine page avec une sélection unique où le texte du placeholder n'est pas du tout utilisé.</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-10" class="select">Choisissez l'état(s):</label>
+		<select name="select-choice-10" id="select-choice-10" multiple="multiple" data-native-menu="false">
+			<option>Choisissez les options</option>
+			<option value="AL">Alabama</option>
+			<option value="AK">Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+		</select>
+	</div>
+
+
+
+	
+
+	<h3>Support de optgroup</h3>
+	<p>Si un menu de sélection contient des éléments <code>optgroup</code>, jQuery Mobile créera un séparateur et un groupe d'éléments basé sur le texte de l'attribut <code>label</code> :</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-8" class="select">Mode de livraison :</label>
+		<select name="select-choice-8" id="select-choice-8" data-native-menu="false">
+			<optgroup label="USPS">
+				<option value="standard">Lent : 7 jours</option>
+				<option value="rush">Rapide : 3 jours</option>
+				<option value="express">Express : Le lendemain</option>
+				<option value="overnight">De nuit</option>
+			</optgroup>
+			<optgroup label="FedEx">
+				<option value="firstOvernight">D'abord la Nuit</option>
+				<option value="expressSaver">Sauveur express</option>
+				<option value="ground">Sur le terrain</option>
+			</optgroup>
+		</select>
+	</div>
+
+
+	<h2>Stylisé avec les attributs de données</h2>
+	<p>Vous pouvez spécifier n'importe quel attribut <code>data-</code> de bouton de jQuery mobile sur un élément select. Dans cet exemple, nous mettons en place le thème, l'icône et les propriétés d'alignement :</p>
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-11" class="select">Actions</label>
+		<select name="select-choice-11" id="select-choice-11" data-theme="a" data-icon="gear" data-inline="true" data-native-menu="false">
+			<option value="edit">Modifier l'utilisateur</option>
+			<option value="delete">Supprimer l'utilisateur</option>
+		</select>
+	</div>
+    
+            
+        
+<h2>Appel du plugin menu de sélection</h2>
+<p>Le plugin menu de sélection initialisera automatiquement n'importe quelle page contenant le menu de sélection, il n'y a pas besoin d'un attribut <code>data-role</code> dans le balisage. Cependant, vous pouvez appeler directement le plugin de menu de sélection sur n'importe quel sélecteur, comme n'importe quel plugin normal de jQuery :</p>
+<pre><code>
+$('select').selectmenu();			
+</code></pre>
+    
+	</form>
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Éléments de formulaire</li>
+					<li><a href="../docs-forms.html">Formulaires basiques</a></li>
+					<li><a href="../forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="../textinputs/index.html">Textes de saisie</a></li>
+					<li><a href="../search/">Saisie d'une recherche</a></li>
+					<li><a href="../slider/">Curseur</a></li>
+					<li><a href="../switch/">Interrupteur</a></li>
+					<li><a href="../radiobuttons/">Radio boutons</a></li>
+					<li><a href="../checkboxes/">Cases à cocher</a></li>
+					<li data-theme="a"><a href="index.html">Menus de sélection</a></li>
+					<li><a href="../forms-themes.html">Thématisation des formulaires</a></li>
+					<li><a href="../forms-all-native.html">Eléments natifs de formulaire</a></li>
+					<li><a href="../forms-sample.html">Soumission de formulaire</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
+

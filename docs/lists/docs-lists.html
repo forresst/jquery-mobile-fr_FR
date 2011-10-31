@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile -Aperçu des listes</title>
+	<link rel="stylesheet"  href="../../css/themes/default/" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Listes</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			<div class="content-primary">
+			<h2>Listes chainées de base</h2>
+			<p>Une vue de liste est codée comme une simple liste non ordonnée contenant des éléments lié à une liste avec l'attribut <code> data-role="listview"</code>. jQuery Mobile appliquera tous les styles nécessaires pour transformer cette liste en vue de liste mobile conviviale avec un indicateur d'une flèche vers la droite, et qui remplit toute la largeur de la fenêtre de navigateur. Lorsque vous appuyez sur l'élément de liste, le framework va déclencher un clic sur le premier lien à l'intérieur de l'élément de la liste, puis émettre une requête AJAX de l'URL dans le lien, créer la nouvelle page dans les DOM, puis lancer une transition de page. Voici le balisage HTML pour une liste de base chainées.</p>
+
+<pre><code>
+&lt;ul data-role="listview" data-theme="g"&gt;
+	&lt;li&gt;&lt;a href="acura.html"&gt;Acura&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="audi.html"&gt;Audi&lt;/a&gt;&lt;/li&gt;
+	&lt;li&gt;&lt;a href="bmw.html"&gt;BMW&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</code></pre>
+
+			<a href="lists-ul.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste basique</a>
+
+			<p><strong>Note de style</strong> : Pour tout le standard, les listes non-intégrées ont une margede -15px pour contrer le 15px d'espacement dans la zone de contenu pour que les listes soient remplies jusquau bord de l'écran. Si vous ajoutez d'autres widgets au dessus ou en dessous d'une liste, la marge négative peut faire que ces éléments se chevauchent, ainsi vous aurez besoin d'ajouter un espacement supplémentaire dans votre CSS personnalisé.</p>
+			<h2>Listes imbriquées</h2>
+			<p>En intégrant des <code>ul</code> ou <code>ol</code> enfant à l'intérieur des éléments de liste, vous pouvez créer des listes imbriquées. Lorsqu'un élément de liste contenant une liste d'enfants est cliqué, le framework va générer une nouvelle ui-page peuplée avec le titre de l'entête parent et la liste des éléments enfants. Ces listes dynamiques imbriquées sont stylisées avec l'échantillon "b" du thème (bleu dans le thème par défaut) pour indiquer que vous êtes dans un niveau secondaire de navigation. Les listes peuvent être imbriquées sur plusieurs niveaux de profondeur et tous les pages et les liens seront géré automatiquement par le framework.</p>
+			<p>Pour définir la couleur de l'échantillon d'une liste enfant, mettez l'attribut <code> data-theme</code> à l'intérieur de chaque liste.</p>
+			<a href="lists-nested.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste imbriquée</a>
+
+			<h2>Listes numérotées</h2>
+			<p>Les listes peuvent également être créées à partir des listes ordonnées <code>(ol)</code> ce qui est utile lorsque les éléments présentés qui sont dans une séquence tel que les résultats de recherche ou une file d'attente de cinéma. Lorsque le balisage amélioré est appliqué à la vue de la liste, jQuery Mobile essayera d'abord utiliser les CSS pour ajouter des numéros à la liste et s'il n'est pas pris en charge, il se retournera vers l'injection de numéros avec JavaScript.</p>
+
+			<a href="lists-ol.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste numérotée</a>
+
+			<h2>Listes en lecture seule</h2>
+			<p>Les vues de liste peuvent aussi être utilisées pour afficher une liste non-interactive d'éléments, généralement sous forme de liste incorporée. Cette liste est construite à partir d'une liste non ordonnée ou ordonnée qui n'a pas d'élément de la liste lié. Le framework par défaut stylise cette liste avec l'échantillon "c" du thème (flat white dans le thème par défaut) et définit la taille du texte à une taille plus petite que les listes cliquables pour économiser un peu d'espace.</p>
+
+			<a href="lists-readonly.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste en lecture seule</a>
+
+			<h2>Listes avec bouton séparé</h2>
+			<p>Dans les cas où il y a plus d'une action possible par élément de la liste, un bouton séparé peut être utilisé pour offrir deux éléments indépendamment cliquable - l'élément de liste et une petite icône de flèche à l'extrême droite. Pour faire un élément séparé de la liste, il suffit d'ajouter un second lien à l'intérieur du <code>li</code> et le framework va ajouter une ligne de séparation verticale, styler le lien comme une flèche icône seule et définit l'attribut <code>title</code> du lien vers le texte du lien pour l'accessibilité. </p>
+			<p>Vous pouvez définir l'icône pour l'icône séparé à droite en spécifiant un attribut <code>data-split-icon</code> avec le <a href="../buttons/buttons-themes.html">nom de l'icône</a> que vous voulez. La couleur de l'échantillon du thème du bouton séparé peut être réglé en spécifiant une lettre d'échantillon dans l'attribut <code>data-split-theme</code>.</p>
+
+			<a href="lists-split.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste séparée</a>
+
+
+			<h2>Séparateurs de liste</h2>
+			<p>Les éléments de la liste peuvent être transformés en séparateur pour organiser et regrouper les éléments de la liste. Ceci est fait en ajoutant le <code> data-role="list-divider"</code> à tout élément de la liste. These items are styled with the body swatch "b" by default (light gray in the default theme) but you can specify a theme for dividers by adding the <code>data-dividertheme</code> attribute to the list element (ul or ol) and specifying a theme swatch letter.</p>
+
+			<a href="lists-divider.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de séparateur de liste</a>
+
+
+			<h2>Filtre de recherche</h2>
+			<p>jQuery Mobile fournit un moyen très facile de filtrer une liste avec une fonction de recherche simple, côté client. Pour faire une liste filtrable, ajoutez simplement l'attribut <code>data-filter="true"</code> à la liste. Le framework ajoutera ensuite une boîte de recherche au dessus de la liste et ajoutera le comportement de filtre aux éléments de la liste qui ne contiennent pas la chaîne de recherche saisie par l'utilisateur. Le texte par défaut du placeholder est "Filter items...". Pour configurer le texte du placeholder dans la saisie de recherche, vous pouvez soit lier l'événement <code>mobileinit</code> et définir l'option <code>$.mobile.listview.prototype.options.filterPlaceholder</code> avec une chaîne de votre choix ou utiliser le data-attribute <code>data-filter-placeholder</code> sur votre liste. Par défaut la boîte de recherche va hériter du thème de son parent. Le thème de la boîte de recherche peut être configuré en utilisant le data-attribute <code>data-filter-theme</code> sur votre liste.</p>
+
+			<a href="lists-search.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de filtre de recherche</a>
+
+      <p>Si vous voulez changer la manière dont les éléments de la liste sont filtrés, à savoir une recherche floue ou correspondant au début de la chaîne, vous pouvez configurer la fonction de rappel utilisée en interne par la définition <code>$.mobile.listview.prototype.options.filterCallback</code> durant le <code>mobileinit</code> ou après que le widget soit créé avec<code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Toute fonction définie pour la fonction de rappel fournira deux arguments. Tout d'abord, le texte de l'élément de la liste actuelle et le deuxième la valeur recherchée. Une valeur exacte aboutira à un élément de liste caché. La fonction de rappel par défaut qui filtre les entrées sans le <code>searchValue</code> , fait cela comme une sous-chaîne qui est décrite ci-dessous :
+      </p>
+
+      <pre>
+        <code>
+function( text, searchValue ){
+  return text.toLowerCase().indexOf( searchValue ) === -1;
+};
+        </code>
+      </pre>
+
+			<h2>Formatage du texte et compteur</h2>
+			<p>Le framework inclut les conventions de formatage du texte pour les modèles de liste commune, comme l'entête/les descriptions, les informations secondaires, les compteurs grâce au balisage sémantique de l'HTML. </p>
+
+			<ul>
+				<li>Pour ajouter un indicateur de comptage à la droite de l'élément de la liste, enveloppez le nombre dans un élément avec une classe de <code>ui-li-count</code>.</li>
+				<li>Pour ajouter la hiérarchie du texte, utiliser des titres pour augmenter la police et utilisez les paragraphes pour réduire la police. </li>
+				<li>Des informations supplémentaires peuvent être ajoutées à la droite de chaque élément de la liste en enveloppant le contenu dans un élément avec une classe de <code>ui-li-aside</code>.</li>
+			</ul>
+			<a href="lists-count.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Listec des bulles de compteur</a> <a href="lists-formatting.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Liste avec du texte formaté</a>
+
+			<h2>Miniatures &amp; icônes</h2>
+			<p>Pour ajouter des miniatures à la gauche d'un élément de la liste, il suffit d'ajouter une image à l'intérieur d'un élément de liste comme le premier élément enfant. Le framework redimensionne l'image à 80 pixels de chaque côté. Pour utiliser les icônes standard 16x16 pixel dans les éléments d'une liste, ajoutez la classe de <code>ui-li-icon</code> à l'élément image.</p>
+			<a href="lists-thumbnails.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Liste avec des images miniatures</a><a href="lists-icons.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Liste avec des images d'icône</a>
+
+			<h2>Listes intégrées</h2>
+			<p>Si les listes sont intégrés dans une page avec d'autres types de contenu, une liste intégrée positionne la liste dans un bloc qui se trouve à l'intérieur de la zone de contenu avec un peu de marge et les coins arrondis (thème contrôlée). En ajoutant l'attribut <code> data-inset="true"</code> à la liste (ul ou ol), cela applique l'apparence intégrée.</p>
+
+			<a href="lists-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Example de liste intégrée</a>
+
+			<h2>Mise à jour des listes</h2>
+			<p>Si vous ajoutez des éléments à une liste, vous aurez besoin d'appeler la méthode <code>refresh()</code> sur elle-même pour mettre à jour les styles et créer des listes imbriquées qui sont ajoutés. Par exemple, <code>$('ul').listview('refresh');</code></p>
+
+			<p>Nous travaillons actuellement sur un certain nombre d'améliorations pour la méthode refresh, donc gardez un oeil sur les mises à jour sur Github.</p>
+
+
+			</div><!--/content-primary -->
+
+			<div class="content-secondary">
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+						<h3>Aussi dans cette rubrique</h3>
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+							<li data-role="list-divider">Apparence d'une liste</li>
+							<li data-theme="a"><a href="docs-lists.html">Conventions balisage des listes</a></li>
+							<li><a href="lists-ul.html">Liste chainée de base</a></li>
+							<li><a href="lists-nested.html">Liste imbriquée</a></li>
+							<li><a href="lists-ol.html">Liste numérotée</a></li>
+
+							<li><a href="lists-split.html">Liste de bouton séparé</a></li>
+							<li><a href="lists-divider.html">Séparateurs de liste</a></li>
+							<li><a href="lists-count.html">Bulle compteur</a></li>
+							<li><a href="lists-thumbnails.html">Miniatures</a></li>
+							<li><a href="lists-icons.html">Icônes</a></li>
+							<li><a href="lists-formatting.html">Formatage du contenu</a></li>
+							<li><a href="lists-search.html">Barre de filtre de recherche</a></li>
+							<li><a href="lists-search-inset.html">Encart barre de filtre de recherche</a></li>
+							<li><a href="lists-search-with-dividers.html">Barre de filtre de recherche avec séparateurs</a></li>
+
+							<li><a href="lists-readonly.html">Listes en lecture seule</a></li>
+							<li><a href="lists-readonly-inset.html">Encart listes en lecture seule</a></li>
+							<li><a href="lists-forms.html">Listes avec formulaires</a></li>
+							<li><a href="lists-forms-inset.html">Encart listes avec formulaires</a></li>
+
+							<li><a href="lists-inset.html">Encart avec listes stylées</a></li>
+							<li><a href="lists-performance.html">Test de performance de liste</a></li>
+							<li><a href="lists-themes.html">Liste thématisée</a></li>
+
+						</ul>
+				</div>
+			</div>
+
+		</div><!-- /content -->
+
+		<div data-role="footer" class="footer-docs" data-theme="c">
+				<p>© 2011 The jQuery Project</p>
+		</div>
+
+		</div><!-- /page -->
+
+		</body>
+		</html>
+

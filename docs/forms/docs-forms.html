@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Formulaires</title>
+	<link rel="stylesheet"  href="../../css/themes/default/" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Formulaires</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+			<p>jQuery Mobile fournit un ensemble complet d'éléments de formulaire tactile qui sont fondées sur des éléments de formulaire HTML natif.</p>
+
+			<h2>Structure de formulaire</h2>
+
+			<p>Tous les formulaires doivent être enveloppés dans une balise <code>form</code> qui a une <code>action</code> et une <code>method</code> qui va gérer les données du formulaire traitées sur le serveur.</p>
+
+<code>
+
+&lt;form action="form.php" method="post"&gt;
+...
+&lt;/form&gt;
+
+</code>
+
+
+<h2>Conventions de balisage</h2>
+<p>Lors de la construction des formulaires utilisé dans jQuery Mobile, la plupart des directives standard utilisées pour créer des formulaires qui soumettent habituellement un HTTP post ou get, sont toujours applicables. Cependant, une chose à garder à l'esprit est que l'attribut  <code>id</code> des contrôles de formulaire doivent être non seulement unique sur une page donnée, mais aussi unique à travers les pages d'un site. C'est parce que le modèle de navigation d'une seule page de jQuery Mobile permet à de nombreuses "pages" différentes d'être présentes dans le DOM au même moment, vous devez donc faire attention à un usage unique de l'attribut <code>id</code> ainsi il y aura seulement un de chaque dans les DOM (et bien sûr, n'oubliez pas de les associer correctement avec l'élément <code>label</code> via l'attribut <code>for</code>).</p>
+
+	<h2>Cacher les labels accessible</h2>
+	<p>Par amour pour l'accessibilité, jQuery Mobile exige que tous les éléments du formulaire soient appareillés avec un <code>label</code> significatif. Pour cacher les labels en les laissant visibles aux technologies d'assistance, par exemple, lorsque qu'on laisse l'attribut <code>plaholder</code> d'un élément qui sert comme label, appliquez la classe d'aide <code>ui-hidden-accessible</code> au label lui-même :</p>
+<code>
+<pre>
+&lt;label for="username" <strong>class="ui-hidden-accessible"</strong>&gt;Nom de l'utilisateur :&lt;/label&gt;
+&lt;input type="text" name="username" id="username" value="" placeholder="Username"/&gt;
+</pre>
+</code>
+
+	<p>Pour cacher les labels dans un conteneur de champ et ajuster en conséquence la mise en page, ajouter la classe <code>ui-hide-label</code> au conteneur de champ comme ci-dessous :</p>
+
+<code>
+<pre>
+&lt;div data-role="fieldcontain" <strong>class="ui-hide-label"</strong>&gt;
+	&lt;label for="username"&gt;Nom de l'utilisateur :&lt;/label&gt;
+	&lt;input type="text" name="username" id="username" value="" placeholder="Username"/&gt;
+&lt;/div&gt;
+</pre>
+</code>
+
+	<p>Les deux exemples ci-dessus vont avoir ainsi ce rendu :</p>
+	<div data-role="fieldcontain" class="ui-hide-label">
+		<label for="username">Nom de l'utilisateur :</label>
+		<input type="text" name="username" id="username" value="" placeholder="Username" />
+	</div>
+
+	<p>Alors que le label ne sera plus visible, il sera disponible pour les technologies d'assistance comme les lecteurs d'écran.</p>
+
+
+	<h2>Désactivation des éléments de formulaire</h2>
+	<p>Tous les widgets jQuery Mobile peuvent être désactivés dans le balisage en ajoutant l'attribut standard <code>disabled</code> à l'élément, comme vous le feriez avec des contrôles natifs. Chaque widget de formulaire a ainsi les méthodes standard <code>disable</code> et <code>enable</code> qui sont documentées avec chaque widget de formulaire. Voici quelques exemples de widgets désactivés : </p>
+	
+	<div data-role="fieldcontain">
+     <label for="foo">Saisie de texte :</label>
+     <input type="text" name="name" id="foo" value="" disabled />
+	</div>
+	
+	<div data-role="fieldcontain">
+	<fieldset data-role="controlgroup">
+    	<legend>Sexe :</legend>
+         	<input type="radio" name="gender" id="radio-female" value="f" disabled />
+         	<label for="radio-female">Féminin</label>
+
+         	<input type="radio" name="gender" id="radio-male" value="m" disabled  />
+         	<label for="radio-male">Masculin</label>
+    </fieldset>
+    </div>
+
+	<div data-role="fieldcontain">
+	<label for="flip-s">Statut du serveur :</label>
+	<select name="slider" id="flip-s" data-role="slider" disabled >
+		<option value="off">Arrêt</option>
+		<option value="on">Marche</option>
+	</select>
+    </div>    
+
+	<div data-role="fieldcontain">
+		<label for="select-choice-x" class="select">Livraison :</label>
+		<select name="select-shipper" id="select-choice-x" disabled>
+			<option></option>
+			<option value="standard">Standard</option>
+			<option value="rush">Rapide</option>
+			<option value="express">Express</option>
+			<option value="overnight">De nuit</option>
+		</select>
+	</div> 
+	
+	<p>Notez que vous pouvez désactiver les boutons créés à partir du balisage basé sur <code>button</code> ou <code>input</code>, mais pas les liens avec un rôle de bouton. Les liens ne comporte pas de fonction parallèles désactivé en HTML, si vous avez besoin de désactiver un lien basé sur bouton (ou tout autre élément), il est possible de lui appliquer la classe <code>ui-disabled</code> avec JavaScript afin de réaliser le même effet. </p>
+	
+		<h2>Conteneurs de champs</h2>
+		<p>Pour améliorer le style des labels et des éléments de formulaire sur des écrans plus larges, nous vous conseillons d'envelopper un <code>div</code> ou <code>fieldset</code> avec l'attribut <code> data-role="fieldcontain"</code> autour de chaque élément label/form. Ce framework permet d'aligner les entrées et les labels associée côte à côte, et casser les éléments ci-dessous de niveau de bloc empilés ~480px. Le framework va également ajouter une bordure inférieure mince pour agir comme un séparateur de champ.</p>
+
+		<p>Par exemple :</p>
+<pre><code>
+&lt;div data-role="fieldcontain"&gt;
+&lt;label for="name"&gt;Saisie de texte :&lt;/label&gt;
+&lt;input type="text" name="name" id="name" value="" /&gt;
+&lt;/div&gt;
+</code></pre>
+
+		<p>Aura le rendu suivant :</p>
+
+		<div data-role="fieldcontain">
+ 			<label for="name">Saisie de texte :</label>
+ 			<input type="text" name="name" id="name" value=""  />
+		</div>
+
+		<p>Pour des exemples supplémentaires, consultez la <a href="forms-all.html">galerie des éléments de formulaire</a></p>
+		
+		
+	<h2>Auto-initialisation des éléments de formulaire</h2>
+	<p>Par défaut, jQuery mobile va automatiquement améliorer certains contrôles de formulaire natifs en riches composants tactiles. Ceci est géré en interne par la recherche des éléments de formulaire via le nom de la balise et par l'exploitation d'une méthode de plugin sur ces éléments, afin par exemple, un élément <code>select</code> soit trouvé et initialisé avec le plugin "selectmenu", tandis qu'un  élément <code>input</code> avec un <code>type="checkbox"</code> sera amélioré avec le plugi "checkboxradio". Une fois initialisé, vous pouvez vous adresser à ces composants améliorés par programmationà travers leurs méthodes d'API de Widget jQuery UI - voir les options, les méthodes et les événements énumérés sur la page de documentation de chaque plugin formulaire pour plus de détails. </p>
+
+	<h2>Initialisation des groupes d'éléments de formulaire injectés dynamiquement</h2> 
+	<p>Si vous devez générer de nouvelles balises côté client ou charger le contenu via AJAX et l'injecter dans une page, vous pouvez déclencher l''événement <code>create</code> pour gérer l'auto-initialisation de tous les plugins contenus dans le nouveau balisage. Cela peut être déclenché sur tout élément (même le div page lui-même),  en vous épargnant la tâche d'initialisation manuelle de chaque plugin (voir ci-dessous).</p> 
+
+	<p>Par exemple, si un bloc de balises HTML (par exemple un formulaire de connexion) a été chargé à travers Ajax, déclenchez la création d'événements pour transformer automatiquement tous les widgets qu'il contient (les entrées et les boutons dans ce cas) dans les versions améliorées. Le code de ce scénario serait :</p>
+
+	<code>
+	
+	$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
+	
+	</code>
+
+	<h2>Rafraîchissant des éléments de formulaire</h2>
+
+    <p>Dans jQuery Mobile, certains contrôles de formulaire améliorés sont simplement stylisé (inputs), mais d'autres sont des contrôles personnalisés (selects, sliders) construit à partir et gardé en synchronisation avec le contrôle natif. Pour mettre à jour par programme un contrôle de formulaire avec JavaScript, tout d'abord manipulez le contrôle natif, puis utilisez la méthode <code>refresh</code> pour dire au contrôle amélioré de se mettre à jour pour correspondre au nouvel état. Voici quelques exemples pour mettre à jour les contrôles de formulaire commun, puis l'appel de la méthode <code>refresh</code> :</p>
+	<h4>Cases à cocher :</h4>
+
+<code>
+
+$("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
+
+</code>
+
+<h4>Radios boutons :</h4>
+<code>
+
+$("input[type='radio']").attr("checked",true).checkboxradio("refresh");
+
+</code>
+
+<h4>Selects :</h4>
+<code><pre>
+var myselect = $("select#foo");
+myselect[0].selectedIndex = 3;
+myselect.selectmenu("refresh");
+</pre></code>
+
+<h4>Curseurs :</h4>
+<code>
+
+$("input[type=range]").val(60).slider("refresh");
+
+</code>
+
+<h4>Interrupteurs (ils utilisent le curseur) :</h4>
+
+<code><pre>
+var myswitch = $("select#bar");
+myswitch[0].selectedIndex = 1;
+myswitch.slider("refresh");
+</pre></code>
+
+	<h2>Empêcher l'auto-initialisation des éléments de formulaire</h2>
+	<p>Si vous préférez qu'un contrôle de formulaire particulier soit laissé intact par jQuery mobile, il suffit de donner à cet élément l'attribut <code> data-role="none"</code>. Par exemple :</p>
+	<pre><code>
+&lt;label for="foo"&gt;
+&lt;select name="foo" id="foo" <strong> data-role="none"</strong>&gt;
+	&lt;option value="a" &gt;A&lt;/option&gt;
+	&lt;option value="b" &gt;B&lt;/option&gt;
+	&lt;option value="c" &gt;C&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+
+
+	<p>Ou, si vous voulez éviter l'auto-initialisation sans ajouter des attributs à votre balisage, vous pouvez personnaliser le sélecteur qui est utilisé pour empêcher l'auto-initialisation en configurant l'option <code>keepNative</code> du plugin (qui est par défaut à  <code>[data-role="none"]</code>). Soyez sûr de configurer cette option à l'intérieur d'un gestionnaire d'évènement lié à l'événement <code>mobileinit</code>, afin qu'il s'applique à la première page ainsi qu'aux pages suivantes qui seront chargées.</p>
+		<pre><code>
+$(document).bind('mobileinit',function(){
+	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>
+});
+		</pre></code>
+
+<p>Un cas particulier est celui des selects. L'exemple ci-dessus permettra d'éviter toute augmentation de prise de place sur les éléments select dans la page si <code>select</code> est inclus. Si vous souhaitez conserver les performances natives, l'aspect et la convivialité du menu lui-même et profiter de l'augmentation visuelle du bouton de sélection par Mobile jQuery, vous pouvez définir $.mobile.nativeSelectMenu à true dans une fonction de rappel <code>mobileinit</code> comme un paramètre global ou utilisez <code>data-native="true"</code> au cas par cas.</p>
+
+		
+
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Éléments de formulaire</li>
+					<li data-theme="a"><a href="docs-forms.html">Formulaires basiques</a></li>
+					<li><a href="forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="textinputs/">Textes de saisie</a></li>
+					<li><a href="search/">Recherche</a></li>
+					<li><a href="slider/">Curseur</a></li>
+					<li><a href="switch/">Interrupteur</a></li>
+					<li><a href="radiobuttons/">Radio boutons</a></li>
+					<li><a href="checkboxes/">Cases à cocher</a></li>
+					<li><a href="selects/">Menus de sélection</a></li>
+					<li><a href="forms-themes.html">Thématisation des formulaires</a></li>
+					<li><a href="forms-all-native.html">Eléments natifs de formulaire</a></li>
+					<li><a href="forms-sample.html">Soumission de formulaire</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

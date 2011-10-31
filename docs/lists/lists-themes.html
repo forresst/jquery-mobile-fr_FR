@@ -1,0 +1,274 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Thématisation des listes</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Liste thématisée</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content" class="ui-body">
+		<div class="content-primary">	
+
+		<p>Tous les échantillons de bouton standard peuvent être appliquées à des listes. Le framework sélectionne par défaut l'échantillon du thème de la liste à "c" (silver dans le thème par défaut) et l'échantillon "b" (blue dans le thème par défaut) pour les séparateurs. Voici une liste thématisée par défaut.</p>
+		
+<code>
+
+&lt;ul data-role="listview" data-inset="true"&gt;
+
+</code>
+		<ul data-role="listview" data-inset="true">
+			<li data-role="list-divider">Séparateur</li>
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Envoyé <span class="ui-li-count">328</span></a></li>
+		</ul>
+		
+		<h2>Éléments de la liste thématisés</h2>
+		<p>Le schéma de couleurs de l'élément de la liste peut être modifiée en n'importe quel échantillon de couleur du thème des boutons en ajoutant l'attribut <code> data-theme</code> à la liste, et en définissant la lettre de l'échantillon du thème. Voici la même liste ci-dessus avec l'application de l'échantillon "a". </p>
+		
+<code>
+
+&lt;ul data-role="listview" data-inset="true" data-theme="d"&gt;
+
+</code>
+		
+		<ul data-role="listview" data-inset="true" data-theme="d">
+			<li data-role="list-divider">Séparateur</li>
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Envoyé <span class="ui-li-count">328</span></a></li>
+		</ul>
+		
+		<p> Les attributs data-theme fonctionne également sur les niveaux LI, pour styliser un seul élément.</p>
+		
+		<ul data-role="listview" data-inset="true" data-theme="d">
+			<li data-role="list-divider">Séparateur</li>
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Envoyé <span class="ui-li-count">328</span></a></li>
+			<li data-theme="a">Corbeille <span class="ui-li-count">34</span></a></li>
+		</ul>
+		
+		<h2>Thématisation des séparateurs</h2>
+		
+		<p>Le thème des <strong>séparateurs de liste</strong> peut être définit par l'ajout du <code>data-divider-theme</code> à la liste et une lettre précisant l'échantillon. Voici un exemple de la même liste ci-dessus avec l'échantillon "d" défini sur les séparateurs.</p>
+		
+<code>
+
+&lt;ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="e"&gt;
+
+</code>
+		
+		<ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="e">
+			<li data-role="list-divider">Séparateur</li>
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Envoyé <span class="ui-li-count">328</span></a></li>
+		</ul>
+		
+		<h2>Thématisation des bulles de compteur</h2>
+		
+		<p>Le thème des <strong>bulles de compteur</strong> peut être définit par l'ajout du <code>data-count-theme</code> à la liste et une lettre précisant l'échantillon. Voici un exemple avec l'échantillon "e" mis sur les bulles de compteur.</p>
+		
+<code>
+
+&lt;ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="e" data-count-theme="b"&gt;
+
+</code>
+		
+		<ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="e" data-count-theme="b">
+			<li data-role="list-divider">Séparateur</li>
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Envoyé <span class="ui-li-count">328</span></a></li>
+		</ul>
+		
+		<h2>Thématisation des icônes</h2>
+		
+		<p>L'icône par défaut pour chaque élément de la liste est <code>arrow-r</code>. Pour remplacer cela, définissez l'attribut <code> data-icon</code> sur l'élément de liste souhaité avec le <a href="../buttons/buttons-icons.html">nom d'une icône standard</a>. Pour éviter les icônes d'apparaître à chaque fois, définissez l'attribut <code> data-icon</code> à "false".</p>
+<pre>
+<code>
+&lt;li data-icon="info"&gt;&lt;a href="#"&gt;Informations&lt;/a&gt;&lt;/li&gt;
+&lt;li data-icon="alert"&gt;&lt;a href="#"&gt;Alertes&lt;/a&gt;&lt;/li&gt;
+&lt;li data-icon="false"&gt;&lt;a href="#"&gt;Aucun icône&lt;/a&gt;&lt;/li&gt;
+</code>
+</pre>
+		<ul data-role="listview" data-inset="true">
+			<li data-role="list-divider">Séparateur</li>
+			<li data-icon="info"><a href="#">Informations</a></li>
+			<li data-icon="alert"><a href="#">Alertes</a></li>
+			<li data-icon="false"><a href="#">Aucun icône</a></li>
+		</ul>
+	
+		
+		<h2>Thématisation des boutons séparés</h2>
+		
+		<p>Pour les listes séparée avec un deuxième bouton, le framework par défaut utilise l'échantillon "b" du thème (blue dans le thème par défaut). Voici une liste séparée par défaut :</p>
+		
+		<ul data-role="listview" data-inset="true">
+			<li><a href="index.html">
+				<img src="images/album-bb.jpg" />
+				<h3>Broken Bells</h3>
+				</a><p>Broken Bells</p></a>
+				<a href="index.html">Purchase album</a>
+			</li>
+			<li><a href="index.html">
+				<img src="images/album-hc.jpg" />
+				<h3>Warning</h3>
+				</a><p>Hot Chip</p></a>
+				<a href="index.html">Purchase album</a>
+			</li>
+		</ul>
+		
+<code>
+
+&lt;ul data-role="listview" data-inset="true" data-split-theme="a"&gt;
+
+</code>
+		<p>Pour spécifier l'échantillon de couleur pour le bouton icône sur la droite, ajoutez le <code>data-split-theme</code> à la liste et spécifiez une lettre d'échantillon. Cet attribut peut également être ajouté pour séparer l'intérieur de chaque élément de la liste en ajoutant un attribut <code> data-theme</code> à des liens spécifiques (voir le second élément de liste).</p>
+		<ul data-role="listview" data-inset="true" data-split-theme="a">
+			<li><a href="index.html">
+				<img src="images/album-bb.jpg" />
+				<h3>Broken Bells</h3>
+				</a><p>Broken Bells</p>
+				</a>
+				<a href="index.html">Purchase album</a>
+			</li>
+			<li><a href="index.html">
+				<img src="images/album-hc.jpg" />
+				<h3>Warning</h3>
+				</a><p>Hot Chip</p>
+				</a>
+				<a href="index.html" data-theme="e">Purchase album</a>
+			</li>
+		</ul>
+
+		<p>L'icône pour le thème de la séparation peut être défini au niveau de la liste en y ajoutant <code>data-split-icon</code> à la liste et en spécifiant une <a href="../buttons/buttons-icons.html">icône standard</a>. Cet attribut peut également être ajoutés pour séparer l'intérieur de chaque éléments de la liste en ajoutant un attribut <code> data-icon</code> à des liens spécifiques (voir le second élément de liste).</p>
+		
+<code>
+
+&lt;ul data-role="listview" data-inset="true" data-split-theme="d" data-split-icon="delete"&gt;
+
+</code>
+
+	<ul data-role="listview" data-inset="true" data-split-theme="d" data-split-icon="delete" >
+		<li><a href="index.html">
+			<img src="images/album-bb.jpg" />
+			<h3>Broken Bells</h3>
+			</a><p>Broken Bells</p>
+			</a>
+			<a href="index.html">Purchase album</a>
+		</li>
+		<li><a href="index.html">
+			<img src="images/album-hc.jpg" />
+			<h3>Warning</h3>
+			</a><p>Hot Chip</p>
+			</a>
+			<a href="index.html">Purchase album</a>
+		</li>
+	</ul>
+
+
+		
+		<h2>Exemples de tous les échantillons d'une liste de base</h2>
+		
+		<p>Échantillon <strong>A</strong></p>
+		<ul data-role="listview" data-inset="true" data-theme="a">
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
+		</ul>
+		
+		<p>Échantillon <strong>B</strong></p>
+		<ul data-role="listview" data-inset="true" data-theme="b">
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
+		</ul>
+		
+		<p>Échantillon <strong>C</strong></p>
+		<ul data-role="listview" data-inset="true" data-theme="c">
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
+		</ul>
+		
+		<p>Échantillon <strong>D</strong></p>
+		<ul data-role="listview" data-inset="true" data-theme="d">
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
+		</ul>
+		
+		<p>Échantillon <strong>E</strong></p>
+		<ul data-role="listview" data-inset="true" data-theme="e">
+			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+			<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
+		</ul>
+		
+		
+		</div><!--/content-primary -->		
+
+		<div class="content-secondary">
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+					<h3>Aussi dans cette rubrique</h3>
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+						<li data-role="list-divider">Apparence d'une liste</li>
+						<li><a href="docs-lists.html">Conventions balisage des listes</a></li>
+						<li><a href="lists-ul.html">Liste chainée de base</a></li>
+						<li><a href="lists-nested.html">Liste imbriquée</a></li>
+						<li><a href="lists-ol.html">Liste numérotée</a></li>
+
+						<li><a href="lists-split.html">Liste de bouton séparé</a></li>	
+						<li><a href="lists-divider.html">Séparateurs de liste</a></li>
+						<li><a href="lists-count.html">Bulle compteur</a></li>
+						<li><a href="lists-thumbnails.html">Miniatures</a></li>
+						<li><a href="lists-icons.html">Icônes</a></li>
+						<li><a href="lists-formatting.html">Formatage du contenu</a></li>
+						<li><a href="lists-search.html">Barre de filtre de recherche</a></li>
+						<li><a href="lists-search-inset.html">Encart barre de filtre de recherche</a></li>
+						<li><a href="lists-search-with-dividers.html">Barre de filtre de recherche avec séparateurs</a></li>
+
+						<li><a href="lists-readonly.html">Listes en lecture seule</a></li>
+						<li><a href="lists-readonly-inset.html">Encart listes en lecture seule</a></li>
+						<li><a href="lists-forms.html">Listes avec formulaires</a></li>
+						<li><a href="lists-forms-inset.html">Encart listes avec formulaires</a></li>
+
+						<li><a href="lists-inset.html">Encart avec listes stylées</a></li>
+						<li><a href="lists-performance.html">Test de performance de liste</a></li>
+						<li data-theme="a"><a href="lists-themes.html">Liste thématisée</a></li>
+
+					</ul>
+			</div>
+		</div>		
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>© 2011 The jQuery Project</p>
+	</div>
+
+	</div><!-- /page -->
+
+	</body>
+	</html>

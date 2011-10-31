@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Curseur</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Curseur</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+			<h2>Curseur</h2>
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Bases</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
+			</ul>
+    
+			<p>Pour ajouter un widget curseur à votre page, utiliser l'<code>input</code> standard avec l'attribut <code>type="range"</code>. L'entrée <code>value</code> est utilisé pour configurer la position de départ du curseur et la valeur dans la zone de saisie. Précisez les valeurs des attributs <code>min</code> et <code>max</code> pour régler la fourchette du curseur. Le framework analysera ces attributs pour configurer le widget curseur. </p>
+			
+			<p>Lorsque vous faites glisser le curseur, le framework met à jour la valeur de l'entrée natif (et vice-versa) afin qu'ils soient toujours en phase, ce qui garantit que la valeur est soumise avec le formulaire.</p>
+			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
+			
+			<p>Le framework trouvera tous les éléments  <code>inputs</code> avec un <code>type="range"</code> et les améliorera automatiquement dans un curseur avec une saisie complémentaire, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique de cette entrée dans un curseur, ajouter l'attribut <code>data-role="none"</code> à l'<code>input</code>.</p> Et enveloppez-les dans un <code>div</code> avec l'attribut <code> data-role="fieldcontain"</code> afin de les grouper.</p>
+			
+<pre><code>
+   &lt;label for="slider-0"&gt;Curseur :&lt;/label&gt;
+   &lt;input type="range" name="slider" id="slider-0" value="25" min="0" max="100"  /&gt;
+</code></pre>
+
+				<p>Le curseur par défaut est affiché comme ceci :</p>
+					<label for="slider-0">Curseur en saisie :</label>
+					<input type="range" name="slider-1" id="slider-0" value="25" min="0" max="100"  />
+			
+				<p>Optionnellement, enveloppez le balisage du curseur dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
+			
+
+<pre><code>
+<strong>&lt;div data-role="fieldcontain"&gt;
+</strong>   &lt;label for="slider"&gt;Curseur :&lt;/label&gt;
+   &lt;input type="range" name="slider" id="slider" value="25" min="0" max="100"  /&gt;
+<strong>&lt;/div&gt;
+</strong></code></pre>
+
+						<p>Le curseur est maintenant affiché comme ceci :</p>
+						<div data-role="fieldcontain">
+							<label for="slider-1">Curseur en saisie :</label>
+							<input type="range" name="slider-1" id="slider-1" value="25" min="0" max="100" />
+						</div>
+
+						<p>Les curseurs répondent également à des commandes via des touches. Les touches flèche vers la droite, flèche vers le haut et haut de page augmentent la valeur, flèche gauche, flèche vers le bas, et bas de page pour la diminuer. Pour déplacer le curseur à sa valeur minimum ou maximum, utilisez respectivement la touche début et fin.</p>
+						
+						
+		<h2>Appel du plugin curseur</h2>
+
+<p>Ce plugin sera automatiquement initialiser sur n'importe quelle page qui contient un <code>input</code> de texte avec l'attribut <code>type="range"</code>. Cependant, si nécessaire, vous pouvez appeler directement le plugin <code>curseur</code> sur un sélecteur,comme n'importe quel plugin jQuery :</p>
+<pre><code>
+$('input').slider();			
+</code></pre>
+    
+
+		<h2>Thématisation du curseur</h2>
+		<p>Pour définir l'échantillon de thème pour le curseur, ajoutez l'attribut  <code>data-theme</code> à l'<code>input</code> qui appliquera le thème à la fois à la saisie, au curseur et à la piste. L'échantillon de la piste du curseur peut être réglé séparément en ajoutant l'attribut  <code>data-track-theme</code> à appliquer à la version de l'état down de l'échantillon du bouton sélectionné.</p>
+		
+		<pre><code>
+&lt;div data-role="fieldcontain"&gt;
+	&lt;label for="slider-2"&gt;Curseur :&lt;/label&gt;
+	&lt;input type="range" name="slider-2" id="slider-1" value="25" min="0" max="100" <strong>data-theme="a" data-track-theme="b"</strong> /&gt;
+&lt;/div&gt;
+		</code></pre>
+		
+		<p>Ceci va produire un curseur thématisé :</p>
+		<div data-role="fieldcontain">
+			<label for="slider-2">Curseur en saisie :</label>
+			<input type="range" name="slider-2" id="slider-1" value="25" min="0" max="100" data-theme="a" data-track-theme="b" />
+		</div>
+		</form>
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Éléments de formulaire</li>
+					<li><a href="../docs-forms.html">Formulaires basiques</a></li>
+					<li><a href="../forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="../textinputs/index.html">Textes de saisie</a></li>
+					<li><a href="../search/">Saisie d'une recherche</a></li>
+					<li data-theme="a"><a href="index.html">Curseur</a></li>
+					<li><a href="../switch/">Interrupteur</a></li>
+					<li><a href="../radiobuttons/">Radio boutons</a></li>
+					<li><a href="../checkboxes/">Cases à cocher</a></li>
+					<li><a href="../selects/">Menus de sélection</a></li>
+					<li><a href="../forms-themes.html">Thématisation des formulaires</a></li>
+					<li><a href="../forms-all-native.html">Eléments natifs de formulaire</a></li>
+					<li><a href="../forms-sample.html">Soumission de formulaire</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
+

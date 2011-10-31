@@ -1,0 +1,122 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Zone de saisie de recherche</title> 
+	<link rel="stylesheet"  href="../../../css/themes/default/" />  
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Saisie d'une recherche</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		
+		<form action="#" method="get">
+
+			<h2>Saisie d'une recherche</h2>
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Bases</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
+			</ul>
+
+			<p>Les zones de saisie de recherche sont un nouveau type HTML qui est stylisé en forme de pilule avec des coins et ajoute une icône "x" pour effacer le champ une fois que vous commencez à taper. Commencez avec un <code>input</code> dont l'attribut est <code>type="search"</code> dans votre balisage. </p>
+			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
+				
+				<pre><code>	
+&lt;label for="search-basic"&gt;Texte de recherche :&lt;/label&gt;
+&lt;input type="search" name="search" id="searc-basic" value="" /&gt;
+				</code></pre>	
+
+				<p>Cela va produire une saisie de recherche de base. Les styles par défaut définissent la largeur de champ de saisie à 100% du conteneur parent et empile les labels sur une ligne distincte.</p>
+		         <label for="search-basic">Saisie pour recherche :</label>
+				 <input type="search" name="search" id="search-basic" value="" />
+		        
+				
+				 <p>Optionnellement, enveloppez-les dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
+
+<pre><code>	
+<strong>&lt;div data-role="fieldcontain"&gt;
+</strong>    &lt;label for="search"&gt;Recherche :&lt;/label&gt;
+    &lt;input type="search" name="password" id="search" value="" /&gt;
+<strong>&lt;/div&gt;
+</strong></code></pre>	
+			 
+			<p>La zone de recherche est maintenant affichée comme ceci :</p>
+			<div data-role="fieldcontain">
+	         <label for="search">Saisie pour recherche :</label>
+	         <input type="search" name="search2" id="search" value="" />
+			</div>
+
+			<p>Plusieurs thématisation :</p>
+			<div data-role="fieldcontain">
+	         <label for="searchA">Saisie pour recherche :</label>
+	         <input type="search" name="search3" id="searchA" value="" data-theme="a" />
+			</div>
+
+		
+			
+			<h2>Appel du plugin textinput</h2>
+
+<p>Ce plugin sera automatiquement initialiser sur n'importe quelle page qui contient une saisie de texte avec l'attribut <code>type="search"</code>, pas besoin d'un attribut <code>data-role</code> dans le balisage. Cependant, si nécessaire, vous pouvez appeler directement le plugin <code>textinput</code> sur un sélecteur, comme n'importe quel plugin jQuery :</p>
+<pre><code>
+$('.mySearchInput').textinput();			
+</code></pre>
+			
+
+	</form>
+	
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Éléments de formulaire</li>
+					<li><a href="../docs-forms.html">Formulaires basiques</a></li>
+					<li><a href="../forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="../textinputs/index.html">Textes de saisie</a></li>
+					<li data-theme="a"><a href="index.html">Saisie d'une recherche</a></li>
+					<li><a href="../slider/">Curseur</a></li>
+					<li><a href="../switch/">Interrupteur</a></li>
+					<li><a href="../radiobuttons/">Radio boutons</a></li>
+					<li><a href="../checkboxes/">Cases à cocher</a></li>
+					<li><a href="../selects/">Menus de sélection</a></li>
+					<li><a href="../forms-themes.html">Thématisation des formulaires</a></li>
+					<li><a href="../forms-all-native.html">Eléments natifs de formulaire</a></li>
+					<li><a href="../forms-sample.html">Soumission de formulaire</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

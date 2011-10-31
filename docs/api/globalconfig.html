@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Configuration par défaut</title>
+	<link rel="stylesheet"  href="../../css/themes/default/" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head>
+<body>
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Configuration par défaut</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="c">
+		<div class="content-primary">
+
+			<h2>Travailler avec l'Auto-initialisation de jQuery Mobile</h2>
+			<p>Contrairement aux autres projets jQuery, tels que jQuery et jQuery UI, jQuery Mobile applique automatiquement de nombreuses améliorations de balisage dès le chargement (bien avant que l'évènement document.ready se déclenche). Ces améliorations sont appliquées en fonction de la configuration par défaut de jQuery Mobile, qui est conçu pour fonctionner avec des scénarios communs, cependant cela peut ou ne peut pas correspondre à vos besoins particuliers. Heureusement, ces paramètres sont faciles à configurer.</p>
+
+			<h3>L'événement mobileinit</h3>
+			<p>Lorsque jQuery mobile commence à s'exécuter, il déclenche un événement <code>mobileinit</code> sur ​​l'objet  <code>document</code>, que vous pouvez lier pour écraser les valeurs par défaut de jQuery Mobile.</p>
+
+			<pre>
+				<code>
+$(document).bind("mobileinit", function(){
+  //Appliquer des remplacements ici
+});
+				</code>
+			</pre>
+
+			<p>Comme l'événement <code>mobileinit</code> est déclenché immédiatement après l'exécution, vous devez lier votre gestionnaire d'événements avant que jQuery Mobile soit chargé. Ainsi, nous recommandons la liaison de vos fichiers JavaScript dans l'ordre suivant :</p>
+
+			<pre>
+				<code>
+&lt;script src="jquery.js"&gt;&lt;/script&gt;
+<strong>&lt;script src="script-perso.js"&gt;&lt;/script&gt;</strong>
+&lt;script src="jquery-mobile.js"&gt;&lt;/script&gt;
+				</code>
+			</pre>
+
+			<p>Au sein de cet événement, vous pouvez configurer les valeurs par défaut, soit en étendant l'objet <code>$.mobile</code> soit à l'aide de la méthode <code>$.extend</code> de jQuery :</p>
+
+			<pre>
+				<code>
+$(document).bind("mobileinit", function(){
+  $.extend(  $.mobile , {
+    <strong>foo: bar</strong>
+  });
+});
+				</code>
+			</pre>
+
+			<p>... ou en les définissant individuellement :</p>
+			<pre>
+				<code>
+$(document).bind("mobileinit", function(){
+  <strong>$.mobile.foo = bar;</strong>
+});
+				</code>
+			</pre>
+
+		<p>Pour prévisualiser rapidement ces options de configuration globale à l'œuvre, consultez les <a href="../config/index.html">pages de test de configuration</a>.</p>
+
+		<h2>Options configurables</h2>
+		<p>Les valeurs par défaut suivantes sont configurables via l'objet <code>$.mobile</code> :</p>
+
+<dl>
+	<dt><code>ns</code> <em>string</em>, par défaut : ""</dt>
+	<dd>L'espace de nom utilisé dans les attributs data-, par exemple data-role, peut être mis avec n'importe quelle valeur, y compris une chaîne vide, qui est celle par défaut. A l'utilisation, ce sera plus clair si vous incluez un tiret, comme "mynamespace-" qui correspond à <code>data-mynamespace-foo="..."</code>.
+		<p><strong>REMARQUE :</strong> si vous utilisez des espaces de nommage data-, vous aurez besoin de mettre à jour/écraser manuellement un sélecteur dans le CSS du thème. Les sélecteurs de donnée suivants devront intégrer l'espace de nommage que vous utilisez :
+		<pre><code>
+.ui-mobile [data-<strong>mynamespace-</strong>role=page], .ui-mobile [data-<strong>mynamespace-</strong>role=dialog], .ui-page { ...
+		</code></pre>
+		</p>
+	</dd>
+
+	<dt><code>autoInitializePage</code> <em>boolean</em>, par défaut : true</dt>
+	<dd>Quand le DOM est prêt, le framework devrait automatiquement appeler <code>$.mobile.initializePage</code>. Si c'est à false, la page ne sera pas initialisée et et sera visuellement cachée jusqu'à ce que <code>$.mobile.initializePage</code> soit appelé manuellement.</dd>
+
+	<dt><code>subPageUrlKey</code> <em>string</em>, par défaut : "ui-page"</dt>
+	<dd>Le paramètre d'url est utilisé pour le référencement des sous-pages de widget-généré (comme ceux générés par des listes imbriquées). Cela se traduit par <em>example.html<strong>&amp;ui-page=</strong>subpageIdentifier</em>. Le segment hash avant &amp;ui-page= est utilisé par le framework pour faire une requête Ajax vers l'URL où se trouve la sous-page.</dd>
+
+	<dt><code>activePageClass</code> <em>string</em>, par défaut, "ui-page-active"</dt>
+	<dd>La classe attribuée à la page actuellement visible et pendant les transitions</dd>
+
+
+	<dt><code>activeBtnClass</code> <em>string</em>, par défaut: "ui-btn-active"</dt>
+	<dd>La classe utilisée pour le statut du bouton "actif" depuis le framework de CSS.</dd>
+
+	<dt><code>ajaxEnabled</code> <em>boolean</em>, par défaut: true</dt>
+	<dd>jQuery Mobile gérera automatiquement les clics sur les liens et soumettra le formulaire grâce à Ajax, quand cela est possible. Si c'est à false, l'écoute de l'url hash sera désactivé, ainsi les urls se chargeront comme des requêtes HTTP régulières.</dd>
+
+	<dt><code>linkBindingEnabled</code> <em>boolean</em>, par défaut : true</dt>
+	<dd>jQuery Mobile liera automatiquement les clics sur les balises d'ancrage dans votre document. Le paramétrage de ces options à false empêchera  tous les ancrages à l'ajout d'<em>including</em> gérant le clic de l'état du bouton actif et de lien alternatif flouté. Cela ne devrait être utilisé que lorsque l'on tente de déléguer la gestion du clic à une autre bibliothèque ou un code personnalisé.</dd>
+
+	<dt><code>hashListeningEnabled</code> <em>boolean</em>, par défaut : true</dt>
+	<dd>jQuery Mobile écoutera et gérera automatiquement les changements vers location.hash. La désactivation empêchera jQuery Mobile de manipuler les changements de hash, ce qui vous permet de le gérer vous-même, ou tout simplement pour utiliser de simples liens dans un document qui défilent vers un ID particulier.</dd>
+
+	<dt><code>pushStateEnabled</code> <em>boolean</em>, par défaut : true</dt>
+	<dd>Amélioration pour utiliser <code>history.replaceState</code> dans les navigateurs pris en charge, pour convertir les URL basées sur le hash Ajax dans le chemin du document complet. Notez que nous <a href="../pages/page-navmodel.html">recommandons</a> la désactivation de cette fonction si l'Ajax est désactivé ou si l'utilisation intensive des liens externes est utilisée.</dd>
+
+	<dt><code>defaultPageTransition</code> <em>string</em>, par défaut : 'slide'</dt>
+	<dd>Définit la transition par défaut pour les changements de page lors de l'utilisation d'Ajax. Définissez à 'none' pour qu'il n'y ait aucune transition par défaut.</dd>
+
+	<dt><code>touchOverflowEnabled</code> <em>boolean</em>, par défaut : false</dt>
+	<dd>Active le lissage des transitions de page et des barres d'outils fixés dans les périphériques qui supportent les propriétés CSS <code>overflow:</code> et <code>overflow-scrolling: touch; </code>.</dd>
+
+	<dt><code>defaultDialogTransition</code> <em>string</em>, par défaut : 'pop'</dt>
+	<dd>Définit la transition par défaut pour les changements de boîte de dialogue qui utilise Ajax. Définissez à 'none' pour qu'il n'y ait aucune transition par défaut.</dd>
+
+	<dt><code>minScrollBack</code> <em>string</em>, par défaut : 150</dt>
+	<dd>La distance minimale de défilement qui restera en mémoire lors du retour à une page. </dd>
+
+	<dt><code>loadingMessage</code> <em>string</em>, par défaut : "loading"</dt>
+	<dd>Définit le texte qui apparaît quand une page se charge. Si c'est à false, le message n'apparaîtra pas du tout.</dd>
+
+	<dt><code>pageLoadErrorMessage</code> <em>string</em>, par défaut: "Error Loading Page"</dt>
+	<dd>Définit le texte qui apparaît quand une page ne se charge pas grâce à l'Ajax.</dd>
+
+	<dt><code>gradeA</code> <em>fonction qui retourne un boolean</em>, par défaut : Une fonction retournant la valeur de $.support.mediaquery</dt>
+	<dd>N'importe quelles conditions de support qui doivent être respectées pour passer.</dd>
+
+
+</dl>
+	</div><!--/content-secondary -->
+
+	<div class="content-secondary">
+
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+				<h3>Aussi dans cette rubrique</h3>
+
+				<ul data-role="listview"  data-theme="c" data-dividertheme="d">
+
+					<li data-role="list-divider">API</li>
+					<li data-theme="a"><a href="../../docs/api/globalconfig.html">Configuration par défaut</a></li>
+					<li><a href="../../docs/api/events.html">Événements</a></li>
+					<li><a href="../../docs/api/methods.html">Méthodes &amp; Utilitaires</a></li>
+					<li><a href="../../docs/api/themes.html">Framework de Théme</a></li>
+				</ul>
+		</div>
+	</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

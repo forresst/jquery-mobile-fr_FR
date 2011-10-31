@@ -1,0 +1,286 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Framework jQuery Mobile - Conteneurs statique, États</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" /> 
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Thèmes</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div>
+
+	<div data-role="content">
+	
+	<div class="content-primary">
+		<h2>Thématisation aperçu</h2>
+		
+			<p>Chaque mise en page et widget en jQuery Mobile est conçu autour d'un nouveau framework CSS orienté objet permet d'appliquer un thème unifié complet pour la conception visuelle des sites et des applications. Le système de thématisation est similaire au système Themeroller de JQuery UI, mais ajoute quelques améliorations importantes :</p> 
+
+			<ul> 
+				<li>Il tire parti des <strong>propriétés CSS3</strong> pour ajouter des coins arrondis, des ombres aux boites et aux textes et des gradients à la place des images, permettant que le fichier de thème soit très léger et en réduisant les requêtes au serveur.</li>
+				<li>Les thèmes comprennent plusieurs <strong>"échantillons" de couleur</strong> - Composées chacune d'une barre d'en-tête, d'un corps de contenu et les états du bouton qui peuvent être librement mélangés et combinés pour créer la texture visuelle - pour rendre  le design le plus riche possible.</li> 
+				<li><strong>La thématisation ouverte</strong> permet jusqu'à 26 échantillons uniques par thème, à ajouter de la variété quasi illimitée aux conceptions.</li> 
+				<li>Tous les contextes utilisent maintenant <strong>les gradients CSS3</strong> pour réduire considérablement la taille du fichier et le nombre de requêtes au serveur.</li> 
+				<li>Un <strong>ensemble d'icône simplifiée</strong> incluant ceux les plus couramment utilisés pour le mobile, dans un sprite pour réduire le poids de l'image.</li> 
+			</ul>
+			
+		
+		<h2>Thèmes &amp; échantillons</h2>
+		
+		<p>La clé du système des thèmes est la séparation de la couleur et de la texture, grâce à des styles structuraux qui définissent les choses comme la marge et les dimensions. Cela permet que les textures et les couleurs du thème soient définies une fois dans la feuille de style et soient mélangées, appariées et combinées pour obtenir un large éventail d'effets visuels. </p>
+		
+		<p>Chaque thème comprend plusieurs paramètres globaux, y compris la famille de police, les ombres portées pour les superpositions et les valeurs du rayon du coin pour les boutons et les boîtes. En outre, le thème peut inclure plusieurs "échantillons" de couleur, chacun avec des valeurs de couleur pour les barres, les blocs de contenu, les éléments de liste et de bouton et la police <code>text-shadow</code>. </p>
+		
+		<p>Le thème par défaut de jQuery Mobile comprend 5 échantillons qui sont donnés par des lettres (a, b, c, d, e) pour une référence rapide. Pour faire la cartographie des échantillons de couleur uniforme dans nos widgets, nous avons suivi la convention que l'échantillon "a" est le plus haut niveau de priorité visuelle (noir dans notre thème par défaut), "b" est de niveau secondaire (bleu) et "c" est le niveau de référence (gris) que nous utilisons par défaut dans de nombreuses situations, "d" pour un autre niveau secondaire et "e" comme un échantillon d'accent. Les thèmes peuvent avoir des échantillons supplémentaires pour les couleurs d'accent ou des situations spécifiques. Par exemple, vous pouvez ajouter un nouvel échantillon "f" qui a une barre et un bouton rouge pour une utilisation dans des situations d'erreur. </p>
+		
+		<p>Un nouvel outil Themeroller sera lancé avec la sortie de la version jQuery Mobile 1.0 en 2011. En attendant, il est simple de modifier manuellement les échantillons de base dans le thème par défaut et/ou d'ajouter des échantillons supplémentaires en éditant le fichier de thème CSS : copier un bloc de style swatch, renommer les classes avec le nom de lettre du nouvel échantillon et modifier les couleurs.</p>
+		
+		
+		<h3>Barres</h3>
+		<p>Le thème par défaut contient les cinq styles de barre :</p>
+		
+		<div class="swatch-preview">
+			<div class="ui-bar ui-bar-a">Barre A - <a href="#" data-role="none" class="ui-link">Link</a></div>
+			<div class="ui-bar ui-bar-b">Barre B - <a href="#" data-role="none" class="ui-link">Link</a></div>
+			<div class="ui-bar ui-bar-c">Barre C - <a href="#" data-role="none" class="ui-link">Link</a></div>
+			<div class="ui-bar ui-bar-d">Barre D - <a href="#" data-role="none" class="ui-link">Link</a></div>
+			<div class="ui-bar ui-bar-e">Barre E - <a href="#" data-role="none" class="ui-link">Link</a></div>
+		</div><!-- end swatch-bars -->
+		
+		<p>Par défaut, le cadre assigne l'échantillon "a" à toutes les en-têtes et pieds de page, parce que ce sont généralement de haute priorité de donnée visuelle dans une application. Pour définir la couleur d'une barre d'une couleur différente de l'échantillon, ajoutez simplement l'attribut <code>data-theme</code> à votre entête ou un pied de page et spécifiez une lettre d'échantillon différent ('b' ou 'd', par exemple) et la couleur de l'échantillon du thème indiqué sera appliquée. En savoir plus sur la <a href="../toolbars/bars-themes.html">barre d'outil de thématisation</a>.</p>
+		
+		
+		
+		<h3>Blocs de contenu</h3>
+		<p>Le thème par défaut inclut également des valeurs d'échantillon de couleur pour une utilisation dans des blocs de contenu, conçu pour être coordonner avec les échantillons de couleur de l'en-tête dans le thème. </p>
+		
+		<div class="swatch-preview">	
+			<div class="ui-body ui-body-a">Bloc A - <a href="#">Link</a></div>
+			<div class="ui-body ui-body-b">Bloc B - <a href="#">Link</a></div>
+			<div class="ui-body ui-body-c">Bloc C - <a href="#">Link</a></div>
+			<div class="ui-body ui-body-d">Bloc D - <a href="#">Link</a></div>
+			<div class="ui-body ui-body-e">Bloc E - <a href="#">Link</a></div>
+		</div><!-- end swatch-bars -->
+
+
+		<p>Si un thème n'est pas spécifié sur un bloc de contenu, le framework sera par défaut à "c" pour optimiser le contraste par défaut de l''en-tête à "a", comme indiqué ici :</p>
+					
+			<div data-role="header" data-position="inline">
+				<a href="#" data-icon="arrow-l">Retour</a>
+				<h1>Entête par défaut</h1>
+			</div>
+			<div class="ui-body ui-body-c">
+				<h3>Entête du contenu du thème par défaut</h3>
+				<p>Il s'agit de la palette de couleurs par défaut du contenu et un aperçu d'un <a href="#" class="ui-link">lien</a>.</p>
+					<label for="slider1">Curseur en saisie :</label>
+				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" />
+				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+				     	<legend>Paramètres du cache :</legend>
+				         	<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
+				         	<label for="radio-choice-a1">Marche</label>
+				         	<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
+				         	<label for="radio-choice-b1">Arrêt</label>
+				    </fieldset>
+				<a href="#" data-role="button" data-inline="true">Bouton</a>
+			</div>
+			<div class="ui-bar ui-bar-a">
+				<div data-role="controlgroup" data-type="horizontal" >
+					<a href="#" data-role="button" data-inline="true">Bouton</a><a href="#" data-role="button" data-inline="true">Bouton</a><a href="#" data-role="button" data-inline="true">Bouton</a>
+				</div><!-- /controlgroup -->
+			</div>
+
+
+		<p>En savoir plus sur la <a href="../content/content-themes.html">thématisation du contenu</a>.</p>
+		
+
+		<h2>Listes &amp; Boutons</h2>
+		<p>Chaque échantillon inclut également des styles par défaut pour des éléments interactifs comme les éléments de liste et les boutons.</p>
+		<ul data-role="listview" data-inset="true" data-theme="a">
+			<li><a href="index.html">Élément de liste</a></li>
+			<li><a href="index.html">Élément de liste</a></li>
+		</ul>
+		
+		<ul data-role="listview" data-inset="true" data-theme="b">
+			<li><a href="index.html">Élément de liste</a></li>
+			<li><a href="index.html">Élément de liste</a></li>
+		</ul>
+		
+		<ul data-role="listview" data-inset="true" data-theme="c">
+			<li><a href="index.html">Élément de liste</a></li>
+			<li><a href="index.html">Élément de liste</a></li>
+		</ul>
+		
+		<ul data-role="listview" data-inset="true" data-theme="d">
+			<li><a href="index.html">Élément de liste</a></li>
+			<li><a href="index.html">Élément de liste</a></li>
+		</ul>
+		
+		<ul data-role="listview" data-inset="true" data-theme="e">
+			<li><a href="index.html">Élément de liste</a></li>
+			<li><a href="index.html">Élément de liste</a></li>
+		</ul>
+		
+		
+		<p>Un bouton est inclus pour chaque échantillon dans le thème. Chaque bouton possède des styles pour les états normal, hover/focus et pressed.</p>
+		
+		<div class="swatch-preview">
+			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l">Button A</a>
+			<a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l">Button B</a>
+			<a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l">Button C</a>
+			<a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l">Button D</a>
+			<a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l">Button E</a>
+		</div><!-- end swatch-bars -->
+		
+		
+		<p>Par défaut, n'importe quel bouton qui est placé dans une barre est attribué automatiquement  à une lettre de l'échantillon qui correspond à la barre ou la boîte de contenu de son parent,  pour intégrer visuellement le bouton dans le thème parent comme un caméléon, comme indiqué ici :</p>
+		
+		<div class="swatch-preview">
+			<div data-role="header" data-theme="a"><h1>Barre A</h1><a href="index.html" data-icon="arrow-l">Bouton A</a></div>
+			<div data-role="header" data-theme="b"><h1>Barre B</h1><a href="index.html" data-icon="arrow-l">Bouton B</a></div>
+			<div data-role="header" data-theme="c"><h1>Barre C</h1><a href="index.html" data-icon="arrow-l">Bouton C</a></div>
+			<div data-role="header" data-theme="d"><h1>Barre D</h1><a href="index.html" data-icon="arrow-l">Bouton D</a></div>
+			<div data-role="header" data-theme="e"><h1>Barre E</h1><a href="index.html" data-icon="arrow-l">Bouton E</a></div>
+		</div><!-- end swatch-bars -->
+		
+		<p>Ce comportement par défaut rend facile la répercution du changement de thème à travers une page en définissant un échantillon de thème sur un parent car vous savez que les boutons seront maintenu avec le même poids relatif visuelle à travers les thèmes. De même les éléments de formulaire utilisent les styles de boutons, ils pourront également à s'adapter à leur conteneur parent. </p>
+			
+		<p>Si vous voulez ajouter l'accent visuel à un bouton et l'aider à se démarquer visuellement de sa barre d'outils parent, une couleur alternative de l'échantillon peut être définie par l'ajout d'un <code>data-theme="a"</code> à l'ancre. Une fois qu'une couleur alternative de l'échantillon est définie sur un bouton dans le balisage, le framework ne va pas écraser cette couleur si le thème parent est changé, parce que vous avez fait un choix conscient pour le définir.</p>
+		
+		<div class="swatch-bars">
+			<div data-role="header" data-theme="a" class="ui-bar" >
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			<div data-role="header" data-theme="b" class="ui-bar" >
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			<div data-role="header" data-theme="c" class="ui-bar" >
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			<div data-role="header" data-theme="d" class="ui-bar" >
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			<div data-role="header" data-theme="e" class="ui-bar" >
+				<div><!-- wrapper div to have control over butttons -->
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="a">A</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="b">B</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="c">C</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="d">D</a>
+					<a href="index.html" data-role="button" data-icon="arrow-l" data-theme="e">E</a>
+				</div>
+			</div>
+			
+		</div><!-- end swatch-bars -->
+
+<p>En savoir plus sur  la <a href="../lists/lists-themes.html">thématisation de liste</a> et la <a href="../buttons/buttons-themes.html">thématisation de bouton</a>.</p>
+
+		<h3>État "Active" globale</h3>
+		<p>Le framework jQuery Mobile utilise un seul échantillon de niveau de thème appelé "active" (bleu clair dans le thème par défaut) pour constamment indiquer l'état sélectionné, indépendamment de l'échantillon individuel du widget donné. Nous appliquons ceci dans les contrôles de navigation et de formulaire chaque fois qu'il y a un besoin d'indiquer ce qui est actuellement sélectionné. Parce que cet échantillon de thème est conçu pour un retour utilisateur clair et cohérent, il ne peut pas être remplacé via le balisage, il est fixé une fois dans le thème et appliqué par le framework à chaque fois qu'un état sélectionné ou actif est nécessaire. Le style de cet état est dans la feuille de style du thème dans les règles de style <code>ui-btn-actif</code>.</p>
+		
+		<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
+	     	<legend>Active est utilisé pour l'état sur ces bascules :</legend>
+	         	<input type="radio" name=" radio-choice-a" id="radio-choice-a" value="on" checked="checked" />
+	         	<label for="radio-choice-a">Marche</label>
+	         	<input type="radio" name=" radio-choice-a" id="radio-choice-b" value="off"  />
+	         	<label for="radio-choice-b">Arrêt</label>
+	    </fieldset>
+
+		
+		<h3>Icônes</h3>
+		<p>Il y a un ensemble de base d'<a href="../buttons/buttons-icons.html">icônes standards</a> inclus dans le framework qui peut être attribué à n'importe quel bouton. Afin de minimiser la taille de téléchargement des icônes de base, jQuery Mobile inclut seulement ces icônes en blanc et ajoute automatiquement un cercle semi-transparent noir derrière l'icône pour s'assurer qu'il a un bon contraste sur toutes les couleurs de fond.</p>
+
+		<h3>Classes de thème</h3>
+		<p>Affectation des échantillons de couleurs à travers l'attribut <code> data-theme</code> est une façon d'exploiter le système de thème, mais il est également possible d'appliquer n'importe quel échantillon de thème directement sur votre balisage à travers des classes pour appliquer les couleurs, les textures et le formatage de police de votre thème à n'importe quel balisage. Ceci est particulièrement utile lorsque vous créez votre propre mise en page personnalisée des éléments ou des widgets UI. Voici quelques classes de thème commune, mais plusieurs sont disponibles dans la feuille de style de thème :</p>
+		<dl>
+			<dt><code>ui-bar-(a-z)</code></dt>
+			<dd>Applique les styles de thème de barre d'outils pour la lettre de l'échantillon sélectionné. Communément utilisé en conjonction avec la classe structurelle <code>ui-bar</code> pour ajouter les styles standards d'espacement.</dd>
+			<dt><code>ui-body-(a-z)</code></dt>
+			<dd>Applique les styles de thème de contenu du corps pour la lettre de l'échantillon sélectionné. Communément utilisé en conjonction avec la classe structurelle <code>ui-body</code> pour ajouter les styles standards d'espacement de bloc de contenu. </dd>
+			<dt><code>ui-btn-up-(a-z)</code></dt>
+			<dd>Applique les styles de thème d'élément bouton/cliquable pour la lettre de l'échantillon sélectionné. Couramment utilisés dans les statuts de classe d'interaction <code>ui-btn-hover-(a-z)</code> et <code>ui-btn-down-(a-z)</code> pour fournir un retour visuelle et <code>ui-btn-active</code> pour indiquer les statuts "on" ou sélectionnés.</dd>
+			<dt><code>ui-corner-all</code></dt>
+			<dd>Applique border-radius sur le thème globale pour les coins arrondis et est utilisé pour les conteneurs ou les éléments regroupés dans le le framework (listes insérées, ensembles de radio bouton). Il y a des classes supplémentaires pour toutes les combinaisons possibles de coin arrondi, par exemple : <code>ui-corner-tl</code> (Haut gauche uniquement), <code>-top</code> (Deux coins supérieurs), <code>-left</code> (Deux coins à gauche), etc. Une deuxième série complète de classes d'angle est fourni pour les boutons de sorte que ces derniers puissent avoir un arrondi différent. L''utilisation de ces classes ont une convention de nommage similaire, mais avec "btn" au lieu de "corner", comme ceci : <code>.ui-<strong>btn</strong>-corner-all</code>.</dd>
+			<dt><code>ui-shadow</code></dt>
+			<dd>Applique le style ombre du thème globale sur tous éléments en utilisant la propriété CSS <code>box-shadow</code>. </dd>
+			<dt><code>ui-disabled</code></dt>
+			<dd>Applique le look désactivé qui réduit essentiellement l'opacité d'un élément quelconque de cette classe à 30%, cache le curseur, et définit <code>pointer-events: none;</code> ce qui empêche toute interaction dans de nombreux navigateurs modernes.</dd>
+		</dl>
+
+			<h3>Surcharge des thèmes</h3>
+			<p>Les thèmes sont conçues comme un solide point de départ, mais sont destinés à être personnalisés pour ajouter les éléments de conception personnalisée qui rendent votre site ou application unique. Puisque tout est contrôlé par CSS, il est facile d'utiliser un outil Web d'inspection pour identifier les propriétés de style que vous voulez modifier. L'ensemble des classes de thème (global) et des classes structurelles sémantique (widget-specific) ajoutés aux éléments fournissent un ensemble riche de sélecteurs possible pour cibler les remplacements de style. Nous vous recommandons d'ajouter une feuille de style externe à <code>head</code>, placée <strong>après</strong> la structure et le style de références thématiques, qui contiennent tous vos remplacements de style. Cela vous permet de facilement de mettre à jour les nouvelles versions de la bibliothèque parce les remplacements sont séparés du code de la bibliothèque.</p>
+			
+			
+		<p><strong>En savoir plus</strong> A propos de la thématisation des composants individuels :</p>
+		<ul data-role="listview" data-inset="true">
+			<li><a href="../pages/pages-themes.html">Thématisation de page</a></li>
+			<li><a href="../toolbars/bars-themes.html">Thématisation de barre d'outils</a></li>
+			<li><a href="../content/content-themes.html">Thématisation de contenu</a></li>
+			<li><a href="../buttons/buttons-themes.html">Thématisation de bouton</a></li>
+            <li><a href="../forms/forms-themes.html">Thématisation de formulaire</a></li>
+            <li><a href="../lists/lists-themes.html">Thématisation de liste</a></li>
+		</ul>
+	</div><!--/content-secondary -->		
+	
+	<div class="content-secondary ui-body-d">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+			
+					<li data-role="list-divider">API</li>
+					<li><a href="../../docs/api/globalconfig.html">Configuration par défaut</a></li>
+					<li><a href="../../docs/api/events.html">Événements</a></li>
+					<li><a href="../../docs/api/methods.html">Méthodes &amp; Utilitaires</a></li>
+					<li data-theme="a"><a href="../../docs/api/themes.html">Framework de Théme</a></li>
+	
+								</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
