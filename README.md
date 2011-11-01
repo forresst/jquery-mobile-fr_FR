@@ -15,6 +15,7 @@ Si vous pensez que vous avez trouvé une erreur de syntaxe ou de traduction, s'i
 2. Créez un ticket expliquant le problème et le résultat attendu
 3. Soumettez le problème.
 
+Recommandé: [modèle de ticket JS Bin avec les instructions](http://jsbin.com/obowiw/edit)
 
 Tout ce qui se trouve ci-dessous est une traduction en français du README du dépôt original.
 

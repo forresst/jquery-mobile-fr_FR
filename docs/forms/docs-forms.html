@@ -152,20 +152,20 @@
 
 <code>
 
-$("input[type='checkbox']").attr("checked",true).checkboxradio("refresh");
+$("input[type='checkbox']").prop("checked",true).checkboxradio("refresh");
 
 </code>
 
 <h4>Radios boutons :</h4>
 <code>
 
-$("input[type='radio']").attr("checked",true).checkboxradio("refresh");
+$("input[type='radio']").prop("checked",true).checkboxradio("refresh");
 
 </code>
 
 <h4>Selects :</h4>
 <code><pre>
-var myselect = $("select#foo");
+var myselect = $("#selectfoo");
 myselect[0].selectedIndex = 3;
 myselect.selectmenu("refresh");
 </pre></code>
@@ -173,14 +173,14 @@ myselect.selectmenu("refresh");
 <h4>Curseurs :</h4>
 <code>
 
-$("input[type=range]").val(60).slider("refresh");
+$("input[type='range']").val(60).slider("refresh");
 
 </code>
 
 <h4>Interrupteurs (ils utilisent le curseur) :</h4>
 
 <code><pre>
-var myswitch = $("select#bar");
+var myswitch = $("#selectbar");
 myswitch[0].selectedIndex = 1;
 myswitch.slider("refresh");
 </pre></code>

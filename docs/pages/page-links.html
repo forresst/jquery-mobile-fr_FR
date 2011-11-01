@@ -31,7 +31,7 @@
 			
 			<h2>Comportement du lien par défaut : Ajax</h2> 
 							
-			<p>Afin de permettre des transitions de page animée, tous les liens qui pointent vers une page externe (ex. products.html) sera chargée via Ajax. Pour le faire discrètement, le framework parse le <code>href&lt;/ c0&gt; du lien pour formuler une requête Ajax (Hijax) et afficher l'icône de chargement. Tout cela se fait automatiquement par jQuery Mobile.</p>
+			<p>Afin de permettre des transitions de page animée, tous les liens qui pointent vers une page externe (ex. products.html) sera chargée via Ajax. Pour le faire discrètement, le framework parse le <code>href</code> du lien pour formuler une requête Ajax (Hijax) et afficher l'icône de chargement. Tout cela se fait automatiquement par jQuery Mobile.</p>
 				
 			<p>Si la requête Ajax est réussie, le contenu de la page est ajoutée au DOM, tous les widgets mobiles sont auto-initialisés et la nouvelle page est animée dans la vue avec une transition de page.</p>
 			
@@ -42,60 +42,60 @@
 		
 		<p>Les liens qui pointent vers d'autres domaines ou qui ont les attributs <code>rel="external"</code>, <code>data-ajax="false"</code> ou <code>target</code> ne seront pas chargés avec l'Ajax. Au lieu de cela, ces liens provoqueront un rafraîchissement de la page complète sans transition animée. Les deux attributs ont le même effet, mais différents sens sémantique : <code>rel="external"</code>  devrait être utilisé lors de la liaison vers un autre site ou un domaine, alors que<code>data-ajax="false"</code> est utile pour tout simplement empêcher une page dans votre domaine d'être chargée via Ajax. En raison des restrictions de sécurité, le framework choisit toujours pour les liens vers des domaines externes sans le comportement de l'Ajax.</p>
 		
-		<p>Note: When building a jQuery Mobile application where the Ajax navigation system is disabled globally or frequently disabled on individual links, we  recommend disabling the <code>$.mobile.pushStateEnabled</code> global <a href="../api/globalconfig.html">configuration option</a> to avoid inconsistent navigation behavior in some browsers.</p>
+		<p>Remarque : Lors de la construction d'une application jQuery Mobile où le système de navigation Ajax est désactivé globalement ou fréquemment désactivé sur des liens individuels, nous vous recommandons de désactiver l'<a href="../api/globalconfig.html">option de configuration</a> globale  <code>$.mobile.pushStateEnabled</code> pour éviter les comportements de navigation incompatibles dans certains navigateurs.</p>
 		
 
 
-		<h2>Linking within a multi-page document</h2> 
+		<h2>Liaison dans un document multi-page</h2> 
 		
-			<p>A single HTML document can contain or multiple 'page' containers simply be  stacking multiple divs with a <code> data-role</code> of <code>"page"</code>. This allows you to build a small site or application within a single HTML document; jQuery Mobile will simply display the first 'page' it finds in the source order when the page loads.</p> 
+			<p>Un unique document HTML peut contenir plusieurs conteneurs de 'page' qui sont simplement empilés dans plusieurs divs avec le <code> data-role</code> de <code>"page"</code>. Cela vous permet de construire un petit site ou une application dans un seul document HTML, jQuery Mobile affichera, lorsque la page se chargera, simplement la première 'page' qu'il trouvera dans l'ordre du code source.</p> 
 			
-			<p>If a link in a multi-page document points to an anchor (<code>#foo</code>), the framework will looks for a page wrapper with that ID (id="foo"). If it finds a page in the HTML document, it will transition the new page into view. You can seamlessly navigate between local, internal "pages" and external pages in jQuery Mobile. Both will look the same to the end user except that external pages will display the Ajax spinner while loading. In either situation, jQuery Mobile updates the page's URL hash to enable Back button support, deep-linking and bookmarking.  </p>
+			<p>Si un lien dans un document multi-page pointe vers une ancre (<code># foo</code>), le framework regardera vers une enveloppe de page avec cet ID (id="foo"). S'il trouve une page dans le document HTML, il fera la transition vers la nouvelle page dans la vue. Vous pouvez facilement naviguer entre les "pages" locales, internes et les pages externes dans jQuery Mobile. Les deux auront le même aspect pour l'utilisateur final, sauf que les pages externes afficheront l'icône Ajax pendant le chargement. Dans les deux cas, jQuery mobile met à jour le hash de l'URL de la page pour activer le support du bouton retour, du lien profond et du marque-page. </p>
 		
-		<p>It's important to note if you  are linking from a mobile page that was loaded via Ajax to a page that contains multiple internal pages, you need to add a <code>rel="external"</code> or <code>data-ajax="false"</code> to the link. This tells the framework to do a full page reload to clear out the Ajax hash in the URL. This is critical because Ajax pages use the hash (#) to track the Ajax history, while multiple internal pages use the hash to indicate internal pages so there will be conflicts in the hash between these two modes.</p>
+		<p>Il est important de noter que si vous avez une liaison d'une page mobile, qui a été chargée via Ajax, à une page qui contient plusieurs pages internes, vous devez ajouter un <code>rel="external"</code> ou <code>data-ajax="false"</code> pour le lien. Ceci indique au framework de faire un rechargement de la page complète pour vider le hash Ajax dans l'URL. Cela est essentiel car les pages Ajax utiliser le hash (#) pour suivre l'historique d'Ajax, alors que plusieurs pages internes utilisent le hash pour indiquer les pages internes donc il y aura des conflits dans le hash entre ces deux modes.</p>
 		
-		<p>For example, a link to a page containing multiple internal pages would look like this:</p>
+		<p>Par exemple, un lien vers une page contenant plusieurs pages internes devrait ressembler à ceci :</p>
 			
-			<code>&lt;a href="multipage.html" rel="external"&gt;Multi-page link&lt;/a&gt;</code>
+			<code>&lt;a href="multipage.html" rel="external"&gt;Lien Multi-page&lt;/a&gt;</code>
 
 				
 
-		<h2>"Back" button links</h2>
-		<p>If you use the attribute <code>data-rel="back"</code> on an anchor, any clicks on that anchor will mimic the back button, going back one history entry and ignoring the anchor's default href. This is particularly useful when linking back to a named page, such as a link that says "home", or when generating "back" buttons with JavaScript, such as a button to close a dialog. When using this feature in your source markup, <strong>be sure to provide a meaningful href that actually points to the URL of the referring page (this will allow the feature to work for users in C-Grade browsers</strong>. Also, please keep in mind that if you just want a reverse transition without actually going back in history, you should use the <code>data-direction="reverse"</code> attribute instead.</p>
+		<h2>Liens du bouton "Retour"</h2>
+		<p>Si vous utilisez l'attribut <code>data-rel="back"</code> sur une ancre, tout clic sur cette ancre imitera le bouton retour, remontant une entrée de l'historique et en ignorant le href par défaut de l'ancre. Ceci est particulièrement utile lors de la liaison de retour vers une page nommée, comme un lien qui s'appelle "accueil", ou lors de la génération des boutons "retour" avec JavaScript, comme un bouton pour fermer une fenêtre de dialogue. Lorsque vous utilisez cette fonctionnalité dans votre balisage source, <strong>assurez vous de fournir un href significatif qui pointe réellement sur l'URL de la page de référence (cela permettra à la fonction de travailler pour les utilisateurs de C-Grade navigateurs)</strong>. Aussi, s'il vous plaît garder à l'esprit que si vous voulez juste une transition inverse sans réellement retourner dans l'historique, vous devez utiliser à la place l'attribut <code>data-direction="reverse"</code>.</p>
 		
 				
-		<h2>Redirects and linking to directories</h2>
+		<h2>Les redirections et les liens vers les répertoires</h2>
 		
-		<p>When linking to directory indexes (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a url is a filename, and it will remove that section when creating base urls from which future pages will be referenced.</p>
+		<p>Lors de la liaison à l'index du répertoire (comme href="typesofcats/" à la place de href="typesofcats/index.html"), vous devez fournir un slash. C'est parce que jQuery Mobile suppose que la section après le dernier caractère "/" dans une URL est un nom de fichier, et il va supprimer cette section lors de la création des urls de base à partir duquel les futures pages seront référencées.</p>
 		
-		<p>However, you can work around this issue by returning your page div with a <code>data-url</code> attribute already specified. When you do this, jQuery Mobile will use that attribute's value for updating the URL, instead of the url used to request that page. This also allows you to return urls that change as the result of a redirect, for example, you might post a form to "/login.html" but return a page from the url "/account" after a successful submission. This tool allows you to take control of the jQuery Mobile history stack in these situations. Here's an example:</p>
+		<p>Cependant, vous pouvez contourner ce problème en retournant votre div de page avec un attribut déjà spécifié <code>data-url</code>. Quand vous faites cela, jQuery Mobile utilisera la valeur de l'attribut en mettant à jour l'URL, au lieu de l'URL utilisée pour requêter la page. Cela vous permet également de retourner les URLs qui changent à la suite d'une redirection, par exemple, vous pourriez afficher un formulaire vers "/login.html" mais renvoyer une page vers l'URL "/compte" après une soumission réussie. Cet outil vous permet  dans ces situations de prendre le contrôle de la pile de l'historique de jQuery Mobile. Voici un exemple :</p>
 		
-		<p>The following link points to "docs-links-urltest/index.html": <a href="docs-links-urltest/index.html">Test Link</a> which is a directory with an index page. The return page will update the hash as "/docs/pages/docs-links-urltest/" with a trailing slash. This is done via the data-url attribute in that page's source. Keep in mind that the value will replace the entire hash, and it is up to you to replace it with a URL that actually resolves to the correct page when requested via refresh or deep link.</p>
+		<p>Le lien suivants pointe vers "docs-links-urltest/index.html" : <a href="docs-links-urltest/index.html">Lien d'essai</a> qui est un répertoire avec une page index. La page de retour mettra à jour le hash ainsi "/docs/pages/docs-links-urltest/" avec un slash. Cela se fait via l'attribut data-url dans la source de cette page. Gardez à l'esprit que la valeur remplacera le hash entier, et c'est à vous de le remplacer par une URL qui en fait corrige vers la bonne page lorsqu'elle est demandée via un refresh ou un lien profond.</p>
 		
-		<p>Learn more about the technical details of the navigation model and <a href="page-navmodel.html">Ajax, hashes and history</a> in jQuery mobile.</p>
+		<p>Pour en savoir plus sur les détails techniques du modèle de navigation et de <a href="page-navmodel.html">l'Ajax, les hashes et l'historique</a> dans jQuery mobile.</p>
 		
 		
 		
-		<h2>Link examples</h2>
-					<p>All standard HTML link types are supported in jQuery Mobile in addition to the types outlined above. Here is a sampler of many common link types:</p>
+		<h2>Exemples de lien</h2>
+					<p>Tous les types de lien standard HTML sont pris en charge dans jQuery Mobile en plus des types décrits ci-dessus. Voici un échantillon de nombreux types de lien commun :</p>
 			
 			<ul data-role="listview" data-inset="true" data-theme="d" data-divider-theme="d">
-				<li data-role="list-divider">Links that will be Ajax-loaded with page transitions</li>
-				<li><a href="../../index.html">Link in the same domain</a></li>
-				<li><a href="../pages/dialog.html" data-rel="dialog">Dialog link: data-rel="dialog" (not tracked in history)</a></li>
-				<li data-role="list-divider">Links that will refresh the page</li>
-				<li><a href="http://www.jquery.com">External domain</a></li>
-				<li><a href="../../index.html" rel="external">Link with rel="external"</a></li>
-				<li><a href="index.html" data-ajax="false">link with [data-ajax="false"]</a></li>
-				<li><a href="../../index.html" target="foo">Link with target="foo"</a></li>
-				<li data-role="list-divider">Email links</li>
-				<li><a href="mailto:jdoe@foo.com">Basic email: mailto:jdoe@foo.com</a></li>
-				<li><a href="mailto:jdoe@foo.com?cc=bill@bar.com&amp;bcc=mark@abc.com&amp;subject=Happy%20Birthday&amp;body=Best%20wishes!">Mailto with a cc:, bcc:, subject and body pre-filled</a></li>
+				<li data-role="list-divider">Liens qui seront chargés via Ajax avec des transitions de page</li>
+				<li><a href="../../index.html">Lien dans le même domaine</a></li>
+				<li><a href="../pages/dialog.html" data-rel="dialog">Lien vers une boîte de dialogue : data-rel="dialog" (pas de suivi dans l'historique)</a></li>
+				<li data-role="list-divider">Liens qui vont rafraîchir la page</li>
+				<li><a href="http://www.jquery.com">Domaine externe</a></li>
+				<li><a href="../../index.html" rel="external">Lien avec rel="external"</a></li>
+				<li><a href="index.html" data-ajax="false">Lien avec [data-ajax="false"]</a></li>
+				<li><a href="../../index.html" target="foo">Lien avec target="foo"</a></li>
+				<li data-role="list-divider">Lien vers Email</li>
+				<li><a href="mailto:jdoe@foo.com">Email de base : mailto:jdoe@foo.com</a></li>
+				<li><a href="mailto:jdoe@foo.com?cc=bill@bar.com&amp;bcc=mark@abc.com&amp;subject=Joyeux%20Anniversaire&amp;body=Meilleurs%20voeux%20!">Mailto avec cc:, bcc:, sujet et corps pré-rempli</a></li>
 
-				<li data-role="list-divider">Phone links</li>
-				<li><a href="tel:15555555555">Phone: tel:15555555555</a></li>
-				<li data-role="list-divider">Other</li>
-				<li><a href="#">A href="#" will return false</a></li>
+				<li data-role="list-divider">Liens Téléphone</li>
+				<li><a href="tel:15555555555">Téléphone : tel:15555555555</a></li>
+				<li data-role="list-divider">Autres</li>
+				<li><a href="#">Un href="#" qui retournera false</a></li>
 			</ul>
 
 		

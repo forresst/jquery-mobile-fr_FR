@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Docs - Ajax, hashes &amp; history</title>
+	<title>Docs jQuery Mobile - L'Ajax, les hashes &amp; l'historique</title>
 	<link rel="stylesheet"  href="../../css/themes/default/" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
@@ -128,7 +128,7 @@ $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
 			<p>The non-standard environment created by jQuery Mobile's page navigation model introduces some conditions for which you should be aware when building pages:</p>
 
 			<ul>
-			<li><p>When linking to directories, without a filename url, (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. This is because jQuery Mobile assumes the section after the last "/" character in a url is a filename, and it will remove that section when creating base urls from which future pages will be referenced.</p></li>
+			<li><p>When linking to directories, without a filename url, (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. C'est parce que jQuery Mobile suppose que la section après le dernier caractère "/" dans une URL est un nom de fichier, et il va supprimer cette section lors de la création des urls de base à partir duquel les futures pages seront référencées.</p></li>
 			<li><p>Documents loaded via Ajax will select the first page in the DOM of that document to be loaded as a JQM page element. As a result the developer must make sure to manage the ID attributes of the loaded page and child elements to prevent confusion when manipulating the DOM.</p></li>
 			<li><p>Any unique assets referenced by pages in a jQuery Mobile-driven site should be placed inside the "page" element (the element with a data-role attribute of "page"). For example, links to styles and scripts that are specific to a particular page can be referenced inside that div. However, a better approach is to use jQuery Mobile's page events to trigger specific scripting when certain pages load. <strong>Note: </strong> you can return a page from the server with a data-url already specified in the markup, and jQuery Mobile will use that for the hash update. This allows you to ensure directory paths resolve with a trailing slash and will therefore be used in the base url path for future requests.</p></li>
 			<li><p>Conversely, any non-unique assets (those used site-wide) should be referenced in the <code>&lt;head&gt;</code> section of an HTML document, or at the very least, outside of the "page" element, to prevent running scripts more than once.</p></li>
