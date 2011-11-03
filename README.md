@@ -15,8 +15,6 @@ Si vous pensez que vous avez trouvé une erreur de syntaxe ou de traduction, s'i
 2. Créez un ticket expliquant le problème et le résultat attendu
 3. Soumettez le problème.
 
-Recommandé: [modèle de ticket JS Bin avec les instructions](http://jsbin.com/obowiw/edit)
-
 Tout ce qui se trouve ci-dessous est une traduction en français du README du dépôt original.
 
 Framework jQuery Mobile
@@ -55,6 +53,8 @@ Si vous pensez que vous avez trouvé un bug, s'il vous plaît reportez le en sui
         * [jsbin](http://jsbin.com)
         * [jsfiddle](http://jsfiddle.net)
 3. Soumettez le problème.
+
+Recommandé: [modèle de ticket JS Bin avec les instructions](http://jsbin.com/obowiw/edit)
 
 Soumettre des correctifs
 ========================
