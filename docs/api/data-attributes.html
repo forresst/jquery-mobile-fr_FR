@@ -1,0 +1,409 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Référence de l'attribut de données</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/" /> 
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+</head> 
+<body> 
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Attributs de données</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="c">
+			
+		<div class="content-primary">
+		
+				<style>
+					table { width:100%; border-bottom:1px solid #ccc; }
+					th { text-align:left; width: 170px; }
+					th, td { vertical-align:top; border-top:1px solid #ccc; padding: 6px 10px 4px 0; }
+				</style>
+			
+			<h2><a href="../buttons/buttons-types.html">Bouton</a></h2>
+			<p>Liens avec <code>data-role="button"</code>. Les boutons basés sur l'input et les éléments button sont améliorés automatiquement, donc pas <code>besoin de data-role</code>.</p>
+			<table>
+				<tr>
+					<th>data-corners</th>
+					<td><strong>true</strong> | false</td><td>
+				</td></tr>
+				<tr>
+					<th>data-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td><td>
+				</td></tr>
+				<tr>
+					<th>data-iconpos</th>
+					<td><strong>left</strong> | right | top | bottom |  notext</td><td>
+				</td></tr>
+				<tr>
+					<th>data-iconshadow</th>
+					<td><strong>true</strong> | false</td><td>
+				</td></tr>
+				<tr>
+					<th>data-inline</th>
+					<td>true | <strong>false</strong></td><td>
+				</td></tr>
+				<tr>
+					<th>data-shadow</th>
+					<td><strong>true</strong> | false</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+			</table>
+			<p>Plusieurs boutons peuvent être enveloppés dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour les regrouper verticalement. Ajoutez l'attribut <code>data-type="horizontal"</code> pour que les boutons soit côte à côte.</p>
+			
+
+			<h2><a href="../toolbars/docs-footers.html">Case à cocher</a></h2>
+			<p>Des paires de labels et d'inputs avec le <code>type="checkbox"</code> sont automatiquement améliorés, donc pas <code>besoin de data-role</code></p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td><td>
+				</td></tr>
+			</table>
+
+			<h2><a href="../content/content-collapsible.html">Pliable</a></h2>
+			<p>Un titre et le contenu enveloppé dans un conteneur avec le <code>data-role="collapsible"</code>.</p>
+			<table>
+				<tr>
+					<th>data-collapsed</th>
+					<td><strong>true</strong> | false</td><td>
+				</td></tr>
+				<tr>
+					<th>data-content-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../content/content-collapsible-set.html">Ensemble de pliable</a></h2>
+			<p>Un nombre et des pliables enveloppé dans un conteneur avec le <code>data-role="collapsible-set"</code>.</p>
+			<table>
+				<tr>
+					<th>data-content-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Définit pour tous les pliables de l'ensemble</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Définit pour tous les pliables de l'ensemble</td><td>
+				</td></tr>
+			</table>
+			
+			
+			<h2><a href="../pages/page-anatomy.html">Contenu</a></h2>
+			<p>Conteneur avec <code>data-role="content"</code></p>
+			<table>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+			</table>
+				
+			
+			<h2><a href="../toolbars/docs-footers.html">Champ de conteneur</a></h2>
+			<p>Conteneur avec <code>data-role="fieldcontain"</code> enveloppé autour d'une paire d'élément label/form.</p>
+
+			<h2><a href="../forms/switch/">Interrupteur</a></h2>
+			<p>Select avec <code>data-role="slider"</code>, deux options seulement</p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td><td>
+				</td></tr>data-track-theme
+				
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td><td>
+				</td></tr>
+				<tr>
+					<th>data-track-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../toolbars/docs-footers.html">Pied de page</a></h2>
+			<p>Conteneur avec <code>data-role="footer"</code></p>
+			<table>
+				<tr>
+					<th>data-id</th>
+					<td>string (id unique, utilisé dans les pieds de page persistant)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-position</th>
+					<td>fixed</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../pages/toolbars/docs-headers.html">Entête</a></h2>
+			<p>Conteneur avec <code>data-role="header"</code></p>
+			<table>
+				<tr>
+					<th>data-add-back-btn</th>
+					<td>true | <strong>false</strong> (ajout automatique du bouton retour dans l'entête seulement)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-back-btn-text</th>
+					<td>string</td><td>
+				</td></tr>
+				<tr>
+					<th>data-back-btn-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-position</th>
+					<td>fixed</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-title</th>
+					<td>string (titre utilisé quand la page est affichée)</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../pages/page-links.html">Lien</a></h2>
+			<p>Liens, incluant ceux avec <code>data-role="button"</code> et les boutons de soumission de formulaire qui partage ces attributs.</code></p>
+			<table>
+				<tr>
+					<th>data-ajax</th>
+					<td><strong>true</strong> | false</td><td>
+				</td></tr>
+				<tr>
+					<th>data-direction</th>
+					<td>reverse (inverse l'animation de transition de page)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-dom-cache</th>
+					<td>true | <strong>false</strong></td><td>
+				</td></tr>
+				<tr>
+					<th>data-prefetch</th>
+					<td>true | <strong>false</strong></td><td>
+				</td></tr>
+				<tr>
+					<th>data-rel</th>
+					<td>back (pour reculer d'une étape dans l'historique)<br /> dialog (pour ouvrir un lien stylisé comme une boîte de dialogue, qui n'est pas tracé dans l'historique)<br /> external (pour des liens dans un autre domaine)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-transition</th>
+					<td><strong>slide</strong> | slideup | slidedown | pop | fade | flip</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../lists/docs-lists.html">Liste</a></h2>
+			<p>OL ou UL avec <code>data-role="listview"</code>.</p>
+			<table>
+				<tr>
+					<th>data-count-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-dividertheme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-filter</th>
+					<td>true | <strong>false</strong></td><td>
+				</td></tr>
+				<tr>
+					<th>data-filter-placeholder</th>
+					<td>string</td><td>
+				</td></tr>
+				<tr>
+					<th>data-filter-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-inset</th>
+					<td>true | <strong>false</strong></td><td>
+				</td></tr>
+				<tr>
+					<th>data-split-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../lists/docs-lists.html">Élément de liste</a></h2>
+			<p>LI dans une liste.</p>
+			<table>
+				<tr>
+					<th>data-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td><td>
+				</td></tr>
+				<tr>
+					<th>data-role</th>
+					<td>list-divider</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z) - peut également être définie sur chaque LI</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../pages/page-anatomy.html">Page</a></h2>
+			<p>Conteneur avec <code>data-role="page"</code> ou <code>"dialog"</code></p>
+			<table>
+				<tr>
+					<th>data-close-btn-text</th>
+					<td>string (texte pour le bouton de fermeture, pour la boîte de dialogue seulement)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-dom-cache</th>
+					<td>true | <strong>false</strong></td><td>
+				</td></tr>
+				<tr>
+					<th>data-id</th>
+					<td>string (id unique pour la page)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-fullscreen</th>
+					<td>true | false (utilisé en conjonction avec les barres d'outils fixées)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-title</th>
+					<td>string (titre utilisé quand la page est affichée)</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../forms/radiobuttons/">Radio bouton</a></h2>
+			<p>Des paires de labels et d'inputs avec le <code>type="radio"</code> sont automatiquement améliorés, donc pas <code>besoin de data-role</code></p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../forms/slider/">Select</a></h2>
+			<p>Tous les éléments de formulaire <code>select</code> sont améliorés automatiquement, donc pas <code>besoin de data-role</code></p>
+			<table>
+				<tr>
+					<th>data-icon</th>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td><td>
+				</td></tr>
+				<tr>
+					<th>data-iconpos</th>
+					<td><strong>left</strong> | right | top | bottom |  notext</td><td>
+				</td></tr>
+				<tr>
+					<th>data-inline</th>
+					<td>true | <strong>false</strong></td><td>
+				</td></tr>
+				<tr>
+					<th>data-native-menu</th>
+					<td><strong>true</strong> | false</td><td>
+				</td></tr>
+				<tr>
+					<th>data-placeholder</th>
+					<td>true | false - Ajoutez à Option</td><td>
+				</td></tr>
+				<tr>
+					<th>data-role</th>
+					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td><td>
+				</td></tr>	
+			</table>
+			<p>Plusieurs sélection peuvent être enveloppées dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour les regrouper verticalement. Add the <code>data-type="horizontal"</code> attribute for the selects to sit side-by-side.</p>
+			
+			<h2><a href="../forms/slider/">Curseur</a></h2>
+			<p>Inputs avec <code>type="range"</code> sont automatiquement améliorés, donc pas <code>besoin de data-role</code>.</p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td><td>
+				</td></tr>
+				<tr>
+					<th>data-track-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td><td>
+				</td></tr>
+			</table>
+			
+			<h2><a href="../forms/textinputs/">Saisie de texte &amp; zone de texte</a></h2>
+			<p>Les éléments Input avec <code>type="text|number|search|etc."</code> ou <code>textarea</code> sont améliorés automatiquement, donc pas <code>besoin de data-role</code>.</p>
+			<table>
+				<tr>
+					<th>data-role</th>
+					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td><td>
+				</td></tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td><td>
+				</td></tr>
+			</table>
+					
+		</div><!--/content -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview"  data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">API</li>
+					<li><a href="../../docs/api/globalconfig.html">Configuration par défaut</a></li>
+					<li><a href="../../docs/api/events.html">Événements</a></li>
+					<li><a href="../../docs/api/methods.html">Méthodes &amp; Utilitaires</a></li>
+					<li><a href="../../docs/api/mediahelpers.html">Mise en page adaptif</a></li> 
+					<li data-theme="a"><a href="../../docs/api/data-attributes.html">Référence de l'attribut de données</a></li>
+					<li><a href="../../docs/api/themes.html">Framework de Théme</a></li>
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
