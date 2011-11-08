@@ -586,18 +586,85 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 	</div>
 
 
-	<h2>Stylisé avec les attributs de données</h2>
+	<h2>Thématisation des sélections</h2>
 	<p>Vous pouvez spécifier n'importe quel attribut <code>data-</code> de bouton de jQuery mobile sur un élément select. Dans cet exemple, nous mettons en place le thème, l'icône et les propriétés d'alignement :</p>
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-11" class="select">Actions</label>
-		<select name="select-choice-11" id="select-choice-11" data-theme="a" data-icon="gear" data-inline="true" data-native-menu="false">
+		<select name="select-choice-11" id="select-choice-11" data-theme="e" data-icon="gear" data-inline="true" data-native-menu="false">
 			<option value="edit">Modifier l'utilisateur</option>
 			<option value="delete">Supprimer l'utilisateur</option>
 		</select>
 	</div>
     
-            
+	<p>L' attribut <code>data-overlay-theme</code> peut être ajouté à un élément de sélection pour définir la couleur de la couche superposée du menu de sélection personnalisé basé sur une boîte de dialogue et la bordure extérieure des menus personnalisés plus petit. Par défaut, les couleurs de blocs de contenu pour l'échantillon A seront utilisés pour les superpositions.</p>
+      
+	<div data-role="fieldcontain">
+		<label for="select-choice-15" class="select">Taille</label>
+		<select name="select-choice-15" id="select-choice-15" data-theme="b" data-overlay-theme="d" data-native-menu="false">
+			<option value="t">Petit</option>
+			<option value="g">Moyen</option>
+			<option value="v">Grand</option>
+		</select>
+	</div>
+	
+	<div data-role="fieldcontain">
+		<label for="select-choice-13" class="select">Choisissez l'état(s):</label>
+		<select name="select-choice-13" id="select-choice-13" data-native-menu="false" data-theme="a" data-overlay-theme="e">
+			<option>Choisissez les options</option>
+			<option value="AL">Alabama</option>
+			<option value="AK">Alaska</option>
+			<option value="AZ">Arizona</option>
+			<option value="AR">Arkansas</option>
+			<option value="CA">California</option>
+			<option value="CO">Colorado</option>
+			<option value="CT">Connecticut</option>
+			<option value="DE">Delaware</option>
+			<option value="FL">Florida</option>
+			<option value="GA">Georgia</option>
+			<option value="HI">Hawaii</option>
+			<option value="ID">Idaho</option>
+			<option value="IL">Illinois</option>
+			<option value="IN">Indiana</option>
+			<option value="IA">Iowa</option>
+			<option value="KS">Kansas</option>
+			<option value="KY">Kentucky</option>
+			<option value="LA">Louisiana</option>
+			<option value="ME">Maine</option>
+			<option value="MD">Maryland</option>
+			<option value="MA">Massachusetts</option>
+			<option value="MI">Michigan</option>
+			<option value="MN">Minnesota</option>
+			<option value="MS">Mississippi</option>
+			<option value="MO">Missouri</option>
+			<option value="MT">Montana</option>
+			<option value="NE">Nebraska</option>
+			<option value="NV">Nevada</option>
+			<option value="NH">New Hampshire</option>
+			<option value="NJ">New Jersey</option>
+			<option value="NM">New Mexico</option>
+			<option value="NY">New York</option>
+			<option value="NC">North Carolina</option>
+			<option value="ND">North Dakota</option>
+			<option value="OH">Ohio</option>
+			<option value="OK">Oklahoma</option>
+			<option value="OR">Oregon</option>
+			<option value="PA">Pennsylvania</option>
+			<option value="RI">Rhode Island</option>
+			<option value="SC">South Carolina</option>
+			<option value="SD">South Dakota</option>
+			<option value="TN">Tennessee</option>
+			<option value="TX">Texas</option>
+			<option value="UT">Utah</option>
+			<option value="VT">Vermont</option>
+			<option value="VA">Virginia</option>
+			<option value="WA">Washington</option>
+			<option value="WV">West Virginia</option>
+			<option value="WI">Wisconsin</option>
+			<option value="WY">Wyoming</option>
+		</select>
+	</div>
+      
         
 <h2>Appel du plugin menu de sélection</h2>
 <p>Le plugin menu de sélection initialisera automatiquement n'importe quelle page contenant le menu de sélection, il n'y a pas besoin d'un attribut <code>data-role</code> dans le balisage. Cependant, vous pouvez appeler directement le plugin de menu de sélection sur n'importe quel sélecteur, comme n'importe quel plugin normal de jQuery :</p>

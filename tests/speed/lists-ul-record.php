@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html>
 	<head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Docs jQuery Mobile - Listes</title>
+	<title>jQuery Mobile Docs - Lists</title>
 	<link rel="stylesheet"  href="../../css/themes/default/" />
 	<script src="../../js/jquery.js"></script>
+  <script type="text/javascript" src="stats/perf.js"></script>
+  <script type="text/javascript" src="stats/startup.js"></script>
 	<script src="../../js/"></script>
 </head>
 <body>
 
-<div  data-role="page">
+<div data-role="page" id="list-page">
 
 	<div  data-role="header">
-		<h1>Liste de 400 éléments</h1>
+		<h1>400 item list</h1>
 	</div><!-- /header -->
 
 	<div  data-role="content" data-filter="true">
@@ -426,4 +427,3 @@
 
 </body>
 </html>
-

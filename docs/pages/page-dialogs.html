@@ -61,23 +61,29 @@
 			<p>Les boîtes de dialogue sont généralement utilisés pour supporter des actions au sein d'une page, le framework n'inclut pas les boîtes de dialogue dans le suivi de l'historique d'état du hash. Cela signifie que les boîtes dialogues n'apparaîtront pas dans la chronologie de votre historique de navigation lorsque le bouton Retour sera cliqué. Par exemple, si vous êtes sur une page, cliquez sur un lien pour ouvrir une boîte de dialogue, fermez la boîte de dialogue, puis naviguer vers une autre page, si vous deviez cliquer sur le bouton Précédent du navigateur, à ce stade, vous reviendrez à la première page, et non pas sur la boîte de dialogue.</p>
 			
 			<h2>Style et Thématisation</h2>
-			<p>Les boîtes de dialogue peuvent être stylisées avec des thèmes différents, comme n'importe quelle page. Voici un design de boîte de dialogue différent :</p>
+			<p>Les boîtes de dialogue peuvent être stylisées avec des échantillons de thème différents, comme n'importe quelle page en ajoutant les attributs <code>data-theme</code> aux conteneurs de l'entête, du contenu et du pied de page. Voici un exemple une différente conception d'une boîte de dialogue :</p>
 				<a href="dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Un schéma de couleur alternatif</a>
+				
+			<p>Les boîtes de dialogue apparaissent en flottant au dessus d'une couche superposée. Cette superposition adopte la couleur de contenu de l'échantillon A par défaut, mais l'attribut <code>data-overlay-theme</code> peut être ajouté à l'enveloppe de la page pour définir la superposition avec une lettre de l'échantillon. Voici un exemple d'une boîte de dialogue avec la superposition définie avec l'échantillon e :</p>
+				<a href="dialog-overlay.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Échantillon de superposition personnalisé</a>
 		
 		
 			<p>Et les boîtes de dialogue peuvent être utilisées comme une feuille de contrôle pour offrir de multiples boutons en enlevant l'entête :</p>
 						<a href="dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">Partagez vos photos ...</a>
 			
-			<p>Par souci de lisibilité, les boîtes de dialogue ont par défaut un <code>max-width</code> de 500 pixels (plus 15px de marge de chaque côté). Pour remplacer cela, utilisez le CSS suivant dans votre thème :</p>
+			<h2>Largeur et marges de boîte de dialogue</h2>
+			<p>Par souci de lisibilité, les boîtes de dialogue ont par défaut un <code>max-width</code> de 500 pixels (plus 15px de marge de chaque côté). Il y a aussi un <code>margin</code> pour le haut à 10% pour donner une marge aux boîtes de dialogue plus grande que les écrans, mais se replie en une petite marge sur les smartphones. Pour remplacer ces styles, ajoutez le CSS suivant qui écrase les règles de votre feuille de style et peaufine si besoin :</p>
 
-<code>
+<code><pre>
+.ui-dialog .ui-header, 
+.ui-dialog .ui-content, 
+.ui-dialog .ui-footer { 
+<strong>	max-width: 500px; 
+	margin: 10% auto 15px auto; </strong>
+}
+</pre></code>
 
-.ui-dialog .ui-header,
-.ui-dialog .ui-content,
-.ui-dialog .ui-footer { <strong>max-width: 100%;</strong> }
-
-</code>
-
+			
 
 
 			

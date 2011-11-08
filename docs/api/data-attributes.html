@@ -24,6 +24,8 @@
 	<div data-role="content" data-theme="c">
 
 		<div class="content-primary">
+			<h2>Référence de l'attribut data-</h2>
+			<p>Le framework  jQuery Mobile utilise les attributs HTML5 <code>data-</code> pour permettre l'initialisation et la configuration des widgets basé sur le balisage. Ces attributs sont complètement optionnels, en appelant les plugins manuellement et en passant les options directement, cela est également supporté. Pour éviter les conflits de noms avec d'autres plugins ou des frameworks qui utilisent également les attributs <code>data-</code>, définissez un espace de nommage personnalisé en modifiant l'<a href="globalconfig.html">option globale <code>ns</code></a>.<p>
 
 				<style>
 					table { width:100%; border-bottom:1px solid #ccc; }
@@ -108,12 +110,37 @@
 					<td>Lettre de l'échantillon (a-z) - Définit pour tous les pliables de l'ensemble</td>
 				</tr>
 			</table>
-
+			
 			<h2><a href="../pages/page-dialogs.html">Boîte de dialogue</a></h2>
+			<p>Conteneur avec <code>data-role="page"</code> ou <code>"dialog"</code> lié avec <code>data-rel="dialog"</code> à l'ancre.</p>
 			<table>
 				<tr>
+					<th>data-close-btn-text</th>
+					<td>string (texte pour le bouton de fermeture, pour la boîte de dialogue seulement)</td>
+				</tr>
+				<tr>
+					<th>data-dom-cache</th>
+					<td>true | <strong>false</strong></td>
+				</tr>
+				<tr>
+					<th>data-id</th>
+					<td>string (id unique pour la page)</td>
+				</tr>
+				<tr>
+					<th>data-fullscreen</th>
+					<td>true | false (utilisé en conjonction avec les barres d'outils fixées)</td>
+				</tr>
+				<tr>
 					<th>data-overlay-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Thème de substitution</td>
+					<td>Lettre de l'échantillon (a-z) - Thème de substitution lorsque la page est ouverte dans une boîte de dialogue</td>
+				</tr>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td>
+				</tr>
+				<tr>
+					<th>data-title</th>
+					<td>string (titre utilisé quand la page est affichée)</td>
 				</tr>
 			</table>
 
@@ -277,7 +304,7 @@
 			</table>
 
 			<h2><a href="../pages/page-anatomy.html">Page</a></h2>
-			<p>Conteneur avec <code>data-role="page"</code> ou <code>"dialog"</code></p>
+			<p>Conteneur avec <code>data-role="page"</code></p>
 			<table>
 				<tr>
 					<th>data-close-btn-text</th>
@@ -342,16 +369,16 @@
 					<td><strong>true</strong> | false</td>
 				</tr>
 				<tr>
+					<th>data-overlay-theme</th>
+					<td>Lettre de l'échantillon (a-z) - Thème de substitution pour les sélections non natives</td>
+				</tr>
+				<tr>
 					<th>data-placeholder</th>
 					<td>true | false - Ajoutez à Option</td>
 				</tr>
 				<tr>
 					<th>data-role</th>
 					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
-				</tr>
-				<tr>
-					<th>data-overlay-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Thème de substitution pour les sélections non natives</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
