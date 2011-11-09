@@ -61,7 +61,7 @@
 			<p>A l'intérieur de la balise <code>&lt;body&gt;</code>, chaque vue ou "page" sur l'appareil mobile est identifié par un élément (généralement un <code>div</code>) avec l'attribut <code> data-role="page"</code> :</p> 
 
 <div class="highlight"> 
-<pre><span class="nt">&lt;div</span> <span class="na"> data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
+<pre><span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"page"</span><span class="nt">&gt;</span> 
 	...
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
@@ -174,7 +174,7 @@
 		
 <h2>Conventions, ce n'est pas des exigences</h2>
 
-<p>Bien que la structure de la page ci-dessus est une approche recommandée pour une application web standard intégré avec jQuery Mobile, le framework est très flexible avec la structure du document. Les éléments de data-role page, header, content et footer sont optionnels et sont surtout utiles pour fournir un formatage et une structure de base. L'enveloppement de la page utilisée est requis pour que l'auto-initialisation fonctionne, mais cela est désormais facultatif pour les documents de page unique donc il n'y a pas obligation de balisage pour tout. Pour une page web avec une mise en page personnalisée, l'ensemble de ces éléments structuraux peuvent être omis, mais la navigation Ajax et tous les widgets fonctionneront exactement comme ils le font dans la structure passe-partout. En arrière plan, le framework va injecter l'enveloppement de la page si elle n'est pas incluse dans le balisage, car c'est nécessaire pour gérer les pages, mais le balisage de départ peut maintenant être extrêmement simple. </p>
+<p>Bien que la structure de la page ci-dessus est une approche recommandée pour une application web standard intégré avec jQuery Mobile, le framework est très flexible avec la structure du document. Les éléments de data-role page, header, content et footer sont optionnels et sont surtout utiles pour fournir un formatage et une structure de base. L'enveloppement de la page utilisée est requis pour que l'auto-initialisation fonctionne, mais cela est désormais facultatif pour les documents de page unique donc il n'y a pas obligation de balisage pour tout. Pour une page web avec une mise en page personnalisée, l'ensemble de ces éléments structuraux peuvent être omis et la navigation Ajax et tous les widgets fonctionneront exactement comme ils le font dans la structure passe-partout. En arrière plan, le framework va injecter l'enveloppement de la page si elle n'est pas incluse dans le balisage, car c'est nécessaire pour gérer les pages, mais le balisage de départ peut maintenant être extrêmement simple. </p>
 
 <p>Notez que dans une configuration multi-page, vous êtes tenus d'avoir l'enveloppement de page dans votre balisage afin de regrouper le contenu en plusieurs pages.</p>
 
