@@ -96,9 +96,8 @@ Pour créer un nouveau thème :
 2. Modifiez le fichier `jquery.mobile.theme.css` de sorte qu'il contienne vos polices et couleurs personnalisées.
 3. Une fois que vous avez fini d'éditer et enregistrer vos fichiers, ouvrez un terminal.
 4. Accédez à la racine du dossier jQuery-Mobile.
-5. Exécutez la commande suivante pour construire jQuery Mobile. Le CSSTHEME précise le thème à inclure. Si vous le laissez tel quel,
-il va le construire en utilisant le thème "default".
+5. Exécutez la commande suivante pour construire jQuery Mobile. (THEME est le nom du répertoire pour votre thème de l'étape 1.) :
 
-    make CSSTHEME=VotreNomDeTheme
+    make THEME=YourThemeName
     
 6. Les fichiers compilés seront situés dans le dossier "compiled" à la racine de jQuery-Mobile.
