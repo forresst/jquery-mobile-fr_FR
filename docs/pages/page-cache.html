@@ -29,7 +29,7 @@
 	
       <p>Habituellement, c'est une bonne idée de stocker les pages de votre application dans plusieurs modèles d'une seule page au lieu d'un large modèle multi-page. Ceci minimise la taille du DOM de la page.</p>
 
-			<p>Lors de l'utilisation des modèles d'une seule page, vous pouvez précharger les pages dans le DOM afin qu'ils soient disponibles instantanément lorsque l'utilisateur les visites. Pour précharger une page, ajouter l'attribut <code>data-prefetch</code> à un lien qui pointe vers la page. jQuery mobile charge ensuite la page cible en arrière plan après que la page principale soit chargée et l'événement pagecreate soit déclenché. Par exemple :</p>
+			<p>Lors de l'utilisation des modèles d'une seule page, vous pouvez précharger les pages dans le DOM afin qu'ils soient disponibles instantanément lorsque l'utilisateur les visites. Pour précharger une page, ajouter l'attribut <code>data-prefetch</code> à un lien qui pointe vers la page. jQuery mobile charge ensuite la page cible en arrière plan après que la page principale soit chargée et que l'événement <code>pagecreate</code> soit déclenché. Par exemple :</p>
 			
 <pre><code>
 &lt;a href="prefetchThisPage.html" data-prefetch&gt; ... &lt;/a&gt;
@@ -52,7 +52,7 @@ $.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
 
 		<p>Pour que des transitions de page animées fonctionnent, les pages de départ et d'arrivée doivent être dans les DOM. Cependant, le maintien d'anciennes pages dans les DOM remplit rapidement la mémoire du navigateur, et peut, sur certains navigateurs mobiles, ralentir ou même planter.</p>
 
-		<p>jQuery Mobile a donc un mécanisme simple pour garder le DOM rangé. Chaque fois qu'il charge une page via Ajax, jQuery Mobile marque la page pour qu'elle soit retirée du DOM lorsque vous en sortez (techniquement, sur l'événement pagehide). Si vous revisitez une page enlevée, le navigateur peut être en mesure de récupérer le fichier HTML de la page dans son cache. Si ce n'est pas le cas, il recharge le fichier sur le serveur. (Dans le cas des vues de liste imbriquée, jQuery Mobile supprime toutes les pages qui composent la liste imbriquée une fois que vous accédez à une page qui ne fait pas partie de la liste.)</p>
+		<p>jQuery Mobile a donc un mécanisme simple pour garder le DOM rangé. Chaque fois qu'il charge une page via Ajax, jQuery Mobile marque la page pour qu'elle soit retirée du DOM lorsque vous en sortez (techniquement, sur l'événement <code>pagehide</code>). Si vous revisitez une page enlevée, le navigateur peut être en mesure de récupérer le fichier HTML de la page dans son cache. Si ce n'est pas le cas, il recharge le fichier sur le serveur. (Dans le cas des vues de liste imbriquée, jQuery Mobile supprime toutes les pages qui composent la liste imbriquée une fois que vous accédez à une page qui ne fait pas partie de la liste.)</p>
     
     <p>Les pages à l'intérieur d'un modèle multi-page ne sont pas affectées par cette fonction pour tout - jQuery Mobile supprime uniquement les pages chargées via Ajax.</p>
 
@@ -104,6 +104,8 @@ $.mobile.page.prototype.options.domCache = true;
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>
 								<li><a href="page-scripting.html">Écriture des scripts des pages</a></li>
+								<li><a href="phonegap.html">Application PhoneGap</a></li>
+								<li><a href="touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
 								<li><a href="pages-themes.html">Thématisation des pages</a></li>
 
 							</ul>

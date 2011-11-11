@@ -96,13 +96,13 @@
 			<li><p>rel=external</p></li>
 			<li><p>target (Avec n'importe quelle valeur, tels que "_blank")</p></li>
 
-			</ul><h2>Form submissions</h2>
+			</ul><h2>Soumissions du formulaire</h2>
 
-			<p>Form submissions are handled automatically through the navigation model as well. Visit the <a href="../forms/forms-sample.html">forms section</a> for more information.</p>
+			<p>Les soumissions de formulaire sont  ainsi gérées automatiquement par le modèle de navigation. Visitez la <a href="../forms/forms-sample.html">section des formulaires</a> pour plus d'informations.</p>
 
-			<h2>Using the Application Cache</h2>
+			<h2>Utilisation du cache de l'application</h2>
 
-			<p>When using the application cache with jQuery Mobile there is at least one important issue to consider. Some browsers, when making requests to the cache will report an http status of 0 on success. This causes jQuery Core's <code>$.ajax</code> to trigger error handlers. The suggested workaround for users leveraging the application cache is to use a jQuery ajax pre-filter. Something like the following (credit to <a href="https://github.com/jquery/jquery-mobile/issues/1579#issuecomment-1209338" rel="external">jammus</a> for the snippet):</p>
+			<p>Lorsque vous utilisez le cache de l'application avec jQuery Mobile, il y a au moins un problème important à considérer. Certains navigateurs, lors des requêtes vers le cache, rapporteront un état ​​HTTP à 0 en cas de succès. Ceci provoque le <code>$.ajax&lt;/ c0&gt; du standard jQuery à déclencher des gestionnaires d'erreur. La solution proposée pour les utilisateurs exploitant le cache de l'application est d'utiliser un pré-filtre ajax jQuery. Quelque chose comme ce qui suit (crédité à <a href="https://github.com/jquery/jquery-mobile/issues/1579#issuecomment-1209338" rel="external">jammus&lt;/ a1&gt; pour le bout de code) :</p>
 
 			<pre><code>
 
@@ -110,25 +110,25 @@ $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
 	if ( applicationCache &amp;&amp;
 		 applicationCache.status != applicationCache.UNCACHED &amp;&amp;
 		 applicationCache.status != applicationCache.OBSOLETE ) {
-		 // the important bit
+		 // le bit important
 		 options.isLocal = true;
 	}
 });
 
 			</code></pre>
 
-			<p>Setting <code>isLocal</code> to true for your ajax requests will alert jQuery Core that it should handle the 0 return values differently. Local requests exhibit similar behavior (ie 0 statuses), and Core will then fall back to determining success based on the presence of content in the xhr <code>responseText</code> attribute.</p>
+			<p>Le paramètrage <code>isLocal</code> à true, pour vos requêtes ajax, alertera le noyau de jQuery qu'il doit gérer les valeurs de retour à 0 différemment. Les requêtes locales présentent un comportement similaire (c'est à dire des statuts à 0), et le noyau ensuite se repliera sur la détermination du succès en se basant sur la présence de contenu dans l'attribut xhr <code>responseText&lt;/ c1&gt;.</p>
 
-			<p>One important issue to note with the above is that it will set <code>isLocal</code> to true for all requests made via ajax regardless of whether they are in the manifest or not so long as the cache is valid. This works for now because Core only consults the <code>isLocal</code> value when the status is in fact 0 which doesn't affect uncached results. There is no long term guarantee that <code>isLocal</code> will remain isolated in its purpose for handling 0 status values. If that changes it may break your application.</p>
+			<p>Un problème important à noter sur ce qui précède, c'est que <code>IsLocal</code>  sera mis à true pour toutes les requêtes faites via ajax indépendamment du fait qu'elles soient dans le cas ou non, tant que le cache est valide. Cela fonctionne pour l'instant parce que le noyau consulte seulement la valeur <code>isLocal&lt;/ c1&gt; lorsque le statut est à 0 ce qui n'affecte pas les résultats non mis en cache. Il n'y a aucune garantie à long terme que <code>isLocal</code> restera isolé pour pouvoir manipuler les valeurs d'état à 0. Si ceci change, cela peut casser votre application.</p>
 
-			<h2>Known limitations</h2>
+			<h2>Limitations connues</h2>
 
-			<p>The non-standard environment created by jQuery Mobile's page navigation model introduces some conditions for which you should be aware when building pages:</p>
+			<p>L'environnement non-standard créé par le modèle de navigation de page de jQuery Mobile introduit quelques conditions pour lesquelles vous devez être conscient lors de la construction des pages :</p>
 
 			<ul>
-			<li><p>When linking to directories, without a filename url, (such as href="typesofcats/" instead of href="typesofcats/index.html"), you must provide a trailing slash. C'est parce que jQuery Mobile suppose que la section après le dernier caractère "/" dans une URL est un nom de fichier, et il va supprimer cette section lors de la création des urls de base à partir duquel les futures pages seront référencées.</p></li>
-			<li><p>Documents loaded via Ajax will select the first page in the DOM of that document to be loaded as a JQM page element. As a result the developer must make sure to manage the ID attributes of the loaded page and child elements to prevent confusion when manipulating the DOM.</p></li>
-			<li><p>Any unique assets referenced by pages in a jQuery Mobile-driven site should be placed inside the "page" element (the element with a data-role attribute of "page"). For example, links to styles and scripts that are specific to a particular page can be referenced inside that div. However, a better approach is to use jQuery Mobile's page events to trigger specific scripting when certain pages load. <strong>Note: </strong> you can return a page from the server with a data-url already specified in the markup, and jQuery Mobile will use that for the hash update. This allows you to ensure directory paths resolve with a trailing slash and will therefore be used in the base url path for future requests.</p></li>
+			<li><p>Lors de la liaison au répertoire, sans un nom de fichier dans l'url, (comme href="typesofcats/" à la place de href="typesofcats/index.html"), vous devez fournir un slash. C'est parce que jQuery Mobile suppose que la section après le dernier caractère "/" dans une URL est un nom de fichier, et il va supprimer cette section lors de la création des urls de base à partir duquel les futures pages seront référencées.</p></li>
+			<li><p>Les documents chargés via Ajax sélectionneront la première page dans le DOM de ce document qui sera chargée comme un élément de page JQM. En conséquence, le développeur doit s'assurer de la gestion des ID d'attributs de la page chargée et des éléments enfants pour éviter toute confusion lors de la manipulation du DOM.</p></li>
+			<li><p>Toutes les ressources uniques référencées par les pages, dans un site géré par jQuery Mobile, devraient être placées à l'intérieur de l'élément "page" (l'élément avec un attribut data-role à "page"). Par exemple, des liens vers des styles et des scripts qui sont spécifiques à une page particulière peuvent être référencés à l'intérieur de ce div. Toutefois, une meilleure approche consiste à utiliser les événements de page de jQuery Mobile pour déclencher des scripts spécifiques lors du chargerment de certaines pages. <strong>Note: </strong> you can return a page from the server with a data-url already specified in the markup, and jQuery Mobile will use that for the hash update. This allows you to ensure directory paths resolve with a trailing slash and will therefore be used in the base url path for future requests.</p></li>
 			<li><p>Conversely, any non-unique assets (those used site-wide) should be referenced in the <code>&lt;head&gt;</code> section of an HTML document, or at the very least, outside of the "page" element, to prevent running scripts more than once.</p></li>
 			<li><p>The "ui-page" key name used in sub-hash url references can be set to any value you'd like, so as to blend into your URL structure. This value is stored in <code>jQuery.mobile.subPageUrlKey</code>.</p></li>
 			<li><p>When traveling back to a previously loaded jQuery Mobile document from an external <b>or</b> internal document with the push state plugin enabled, some browsers load and trigger the popstate event on the wrong document or for the wrong reasons (two edge cases recorded so far). If you are regularly linking to external documents and find the application behaving erratically try disabling pushstate support.</p></li>
@@ -159,8 +159,9 @@ $.ajaxPrefilter( function(options, originalOptions, jqXHR) {
 								<li data-theme="a"><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>
 								<li><a href="page-scripting.html">Écriture des scripts des pages</a></li>
+								<li><a href="phonegap.html">Application PhoneGap</a></li>
+								<li><a href="touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
 								<li><a href="pages-themes.html">Thématisation des pages</a></li>
-
 							</ul>
 					</div>
 				</div>
