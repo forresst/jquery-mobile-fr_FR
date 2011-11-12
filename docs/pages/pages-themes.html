@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Docs - Theming Pages</title> 
+	<title>Docs jQuery Mobile - Thématisation des pages</title> 
 	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
@@ -22,7 +22,18 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<div class="content-primary">		
+		<div class="content-primary">
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="pages-themes.html" data-role="button" data-transition="fade" class="ui-btn-active">Aperçu du thème</a></li>				
+				
+				<li><a href="pages-themes/theme-a.html" data-role="button" data-transition="fade">A</a></li>
+				<li><a href="pages-themes/theme-b.html" data-role="button" data-transition="fade"> B</a></li>
+				<li><a href="pages-themes/theme-c.html" data-role="button" data-transition="fade">C</a></li>
+				<li><a href="pages-themes/theme-d.html" data-role="button" data-transition="fade">D</a></li>
+				<li><a href="pages-themes/theme-e.html" data-role="button" data-transition="fade">E</a></li>
+			</ul>
+			
 			<h2>Page Theming</h2>
 			
 			<p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how pages are styled. There is detailed theming documentation within each page widget, but let's look at a few high-level examples of how theming is applied.</p>
@@ -34,58 +45,26 @@
 			<div data-role="header">
 				<h1>Default Theme</h1>
 			</div>
-			<div class="ui-bar ui-bar-c">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-icon="gear" data-role="button" data-inline="true">Tools</a>
-					<a href="#" data-icon="star" data-role="button" data-inline="true">Like</a>
-					<a href="#" data-icon="refresh" data-role="button" data-inline="true">Refresh</a>
-				</div><!-- /controlgroup -->
-			</div>
+
 			<div class="ui-body ui-body-c">
 				<h3>Entête du contenu du thème par défaut</h3>
 				<p>Il s'agit de la palette de couleurs par défaut du contenu et un aperçu d'un <a href="#" class="ui-link">lien</a>.</p>
-					<label for="slider1">Curseur en saisie :</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" />
-				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-				     	<legend>Paramètres du cache :</legend>
-				         	<input type="radio" name="radio-choice-z1" id="radio-choice-y1" value="on" checked="checked" />
-				         	<label for="radio-choice-y1">Marche</label>
-				         	<input type="radio" name="radio-choice-z1" id="radio-choice-z1" value="off"  />
-				         	<label for="radio-choice-z1">Arrêt</label>
-				    </fieldset>
+				
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
 			</div>
-			<div class="ui-bar ui-bar-a">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a>
-				</div><!-- /controlgroup -->
-			</div>
 
-			
 			<p>And each of the five "swatches" applies its style consistently across all page elements, as shown below:</p>
 						
 			<h2>Swatch A</h2>
 			<div data-role="header" data-position="inline">
 				<h1>Header A</h1>
 			</div>
+			
+			
 			<div class="ui-body ui-body-a">
 				<h3>Entête</h3>
 				<p>This is content color swatch "A" and a preview of a <a href="#" class="ui-link">link</a>.</p>
-					<label for="slider1">Curseur en saisie :</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="a" />
-				     <fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-				     	<legend>Paramètres du cache :</legend>
-				         	<input type="radio" name="radio-choice-a1" id="radio-choice-a1" value="on" checked="checked" />
-				         	<label for="radio-choice-a1">Marche</label>
-				         	<input type="radio" name="radio-choice-a1" id="radio-choice-b1" value="off"  />
-				         	<label for="radio-choice-b1">Arrêt</label>
-				    </fieldset>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
-			</div>
-			<div class="ui-bar ui-bar-a">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a>
-				</div><!-- /controlgroup -->
 			</div>
 
 
@@ -96,21 +75,7 @@
 			<div class="ui-body ui-body-b">
 				<h3>Entête</h3>
 				<p>This is content color swatch "B" and a preview of a <a href="#" class="ui-link">link</a>.</p>
-					<label for="slider1">Curseur en saisie :</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="b" />
-					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-				     	<legend>Paramètres du cache :</legend>
-				         	<input type="radio" name="radio-choice-a2" id="radio-choice-a2" value="on" checked="checked" />
-				         	<label for="radio-choice-a2">Marche</label>
-				         	<input type="radio" name="radio-choice-a2" id="radio-choice-b2" value="off"  />
-				         	<label for="radio-choice-b2">Arrêt</label>
-				    </fieldset>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
-			</div>
-			<div class="ui-bar ui-bar-b">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a>
-				</div><!-- /controlgroup -->
 			</div>
 			
 			<h2>Swatch C</h2>
@@ -120,23 +85,9 @@
 			<div class="ui-body ui-body-c">
 				<h3>Entête</h3>
 				<p>This is content color swatch "C" and a preview of a <a href="#" class="ui-link">link</a>.</p>
-					<label for="slider1">Curseur en saisie :</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="c" />
-					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-				     	<legend>Paramètres du cache :</legend>
-				         	<input type="radio" name="radio-choice-a3" id="radio-choice-a3" value="on" checked="checked" />
-				         	<label for="radio-choice-a3">Marche</label>
-				         	<input type="radio" name="radio-choice-a3" id="radio-choice-b3" value="off"  />
-				         	<label for="radio-choice-b3">Arrêt</label>
-				    </fieldset>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
 			</div>
-			<div class="ui-bar ui-bar-c">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a>
-				</div><!-- /controlgroup -->
-			</div>
-			
+
 			<h2>Swatch D</h2>
 			<div data-role="header" data-theme="d">
 				<h1>Header D</h1>
@@ -144,21 +95,7 @@
 			<div class="ui-body ui-body-d">
 				<h3>Entête</h3>
 				<p>This is content color swatch "D" and a preview of a <a href="#" class="ui-link">link</a>.</p>
-					<label for="slider1">Curseur en saisie :</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="d" />
-					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-				     	<legend>Paramètres du cache :</legend>
-				         	<input type="radio" name="radio-choice-a4" id="radio-choice-a4" value="on" checked="checked" />
-				         	<label for="radio-choice-a4">Marche</label>
-				         	<input type="radio" name="radio-choice-a4" id="radio-choice-b4" value="off"  />
-				         	<label for="radio-choice-b4">Arrêt</label>
-				    </fieldset>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
-			</div>
-			<div class="ui-bar ui-bar-d">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a>
-				</div><!-- /controlgroup -->
 			</div>
 			
 			<h2>Swatch E</h2>
@@ -168,24 +105,9 @@
 			<div class="ui-body ui-body-e">
 				<h3>Entête</h3>
 				<p>This is content color swatch "E" and a preview of a <a href="#" class="ui-link">link</a>.</p>
-					<label for="slider1">Curseur en saisie :</label>
-				 	<input type="range" name="slider1" id="slider1" value="50" min="0" max="100" data-theme="e" />
-					<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
-				     	<legend>Paramètres du cache :</legend>
-				         	<input type="radio" name="radio-choice-a5" id="radio-choice-a5" value="on" checked="checked" />
-				         	<label for="radio-choice-a5">Marche</label>
-				         	<input type="radio" name="radio-choice-a5" id="radio-choice-b5" value="off"  />
-				         	<label for="radio-choice-b5">Arrêt</label>
-				    </fieldset>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
 			</div>
-			<div class="ui-bar ui-bar-e">
-				<div data-role="controlgroup" data-type="horizontal" >
-					<a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a><a href="#" data-inline="true" data-role="button">Bouton</a>
-				</div><!-- /controlgroup -->
-			</div>
-
-
+			
 				</div><!--/content-primary -->		
 
 				<div class="content-secondary">

@@ -108,8 +108,24 @@
 			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Supprimer</a>
 
 		<h2>Icônes personnalisées</h2>
-		<p>Pour utiliser des icônes personnalisées, spécifiez une valeur <code> data-icon</code> qui a un nom unique, comme <code>myapp-email</code> et le plugin bouton générera une classe en préfixant <code>ui-icon-</code> à la valeur <code> data-icon</code> et l'appliquera au bouton. Vous pouvez alors écrire une règle CSS qui cible la classe <code>ui-icon-myapp-email</code> pour spécifier la source d'arrière plan de l'icône. Afin de maintenir une cohérence visuelle, créez une icône blanche de 18x18 pixels enregistrées au format PNG-8 avec transparence alpha.</p>
-			
+		<p>Pour utiliser des icônes personnalisés, spécifiez une valeur <code>data-icon</code> qui a un nom unique, comme <code>myapp-email</code> et le plugin bouton générera une classe en préfixant <code>ui-icon-</code> à la valeur <code> data-icon</code> et l'appliquera au bouton :  <code>ui-icon-myapp-email</code>. </p>
+		<p>Vous pouvez alors écrire une règle CSS qui cible la classe <code>ui-icon-myapp-email</code> pour spécifier la source d'arrière plan de l'icône. Afin de maintenir une cohérence visuelle avec le reste des icônes, créez une icône blanche de 18x18 pixels enregistrées au format PNG-8 avec transparence alpha.</p>
+		<p> Dans cet exemple, nous pointons juste vers une image d'icône autonome, mais vous pourriez tout aussi bien utiliser une icône de sprite et préciser le positionnement à la place, tout comme le sprite icône que nous utilisons dans le framework.</p>
+		
+<pre><code>.ui-icon-myapp-email {
+	background-image: url("app-icon-email.png");
+}</code></pre>
+
+		<p>Cela va créer l'icône avec une résolution standard, mais de nombreux appareils ont maintenant un affichage en très haute résolution, comme l'écran Retina de l'iPhone 4. Pour ajouter une icône HD, créez une icône qui est 36x36 pixels (exactement le double de la taille de 18 pixels), et ajoutez la deuxième règle qui utilise le média query <code>-webkit-min-device-pixel-ratio: 2</code> pour cibler une seule règle d'affichage de haute résolution. Précisez l'image de fond pour le fichier d'icône HD et définissez la taille de fond à 18x18 pixels qui s'adaptera sur l'icône 36 pixels dans le même espace de 18 pixels. Le block du média query peut envelopper plusieurs règles d'icône :</p>
+<pre><code>
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.ui-icon-myapp-email {
+		background-image: url("app-icon-email-highres.png");
+		background-size: 18px 18px;
+	}
+	... d'autres règles d'icône HD ici...
+}
+</code></pre>			
 		 	
 		<h2>Les icônes et les thèmes</h2>
 		<p>Le demi-cercle noir transparent derrière l'icône blanche assure un bon contraste sur n'importe quelle couleur de fond de sorte qu'il fonctionne bien avec le système de thématisation de jQuery Mobile. Voici des exemples d'une même icône positionnée sur une gamme de différents échantillons de couleurs dans le thème.</p><!-- A themed -->

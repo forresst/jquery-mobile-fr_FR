@@ -1,0 +1,162 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Thématisation des pages</title> 
+	<link rel="stylesheet"  href="../../../css/themes/default/" />  
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior" data-theme="a">
+
+		<div data-role="header">
+		<h1>Thématisation des pages</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="../pages-themes.html" data-role="button" data-transition="fade">Aperçu du thème</a></li>				
+				
+				<li><a href="theme-a.html" data-role="button" data-transition="fade" class="ui-btn-active">A</a></li>
+				<li><a href="theme-b.html" data-role="button" data-transition="fade"> B</a></li>
+				<li><a href="theme-c.html" data-role="button" data-transition="fade">C</a></li>
+				<li><a href="theme-d.html" data-role="button" data-transition="fade">D</a></li>
+				<li><a href="theme-e.html" data-role="button" data-transition="fade">E</a></li>
+			</ul>
+			
+			<h2>Thème A exemple de page</h2>
+	
+			<p>Ceci est un exemple de <code>data-theme="a"</code> appliqué au même élément que <code>data-role="page"</code>, montrant comment le thème est hérité par les widgets à travers la page.</p>
+	
+			<div data-role="fieldcontain">
+	         <label for="name-a">Saisie de texte :</label>
+	         <input type="text" name="name" id="name-a" value=""  />
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="switch-a">Interrupteur :</label>
+				<select name="switch-a" id="switch-a" data-role="slider">
+					<option value="off">Arrêt</option>
+					<option value="on">Marche</option>
+				</select> 
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="slider-a">Curseur :</label>
+			 	<input type="range" name="slider" id="slider-a" value="0" min="0" max="100"  />
+			</div>
+
+			<div data-role="fieldcontain">
+			<fieldset data-role="controlgroup" data-type="horizontal">
+		    	<legend>Style de police  :</legend>
+		    	<input type="checkbox" name="checkbox-6a" id="checkbox-6a" class="custom" />
+				<label for="checkbox-6a">b</label>
+
+				<input type="checkbox" name="checkbox-7a" id="checkbox-7a" class="custom" />
+				<label for="checkbox-7a"><em>i</em></label>
+
+				<input type="checkbox" name="checkbox-8a" id="checkbox-8a" class="custom" />
+				<label for="checkbox-8a">u</label>    
+		    </fieldset>
+			</div>
+
+			<div data-role="fieldcontain">
+			    <fieldset data-role="controlgroup">
+			    	<legend>Choisir un animal :</legend>
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-1a" value="choice-1" />
+			         	<label for="radio-choice-1a">Chat</label>
+
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-2a" value="choice-2"  />
+			         	<label for="radio-choice-2a">Chien</label>
+
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-3a" value="choice-3"  />
+			         	<label for="radio-choice-3a">Hamster</label>
+
+			         	<input type="radio" name="radio-choice-1" id="radio-choice-4a" value="choice-4"  />
+			         	<label for="radio-choice-4a">Lézard</label>
+			    </fieldset>
+			</div>
+
+			<div data-role="fieldcontain">
+				<label for="select-choice-a" class="select">Choisissez la méthode d'expédition :</label>
+				<select name="select-choice-a" id="select-choice-a">
+					<option value="standard">Lent : 7 jours</option>
+					<option value="rush">Rapide : 3 jours</option>
+					<option value="express">Express : Le lendemain</option>
+					<option value="overnight">De nuit</option>
+				</select>
+			</div>
+			
+			<h2>Ensembles pliable</h2>		
+			<div data-role="collapsible-set">
+				<div data-role="collapsible" data-collapsed="false">
+					<h3>Section 1</h3>
+					<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis caché par défaut, parce que j'ai l'état "collapsed", vous avez besoin d'ouvrir l'entête pour me voir.</p>
+				</div>
+				<div data-role="collapsible">
+					<h3>Section 2</h3>
+					<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis caché par défaut, parce que j'ai l'état "collapsed", vous avez besoin d'ouvrir l'entête pour me voir.</p>
+
+				</div>
+				<div data-role="collapsible">
+					<h3>Section 3</h3>
+					<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis caché par défaut, parce que j'ai l'état "collapsed", vous avez besoin d'ouvrir l'entête pour me voir.</p>
+
+				</div>
+			</div>
+			
+			<h2>Liste intégrée</h2>
+			<ul data-role="listview" data-inset="true">
+				<li><a href="index.html">Boîte de réception <span class="ui-li-count" >12</span></a></li>
+				<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+				<li><a href="index.html">Brouillons <span class="ui-li-count">4</span></a></li>
+				<li><a href="index.html">Envoyé <span class="ui-li-count">328</span></a></li>
+				<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
+			</ul>
+			
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+					<div data-role="collapsible" data-collapsed="true" data-theme="a" data-content-theme="a">
+
+						<h3>Aussi dans cette rubrique</h3>
+
+						<ul data-role="listview" data-theme="a" data-dividertheme="a">
+							<li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
+							<li><a href="../page-anatomy.html">Anatomie d'une page</a></li>
+							<li><a href="../page-template.html" data-ajax="false">Modèle de page unique</a></li>
+							<li><a href="../multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
+							<li><a href="../page-titles.html">Titres de page</a></li>
+							<li><a href="../page-links.html">Liaison de pages</a></li>
+							<li><a href="../page-transitions.html" data-ajax="false">Transitions de page</a></li>
+							<li><a href="../page-dialogs.html">Boîtes de dialogue</a></li>
+							<li><a href="../page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
+							<li><a href="../page-navmodel.html">Ajax, hashes &amp; historique</a></li>
+							<li><a href="../page-dynamic.html">Injection dynamique des pages</a></li>
+							<li><a href="../page-scripting.html">Écriture des scripts des pages</a></li>
+							<li data-theme="a"><a href="../pages-themes.html">Thématisation des pages</a></li>
+						</ul>
+					</div>
+				</div>	
+
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs">
+					<p>© 2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

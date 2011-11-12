@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Docs - Page titles</title> 
+	<title>Docs jQuery Mobile - Titres de page</title> 
 	<link rel="stylesheet"  href="../../css/themes/default/" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 	<script src="../../js/jquery.js"></script>
@@ -24,14 +24,14 @@
 	<div data-role="content">
 			<div class="content-primary">	
 					
-		<h2>Titles in Ajax navigation</h2>
+		<h2>Titres dans la navigation Ajax</h2>
 		
-		<p>When you load the first page of a jQuery Mobile based site, then click a link or submit a form, Ajax is used to pull in the content of the requested page. Having both pages in the DOM is essential to enable the animated page transitions, but one downside of this approach is that the page title is always that of the first page, not the subsequent page youâ€™re viewing.</p>
-		<p>To remedy this, jQuery Mobile automatically parses the <code>title</code> of the page pulled via Ajax and changes the <code>title</code> attribute of the parent document to match.</p>		
+		<p>Lorsque vous chargez la première page d'un site basé sur jQuery Mobile, puis que vous cliquez sur un lien ou soumettez un formulaire, Ajax est utilisé pour tirer  le contenu de la page requêtée. Avoir les deux pages dans les DOM est essentielle pour permettre les transitions de page animées, mais un inconvénient sur cette approche est que le titre de la page est toujours celle de la première page, et non celle de la page suivante que vous visualisez.</p>
+		<p>Pour remédier à cela, jQuery mobile analyse automatiquement le <code>title</code> de la page tirée via AJAX et change l'attribut <code>title</code> du document parent pour le faire correspondre.</p>		
 		
-		<h2>Titles in multi-page templates</h2>
+		<h2>Titres dans les modèles multi-page</h2>
 		
-		<p>On multi-page documents, we follow a similiar convention, but since all the pages share a common <code>title</code>, we have a <code>data-title</code> attribute that can be added to each page container within a multi-page template to manually define a title. The title of the HTML document will be automatically updated to match the <code>data-title</code> of the page currently in view.</p>
+		<p>Sur des documents multi-page, nous suivons une convention similaire, mais toutes les pages partagent un<code>title</code> commun, nous avons un attribut <code>data-title</code> qui peut être ajouté à chaque conteneutr de page dans un modèle multi-page pour définir manuellement un titre. Le titre du document HTML sera automatiquement mis à jour pour correspondre au <code>data-title</code> de la page en cours à l'affichage.</p>
 		
 <pre><code>
 &lt;div data-role="page" id="foo" <strong>data-title="Page Foo"</strong>&gt;
