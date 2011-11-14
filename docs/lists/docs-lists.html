@@ -24,7 +24,8 @@
 	<div data-role="content">
 			<div class="content-primary">
 			<h2>Listes chainées de base</h2>
-			<p>Une vue de liste est codée comme une simple liste non ordonnée contenant des éléments lié à une liste avec l'attribut <code> data-role="listview"</code>. jQuery Mobile appliquera tous les styles nécessaires pour transformer cette liste en vue de liste mobile conviviale avec un indicateur d'une flèche vers la droite, et qui remplit toute la largeur de la fenêtre de navigateur. Lorsque vous appuyez sur l'élément de liste, le framework va déclencher un clic sur le premier lien à l'intérieur de l'élément de la liste, puis émettre une requête AJAX de l'URL dans le lien, créer la nouvelle page dans les DOM, puis lancer une transition de page. Voici le balisage HTML pour une liste de base chainées.</p>
+			<p>Une vue de liste est codée comme une simple liste non ordonnée contenant des éléments lié à une liste avec l'attribut <code> data-role="listview"</code>. jQuery Mobile appliquera tous les styles nécessaires pour transformer cette liste en vue de liste mobile conviviale avec un indicateur d'une flèche vers la droite, et qui remplit toute la largeur de la fenêtre de navigateur. Lorsque vous appuyez sur l'élément de liste, le framework va déclencher un clic sur le premier lien à l'intérieur de l'élément de la liste, puis émettre une requête AJAX de l'URL dans le lien, créer la nouvelle page dans les DOM, puis lancer une transition de page. Regardez la &lt;a3&gt;reference de data- attribute&lt;/a3&gt; pour voir tous les attributs possibles que vous pouvez ajouter aux listes.</p> 
+			<p>Voici le balisage HTML pour une liste de base chainées.</p>
 
 <pre><code>
 &lt;ul data-role="listview" data-theme="g"&gt;
@@ -48,7 +49,7 @@
 			<a href="lists-ol.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste numérotée</a>
 
 			<h2>Listes en lecture seule</h2>
-			<p>Les vues de liste peuvent aussi être utilisées pour afficher une liste non-interactive d'éléments, généralement sous forme de liste incorporée. Cette liste est construite à partir d'une liste non ordonnée ou ordonnée qui n'a pas d'élément de la liste lié. Le framework par défaut stylise cette liste avec l'échantillon "c" du thème (flat white dans le thème par défaut) et définit la taille du texte à une taille plus petite que les listes cliquables pour économiser un peu d'espace.</p>
+			<p>Les vues de liste peuvent aussi être utilisées pour afficher une liste non-interactive d'éléments, généralement sous forme de liste incorporée. Cette liste est construite à partir d'une liste non ordonnée ou ordonnée qui n'a pas d'élément de la liste lié. Le framework par défaut stylise cette liste avec l'échantillon "c" du thème et définit la taille du texte à une taille plus petite que les listes cliquables pour économiser un peu d'espace.</p>
 
 			<a href="lists-readonly-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste en lecture seule</a>
 
@@ -100,10 +101,15 @@ function( text, searchValue ){
 
 			<a href="lists-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Example de liste intégrée</a>
 
+			<h2>Appel du plugin listview</h2>
+			<p>Vous pouvez appeler directement le plugin listview sur n'importe quel sélecteur, comme n'importe quel plugin normal de jQuery :</p>
+			<code>$('#mylist').listview();</code>
+			
 			<h2>Mise à jour des listes</h2>
-			<p>Si vous ajoutez des éléments à une liste, vous aurez besoin d'appeler la méthode <code>refresh()</code> sur elle-même pour mettre à jour les styles et créer des listes imbriquées qui sont ajoutés. Par exemple, <code>$('ul').listview('refresh');</code></p>
+			<p>Si vous ajoutez des éléments à une liste, vous aurez besoin d'appeler la méthode <code>refresh()</code> sur elle-même pour mettre à jour les styles et créer des listes imbriquées qui sont ajoutés. Par exemple :</p>
+			<code>$('#mylist').listview('refresh');</code>
 
-			<p>Nous travaillons actuellement sur un certain nombre d'améliorations pour la méthode refresh, donc gardez un oeil sur les mises à jour sur Github.</p>
+			<p>Notez que la méthode <code>refresh()</code> affecte seulement les <strong>nouveaux noeuds</strong> ajoutés à la liste. Cela pour des raisons de performance. Tous les éléments de la liste déjà améliorés seront ignorés par le processus d'actualisation. Cela signifie que si vous modifiez le contenu ou les attributs d'un élément de la liste déjà amélioré, elles ne seront pas pris en compte. Si vous voulez mettre à jour un élément de la liste, remplacez le par un nouveau balisage avant d'appeler refresh. </p>
 
 
 			</div><!--/content-primary -->
