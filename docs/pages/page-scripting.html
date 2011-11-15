@@ -23,11 +23,11 @@
 
 	<div data-role="content">
 		<div class="content-primary">		
-			<p>Étant donné que jQuery Mobile utilise un système de navigation Ajax, il y a quelques petites choses utiles à connaître lors de l'écriture de scripts permettant de manipuler votre contenu. Vous pouvez explorer plus en détail l'API mobile en lisant les <a href="../api/globalconfig.html">options de configuration globales&lt;/ a0&gt;, les <a href="../api/events.html">événements&lt;/ a1&gt; et les  <a href="../api/methods.html">méthodes</a> ou plonger dans les détails techniques du <a href="page-navmodel.html">modèle de navigation d'ajax</a>.</p> 
+			<p>Étant donné que jQuery Mobile utilise un système de navigation Ajax, il y a quelques petites choses utiles à connaître lors de l'écriture de scripts permettant de manipuler votre contenu. Vous pouvez explorer plus en détail l'API mobile en lisant les <a href="../api/globalconfig.html">options de configuration globales</a>, les <a href="../api/events.html">événements</a> et les  <a href="../api/methods.html">méthodes</a> ou plonger dans les détails techniques du <a href="page-navmodel.html">modèle de navigation d'ajax</a>.</p> 
 			
 			<h2>Les scripts &amp; les styles dans le head</h2> 
 			
-			<p>Lorsque l'utilisateur clique sur un lien dans un site axé sur jQuery Mobile, le comportement par défaut du système de navigation est d'utiliser un <code>href</code> d'un lien pour formuler une requête Ajax (au lieu de permettre le comportement du lien par défaut du navigateur en requêtant le <code>href</code> avec un chargement complet de la page). Quand cette requête Ajax sort, le framework recevra son contenu de texte en entier, mais il injectera seulement le <em>contenu de la réponse de l'élément <code>body&lt;/ c3&gt; (ou plus précisément l'élément <code>data-role="page"</code>, s'il est fourni)</em>, ce qui signifie rien dans le <code>head</code> de la page sera utilisé (à l'exception du titre de lapage, qui est récupérée en particulier) .</p>
+			<p>Lorsque l'utilisateur clique sur un lien dans un site axé sur jQuery Mobile, le comportement par défaut du système de navigation est d'utiliser un <code>href</code> d'un lien pour formuler une requête Ajax (au lieu de permettre le comportement du lien par défaut du navigateur en requêtant le <code>href</code> avec un chargement complet de la page). Quand cette requête Ajax sort, le framework recevra son contenu de texte en entier, mais il injectera seulement le <em>contenu de la réponse de l'élément <code>body</code> (ou plus précisément l'élément <code>data-role="page"</code>, s'il est fourni)</em>, ce qui signifie rien dans le <code>head</code> de la page sera utilisé (à l'exception du titre de lapage, qui est récupérée en particulier) .</p>
 			
 			<p> Cela signifie que tous les scripts et les styles référencés du <code>head</code> d'une page n'auront aucun effet <em>quand une page est chargée via Ajax</em>, mais ils <strong>seront exécutés si la page est demandée normalement via HTTP</strong>. En écrivant les sites Jquery Mobile, les deux scénarios doivent être envisagés. La raison pour laquelle le <code>head</code> d'une page est ignoré, lorsque qu'elle est requêtée via Ajax, est que le potentiel de re-exécuter le même JavaScript est très élevé (il est courant de faire référence aux mêmes scripts dans chaque page d'un site) . En raison de la complexité pour tenter de contourner ce problème, nous laissons la tâche d'exécution des scripts de la page spécifique pour le développeur et assumons que les scripts du <code>head</code> sont uniquement prévus pour être exécutés une fois par session de navigation.</p>
 			
@@ -54,34 +54,34 @@ $( document ).delegate("#aboutPage", "pagebeforecreate", function() {
 });
 </code></pre>
 
-			<h2>Changing pages</h2> 
-			<p>If you want to change the current active page with JavaScript, you can use the <a href="../api/methods.html"><code>changePage</code></a> method. There are a lot of methods and properties that you can set when changing pages, but here are two simple examples:</p>
+			<h2>Changement des pages</h2> 
+			<p>Si vous voulez changer la page active en cours avec JavaScript, vous pouvez utiliser la méthode <a href="../api/methods.html"><code>changePage</code></a>. Il y a beaucoup de méthodes et propriétés que vous pouvez définir lors du changement de pages, mais voici deux exemples simples :</p>
 			<pre><code>
-<strong>//transition to the "about us" page with a slideup transition</strong> 			
+<strong>//transition vers la page "about us" avec une transition slideup</strong> 			
 $.mobile.changePage( "about/us.html", { transition: "slideup"} );	
 
-<strong>//transition to the "search results" page, using data from a form with an ID of "search"" 	</strong>	
+<strong>//transition vers la page "search results", en utilisant data depuis le formulaire avec un ID à "search"" 	</strong>	
 $.mobile.changePage( "searchresults.php", {
 	type: "post", 
 	data: $("form#search").serialize()
 });		
 </code></pre>
 
-			<h2>Loading pages</h2> 
-			<p>To load an external page, enhance its content, and insert it into the DOM, use the <a href="../api/methods.html"><code>loadPage</code> method</a>. There are a lot of methods and properties that you can set when loading pages, but here is a simple example:</p>
+			<h2>Chargement des pages</h2> 
+			<p>Pour charger une page externe, améliorer son contenu et l'insérer dans le DOM, utilisez la <a href="../api/methods.html">méthode <code>loadPage</code></a>. Il y a beaucoup de méthodes et propriétés que vous pouvez définir lors du chargement de pages, mais voici un exemple simple :</p>
 			<pre><code>
-//load the "about us" page into the DOM			
+//charge la page "about us" page dans le DOM			
 $.mobile.loadPage( "about/us.html" );	
 </code></pre>
 
-			<h2>Enhancing new markup</h2> 
-			<p>The page plugin dispatches a <code>pagecreate</code> event, which most widgets use to auto-initialize themselves. As long as a widget plugin script is referenced, it will automatically enhance any instances of the widgets it finds on the page.</p>		
-			<p>However, if you generate new markup client-side or load in content via Ajax and inject it into a page, you can trigger the <code>create</code> event to handle the auto-initialization for all the plugins contained within the new markup. This can be triggered on any element (even the page <code>div</code> itself), saving you the task of manually initializing each plugin (listview button, select, etc.).</p> 
-			<p>For example, if a block of HTML markup (say a login form) was loaded in through Ajax, trigger the <code>create</code> event to automatically transform all the widgets it contains (<a href="http://jquerymobile.com/test/docs/forms/textinputs/index.html">inputs</a> and <a href="http://jquerymobile.com/test/docs/buttons/index.html">buttons</a> in this case) into the enhanced versions. Le code de ce scénario serait :</p> 
+			<h2>Amélioration de nouvelle balise</h2> 
+			<p>Le plugin page envoie un événement <code>pagecreate</code>, où la plupart des widgets l'utilisent pour s'auto-initialiser. Tant que le script du plugin du widget est référencé, il va automatiquement améliorer toutes les instances des widgets qu'il trouve sur la page.</p>		
+			<p>Toutefois, si vous générez de nouvelles balises côté client ou chargez de contenu via Ajax et l'injectez dans une page, vous pouvez déclencher l'événement <code>create</code> pour gérer l'auto-initialisation de tous les plugins contenus dans le nouveau balisage. Cela peut être déclenché sur tout élément (même le <code>div</code> de la page lui-même),  en vous épargnant la tâche d'initialisation manuelle de chaque plugin (voir ci-dessous).</p> 
+			<p>Par exemple, si un bloc de balises HTML (par exemple un formulaire de connexion) a été chargé à travers Ajax, déclenchez l'événement <code>create</code> pour transformer automatiquement tous les widgets qu'il contient (<a href="http://jquerymobile.com/test/docs/forms/textinputs/index.html">inputs</a> et <a href="http://jquerymobile.com/test/docs/buttons/index.html">buttons</a> dans ce cas) dans les versions améliorées. Le code de ce scénario serait :</p> 
 <pre style="margin: 25px 0;"><code style="font-size: 12px;">$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
 </code></pre> 
 
-			<h2>Create vs. refresh: An important distinction</h2> 
+			<h2>Create et refresh : Une distinction importante</h2> 
 			<p>Note that there is an important difference between the <code>create</code> event and <code>refresh</code> method that some widgets have. The <code>create</code> event is suited for enhancing <em>raw markup</em> that contains one or more widgets. The <code>refresh</code> method should be used on existing (already enhanced) widgets that have been manipulated programmatically and need the UI be updated to match.</p> 
 
 			<p>For example, if you had a page where you dynamically appended a new unordered list with <code>data-role=listview</code> attribute after page creation, triggering <code>create</code> on a parent element of that list would transform it into a <a href="http://jquerymobile.com/test/docs/lists/index.html">listview</a> styled widget. If more list items were then programmatically added, calling the listview’s <code>refresh</code> method would update just those new list items to the enhanced state and leave the existing list items untouched.</p>

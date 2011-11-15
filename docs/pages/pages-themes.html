@@ -27,23 +27,23 @@
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="pages-themes.html" data-role="button" data-transition="fade" class="ui-btn-active">Aperçu du thème</a></li>				
 				
-				<li><a href="pages-themes/theme-a.html" data-role="button" data-transition="fade">A</a></li>
-				<li><a href="pages-themes/theme-b.html" data-role="button" data-transition="fade"> B</a></li>
-				<li><a href="pages-themes/theme-c.html" data-role="button" data-transition="fade">C</a></li>
-				<li><a href="pages-themes/theme-d.html" data-role="button" data-transition="fade">D</a></li>
-				<li><a href="pages-themes/theme-e.html" data-role="button" data-transition="fade">E</a></li>
+				<li><a href="pages-themes/theme-a.html" data-role="button" data-transition="fade">A&nbsp;</a></li>
+				<li><a href="pages-themes/theme-b.html" data-role="button" data-transition="fade">B&nbsp;</a></li>
+				<li><a href="pages-themes/theme-c.html" data-role="button" data-transition="fade">C&nbsp;</a></li>
+				<li><a href="pages-themes/theme-d.html" data-role="button" data-transition="fade">D&nbsp;</a></li>
+				<li><a href="pages-themes/theme-e.html" data-role="button" data-transition="fade">E&nbsp;</a></li>
 			</ul>
 			
-			<h2>Page Theming</h2>
+			<h2>Thématisation de page</h2>
 			
-			<p>jQuery Mobile has a rich <a href="../api/themes.html">theming system</a> that gives you full control of how pages are styled. There is detailed theming documentation within each page widget, but let's look at a few high-level examples of how theming is applied.</p>
+			<p>jQuery Mobile a un riche <a href="../api/themes.html">système de thématisation</a>qui vous donne le contrôle totale pour que les pages soient stylisées. Il y a une documentation détaillée au sein de chaque page de widget, mais regardons quelques-uns des exemples de haut niveau  où la thématisation est appliquée.</p>
 			
-			<p>The <code> data-theme</code> attribute can be applied to the header and footer containers to apply any of the lettered theme color swatches. While the <code> data-theme</code> attribute could be added to the content container, we recommend adding it instead to <code>div</code> or container that has been assigned the <code> data-role="page"</code> attribute to ensure that the background color is applied to the full page.</p>
+			<p>L'attribut <code> data-theme</code> peut être aux conteneurs de l'entête et du pied de page pour appliquer l'une des lettres des échantillons de couleur du thème. Alors que l'attribut <code> data-theme</code> pourrait être ajouté au conteneur de contenu, nous vous conseillons de l'ajouter à la place du <code>div</code> ou du conteneur qui a été attribué à l'attribut  <code> data-role="page"</code> pour s'assurer que la couleur de fond est appliquée à toute la page.</p>
 			
-			<p>The default Theme mixes styles from multiple swatches to create visual texture and present the various elements in optimal contrast to one another:</p>
+			<p>Le thème par défaut mélange les styles de multiples échantillons pour créer la texture visuelle et présenter les différents éléments dans un contraste optimal à un autre :</p>
 			
 			<div data-role="header">
-				<h1>Default Theme</h1>
+				<h1>Thème par défaut</h1>
 			</div>
 
 			<div class="ui-body ui-body-c">
@@ -53,58 +53,58 @@
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
 			</div>
 
-			<p>And each of the five "swatches" applies its style consistently across all page elements, as shown below:</p>
+			<p>Et chacun des cinq «échantillons» applique son style uniformément dans toutes les éléments de la page, comme indiqué ci-dessous :</p>
 						
-			<h2>Swatch A</h2>
+			<h2>Échantillon A</h2>
 			<div data-role="header" data-position="inline">
-				<h1>Header A</h1>
+				<h1>Entête A</h1>
 			</div>
 			
 			
 			<div class="ui-body ui-body-a">
 				<h3>Entête</h3>
-				<p>This is content color swatch "A" and a preview of a <a href="#" class="ui-link">link</a>.</p>
+				<p>Il s'agit de la palette de couleurs "A" du contenu et un aperçu d'un <a href="#" class="ui-link">lien</a>.</p>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
 			</div>
 
 
-			<h2>Swatch B</h2>
+			<h2>Échantillon B</h2>
 			<div data-role="header" data-theme="b">
-				<h1>Header B</h1>
+				<h1>Entête B</h1>
 			</div>
 			<div class="ui-body ui-body-b">
 				<h3>Entête</h3>
-				<p>This is content color swatch "B" and a preview of a <a href="#" class="ui-link">link</a>.</p>
+				<p>Il s'agit de la palette de couleurs "B" du contenu et un aperçu d'un <a href="#" class="ui-link">lien</a>.</p>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
 			</div>
 			
-			<h2>Swatch C</h2>
+			<h2>Échantillon C</h2>
 			<div data-role="header" data-theme="c">
-				<h1>Header C</h1>
+				<h1>Entête C</h1>
 			</div>
 			<div class="ui-body ui-body-c">
 				<h3>Entête</h3>
-				<p>This is content color swatch "C" and a preview of a <a href="#" class="ui-link">link</a>.</p>
+				<p>Il s'agit de la palette de couleurs "C" du contenu et un aperçu d'un <a href="#" class="ui-link">lien</a>.</p>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
 			</div>
 
-			<h2>Swatch D</h2>
+			<h2>Échantillon D</h2>
 			<div data-role="header" data-theme="d">
-				<h1>Header D</h1>
+				<h1>Entête D</h1>
 			</div>
 			<div class="ui-body ui-body-d">
 				<h3>Entête</h3>
-				<p>This is content color swatch "D" and a preview of a <a href="#" class="ui-link">link</a>.</p>
+				<p>Il s'agit de la palette de couleurs "D" du contenu et un aperçu d'un <a href="#" class="ui-link">lien</a>.</p>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
 			</div>
 			
-			<h2>Swatch E</h2>
+			<h2>Échantillon E</h2>
 			<div data-role="header" data-theme="e">
-				<h1>Header E</h1>
+				<h1>Entête E</h1>
 			</div>
 			<div class="ui-body ui-body-e">
 				<h3>Entête</h3>
-				<p>This is content color swatch "E" and a preview of a <a href="#" class="ui-link">link</a>.</p>
+				<p>Il s'agit de la palette de couleurs "E" du contenu et un aperçu d'un <a href="#" class="ui-link">lien</a>.</p>
 				<a href="#" data-role="button" data-inline="true">Bouton</a>
 			</div>
 			

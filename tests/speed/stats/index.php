@@ -12,11 +12,17 @@
      $st = $db->prepare( '
      SELECT agent, agent_version, point, avg(value) as avg_value,
             pathname, strftime(\'%Y-%m-%d\', time) as day
-     FROM stats
-     WHERE (agent_full like \'%Mobile%\' or agent_full like \'%mobile%\')
+     FROM (
+          SELECT agent, agent_version, agent_full, pathname, point, value, time FROM stats WHERE agent <> \'Android\'
+          UNION
+          SELECT agent, substr(agent_version, 1, 3) as agent_version, agent_full, pathname, point, value, time
+          FROM stats
+          WHERE agent LIKE \'Android\'
+     )
+     WHERE (agent_full like \'%Mobile%\' or agent_full like \'%mobile%\' or agent_full like \'%Android%\')
            and agent like :agent and point like :data_point
-     GROUP BY agent, agent_version, pathname, point, strftime(\'%Y-%m-%d\', time)
-     ORDER BY time;
+     GROUP BY agent, agent_version, pathname, point, time
+     ORDER BY agent, agent_version, time;
      ');
 
      $st->execute(array(
