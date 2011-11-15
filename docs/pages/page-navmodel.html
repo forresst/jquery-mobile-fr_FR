@@ -84,7 +84,7 @@
 
 			<p>Ainsi, par exemple, une page générée par le plugin listview peut avoir un attribut <code>data-url</code> comme ceci : <code>data-url="artists.html&amp;ui-page=listview-1"</code></p>
 
-			<p>Quand une page est demandée, jQuery Mobile sait diviser l'URL à partir de "&amp;ui-page" et faire une requête HTTP avec la portion de l'URL avant la clef. In the case of the listview example mentioned above, the URL would look like this: http://example.com/artists.html&amp;ui-page=listview-1 ...and jQuery Mobile would request artists.html, which would then generate its sub-pages, creating the vcode&gt;div</code> with <code>data-url="artists.html&amp;ui-page=listview-1"</code>, which it will then display as the active page.</p>
+			<p>Quand une page est demandée, jQuery Mobile sait diviser l'URL à partir de "&amp;ui-page" et faire une requête HTTP avec la portion de l'URL avant la clef. Dans le cas de l'exemple listview mentionné ci-dessus, l'URL devrait ressembler à ceci : http://example.com/artists.html&amp;ui-page=listview-1 ... et jQuery Mobile devrait requêter artists.html, cela générera alors ses sous-pages, la création du <code>div</code> avec <code>data-url="artists.html&amp;ui-page=listview-1"</code>, qui affichera alors la page active.</p>
 
 			<p><em>Notez que l'attribut <code>data-url</code> de l'élément contient le chemin de l'URL complet, pas seulement la partie après &amp;ui-page=. Cela permet à jQuery Mobile d'utiliser un mécanisme unique et cohérent qui correspond aux URLs vers la page des attributs <code>data-url</code>.</em></p>
 
