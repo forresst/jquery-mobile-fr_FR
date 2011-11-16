@@ -41,9 +41,9 @@
 	</div>
 </div><!-- /grid-a -->
 
-<p><strong>Transitions from <a href="http://www.jqtouch.com/">jQtouch</a></strong> (<em>with small modifications</em>): Built by David Kaneda and maintained by Jonathan Stark.</p>
+<p><strong>Transitions depuis <a href="http://www.jqtouch.com/">jQtouch</a></strong> (<em>avec quelques modifications</em>) : Contruit par David Kaneda et maintenu par Jonathan Stark.</p>
 
-<p>NOTE: The flip transition isn't rendered correctly on most versions of Android because it lacks 3D CSS transform capabilities. Unfortunately, instead of ignoring the flip, Android makes the page "cartwheel" away by rotating instead of flipping. We recommend using this transition sparingly until support improves.</p>
+<p>REMARQUE : La transition flip n'est pas rendu correctement sur la plupart des versions d'Android car il manque les capacités de transformation 3D CSS. Malheureusement, au lieu d'ignorer le flip, Android rend la page "roue" en tournant au lieu du retournement. We recommend using this transition sparingly until support improves.</p>
 
 
 	<h2>Setting a transition on a link or form submit</h2>
@@ -159,12 +159,12 @@ $.mobile.css3TransitionHandler
 {
     var deferred = new $.Deferred();
 
-    // Perform any actions or set-up necessary to kick-off
-    // your transition here. The only requirement is that
-    // whenever the transition completes, your code calls
+    // Effectue toute action ou mise en place nécessaire au lancement
+    // votre transition ici. La seule exigence est que
+    // chaque fois que la transition terminée, votre code appelle
     // deferred.resolve(name, reverse, $to, $from).
 
-    // Return a promise.
+    // Return un promise.
     return deferred.promise();
 }
 		</code></pre>
@@ -175,18 +175,18 @@ $.mobile.css3TransitionHandler
 
 		<p>Once you have created a transition handler function, you need to tell jQuery Mobile about it. To do this, simply add your handler to the <code>$.mobile.transitionHandlers</code> dictionary. Remember, the key used should be the name of your transition. This name is also the same name that will be used within the <code>@data-transition</code> attribute of any navigation links.</p>
 
-		<pre><code>// Define your transition handler:
+		<pre><code>// Definit votre gestionnaire de transition :
 
 function myTransitionHandler(name, reverse, $to, $from)
 {
     var deferred = new $.Deferred();
 
-    // Perform any actions or set-up necessary to kick-off
-    // your transition here. The only requirement is that
-    // whenever the transition completes, your code calls
+    // Effectue toute action ou mise en place nécessaire au lancement
+    // votre transition ici. La seule exigence est que
+    // chaque fois que la transition terminée, votre code appelle
     // deferred.resolve(name, reverse, $to, $from).
 
-    // Return a promise.
+    // Return un promise.
     return deferred.promise();
 }
 
@@ -206,22 +206,22 @@ $.mobile.transitionHandlers["myTransition"] = myTransitionHandler;
 
 		<p>As previously mentioned the default transition handler assumes that any transition name other than "none" is a CSS class to be placed on the "from" and "to" elements to kick off a CSS3 animation. If you would like to override one of these built-in CSS transitions, you simply register your own handler with the same name as the CSS page transition you want to override. So for example, if I wanted to override the built-in "slide" CSS transition with my own JavaScript based transition, I would simply do the following:</p>
 
-		<pre><code>// Define your transition handler:
+		<pre><code>// Definit votre gestionnaire de transition :
 
 function myTransitionHandler(name, reverse, $to, $from)
 {
     var deferred = new $.Deferred();
 
-    // Perform any actions or set-up necessary to kick-off
-    // your transition here. The only requirement is that
-    // whenever the transition completes, your code calls
+    // Effectue toute action ou mise en place nécessaire au lancement
+    // votre transition ici. La seule exigence est que
+    // chaque fois que la transition terminée, votre code appelle
     // deferred.resolve(name, reverse, $to, $from).
 
-    // Return a promise.
+    // Return un promise.
     return deferred.promise();
 }
 
-// Register it with jQuery Mobile:
+// L'enregistrer avec jQuery Mobile :
 
 $.mobile.transitionHandlers["slide"] = myTransitionHandler;
 		</code></pre>
@@ -238,12 +238,12 @@ function myTransitionHandler(name, reverse, $to, $from)
 {
     var deferred = new $.Deferred();
 
-    // Perform any actions or set-up necessary to kick-off
-    // your transition here. The only requirement is that
-    // whenever the transition completes, your code calls
+    // Effectue toute action ou mise en place nécessaire au lancement
+    // votre transition ici. La seule exigence est que
+    // chaque fois que la transition terminée, votre code appelle
     // deferred.resolve(name, reverse, $to, $from).
 
-    // Return a promise.
+    // Return un promise.
     return deferred.promise();
 }
 

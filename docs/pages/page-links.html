@@ -36,6 +36,8 @@
 			<p>Si la requête Ajax est réussie, le contenu de la page est ajoutée au DOM, tous les widgets mobiles sont auto-initialisés et la nouvelle page est animée dans la vue avec une transition de page.</p>
 			
 			<p>Si la requête Ajax échoue, le framework affiche en superposition un petit message d'erreur (stylisé avec l'échantillon "e") qui disparaît après un bref instant afin que ceci ne casse pas le flux de la navigation. Aperçu d'un <a href="notapage.html">exemple de message d'erreur</a>.</p>
+			
+			<p><strong>Remarque :</strong> vous ne pouvez pas faire un lien <strong>à</strong> un document multipage avec la navigation Ajax, car le framework ne fera que charger la première page qu'il trouve, et non l'ensemble des pages internes. Dans ces cas, vous devez lier sans Ajax (voir la prochaine section) pour l'actualisation d'une pleine page afin de prévenir d'éventuelles collisions de hash. Il y a actuellement un <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">plugin subpage</a> qui permet de charger des documents multi-pages.</p>
 
 
 <h2>Liaison sans Ajax</h2>
