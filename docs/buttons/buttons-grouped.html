@@ -1,0 +1,90 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Boutons groupés</title> 
+	<link rel="stylesheet"  href="../../jquery.mobile.min.css" /> 
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/> 
+	<script src="../../jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../jquery.mobile.min.js"></script>
+</head>
+<body> 
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Groupement des boutons</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		
+		<p>Occasionnellement, vous voudrez peut-être un ensemble de boutons pour former un seul bloc qui ressemble à une composante de navigation. Pour obtenir cet effet, envelopper un ensemble de boutons dans un container avec l'attribut <code> data-role="controlgroup"</code> — le framework créera un groupe de boutons verticale, enlèvera toutes les marges et les ombres portées entre les boutons et laissera seulement  l'arrondi du premier et dernier bouton de la série pour créer un effet de regroupement. </p>
+<pre><code>
+&lt;div data-role="controlgroup"&gt;
+&lt;a href="index.html" data-role="button"&gt;Oui&lt;/a&gt;
+&lt;a href="index.html" data-role="button"&gt;Non&lt;/a&gt;
+&lt;a href="index.html" data-role="button"&gt;Peut être&lt;/a&gt;
+&lt;/div&gt;
+</code></pre>
+
+		<p>By default, grouped buttons are presented as a vertical list:</p>
+		
+		<div data-role="controlgroup">
+			<a href="index.html" data-role="button">Oui</a> <a href="index.html" data-role="button">Non</a> <a href="index.html" data-role="button">Peut être</a>
+		</div>
+		
+		<p>En ajoutant l'attribut <code>data-type="horizontal"</code> au container <code>controlgroup</code>, vous pouvez transformer en un groupe horizontal qui positionne les boutons côte à côte et définir une largeur pour être assez grand pour accueillir le contenu. (Soyez conscient que cela va se positionner sur plusieurs lignes si le nombre de boutons ou la longueur du texte global est trop large pour l'écran.)
+		
+		<p>Boutons groupés horizontalement :</p>
+		<div data-role="controlgroup" data-type="horizontal">
+			<a href="index.html" data-role="button">Oui</a> <a href="index.html" data-role="button">Non</a> <a href="index.html" data-role="button">Peut être</a>
+		</div>
+			
+		<p>Boutons groupés horizontalement avec des icônes:</p>
+		<div data-role="controlgroup" data-type="horizontal" >
+			<a href="index.html" data-role="button" data-icon="plus">Ajouter</a><a href="index.html" data-role="button" data-icon="delete">Supprimer</a>
+		</div>
+		
+		<p>Boutons groupés horizontalement, icônes seulement :</p>
+		<div data-role="controlgroup" data-type="horizontal" >
+			<a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext">Haut</a> <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext">Bas</a> <a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Supprimer</a>
+		</div>
+		
+		
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Boutons</li>
+					<li><a href="buttons-types.html">Bases du bouton</a></li>
+					<li><a href="buttons-icons.html"> Icônes des boutons</a></li>
+					<li><a href="buttons-inline.html">Alignement des boutons</a></li>
+					<li data-theme="a"><a href="buttons-grouped.html">Groupement des boutons</a></li>
+					<li><a href="buttons-themes.html">Thématisation des boutons</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

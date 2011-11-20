@@ -1,0 +1,152 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile Docs - Contenu pliable</title> 
+	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../jquery.mobile.min.js"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Ensembles pliable (accordéon)</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		
+		<h2>Balisage à définir pour le pliable</h2>
+		<p>Les ensembles pliable commencent avec exactement le même balisage que les <a href="content-collapsible.html">pliables individuels</a>. En ajoutant une enveloppe parent avec l'attribut <code> data-role="collapsible-set"</code> autour d'un certain nombre de pliables, le framework le stylisera pour ressemble à un widget visuel groupé et le fera se comporter comme un accordéon dont une seule section peut être ouvert à la fois. Regardez la <a href="../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux ensembles de pliable.</p>
+		<p>Par défaut, toutes les sections seront réduites. Pour définir une section à ouvrir lorsque la page se charge, ajoutez l'attribut <code> data-collapsed="false"</code> à l'entête de la section que vous souhaitez dépliée.</p>
+
+	<pre><code>		
+<strong>&lt;div data-role="collapsible-set"&gt;</strong>
+
+	&lt;div data-role="collapsible" <strong>data-collapsed="false"</strong>&gt;
+	&lt;h3&gt;Section 1&lt;/h3&gt;
+	&lt;p&gt;Je suis le contenu pliable pour la section 1.&lt;/p&gt;
+	&lt;/div&gt;
+	
+	&lt;div data-role="collapsible"&gt;
+	&lt;h3&gt;Section 2&lt;/h3&gt;
+	&lt;p&gt;Je suis le contenu pliable pour la section 2.&lt;/p&gt;
+	&lt;/div&gt;
+	
+<strong>&lt;/div&gt;</strong>
+	</code></pre>	
+	
+
+		<p>Voici un exemple d'un ensemble pliable avec 5 sections.</p>
+		
+		<div data-role="collapsible-set">
+			<div data-role="collapsible" data-collapsed="false">
+				<h3>Section 1</h3>
+				<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis ouvert par défaut, car j'ai l'attribut <code>data-collapsed="false"</code>.</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 2</h3>
+				<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis caché par défaut, parce que j'ai l'état "collapsed", vous avez besoin d'ouvrir l'entête pour me voir.</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis caché par défaut, parce que j'ai l'état "collapsed", vous avez besoin d'ouvrir l'entête pour me voir.</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 4</h3>
+				<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis caché par défaut, parce que j'ai l'état "collapsed", vous avez besoin d'ouvrir l'entête pour me voir.</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 5</h3>
+				<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis caché par défaut, parce que j'ai l'état "collapsed", vous avez besoin d'ouvrir l'entête pour me voir.</p>
+
+			</div>
+		</div>
+
+		<h2>Thématisation du contenu pliable</h2>
+		<p>L'attribut standard <code>data-theme</code> peut être utilisé pour définir la couleur de chaque pliable dans un ensemble. Pour fournir un regroupement plus claire visuellement du contenu des entêtes, ajoutez l'attribut  <code>data-content-theme</code> avec une lettre de l'échantillon. Cela ajoute une couleur de fond thématisé et des bordures pour le bloc de contenu. Pour une thématisation cohérente, ajouter ces attributs à l'ensemble pliable parent .</p>
+
+
+<pre><code>		
+&lt;div data-role="collapsible-set" <strong>data-theme="c" data-content-theme="d"</strong>&gt;
+</code></pre>	
+
+
+		<div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+			<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>Contenu pliable</p>
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 2</h3>
+				<p>Contenu pliable</p>
+
+			</div>
+			<div data-role="collapsible">
+				<h3>Section 3</h3>
+				<p>Contenu pliable</p>
+			</div>
+		</div>
+
+
+		<h2>Thématisation des sections individuelles</h2>
+		<p>Pour avoir des sections individuelles différentes dans un groupe de style, ajouter les attributs <code>data-theme</code> et <code>data-content-theme</code> pour les pliables spécifiques.</p>
+
+		<div data-role="collapsible-set" data-content-theme="c">
+			<div data-role="collapsible" data-theme="b" data-content-theme="b">
+				<h3>Section entête, échantillon B</h3>
+				<p>Contenu pliable, échantillon B</p>
+
+			</div>
+			<div data-role="collapsible" data-theme="a" data-content-theme="a">
+				<h3>Section entête, échantillon A</h3>
+				<p>Contenu pliable, échantillon A</p>
+			</div>
+			<div data-role="collapsible" data-theme="e" data-content-theme="d">
+				<h3>Section entête, échantillon E</h3>
+				<p>Contenu pliable, échantillon D</p>
+			</div>
+		</div>
+		
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Formatage de contenu</li>
+					<li><a href="content-html.html">Styles HTML de base</a></li>
+					<li><a href="content-grids.html">Grille de mise en page (colonnes)</a></li>
+					<li><a href="content-collapsible.html">Blocs de contenu pliable</a></li>
+					<li data-theme="a"><a href="content-collapsible-set.html">Ensembles pliable (accordéons)</a></li>
+					<li><a href="content-themes.html">Thématisation du contenu</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

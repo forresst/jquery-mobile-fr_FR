@@ -1,0 +1,105 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile Docs - Thématisation des boutons</title> 
+	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../jquery.mobile.min.js"></script>
+</head> 
+<body> 
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Thématisation des boutons</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+			
+			<h2>Thématisation des boutons</h2>
+			
+			<p>jQuery Mobile a un riche <a href="../api/themes.html">système de thématisation</a>qui vous donne le contrôle totale pour que les boutons soient stylisés. Quand un lien est ajouté à un conteneur, il lui est attribué automatiquement une lettre d'échantillon de thème qui correspond à la barre ou la boîte de contenu du son parent pour visuellement intégrer le bouton dans le conteneur parent, comme un caméléon. Donc un bouton placé à l'intérieur d'un conteneur de contenu avec un thème à "a" (black dans le thème par défaut) aura automatiquement le thème du bouton à "a" (charcoal dans le thème par défaut). Voici des exemples d'association de thème de bouton dans le thème par défaut. Tous les boutons ont le même balisage HTML : </p>
+			
+			<div class="ui-body ui-body-a"><h4>Échantillon A</h4><a href="index.html" data-role="button">Bouton</a></div>
+			<div class="ui-body ui-body-b"><h4>Échantillon B</h4><a href="index.html" data-role="button">Bouton</a></div>
+			<div class="ui-body ui-body-c"><h4>Échantillon C</h4><a href="index.html" data-role="button">Bouton</a></div>
+			<div class="ui-body ui-body-d"><h4>Échantillon D</h4><a href="index.html" data-role="button">Bouton</a></div>
+			<div class="ui-body ui-body-e"><h4>Échantillon E</h4><a href="index.html" data-role="button">Bouton</a></div>
+			
+			<h2>Attribution des échantillons de thème</h2>
+			<p>Les boutons peuvent être attribuées manuellement à n'importe quels échantillons de couleur des boutons à partir du thème pour ajouter du contraste visuel avec le conteneur, il faut le positionner à l'intérieur en ajoutant l'attribut <code> data-theme</code> sur la balise bouton et une lettre précisant l'échantillon. </p>
+
+<pre><code>			
+&lt;a href="index.html" data-role="button" data-theme="a"&gt;Thème a&lt;/a&gt;			
+</code></pre>
+				
+		<p>Voici 5 boutons avec des icônes qui ont une lettre d'échantillons différentes affecté via l'attribut <code> data-theme</code>.</p>
+	
+		<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Thème a</a> <a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Thème b</a> <a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Thème c</a> <a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Thème d</a> <a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Thème e</a>
+		
+		<h2>Variations de thème</h2>
+		
+		<p><strong>Thème "a"</strong> sur un conteneur avec des boutons thématisés à l'intérieur</p>
+		<div class="ui-body ui-body-a">
+			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Thème a</a> <a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Thème b</a> <a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Thème c</a> <a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Thème d</a> <a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Thème e</a>
+		</div>
+		
+		<p><strong>Thème "b"</strong> sur un conteneur avec des boutons thématisés à l'intérieur</p>
+		<div class="ui-body ui-body-b">
+			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Thème a</a> <a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Thème b</a> <a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Thème c</a> <a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Thème d</a> <a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Thème e</a>
+		</div>
+		
+		<p><strong>Thème "c"</strong> sur un conteneur avec des boutons thématisés à l'intérieur</p>
+		<div class="ui-body ui-body-c">
+			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Thème a</a> <a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Thème b</a> <a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Thème c</a> <a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Thème d</a> <a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Thème e</a>
+		</div>
+		
+		<p><strong>Thème "d"</strong> sur un conteneur avec des boutons thématisés à l'intérieur</p>
+		<div class="ui-body ui-body-d">
+			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Thème a</a> <a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Thème b</a> <a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Thème c</a> <a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Thème d</a> <a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Thème e</a>
+		</div>
+		
+		<p><strong>Thème "e"</strong> sur un conteneur avec des boutons thématisés à l'intérieur</p>
+		<div class="ui-body ui-body-e">
+			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l" data-inline="true">Thème a</a> <a href="index.html" data-role="button" data-theme="b" data-icon="arrow-l" data-inline="true">Thème b</a> <a href="index.html" data-role="button" data-theme="c" data-icon="arrow-l" data-inline="true">Thème c</a> <a href="index.html" data-role="button" data-theme="d" data-icon="arrow-l" data-inline="true">Thème d</a> <a href="index.html" data-role="button" data-theme="e" data-icon="arrow-l" data-inline="true">Thème e</a>
+		</div>
+		
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Boutons</li>
+					<li><a href="buttons-types.html">Bases du bouton</a></li>
+					<li><a href="buttons-icons.html"> Icônes des boutons</a></li>
+					<li><a href="buttons-inline.html">Alignement des boutons</a></li>
+					<li><a href="buttons-grouped.html">Groupement des boutons</a></li>
+					<li data-theme="a"><a href="buttons-themes.html">Thématisation des boutons</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

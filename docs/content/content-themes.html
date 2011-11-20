@@ -1,0 +1,146 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Thèmes de contenu</title> 
+	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../jquery.mobile.min.js"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Thématisation du contenu</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+			<div class="content-primary">
+		<h2>Thématisation la zone de contenu</h2>
+		<p>La zone principale de contenu d'une page (conteneur avec l'attribut <code> data-role="content"</code>) devrait être thématisé en ajoutant l'attribut <code> data-theme</code> au conteneur <code> data-role="page"</code> afin de s'assurer que les couleurs de fond soient appliquées à toute la page, quelle que soit la longueur du contenu. (Si vous ajoutez l'attribut <code> data-theme</code> au conteneur de contenu, la couleur de fond s'arrête après le contenu. Ainsi il peut y avoir un écart de couleur entre le contenu et le pied de page fixé.)</p>
+		<p>De plus, la zone de contenu du pliable peut être thématisée pour correspondre au thème de l'entête pliable en utilisant l'attribut <code>data-content-theme</code>.</p>
+
+<code>
+
+&lt;div data-role="page" <strong> data-theme="a"</strong> <strong>data-content-theme="a"</strong>&gt;
+
+</code>
+
+		<h2>Thématisation des blocs pliables</h2>
+		<p>Pour définir la couleur de l'entête pliable, ajoutez l'attribut <code> data-theme</code> au conteneur pliable. L'icône et le corps ne sont pas actuellement thématisable à travers les attributs de données, mais peut l'être directement avec un style CSS personnalisé.</p>
+
+<code>		
+		
+&lt;div data-role="collapsible" data-collapsed="true" <strong> data-theme="a"&gt;</strong>
+</code>
+		<h2>Exemples thématisé</h2>
+		
+		<p>Échantillon de thème <strong>A</strong> sur contenu et pliable</p>
+		<div class="ui-body ui-body-a">
+			<h1>Rubrique H1</h1>
+			<p>Ceci est un paragraphe qui contient<strong>strong</strong>, <em>emphasized</em> et <a href="index.html">linked</a>. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu.</p>
+			<div data-role="collapsible" data-collapsed="true" data-theme="a">
+				<h3>Je suis un pliable thématisé</h3>
+				<p>J'ai l'attribut <code> data-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="a" data-content-theme="a">
+				<h3>Je suis un pliable thématisé avec un contenu thématisé.</h3>
+				<p>J'ai l'attribu <code> data-content-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div>
+		</div><!-- /themed container -->
+		
+		<p>Échantillon de thème <strong>B</strong> sur contenu et pliable</p>
+		<div class="ui-body ui-body-b">
+			<h1>Rubrique H1</h1>
+			<p>Ceci est un paragraphe qui contient<strong>strong</strong>, <em>emphasized</em> et <a href="index.html">linked</a>. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu.</p>
+			<div data-role="collapsible" data-collapsed="true" data-theme="b">
+				<h3>Je suis un pliable thématisé</h3>
+				<p>J'ai l'attribut <code> data-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="b" data-content-theme="b">
+				<h3>Je suis un pliable thématisé avec un contenu thématisé.</h3>
+				<p>J'ai l'attribu <code> data-content-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div>
+		</div><!-- /themed container -->
+		
+		<p>Échantillon de thème <strong>C</strong> sur contenu et pliable</p>
+		<div class="ui-body ui-body-c">
+			<h1>Rubrique H1</h1>
+			<p>Ceci est un paragraphe qui contient<strong>strong</strong>, <em>emphasized</em> et <a href="index.html">linked</a>. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu.</p>
+			<div data-role="collapsible" data-collapsed="true" data-theme="c">
+				<h3>Je suis un pliable thématisé</h3>
+				<p>J'ai l'attribut <code> data-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="c" data-content-theme="c">
+				<h3>Je suis un pliable thématisé avec un contenu thématisé.</h3>
+				<p>J'ai l'attribu <code> data-content-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div>
+		</div><!-- /themed container -->
+		
+		<p>Échantillon de thème <strong>D</strong> sur contenu et pliable</p>
+		<div class="ui-body ui-body-d">
+			<h1>Rubrique H1</h1>
+			<p>Ceci est un paragraphe qui contient<strong>strong</strong>, <em>emphasized</em> et <a href="index.html">linked</a>. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu.</p>
+			<div data-role="collapsible" data-collapsed="true" data-theme="d">
+				<h3>Je suis un pliable thématisé</h3>
+				<p>J'ai l'attribut <code> data-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="d" data-content-theme="d">
+				<h3>Je suis un pliable thématisé avec un contenu thématisé.</h3>
+				<p>J'ai l'attribu <code> data-content-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div>
+		</div><!-- /themed container -->
+		
+		<p>Échantillon de thème <strong>E</strong> sur contenu et pliable</p>
+		<div class="ui-body ui-body-e">
+			<h1>Rubrique H1</h1>
+			<p>Ceci est un paragraphe qui contient<strong>strong</strong>, <em>emphasized</em> et <a href="index.html">linked</a>. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu.</p>
+			<div data-role="collapsible" data-collapsed="true" data-theme="e">
+				<h3>Je suis un pliable thématisé</h3>
+				<p>J'ai l'attribut <code> data-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="e" data-content-theme="e">
+				<h3>Je suis un pliable thématisé avec un contenu thématisé.</h3>
+				<p>J'ai l'attribu <code> data-content-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div>
+		</div><!-- /themed container -->
+		
+	
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+						<li data-role="list-divider">Formatage de contenu</li>
+						<li><a href="content-html.html">Styles HTML de base</a></li>
+						<li><a href="content-grids.html">Grille de mise en page (colonnes)</a></li>
+						<li><a href="content-collapsible.html">Blocs de contenu pliable</a></li>
+						<li><a href="content-collapsible-set.html">Ensembles pliable (accordéons)</a></li>
+						<li data-theme="a"><a href="content-themes.html">Thématisation du contenu</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

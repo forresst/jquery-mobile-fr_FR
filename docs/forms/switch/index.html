@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Curseurs</title>
+	<link rel="stylesheet"  href="../../../jquery.mobile.min.css" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../jquery.js"></script>
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../_assets/js/jqm-docs.js"></script>
+	<script src="../../../jquery.mobile.min.js"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Interrupteur</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+			<h2>Interrupteur</h2>
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Bases</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
+			</ul>
+    
+			<p>Un interrupteur "flip" binaire est un élément d'interface commune sur les appareils mobiles qui est utilisé pour saisie de données binaires marche/arrêt ou vrai/faux . Vous pouvez soit faire glisser l'interrupteur comme un curseur ou appuyez sur un des côtés de l'interrupteur.</p>
+			
+				<p>Pour créer un interrupteur, commencer avec un <code>select</code> avec deux options. La première option sera stylisé comme un interrupteur à l'état "marche" et le second sera stylisé comme un interrupteur à l'état "arrêt" de ce fait, écrivez vos options en conséquence. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux interrupteurs.</p>
+				
+				<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
+				
+<pre><code>	
+&lt;label for="flip-a"&gt;Select slider:&lt;/label&gt;
+&lt;select name="slider" id="flip-a" data-role="slider"&gt;
+	&lt;option value="off"&gt;Arrêt&lt;/option&gt;
+	&lt;option value="on"&gt;Marche&lt;/option&gt;
+&lt;/select&gt; 
+</code></pre>	
+
+			<p>Ceci va produire un interrupteur. Les styles par défaut définissent la largeur de l'interrupteur à 100% du conteneur parent et empile les labels sur une ligne distincte.</p>
+
+			<label for="flip-a">Interrupteur :</label>
+			<select name="slider" id="flip-a" data-role="slider">
+				<option value="off">Arrêt</option>
+				<option value="on">Marche</option>
+			</select> 
+				
+			 <p>Optionnellement, enveloppez le balisage de l'interrupteur dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
+
+<pre><code>	
+<strong>&lt;div data-role="fieldcontain"&gt;
+</strong>&lt;label for="flip-b"&gt;Flip switch:&lt;/label&gt;
+	&lt;select name="slider" id="flip-b" data-role="slider"&gt;
+		&lt;option value="no"&gt;Non&lt;/option&gt;
+		&lt;option value="yes"&gt;Oui&lt;/option&gt;
+	&lt;/select&gt; 
+<strong>&lt;/div&gt;
+</strong></code></pre>	
+		<p>L'interrupteur s'affiche désormais comme ceci :</p>
+		<div data-role="fieldcontain">
+			<label for="flip-b">Interrupteur :</label>
+			<select name="slider" id="flip-b" data-role="slider">
+				<option value="no">Non</option>
+				<option value="yes">Oui</option>
+			</select> 
+		</div>
+						
+				
+		<h2>Thématisation de l'interrupteur</h2>	
+		
+		<p>Comme tous les éléments de formulaire, ce widget hérite automatiquement du thème du conteneur parent. POUR choisir un échantillon de couleurs thème spécifique, spécifiez l'attribut <code>data-theme</code> sur le select et spécifiez une lettre d'échantillon.</p>	
+		
+<pre><code>	
+&lt;div data-role="fieldcontain"&gt;
+	&lt;label for="flip-c"&gt;Flip switch:&lt;/label&gt;
+	&lt;select name="slider" id="flip-c" data-role="slider" data-theme="a"&gt;
+		&lt;option value="no"&gt;Non&lt;/option&gt;
+		&lt;option value="yes"&gt;Oui&lt;/option&gt;
+	&lt;/select&gt; 
+&lt;/div&gt;
+</code></pre>	
+				<p>Il en résulte un interrupteur avec les couleurs de l'échantillon A pour le curseur. Notez que le statut à gauche "Marche" obtient la couleur du statut actif.</p>
+				<div data-role="fieldcontain">
+					<label for="flip-c">Interrupteur :</label>
+					<select name="slider" id="flip-c" data-role="slider" data-theme="a">
+						<option value="no">Non</option>
+						<option value="yes">Oui</option>
+					</select> 
+				</div>
+				
+				<p>Voici une variante avec l'échantillon E :</p>
+				<div data-role="fieldcontain">
+					<label for="flip-d">Interrupteur :</label>
+					<select name="slider" id="flip-d" data-role="slider" data-theme="e">
+						<option value="no">Non</option>
+						<option value="yes">Oui</option>
+					</select> 
+				</div>
+		
+		<h2>Appel du plugin interrupteur</h2>
+
+<p>Ce plugin sera automatiquement initialiser sur n'importe quelle page qui contient un <code>select</code> avec l'attribut <code>data-role="slider"</code>. Cependant, si nécessaire, vous pouvez appeler directement le plugin <code>curseur</code> sur un sélecteur,comme n'importe quel plugin jQuery :</p>
+<pre><code>
+$('select').slider();			
+</code></pre>
+    
+		</form>
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Éléments de formulaire</li>
+					<li><a href="../docs-forms.html">Formulaires basiques</a></li>
+					<li><a href="../forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="../textinputs/index.html">Textes de saisie</a></li>
+					<li><a href="../search/">Saisie d'une recherche</a></li>
+					<li><a href="../slider/">Curseur</a></li>
+					<li data-theme="a"><a href="index.html">Interrupteur</a></li>
+					<li><a href="../radiobuttons/">Radio boutons</a></li>
+					<li><a href="../checkboxes/">Cases à cocher</a></li>
+					<li><a href="../selects/">Menus de sélection</a></li>
+					<li><a href="../forms-themes.html">Thématisation des formulaires</a></li>
+					<li><a href="../forms-all-native.html">Eléments natifs de formulaire</a></li>
+					<li><a href="../forms-sample.html">Soumission de formulaire</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
+

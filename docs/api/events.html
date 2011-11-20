@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Événements</title>
+	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../jquery.mobile.min.js"></script>
+</head>
+<body>
+
+<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Événements</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+		<p>jQuery Mobile propose plusieurs événements personnalisé qui s'appuient sur ​​des événements natifs pour créer des hooks utiles pour le développement. Notez que ces événements emploient divers événements tactiles, de la souris et de la fenêtre, selon l'existence de l'événement, vous pouvez les lier pour une utilisation dans des environnements de bureau et portatifs. Vous pouvez lier ces événements comme vous le feriez avec les autres événements jQuery en utilisant <code>live()</code> ou <code>bind()</code>.</p>
+
+			<div class="ui-body ui-body-e">
+		<h4 style="margin:.5em 0">Important : Utilisez pageInit() à la place de $(document).ready()</h4>
+		La première chose que vous apprenez dans jQuery est d'appeler le code à l'intérieur de la fonction $(document).ready() où tout va exécuter dès que le DOM est chargé. Cependant, dans jQuery Mobile, Ajax est utilisé pour charger le contenu de chaque page dans le DOM où vous naviguez, et le gestionnaire DOM s'exécute que pour la première page. Pour exécuter du code à chaque fois qu'une nouvelle page est chargée et créée, vous pouvez lier l'événement  <code><strong>pageinit</strong></code>. Cet événement est expliqué en détail au bas de cette page.</div>
+
+      <p>
+		<div class="ui-body ui-body-e">
+		<h4 style="margin:.5em 0">Important : pageCreate() vs pageInit()</h4>
+    Avant la version bêta 2, il était recommandait de lier l'événement <code><strong>pagecreate</strong></code>, pour ceux qui voulaient manipuler une page améliorée par jQuery mobile et le balisage de widget.  Dans la version bêta 2, un changement interne a été faite pour dissocier chacun des widgets en liant l'événement <code><strong>pagecreate</strong></code> à la place des appels directs aux méthodes du widget. Par conséquence, les utilisateurs qui liaient <code><strong>pagecreate</strong></code> dans<code><strong>mobileinit</strong></code> trouvaient la liaison d'exécution avant que le balisage ait été amélioré par tous les plugins. En accord avec le cycle de vie de production des widgets de jQuery UI, la méthode d'initialisation est appelée <strong>après</strong> la méthode de création, de sorte que l'événement <code><strong>pageinit</strong></code> se synchronise correctement avec la manipulation d'amélioration du DOM et/ou des objets Javascript. En bref, si vous utilisiez précédemment <code><strong>pagecreate</strong></code> pour manipuler le balisage amélioré avant que la page ait été montré, il est très probable que vous devriez migrer vers 'pageinit'.
+		</div></p>
+
+		<h2>Evénements tactiles</h2>
+		<dl>
+			<dt><code>tap</code></dt>
+			<dd>Se déclenche après un un événement tactile rapide, complet.</dd>
+
+			<dt><code>taphold</code></dt>
+			<dd>Se déclenche après un appui long (près d'une seconde).</dd>
+
+			<dt><code>swipe</code></dt>
+			<dd><p>Se déclenche lors d'un glissé horizontal de 30px ou plus (et de moins de 20px verticalement) se produisant dans la seconde, mais ces paramètres peuvent être configurés :</p>
+			  <ul>
+			  	<li><code>scrollSupressionThreshold</code> (par défaut : 10px) Un déplacement horizontal plus important supprime le scrolling</li>
+			  	<li><code>durationThreshold</code> (par défaut : 1000ms) Si cela dépasse la durée, ce n'est pas considérer comme un swipe</li>
+			  	<li><code>horizontalDistanceThreshold</code> (par défaut : 30px) Un déplacement horizontal doit être plus grand que cette valeur.</li>
+			  	<li><code>verticalDistanceThreshold</code> (par défaut : 75px) Un déplacement vertical doit être moins grand que cette valeur.</li>
+			  	</ul>
+			</dd>
+
+			<dt><code>swipeleft</code></dt>
+			<dd>Se déclenche lors d'un événement "glisser" s'est produit en direction de la gauche.</dd>
+
+			<dt><code>swiperight</code></dt>
+			<dd>Se déclenche lors d'un événement "glisser" s'est produit en direction de la droite.</dd>
+			</dl>
+			
+			<h2>Événements virtuels de souris</h2>
+			<p>Nous fournissons un ensemble d'événements «virtuels» de souris pour rendre abstrait les événements du tactile et de la souris. Cela permet au développeur d'enregistrer des gestionnaires pour les événements de base de la souris, tels que mousedown, mousemove, mouseup et click. Le plugin va prendre soin d'inscrire ces gestionnaires en arrière plan afin de l'appeler le plus rapidement possible pour ce périphérique. Dans les environnements tactile, le plugin conserve l'ordre du déclenchement des événements qui est vu dans les environnements de la souris traditionnelle, ainsi par exemple, vmouseup est toujours envoyé avant vmousedown et vmousedown avant vclick, etc... Les événements virtuel de souris normalisent également la manière dont l'information est extraite de l'événement, donc dans des environnements basée sur le tactile, les coordonnées sont disponibles directement sur l'objet événement à partir des propriétés pageX, pageY, screenX, screenY, clientX et clientY.</p>
+			<dl>
+				<dt><code>vmouseover</code></dt>
+				<dd>Événement normalisé pour la manipulation des événements touch ou <code>mouseover</code>.</dd>
+
+				<dt><code>vmousedown</code></dt>
+				<dd>Événement normalisé pour la manipulation des événements touchstart ou <code>mousedown</code>.</dd>
+
+				<dt><code>vmousemove</code></dt>
+				<dd>Événement normalisé pour la manipulation des événements touchmove ou <code>mousemove</code>.</dd>
+
+				<dt><code>vmouseup</code></dt>
+				<dd>Événement normalisé pour la manipulation des événements touchend ou <code>mouseup</code>.</dd>
+
+				<dt><code>vclick</code></dt>
+				<dd>Événement normalisé pour la manipulation des événements touchend ou <code>click</code> de souris. Sur les appareils tactiles, cet événement est envoyé *APRÈS* vmouseup. </dd>
+
+				<dt><code>vmousecancel</code></dt>
+				<dd>L'événement normalisé pour traiter les événements  <code>mousecancel</code> de la souris ou du tactile</dd>
+			</dl>
+
+			<div class="ui-body ui-body-e">
+				<h4 style="margin:.5em 0">Avertissement : Utilisez avec prudence vclick</h4>
+				<p> Utiliser avec prudence  vclick sur les appareils tactiles. Les navigateurs basés sur Webkit synthétisent les événements mousedown, mouseup et click à peu près 300 ms après que l'événement touchend soit déclenché. Les cibles de l'événement de souris synthétisé sont calculés au moment où elles sont envoyées et sont basées sur la localisation des événements tactiles, et dans certains cas, la mise en œuvre des heuristiques spécifiques qui conduit à des calculs cibles différents sur différents périphériques et même sur différentes versions d'OS pour le même appareil. Cela signifie que l'élément cible dans les événements tactiles originaux pourraient être différent de l'élément cible dans les événements de souris synthétisé.</p>
+	            <p>Nous vous recommandons de l'utiliser plutôt que vclick à tout moment l'action est déclenchée avec la possibilité de changer le contenu sous le point qui a été touché à l'écran. Cela inclut les transitions de page et d'autres comportements tels que réduire/développer qui pourrait  aboutir au changement d'écran ou au contenu pouvant être complètement remplacé.</p>
+			</div>
+			<p>&nbsp;</p>
+			<div class="ui-body ui-body-e">
+				<h4 style="margin:.5em 0">Annulation d'un comportement click par défaut des éléments</h4>
+				<p>Les applications peuvent appeler preventDefault() sur un événement vclick pour annuler le comportement click par défaut d'un élément. Sur les périphériques basé sur la souris, l'appel de preventDefault() sur un événement vclick équivaut à appeler preventDefault() sur l'événement réel click pendant la phase d'événement bubble. Sur les périphériques basés sur le tactile, c'est un peu plus compliqué, car l'événement réel click est envoyé environ 300 ms après l'événement vclick soit envoyé. Pour les appareils tactiles, l'appel de preventDefault () sur un événement vclick déclenche un code dans le plugin vmouse qui tente d'attraper le prochain événement vclick qui sera envoyé par le navigateur, durant la phase de capture de l'événement, et d'appeler preventDefault() et stopPropagation(). Comme mentionné dans l'avertissement ci-dessus, il est parfois difficile de faire correspondre à un événement tactile avec ses correspondants de souris car les cibles peuvent varier. Pour cette raison, le plugin vmouse peut aussi revenir pour tenter d'identifier un événement de click correspondant à des coordonnées. Il y a encore des cas lorsqu'il y a deux cibles, l'identification des coordonnées échoue, ce qui entraine que l'événement click soit envoyé, et soit cela déclenche l'action par défaut de l'élément, soit dans le cas où le contenu a été déplacé ou remplacé, cela déclenche un click sur un élément différent. Si cela se produit de façon régulière pour un élément/contrôle, nous vous suggérons d'utiliser click pour déclencher votre action.</p>
+			</div>
+		
+		<h2>Événement de changement d'orientation</h2>
+		<dl>
+			<dt><code>orientationchange</code></dt>
+			<dd>Se déclenche lors d'un changement d'orientation du périphérique (en le tournant verticalement ou horizontalement). Lorsque cet événement est lié, votre fonction de rappel peut exploiter un second argument, qui contient une propriété <code>orientation</code> égale à "portrait" ou "landscape". Ces valeurs sont également ajoutés comme des classes à l'élément HTML, cela vous permet de les exploiter dans vos sélecteurs CSS. Notez que nous avons actuellement lier l'événement resize quand orientationChange n'est pas supporté nativement ou lorsque <code>$.mobile.orientationChangeEnabled</code> est défini à false.</dd>
+			<div class="ui-body ui-body-e">
+				<h4>Timing de orientationchange</h4>
+
+				Le timing de <code>orientationchange</code> en relation avec le changement de la hauteur et la largeur du client est différent entre les navigateurs, mais l'implémentation actuelle vous donne la valeur correcte pour <code>event.orientation</code> dérivée de <code>window.orientation</code>. Cela signifie que si vos liaisons dépendent des valeurs de la hauteur et de la largeur, vous pouvez désactiver orientationchange sur tout l'ensemble avec <code>$.mobile.orientationChangeEnabled = false</code> pour laisser une solution de repli au code de redimensionnement  qui déclenchent vos liaisons.
+			</div>
+		</dl>
+
+		<h2>Événements de scroll</h2>
+		<dl>
+			<dt><code>scrollstart</code></dt>
+			<dd>Se déclenche lorsqu'un scroll commence. Notez que les périphériques iOS gel la manipulation du  DOM pendant le scroll, l'application se fera dès la fin du scroll. Nous étudions actuellement les moyens pour permettre les manipulations du DOM à appliquer avant le début du scroll.</dd>
+		</dl>
+		<dl>
+			<dt><code>scrollstop</code></dt>
+			<dd>Se déclenche lorsqu'un scroll se termine.</dd>
+		</dl>
+
+		<h2>Evénements d'initialisation de page</h2>
+        <p>Quand une page externe est chargé dans le DOM d'application, deux événements sont déclenchés. Le premier est pagebeforeload. Le deuxième événement sera soit pageLoad ou pageloadfailed.</p>
+		<dl>
+			<dt><code>pagebeforeload</code></dt>
+			<dd><p>Déclenché avant que toute demande de chargement soit faite. Les fonctions de rappel liées à cet événement peuvent appeler preventDefault() sur l'événement pour indiquer qu'elles sont liées à la requête de chargement. Les fonctions de rappel qui font cela, *DOIVENT* assurer l'appel du resolve() ou du reject() sur la référence de l'objet deferred contenue dans l'objet de données passé à la fonction de rappel.</p>
+			<p>L'objet data, passé en deuxième argument à la fonction de rappel contient les propriétés suivantes :</p>
+            <ul>
+            	<li><code>url</code> (string)
+
+<ul>
+           	    <li>L'URL absolue ou relative qui a été passé dans $.mobile.loadPage() par l'appelant.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  
+            	  <ul>
+            	    <li>La version absolue de l'url. Si l'URL était relative, elle est resolved pour les URL utilisées pour charger la page active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  
+            	  <ul>
+            	    <li>La version filtrée de l'absUrl doit être utilisée lors de l'identification de la page et lors de la mise à jour du location du navigateur lorsque la page est rendue active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>deferred</code> (object)
+            	  
+            	  <ul>
+            	    <li>Les fonctions de rappel qui appellent preventDefault() sur l'événement, *DOIVENT* appeler resolve() ou reject() sur cet objet afin que les requête changePage() reprennent le traitement. Les observateurs d'objet deferred attendent les objets deferred pour être resolved  comme ceci :</p>
+                    <pre><code>
+$( document ).bind( "pagebeforeload", function( event, data ){
+
+	// Permet d'informer le framework que nous allons gérer le chargement.
+
+	event.preventDefault();
+
+	// ... charge le document puis l'insère dans le DOM ...
+	// A certains endroits, que ce soit dans cette fonction de rappel, ou par
+	// un autre moyen asynchrone, appelez resolve, en passant
+	// les arguments suivants, ainsi qu'un objet de collection jQuery
+	// contenant l'élément du DOM de la page.
+
+	data.deferred.resolve( data.absUrl, data.options, page );
+
+});</code></pre>
+                    <p>ou rejected comme ceci :
+                    <pre><code>
+$( document ).bind( "pagebeforeload", function( event, data ){
+
+	// Permet d'informer le framework que nous allons gérer le chargement.
+
+	event.preventDefault();
+
+	//  ... charge le document puis l'insére dans le DOM ...
+	// A certains endroits, si le chargement échoue, que ce soit dans cette
+	// fonction de rappel, ou par un autre moyen asynchrone, appelez
+	// reject comme ceci :
+
+	data.deferred.reject( data.absUrl, data.options );
+
+});</code></pre>
+                    </li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  
+            	  <ul>
+            	    <li>Cet objet contient des options qui ont été passés dans $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+            </dd>
+			<dt><code>pageload</code></dt>
+			<dd>Déclenché après que la page est été chargée avec succès et insérée dans le DOM. Les fonctions de rappel liées à cet événement seront passées à l'objet data comme deuxième argument. Cet objet contient les informations suivantes :
+            <ul>
+            	<li><code>url</code> (string)
+
+<ul>
+           	    <li>L'URL absolue ou relative qui a été passé dans $.mobile.loadPage() par l'appelant.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  
+            	  <ul>
+            	    <li>La version absolue de l'url. Si l'URL était relative, elle est resolved pour les URL utilisées pour charger la page active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  
+            	  <ul>
+            	    <li>La version filtrée de l'absUrl doit être utilisée lors de l'identification de la page et lors de la mise à jour du location du navigateur lorsque la page est rendue active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  
+            	  <ul>
+            	    <li>Cet objet contient des options qui ont été passés dans $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+            	<li><code>xhr</code> (object)
+            	  
+            	  <ul>
+            	    <li>L'objet XMLHttpRequest de jQuery utilisé lorsque l'on tente de charger la page. C'est ce qui est transmis comme troisième argument à la fonction de rappel de succès de $.ajax() du framework.</li>
+          	    </ul>
+            	</li>
+            	<li><code>textStatus</code> (null ou string)
+            	  <ul>
+            	    <li>Selon <a href="http://api.jquery.com/jQuery.ajax/">la documentation</a> de jQuery, ce sera une chaîne décrivant l'état. C'est ce qui est transmis comme deuxième argument à la fonction de rappel d'erreur de $.ajax() du framework.</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+            </dd>
+			<dt><code>pageloadfailed</code></dt>
+			<dd>Déclenché si la requête du chargement de la page a échoué. Par défaut, après l'envoi de cet événement, le framework affiche un message page échouée et appelle reject () sur l'objet deferred contenue dans l'objet data de l'événement. Les fonctions de rappel peuvent empêcher l'exécution de ce comportement par défaut, en appelant la méthode preventDefault () sur l'événement.
+			  <p>L'objet data, passé en deuxième argument à la fonction de rappel contient les propriétés suivantes :</p>
+              <ul>
+            	<li><code>url</code> (string)
+
+<ul>
+           	    <li>L'URL absolue ou relative qui a été passé dans $.mobile.loadPage() par l'appelant.</li>
+          	    </ul>
+            	</li>
+            	<li><code>absUrl</code> (string)
+            	  
+            	  <ul>
+            	    <li>La version absolue de l'url. Si l'URL était relative, elle est resolved pour les URL utilisées pour charger la page active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>dataUrl</code> (string)
+            	  
+            	  <ul>
+            	    <li>La version filtrée de l'absUrl doit être utilisée lors de l'identification de la page et lors de la mise à jour du location du navigateur lorsque la page est rendue active.</li>
+          	    </ul>
+            	</li>
+            	<li><code>deferred</code> (object)
+            	  
+            	  <ul>
+            	    <li>Les fonctions de rappel qui appellent preventDefault() sur l'événement, *DOIVENT* appeler resolve() ou reject() sur cet objet afin que les requête changePage() reprennent le traitement. Les observateurs d'objet deferred attendent les objets deferred pour être resolved  comme ceci :</p>
+                    <pre><code>
+$( document ).bind( "pageloadfailed", function( event, data ){
+
+	// Permet d'informer le framework que nous allons gérer les choses.
+
+	event.preventDefault();
+
+	// ... charge le document puis l'insère dans le DOM ...
+	// A certains endroits, que ce soit dans cette fonction de rappel, ou par
+	// un autre moyen asynchrone, appelez resolve, en passant
+	// les arguments suivants, ainsi qu'un objet de collection jQuery
+	// contenant l'élément du DOM de la page.
+
+	data.deferred.resolve( data.absUrl, data.options, page );
+
+});</code></pre>
+                    <p>ou rejected comme ceci :
+                    <pre><code>
+$( document ).bind( "pageloadfailed", function( event, data ){
+
+	// Permet d'informer le framework que nous allons gérer les choses.
+
+	event.preventDefault();
+
+	// ... tente de charger une autre page ...
+	// A certains endroits, si le chargement échoue, que ce soit dans cette
+	// fonction de rappel, ou par un autre moyen asynchrone, appelez
+	// reject comme ceci :
+
+	data.deferred.reject( data.absUrl, data.options );
+
+});</code></pre>
+                    </li>
+          	    </ul>
+            	</li>
+            	<li><code>options</code> (object)
+            	  
+            	  <ul>
+            	    <li>Cet objet contient des options qui ont été passés dans $.mobile.loadPage().</li>
+          	    </ul>
+            	</li>
+            	<li><code>xhr</code> (object)
+            	  
+            	  <ul>
+            	    <li>L'objet XMLHttpRequest de jQuery utilisé lorsque l'on tente de charger la page. C'est ce qui est transmis comme premier argument à la fonction de rappel d'erreur du $.ajax() du framework.</li>
+          	    </ul>
+            	</li>
+            	<li><code>textStatus</code> (null ou string)
+            	  <ul>
+            	    <li>Selon <a href="http://api.jquery.com/jQuery.ajax/">la documentation</a> de jQuery, les valeurs possibles pour cette propriété, en dehors de null, sont "timeout", "error", "abort" et "parsererror". C'est ce qui est transmis comme deuxième argument à la fonction de rappel d'erreur de $.ajax() du framework.</li>
+          	    </ul>
+            	</li>
+            	<li><code>errorThrown</code> (null, string, object)
+            	  
+            	  <ul>
+            	    <li>Selon <a href="http://api.jquery.com/jQuery.ajax/">la documentation</a> de jQuery, cette propriété peut être un objet d'exception si l'on produit, ou si une erreur HTTP s'est produite, cela définira une partie textuelle de l'état ​​HTTP. C'est ce qui est transmis comme troisième argument à la fonction de rappel d'erreur du $.ajax() du framework.</li>
+          	    </ul>
+            	</li>
+           	  </ul>
+			</dd>
+		</dl>
+		<h2>Événements de changement de page</h2>
+		<p>Naviguer entre les pages de l'application est habituellement accompli par l'appel de <code>$.mobile.changePage().</code>. Cette fonction à la responsabilité de s'assurer que la page où nous naviguons est chargée et insérée dans les DOM, puis envoi des animations de transition entre la page active en cours, et la page que l'appelant veut rendre active. Pendant ce processus, qui est généralement asynchrones, changePage() va déclencher deux événements. Le premier est <code>pagebeforechange</code>. Le deuxième événement dépend de la réussite ou de l'échec de la requête de changement. Ce sera soit <code>pagechange</code> ou <code>pagechangefailed</code>.</p>
+		<dl>
+			<dt><code>pagebeforechange</code></dt>
+			<dd>Cet événement est déclenché avant toute opération de chargement ou de transition d'une page. Les fonctions de rappel peuvent empêcher l'exécution de la fonction changePage() en appelant preventDefault sur l'objet de l'événement passé dans la fonction de rappel. La fonction de rappel reçoit également un objet data comme deuxième argument. L'objet data a les propriétés suivantes :
+            <ul>
+				<li><code>toPage</code> (object ou string)
+					<ul>
+						<li>Cette propriété représente la page de l'appelant qu'on désire activer. Il peut être soit un objet collection jQuery contenant l'élément DOM de la page ou une url absolue/relative à une page interne ou externe. La valeur correspond exactement au premier argument de l'appel de changePage() qui a déclenché l'événement.</li>
+					</ul>
+				</li>
+				<li><code>options</code> (object)
+					
+					<ul>
+						<li>Cet objet contient les options de configuration à utiliser pour l'appel de changePage() actuel.</li>
+					</ul>
+				</li>
+			</ul>
+              <p>Il est à noter que les fonctions de rappel peuvent modifier les propriétés à la fois de toPage et options pour modifier le comportement de l'appel changePage() actuel. Ainsi, par exemple, le toPage peut être mappé vers une URL différente de celle à l'intérieur d'une fonction de rappel pour faire une sorte de redirection.</p>
+            </dd>
+			<dt><code>pagechange</code></dt>
+			<dd>Cet événement est déclenché après que la requête changePage() ait fini de charger la page dans les DOM et que toutes les animations de transition de page soient terminées. Notez que tous les événements pageshow ou pagehide seront déclenchés *AVANT* que cet événement soit déclenché. Les fonctions de rappel pour cet événement particulier seront passées à un objet data comme deuxième argument. Les propriétés de cet objet sont comme suit :
+            <ul>
+				<li><code>toPage</code> (object ou string)
+					<ul>
+						<li>Cette propriété représente la page de l'appelant qu'on désire activer. Il peut être soit un objet collection jQuery contenant l'élément DOM de la page ou une url absolue/relative à une page interne ou externe. La valeur correspond exactement au premier argument de l'appel de changePage() qui a déclenché l'événement.</li>
+					</ul>
+				</li>
+				<li><code>options</code> (object)
+					
+					<ul>
+						<li>Cet objet contient les options de configuration à utiliser pour l'appel de changePage() actuel.</li>
+					</ul>
+				</li>
+			</ul>
+            </dd>
+			<dt><code>pagechangefailed</code></dt>
+			<dd>Cet événement est déclenché lorsque la requête changePage() échoue pour charger la page. Les fonctions de rappel pour cet événement particulier seront passées à un objet data comme deuxième argument. Les propriétés de cet objet sont comme suit :
+            <ul>
+				<li><code>toPage</code> (object ou string)
+					<ul>
+						<li>Cette propriété représente la page de l'appelant qu'on désire activer. Il peut être soit un objet collection jQuery contenant l'élément DOM de la page ou une url absolue/relative à une page interne ou externe. La valeur correspond exactement au premier argument de l'appel de changePage() qui a déclenché l'événement.</li>
+					</ul>
+				</li>
+				<li><code>options</code> (object)
+					
+					<ul>
+						<li>Cet objet contient les options de configuration à utiliser pour l'appel de changePage() actuel.</li>
+					</ul>
+				</li>
+			</ul>
+            </dd>
+            </dl>
+		<h2>Événements de transition de page</h2>
+		<p>Les transitions de page sont utilisés pour animer le changement de la page active actuelle (fromPage) vers une nouvelle page (toPage). Les événements sont déclenchés avant et après ces transitions afin que les observateurs puissent être notifiés lorsque des pages sont affichées ou masquées. Les événements déclenchés sont comme suit :</p>
+		<dl>
+			<dt><code>pagebeforeshow</code></dt>
+			<dd>Déclenché sur le "toPage" nous sommes à la transition, avant que l'animation de la transition actuelle soit lancée. Les fonctions de rappel pour cet événement recevront un objet data comme deuxième argument. Cet objet data a les propriétés suivantes sur lui :
+			<ul>
+				<li><code>prevPage</code> (object)
+					
+					<ul>
+						<li>Un objet de collection jQuery qui contient l'élément DOM de la page dont nous sommes loin de la transition. Notez que cette collection est vide lorsque la première page est en cours de transition au démarrage de l'application.</li>
+					</ul>
+				</li>
+			</ul>
+            </dd>
+
+			<dt><code>pagebeforehide</code></dt>
+			<dd>Déclenché sur le "fromPage", nous sommes loin de la transition, avant que l'animation de transition actuelle soit lancée. Les fonctions de rappel pour cet événement recevront un objet data comme deuxième argument. Cet objet data a les propriétés suivantes sur lui :
+			<ul>
+				<li><code>nextPage</code> (object)
+					
+					<ul>
+						<li>Un objet de collection jQuery qui contient l'élément DOM de la page où nous sommes vers la transition.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Notez que cet événement ne sera pas envoyée lors de la transition de la première page au démarrage de l'application car il n'existe aucune page précédemment active.</p>
+          </dd>
+
+			<dt><code>pageshow</code></dt>
+			<dd>Déclenché sur le "toPage" après que l'animation de transition soit terminée. Les fonctions de rappel pour cet événement recevront un objet data comme deuxième argument. Cet objet data a les propriétés suivantes sur lui :
+			<ul>
+				<li><code>prevPage</code> (object)
+					
+					<ul>
+						<li>Un objet de collection jQuery qui contient l'élément DOM de la page où nous sommes de loin de la transition. Notez que cette collection est vide lorsque la première page est en cours de transition au démarrage de l'application.</li>
+					</ul>
+				</li>
+			</ul>
+          </dd>
+
+			<dt><code>pagehide</code></dt>
+			<dd>Déclenché sur le "fromPage", après que l'animation de transition soit terminée. Les fonctions de rappel pour cet événement recevront un objet data comme deuxième argument. Cet objet data a les propriétés suivantes sur lui :
+			<ul>
+				<li><code>nextPage</code> (object)
+					
+					<ul>
+						<li>Un objet de collection jQuery qui contient l'élément DOM de la page où nous venons de la transition vers.</li>
+					</ul>
+				</li>
+			</ul>
+			<p>Notez que cet événement ne sera pas envoyée lors de la transition de la première page au démarrage de l'application car il n'existe aucune page précédemment active.</p>
+          </dd>
+
+		</dl>
+
+		<p>Vous pouvez accéder aux propriétés prevPage ou nextPage via le second argument d'une fonction de rappel liée. Par exemple : </p>
+<pre><code>
+$( 'div' ).live( 'pageshow',function(event, ui){
+  alert( 'Cette page était à l'instant masquée : '+ ui.prevPage);
+});
+
+$( 'div' ).live( 'pagehide',function(event, ui){
+  alert( 'Cette page était à l'instant affichée : '+ ui.nextPage);
+});
+</code></pre>
+		<p>Aussi, pour ces gestionnaires soient exécutés pendant le chargement de la page initiale, vous devez les lier avant que jQuery mobile s'exécute. Cela peut être fait dans le gestionnaire <code>mobileinit</code>, tel qu'il est décrit dans la page de <a href="globalconfig.html">configuration globale</a>.
+		<h2>Evénements d'initialisation de page</h2>
+
+		<p>En interne, jQuery Mobile auto-initialise les plugins basés sur les conventions de marquage trouvées dans la "page" donnée. Par exemple, un élément <code>input</code> avec le <code>type</code> à <code>range</code> sera automatiquement transformer en  un curseur de contrôle.</p>
+
+		<p>Cette auto-initialisation est contrôlé par le plugin de la "page", qui envoie les événements avant et après son exécution, vous permettant de manipuler la page avant ou après l'initialisation, ou même de fournir votre propre comportement d'initialisation et d'éviter que les auto-initialisations se produisent. Notez que ces événements se déclencheront seulement une fois par "page", à l'inverse des événements afficher/masquer, qui se déclénchent à chaque fois qu'une page est affichée et cachée.</p>
+
+		<dl>
+			<dt><code>pagebeforecreate</code></dt>
+			<dd>
+				<p>Se déclenche sur la page en cours d'initialisation, avant que la plupart des plugins d'auto-initialisation se produisent.</p>
+<pre><code>
+$( '#aboutPage' ).live( 'pagebeforecreate',function(event){
+  alert( 'Cette page était à l'instant insérée dans le dom !' );
+});
+</code></pre>
+				<p>Notez qu'en liant <code>pagebeforecreate</code>, vous pouvez manipuler le marquage avant que les widgets par défaut de jQuery Mobile soient auto-initialisés. Par exemple, disons que vous voulez ajouter des attributs de données via JavaScript dans la source HTML, c'est l'événement que vous devriez utiliser.</p>
+
+<pre><code>
+$( '#aboutPage' ).live( 'pagebeforecreate',function(event){
+  // Manipuler cette page avant que ses widgets soient auto-initialisés
+});
+</code></pre>
+			</dd>
+
+			<dt><code>pagecreate</code></dt>
+			<dd>
+				<p>Déclenché lorsque la page a été créée dans le DOM (via AJAX ou autre), mais avant que tous les widgets aient eu l'occasion d'améliorer le balisage de contenu. Cet événement est le plus utile pour l'utilisateur voulant créer ces propres widgets personnalisés pour l'amélioration du balisage comme le font les widgets de jQuery Mobile.</p>
+<pre><code>
+$( '#aboutPage' ).live( 'pagecreate',function(event){
+  ( ":jqmData(role='sweet-plugin')" ).sweetPlugin();
+});
+</code></pre>
+			</dd>
+
+			<dt><code>pageinit</code></dt>
+			<dd>
+				<p>Déclenché sur la page en cours d'initialisation, cet événement se produit après l'initialisation. Nous vous recommandons de lier cet événement au lieu du ready() du DOM, car cela va fonctionner indépendamment du fait que la page soit chargée directement ou si le contenu est tiré dans une autre page dans le cadre du système de navigation Ajax.</p>
+<pre><code>
+$( '#aboutPage' ).live( 'pageinit',function(event){
+  alert( 'Cette page a été simplement renforcée par jQuery Mobile !' );
+});
+</code></pre>
+			</dd>
+		</dl>
+
+
+
+		<h2>Événements de page supprimée</h2>
+		<p>Par défaut, le framework supprime dynamiquement toutes les pages externes chargées non actives à partir du DOM dès que l'utilisateur quitte une autre page. L'événement <code>pageremove</code> est envoyé juste avant que le framework tente de supprimer la page du DOM.</p>
+		<dl>
+			<dt><code>pageremove</code></dt>
+			<dd>Cet événement est déclenché juste avant que le framework tente de supprimer une page externe à partir du DOM. Les fonctions de rappel d'événement peuvent appeler preventDefault sur l'objet événement pour prévenir que la page va être enlevée.
+			</dd>
+		</dl>
+
+		<h2>Événements de mise en page</h2>
+		<p>Certains composants dans le framework, comme les pliables et la recherche dans une liste, masquent et affichent dynamiquement du contenu basé sur des événements utilisateur. Cette affichage/masquage de contenu affecte la taille de la page et peut entraîner dans le navigateur un ajustement/défilement de la fenêtre pour accueillir le nouveau format de page. Depuis ceci a le potentiel d'affecter d'autres composants tels que les entêtes et pieds de page qui sont fixés, les composants comme les pliables et les vues de liste déclenchent un événement personnalisé <code>updatelayout</code> pour avertir les autres composants qu'ils peuvent avoir besoin d'ajuster leurs mises en page en réponse à leur changement de contenu. Les développeurs qui créent des applications dynamiques qui injectent, masquent ou suppriment du contenu dans la page ou la manipulent d'une manière qui influe sur les dimensions de la page, peuvent également déclencher manuellement cet événement <code>updatelayout</code> pour assurer la mise à jour des composants sur la page en réponse à du nouveau contenu qui vient d'être ajouté.</p>
+		<dl>
+			<dt><code>updatelayout</code></dt>
+			<dd>Cet événement est déclenché par des composants dans le framework qui dynamiquement affiche/masque le contenu, et est conçu comme un mécanisme générique pour notifier aux autres composants qu'ils peuvent avoir besoin de mettre à jour leur taille ou leur position. Dans le framework, cet événement est déclenché sur l'élément composant dont le contenu a été affiché/masqué, et ce déclenchement déborde sur tout le chemin jusqu'à l'élément document.
+<pre><code>
+$( '#foo' ).hide().trigger( 'updatelayout' );
+</code></pre>
+            </dd>
+        </dl>
+		
+		<h2>Evénements d'animation</h2>
+		<p>jQuery Mobile propose le plugin <code>animationComplete</code>, que vous pouvez utiliser après l'ajout ou la suppression d'une classe qui applique une transition CSS.</p>
+
+    </div><!--/content-secondary -->
+
+	<div class="content-secondary">
+
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+				<h3>Aussi dans cette rubrique</h3>
+
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+					<li data-role="list-divider">API</li>
+					<li><a href="../../docs/api/globalconfig.html">Configuration par défaut</a></li>
+					<li data-theme="a"><a href="../../docs/api/events.html">Événements</a></li>
+					<li><a href="../../docs/api/methods.html">Méthodes &amp; Utilitaires</a></li>
+					<li><a href="../../docs/api/data-attributes.html">Référence de l'attribut de données</a></li>
+					<li><a href="../../docs/api/themes.html">Framework de Théme</a></li>
+
+				</ul>
+		</div>
+	</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

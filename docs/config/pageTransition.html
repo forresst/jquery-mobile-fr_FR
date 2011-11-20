@@ -1,0 +1,41 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Configuration</title> 
+	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../jquery.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script><!-- Moving the docs JS up here because it was overriding with my override -->
+	
+	<script>
+	$(document).bind("mobileinit", function(){
+	  $.mobile.defaultPageTransition = 'fade';
+	});
+	</script>
+	
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../jquery.mobile.min.js"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-index">
+
+		<div data-role="header" data-theme="f">
+		<h1>Configuration appliquée</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		
+		<h2>defaultPageTransition est désormais "fade"</h2>
+		<p>Pour tester, cliquez sur le bouton ci-dessous et de parcourez les docs. Notez que si un lien provoque un rafraîchissement, ce paramètre sera perdue et les paramètres par défaut seront vus.</p>
+		<a href="../../index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Navigation dans les docs</a>
+
+		</div><!-- /ui-body wrapper -->	
+</div><!-- /page -->
+
+</body>
+</html>

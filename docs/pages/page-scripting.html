@@ -1,0 +1,147 @@
+<!DOCTYPE html> 
+<html> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Script de pages</title> 
+	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../jquery.mobile.min.js"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Écriture des scripts des pages</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">		
+			<p>Étant donné que jQuery Mobile utilise un système de navigation Ajax, il y a quelques petites choses utiles à connaître lors de l'écriture de scripts permettant de manipuler votre contenu. Vous pouvez explorer plus en détail l'API mobile en lisant les <a href="../api/globalconfig.html">options de configuration globales</a>, les <a href="../api/events.html">événements</a> et les  <a href="../api/methods.html">méthodes</a> ou plonger dans les détails techniques du <a href="page-navmodel.html">modèle de navigation d'ajax</a>.</p> 
+			
+			<h2>Les scripts &amp; les styles dans le head</h2> 
+			
+			<p>Lorsque l'utilisateur clique sur un lien dans un site axé sur jQuery Mobile, le comportement par défaut du système de navigation est d'utiliser un <code>href</code> d'un lien pour formuler une requête Ajax (au lieu de permettre le comportement du lien par défaut du navigateur en requêtant le <code>href</code> avec un chargement complet de la page). Quand cette requête Ajax sort, le framework recevra son contenu de texte en entier, mais il injectera seulement le <em>contenu de la réponse de l'élément <code>body</code> (ou plus précisément l'élément <code>data-role="page"</code>, s'il est fourni)</em>, ce qui signifie rien dans le <code>head</code> de la page sera utilisé (à l'exception du titre de lapage, qui est récupérée en particulier) .</p>
+			
+			<p> Cela signifie que tous les scripts et les styles référencés du <code>head</code> d'une page n'auront aucun effet <em>quand une page est chargée via Ajax</em>, mais ils <strong>seront exécutés si la page est demandée normalement via HTTP</strong>. En écrivant les sites Jquery Mobile, les deux scénarios doivent être envisagés. La raison pour laquelle le <code>head</code> d'une page est ignoré, lorsque qu'elle est requêtée via Ajax, est que le potentiel de re-exécuter le même JavaScript est très élevé (il est courant de faire référence aux mêmes scripts dans chaque page d'un site) . En raison de la complexité pour tenter de contourner ce problème, nous laissons la tâche d'exécution des scripts de la page spécifique pour le développeur et assumons que les scripts du <code>head</code> sont uniquement prévus pour être exécutés une fois par session de navigation.</p>
+			
+			<p>L'approche la plus simple lors de la construction d'un site JQuery Mobile est de faire référence au même ensemble de feuilles de style et aux scripts dans le head de chaque page. Si vous avez besoin de charger des scripts ou des styles spécifiques pour une page particulière, nous recommandons la liaison logique à l'événement <code>pagecreate</code> (les détails ci-dessous) pour exécuter du code nécessaire quand une page spécifique est créée (qui peut être déterminée par ses <code>id</code> attribués ou par d'autres manières). Suite à cette approche, cela garantira que le code s'exécute si la page est chargée directement ou est tirée et affichée via Ajax.</p>
+			
+			<p>Une autre approche pour la page spécifique serait d'inclure des scripts à la fin de l'élément <code>body</code>. Si vous incluez vos scripts personnalisés de cette façon, soyez conscient que ces scripts s'exécuteront lorsque cette page sera chargée via Ajax ou une requête réguliere HTTP, donc si ces scripts sont les mêmes sur chaque page, vous aurez probablement des problèmes. Si vous incluez les scripts de cette façon, nous vous recommandons d'englober le contenu de votre page dans un élément <code>data-role="page"</code> et de placer des scripts qui sont référencés sur chaque page en dehors de cet élément. Les scripts qui sont uniques à cette page peuvent être placés dans cet élément, afin de s'assurer qu'ils s'exécutent lorsque la page est récupérée via Ajax.</p>
+			
+			<h2>pagecreate = DOM ready</h2> 
+
+			<p>Une des premières choses que les gens apprennent en jQuery est d'utiliser la fonction <code>$(document).ready()</code> pour exécuter du code spécifique du DOM dès que le DOM est prêt (qui survient souvent bien avant l'événement <code>onload</code>). Cependant, dans un site jQuery Mobilde et dans les applications, les pages sont requêtées et injectées dans le même DOM où l'utilisateur navigue, donc l'événement ready du DOM n'est pas aussi utile, car il ne s'exécute que pour la première page. Pour exécuter du code à chaque fois qu'une nouvelle page est chargée et créée dans jQuery Mobile, vous pouvez lier l'événement <a href="../api/events.html"><code>pagecreate</code></a>. </p>
+			
+			<p>L'événement  <code>pagecreate</code> est déclenché sur une page où il est initialisé, juste après que l'initialisation se produise. La plupart des widgets officiels de jQuery Mobile s'auto-initialisent en se basant sur cet événement, et vous pouvez définir votre code pour faire la même chose.</p>
+<pre><code>
+$( document ).delegate("#aboutPage", "pagecreate", function() {
+  alert('Une page avec un ID "aboutPage" vient juste d'être créée par jQuery Mobile !');
+});
+</code></pre>
+
+	<p>Si vous souhaitez manipuler le contenu d'une page <em>avant</em> que l'événement pagecreate se déclenche et que les widgets soient auto-initialisés, vous pouvez lier à la place l'évènement <code>pagebeforecreate</code> :</p>
+	
+<pre><code>
+$( document ).delegate("#aboutPage", "pagebeforecreate", function() {
+  alert('Une page avec un ID "aboutPage" est sur le point d'être créée par jQuery Mobile!');
+});
+</code></pre>
+
+			<h2>Changement des pages</h2> 
+			<p>Si vous voulez changer la page active en cours avec JavaScript, vous pouvez utiliser la méthode <a href="../api/methods.html"><code>changePage</code></a>. Il y a beaucoup de méthodes et propriétés que vous pouvez définir lors du changement de pages, mais voici deux exemples simples :</p>
+			<pre><code>
+<strong>//transition vers la page "about us" avec une transition slideup</strong> 			
+$.mobile.changePage( "about/us.html", { transition: "slideup"} );	
+
+<strong>//transition vers la page "search results", en utilisant data depuis le formulaire avec un ID à "search"" 	</strong>	
+$.mobile.changePage( "searchresults.php", {
+	type: "post", 
+	data: $("form#search").serialize()
+});		
+</code></pre>
+
+			<h2>Chargement des pages</h2> 
+			<p>Pour charger une page externe, améliorer son contenu et l'insérer dans le DOM, utilisez la <a href="../api/methods.html">méthode <code>loadPage</code></a>. Il y a beaucoup de méthodes et propriétés que vous pouvez définir lors du chargement de pages, mais voici un exemple simple :</p>
+			<pre><code>
+//charge la page "about us" page dans le DOM			
+$.mobile.loadPage( "about/us.html" );	
+</code></pre>
+
+			<h2>Amélioration de nouvelle balise</h2> 
+			<p>Le plugin page envoie un événement <code>pagecreate</code>, où la plupart des widgets l'utilisent pour s'auto-initialiser. Tant que le script du plugin du widget est référencé, il va automatiquement améliorer toutes les instances des widgets qu'il trouve sur la page.</p>		
+			<p>Toutefois, si vous générez de nouvelles balises côté client ou chargez de contenu via Ajax et l'injectez dans une page, vous pouvez déclencher l'événement <code>create</code> pour gérer l'auto-initialisation de tous les plugins contenus dans le nouveau balisage. Cela peut être déclenché sur tout élément (même le <code>div</code> de la page lui-même),  en vous épargnant la tâche d'initialisation manuelle de chaque plugin (voir ci-dessous).</p> 
+			<p>Par exemple, si un bloc de balises HTML (par exemple un formulaire de connexion) a été chargé à travers Ajax, déclenchez l'événement <code>create</code> pour transformer automatiquement tous les widgets qu'il contient (<a href="http://jquerymobile.com/test/docs/forms/textinputs/index.html">inputs</a> et <a href="http://jquerymobile.com/test/docs/buttons/index.html">buttons</a> dans ce cas) dans les versions améliorées. Le code de ce scénario serait :</p> 
+<pre style="margin: 25px 0;"><code style="font-size: 12px;">$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );
+</code></pre> 
+
+			<h2>Create et refresh : Une distinction importante</h2> 
+			<p>Notez qu'il y a une différence importante entre l'événement  <code>create</code> et la méthode <code>refresh</code> que certains widgets ont. L'événement <code>create</code> est adapté pour améliorer les <em>balises brutes</em> qui contiennent un ou plusieurs widgets. La méthode <code>refresh</code> doit être utilisée sur les widgets existants (déjà améliorée) qui ont été manipulés par programme et qui ont besoin que l'UI soit mise à jour.</p> 
+
+			<p>Par exemple, si vous avez une page où vous avez ajouté dynamiquement une nouvelle liste non ordonnée avec l'attribut <code>data-role=listview</code> après la création de la page, en déclenchant <code>create</code> sur un élément parent, cette liste devrait se transformer en un widget de style  <a href="http://jquerymobile.com/test/docs/lists/index.html">listview</a>. Si des éléments de liste ont ensuite été ajouté par programme, en appelant la méthode <code>refresh</code> de listview, cela devrait mettre à jour uniquement les nouveaux éléments de la liste dans un état amélioré et laisser les éléments de la liste existante intacte.</p>
+
+
+			<h2>Défilement à une position au sein d'une page</h2> 
+			<p>Puisque nous utilisons le hash de l'URL pour préserver le comportement du bouton Retour, l'utilisation des ancres de page pour sauter vers une position sur la page n'est pas supportée en utilisant le lien d'ancrage traditionnel (#foo). Utiliser la méthode <a href="../api/methods.html"><code>silentScroll</code></a> pour défiler vers une position Y particulière sans que cela déclenche l'écouteur de l'événement scroll. Vous pouvez passer dans un argument <code>yPos</code> pour défiler vers cet emplacement Y. Par exemple :</p>
+<pre><code>
+//scroll de 300px 			
+$.mobile.silentScroll(300);	
+</code></pre>	
+		
+			<h2>Liaison aux événements de souris et tactile</h2> 
+			<p>Une considération importante dans un mobile est la gestion des la gestion de la souris et du tactile. Ces événements diffèrent sensiblement selon les plateformes mobiles, mais le dénominateur commun est que les événements de clic fonctionneront partout, mais généralement après un retard important de 500-700 ms. Ce délai est nécessaire pour le navigateur pour attendre qu'éventuellement se produisent des événements de double appui, de défilement ou d'un appui long. Pour éviter ce délai, il est possible de lier des événements tacticle (ex. touchstart) mais le problème avec cette approche c'est que certaines plateformes (WP7, Blackberry) ne supportent pas le tactile. Pour aggraver ce problème, certaines plateformes vont émettre <em>à la fois</em> un événement tactiles et un événement de souris si vous liez à la fois les deux types, les événements en double seront déclenchés pour une seule interaction.</p>
+			<p>Notre solution est de créer un ensemble d'<a href="../api/events.html">événements virtuels</a> qui régularise les événements de souris et du tactile. Cela permet au développeur d'enregistrer des gestionnaires pour les événements de base de la souris, tels que mousedown, mousemove, mouseup et click. Le plugin va prendre soin d'inscrire ces gestionnaires en arrière plan afin de l'appeler le plus rapidement possible pour ce périphérique. Cela permet de conserver l'ordre de manifestation des événements dans l'environnement de la souris traditionnelle, cela aura pour conséquence l'enregistrement de plusieurs gestionnaires sur le même élément pour différents événements. Le système de souris virtuel expose les événements virtuels suivants aux méthodes liées à jQuery : <code>vmouseover</code>, <code>vmousedown</code>, <code>vmousemove</code>, <code>vmouseup</code>, <code>vclick</code> et <code>vmousecancel</code></p>
+			
+
+			<h2>Passage de paramètres entre les pages</h2>
+			<p>jQuery Mobile ne supporte pas le parametre query  passant vers des pages internes/embarquées. Par exemple, si le framework voit un lien vers "#somePage?someId=1", il interpréter cela comme "#somePage" et accéde au div de la page interne avec l'ID<code>somePage</code> et applique un data-url <code>#somePage?someId=1</code> à ce conteneur page. Les appels ultérieurs à d'autres paramètres tels que "#somePage?someId=2" trouveront les mêmes div parce que jQuery Mobile se réfère à des data-url sur le div qui est seulement défini une fois et restera à <code>#somePage?someId=1</code>.</p>
+
+			<p>Il ya deux plugins que vous pouvez ajouter à votre projet si des paramètres de query sont nécessaires entre les pages. Il en existe un léger <a href="https://github.com/jblas/jquery-mobile-plugins/tree/master/page-params" rel="external">page params plugin</a> et un plus complet <a href="https://github.com/azicchetti/jquerymobile-router" rel="external">jQuery Mobile router plugin</a> pour utiliser backbone.js ou spine.js.</p>
+
+
+
+				</div><!--/content-primary -->		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>Aussi dans cette rubrique</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
+								<li><a href="page-anatomy.html">Anatomie d'une page</a></li>
+								<li><a href="page-template.html" data-ajax="false">Modèle de page unique</a></li>
+								<li><a href="multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
+								<li><a href="page-titles.html">Titres de page</a></li>
+								<li><a href="page-links.html">Liaison de pages</a></li>
+								<li><a href="page-transitions.html" data-ajax="false">Transitions de page</a></li>
+								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
+								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>
+								<li data-theme="a"><a href="page-scripting.html">Écriture des scripts des pages</a></li>
+								<li><a href="phonegap.html">Application PhoneGap</a></li>
+								<li><a href="touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
+								<li><a href="pages-themes.html">Thématisation des pages</a></li>
+							</ul>
+					</div>
+				</div>		
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>© 2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

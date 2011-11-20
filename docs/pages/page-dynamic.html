@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Injection dynamique des pages</title>
+	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+	<script src="../../jquery.js"></script>
+	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../_assets/js/jqm-docs.js"></script>
+	<script src="../../jquery.mobile.min.js"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Injection dynamique des pages</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+			<h2>jQuery Mobile et la génération dynamique de page</h2>
+			<p>jQuery Mobile permet aux pages d'être tiré dans le DOM dynamiquement via son clic par défaut en détournant le comportement ou par des appels manuel vers $.mobile.changePage(). C'est idéal pour les applications qui génèrent des pages/fragments  HTML du côté du serveur, mais il y a parfois des cas où une application a besoin de générer dynamiquement le contenu des pages du côté du client depuis du JSON ou d'autre format. Cela peut être nécessaire pour des raisons de bande passante/performance, ou parce que c'est le format de données choisi pour le serveur avec lequel il est en interaction.</p>
+			<p>Pour les applications qui ont besoin de générer le balisage de la page du côté du client, il est important de savoir les notifications qui sont déclenchées lors de l'appel $.mobile.changePage() parce qu'elles peuvent être utilisées comme des crochets dans le système de navigation qui vous permettra de générer votre contenu au moment approprié.</p>
+			<p>Un appel à changePage() déclenchera généralement les notifications d'événements suivants :</p>
+			<ul>
+			  <li>pagebeforechange
+			    
+			    <ul>
+			      <li>Lancé avant toute opération de chargement de page ou de transition.</li>
+			      <li>REMARQUE : Cet événement était autrefois connu comme "beforechangepage".</li>
+		        </ul>
+			  </li>
+			  <li>pagechange
+			    
+			    <ul>
+			      <li>Lancé après que tous les chargements des pages et des transitions.</li>
+			      <li>REMARQUE: cet événement était autrefois connu comme "changepage".</li>
+		        </ul>
+			  </li>
+			  <li>pagechangefailed
+			    
+			    <ul>
+			      <li>Lancé si une erreur s'est produite tout en essayant de charger dynamiquement une nouvelle page.		          </li>
+		        </ul>
+			  </li>
+		  </ul>
+			<p>Ces notifications sont déclenchées sur l'élément conteneur parent ($.mobile.pageContainer) des pages, et déborde sur tout le chemin jusqu'à l'élément document et window.</p>
+<p>Pour les applications souhaitant injecter des pages, ou radicalement modifier le contenu d'une page existante, basée sur des données non-HTML, tels que JSON ou un objet JS en mémoire, l'événement pagebeforechange est très utile car il vous donne un crochet pour l'analyse des URL ou élément de la page de l'application est demandé de charger ou de basculer, et court-circuiter les changePage () par défaut le comportement en appelant simplement preventDefault () sur l'événement pagebeforechange. (TRADUCTION A REVOIR)</p>
+<p>Pour illustrer cette technique, jetez un œil à cet <a href="dynamic-samples/sample-reuse-page.html" rel="external">échantillon de travail</a>. Dans cet échantillon, la page principale commence avec une liste de catégories où l'utilisateur a la possibilité de naviguer. Les éléments actuels dans chaque catégorie sont stockées dans un objet JavaScript en mémoire, à des fins d'illustration, mais les données peuvent vraiment venir de n'importe où.</p>
+<pre><code>
+var categoryData = {
+	animals: {
+		name: "Animaux",
+		description: "Tous vos favoris de alligator à zèbre.",
+		items: [
+			{
+				name: "Animaux de compagnie",
+			},
+			{
+				name: "Animaux de la ferme",
+			},
+			{
+				name: "Animaux sauvages",
+			}
+		]
+	},
+	colors: {
+		name: "Couleurs",
+		description: "Les couleurs fraîches de l'arc-en-ciel.",
+		items: [
+			{
+				name: "Bleu",
+			},
+			{
+				name: "Vert",
+			},
+			{
+				name: "Orange",
+			},
+			{
+				name: "Pourpre",
+			},
+			{
+				name: "Rouge",
+			},
+			{
+				name: "Jaunes",
+			},
+			{
+				name: "Violet",
+			}
+		]
+	},
+	vehicles: {
+		name: "Véhicules",
+		description: "Tout : des voitures aux avions.",
+		items: [
+			{
+				name: "Voitures",
+			},
+			{
+				name: "Avions",
+			},
+			{
+				name: "Construction",
+			}
+		]
+	}
+};
+</code></pre>
+<p>L'application utilise des liens avec des URL qui contiennent un hash qui indique à l'application quels éléments de la catégorie sont à afficher :</p>
+<pre>
+<code>
+  	&lt;h2&gt;Sélectionnez une catégorie ci-dessous :&lt;/h2&gt;
+  	&lt;ul data-role="listview" data-inset="true"&gt;
+    	&lt;li&gt;&lt;a href="#category-items?category=animals"&gt;Animaux&lt;/a&gt;&lt;/li&gt;
+    	&lt;li&gt;&lt;a href="#category-items?category=colors"&gt;Couleurs&lt;/a&gt;&lt;/li&gt;
+    	&lt;li&gt;&lt;a href="#category-items?category=vehicles"&gt;Véhicules&lt;/a&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+</code>
+</pre>
+<p>En interne, lorsque l'utilisateur clique sur un de ces liens, l'application intercepte l'appel $.mobile.changePage() qui est invoqué par le lien par défaut du framework en détournant le comportement. Il analyse ensuite l'URL de la page en passe d'être chargée, puis décide si elle doit ou non gérer le chargement sur elle-même ou laisser  le code de changePage() gérer les choses normalement.</p>
+<p>L'application a été en mesure d'insérer elle-même des flux de changePage() en liant à l'événement "pagebeforechange" au niveau du document :</p>
+<pre>
+<code>
+/ / Ecoute toute tentative de faire appel à changePage ().
+$(document).bind( "pagebeforechange", function( e, data ) {
+
+	// Nous voulons seulement gérer les appels changePage() où l'appelant nous
+	// demande de charger une page par URL.
+	if ( typeof data.toPage === "string" ) {
+
+		// On nous demande de charger une page par l'URL, mais
+		// nous voulons seulement gérer les URL qui demande les
+		//  données spécifiques pour une catégorie.
+		var u = $.mobile.path.parseUrl( data.toPage ),
+			re = /^#category-item/;
+
+		if ( u.hash.search(re) !== -1 ) {
+
+			// On nous demande d'afficher les éléments d'une catégorie spécifique.
+			// Appel de notre méthode interne qui construit le contenu de la catégorie
+			// à la volée basé sur notre structure de donnée en mémoire des catégories.
+			showCategory( u, data.options );
+
+			// Assurez-vous d'appeler changePage(),  nous avons traité cet appel afin
+			// de ne rien à faire.
+			e.preventDefault();
+		}
+	}
+});
+</code>
+</pre>
+<p>Alors pourquoi écouter au niveau du document ? En bref, en raison de liens profonds. Nous avons besoin que notre liaison soit active avant que le framework jQuery Mobile initialise et décide de la manière de traiter l'URL initiale qui a invoqué l'application.</p>
+<p>Lorsque la fonction de rappel pour contraindre la "pagebeforechange" est invoquée, le deuxième argument envoyé à la fonction de rappel sera un objet de données qui contient les arguments qui ont été passés à l'appel initiale de $.mobile.changePage() Les propriétés de cet objet sont les suivants :</p>
+<ul>
+  <li>toPage
+    
+    <ul>
+      <li>Il peut être soit un objet de collection jQuery contenant la page qui doit être mise en transition, *OU* une référence d'une URL pour une page qui doit être chargée/mise en transition.</li>
+    </ul>
+  </li>
+  <li>options
+    
+    <ul>
+      <li>Un objet contenant les options qui étaient passées par l'appelant de la fonction $.mobile.changePage().</li>
+      <li>La liste des options peut être trouvée <a href="../api/methods.html">ici</a>.</li>
+      </ul>
+  </li>
+  </ul>
+<p>Dans l'exemple de notre application, nous sommes seulement intéressés dans les appels de changePage() aux URLs qui sont initialement passées, ainsi la première chose de notre fonction de rappel est de vérifier le type pour toPage. Ensuite, à l'aide de certains utilitaires d'analyse d'URL, on vérifie si l'URL contient un hash qui nous intéresse en le gérant nous-même. Si c'est bon, on appelle ensuite une fonction d'application appelée showCategory() qui créera dynamiquement le contenu pour la catégorie indiquée par le hash de l'URL, puis on appelle preventDefault() sur l'événement.</p>
+<p>En appelant preventDefault() sur un événement pagebeforechange provoque l'appel du $.mobile.changePage() d'origine pour sortir sans effectuer aucun travail. En appelant la méthode preventDefault() sur l'événement, cela équivaut de dire à jQuery Mobile que vous avez géré la requête changePage() vous même.</p>
+<p>Si preventDefault() n'est pas appelée, changePage() continuera le traitement comme il le fait normalement. Une chose à noter sur l'objet de données qui est passé dans notre fonction de rappel, c'est que toutes les modifications que vous apportez à la propriété toPage, ou aux propriétés d'options, aura une incidence sur le traitement de changePage() si preventDefault() n'est pas appelé. Ainsi, par exemple, si je voulais rediriger ou mapper une URL spécifique vers une autre page interne/externe, ma fonction de rappel pourrait simplement définir la propriété data.toPage dans la fonction de rappel vers l'URL ou l'un élément du DOM de la page à rediriger. De même, je pourrais mettre ou non une option à partir de ma fonction de rappel, et changePage() utilisera les nouveaux paramètres.</p>
+<p>Alors maintenant que nous savons comment intercepter les appels de changePage() , nous allons regarder de plus près comment cet échantillon génère effectivement le balisage d'une page. Notre exemple utilise réellement, ou devrais-je dire, ré-utilise la même page pour afficher chacune des catégories. Chaque fois qu'un de nos liens spéciaux est cliqué, la fonction showCategory() est invoquée :</p>
+<pre><code>
+// Charge les données pour une catégorie spécifique, basée sur
+// l'URL passée. Génère un balisage pour les éléments dans la
+// catégorie, l'injecte dans une page intégrée, et ensuite fait
+// que la page soit la page active.
+function showCategory( urlObj, options )
+{
+	var categoryName = urlObj.hash.replace( /.*category=/, "" ),
+
+		// Obtient l'objet qui représente la catégorie
+		// qui nous intéresse. Notez qu'à ce stade, nous pourrions
+		// lancé à la place une requête Ajax pour récupérer les données, mais
+		// pour les besoins de cet échantillon, il est déjà en mémoire.
+		category = categoryData[ categoryName ],
+
+		// Les pages que nous utilisons pour afficher notre contenu est déjà dans
+		// le DOM. L'id de la page dans laquelle nous allons écrire notre
+		// contenu, est spécifié dans le hash avant le '?'.
+		pageSelector = urlObj.hash.replace( /\?.*$/, "" );
+
+	if ( category ) {
+		// Obtient la page où nous allons déverser notre contenu.
+		var $page = $( pageSelector ),
+
+			// Obtient l'entête pour la page.
+			$header = $page.children( ":jqmData(role=header)" ),
+
+			// Obtient l'élément de la zone de contenu de la page.
+			$content = $page.children( ":jqmData(role=content)" ),
+
+			// Le balisage que nous allons injecter dans la zone
+			// de contenu de la page.
+			markup = "&lt;p&gt;" + category.description + "&lt;/p&gt;&lt;ul data-role='listview' data-inset='true'&gt;",
+
+			// Le tableau des éléments pour cette catégorie.
+			cItems = category.items,
+
+			// Le nombre d'éléments dans la catégorie.
+			numItems = cItems.length;
+
+		// Génère un élément de liste pour chaque élément dans la catégorie
+		// et l'ajoute à notre balisage.
+		for ( var i = 0; i &lt; numItems; i++ ) {
+			markup += "&lt;li&gt;" + cItems[i].name + "&lt;/li&gt;";
+		}
+		markup += "&lt;/ul&gt;";
+
+		// Recherche l'élément h1 dans notre entête et injecte le nom de
+		// la catégorie à l'intérieur.
+		$header.find( "h1" ).html( category.name );
+
+		// Injecte le balisage des éléments de la catégorie dans l'élément de contenu.
+		$content.html( markup );
+
+		// Les pages sont paresseusement améliorées. Nous appelons page() sur l'élément de la
+		// page pour s'assurer qu'il est toujours amélioré avant que nous tentions
+		// d'améliorer le balisage de la vue de la liste que nous venons injecté.
+		// Les appels ultérieurs à page() sont ignorés afin qu'une page/widget
+		// ne puisse être améliorée qu'une fois.
+		$page.page();
+
+		// Améliore la vue de la liste que nous venons d'injecter.
+		$content.find( ":jqmData(role=listview)" ).listview();
+
+		// Nous ne voulons pas que le data-url de la page que nous venons de modifié,
+		//  soit l'URL qui apparaît dans le champ d'adresse du navigateur,
+		// ainsi nous définissons l'option dataUrl à l'URL de la catégorie
+		// que nous venons de charger.
+		options.dataUrl = urlObj.href;
+
+		// Maintenant appelons changePage () et disons lui de
+		//  passer à la page que nous venons de modifier.
+		$.mobile.changePage( $page, options );
+	}
+}
+</code></pre>
+<p>Dans notre exemple d'application, le hash de l'URL que nous traitons contient 2 parties :</p>
+<pre><code>
+#category-items?category=vehicles
+</code></pre>
+<p>La première partie, avant le '?' est en fait l'id de la page pour écrire le contenu à l'intérieur, dans la partie après le '?', c'est l'info que l'application utilise pour faire figurer les données à prendre lors de la génération du balisage de la page. La première chose que showCategory () fait, c'est de déconstruire ce hash pour extraire l'id de la page pour écrire le contenu à l'intérieur, et le nom de la catégorie qu'il doit utiliser pour obtenir le bon jeu de données de notre objet JavaScript category en mémoire. Après qu'il ait récupérer les données de la catégorie à utiliser, il génère ensuite le balisage de la catégorie, puis l'injecte dans l'entête et dans la zone de contenu de la page, effaçant toute les autres balisages qui existaient déjà dans ces éléments.</p>
+<p>Après il injecte le balisage, il appelle alors le widget de jQuery Mobile approprié pour améliorer le balisage de la liste qu'il vient d'injecter. C'est ce qui transforme le balisage de la liste normale dans une vue de liste totalement stylisée avec tous ses comportements.</p>
+<p>Une fois cela fait, il appelle alors $.mobile.changePage(), en lui passant l'élément du DOM de la page que nous venons de modifier, pour dire au framework qu'il veut montrer la page.</p>
+<p>Maintenant un problème ici intéressant est que jQuery Mobile met généralement à jour le hash de location du navigateur avec l'URL associé à la page qu'il affiche. Parce que nous réutilisons la même page pour chaque catégorie, ce n'est l'idéal, parce que l'URL de cette page n'a pas d'info de catégorie spécifique qui lui est associé. Pour contourner ce problème, showCategory() définit simplement la propriété dataUrl sur l'objet options qu'elle passe dans changePage() pour lui dire d'afficher notre URL d'origine à la place.</p>
+<p>C'est l'exemple en un mot. Il est à noter que cet exemple particulier et son usage n'est pas un très bon exemple d'application car il se dégrade énormément lorsque le JavaScript est désactivé. Cela signifie qu'il ne fonctionnera probablement pas très bien sur des navigateurs de grade C. Plus tard, nous publierons d'autres exemples qui montreront comment dégrader de façon gracieuse. Cochez cette <a href="http://jquerymobile.com/test/docs/pages/dynamic-samples/">page</a> pour les mises à jour.</p>
+      </div><!--/content-primary -->
+		
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>Aussi dans cette rubrique</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
+								<li><a href="page-anatomy.html">Anatomie d'une page</a></li>
+								<li><a href="page-template.html" data-ajax="false">Modèle de page unique</a></li>
+								<li><a href="multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
+								<li><a href="page-titles.html">Titres de page</a></li>
+								<li><a href="page-links.html">Liaison de pages</a></li>
+								<li><a href="page-transitions.html" data-ajax="false">Transitions de page</a></li>
+								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
+								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
+								<li data-theme="a"><a href="page-dynamic.html">Injection dynamique des pages</a></li>
+								<li><a href="page-scripting.html">Écriture des scripts des pages</a></li>
+								<li><a href="phonegap.html">Application PhoneGap</a></li>
+								<li><a href="touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
+								<li><a href="pages-themes.html">Thématisation des pages</a></li>
+							</ul>
+					</div>
+				</div>
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="footer-docs" data-theme="c">
+					<p>© 2011 The jQuery Project</p>
+			</div>
+
+			</div><!-- /page -->
+
+			</body>
+			</html>

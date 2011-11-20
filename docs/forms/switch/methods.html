@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Doc jQuery Mobile Docs - Méthodes du curseur</title>
+	<link rel="stylesheet"  href="../../../jquery.mobile.min.css" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+	<script src="../../../jquery.js"></script>
+	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../_assets/js/jqm-docs.js"></script>
+	<script src="../../../jquery.mobile.min.js"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Interrupteur</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+
+			<h2>Interrupteur</h2>
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade">Bases</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade" class="ui-btn-active">Méthodes</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
+			</ul>
+			
+			<p>Le plugin curseur a les méthodes suivantes :</p>
+
+		<dl>									
+			<dt><code>enable</code> active un curseur désactivé</dt>
+			<dd>
+				<pre><code>
+$('.selector').slider('enable');			
+				</code></pre>
+			</dd>
+			
+			<dt><code>disable</code> désactive un curseur</dt>
+			<dd>
+				<pre><code>
+$('.selector').slider('disable');			
+				</code></pre>
+			</dd>
+						
+			<dt><code>refresh</code> met à jour un curseur</dt>
+			<dd>
+			<p>Si vous manipulez un curseur via JavaScript, vous devez appeler la méthode refresh sur elle même pour mettre à jour le style visuel.</p> 				
+			
+			<pre><code>			
+$('.selector').slider('refresh');
+				</code></pre>
+			</dd>
+			
+		</dl>	
+    
+	</form>
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Éléments de formulaire</li>
+					<li><a href="../docs-forms.html">Formulaires basiques</a></li>
+					<li><a href="../forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="../textinputs/index.html">Textes de saisie</a></li>
+					<li><a href="../search/">Saisie d'une recherche</a></li>
+					<li><a href="../slider/">Curseur</a></li>
+					<li data-theme="a"><a href="index.html">Interrupteur</a></li>
+					<li><a href="../radiobuttons/">Radio boutons</a></li>
+					<li><a href="../checkboxes/">Cases à cocher</a></li>
+					<li><a href="../selects/">Menus de sélection</a></li>
+					<li><a href="../forms-themes.html">Thématisation des formulaires</a></li>
+					<li><a href="../forms-all-native.html">Eléments natifs de formulaire</a></li>
+					<li><a href="../forms-sample.html">Soumission de formulaire</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
+

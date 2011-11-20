@@ -1,0 +1,84 @@
+<!DOCTYPE html> 
+<html> 
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Modèle Multi-page</title> 
+	<link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" />
+	<script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+	<script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"></script>
+</head> 
+
+	
+<body><!-- Start of first page: #one --> 
+
+
+<div data-role="page" id="one">
+
+	<div data-role="header">
+		<h1>Multi-page</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" >	
+		<h2>One</h2>
+		
+		<p>J'ai un id "one" sur ma page conteneur. Je suis la première dans l'ordre de source, donc je suis affiché lorsque la page se charge.</p>	
+		
+		<p>C'est un modèle passe-partout multi-pages que vous pouvez copier pour vous construire la première page jQuery Mobile. Ce modèle contient à l'intérieur des conteneurs de plusieurs "page", contrairement à un <a href="page-template.html"> modèle de page unique</a> qui n'a qu'une d'une page à l'intérieur.</p>	
+		<p>Affichez juste la source et copiez le code pour démarrer. Toutes les CSS et le JS sont liés aux versions CDN de jQuery donc c'est super facile à configurer. N'oubliez pas d'inclure une balise meta viewport dans le head pour fixer le niveau de zoom.</p>
+		<p>Vous liez des pages internes en se référant à l'ID de la page que vous voulez montrer. Par exemple, pour le <a href="#two" >lien</a> à la page avec un ID "two", mon lien aura un <code>href="#two"</code> dans le code.</p>	
+
+		<h3>Voir les pages internes :</h3>
+		<p><a href="#two" data-role="button">Voir la page "two"</a></p>	
+		<p><a href="#popup"data-role="button" data-rel="dialog" data-transition="pop">Voir la page "popup" (comme une boîte de dialogue)</a></p>
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="d">
+		<h4>Pied de page</h4>
+	</div><!-- /footer -->
+</div><!-- /page one --><!-- Start of second page: #two -->
+
+
+
+<div data-role="page" id="two" data-theme="a">
+
+	<div data-role="header">
+		<h1>Two</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="a">	
+		<h2>Two</h2>
+		<p>J'ai un id "two" sur mon conteneur de page. Je suis le second conteneur de page dans un modèle multi-page.</p>	
+		<p>Notez que le thème est différent pour cette page car nous avons ajouté ici quelques assignations d'échantillons <code>data-theme</code> pour montrer combien cela est flexible. Vous pouvez ajouter n'importe quel contenu ou widget à ces pages, mais nous gardons ces cas simples.</p>	
+		<p><a href="#one" data-direction="reverse" data-role="button" data-theme="b">Retour à la page "one"</a></p>	
+		
+	</div><!-- /content -->
+	
+	<div data-role="footer">
+		<h4>Pied de page</h4>
+	</div><!-- /footer -->
+</div><!-- /page two --><!-- Start of third page: #popup -->
+
+
+
+<div data-role="page" id="popup">
+
+	<div data-role="header" data-theme="e">
+		<h1>Boîte de dialogue</h1>
+	</div><!-- /header -->
+
+	<div data-role="content" data-theme="d">	
+		<h2>Popup</h2>
+		<p>J'ai un id "popup" sur mon conteneur de page et je ressemble à une boîte de dialogue, car le lien avait un attribut <code>data-rel="dialog"</code> qui me donne ce look et un attribut <code>data-transition="pop"</code> pour changer la transition en pop. Sans cela, je serais stylisé comme une page normale.</p>		
+		<p><a href="#one" data-rel="back" data-role="button" data-inline="true" data-icon="back">Retour à la page "one"</a></p>	
+	</div><!-- /content -->
+	
+	<div data-role="footer">
+		<h4>Pied de page</h4>
+	</div><!-- /footer -->
+</div><!-- /page popup -->
+
+</body>
+</html>
