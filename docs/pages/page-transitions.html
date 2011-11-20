@@ -43,33 +43,31 @@
 
 <p><strong>Transitions depuis <a href="http://www.jqtouch.com/">jQtouch</a></strong> (<em>avec quelques modifications</em>) : Contruit par David Kaneda et maintenu par Jonathan Stark.</p>
 
-<p>REMARQUE : La transition flip n'est pas rendu correctement sur la plupart des versions d'Android car il manque les capacités de transformation 3D CSS. Malheureusement, au lieu d'ignorer le flip, Android rend la page "roue" en tournant au lieu du retournement. We recommend using this transition sparingly until support improves.</p>
+<p>REMARQUE : La transition flip n'est pas rendu correctement sur la plupart des versions d'Android car il manque les capacités de transformation 3D CSS. Malheureusement, au lieu d'ignorer le flip, Android rend la page "roue" en tournant au lieu du retournement. Nous vous recommandons d'utiliser cette transitionavec parcimonie jusqu'à ce que le support s'améliore.</p>
 
 
-	<h2>Setting a transition on a link or form submit</h2>
-	<p>By default, the framework applies the right to left <strong>slide</strong> transition. To set a custom transition effect, add the <code>data-transition</code> attribute to the link.  </p>
+	<h2>Définition d'une transition sur un lien ou à la soumission d'un formulaire</h2>
+	<p>Par défaut, le framework applique une transition <strong>slide</strong> de droite à gauche. Pour définir un effet de transition personnalisé, ajouter l'attribut <code>data-transition</code> au lien. </p>
 
 <code><code>
-
-&lt;a href="index.html" <strong>data-transition="pop"</strong>&gt;I'll pop&lt;/a&gt;
-
+&lt;a href="index.html" <strong>data-transition="pop"</strong>&gt;Je ferais Pop&lt;/a&gt;
 </code></code>
 		
-		<p>When the Back button is pressed, the framework will automatically apply the reverse version of the transition that was used to show the page. To specify that the reverse version of a transition should be used, add the <code>data-direction="reverse"</code> attribute to a link. Note: (this was formerly <code>data-back="true"</code>, which will remain supported until 1.0)</p>
+		<p>Lorsque le bouton Retour est pressé, le framework appliquera automatiquement la version inversée de la transition qui a été utilisée pour afficher la page. Pour spécifier que la version inversée de la transition doit être utilisée, ajouter l'attribut <code>data-direction="reverse"</code> au lien. Remarque : (l'ancienne formulation : <code>data-back="true"</code> restera supporté jusqu'à la version 1.0)</p>
 		
-		<p>For smoother page transitions, consider enabling the <a href="touchoverflow.html">touchOverflow</a> feature.</p>
+		<p>Pour des transitions de page lissé, pensez à activer la fonctionnalité <a href="touchoverflow.html">touchOverflow</a>.</p>
 		
-		<h2>Global configuration of transitions</h2>
+		<h2>Configuration globale des transitions</h2>
 		
-		<p>Set the <code>defaultPageTransition</code> <a href="../api/globalconfig.html">global option</a> if you'd prefer a different default transition. Dialogs have a different option called <code>defaultDialogTransition</code> that can also set configured.</p>
+		<p>Réglez l'<a href="../api/globalconfig.html">option globale</a> <code>defaultPageTransition</code> si vous préférez une transition par défaut différente. Les boîtes de dialogue ont une autre option appelée <code>defaultDialogTransition</code> qui peut également être configurée.</p>
 		
 
 
 
-		<h2>Creating custom CSS-based transitions</h2>
+		<h2>Création de transition personnalisée basée sur le CSS</h2>
 
 
-		<p>To create a custom CSS transition, select a class name that corresponds to the name of your transition, for example "slide", and then define your "in" and "out" CSS rules to take advantage of transitions or animation keyframes:</p>
+		<p>Pour créer une transition CSS personnalisé, sélectionnez un nom de classe qui correspond au nom de votre transition, par exemple "slide", et ensuite définissez vos règles CSS "in" et "out" pour profiter des transitions ou des keyframes d'animation :</p>
 
 		<pre><code>.slide.in {
 	    -webkit-transform: translateX(0);
@@ -91,9 +89,9 @@
 	}
 		</code></pre>
 
-		<p>During a CSS-based page transition, jQuery Mobile will place the class name of the transition on both the "from" and "to" pages involved in the transition. It then places an "out" class on the "from" page, and "in" class on the "to" page. The presence of these classes on the "from" and "to" page elements then triggers the animation CSS rules defined above.</p>
+		<p>Lors d'une transition de page à base de CSS, jQuery Mobile place le nom de la classe de la transition sur les deux pages "de" et "à" impliquées dans la transition. Il place ensuite une classe "out" sur la page "de", et la classe "in" sur la page "à". La présence de ces classes sur les éléments de la page "de" et "à" déclenche alors les règles CSS de l'animation définies ci-dessus.</p>
 
-		<p>If your transition supports a reverse direction, you need to create CSS rules that use the <code>reverse</code> class in addition to the transition class name and the "in" and "out" classes:</p>
+		<p>Si votre transition prend en charge une direction inverse, vous avez besoin pour créer des règles CSS qui utilisent en plus la classe <code>reverse</code> pour le nom de la classe de transition et pour les classes "in" et "out" :</p>
 
 		<pre><code>.slide.in.reverse {
 		    -webkit-transform: translateX(0);
@@ -116,14 +114,14 @@
 		}
 		</code></pre>
 
-		<p>After the CSS rules are in place, you simply specify the name of your transition within the @data-transition attribute of a navigation link:</p>
+		<p>Après que les règles CSS soient en place, il vous suffit de spécifier le nom de votre transition au sein de l'attribut @data-transition d'un lien de navigation :</p>
 
 		<pre><code>&lt;a href="#page2" data-transition="slide"&gt;Page 2&lt;/a&gt;
 		</code></pre>
 
-		<p>When the user clicks on the navigation link, jQuery Mobile will invoke your transition when it navigates to the page mentioned within the link.</p>
+		<p>Lorsque l'utilisateur clique sur le lien de navigation, jQuery Mobile invoquera votre transition quand il accèdera à la page mentionnée dans le lien.</p>
 
-		<p>In case you were wondering why none of the CSS rules above specified any easing or duration, it's because the CSS for jQuery Mobile defines the default easing and duration in the following rules:</p>
+		<p>Dans le cas où vous vous poseriez la question pourquoi aucune des règles CSS ci-dessus ne spécifient aucun assouplissement (easing) ou durée, c'est parce que le CSS pour jQuery Mobile définit l'assouplissement et la durée par défaut dans les règles suivantes :</p>
 
 		<pre><code>
 .in, .out {
@@ -132,28 +130,28 @@
 }
 		</code></pre>
 
-		<p>If you need to specify a different easing or duration, simply add the appropriate CSS3 property to your custom page transition rules.</p>
+		<p>Si vous avez besoin de spécifier un assouplissement ou une durée différente, ajoutez simplement la propriété CSS3 appropriée à vos règles de transition de page personalisées.</p>
 
-		<h2>Creating custom JavaScript-based transitions</h2>
+		<h2>Création de transition personnalisée basée sur le JavaScript</h2>
 
-		<p>When a user clicks on a link within a page, jQuery Mobile checks if the link specifies a <code>@data-transition</code> attribute. The value of this attribute is the name of the transition to use when displaying the page referred to by the link. If there is no <code>@data-transition</code> attribute, the transition name specified by the configuration option <code>$.mobile.defaultPageTransition</code> is used for pages, and <code>$.mobile.defaultDialogTransition</code> is used for dialogs.</p>
+		<p>Quand un utilisateur clique sur un lien dans une page, jQuery Mobile contrôles si le lien spécifie un attribut <code>@data-transition</code>. La valeur de cet attribut est le nom de la transition à utiliser lors de l'affichage de la page visée par le lien. S'il n'y a pas d'attribut <code>@data-transition</code>, le nom de la transition spécifié par l'option de configuration <code>$.mobile.defaultPageTransition</code> est utilisé pour les pages et <code>$.mobile.defaultDialogTransition</code> est utilisé pour les boîtes de dialogue.</p>
 
-		<p>After the new page is loaded, the <code>$.mobile.transitionHandlers</code> dictionary is used to see if any transition handler function is registered for the given transition name. If a handler is found, that handler is invoked to start and manage the transition. If no handler is found the handler specified by the configuration option <code>$.mobile.defaultTransitionHandler</code> is invoked.</p>
+		<p>Après que la nouvelle page soit chargée, le dictionnaire <code>$.mobile.transitionHandlers</code> est utilisé pour voir si une fonction de gestion de transition est enregistrée pour le nom de la transition donnée. Si un gestionnaire est trouvé, ce gestionnaire est invoqué pour démarrer et gérer la transition. Si aucun gestionnaire n'est trouvé, le gestionnaire spécifié par l'option de configuration <code>$.mobile.defaultTransitionHandler</code> est invoqué.</p>
 
-		<p>By default, the <code>$.mobile.transitionHandlers</code> dictionary is only populated with a single handler entry called "none". This handler simply removes the <code>"ui-page-active"</code> class from the page we are transitioning "from", and places it on the page we are transitioning "to". The transition is instantaneous; no animation, no fanfare.</p>
+		<p>Par défaut, le dictionnaire <code>$.mobile.transitionHandlers</code> n'est peuplé que d'une entrée de gestionnaire unique dénommé "none". Ce gestionnaire supprime simplement la classe <code>"ui-page-active"</code> de la page "de" et le place sur la page "à". La transition est instantanée : aucune animation, aucune fanfare.</p>
 
-		<p>The <code>$.defaultTransitionHandler</code> points to a handler function that assumes the name is a CSS class name, and implements the "Pure CSS3 Based Transitions" section above.</p>
+		<p>Le <code>$.defaultTransitionHandler</code> pointe vers une fonction de gestionnaire qui suppose que le nom est un nom de classe CSS, et met en œuvre la section ci-dessus " Transitions basées sur du pur CSS3".</p>
 
-		<p>Both the "none" and "css3" transition handlers are available off of the $.mobile namespace:</p>
+		<p>Les deux gestionnaires de transition "none" et "css3" sont disponibles hors de l'espace de nommage $.mobile :</p>
 
 		<pre><code>
 $.mobile.noneTransitionHandler
 $.mobile.css3TransitionHandler
 		</code></pre>
 
-		<h3>Transition Handlers</h3>
+		<h3>Gestionnaires de transition</h3>
 
-		<p>A transition handler is a function with the following call signature:</p>
+		<p>Un gestionnaire de transition est une fonction avec la signature d'appel suivante :</p>
 
 		<pre><code>function myTransitionHandler(name, reverse, $to, $from)
 {
@@ -169,11 +167,11 @@ $.mobile.css3TransitionHandler
 }
 		</code></pre>
 
-		<p>Your handler must create a Deferred object and return a promise to the caller. The promise is used to communicate to the caller when your transition is actually complete. It is up to you to call <code>deferred.resolve()</code> at the correct time. If you are new to Deferred objects, you can find documentation <a href="http://api.jquery.com/category/deferred-object/" rel="nofollow">here</a>.</p>
+		<p>Votre gestionnaire doit créer un objet Deferred et retourner une Promise à l'appelant. La Promise est utilisée pour communiquer à l'appelant quand votre transition est réellement complète. C'est à vous d'appeler <code>deferred.resolve()</code> au bon moment. Si vous êtes débutant sur les objets Deferred, vous pouvez trouver de la documentation <a href="http://api.jquery.com/category/deferred-object/" rel="nofollow">ici</a>.</p>
 
-		<h3>Registering and Invoking Your Transition Handler</h3>
+		<h3>Enregistrement et invocation de votre gestionnaire de transition</h3>
 
-		<p>Once you have created a transition handler function, you need to tell jQuery Mobile about it. To do this, simply add your handler to the <code>$.mobile.transitionHandlers</code> dictionary. Remember, the key used should be the name of your transition. This name is also the same name that will be used within the <code>@data-transition</code> attribute of any navigation links.</p>
+		<p>Une fois que vous avez créé une fonction de gestionnaire de transition, vous devez le dire à jQuery Mobile. Pour faire cela, ajoutez simplement votre gestionnaire au dictionnaire <code>$.mobile.transitionHandlers</code>. Rappelez-vous, la clé utilisée doit être le nom de votre transition. Ce nom est également le même nom qui sera utilisé dans l'attribut <code>@data-transition</code> sur n'importe quel lien de navigation.</p>
 
 		<pre><code>// Definit votre gestionnaire de transition :
 
@@ -190,21 +188,21 @@ function myTransitionHandler(name, reverse, $to, $from)
     return deferred.promise();
 }
 
-// Register it with jQuery Mobile:
+// L'enregistrer avec jQuery Mobile :
 
 $.mobile.transitionHandlers["myTransition"] = myTransitionHandler;
 		</code></pre>
 
-		<p>Once you've registered your handler, you can invoke your transition by placing a <code>data-transition</code> attribute on a link:</p>
+		<p>Une fois que vous avez enregistré votre gestionnaire, vous pouvez appeler votre transition en plaçant un attribut <code>data-transition</code> sur un lien :</p>
 
 		<pre><code>&lt;a href="#page2" data-transition="myTransition"&gt;Page 2&lt;/a&gt;
 		</code></pre>
 
-		<p>When the user clicks the link above, your transition handler will be invoked after the page is loaded and it is ready to be shown.</p>
+		<p>Lorsque l'utilisateur clique sur le lien ci-dessus, votre gestionnaire de transition sera appelé après que la page soit chargée et qu'elle soit prête à être affichée.</p>
 
-		<h3>Overriding a CSS Transition With Your Own Handler</h3>
+		<h3>Substitution d'une transition CSS avec votre propre gestionnaire</h3>
 
-		<p>As previously mentioned the default transition handler assumes that any transition name other than "none" is a CSS class to be placed on the "from" and "to" elements to kick off a CSS3 animation. If you would like to override one of these built-in CSS transitions, you simply register your own handler with the same name as the CSS page transition you want to override. So for example, if I wanted to override the built-in "slide" CSS transition with my own JavaScript based transition, I would simply do the following:</p>
+		<p>Comme mentionné précédemment le gestionnaire de transition par défaut suppose que tout nom de transition autre que "none" est une classe CSS pour être mis sur les éléments "from" et "to" pour lancer une animation CSS3. Si vous souhaitez remplacer l'une de ces transitions CSS construite en interne, il vous suffit d'enregistrer votre propre gestionnaire avec le même nom que la transition de page CSS que vous souhaitez remplacer. Ainsi, par exemple, si je voulais remplacer la transition CSS "slide" contruite en interne avec ma propre transition basée sur JavaScript, je devrais simplement faire ce qui suit :</p>
 
 		<pre><code>// Definit votre gestionnaire de transition :
 
@@ -226,13 +224,13 @@ function myTransitionHandler(name, reverse, $to, $from)
 $.mobile.transitionHandlers["slide"] = myTransitionHandler;
 		</code></pre>
 
-		<p>Once you do this, anytime the "slide" transition is invoked, your handler, instead of the default one, will be called to perform the transition.</p>
+		<p>Une fois que vous avez fait cela, quand la transition "slide" est appelée, votre gestionnaire, au lieu de celui par défaut, sera appelé pour effectuer la transition.</p>
 
-		<h3>Overriding the Default Transition Handler</h3>
+		<h3>Substitution du gestionnaire de transition par défaut</h3>
 
-		<p>The <code>$.mobile.css3TransitionHandler</code> function is the default transition handler that gets invoked when a transition name is used and not found in the <code>$.mobile.transitionHandlers</code> dictionary. If you want to install your own custom default handler, you simply set the <code>$.mobile.defaultTransitionHandler</code> to your handler:</p>
+		<p>La fonction <code>$.mobile.css3TransitionHandler</code> est le gestionnaire de transition par défaut qui est invoquée quand un nom de transition est utilisé et qu'il ne se trouve pas dans le dictionnaire <code>$.mobile.transitionHandlers</code>. Si vous souhaitez installer votre propre gestionnaire personnalisé par défaut, il vous suffit de définir le <code>$.mobile.defaultTransitionHandler</code> par votre gestionnaire :</p>
 
-		<pre><code>// Define your default transition handler:
+		<pre><code>// Definit votre gestionnaire de transition par défaut:
 
 function myTransitionHandler(name, reverse, $to, $from)
 {
@@ -250,7 +248,7 @@ function myTransitionHandler(name, reverse, $to, $from)
 $.mobile.defaultTransitionHandler = myTransitionHandler;
 		</code></pre>
 
-		<p>Once you do this, your handler will be invoked any time a transition name is used but not found within the <code>$.mobile.transitionHandlers</code> dictionary.</p>
+		<p>Une fois que vous avez fait cela, votre gestionnaire sera appelé à chaque fois qu'un nom de transition est utilisé mais ne se trouve pas dans le dictionnaire <code>$.mobile.transitionHandlers</code>.</p>
 			
 
 				</div><!--/content-primary -->		
@@ -296,13 +294,13 @@ $.mobile.defaultTransitionHandler = myTransitionHandler;
 			<div data-role="page" id="dialog"><!-- dialog-->
 
 				<div data-role="header" data-theme="e">
-					<h1>Ta-da!</h1>
+					<h1>Ta-da !</h1>
 				</div><!-- /header -->
 
 				<div data-role="content" data-theme="e">
-					<p>That was an animated page transition effect that we added with a <code>data-transition</code> attribute on the link.</p>
-					<p>Since it uses CSS transforms, this should be hardware accelerated on many mobile devices.</p>
-					<p>What do you think?</p>
+					<p>Cela était un effet de transition de page animée que nous avons ajouté avec un attribut <code>data-transition</code> sur le lien.</p>
+					<p>Comme cela utilise des transformations CSS, cela devrait être accéléré matériellement sur de nombreux appareils mobiles.</p>
+					<p>Que pensez-vous ?</p>
 					<a href="docs-transitions.html" data-role="button" data-theme="b" data-rel="back">J'aime ça</a>   
 				</div>
 			</div>
