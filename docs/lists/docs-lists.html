@@ -74,13 +74,13 @@
       <p>Si vous voulez changer la manière dont les éléments de la liste sont filtrés, à savoir une recherche floue ou correspondant au début de la chaîne, vous pouvez configurer la fonction de rappel utilisée en interne par la définition <code>$.mobile.listview.prototype.options.filterCallback</code> durant le <code>mobileinit</code> ou après que le widget soit créé avec<code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Toute fonction définie pour la fonction de rappel fournira deux arguments. Tout d'abord, le texte de l'élément de la liste actuelle puis la valeur recherchée. Une valeur exacte aboutira à un élément de liste caché. La fonction de rappel par défaut qui filtre les entrées sans le <code>searchValue</code> , fait cela comme une sous-chaîne qui est décrite ci-dessous :
       </p>
 
-      <pre>
-        <code>
-function( text, searchValue ){
+<pre><code>function( text, searchValue ){
   return text.toLowerCase().indexOf( searchValue ) === -1;
-};
-        </code>
-      </pre>
+};</code></pre>
+
+			<p>Pour filtrer les éléments de la liste par des valeurs autres que le texte, ajoutez un attribut <code>data-filtertext</code> à l'élément de la liste. La valeur de cet attribut sera passée comme premier argument de la fonction <code>filterCallback</code> à la place du texte.</p>
+
+			<a href="lists-search-filtertext.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de filtre des données masquées</a>
 
 			<h2>Formatage du texte et compteur</h2>
 			<p>Le framework inclut les conventions de formatage du texte pour les modèles de liste commune, comme l'entête/les descriptions, les informations secondaires, les compteurs grâce au balisage sémantique de l'HTML.</p>
@@ -137,6 +137,7 @@ function( text, searchValue ){
 							<li><a href="lists-search.html">Barre de filtre de recherche</a></li>
 							<li><a href="lists-search-inset.html">Encart barre de filtre de recherche</a></li>
 							<li><a href="lists-search-with-dividers.html">Barre de filtre de recherche avec séparateurs</a></li>
+							<li><a href="lists-search-filtertext.html">Filtre de recherche des données cachées</a></li>
 
 							<li><a href="lists-readonly.html">Listes en lecture seule</a></li>
 							<li><a href="lists-readonly-inset.html">Encart listes en lecture seule</a></li>

@@ -41,29 +41,29 @@
 
 			<h2>$.mobile.allowCrossDomainPages</h2>
 
-			<p>Lorsque jQuery Mobile tente de charger une page externe, la requête passe par <code>$.mobile.loadPage()</code>. Ceci permettra seulement les requêtes inter-domaines si l'option de configuration <code>$.mobile.allowCrossDomainPages</code> est définie à <code>true</code>. Because the jQuery Mobile framework tracks what page is being viewed within the browser's location hash, it is possible for a cross-site scripting (XSS) attack to occur if the XSS code in question can manipulate the hash and set it to a cross-domain URL of its choice. This is the main reason that the default setting for <code>$.mobile.allowCrossDomainPages</code> is set to <code>false</code>.</p>
+			<p>Lorsque jQuery Mobile tente de charger une page externe, la requête passe par <code>$.mobile.loadPage()</code>. Ceci permettra seulement les requêtes inter-domaines si l'option de configuration <code>$.mobile.allowCrossDomainPages</code> est définie à <code>true</code>. Parce que le framework jQuery Mobile piste quelle page est considérée au sein de hash de location du navigateur, il est possible pour une attaque par script inter-site (XSS) de se produire si le code XSS en question peut manipuler le hash et le définir à une URL inter-domaine de son choix. Ceci est la raison principale pour que le paramètre par défaut pour <code>$.mobile.allowCrossDomainPages</code> soit défini sur <code>false</code>.</p>
 
-			<p>So in PhoneGap apps that must "phone home" by loading assets off a remote server, both the <code>$.support.cors</code> AND <code>$.mobile.allowCrossDomainPages</code> must be set to <code>true</code>.  The  <code>$.mobile.allowCrossDomainPages</code> option must be set before any cross-domain request is made so we recommend wrapping this in a <code>mobileinit</code> handler:</p>
+			<p>Ainsi dans les applications PhoneGap qui doivent "phone home" en chargeant des ressources hors d'un serveur distant, <code>$.support.cors</code> ET <code>$.mobile.allowCrossDomainPages</code> doivent être définis sur <code>true</code>. L'option <code>$.mobile.allowCrossDomainPages</code> doit être définie avant que toute requête inter-domaine soit faite ainsi nous recommandons son emballage dans un gestionnaire de <code>mobileinit</code> :</p>
 
 <pre><code>$( document ).bind( "mobileinit", function() {
-    // Make your jQuery Mobile framework configuration changes here!
+    // Faites vos changements de configuration du framework jQuery Mobile ici !
 
     $.mobile.allowCrossDomainPages = true;
 });</code></pre>
 
-			<h2>PhoneGap White Listing</h2>
+			<h2>Liste blanche de PhoneGap</h2>
 
-			<p>PhoneGap 1.0 introduced the idea of white-listing servers that its internal webview is allowed to make cross-domain requests to. You can find info about it here on the <a href="http://wiki.phonegap.com/w/page/40796976/Install%20the%20latest%20%28trunk%29%20source%20of%20iOS%20PhoneGap">PhoneGap wiki</a>:</p>
+			<p>PhoneGap 1.0 a introduit l'idée de liste blanche de serveurs où son webview interne est autorisé pour faire des requêtes inter-domaine. Vous pouvez trouvez plus d'infos sur le <a href="http://wiki.phonegap.com/w/page/40796976/Install%20the%20latest%20%28trunk%29%20source%20of%20iOS%20PhoneGap">wiki de PhoneGap</a> :</p>
 
-			<p>However, not all platforms support this white-listing feature so check the PhoneGap documentation for details. Older versions of PhoneGap prior to 1.0 defaulted to allowing cross-domain requests to any server.</p>
+			<p>Cependant, toutes les plateformes ne prennent pas en charge cette fonctionnalité de liste blanche donc veuillez consulter pour plus de détails la documentation PhoneGap. Les anciennes versions de PhoneGap par défaut avant la 1.0 permettaient les requêtes inter-domaine à un serveur.</p>
 
-			<h2>Still having issues?</h2>
+			<h2>Toujours des problèmes ?</h2>
 
-			<p>Here are a few more tips that aren't specifically related to PhoneGap but are good to know:</p>
+			<p>Voici quelques conseils supplémentaires qui ne sont pas spécifiquement liés à PhoneGap, mais qui sont bonnes à savoir :</p>
 
-			<p><strong>We recommend disabling the <a href="../api/globalconfig.html">pushState feature</a> for installed apps </strong>because there are edge cases where this feature can cause unexpected navigation behavior and since URLs aren't visible in a webview, it's not worth keeping this active in these situations.  </p>
+			<p><strong>Nous recommandons de désactiver la <a href="../api/globalconfig.html">fonctionnalité  pushState</a> pour les applications installées </strong> parce qu'il y a des cas où l'avantage de cette fonction peut provoquer un comportement inattendu de navigation et puisque les URL ne sont pas visibles dans un webview, c'est pas la peine garder ceci actif dans ces situations. </p>
 
-			<p><strong>Android enforces a timeout when loading URLs in a webview</strong> which may be too short for your needs. You can change this timeout by editing a Java class generated by the Eclipse plugin for Android:</p>
+			<p><strong>Android applique un timeout lors du chargement des URL dans un webview</strong> qui peut être trop court pour vos besoins. Vous pouvez modifier ce délai en éditant une classe Java générée par le plugin Eclipse pour Android :</p>
 
 			<code>super.setIntegerProperty("loadUrlTimeoutValue", 60000);</code>
 			

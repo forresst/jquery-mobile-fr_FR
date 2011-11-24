@@ -1,4 +1,4 @@
-//set up the theme switcher on the homepage
+//mise en place du sélecteur de thème sur la page d'accueil
 $('div').live('pagecreate',function(event){
 	if( !$(this).is('.ui-dialog')){
 		var appendEl = $(this).find('.ui-footer:last');
@@ -27,7 +27,7 @@ $('div').live('pagecreate',function(event){
 
 });
 
-//collapse page navs after use
+//Réduction de la page de navigation après utilisation
 $(function(){
 	$('body').delegate('.content-secondary .ui-collapsible-content', 'click',  function(){
 		$(this).trigger("collapse");
@@ -55,31 +55,31 @@ $(function(){
 });
 
 
-// Turn off AJAX for local file browsing
+// Désactiver AJAX pour la navigation des fichiers locaux
 if ( location.protocol.substr(0,4)  === 'file' ||
      location.protocol.substr(0,11) === '*-extension' ||
      location.protocol.substr(0,6)  === 'widget' ) {
 
-  // Start with links with only the trailing slash and that aren't external links
+  // Commencez avec des liens avec seulement un slash final et qui ne sont pas des liens externes
   var fixLinks = function() {
     $( "a[href$='/'], a[href='.'], a[href='..']" ).not( "[rel='external']" ).each( function() {
       this.href = $( this ).attr( "href" ).replace( /\/$/, "" ) + "/index.html";
     });
   };
 
-  // fix the links for the initial page
+  // corriger les liens de la page initiale
   $(fixLinks);
 
-  // fix the links for subsequent ajax page loads
+  // corriger les liens pour les chargements ultérieures de page AJAX
   $(document).bind( 'pagecreate', fixLinks );
 
-  // Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
+  // Vérifie pour voir si AJAX peut être utilisé. Cela fait une requête rapide ajax et bloque la page jusqu'à ce soit fait
   $.ajax({
     url: '.',
     async: false,
     isLocal: true
   }).error(function() {
-    // Ajax doesn't work so turn it off
+    // Ajax ne fonctionne pas donc on le désactive
     $( document ).bind( "mobileinit", function() {
       $.mobile.ajaxEnabled = false;
 
@@ -90,8 +90,8 @@ if ( location.protocol.substr(0,4)  === 'file' ||
       });
 
       message
-        .append( "<h3>Note: Navigation may not work if viewed locally</h3>" )
-        .append( "<p>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>view help</a>.</p>" );
+        .append( "<h3>Remarque : Il est possible que la navigation ne fonctionne pas si la documentation est visualisée localement</h3>" )
+        .append( "<p>La navigation axée AJAX qui est utilisée dans la documentation de jQuery Mobile peut avoir besoin d'être visualisée sur un serveur web pour fonctionner dans certains navigateurs. Si vous voyez un message d'erreur lorsque vous cliquez sur un lien, essayez un autre navigateur ou <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>consultez l'aide</a>.</p>" );
 
       $( document ).bind( "pagecreate", function( event ) {
         $( event.target ).append( message );
