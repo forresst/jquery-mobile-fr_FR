@@ -1,4 +1,4 @@
-//quick view source in new window links
+//rapide aperçu de la source dans une nouvelle fenêtre
 $.fn.addSourceLink = function(style){
 
 	return $(this).each(function(){
@@ -36,7 +36,7 @@ $.fn.addSourceLink = function(style){
 		});	
 };
 
-//set up view source links
+//créer des liens d'aperçu de la source
 $('div').live('pagebeforecreate',function(){
 	$(this).find('[data-'+ $.mobile.ns +'source="true"]').addSourceLink();
 });
