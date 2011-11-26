@@ -34,23 +34,23 @@
 				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
 			</ul>
 
-			<p>Pour ajouter un widget curseur à votre page, utiliser l'<code>input</code> standard avec l'attribut <code>type="range"</code>. L'entrée <code>value</code> est utilisé pour configurer la position de départ du curseur et la valeur est peuplée dans la zone de saisie. Précisez les valeurs des attributs <code>min</code> et <code>max</code> pour régler la fourchette du curseur. Le framework analysera ces attributs pour configurer le widget curseur. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux curseurs.</p>
+			<p>Pour ajouter un widget curseur à votre page, utiliser l'<code>input</code> standard avec l'attribut <code>type="range"</code>. L'entrée <code>value</code> est utilisé pour configurer la position de départ du curseur et la valeur est peuplée dans la zone de saisie. Précisez les valeurs des attributs <code>min</code> et <code>max</code> pour régler la fourchette du curseur. Si vous voulez contraindre l'entrée des incréments spécifiques ajouter l'attribut <code>step</code>. Définissez l'attribut <code>value</code> pour régler la valeur initiale. Le framework analysera ces attributs pour configurer le widget curseur. Regardez la <a href="../../api/data-attributes.html">référence des attributs data-</a> pour voir tous les attributs possibles que vous pouvez ajouter aux curseurs.</p>
 
 			<p>Lorsque vous faites glisser le curseur, le framework met à jour la valeur de l'entrée natif (et vice-versa) afin qu'ils soient toujours en phase, ce qui garantit que la valeur est soumise avec le formulaire.</p>
 			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
 
-			<p>Le framework trouvera tous les éléments <code>input</code> avec un <code>type="range"</code> et les améliorera automatiquement dans un curseur avec une saisie complémentaire, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique de cette entrée dans un curseur, ajouter l'attribut <code>data-role="none"</code> à l'<code>input</code> et enveloppez les d'un <code>div</code> avec l'attribut <code> data-role="fieldcontain"</code> pour les grouper.</p>
+			<p>Le framework trouvera tous les éléments <code>input</code> avec un <code>type="range"</code> et les améliorera automatiquement dans un curseur avec une saisie complémentaire, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique de cette entrée dans un curseur, ajouter l'attribut <code>data-role="none"</code> à l'<code>input</code> et enveloppez les d'un <code>div</code> avec l'attribut <code> data-role="fieldcontain"</code> pour les grouper. Dans cet exemple, les limites acceptables sont de 0 à 100 et la graduation est de 5. </p>
 
 <pre><code>
    &lt;label for="slider-0"&gt;Curseur :&lt;/label&gt;
    &lt;input type="range" name="slider" id="slider-0" value="25" min="0" max="100" step="5" /&gt;
 </code></pre>
 
-				<p>Le curseur par défaut est affiché comme ceci :</p>
+				<p>Le curseur par défaut est affiché avec ces paramètres comme ceci :</p>
 					<label for="slider-0">Curseur en saisie :</label>
 					<input type="range" name="slider-1" id="slider-0" value="25" min="0" max="100" step="5" />
 
-				<p>Optionnellement, enveloppez le balisage du curseur dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
+				<p>Optionnellement, enveloppez le balisage du curseur dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long. Dans cet exemple, l'attribut <code>step</code> est omis pour permettre toutes les valeurs entières d'être sélectionnées.</p>
 
 
 <pre><code>
