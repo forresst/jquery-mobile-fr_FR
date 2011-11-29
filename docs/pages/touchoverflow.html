@@ -66,6 +66,17 @@ $(document).bind("mobileinit", function(){
 			<p>Plus important encore, le but d'un débordement correct est un enjeu majeur. Si nous plaçons simplement une règle CSS <code>overflow: auto</code> sur les pages, d'autres plateformes mobiles comme les anciennes versions populaires d'Android et iOS seraient essentiellement dégrafées du contenu et le rendraient effectivement inaccessibles (oui, vous pouvez faire un geste de défilement avec deux doigts dans iOS, mais personne ne le sait ). La chose la plus intelligente sur l'implémentation d'Apple pour iOS5 est qu' ils ont ajouté une propriété CSS supplémentaire <code>-webkit-overflow-scrolling:touch</code> qui nous permet de tester cette propriété de défilement tactile, et, si elle est prise en charge, de l'ajouter  seulement dans les règles <code>overflow</code> pour ces navigateurs. C'est la seule manière sûre de cibler le débordement sans recourir à la détection complexe et ingérable de l'agent de l'utilisateur.</p>
 			<p>Nous allons travailler avec les fabricants d'appareils et de navigateur pour encourager le support de ces <em>deux</em> propriétés CSS, car nous croyons fermement que cette pièce critique est nécessaire pour construire des applications web mobiles riches. Le projet ajoutera n'importe quels compléments préfixés du vendeur pour toucher la propriété scrolling si, par exemple, Opera, Firefox ou Microsoft a ajouté ce support. Une fois que les gens verront à quel point les transitions de page sont mieux et que les barres d'outils sont fixés sur l'iOS5, nous espérons que cela sera supporté rapidement par d'autres navigateurs. Les scripts JS de défilement peuvent encore avoir une place dans ce nouveau monde comme un polyfill pour les navigateurs qui ne supportent pas encore ces nouvelles fonctionnalités CSS, mais nous voyons cela comme une étape, un outil intermédiaire dans l'évolution de l'internet mobile.</p>
 			
+			
+			
+			<h2>Débogage touchOverflow</h2>
+			<p>Généralement touchOverflow est activée uniquement sur les périphériques qui supportent le défilement tactile des zones de débordement, pas les navigateurs de bureau. Cela peut rendre difficile le débogage des problèmes avec la fonctionnalité touchOverflow. Pour activer touchOverflow sur tous les navigateurs, utilisez le code suivant :
+
+<pre><code>&lt;script&gt;
+$(document).bind("mobileinit", function() {
+  <strong>$.support.touchOverflow = true;</strong>
+  $.mobile.touchOverflowEnabled = true;
+});
+&lt;/script&gt;</code></pre>
 
 
 		</div><!--/content-primary -->		
