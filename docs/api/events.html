@@ -27,14 +27,14 @@
 		<p>jQuery Mobile propose plusieurs événements personnalisé qui s'appuient sur ​​des événements natifs pour créer des hooks utiles pour le développement. Notez que ces événements emploient divers événements tactiles, de la souris et de la fenêtre, selon l'existence de l'événement, vous pouvez les lier pour une utilisation dans des environnements de bureau et portatifs. Vous pouvez lier ces événements comme vous le feriez avec les autres événements jQuery en utilisant <code>live()</code> ou <code>bind()</code>.</p>
 
 			<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important : Utilisez pageInit() à la place de $(document).ready()</h4>
-		La première chose que vous apprenez dans jQuery est d'appeler le code à l'intérieur de la fonction $(document).ready() où tout va exécuter dès que le DOM est chargé. Cependant, dans jQuery Mobile, Ajax est utilisé pour charger le contenu de chaque page dans le DOM où vous naviguez, et le gestionnaire DOM s'exécute que pour la première page. Pour exécuter du code à chaque fois qu'une nouvelle page est chargée et créée, vous pouvez lier l'événement  <code><strong>pageinit</strong></code>. Cet événement est expliqué en détail au bas de cette page.</div>
+		<h4 style="margin:.5em 0">Important : Utilisez <code>pageInit()</code> à la place de <code>$(document).ready()</code></h4>
+		<p>La première chose que vous apprenez dans jQuery est d'appeler le code à l'intérieur de la fonction <code>$(document).ready()</code> où tout va exécuter dès que le DOM est chargé. Cependant, dans jQuery Mobile, Ajax est utilisé pour charger le contenu de chaque page dans le DOM où vous naviguez, et le gestionnaire DOM s'exécute que pour la première page. Pour exécuter du code à chaque fois qu'une nouvelle page est chargée et créée, vous pouvez lier l'événement  <code>pageinit</code>. Cet événement est expliqué en détail au bas de cette page.</p></div>
 
-      <p>
+      <p>  &nbsp;</p>
 		<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important : pageCreate() vs pageInit()</h4>
-    Avant la version bêta 2, il était recommandait de lier l'événement <code><strong>pagecreate</strong></code>, pour ceux qui voulaient manipuler une page améliorée par jQuery mobile et le balisage de widget.  Dans la version bêta 2, un changement interne a été faite pour dissocier chacun des widgets en liant l'événement <code><strong>pagecreate</strong></code> à la place des appels directs aux méthodes du widget. Par conséquence, les utilisateurs qui liaient <code><strong>pagecreate</strong></code> dans<code><strong>mobileinit</strong></code> trouvaient la liaison d'exécution avant que le balisage ait été amélioré par tous les plugins. En accord avec le cycle de vie de production des widgets de jQuery UI, la méthode d'initialisation est appelée <strong>après</strong> la méthode de création, de sorte que l'événement <code><strong>pageinit</strong></code> se synchronise correctement avec la manipulation d'amélioration du DOM et/ou des objets Javascript. En bref, si vous utilisiez précédemment <code><strong>pagecreate</strong></code> pour manipuler le balisage amélioré avant que la page ait été montré, il est très probable que vous devriez migrer vers 'pageinit'.
-		</div></p>
+		<h4 style="margin:.5em 0">Important : <code>pageCreate()</code> contre <code>pageInit()</code></h4>
+   <p> Avant la version bêta 2, il était recommandait de lier l'événement <code>pagecreate</code>, pour ceux qui voulaient manipuler une page améliorée par jQuery mobile et le balisage de widget.  Dans la version bêta 2, un changement interne a été faite pour dissocier chacun des widgets en liant l'événement <code>pagecreate</code> à la place des appels directs aux méthodes du widget. Par conséquence, les utilisateurs qui liaient <code>pagecreate</code> dans<code>mobileinit</code> trouvaient la liaison d'exécution avant que le balisage ait été amélioré par tous les plugins. En accord avec le cycle de vie de production des widgets de jQuery UI, la méthode d'initialisation est appelée <strong>après</strong> la méthode de création, de sorte que l'événement <code>pageinit</code> se synchronise correctement avec la manipulation d'amélioration du DOM et/ou des objets Javascript. En bref, si vous utilisiez précédemment <code>pagecreate</code> pour manipuler le balisage amélioré avant que la page ait été montré, il est très probable que vous  devrez migrer vers 'pageinit'.
+		</p></div>
 
 		<h2>Evénements tactiles</h2>
 		<dl>
@@ -85,23 +85,23 @@
 
 			<div class="ui-body ui-body-e">
 				<h4 style="margin:.5em 0">Avertissement : Utilisez avec prudence vclick</h4>
-				<p> Utiliser avec prudence  vclick sur les appareils tactiles. Les navigateurs basés sur Webkit synthétisent les événements mousedown, mouseup et click à peu près 300 ms après que l'événement touchend soit déclenché. Les cibles de l'événement de souris synthétisé sont calculés au moment où elles sont envoyées et sont basées sur la localisation des événements tactiles, et dans certains cas, la mise en œuvre des heuristiques spécifiques qui conduit à des calculs cibles différents sur différents périphériques et même sur différentes versions d'OS pour le même appareil. Cela signifie que l'élément cible dans les événements tactiles originaux pourraient être différent de l'élément cible dans les événements de souris synthétisé.</p>
-	            <p>Nous vous recommandons de l'utiliser plutôt que vclick à tout moment l'action est déclenchée avec la possibilité de changer le contenu sous le point qui a été touché à l'écran. Cela inclut les transitions de page et d'autres comportements tels que réduire/développer qui pourrait  aboutir au changement d'écran ou au contenu pouvant être complètement remplacé.</p>
+				<p> Utiliser avec prudence  vclick sur les appareils tactiles. Les navigateurs basés sur Webkit synthétisent les événements <code>mousedown</code>, <code>mouseup</code> et <code>click</code> à peu près 300 ms après que l'événement <code>touchend</code> soit déclenché. Les cibles de l'événement de souris synthétisé sont calculés au moment où elles sont envoyées et sont basées sur la localisation des événements tactiles, et dans certains cas, la mise en œuvre des heuristiques spécifiques qui conduit à des calculs cibles différents sur différents périphériques et même sur différentes versions d'OS pour le même appareil. Cela signifie que l'élément cible dans les événements tactiles originaux pourraient être différent de l'élément cible dans les événements de souris synthétisé.</p>
+	            <p>Nous vous recommandons de l'utiliser plutôt <code>click</code> que <code>vclick</code> à tout moment l'action est déclenchée avec la possibilité de changer le contenu sous le point qui a été touché à l'écran. Cela inclut les transitions de page et d'autres comportements tels que réduire/développer qui pourrait  aboutir au changement d'écran ou au contenu pouvant être complètement remplacé.</p>
 			</div>
 			<p>&nbsp;</p>
 			<div class="ui-body ui-body-e">
 				<h4 style="margin:.5em 0">Annulation d'un comportement click par défaut des éléments</h4>
-				<p>Les applications peuvent appeler preventDefault() sur un événement vclick pour annuler le comportement click par défaut d'un élément. Sur les périphériques basé sur la souris, l'appel de preventDefault() sur un événement vclick équivaut à appeler preventDefault() sur l'événement réel click pendant la phase d'événement bubble. Sur les périphériques basés sur le tactile, c'est un peu plus compliqué, car l'événement réel click est envoyé environ 300 ms après l'événement vclick soit envoyé. Pour les appareils tactiles, l'appel de preventDefault () sur un événement vclick déclenche un code dans le plugin vmouse qui tente d'attraper le prochain événement vclick qui sera envoyé par le navigateur, durant la phase de capture de l'événement, et d'appeler preventDefault() et stopPropagation(). Comme mentionné dans l'avertissement ci-dessus, il est parfois difficile de faire correspondre à un événement tactile avec ses correspondants de souris car les cibles peuvent varier. Pour cette raison, le plugin vmouse peut aussi revenir pour tenter d'identifier un événement de click correspondant à des coordonnées. Il y a encore des cas lorsqu'il y a deux cibles, l'identification des coordonnées échoue, ce qui entraine que l'événement click soit envoyé, et soit cela déclenche l'action par défaut de l'élément, soit dans le cas où le contenu a été déplacé ou remplacé, cela déclenche un click sur un élément différent. Si cela se produit de façon régulière pour un élément/contrôle, nous vous suggérons d'utiliser click pour déclencher votre action.</p>
+				<p>Les applications peuvent appeler  <code>preventDefault()</code> sur un événement <code>vclick</code> pour annuler le comportement click par défaut d'un élément. Sur les périphériques basé sur la souris, l'appel de <code>preventDefault()</code> sur un événement <code>vclick</code> équivaut à appeler <code>preventDefault()</code> sur l'événement réel <code>click</code> pendant la phase d'événement bubble. Sur les périphériques basés sur le tactile, c'est un peu plus compliqué, car l'événement actuel <code>click</code> est envoyé environ 300 ms après l'événement <code>vclick</code> soit envoyé. Pour les appareils tactiles, l'appel de <code>preventDefault()</code> sur un événement <code>vclick</code> déclenche un code dans le plugin vmouse qui tente d'attraper le prochain événement <code>click</code> qui sera envoyé par le navigateur, durant la phase de capture de l'événement, et d'appeler <code>preventDefault()</code> et <code>stopPropagation()</code>. Comme mentionné dans l'avertissement ci-dessus, il est parfois difficile de faire correspondre un événement tactile avec ses correspondants de souris car les cibles peuvent varier. Pour cette raison, le plugin vmouse peut aussi revenir pour tenter d'identifier un événement de <code>click</code> correspondant à des coordonnées. Il y a encore des cas lorsqu'il y a deux cibles, l'identification des coordonnées échoue, ce qui entraine que l'événement <code>click</code> soit envoyé, et soit cela déclenche l'action par défaut de l'élément, soit dans le cas où le contenu a été déplacé ou remplacé, cela déclenche un click sur un élément différent. Si cela se produit de façon régulière pour un élément/contrôle, nous vous suggérons d'utiliser <code>click</code> pour déclencher votre action.</p>
 			</div>
 		
 		<h2>Événement de changement d'orientation</h2>
 		<dl>
 			<dt><code>orientationchange</code></dt>
-			<dd>Se déclenche lors d'un changement d'orientation du périphérique (en le tournant verticalement ou horizontalement). Lorsque cet événement est lié, votre fonction de rappel peut exploiter un second argument, qui contient une propriété <code>orientation</code> égale à "portrait" ou "landscape". Ces valeurs sont également ajoutés comme des classes à l'élément HTML, cela vous permet de les exploiter dans vos sélecteurs CSS. Notez que nous avons actuellement lier l'événement resize quand orientationChange n'est pas supporté nativement ou lorsque <code>$.mobile.orientationChangeEnabled</code> est défini à false.</dd>
+			<dd>Se déclenche lors d'un changement d'orientation du périphérique (en le tournant verticalement ou horizontalement). Lorsque cet événement est lié, votre fonction de rappel peut exploiter un second argument, qui contient une propriété <code>orientation</code> égale à "portrait" ou "landscape". Ces valeurs sont également ajoutés comme des classes à l'élément HTML, cela vous permet de les exploiter dans vos sélecteurs CSS. Notez que nous avons actuellement lier l'événement resize quand <code>orientationchange</code> n'est pas supporté nativement ou lorsque <code>$.mobile.orientationChangeEnabled</code> est défini à false.</dd>
 			<div class="ui-body ui-body-e">
 				<h4>Timing de orientationchange</h4>
 
-				Le timing de <code>orientationchange</code> en relation avec le changement de la hauteur et la largeur du client est différent entre les navigateurs, mais l'implémentation actuelle vous donne la valeur correcte pour <code>event.orientation</code> dérivée de <code>window.orientation</code>. Cela signifie que si vos liaisons dépendent des valeurs de la hauteur et de la largeur, vous pouvez désactiver orientationchange sur tout l'ensemble avec <code>$.mobile.orientationChangeEnabled = false</code> pour laisser une solution de repli au code de redimensionnement  qui déclenchent vos liaisons.
+			<p>	Le timing de <code>orientationchange</code> en relation avec le changement de la hauteur et la largeur du client est différent entre les navigateurs, mais l'implémentation actuelle vous donne la valeur correcte pour <code>event.orientation</code> dérivée de <code>window.orientation</code>. Cela signifie que si vos liaisons dépendent des valeurs de la hauteur et de la largeur, vous pouvez désactiver <code>orientationChange</code> sur tout l'ensemble avec <code>$.mobile.orientationChangeEnabled = false</code> pour laisser une solution de repli au code de redimensionnement  qui déclenchent vos liaisons.</p>
 			</div>
 		</dl>
 
@@ -116,10 +116,10 @@
 		</dl>
 
 		<h2>Evénements d'initialisation de page</h2>
-        <p>Quand une page externe est chargé dans le DOM d'application, deux événements sont déclenchés. Le premier est pagebeforeload. Le deuxième événement sera soit pageLoad ou pageloadfailed.</p>
+        <p>Quand une page externe est chargé dans le DOM d'application, deux événements sont déclenchés. Le premier est <code>pagebeforeload</code>. Le deuxième événement sera soit <code>pageload</code> ou <code>pageloadfailed</code>.</p>
 		<dl>
 			<dt><code>pagebeforeload</code></dt>
-			<dd><p>Déclenché avant que toute demande de chargement soit faite. Les fonctions de rappel liées à cet événement peuvent appeler preventDefault() sur l'événement pour indiquer qu'elles sont liées à la requête de chargement. Les fonctions de rappel qui font cela, *DOIVENT* assurer l'appel du resolve() ou du reject() sur la référence de l'objet deferred contenue dans l'objet de données passé à la fonction de rappel.</p>
+			<dd><p>Déclenché avant que toute demande de chargement soit faite. Les fonctions de rappel liées à cet événement peuvent appeler <code>preventDefault()</code> sur l'événement pour indiquer qu'elles sont liées à la requête de chargement. Les fonctions de rappel qui font cela, *DOIVENT* assurer l'appel du <code>resolve()</code> ou du <code>reject()</code> sur la référence de l'objet deferred contenue dans l'objet de données passé à la fonction de rappel.</p>
 			<p>L'objet data, passé en deuxième argument à la fonction de rappel contient les propriétés suivantes :</p>
             <ul>
             	<li><code>url</code> (string)
@@ -332,10 +332,10 @@ $( document ).bind( "pageloadfailed", function( event, data ){
 					</ul>
 				</li>
 			</ul>
-              <p>Il est à noter que les fonctions de rappel peuvent modifier les propriétés à la fois de toPage et options pour modifier le comportement de l'appel changePage() actuel. Ainsi, par exemple, le toPage peut être mappé vers une URL différente de celle à l'intérieur d'une fonction de rappel pour faire une sorte de redirection.</p>
+              <p>Il est à noter que les fonctions de rappel peuvent modifier les propriétés à la fois de <code>toPage</code> et <code>options</code> pour modifier le comportement de l'appel <code>changePage()</code> actuel. Ainsi, par exemple, le <code>toPage</code> peut être mappé vers une URL différente de celle à l'intérieur d'une fonction de rappel pour faire une sorte de redirection.</p>
             </dd>
 			<dt><code>pagechange</code></dt>
-			<dd>Cet événement est déclenché après que la requête changePage() ait fini de charger la page dans les DOM et que toutes les animations de transition de page soient terminées. Notez que tous les événements pageshow ou pagehide seront déclenchés *AVANT* que cet événement soit déclenché. Les fonctions de rappel pour cet événement particulier seront passées à un objet data comme deuxième argument. Les propriétés de cet objet sont comme suit :
+			<dd>Cet événement est déclenché après que la requête <code>changePage()</code> ait fini de charger la page dans les DOM et que toutes les animations de transition de page soient terminées. Notez que tous les événements pageshow ou pagehide seront déclenchés *AVANT* que cet événement soit déclenché. Les fonctions de rappel pour cet événement particulier seront passées à un objet data comme deuxième argument. Les propriétés de cet objet sont comme suit :
             <ul>
 				<li><code>toPage</code> (object ou string)
 					<ul>
@@ -351,7 +351,7 @@ $( document ).bind( "pageloadfailed", function( event, data ){
 			</ul>
             </dd>
 			<dt><code>pagechangefailed</code></dt>
-			<dd>Cet événement est déclenché lorsque la requête changePage() échoue pour charger la page. Les fonctions de rappel pour cet événement particulier seront passées à un objet data comme deuxième argument. Les propriétés de cet objet sont comme suit :
+			<dd>Cet événement est déclenché lorsque la requête<code>changePage()</code> échoue pour charger la page. Les fonctions de rappel pour cet événement particulier seront passées à un objet data comme deuxième argument. Les propriétés de cet objet sont comme suit :
             <ul>
 				<li><code>toPage</code> (object ou string)
 					<ul>
@@ -422,7 +422,7 @@ $( document ).bind( "pageloadfailed", function( event, data ){
 
 		</dl>
 
-		<p>Vous pouvez accéder aux propriétés prevPage ou nextPage via le second argument d'une fonction de rappel liée. Par exemple : </p>
+		<p>Vous pouvez accéder aux propriétés <code>prevPage</code> ou <code>nextPage</code> via le second argument d'une fonction de rappel liée. Par exemple : </p>
 <pre><code>
 $( 'div' ).live( 'pageshow',function(event, ui){
   alert( 'Cette page était à l'instant masquée : '+ ui.prevPage);
