@@ -25,27 +25,27 @@
 		<div class="content-primary">		
 	<h2>Les types de barre d'outils</h2>
 	
-	<p>In jQuery Mobile, there are two standard types of toolbars: Headers and Footers.  </p>
+	<p>Dans jQuery Mobile, il y a deux types de barres d'outils standards : Entêtes et pieds de page. </p>
 	
-<ul>	<li>The <a href="docs-headers.html"><strong>Header bar </strong></a> serves as the page title, is usually the first element inside each <a href="../pages/page-anatomy.html">mobile page</a>, and typically contains a page title and up to two buttons.</li>
+<ul>	<li>La <a href="docs-headers.html"><strong>barre d'entête </strong></a> sert de titre de page, est généralement le premier élément de chaque <a href="../pages/page-anatomy.html">page mobile</a>, et contient généralement un titre de page et jusqu'à deux boutons.</li>
 
-	<li>The <a href="docs-footers.html"><strong>Footer bar</strong></a> is usually the last element inside each mobile page, and tends to be more freeform than the header in terms of content and functionality, but typically contains a combination of text and buttons.</li> 
+	<li>La <a href="docs-footers.html"><strong>barre de pied de page</strong></a> est généralement le dernier élément à l'intérieur de chaque page mobile, et tend à être plus libre que l'entête en termes de contenu et de fonctionnalité, mais contient généralement une combinaison de texte et de boutons.</li> 
 </ul>	
 
-	<p>It's very common to have a horizontal navigation or tab bar inside the header and/or footer; jQuery Mobile includes a <a href="docs-navbar.html"><strong>navbar widget </strong></a> that turns an unordered list of links into a horizontal button bar, which works well in these instances.</p>
+	<p>Il est très courant d'avoir une navigation horizontale ou une barre d'onglets à l'intérieur de l'entête et/ou du pied de page. jQuery Mobile inclut un <a href="docs-navbar.html"><strong>widget navbar</strong></a> qui transforme une liste non ordonnée de lien dans une barre de bouton horizontale, qui fonctionne bien dans ces cas.</p>
 	
 	<p>Regardez la <a href="../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux barres d'outil.</p>
 
 			
-			<h2>Toolbar positioning options</h2>
+			<h2>Options de positionnement de barre d'outils</h2>
 			
-			<p>Header and footers can be positioned on the page in a few different ways. By default, the toolbars use the <strong>"inline" positioning</strong> mode. In this mode, the headers and footer sit in the natural document flow (the default HTML behavior), which ensures that they are visible on all devices, regardless of JavaScript and CSS positioning support.</p>
+			<p>L'entête et le pied de page peuvent être positionnés sur la page de plusieurs façons différentes. Par défaut, les barres d'outils utilisent le mode de <strong>positionnement "inline"</strong>. Dans ce mode, les entêtes et le pied de page se positionnent dans le flux normal du document (le comportement par défaut HTML), ce qui assure qu'ils sont visibles sur tous les appareils, indépendamment de JavaScript et du support du positionnement CSS.</p>
 			
-			<p>A <a href="bars-fixed.html"><strong>"fixed" positioning mode</strong></a> provides the convenience of static toolbars without the drawbacks of implementing faux-scrolling in JavaScript. The toolbars start in their natural positions on the page, like the "inline" mode, but when a bar scrolls out of the viewport, the framework animates the bar back into view by dynamically re-positioning the bar to the top or bottom of the viewport.</p>
-			<p>  At any time, tapping the screen will toggle the visibility of the fixed toolbars: tapping the page when the toolbars aren't visible brings them into view, tapping again hides them until you tap again. This gives users the option to hide the toolbars until needed to maximize screen real estate.  </p>
-			<p>To set this behavior on a header or footer, add the <code> data-position="fixed"</code> attribute to the toolbar container.</p>
+			<p>Un mode de <a href="bars-fixed.html"><strong>positionnement "fixed"</strong></a> offre la commodité de barres d'outils statiques sans les inconvénients de la mise en œuvre du faux-défilement en JavaScript. Les barres d'outils commencent dans leurs positions naturelles sur la page, comme le mode "inline", mais quand une barre défile en dehors de la fenêtre d'affichage, le framework anime la barre pour revenir sur l'affichage en repositionnant dynamiquement la barre au sommet ou en bas de la fenêtre d'affichage.</p>
+			<p> A tout moment, en tapant sur l'écran, cela permet de basculer la visibilité de la barre d'outils fixes : en tapant sur la page, lorsque les barres d'outils ne sont pas visibles, cela les affiche, en tapant de nouveau, cela les cache jusqu'à ce que vous tapiez à nouveau. Cela donne aux utilisateurs la possibilité de masquer les barres d'outils pour utiliser le maximum de la surface d'affichage. </p>
+			<p>Pour définir ce comportement sur une entête ou sur un pied de page, ajoutez l'attribut <code> data-position="fixed"</code> au conteneur de la barre d'outils.</p>
 									
-			<p>A <a href="bars-fullscreen.html"><strong>"fullscreen" position mode</strong></a> works just like the fixed mode except that the toolbars aren't shown at the top and bottom of the page and only appear when the page is clicked. This is useful for immersive apps like photo or video viewers where you want the content to fill the whole screen and toolbars can be summoned to appear by tapping the screen. Keep in mind that the toolbars in this mode will sit <strong>over</strong> page content so this is best used for specific situations.</p>
+			<p>Un mode de <a href="bars-fullscreen.html"><strong>positionnement "fullscreen"</strong></a> fonctionne exactement comme le mode "fixed", sauf que les barres d'outils ne sont pas représentés en haut et au bas de la page et n'apparaissent que lorsque la page est cliquée . Ceci est utile pour des applications d'immersion comme des aperçus de photo ou de vidéo où vous voulez que le contenu remplisse tout l'écran et où les barres d'outils peuvent être citées à comparaître en touchant l'écran. Gardez à l'esprit que les barres d'outils dans ce mode se positionneront <strong>au dessus du</strong> contenu de la page c'est donc la meilleur utilisation pour des situations spécifiques.</p>
 
 				
 

@@ -192,17 +192,17 @@ $.mobile.hidePageLoadingMsg();
 			</dd>
 			
 			<dt><code>$.mobile.fixedToolbars.show</code> (<em>method</em>)</dt>
-			<dd>Méthode utile pour afficher l'entête et/ou le bas de page fixés de la page active en cours au sein de la fenêtre. Notez que les entêtes/pieds de page fixés ne sont jamais vraiment caché. Le basculement de l'état afficher/masquer de la barre d'outils est vraiment basculer s'ils sont  oui ou non alignés dans le contenu de la page, ou affichés dans la fenêtre comme s'ils étaient fixés.</dd>
+			<dd>Méthode utile pour afficher l'entête et/ou le bas de page fixes de la page active en cours au sein de la fenêtre. Notez que les entêtes/pieds de page fixes ne sont jamais vraiment caché. Le basculement de l'état afficher/masquer de la barre d'outils est vraiment basculer s'ils sont  oui ou non alignés dans le contenu de la page, ou affichés dans la fenêtre comme s'ils étaient fixes.</dd>
 			<dd>
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>immediately</code> (<em>boolean</em>, facultatif) Si c'est à true, n'importe quel entête ou pied de page fixé pour la page active en cours the current active est affiché immédiatement dans la fenêtre. Si c'est à false ou non défini, l'entête/pied de page fixé apparaîtra avec l'effet fade-in après un délai de 100 millisecondes. Notez que d'autres événements tels que l'événement resize ou scroll du document peut entraîner un délai supplémentaire avant le début de l'animation de l'affichage de l'entête/pied de page.</dd>							
+					<dd><code>immediately</code> (<em>boolean</em>, facultatif) Si c'est à true, n'importe quel entête ou pied de page fixe pour la page active en cours est affiché immédiatement dans la fenêtre. Si c'est à false ou non défini, l'entête/pied de page fixe apparaîtra avec l'effet fade-in après un délai de 100 millisecondes. Notez que d'autres événements tels que l'événement resize ou scroll du document peut entraîner un délai supplémentaire avant le début de l'animation de l'affichage de l'entête/pied de page.</dd>							
 				</dl>
 			</dd>
 			<dd>Exemple :
 			<pre>
 			<code>
-<strong>// Affiche entête/pied de page fixé avec une animation fade.</strong> 			
+<strong>// Affiche entête/pied de page fixe avec une animation fade.</strong> 			
 $.mobile.fixedToolbars.show();	
 
 <strong>// Affiche entête/pied de page fixé immédiatement.</strong>
@@ -213,20 +213,20 @@ $.mobile.fixedToolbars.show(true);
 			</dd>
 
 			<dt><code>$.mobile.fixedToolbars.hide</code> (<em>method</em>)</dt>
-			<dd>Méthode utile pour masquer l'entête et/ou le bas de la page fixés de la page en cours active.</dd>
+			<dd>Méthode utile pour masquer l'entête et/ou le bas de la page fixes de la page en cours active.</dd>
 			<dd>
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>immediately</code> (<em>boolean</em>, facultatifl) Si c'est à true, n'importe quelle entête ou pied de page fixé pour la page active en cours est immédiatement placé (après le flux) avec le contenu de la page, ce qui signifie que cela permet de faire défiler avec le contenu et ne sera visible que lorsque vous regardez le haut ou le bas de la page dans la fenêtre. Si c'est à false ou indéterminée, l'entête/pied de page fixé disparaîtra avec l'effet fade-out après un délai de 100 millisecondes. Notez que d'autres événements tels que l'événement resize ou scroll du document peut entraîner un délai supplémentaire avant le début de l'animation du masquage de l'entête/pied de page.</dd>							
+					<dd><code>immediately</code> (<em>boolean</em>, facultatifl) Si c'est à true, n'importe quelle entête ou pied de page fixé pour la page active en cours est immédiatement placé (après le flux) avec le contenu de la page, ce qui signifie que cela permet de faire défiler avec le contenu et ne sera visible que lorsque vous regardez le haut ou le bas de la page dans la fenêtre. Si c'est à false ou indéterminée, l'entête/pied de page fixe disparaîtra avec l'effet fade-out après un délai de 100 millisecondes. Notez que d'autres événements tels que l'événement resize ou scroll du document peut entraîner un délai supplémentaire avant le début de l'animation du masquage de l'entête/pied de page.</dd>							
 				</dl>
 			</dd>
 			<dd>Exemple :
 			<pre>
 			<code>
-<strong>// Masque entête/pied de page fixé avec une animation fade.</strong> 			
+<strong>// Masque entête/pied de page fixe avec une animation fade.</strong> 			
 $.mobile.fixedToolbars.hide();	
 
-<strong>// Masque ntête/pied de page fixé immédiatement.</strong>
+<strong>// Masque entête/pied de page fixe immédiatement.</strong>
 $.mobile.fixedToolbars.hide(true);	
 			</code>
 			</pre>
