@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>jQuery Mobile Framework - Theming Toolbars</title> 
+	<title>Framework jQuery Mobile - Thématisation des barres d'outils</title> 
 	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />  
 	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
 	<script src="../../jquery.js"></script>
@@ -17,127 +17,112 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Bar theming  </h1>
+		<h1>Thématisation des barres d'outils </h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
 	</div>
 	
 
 	<div data-role="content">
 		<div class="content-primary">	
-		<p>Both the header and footer bars will be styled by default with the theme's "a" color swatch (black in the default theme) because these bars are typically primary in the visual hierarchy of a page.  </p>
+		<p>Les barres d'entête et de pied de page seront stylisées par défaut avec le thème du nuancier de couleur "a" (noire dans le thème par défaut), car ces barres sont généralement primaires dans la hiérarchie visuelle d'une page. </p>
 		
 			
-		<h2>Theming headers and footers</h2>
-		<p>To set the header or footer bars to a different color in your theme, add the <code> data-theme</code> attribute and specify the letter of the theme swatch (a, b, c, etc.). For example, this will set the bar to swatch "b" (blue in the default theme):</p> 
+		<h2>Thématisation des entêtes et des pieds de page</h2>
+		<p>Pour définir une couleur différente dans votre thème de la barre d'entête ou de pied de page, ajoutez l'attribut <code> data-theme</code> et spécifiez la lettre du nuancierdu  thème (a, b, c, etc.). Par exemple, cela va mettre la barre avec le nuancier "b" (bleu dans le thème par défaut) :</p> 
 
 <div class="highlight"> 
 <pre>
 <span class="nt">&lt;div</span> <span class="na">data-role=</span><span class="s">"header"</span> <strong><span class="na">data-theme=</span><span class="s">"b"</span></strong><span class="nt">&gt;</span> 
-	<span class="nt">&lt;h1&gt;</span>Page Title<span class="nt">&lt;/h1&gt;</span> 
+	<span class="nt">&lt;h1&gt;</span>Titre de la page<span class="nt">&lt;/h1&gt;</span> 
 <span class="nt">&lt;/div&gt;</span> 
 </pre> 
 </div>
 
 		
-		<h2>Theming buttons in toolbars</h2>
+		<h2>Thématisation des boutons dans les barres d'outils</h2>
 
-		<p>Any link added inside the header block will be automatically styled as a button that matches the color of the bar's theme swatch. To make a button stand out as a primary call to action, the <code> data-theme</code> attribute can be used to specify a contrasting button color from a different theme swatch. For example, if we set the header to theme "c" (light gray), both buttons would be styled as the "c" button by default. If we wanted the Save button to visually pop, we can override the color by setting the <code> data-theme</code> attribute to "b" (blue in our default theme) on the Save button's anchor.</p> 
+		<p>Tout lien ajouté à l'intérieur du bloc d'entête sera automatiquement stylisé comme un bouton qui correspond à la couleur du nuancier du thème de la barre. Pour faire qu'un bouton ressorte comme un appel principale à l'action, l'attribut  <code> data-theme</code> peut être utilisé pour spécifier une couleur de bouton contrastée à partir d'un nuancier différent du thème. Par exemple, si nous mettons l'entête avec le thème "c" (gris clair), le bouton sera aussi stylisé comme un bouton "c" par défaut. Si nous voulons que le bouton Enregistrer soit plus visuel, on peut remplacer la couleur en définissant l'attribut <code> data-theme</code> à "b" (en bleu dans notre thème par défaut) sur l'ancrage du bouton Enregistrer.</p> 
 
 <div class="highlight"> 
 <pre>
-<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"add-user.php"</span> <strong><span class="na">data-theme=</span><span class="s">"b"</span></strong><span class="nt">&gt;</span>Save<span class="nt">&lt;/a&gt;</span> 
+<span class="nt">&lt;a</span> <span class="na">href=</span><span class="s">"add-user.php"</span> <strong><span class="na">data-theme=</span><span class="s">"b"</span></strong><span class="nt">&gt;</span>Enregistrer<span class="nt">&lt;/a&gt;</span> 
 </pre> 
 </div> 
 			
 
 		
 		<h2>Variations de thème</h2>
-		<p>This is a demo of the variation that can be achieved by tweaking the theme swatches and buttons inside the headers and footers.</p>
-		<h3>Headers</h3>
+		<p>Ceci est une démonstration de la variation qui peut être atteinte en modifiant les nuanciers de thème et les boutons à l'intérieur des entêtes et des pieds de page.</p>
+		<h3>Entêtes</h3>
 
 		
 		<div data-role="header" data-position="inline">
-			<h1>Bar theme "a"</h1>
-			<a href="index.html" data-icon="plus" data-theme="c">New</a>
+			<h1>Barre avec thème "a"</h1>
+			<a href="index.html" data-icon="plus" data-theme="c">Nouveau</a>
 		</div>
 		
 		<div data-role="header" data-position="inline">
 			<a href="index.html" data-icon="delete" iconpos="notext">Annuler</a>
-			<h1>Bar theme "a"</h1>
-			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Save</a>
+			<h1>Barre avec thème "a"</h1>
+			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Enregistrer</a>
 		</div>
 
 		<div data-role="header" data-position="inline" data-theme="b">
-			<h1>Bar theme "b"</h1>
-			<a href="index.html" data-icon="plus" data-theme="a">New</a>
+			<h1>Barre avec thème "b"</h1>
+			<a href="index.html" data-icon="plus" data-theme="a">Nouveau</a>
 		</div>
 
 		<div data-role="header" data-position="inline" data-theme="b">
 			<a href="index.html" data-icon="delete" iconpos="notext">Annuler</a>
-			<h1>Bar theme "b"</h1>
-			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="d">Save</a>
+			<h1>Barre avec thème "b"</h1>
+			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="d">Enregistrer</a>
 		</div>
 
 		<div data-role="header" data-position="inline" data-theme="c">
-			<h1>Bar theme "c"</h1>
-			<a href="index.html" data-icon="plus" data-theme="a">New</a>
+			<h1>Barre avec thème "c"</h1>
+			<a href="index.html" data-icon="plus" data-theme="a">Nouveau</a>
 		</div>
 
 		<div data-role="header" data-position="inline" data-theme="c">
 			<a href="index.html" data-icon="delete" iconpos="notext">Annuler</a>
-			<h1>Bar theme "c"</h1>
-			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Save</a>
+			<h1>Barre avec thème "c"</h1>
+			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Enregistrer</a>
 		</div>
 
 		<div data-role="header" data-position="inline" data-theme="d">
-			<h1>Bar theme "d"</h1>
-			<a href="index.html" data-icon="plus" data-theme="a">New</a>
+			<h1>Barre avec thème "d"</h1>
+			<a href="index.html" data-icon="plus" data-theme="a">Nouveau</a>
 		</div>
 
 		<div data-role="header" data-position="inline" data-theme="d">
 			<a href="index.html" data-icon="delete" iconpos="notext">Annuler</a>
-			<h1>Bar theme "d"</h1>
-			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Save</a>
+			<h1>Barre avec thème "d"</h1>
+			<a href="index.html" data-icon="arrow-r" data-iconpos="right" data-theme="b">Enregistrer</a>
 		</div>
 
-    <h3>Footers</h3>
-	<p>These are examples of a footer with link buttons inside. Note that footers do not have the same prescriptive markup contentions as headers with button slots so use <a href="../content/content-grids.html">layout grids</a> or custom styles to achieve the design you want.</p>
+    <h3>Pieds de page</h3>
+	<p>Ce sont des exemples de pied de page avec des boutons à l'intérieur. Remarquez que les pieds de page n'ont pas les mêmes prétentions de balisage prescriptible que les entêtes avec des boutons pour utiliser <a href="../content/content-grids.html">des grilles de mise en page</a> ou des styles personnalisés pour réaliser la conception que vous voulez.</p>
 	
 
 	
 	<div data-role="footer" data-theme="a">
-            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">left</a>
-            <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">right</a>
-            <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">up</a>
-            <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">down</a>
+            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">gauche</a> <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">droite</a> <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">haut</a> <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">bas</a>
 	</div>
     
 	<div data-role="footer" data-theme="b">
-            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">left</a>
-            <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">right</a>
-            <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">up</a>
-            <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">down</a>
+            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">gauche</a> <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">droite</a> <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">haut</a> <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">bas</a>
 	</div>
     
     <div data-role="footer" data-theme="c">
-            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">left</a>
-            <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">right</a>
-            <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">up</a>
-            <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">down</a>
+            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">gauche</a> <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">droite</a> <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">haut</a> <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">bas</a>
 	</div>
     
     	<div data-role="footer" data-theme="d">
-            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">left</a>
-            <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">right</a>
-            <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">up</a>
-            <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">down</a>
+            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">gauche</a> <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">droite</a> <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">haut</a> <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">bas</a>
 		</div>
     
     	<div data-role="footer" data-theme="e">
-            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">left</a>
-            <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">right</a>
-            <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">up</a>
-            <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">down</a>
+            <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="right">gauche</a> <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">droite</a> <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="right">haut</a> <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="right">bas</a>
 		</div>
 
 
