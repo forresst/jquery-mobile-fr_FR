@@ -37,7 +37,7 @@
 			
 			<p>Le menu de sélection est basée sur un élément <code>select</code> natif, qui est caché de la vue et remplacé par un bouton de sélection avec un style personnalisé qui correspond à l'aspect et à la convivialité du framework jQuery Mobile. Le menu de sélection est ARIA-enabled et accessible par le clavier sur un ordinateur de bureau. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux sélections.</p>
 			
-			<p>Par défaut, le framework s'appuie sur les options du menu natif de l'OS pour l'utiliser avec le bouton personnalisé. Lorsque le bouton est cliqué, le menu natif de l'OS va s'ouvrir. Quand une valeur est sélectionnée et que le menu se ferme, le texte du bouton personnalisé est mis à jour pour correspondre à la valeur sélectionnée.</p>
+			<p>Par défaut, le framework s'appuie sur les options du menu natif de l'OS pour l'utiliser avec le bouton personnalisé. Lorsque le bouton est cliqué, le menu natif de l'OS va s'ouvrir. Quand une valeur est sélectionnée et que le menu se ferme, le texte du bouton personnalisé est mis à jour pour correspondre à la valeur sélectionnée. Veuillez noter que le framework offre aussi la possibilité d'avoir des menus de sélection personnalisés (non natif), voir les détails au bas de cette page et dans la page <a href="custom.html">menu de sélection personnalisé</a>.</p>
 
 			<p>Pour ajouter un menu de sélection sur votre page, commencez avec un élément standard <code>select</code> peuplé avec un ensemble d'élément <code>option</code>. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID du <code>select</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.  </p>
 			
@@ -407,7 +407,10 @@ $('select').selectmenu();
 	</div>
 	
 	<h2>Menus de sélection personnalisés</h2>
-	<p>Pour des raisons de style avancé, le framework offre également une méthode de génération des <a href="custom.html">menus personnalisés</a> depuis l'existence d'un balisage de menu plutôt que de sélectionner le menu OS natif. Le menu personnalisé supporte les options désactivées et la sélection multiple (alors que le support natif de l'OS du mobile pour les deux est incompatible), cela apporte une façon élégante de gérer les valeurs placeholder et de reconstituer la fonctionnalité manquante sur certaines plateformes telles que le support de <code>optgroup</code> sur Android (tout est expliqué ci-dessous). <a href="custom.html" data-role="button">Documentation du menu de sélection personnalisé</a>
+	<p>Pour des raisons de style avancé, le framework offre également une méthode de génération des <a href="custom.html">menus personnalisés</a> depuis l'existence d'un balisage de menu plutôt que de sélectionner le menu OS natif. Le menu personnalisé supporte les options désactivées et la sélection multiple (alors que le support natif de l'OS du mobile pour les deux est incompatible), cela apporte une façon élégante de gérer les valeurs placeholder et de reconstituer la fonctionnalité manquante sur certaines plateformes telles que le support de <code>optgroup</code> sur Android (tout est expliqué ci-dessous).
+		
+	<div align="right"><a href="custom.html" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true" align="right">Documentation du menu de sélection personnalisé</a>
+</div>
 		</p>
 	
 	</div><!--/content-primary -->		
