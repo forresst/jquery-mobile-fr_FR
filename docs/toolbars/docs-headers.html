@@ -52,50 +52,50 @@
 			
 			
 	
-			<p>Dans la configuration standard de l'entête, il y a des emplacements pour les boutons de chaque côté du texte du titre. Each button is typically an <code>anchor</code> element, but any valid <a href="../buttons/buttons-types.html">button markup</a> will work. To save space, buttons in toolbars are set to <a href="../buttons/buttons-inline.html">inline styling</a> so the button is only as wide as the text and icons it contains. </p>
+			<p>Dans la configuration standard de l'entête, il y a des emplacements pour les boutons de chaque côté du texte du titre. Chaque bouton est généralement un élément <code>anchor</code>, mais toutes les <a href="../buttons/buttons-types.html">balises de bouton</a> valide fonctionneront. Pour économiser de l'espace, les boutons dans les barres d'outils sont définis avec un <a href="../buttons/buttons-inline.html">style aligné</a> de sorte que le bouton soit aussi large que le texte et les icônes qu'il contient. </p>
 
 
 		
 		
-			<h3>Default button positioning</h3>
+			<h3>Positionnement par défaut des boutons</h3>
 		
-			<p>The header plugin looks for immediate children of the header container, and automatically sets the first link in the left button slot and the second link in the right. In this example, the 'Cancel' button will appear in the left slot and 'Save' will appear in the right slot based on their sequence in the source order.  </p> 
+			<p>Le plugin d'entête regarde les enfants immédiats du conteneur d'entête, et configure automatiquement le premier lien dans le bouton de gauche et le deuxième lien dans le droit. Dans cet exemple, le bouton 'Annuler' apparaîtra dans l'emplacement de gauche et 'Enregistrer' apparaîtra dans l'emplacement de droite en fonction de leur séquence dans l'ordre de la source. </p> 
 			
 
 <pre><code>			
 &lt;div data-role="header" data-position="inline"&gt;
-	&lt;a href="index.html" data-icon="delete"&gt;Cancel&lt;/a&gt;
-	&lt;h1&gt;Edit Contact&lt;/h1&gt;
-	&lt;a href="index.html" data-icon="check"&gt;Save&lt;/a&gt;
+	&lt;a href="index.html" data-icon="delete"&gt;Annuler&lt;/a&gt;
+	&lt;h1&gt;Modifier le contact&lt;/h1&gt;
+	&lt;a href="index.html" data-icon="check"&gt;Enregistrer&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 	
 	
 			<div data-role="header" data-position="inline">
 				<a href="index.html" data-icon="delete">Annuler</a>
-				<h1>Edit Contact</h1>
+				<h1>Modifier le contact</h1>
 				<a href="index.html" data-icon="check">Enregistrer</a>
 			</div>
-			<p>Buttons automatically adopt the swatch color of the bar they sit in, so a link in a header bar with the "a" color will also be styled as "a" colored buttons. It's simple to make a button visually stand out — here, we add the <code> data-theme</code> attribute and set the color swatch for the button to "b" to make the "Save" button pop.</p>
+			<p>Les boutons adoptent automatiquement la couleur du nuancier de la barre où ils sont positionnés, de sorte qu'un lien dans une barre d'entête avec la couleur "a" sera également stylisé comme les boutons colorés "a". C'est simple de faire un bouton qui ressort visuellement - ici, nous ajoutons l'attribut <code> data-theme</code> et définissons le nuancier de couleur pour le bouton à "b" pour mettre en évidence le bouton "Enregistrer".</p>
 			
 			<pre><code>			
 &lt;div data-role="header" data-position="inline"&gt;
-	&lt;a href="index.html" data-icon="delete"&gt;Cancel&lt;/a&gt;
-	&lt;h1&gt;Edit Contact&lt;/h1&gt;
-	&lt;a href="index.html" data-icon="check" data-theme="b"&gt;Save&lt;/a&gt;
+	&lt;a href="index.html" data-icon="delete"&gt;Annuler&lt;/a&gt;
+	&lt;h1&gt;Modifier le contact&lt;/h1&gt;
+	&lt;a href="index.html" data-icon="check" data-theme="b"&gt;Enregistrer&lt;/a&gt;
 &lt;/div&gt;
 </code></pre>
 			
 						
 			<div data-role="header" data-position="inline">
 				<a href="index.html" data-icon="delete">Annuler</a>
-				<h1>Edit Contact</h1>
+				<h1>Modifier le contact</h1>
 				<a href="index.html" data-icon="check" data-theme="b">Enregistrer</a>
 			</div>
 	
-			<h3>Controlling button position with classes</h3>
+			<h3>Contrôler le positionnement du bouton avec des classes</h3>
 	
-			<p>The button position can also be controlled by adding classes to the button anchors, rather than relying on source order. This is especially useful if you only want a button in the right slot. To specify the button position, add the class of <code>ui-btn-left</code> or <code>ui-btn-right</code> to the anchor.</p> 
+			<p>La position du bouton peut également être contrôlée par l'ajout de classes à l'ancrage du bouton, plutôt que de compter sur l'ordre de la source. Ceci est particulièrement utile si vous voulez seulement un bouton dans l'emplacement de droite. Pour spécifier la position du bouton, ajoutez la classe <code>ui-btn-left</code> ou <code>ui-btn-right</code> à l'ancrage.</p> 
 
 			
 
@@ -103,55 +103,54 @@
 <div class="highlight"> 
 <pre><code>
 &lt;div data-role="header" data-position="inline" 
-	&lt;h1&gt;Page Title&lt;/h1&gt;
+	&lt;h1&gt;Titre de la page&lt;/h1&gt;
 	&lt;a href="index.html" data-icon="gear" class="ui-btn-right"&gt;Options&lt;/a&gt;
 &lt;/div&gt;
 </code></pre> 
 </div> 
 
 			<div data-role="header" data-position="inline" >
-				<h1>Page Title</h1>
+				<h1>Titre de la page</h1>
 				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
 			</div>
 			
 			
-		<h2>Adding Back buttons</h2>
+		<h2>Ajout des boutons Retour</h2>
 		
-		<p>jQuery Mobile has a feature to automatically create and append "back" buttons to any header, though it is disabled by default. This is primarily useful in chromeless installed applications, such as those running in a native app web view. The framework automatically generates a "back" button on a header when the page plugin's <code>addBackBtn</code> option is true. This can also be set via markup if the page div has a <code>data-add-back-btn="true"</code> attribute.  </p> 
+		<p>jQuery Mobile a une fonctionnalité pour automatiquement créer et d'ajouter des boutons "retour" pour l'entête, bien qu'elle soit désactivée par défaut. Ceci est principalement utile dans les applications installées sans habillage, tels que celles qui fonctionnent dans une vue web app native. Le framework génère automatiquement un bouton "retour" sur une entête lorsque l'option <code>addBackBtn</code> du plugin page est à true. Cela peut aussi être définie via le balisage si le div de la page a un attribut <code>data-add-back-btn="true"</code>. </p> 
 		
 		
 		<p>Si vous utilisez l'attribut <code>data-rel="back"</code> sur une ancre, tout clic sur cette ancre imitera le bouton retour, remontant une entrée de l'historique et en ignorant le href par défaut de l'ancre. Ceci est particulièrement utile lors de la liaison de retour vers une page nommée, comme un lien qui s'appelle "accueil", ou lors de la génération des boutons "retour" avec JavaScript, comme un bouton pour fermer une fenêtre de dialogue. Lorsque vous utilisez cette fonctionnalité dans votre balisage source, <strong>assurez vous de fournir un href significatif qui pointe réellement sur l'URL de la page de référence (cela permettra à la fonction de travailler pour les utilisateurs de C-Grade navigateurs)</strong>. Aussi, s'il vous plaît garder à l'esprit que si vous voulez juste une transition inverse sans réellement retourner dans l'historique, vous devez utiliser à la place l'attribut <code>data-direction="reverse"</code>.</p>	
 			
-		<h2>Customizing the back button text</h2>	
+		<h2>Personnalisation du texte du bouton Retour</h2>	
 		
-		<p>If you'd like to configure the back button text, you can either use the <code>data-back-btn-text="previous"</code> attribute on your page element, or set it programmatically via the page plugin's options: <br /><code>$.mobile.page.prototype.options.backBtnText = "previous";</code></p>
+		<p>Si vous souhaitez configurer le texte du bouton retour, vous pouvez soit utiliser l'attribut <code>data-back-btn-text="précédent"</code> sur ​​l'élément de votre page, ou le définir par programmation via les options du plugin de page : <br /><code>$.mobile.page.prototype.options.backBtnText = "précédent";</code></p>
 		
-		<h3>Default back button style</h3>
-		<p>If you'd like to configure the back button role-theme, you can use: <br /><code>$.mobile.page.prototype.options.backBtnTheme = "a";</code><br />
-		If you're doing this programmatically, set this option inside the mobileinit event handler.</p>
+		<h3>Style par défaut du bouton Retour</h3>
+		<p>Si vous souhaitez configurer le thème du bouton Retour, vous pouvez utiliser : <br /><code>$.mobile.page.prototype.options.backBtnTheme = "a";</code><br />  Si vous faites cela par programmation, définissez cette option à l'intérieur du gestionnaire d'événements mobileinit.</p>
 
-			<h2>Custom header configurations</h2>
-			<p>If you need to to create a header that doesn't follow the default configuration, simply wrap your custom styled markup in a container <code>div</code> inside the header container and the plugin won't apply the automatic button logic so you can write custom styles for laying out the content in your header.</p> 
+			<h2>Configurations personnalisées de l'entête</h2>
+			<p>Si vous avez besoin de créer une entête qui ne suit pas la configuration par défaut, il suffit d'envelopper votre balisage personnalisé de style dans un conteneur <code>div</code> à l'intérieur du conteneur de l'entête et le plugin n'appliquera pas automatiquement la logique du bouton de sorte que vous puissiez écrire des styles personnalisés pour la mise en forme du contenu de votre entête.</p> 
 
-			<p>It's also possible to create custom bars without using the header data-role at all. For example, start with any container and add the <code>ui-bar</code> class to apply standard bar padding and  add the <code>ui-bar-b</code> class to assign the bar swatch styles from your theme (the "b" can be any swatch letter).</p>
+			<p>Il est également possible de créer des barres personnalisées sans jamais utiliser le data-role de l'entête. Par exemple, commencez avec n'importe quel conteneur et ajoutez la classe <code>ui-bar</code> pour demander un espacement standard de la barre et ajoutez la classe <code>ui-bar-b</code> pour attribuer les styles du nuancier de la barre à partir de votre thème (le "b" peut être n'importe quelle lettre du nuancier).</p>
 			
 			<pre><code>
 &lt;div <strong>class="ui-bar ui-bar-b"</strong>&gt;
-	&lt;h3&gt;I'm just a div with bar classes and a &lt;a href="#" data-role="button"&gt;Button&lt;/a&gt;&lt;/h3&gt;
+	&lt;h3&gt;Je suis juste un div avec des classes de barre et un &lt;a href="#" data-role="button"&gt;Bouton&lt;/a&gt;&lt;/h3&gt;
 &lt;/div&gt;
 			</code></pre>
 
-			<p>This will produce this bar:</p>
+			<p>Ceci produira cette barre :</p>
 				<div class="ui-bar ui-bar-b">
-					<h3>I'm just a div with bar classes and a <a href="#" data-role="button">Button</a></h3>
+					<h3>e suis juste un div avec des classes de barre et un <a href="#" data-role="button">Bouton</a></h3>
 				</div>
 				
-				<p>By writing some simple styles, it's easy to build little message bars like this:</p><!-- Yes, the inline styles aren't recommended in a real system but they are used to simply illustrate how to tweak CSS -->
+				<p>En écrivant certains styles simples, il est facile de construire des barres de petit message comme ceci :</p><!-- Yes, the inline styles aren't recommended in a real system but they are used to simply illustrate how to tweak CSS -->
 					
 					<div class="ui-bar ui-bar-e">
-						<h3 style="float:left; margin-top:8px;">This is an alert message with dismiss button.  </h3>
+						<h3 style="float:left; margin-top:8px;">Ceci est un message d'alerte avec un bouton pour le fermer. </h3>
 						<div style="float:right; margin-top:4px;"><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Bouton</a></div>
-						<p style="clear:both; font-size:85%; margin-bottom:8px;">And here's some additional text in a paragraph.</p>
+						<p style="clear:both; font-size:85%; margin-bottom:8px;">Et voici un texte supplémentaire dans un paragraphe.</p>
 					</div>
 				</div><!--/content-primary -->		
 
