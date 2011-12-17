@@ -25,8 +25,8 @@
 		<div class="content-primary">		
 	<h2>Barre de navigation simple</h2>
 	
-	<p>jQuery Mobile has a very basic navbar widget that is useful for providing up to 5 buttons with optional icons in a bar, typically within a header or footer. There is also a <a href="footer-persist-a.html">persistent navbar</a> variation that works more like a tab bar that stays fixed as you navigate across pages.</p>
-	<p>A navbar is coded as an unordered list of links wrapped in a container element that has the <code> data-role="navbar"</code> attribute. To set one of links to the active (selected) state, add <code>class="ui-btn-active"</code> to the anchor. In this example, we have a two-button navbar in the footer with the "One" item set to active:</p>
+	<p>jQuery Mobile a un widget de barre de navigation très simple qui est utile pour fournir un maximum de 5 boutons avec des icônes en option dans une barre, généralement au sein d'une entête ou d'un pied de page. Il y a également une variante, une <a href="footer-persist-a.html">barre de navigation persistante</a> qui fonctionne davantage comme une barre d'onglets qui reste fixe pendant que vous naviguez à travers les pages.</p>
+	<p>Une barre de navigation est codée comme une liste non ordonnée de liens enveloppée dans un élément de conteneur qui contient l'attribut <code> data-role="navbar"</code>. Pour définir l'un des liens à l'état actif (sélectionné) , ajoutez <code>class="ui-btn-active"</code> à l'ancrage. Dans cet exemple, nous avons une barre de navigation à deux boutons dans le pied de page avec l'élément "Un" définie à actif :</p>
 	
 <pre><code>
 <strong>&lt;div data-role="navbar"&gt;</strong>
@@ -37,49 +37,50 @@
 <strong>&lt;/div&gt;&lt;!-- /navbar --&gt;</strong>
 </code></pre>
 
-	<p>The navbar items are set to divide the space evenly so in this case, each button is 1/2 the width of the browser window:</p>
+	<p>Les éléments de la barre de navigation sont définis pour diviser l'espace uniformément dans ce cas, chaque bouton est la moitié de largeur de la fenêtre du navigateur:</p>
 
 
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#" class="ui-btn-active">One</a></li>
-				<li><a href="#">Two</a></li>
+				<li><a href="#" class="ui-btn-active">Un</a></li>
+				<li><a href="#">Deux</a></li>
 			</ul>
 		</div><!-- /navbar -->
 
 	
-	<p>Adding a third item will automatically make each button 1/3 the width of the browser window:</p>
+	<p>L'ajout d'un troisième élément rendra automatiquement chaque bouton avec un tiers de la largeur de la fenêtre du navigateur :</p>
 
 
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#" class="ui-btn-active">One</a></li>
-				<li><a href="#">Two</a></li>
+				<li><a href="#" class="ui-btn-active">Un</a></li>
+				<li><a href="#">Deux</a></li>
 				<li><a href="#">Trois</a></li>
 			</ul>
 		</div><!-- /navbar -->
 
 	
-	<p>Adding a fourth more item will automatically make each button 1/4 the width of the browser window:</p>
+	<p>L'ajout d'un quatrième élément rendra automatiquement chaque bouton avec un quart de la largeur de la fenêtre du navigateur :</p>
 
 
 		<div data-role="navbar" data-grid="c">
 			<ul>
-				<li><a href="#" class="ui-btn-active">One</a></li>
-				<li><a href="#">Two</a></li>
+				<li><a href="#" class="ui-btn-active">Un</a></li>
+				<li><a href="#">Deux</a></li>
 				<li><a href="#">Trois</a></li>
 				<li><a href="#">Quatre</a></li>
 			</ul>
 		</div><!-- /navbar -->
 
 
-	<p>The navbar maxes out with 5 items, each 1/5 the width of the browser window:</p>
+	<p>La barre de navigation autorise 5 éléments au maximum, chacun utilise un cinquième de la largeur de la fenêtre du navigateur :
+</p>
 
 
 		<div data-role="navbar" data-grid="d">
 			<ul>
-				<li><a href="#" class="ui-btn-active">One</a></li>
-				<li><a href="#">Two</a></li>
+				<li><a href="#" class="ui-btn-active">Un</a></li>
+				<li><a href="#">Deux</a></li>
 				<li><a href="#">Trois</a></li>
 				<li><a href="#">Quatre</a></li>
 				<li><a href="#">Cinq</a></li>
@@ -87,12 +88,12 @@
 		</div><!-- /navbar -->
 
 	
-	<p>If more than 5 items are added, the navbar will simply wrap to multiple lines:</p>
+	<p>Si plus de 5 éléments sont ajoutés, la barre de navigation sera tout simplement envelopper sur plusieurs lignes :</p>
 	
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#" class="ui-btn-active">One</a></li>
-				<li><a href="#">Two</a></li>
+				<li><a href="#" class="ui-btn-active">Un</a></li>
+				<li><a href="#">Deux</a></li>
 				<li><a href="#">Trois</a></li>
 				<li><a href="#">Quatre</a></li>
 				<li><a href="#">Cinq</a></li>
@@ -104,17 +105,17 @@
 			</ul>
 		</div><!-- /navbar -->
 	
-	<p>As a fallback, navbars with 1 item will simply render as 100%.</p>
+	<p>En dernier recours, les barres de navigation avec 1 élément sera simplement rendu à 100%.</p>
 	
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#" class="ui-btn-active">One</a></li>
+				<li><a href="#" class="ui-btn-active">Un</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	
-	<h2>Navbars in headers</h2>
+	<h2>Barres de navigation dans les entêtes</h2>
 	
-	<p>If you want to add a navbar to the top of the page, you can still have a page title and buttons. Just add the navbar container inside the header block, right after the title and buttons in the source order.</p>
+	<p>Si vous souhaitez ajouter une barre de navigation en haut de la page, vous pouvez toujours avoir un titre de page et des boutons. Il suffit d'ajouter le conteneur de la barre de navigation à l'intérieur du bloc de l'entête, juste après le titre et les boutons dans l'ordre du code.</p>
 
 	<div data-role="header">
 		<h1>Je suis l'entête</h1>
@@ -122,23 +123,23 @@
 				
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#">One</a></li>
-				<li><a href="#">Two</a></li>
+				<li><a href="#">Un</a></li>
+				<li><a href="#">Deux</a></li>
 				<li><a href="#">Trois</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /header -->
 	
-	<h2>Navbars in footers</h2>
+	<h2>Barres de navigation dans les pied de page</h2>
 	
-	<p>If you want to add a navbar to the bottom of the page so it acts more like a tab bar, simply wrap the navbar in a container with a <code>data-role="footer"</code></p>
+	<p>Si vous souhaitez ajouter une barre de navigation au bas de la page afin qu'elle agisse plus comme une barre d'onglets, il suffit d'envelopper la la barre de navigation dans un conteneur avec un <code>data-role="footer"</code></p>
 <pre><code>
 &lt;div data-role="footer"&gt;		
 	&lt;div data-role="navbar"&gt;
 		&lt;ul&gt;
-			&lt;li&gt;&lt;a href="#"&gt;One&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href="#"&gt;Two&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href="#"&gt;Three&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="#"&gt;Un&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="#"&gt;Deux&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="#"&gt;Trois&lt;/a&gt;&lt;/li&gt;
 		&lt;/ul&gt;
 	&lt;/div&gt;&lt;!-- /navbar --&gt;
 &lt;/div&gt;&lt;!-- /footer --&gt;
@@ -146,16 +147,16 @@
 	<div data-role="footer">		
 		<div data-role="navbar">
 			<ul>
-				<li><a href="#">One</a></li>
-				<li><a href="#">Two</a></li>
+				<li><a href="#">Un</a></li>
+				<li><a href="#">Deux</a></li>
 				<li><a href="#">Trois</a></li>
 			</ul>
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 	
-	<h2>Icons in navbars</h2>
+	<h2>Icônes dans les barres de navigation</h2>
 	
-	<p>Icons can be added to navbar items by adding the <code> data-icon</code> attribute specifying a <a href="../buttons/buttons-icons.html">standard mobile icon</a> to each anchor. By default, icons are added above the text (<code>data-iconpos="top"</code>). The following examples add icons to a navbar in a footer.</p>
+	<p>Les icônes peuvent être ajoutées aux éléments de la barre de navigation en ajoutant l'attribut <code> data-icon</code> en spécifiant une  <a href="../buttons/buttons-icons.html">icône mobile standard</a>  pour chaque ancrage. Par défaut, les icônes sont ajoutées au-dessus du texte (<code>data-iconpos="top"</code>). Les exemples suivants ajoutent des icônes à la barre de navigation dans un pied de page.</p>
 
 	<div data-role="footer">
 		<div data-role="navbar">
@@ -167,11 +168,11 @@
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 	
-	<p>The icon position is set <em>on the navbar container</em> instead of for individual links within for visual consistency. For example, to place the icons below the labels, add the <code> data-iconpos="bottom"</code> attribute to the navbar container.</p>
+	<p>La position de l'icône est définie <em>sur le conteneur de la barre de navigation</em> plutôt que cela soit défini individuellement sur les liens par souci de cohérence visuelle. Par exemple, pour placer les icônes dessous les textes, ajoutez l'attribut <code> data-iconpos="bottom"</code> au conteneur de la la barre de navigation.</p>
 <pre><code>
 &lt;div data-role="navbar" <strong>data-iconpos="bottom"</strong>&gt;
 </code></pre>
-	<p>This will result in a bottom icon alignment:</p>
+	<p>Cela se traduira par un alignement d'icône en bas :</p>
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="bottom">
 			<ul>
@@ -182,7 +183,7 @@
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 	
-	<p>The icon position can be set to <code>data-iconpos="left"</code>:</p>
+	<p>La position de l'icône peut être réglée à <code>data-iconpos="left"</code> :</p>
 
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="left">
@@ -194,7 +195,7 @@
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 	
-	<p>Or the icon position can be set to <code>data-iconpos="right"</code>:</p>
+	<p>Ou, la position de l'icône peut être réglée à <code>data-iconpos="right"</code> :</p>
 
 	<div data-role="footer">
 		<div data-role="navbar" data-iconpos="right">
@@ -206,9 +207,9 @@
 		</div><!-- /navbar -->
 	</div><!-- /footer -->
 	
-	<h2>Using 3rd party icon sets</h2>
+	<h2>Utilisation d'ensembles d'icônes extérieurs</h2>
 	
-	<p>You can add any of the popular icon libraries like <a href="http://glyphish.com/">Glyphish</a> to achieve the iOS style tab that has large icons stacked on top of text labels. All that is required is a bit of custom styles to link to the icons and position them in the navbar. Here is an example using Glyphish icons and custom styles (view page source for styles) in our navbar:</p>
+	<p>Vous pouvez ajouter l'une des bibliothèques d'icônes populaires comme <a href="http://glyphish.com/">Glyphish</a> pour réaliser un onglet de style iOS qui a de grandes icônes au dessus des étiquettes de texte. Tout ce qui est requis, c'est seulement des styles personnalisés vers un lien vers les icônes et les positionner dans la barre de navigation. Voici un exemple utilisant des icônes et des styles personnalisés Glyphish (affichez le code de la page pour les styles) dans notre la barre de navigation :</p>
 	
 	
 	<style>	
@@ -237,10 +238,10 @@
 	<p>Icônes par Joseph Wain / <a href="http://glyphish.com/">glyphish.com</a>. Sous licence <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
 
 
-	<h2>Theming navbars</h2>
+	<h2>Thématisation des barres de navigations</h2>
 	
-	<p>Navbars inherit the theme swatch from their parent container, just like buttons. If a navbar is placed in the header or footer toolbar, it will inherit the default toolbar swatch (A) for bars unless you set this in the markup.  </p>
-	<p>Here are a few examples of navbars in various container swatches that automatically inheriting their parent's swatch letter. Note that in these examples, instead of using a <code>data-theme</code> attribute, we're manually adding the swatch classes to apply the body swatch (<code>ui-body-a</code>) and the class to add the standard body padding (ui-body), but the inheritance works the same way:</p>
+	<p>Les barres de navigation héritent du nuancier de thème de leur conteneur parent, tout comme les boutons. Si une la barre de navigation est placée dans l'entête ou le pied de page de la barre d'outils, elle héritera du nuancier (A) de la barre d'outils par défaut pour les barres, sauf si vous définissez ceci dans le balisage. </p>
+	<p>Voici quelques exemples de barres de navigation dans différents nuancier de conteneur qui automatiquement héritent de la lettre du nuancier de leurs parents. Notez que dans ces exemples, au lieu d'utiliser un attribut <code>data-theme</code>, nous ajoutons manuellement les classes de nuancier pour appliquer le nuancier du corps (<code>ui-body-a</code>) et la classe pour ajouter l'espacement standard du corps (ui-body), mais l'héritage fonctionne de la même manière :</p>
 
 	<div class="ui-body-a ui-body">
 		<h3>Échantillon A</h3>
@@ -268,7 +269,7 @@
 		</div><!-- /navbar -->
 	</div><!-- /container -->
 	
-<p>To set to the theme color for a navbar item, add the <code>data-theme</code> attribute to the individual links and specify a theme swatch. Note that applying a theme swatch to the navbar container is <em>not</em> supported.</p>
+<p>Pour définir la couleur du thème pour un élément de la barre de navigation, ajoutez l'attribut <code>data-theme</code> pour les liens individuels et spécifiez un nuancier du thème. Notez que l'application d'un nuancier de thème au conteneur de la barre de navigation  <em>n'est pas</em> supporté.</p>
 	<div data-role="footer">
 		<div data-role="navbar">
 			<ul>

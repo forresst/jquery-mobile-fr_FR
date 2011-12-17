@@ -209,7 +209,7 @@ $(document).bind('mobileinit',function(){
 });
 		</pre></code>
 
-<p>Un cas particulier est celui des selects. L'exemple ci-dessus permettra d'éviter toute augmentation de prise de place sur les éléments select dans la page si <code>select</code> est inclus. Si vous souhaitez conserver les performances natives, l'aspect et la convivialité du menu lui-même et profiter de l'augmentation visuelle du bouton de sélection par Mobile jQuery, vous pouvez définir $.mobile.nativeSelectMenu à true dans une fonction de rappel <code>mobileinit</code> comme un paramètre global ou utilisez <code>data-native="true"</code> au cas par cas.</p>
+<p>Un cas particulier est celui des selects. L'exemple ci-dessus permettra d'éviter toute augmentation de prise de place sur les éléments select dans la page si <code>select</code> est inclus. Si vous souhaitez conserver les performances natives, l'aspect et la convivialité du menu lui-même et profiter de l'augmentation visuelle du bouton de sélection par Mobile jQuery, vous pouvez définir <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> à true dans une fonction de rappel <code>mobileinit</code> comme un paramètre global ou utilisez <code>data-native="true"</code> au cas par cas.</p>
 
 		
 
