@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile Framework - Converter Demo Application</title> 
+	<title>Framework jQuery Mobile - Application de démonstration du convertisseur</title> 
 	<link rel="stylesheet"  href="../../css/themes/default/" />
 	<link rel="stylesheet"  href="converter.css" /> 
 	<script src="../../js/jquery.js"></script>
@@ -35,12 +35,12 @@
 	</script>
 	
 	<div data-role="header" data-theme="e">
-		<a href="#customize" data-rel="dialog" data-transition="pop" data-icon="gear" class="ui-btn-right">Edit</a>
-		<h1>Currency converter</h1>
+		<a href="#customize" data-rel="dialog" data-transition="pop" data-icon="gear" class="ui-btn-right">Modifier</a>
+		<h1>Convertisseur de devises</h1>
 	</div>
 	<div class="ui-bar ui-bar-a">
 			<form method="get" action="" data-role="autoform" id="curr-form">
-				<label for="term" data-role="nojs">Search:</label>
+				<label for="term" data-role="nojs">Recherche :</label>
 				<input type="search" name="term" id="term" placeholder="Type a value..." value="25" data-theme="a" />
 			</form>
 	</div>
@@ -53,8 +53,8 @@
 <div data-role="page" id="customize" class="ui-body-b">
 	
 	<div data-role="header" data-theme="b">
-		<h1>Edit conversions</h1>
-		<a href="#start" data-transition="fade" data-theme="b" data-icon="check" class="ui-btn-right">Done</a>
+		<h1>Modifier les conversions</h1>
+		<a href="#start" data-transition="fade" data-theme="b" data-icon="check" class="ui-btn-right">Fait</a>
 	</div>
 	
 	<div data-role="content">
@@ -62,38 +62,36 @@
 		</ul>
 	</div>
 	<div class="ui-body">
-		<a href="#add-currency-dialog" data-role="button">Add new...</a>
-		<a id="restore" href="#" data-role="button" data-theme="c">Restore defaults</a>
+		<a href="#add-currency-dialog" data-role="button">Ajouter nouveau...</a> <a id="restore" href="#" data-role="button" data-theme="c">Restaurer par défaut</a>
 	</div>
 </div>
 
 <div data-role="page" id="add-currency-dialog" class="ui-body-b">
 	<div data-role="header" data-theme="a">
-		<h1>Add new</h1>
+		<h1>Ajouter nouveau</h1>
 		<a href="#customize" class="ui-back" data-icon="arrow-l">Annuler</a>
 	</div>
 	
 	<div data-role="content">
-		<h2>Select currencies to convert:</h2>
+		<h2>Sélectionnez les devises à convertir :</h2>
 		<div data-role="fieldcontain">
-			<label for="currency-options-from">From</label>
+			<label for="currency-options-from">De</label>
 			<select name="currency-options" id="currency-options-from" data-theme="c">
-				<option value="EUR">EUR to Euro</option>
-				<option value="USD">USD to US Dollar</option>
-				<option value="GBP">GBP to Great Britain Pound</option>
+				<option value="EUR">EUR vers Euro</option>
+				<option value="USD">USD vers US Dollar</option>
+				<option value="GBP">GBP vers Grande-Bretagne Pound</option>
 			</select>
 		</div>
 		<div data-role="fieldcontain">
-			<label for="currency-options-to">To</label>
+			<label for="currency-options-to">Vers</label>
 			<select name="currency-options" id="currency-options-to" data-theme="c">
-				<option value="EUR">EUR to Euro</option>
-				<option value="USD">USD to US Dollar</option>
-				<option value="GBP">GBP to Great Britain Pound</option>
+				<option value="EUR">EUR vers Euro</option>
+				<option value="USD">USD vers US Dollar</option>
+				<option value="GBP">GBP vers Grande-Bretagne Pound</option>
 			</select>
 		</div>
 		<div data-role="fieldcontain">
-		<a id="cancel" href="#customize" data-role="button" data-theme="c" data-inline="true">Cancel</a>
-		<a id="add" href="#customize" data-role="button" data-theme="b" data-inline="true">Add conversion</a>
+		<a id="cancel" href="#customize" data-role="button" data-theme="c" data-inline="true">Annuler</a> <a id="add" href="#customize" data-role="button" data-theme="b" data-inline="true">Ajouter une conversion</a>
 		</div>
 	</div>
 </div>
