@@ -2,6 +2,20 @@
 * custom "selectmenu" plugin
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Fully-custom select menus.
+//>>label: Custom Selects
+
+define( [
+	"jquery.mobile.buttonMarkup",
+	"jquery.mobile.core",
+	"jquery.mobile.dialog",
+	"jquery.mobile.forms.select",
+	"jquery.mobile.listview",
+	"jquery.mobile.page",
+	// NOTE expects ui content in the defined page, see selector for menuPageContent definition
+	"jquery.mobile.page.sections" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var extendSelect = function( widget ){
 
@@ -300,8 +314,8 @@
 					tScrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage,
 					scrollTop = tOverflow ? tScrollElem.scrollTop() : $( window ).scrollTop(),
 					btnOffset = self.button.offset().top,
-					screenHeight = window.innerHeight,
-					screenWidth = window.innerWidth;
+					screenHeight = $(window).height(),
+					screenWidth = $(window).width();
 
 				//add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );
@@ -491,3 +505,6 @@
 		}
 	});
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

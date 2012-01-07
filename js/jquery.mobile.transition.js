@@ -2,6 +2,15 @@
 * "transitions" plugin - Page change tranistions
 */
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Page change tranistions.
+//>>label: Page Transitions
+
+// TODO the dependency defined here for transitions is to make sure
+// that the defaultTransitionHandler is defined _after_ navigation has been defined
+// This requires a rework/rethinking
+define( [ "jquery.mobile.core", "order!jquery.mobile.navigation" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 function css3TransitionHandler( name, reverse, $to, $from ) {
@@ -43,3 +52,6 @@ if ( $.mobile.defaultTransitionHandler === $.mobile.noneTransitionHandler ) {
 }
 
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

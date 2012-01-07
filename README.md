@@ -98,6 +98,19 @@ Vous avez besoin que les modules Apache suivants soient chargés :
 * Expire (mod\_expires.so)
 * Header (mod\_headers.so)
 
+Sinon, avec l'ajout du chargement asynchrone, vous pouvez utiliser le simple serveur HTTP Python à partir de la racine du projet :
+
+    $ python -m SimpleHTTPServer 8000
+
+Et dans votre navigateur visitez [localhost:8000](http://localhost:8000).
+
+Support AMD dans le développement
+=================================
+
+Veuillez garder à l'esprit que le chargement asynchrone n'est pas supporté pour la production et est principalement utilisé pour le processus de construction du projet.
+
+Si vous trouvez des bugs de dépendance lorsque vous utilisez le support de chargement asynchrone pour le développement veuillez le préciser dans le suivi des problèmes github.
+
 Construction avec un thème personnalisé
 =======================================
 Pour utiliser un thème personnalisé dans votre propre construction, vous aurez besoin d'avoir Make installé. Vous pouvez trouver des thèmes dans le dossier CSS/Themes.

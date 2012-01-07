@@ -1,13 +1,15 @@
-/*
-* "core" - The base file for jQm
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: The base file for jQM
+//>>label: Core
 
+define( [ "jquery.mobile.widget" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 	var nsNormalizeDict = {};
 
 	// jQuery.mobile configurable options
-	$.extend( $.mobile, {
+	$.mobile = $.extend( {}, {
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -22,6 +24,9 @@
 
 		// Class used for "active" button state, from CSS framework
 		activeBtnClass: "ui-btn-active",
+
+		// Class used for "focus" form element state, from CSS framework
+		focusClass: "ui-focus",
 
 		// Automatically handle clicks and form submissions through Ajax, when same-domain
 		ajaxEnabled: true,
@@ -171,7 +176,7 @@
 				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
 				.data("page");
 		}
-	});
+	}, $.mobile );
 
 	// Mobile version of data and removeData and hasData methods
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
@@ -247,4 +252,7 @@
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
 

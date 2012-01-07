@@ -1,7 +1,13 @@
-/*
-* core utilities for auto ajax navigation, base tag mgmt,
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Formats groups of links as nav bars.
+//>>label: Navigation Bars
 
+define( [
+	"jquery.mobile.core",
+	"jquery.mobile.event",
+	"jquery.mobile.hashchange",
+	"jquery.mobile.page" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
 	//define vars for interal use
@@ -1436,7 +1442,7 @@
 
 				// If current active page is not a dialog skip the dialog and continue
 				// in the same direction
-				if(!$.mobile.activePage.is( ".ui-dialog" )) {
+				if(!$.mobile.activePage.is( ".ui-dialog-page" )) {
 					//determine if we're heading forward or backward and continue accordingly past
 					//the current dialog
 					urlHistory.directHashChange({
@@ -1499,3 +1505,6 @@
 	};//_registerInternalEvents callback
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

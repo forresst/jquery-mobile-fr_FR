@@ -1,11 +1,14 @@
-.ui-dialog { min-height: 480px; }
+.ui-dialog { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; }
+
+.ui-dialog .ui-header {
+	margin-top: 15%;
+}
 .ui-dialog .ui-header, 
 .ui-dialog .ui-content, 
 .ui-dialog .ui-footer { 
-	max-width: 500px; 
-	margin: 10% auto 15px auto; 
-	width: 85%; 
+	display: block;
 	position: relative; 
+	width: auto;
 }
 .ui-dialog .ui-header, 
 .ui-dialog .ui-footer  { 
@@ -15,7 +18,6 @@
 .ui-dialog .ui-content { 
 	padding: 15px; 
 }
-.ui-dialog .ui-content, 
-.ui-dialog .ui-footer { 
+.ui-dialog { 
 	margin-top: -15px;  
 }

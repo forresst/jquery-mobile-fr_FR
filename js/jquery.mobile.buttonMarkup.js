@@ -1,7 +1,9 @@
-/*
-* "buttons" plugin - for making button-like links
-*/
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: For making button-like links.
+//>>label: Buttons
 
+define( [ "jquery.mobile.core", "jquery.mobile.vmouse" ], function() {
+//>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
@@ -23,7 +25,6 @@ $.fn.buttonMarkup = function( options ) {
 			innerClass = "ui-btn-inner",
 			textClass = "ui-btn-text",
 			buttonClass, iconClass,
-
 			// Button inner markup
 			buttonInner = document.createElement( o.wrapperEls ),
 			buttonText = document.createElement( o.wrapperEls ),
@@ -73,7 +74,7 @@ $.fn.buttonMarkup = function( options ) {
 		}
 
 		e.setAttribute( "data-" + $.mobile.ns + "theme", o.theme );
-		el.addClass( buttonClass );
+		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
 
@@ -128,6 +129,8 @@ function closestEnabledButton( element ) {
 }
 
 var attachEvents = function() {
+	var hoverDelay = 200,
+		hov, foc;
 	$( document ).bind( {
 		"vmousedown": function( event ) {
 			var btn = closestEnabledButton( event.target ),
@@ -136,7 +139,14 @@ var attachEvents = function() {
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+				
+				if( $.support.touch ) {
+					hov = setTimeout(function() {
+						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+					}, hoverDelay );
+				} else {
+					$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
+				}
 			}
 		},
 		"vmousecancel vmouseup": function( event ) {
@@ -152,21 +162,31 @@ var attachEvents = function() {
 		"vmouseover focus": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
-
+				
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+				
+				if( $.support.touch ) {
+					foc = setTimeout(function() {
+						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+					}, hoverDelay );
+				} else {
+					$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
+				}
 			}
 		},
-		"vmouseout blur": function( event ) {
+		"vmouseout blur scrollstart": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
-
+				
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
 				$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
+				
+				hov && clearTimeout( hov );
+				foc && clearTimeout( foc );
 			}
 		}
 	});
@@ -184,3 +204,7 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
