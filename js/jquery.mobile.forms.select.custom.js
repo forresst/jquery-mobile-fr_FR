@@ -7,14 +7,15 @@
 //>>label: Custom Selects
 
 define( [
-	"jquery.mobile.buttonMarkup",
-	"jquery.mobile.core",
-	"jquery.mobile.dialog",
-	"jquery.mobile.forms.select",
-	"jquery.mobile.listview",
-	"jquery.mobile.page",
+	"jquery",
+	"./jquery.mobile.buttonMarkup",
+	"./jquery.mobile.core",
+	"./jquery.mobile.dialog",
+	"./jquery.mobile.forms.select",
+	"./jquery.mobile.listview",
+	"./jquery.mobile.page",
 	// NOTE expects ui content in the defined page, see selector for menuPageContent definition
-	"jquery.mobile.page.sections" ], function() {
+	"./jquery.mobile.page.sections" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 	var extendSelect = function( widget ){
@@ -307,15 +308,16 @@ define( [
 				}
 
 				var self = this,
-					menuHeight = self.list.parent().outerHeight(),
-					menuWidth = self.list.parent().outerWidth(),
+          $window = $( window ),
+          selfListParent = self.list.parent(),
+					menuHeight = selfListParent.outerHeight(),
+					menuWidth = selfListParent.outerWidth(),
 					activePage = $( ".ui-page-active" ),
-					tOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
-					tScrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage,
-					scrollTop = tOverflow ? tScrollElem.scrollTop() : $( window ).scrollTop(),
+					tScrollElem = activePage,
+					scrollTop = $window.scrollTop(),
 					btnOffset = self.button.offset().top,
-					screenHeight = $(window).height(),
-					screenWidth = $(window).width();
+					screenHeight = $window.height(),
+					screenWidth = $window.width();
 
 				//add active class to button
 				self.button.addClass( $.mobile.activeBtnClass );

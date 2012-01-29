@@ -2,7 +2,7 @@
 //>>description: Degrades inputs to another type after custom enhancements are made.
 //>>label: Dialog-style Pages
 
-define( [ "jquery.mobile.widget" ], function() {
+define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -39,7 +39,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		// this must be an anonymous function so that select menu dialogs can replace
 		// the close method. This is a change from previously just defining data-rel=back
 		// on the button and letting nav handle it
-		headerCloseButton.bind( "vclick", function() {
+		//
+		// Use click rather than vclick in order to prevent the possibility of unintentionally
+		// reopening the dialog if the dialog opening item was directly under the close button.
+		headerCloseButton.bind( "click", function() {
 			self.close();
 		});
 
@@ -60,8 +63,21 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 					.attr( "data-" + $.mobile.ns + "direction", "reverse" );
 			}
 		})
-		.bind( "pagehide", function() {
+		.bind( "pagehide", function( e, ui ) {
 			$( this ).find( "." + $.mobile.activeBtnClass ).removeClass( $.mobile.activeBtnClass );
+			
+			// if there's an overlay theme, we're going to remove it from the page container.
+			// First though, check that the incoming page isn't a dialog with the same theme. If so, don't remove.
+			if( self.options.overlayTheme ){
+				if( !ui.nextPage || !ui.nextPage.is( ".ui-dialog-page.ui-overlay-" + self.options.overlayTheme ) ){
+					$.mobile.pageContainer.removeClass( "ui-overlay-" + self.options.overlayTheme );
+				}	
+			}
+		})
+		.bind( "pagebeforeshow", function(){
+			if( self.options.overlayTheme ){
+				$.mobile.pageContainer.addClass( "ui-overlay-" + self.options.overlayTheme );
+			}
 		});
 	},
 

@@ -3,10 +3,12 @@
 //>>label: Navigation Bars
 
 define( [
-	"jquery.mobile.core",
-	"jquery.mobile.event",
-	"jquery.mobile.hashchange",
-	"jquery.mobile.page" ], function() {
+	"jquery",
+	"./jquery.mobile.core",
+	"./jquery.mobile.event",
+	"./jquery.mobile.hashchange",
+	"./jquery.mobile.page",
+	"./jquery.mobile.transition" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
@@ -376,7 +378,7 @@ define( [
 
 
 	//direct focus to the page title, or otherwise first focusable element
-	function reFocus( page ) {
+	$.mobile.focusPage = function ( page ) {
 		var pageTitle = page.find( ".ui-title:eq(0)" );
 
 		if( pageTitle.length ) {
@@ -404,21 +406,9 @@ define( [
 
 	// Save the last scroll distance per page, before it is hidden
 	var setLastScrollEnabled = true,
-		firstScrollElem, getScrollElem, setLastScroll, delayedSetLastScroll;
+		setLastScroll, delayedSetLastScroll;
 
-	getScrollElem = function() {
-		var scrollElem = $window, activePage,
-			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled;
-
-		if( touchOverflow ){
-			activePage = $( ".ui-page-active" );
-			scrollElem = activePage.is( ".ui-native-fixed" ) ? activePage.find( ".ui-content" ) : activePage;
-		}
-
-		return scrollElem;
-	};
-
-	setLastScroll = function( scrollElem ) {
+	setLastScroll = function() {
 		// this barrier prevents setting the scroll value based on the browser
 		// scrolling the window based on a hashchange
 		if( !setLastScrollEnabled ) {
@@ -428,7 +418,7 @@ define( [
 		var active = $.mobile.urlHistory.getActive();
 
 		if( active ) {
-			var lastScroll = scrollElem && scrollElem.scrollTop();
+			var lastScroll = $window.scrollTop();
 
 			// Set active page's lastScroll prop.
 			// If the location we're scrolling to is less than minScrollBack, let it go.
@@ -441,7 +431,7 @@ define( [
 	// to the hash targets location (sometimes the top of the page). once pagechange fires
 	// getLastScroll is again permitted to operate
 	delayedSetLastScroll = function() {
-		setTimeout( setLastScroll, 100, $(this) );
+		setTimeout( setLastScroll, 100 );
 	};
 
 	// disable an scroll setting when a hashchange has been fired, this only works
@@ -460,101 +450,46 @@ define( [
 	$window.one( "pagecontainercreate", function(){
 		// once the page has changed, re-enable the scroll recording
 		$.mobile.pageContainer.bind( "pagechange", function() {
-			var scrollElem = getScrollElem();
 
 	 		setLastScrollEnabled = true;
 
 			// remove any binding that previously existed on the get scroll
 			// which may or may not be different than the scroll element determined for
 			// this page previously
-			scrollElem.unbind( "scrollstop", delayedSetLastScroll );
+			$window.unbind( "scrollstop", delayedSetLastScroll );
 
 			// determine and bind to the current scoll element which may be the window
 			// or in the case of touch overflow the element with touch overflow
-			scrollElem.bind( "scrollstop", delayedSetLastScroll );
+			$window.bind( "scrollstop", delayedSetLastScroll );
 		});
 	});
 
 	// bind to scrollstop for the first page as "pagechange" won't be fired in that case
-	getScrollElem().bind( "scrollstop", delayedSetLastScroll );
-
-	// Make the iOS clock quick-scroll work again if we're using native overflow scrolling
-	/*
-	if( $.support.touchOverflow ){
-		if( $.mobile.touchOverflowEnabled ){
-			$( window ).bind( "scrollstop", function(){
-				if( $( this ).scrollTop() === 0 ){
-					$.mobile.activePage.scrollTop( 0 );
-				}
-			});
-		}
-	}
-	*/
+	$window.bind( "scrollstop", delayedSetLastScroll );
 
 	//function for transitioning between two existing pages
 	function transitionPages( toPage, fromPage, transition, reverse ) {
-
-		//get current scroll distance
-		var active	= $.mobile.urlHistory.getActive(),
-			touchOverflow = $.support.touchOverflow && $.mobile.touchOverflowEnabled,
-			toScroll = active.lastScroll || ( touchOverflow ? 0 : $.mobile.defaultHomeScroll ),
-			screenHeight = getScreenHeight();
-
-		// Scroll to top, hide addr bar
-		window.scrollTo( 0, $.mobile.defaultHomeScroll );
 
 		if( fromPage ) {
 			//trigger before show/hide events
 			fromPage.data( "page" )._trigger( "beforehide", null, { nextPage: toPage } );
 		}
 
-		if( !touchOverflow){
-			toPage.height( screenHeight + toScroll );
-		}
-
 		toPage.data( "page" )._trigger( "beforeshow", null, { prevPage: fromPage || $( "" ) } );
-
+		
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
-
-		if( touchOverflow && toScroll ){
-
-			toPage.addClass( "ui-mobile-pre-transition" );
-			// Send focus to page as it is now display: block
-			reFocus( toPage );
-
-			//set page's scrollTop to remembered distance
-			if( toPage.is( ".ui-native-fixed" ) ){
-				toPage.find( ".ui-content" ).scrollTop( toScroll );
-			}
-			else{
-				toPage.scrollTop( toScroll );
-			}
-		}
 
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
-		var th = $.mobile.transitionHandlers[transition || "none"] || $.mobile.defaultTransitionHandler,
+		var th = $.mobile.transitionHandlers[ transition || "default" ] || $.mobile.defaultTransitionHandler,
 			promise = th( transition, reverse, toPage, fromPage );
 
 		promise.done(function() {
-			//reset toPage height back
-			if( !touchOverflow ){
-				toPage.height( "" );
-			}
-
-			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			if( !touchOverflow ){
-				$.mobile.silentScroll( toScroll );
-			}
 
 			//trigger show/hide events
 			if( fromPage ) {
-				if( !touchOverflow ){
-					fromPage.height( "" );
-				}
-
 				fromPage.data( "page" )._trigger( "hide", null, { nextPage: toPage } );
 			}
 
@@ -581,10 +516,6 @@ define( [
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
-		// Don't apply this height in touch overflow enabled mode
-		if( $.support.touchOverflow && $.mobile.touchOverflowEnabled ){
-			return;
-		}
 		$( "." + $.mobile.activePageClass ).css( "min-height", getScreenHeight() );
 	}
 
@@ -605,7 +536,7 @@ define( [
 	//animation complete callback
 	$.fn.animationComplete = function( callback ) {
 		if( $.support.cssTransitions ) {
-			return $( this ).one( 'webkitAnimationEnd', callback );
+			return $( this ).one( 'webkitAnimationEnd animationend', callback );
 		}
 		else{
 			// defer execution for consistency between webkit/non webkit
@@ -625,23 +556,7 @@ define( [
 
 	$.mobile.dialogHashKey = dialogHashKey;
 
-	//default non-animation transition handler
-	$.mobile.noneTransitionHandler = function( name, reverse, $toPage, $fromPage ) {
-		if ( $fromPage ) {
-			$fromPage.removeClass( $.mobile.activePageClass );
-		}
-		$toPage.addClass( $.mobile.activePageClass );
-
-		return $.Deferred().resolve( name, reverse, $toPage, $fromPage ).promise();
-	};
-
-	//default handler for unknown transitions
-	$.mobile.defaultTransitionHandler = $.mobile.noneTransitionHandler;
-
-	//transition handler dictionary for 3rd party transitions
-	$.mobile.transitionHandlers = {
-		none: $.mobile.defaultTransitionHandler
-	};
+	
 
 	//enable cross-domain page support
 	$.mobile.allowCrossDomainPages = false;
@@ -948,18 +863,15 @@ define( [
 
 					// Remove loading message.
 					if ( settings.showLoadMsg ) {
-
+						
 						// Remove loading message.
 						hideMsg();
 
-						//show error message
-						$( "<div class='ui-loader ui-overlay-shadow ui-body-e ui-corner-all'><h1>"+ $.mobile.pageLoadErrorMessage +"</h1></div>" )
-							.css({ "display": "block", "opacity": 0.96, "top": $window.scrollTop() + 100 })
-							.appendTo( settings.pageContainer )
-							.delay( 800 )
-							.fadeOut( 400, function() {
-								$( this ).remove();
-							});
+						// show error message
+						$.mobile.showPageLoadingMsg( $.mobile.pageLoadErrorMessageTheme, $.mobile.pageLoadErrorMessage, true );
+						
+						// hide after delay
+						setTimeout( $.mobile.hidePageLoadingMsg, 1500 );
 					}
 
 					deferred.reject( absUrl, options );
@@ -1159,7 +1071,7 @@ define( [
 		settings.reverse = settings.reverse || historyDir < 0;
 
 		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
-			.done(function() {
+			.done(function( name, reverse, $to, $from, alreadyFocused ) {
 				removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
@@ -1174,7 +1086,9 @@ define( [
 				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965
 				// https://github.com/jquery/jquery-mobile/issues/2965
-				reFocus( toPage );
+				if( !alreadyFocused ){
+					$.mobile.focusPage( toPage );
+				}
 
 				releasePageTransitionLock();
 
@@ -1299,6 +1213,11 @@ define( [
 					$activeClickedLink = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
 					$activeClickedLink.addClass( $.mobile.activeBtnClass );
 					$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
+					
+					// By caching the href value to data and switching the href to a #, we can avoid address bar showing in iOS. The click handler resets the href during its initial steps if this data is present
+					$( link )
+						.jqmData( "href", $( link  ).attr( "href" )  )
+						.attr( "href", "#" );
 				}
 			}
 		});
@@ -1322,6 +1241,11 @@ define( [
 				httpCleanup = function(){
 					window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
 				};
+			
+			// If there's data cached for the real href value, set the link's href back to it again. This pairs with an address bar workaround from the vclick handler	
+			if( $link.jqmData( "href" ) ){
+				$link.attr( "href", $link.jqmData( "href" ) );
+			}
 
 			//if there's a data-rel=back attr, go back in history
 			if( $link.is( ":jqmData(rel='back')" ) ) {
@@ -1397,7 +1321,7 @@ define( [
 
 				//this may need to be more specific as we use data-rel more
 				role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
-
+				
 			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
 			event.preventDefault();
 		});

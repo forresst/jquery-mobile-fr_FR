@@ -5,11 +5,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>Docs jQuery Mobile - Configuration du pied de page</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
-	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+
 	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
 </head> 
 <body> 
 
@@ -37,7 +37,7 @@
 			
 			<p>La barre d'outils <code>footer</code> sera thématisé avec le nuancier  "a" par défaut (noir dans le thème par défaut) mais vous pouvez facilement <a href="bars-themes.html">définir une couleur de nuancier du thème</a>.</p> 
 			
-			<div data-role="footer" data-position="inline">
+			<div data-role="footer">
 				<h4>Contenu de pied de page</h4>
 			</div>
 			
@@ -64,7 +64,7 @@
 			<p>Cela crée cette barre d'outils avec des boutons positionnés sur une rangée</p>
 
 
-			<div data-role="footer" class="ui-bar" data-position="inline">
+			<div data-role="footer" class="ui-bar">
 				<a href="index.html" data-icon="delete">Enlever</a> <a href="index.html" data-icon="plus">Ajouter</a> <a href="index.html" data-icon="arrow-u">Haut</a> <a href="index.html" data-icon="arrow-d">Bas</a>
 			</div>
 			
@@ -74,7 +74,7 @@
 
 			<p>Cela crée un ensemble groupé de boutons :</p>
 
-			<div data-role="footer" class="ui-bar" data-position="inline">
+			<div data-role="footer" class="ui-bar">
 				<div data-role="controlgroup" data-type="horizontal">
 					<a href="index.html" data-icon="delete">Enlever</a> <a href="index.html" data-icon="plus">Ajouter</a> <a href="index.html" data-icon="arrow-u">Haut</a> <a href="index.html" data-icon="arrow-d">Bas</a>
 				</div>
@@ -87,7 +87,7 @@
 			<p>Les éléments de formulaire et d'autres contenus peuvent également être ajoutés aux barres d'outils. Voici un exemple de menu de sélection à l'intérieur d'une barre de pied de page :</p>
 		
 
-			<div data-role="footer" class="ui-bar" data-position="inline">
+			<div data-role="footer" class="ui-bar">
 				<label for="select-choice-1">Livraison :</label>
 				<select name="select-choice-1" id="select-choice-1" data-theme="a">
 					<option value="standard">Lent : 7 jours</option>
@@ -127,7 +127,6 @@
 										<li data-theme="a"><a href="docs-footers.html">Barres de pied de page</a></li>
 										<li><a href="docs-navbar.html">Barres de navigation</a></li>
 										<li><a href="bars-fixed.html">Positionnement fixe</a></li>
-										<li><a href="bars-fullscreen.html">Positionnement plein écran</a></li>
 										<li><a href="footer-persist-a.html">Barre de navigation persistante de pied page</a></li>
 										<li><a href="bars-themes.html">Thématisation des barres d'outils</a></li>
 

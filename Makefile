@@ -1,29 +1,9 @@
-# The files to include when compiling the CSS files
-CSSFILES = css/structure/jquery.mobile.core.css \
-	css/structure/jquery.mobile.transitions.css \
-	css/structure/jquery.mobile.grids.css \
-	css/structure/jquery.mobile.headerfooter.css \
-	css/structure/jquery.mobile.navbar.css \
-	css/structure/jquery.mobile.button.css \
-	css/structure/jquery.mobile.collapsible.css \
-	css/structure/jquery.mobile.controlgroup.css \
-	css/structure/jquery.mobile.dialog.css \
-	css/structure/jquery.mobile.forms.checkboxradio.css \
-	css/structure/jquery.mobile.forms.fieldcontain.css \
-	css/structure/jquery.mobile.forms.select.css \
-	css/structure/jquery.mobile.forms.textinput.css \
-	css/structure/jquery.mobile.listview.css \
-	css/structure/jquery.mobile.forms.slider.css
-CSSTHEMEFILES = css/themes/${THEME}/jquery.mobile.theme.css
-
-
-
-
 # Helper Variables
 # The command to replace the @VERSION in the files with the actual version
 VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
 VER_MIN = "/*! jQuery Mobile v$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd") jquerymobile.com | jquery.org/license */"
 VER_OFFICIAL = $(shell cat version.txt)
+SED_VER_API = sed 's/__version__/"${VER_OFFICIAL}"/g'
 deploy: VER = sed "s/v@VERSION/${VER_OFFICIAL}/"
 deploy: VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
 
@@ -39,7 +19,7 @@ deploy: STRUCTURE = jquery.mobile.structure-${VER_OFFICIAL}
 # The CSS theme being used
 THEME = default
 
-
+RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main
 
 
 
@@ -52,10 +32,9 @@ all: init css js zip notify
 # Build and minify the CSS files
 css: init
 	# Build the CSS file with the theme included
-	@@java -XX:ReservedCodeCacheSize=64m \
-		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+	${RUN_JS} \
 		external/r.js/dist/r.js \
-		-o cssIn=css/themes/default/jquery.mobile.theme.css \
+		-o cssIn=css/themes/default/jquery.mobile.css \
 		out=${OUTPUT}/${NAME}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.css
 	@@cat ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.css
@@ -65,29 +44,37 @@ css: init
 		--type css ${OUTPUT}/${NAME}.compiled.css >> ${OUTPUT}/${NAME}.min.css
 	@@rm ${OUTPUT}/${NAME}.compiled.css
 	# Build the CSS Structure-only file
+	${RUN_JS} \
+		external/r.js/dist/r.js \
+		-o cssIn=css/structure/jquery.mobile.structure.css \
+		out=${OUTPUT}/${STRUCTURE}.compiled.css
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${STRUCTURE}.css
-	@@cat ${CSSFILES} >> ${OUTPUT}/${STRUCTURE}.css
+	@@cat ${OUTPUT}/${STRUCTURE}.compiled.css >> ${OUTPUT}/${STRUCTURE}.css
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${STRUCTURE}.min.css
 	@@java -XX:ReservedCodeCacheSize=64m \
 		-jar build/yuicompressor-2.4.6.jar \
-		--type css ${OUTPUT}/${STRUCTURE}.css >> ${OUTPUT}/${STRUCTURE}.min.css
+		--type css ${OUTPUT}/${STRUCTURE}.compiled.css >> ${OUTPUT}/${STRUCTURE}.min.css
+	@@rm ${OUTPUT}/${STRUCTURE}.compiled.css
 	# ..... and then copy in the images
 	@@cp -R css/themes/${THEME}/images ${OUTPUT}/
 	# Css portion is complete.
 	# -------------------------------------------------
 
 
-docs: init css js
+docs: init
 	# Create the Demos/Docs/Tests/Tools
-	@@mkdir -p tmp/${NAME}
-	@@cp -R index.html docs experiments external js/jquery.js tests css/themes/${THEME}/images tmp/${NAME}/
-	@@cp ${OUTPUT}/${NAME}.min.css ${OUTPUT}/${NAME}.min.js tmp/${NAME}/
-	# ... Update the JavaScript and CSS paths
-	@@find tmp/${NAME} -type f \
-		\( -name '*.html' -o -name '*.php' \) \
-		-exec perl -pi -e \
-		's|js/"|${NAME}.min.js"|g;s|css/themes/default/|${NAME}.min.css|g;s|js/jquery.js"|jquery.js"|g' {} \;
+	# ... Build the docs bundle
+	${RUN_JS} \
+		external/r.js/dist/r.js \
+	 	-o build/docs.build.js \
+		dir=../tmp/${NAME}
+	# ... Prepend versioned license
+	@@cat LICENSE-INFO.txt | ${VER} > tmp/${NAME}/LICENSE-INFO.txt
+	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/js/jquery.mobile.docs.js > tmp/${NAME}/js/jquery.mobile.docs.js.tmp
+	@@cat tmp/${NAME}/js/jquery.mobile.docs.js.tmp | ${SED_VER_API} > tmp/${NAME}/js/jquery.mobile.docs.js
+	@@cat tmp/${NAME}/LICENSE-INFO.txt | cat - tmp/${NAME}/css/themes/default/${NAME}.css > tmp/${NAME}/css/themes/default/${NAME}.css.tmp
+	@@mv tmp/${NAME}/css/themes/default/${NAME}.css.tmp tmp/${NAME}/css/themes/default/${NAME}.css
 	# ... Move and zip up the the whole folder
 	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.docs.zip ${NAME}
 	@@mv tmp/${NAME} ${OUTPUT}/demos
@@ -109,17 +96,20 @@ init:
 # Build and minify the JS files
 js: init
 	# Build the JavaScript file
-	@@java -XX:ReservedCodeCacheSize=64m \
-		-classpath build/js.jar:build/google-compiler-20111003.jar org.mozilla.javascript.tools.shell.Main \
+	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o baseUrl="js" \
-		include=jquery.mobile,jquery.mobile.exports exclude=jquery,order \
+		include=jquery.mobile \
+		exclude=jquery,../external/requirejs/order,../external/requirejs/text,../external/requirejs/text!../version.txt \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
+		wrap.startFile=build/wrap.start \
+		wrap.endFile=build/wrap.end \
+		findNestedDependencies=true \
 		skipModuleInsertion=true \
 		optimize=none
 	@@cat LICENSE-INFO.txt | ${VER} > ${OUTPUT}/${NAME}.js
-	@@cat ${OUTPUT}/${NAME}.compiled.js >> ${OUTPUT}/${NAME}.js
+	@@cat ${OUTPUT}/${NAME}.compiled.js | ${SED_VER_API} >> ${OUTPUT}/${NAME}.js
 	@@rm ${OUTPUT}/${NAME}.compiled.js
 	# ..... and then minify it
 	@@echo ${VER_MIN} > ${OUTPUT}/${NAME}.min.js
@@ -139,18 +129,15 @@ notify: init
 
 
 # Zip up the jQm files without docs
-zip: init css js 
+zip: init css js
 	# Packaging up the files into a zip archive
 	@@mkdir tmp
-	@@cp -R ${OUTPUT} tmp/${NAME} 
+	@@cp -R ${OUTPUT} tmp/${NAME}
 	# ... And remove the Zipped docs so they aren't included twice (for deploy scripts)
-	@@rm -rf tmp/${NAME}/${NAME}.docs.zip 
+	@@rm -rf tmp/${NAME}/${NAME}.docs.zip
 	@@cd tmp; zip -rq ../${OUTPUT}/${NAME}.zip ${NAME}
 	@@rm -rf tmp
 	# -------------------------------------------------
-	
-
-
 
 # -------------------------------------------------
 # -------------------------------------------------
@@ -161,15 +148,13 @@ zip: init css js
 # -------------------------------------------------
 
 # Push the latest git version to the CDN. This is done on a post commit hook
-latest: init css js zip
+latest: init css docs js zip
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
-	# Do some cleanup to wrap it up
-	@@rm -rf ${OUTPUT}
 	# -------------------------------------------------
 
 # Build the nightly backups. This is done on a server cronjob
-nightlies: init css js docs zip 
+nightlies: init css js docs zip
 	# Time to put these on the CDN
 	@@mkdir -p tmp/nightlies
 	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
@@ -189,12 +174,13 @@ deploy: init css js docs zip
 	@@mv ${OUTPUT}/demos tmp/${VER_OFFICIAL}
 	# Create the Demos/Docs/Tests/Tools for jQueryMobile.com
 	# ... By first replacing the paths
+	# TODO update jQuery Version replacement on deploy
 	@@find tmp/${VER_OFFICIAL} -type f \
 		\( -name '*.html' -o -name '*.php' \) \
 		-exec perl -pi -e \
-		's|src="(.*)${NAME}.min.js"|src="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.js"|g;s|href="(.*)${NAME}.min.css"|href="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.css"|g;s|src="(.*)jquery.js"|src="//code.jquery.com/jquery-1.6.4.js"|g' {} \;
+		's|src="(.*)${NAME}.min.js"|src="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.js"|g;s|href="(.*)${NAME}.min.css"|href="//code.jquery.com/mobile/${VER_OFFICIAL}/${NAME}.min.css"|g;s|src="(.*)jquery.js"|src="//code.jquery.com/jquery-1.7.1.min.js"|g' {} \;
 	# ... So they can be copied to jquerymobile.com
-	@@scp -qr tmp/* jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/	
+	@@scp -qr tmp/* jqadmin@jquerymobile.com:/srv/jquerymobile.com/htdocs/demos/
 	# Do some cleanup to wrap it up
 	@@rm -rf tmp
 	@@rm -rf ${OUTPUT}

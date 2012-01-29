@@ -18,6 +18,13 @@ $files = array(
 	'jquery.mobile.navigation.js',
 	'jquery.mobile.navigation.pushstate.js',
 	'jquery.mobile.transition.js',
+	'jquery.mobile.transition.pop.js',
+	'jquery.mobile.transition.slide.js',
+	'jquery.mobile.transition.slidedown.js',
+	'jquery.mobile.transition.slideup.js',
+	'jquery.mobile.transition.flip.js',
+	'jquery.mobile.transition.flow.js',
+	'jquery.mobile.transition.turn.js',
 	'jquery.mobile.degradeInputs.js',
 	'jquery.mobile.dialog.js',
 	'jquery.mobile.page.sections.js',
@@ -38,8 +45,9 @@ $files = array(
 	'jquery.mobile.buttonMarkup.js',
 	'jquery.mobile.controlGroup.js',
 	'jquery.mobile.links.js',
-	'jquery.mobile.fixHeaderFooter.js',
-	'jquery.mobile.fixHeaderFooter.native.js',
+	'jquery.mobile.fixedToolbar.js',
+	'jquery.mobile.zoom,js',
+	'jquery.mobile.zoom.iosorientationfix,js',
 	'jquery.mobile.init.js'
 );
 

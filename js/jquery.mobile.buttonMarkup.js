@@ -2,7 +2,7 @@
 //>>description: For making button-like links.
 //>>label: Buttons
 
-define( [ "jquery.mobile.core", "jquery.mobile.vmouse" ], function() {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
@@ -29,6 +29,15 @@ $.fn.buttonMarkup = function( options ) {
 			buttonInner = document.createElement( o.wrapperEls ),
 			buttonText = document.createElement( o.wrapperEls ),
 			buttonIcon = o.icon ? document.createElement( "span" ) : null;
+
+		// if so, prevent double enhancement, and continue with rest of the elements.
+		if( e.tagName === "INPUT" && el.jqmData('role') === "button" ) continue;
+		
+		// if this is a button, check if it's been enhanced and, if not, use the right function
+		if( e.tagName === "BUTTON" ) {
+	 	 	if ( !$( e.parentNode ).hasClass( "ui-btn" ) ) $( e ).button();
+	 	 	continue;
+ 	 	}
 
 		if ( attachEvents ) {
 			attachEvents();

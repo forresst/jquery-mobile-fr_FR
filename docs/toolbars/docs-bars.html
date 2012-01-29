@@ -5,11 +5,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>Docs jQuery Mobile - Les bases de la barre d'outils</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
-	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+
 	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
 </head> 
 <body> 
 
@@ -40,11 +40,11 @@
 			
 			<p>L'entête et le pied de page peuvent être positionnés sur la page de plusieurs façons différentes. Par défaut, les barres d'outils utilisent le mode de <strong>positionnement "inline"</strong>. Dans ce mode, les entêtes et le pied de page se positionnent dans le flux normal du document (le comportement par défaut HTML), ce qui assure qu'ils sont visibles sur tous les appareils, indépendamment de JavaScript et du support du positionnement CSS.</p>
 			
-			<p>Un mode de <a href="bars-fixed.html"><strong>positionnement "fixed"</strong></a> offre la commodité de barres d'outils statiques sans les inconvénients de la mise en œuvre du faux-défilement en JavaScript. Les barres d'outils commencent dans leurs positions naturelles sur la page, comme le mode "inline", mais quand une barre défile en dehors de la fenêtre d'affichage, le framework anime la barre pour revenir sur l'affichage en repositionnant dynamiquement la barre au sommet ou en bas de la fenêtre d'affichage.</p>
-			<p> A tout moment, en tapant sur l'écran, cela permet de basculer la visibilité de la barre d'outils fixes : en tapant sur la page, lorsque les barres d'outils ne sont pas visibles, cela les affiche, en tapant de nouveau, cela les cache jusqu'à ce que vous tapiez à nouveau. Cela donne aux utilisateurs la possibilité de masquer les barres d'outils pour utiliser le maximum de la surface d'affichage. </p>
-			<p>Pour définir ce comportement sur une entête ou sur un pied de page, ajoutez l'attribut <code> data-position="fixed"</code> au conteneur de la barre d'outils.</p>
+			<p>Le <a href="bars-fixed.html"><strong>mode de positionnement "fixed"</strong></a> fixe les barres d'outils soit en haut ou en bas de la fenêtre sur les navigateurs qui supportent le CSS de positionnement fixe (généralement, les navigateurs de bureau, iOS5+, Android 2.2 +, BlackBerry 6 et plus encore). Dans les navigateurs qui ne supportent pas le positionnement fixe, les barres d'outils se replieront vers du statique, le positionnement est intégré dans la page.</p>
+			<p> Lorsque le basculement est  activé, en tapant sur l'écran, cela permet de basculer la visibilité de la barre d'outils fixes : en tapant sur la page, lorsque les barres d'outils ne sont pas visibles, cela les affiche, en tapant de nouveau, cela les cache jusqu'à ce que vous tapiez à nouveau. Cela donne aux utilisateurs la possibilité de masquer les barres d'outils pour utiliser le maximum de la surface d'affichage. Un bémol est que les barres d'outils fixes ne sont jamais réellement cachées, mais alternées entre le positionnement fixe et statique. Cela signifie que si vous êtes au sommet d'une page, vous ne pouvez pas basculer une barre d'outils d'entête en dehors de l'affichage, car l'endroit pour basculer dans le flux du document est le haut de la page. C'est la même chose pour les pieds de page fixes lorsqu'on se trouve au bas de document.</p>
+			<p>Pour définir ce comportement sur une entête ou un pied de page, ajoutez  l'attribut <code> data-position="fixed"</code> à l'élément entête ou pied de page.</p>
 									
-			<p>Un mode de <a href="bars-fullscreen.html"><strong>positionnement "fullscreen"</strong></a> fonctionne exactement comme le mode "fixed", sauf que les barres d'outils ne sont pas représentés en haut et au bas de la page et n'apparaissent que lorsque la page est cliquée . Ceci est utile pour des applications d'immersion comme des aperçus de photo ou de vidéo où vous voulez que le contenu remplisse tout l'écran et où les barres d'outils peuvent être citées à comparaître en touchant l'écran. Gardez à l'esprit que les barres d'outils dans ce mode se positionneront <strong>au dessus du</strong> contenu de la page c'est donc la meilleur utilisation pour des situations spécifiques.</p>
+			<p>Le <a href="bars-fullscreen.html"><strong>mode de positionnement "fullscreen"</strong></a> fonctionne exactement comme le mode fixe, sauf que les barres d'outils se superposent sur le contenu de la page au lieu de se réserver une place dans le document. Ceci est utile pour des applications d'immersion comme des aperçus de photo ou de vidéo où vous voulez que le contenu remplisse tout l'écran et où les barres d'outils peuvent être citées à comparaître en touchant l'écran. Gardez à l'esprit que les barres d'outils dans ce mode se positionneront <strong>au dessus du</strong> contenu de la page c'est donc la meilleur utilisation pour des situations spécifiques.</p>
 
 				
 
@@ -64,7 +64,6 @@
 								<li><a href="docs-footers.html">Barres de pied de page</a></li>
 								<li><a href="docs-navbar.html">Barres de navigation</a></li>
 								<li><a href="bars-fixed.html">Positionnement fixe</a></li>
-								<li><a href="bars-fullscreen.html">Positionnement plein écran</a></li>
 								<li><a href="footer-persist-a.html">Barre de navigation persistante de pied page</a></li>
 								<li><a href="bars-themes.html">Thématisation des barres d'outils</a></li>
 

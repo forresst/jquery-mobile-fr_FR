@@ -5,11 +5,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>Docs jQuery Mobile - Liaisons des pages</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
-	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+
 	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
 </head> 
 <body> 
 
@@ -62,7 +62,8 @@
 				
 
 		<h2>Liens du bouton "Retour"</h2>
-		<p>Si vous utilisez l'attribut <code>data-rel="back"</code> sur une ancre, tout clic sur cette ancre imitera le bouton retour, remontant une entrée de l'historique et en ignorant le href par défaut de l'ancre. Ceci est particulièrement utile lors de la génération des boutons "back" avec JavaScript, de la même manière qu'un bouton pour fermer une boîte de dialogue. Lorsque vous utilisez cette fonctionnalité dans votre balisage source, bien que les navigateurs qui supportent cette fonctionnalité n'utiliseront pas l'attribut <code>href</code> spécifié, <strong>assurez vous de toujours fournir une valeur significative qui pointe actuellement vers l'URL de la page référante afin de permettre à la fonctionnalité de fonctionner pour les utilisateurs de navigateurs de Grade C</strong>. Si les utilisateurs peuvent atteindre cette page depuis plus d'une page référante, spécifiez un <code>href</code> judicieux de sorte que la navigation reste logique pour tous les utilisateurs Aussi, s'il vous plaît garder à l'esprit que si vous voulez juste une transition inverse sans réellement retourner dans l'historique, vous devez utiliser à la place l'attribut <code>data-direction="reverse"</code>.</p>
+		<p>Si vous utilisez l'attribut <code>data-rel="back"</code> sur une ancre, tout clic sur cette ancre imitera le bouton retour, remontant une entrée de l'historique et en ignorant le <code>href</code> par défaut de l'ancre. Ceci est particulièrement utile lors de la génération des boutons "back" avec JavaScript, de la même manière qu'un bouton pour fermer une boîte de dialogue. Lorsque vous utilisez cette fonctionnalité dans votre balisage source, bien que les navigateurs qui supportent cette fonctionnalité n'utiliseront pas l'attribut <code>href</code> spécifié, <strong>assurez vous de toujours fournir une valeur significative qui pointe actuellement vers l'URL de la page référante afin de permettre à la fonctionnalité de fonctionner pour les utilisateurs de navigateurs de Grade C</strong>. Si les utilisateurs peuvent atteindre cette page depuis plus d'une page référante, spécifiez un <code>href</code> judicieux de sorte que la navigation reste logique pour tous les utilisateurs Aussi, s'il vous plaît garder à l'esprit que si vous voulez juste une transition inverse sans réellement retourner dans l'historique, vous devez utiliser à la place l'attribut <code>data-direction="reverse"</code>. Remarque : <code>data-direction="reverse"</code> est destiné à exécuter simplement la version inverse de la transition qui se déroulera sur ce changement de page, tandis que <code>data-rel="back"</code> fait le lien fonctionnellement équivalent à bouton retour du navigateur et toutes les logiques standard du bouton de retour s'applique. L'ajout de <code>data-direction="reverse"</code> à un lien avec <code>data-rel="back"</code> <b>ne sera pas</b> l'inverse de la transition de page inversée et produira une version "normale" de la transition. 
+		</p>
 		
 				
 		<h2>Les redirections et les liens vers les répertoires</h2>

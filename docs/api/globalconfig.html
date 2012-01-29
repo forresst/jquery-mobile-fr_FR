@@ -5,11 +5,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Docs jQuery Mobile - Configuration par défaut</title>
-	<link rel="stylesheet"  href="../../css/themes/default/" />
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
-	<script src="../../js/jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+
 	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
 </head>
 <body>
 
@@ -122,9 +122,20 @@ $(document).bind("mobileinit", function(){
 
 	<dt><code>loadingMessage</code> <em>string</em>, par défaut : "loading"</dt>
 	<dd>Définit le texte qui apparaît quand une page se charge. Si c'est à false, le message n'apparaîtra pas du tout.</dd>
+	
+	<dt><code>loadingMessageTheme</code> <em>string</em>, par défaut : "a"</dt>
+	<dd>Définit le thème utilisé pour les boîtes de message de chargement, lorsque le texte est visible.</dd>
 
 	<dt><code>pageLoadErrorMessage</code> <em>string</em>, par défaut: "Error Loading Page"</dt>
 	<dd>Définit le texte qui apparaît quand une page ne se charge pas grâce à l'Ajax.</dd>
+	
+	<dt><code>pageLoadErrorMessageTheme</code> <em>string</em>, par défaut : "e"</dt>
+	<dd>Définit le thème utilisé pour les boîtes de message d'erreur.</dd>
+	
+	<dt><code>loadingMessageTextVisible</code> <em>string</em>, par défaut : false</dt>
+	<dd>Si le texte doit être visible lorsque le message de chargement est indiqué. (Remarque : Actuellement, le texte est toujours visible pour les erreurs de chargement)</dd>
+	
+	
 
 	<dt><code>gradeA</code> <em>fonction qui retourne un boolean</em>, par défaut : Une fonction retournant la valeur de $.support.mediaquery</dt>
 	<dd>N'importe quelles conditions de support qui doivent être respectées pour passer.</dd>

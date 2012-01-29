@@ -1,0 +1,260 @@
+<!DOCTYPE html> 
+<html class="ui-mobile-rendering"> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Transitions</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Transitions</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">		
+
+				<h2>Création de transition personnalisée basée sur le CSS</h2>
+
+
+				<p>Pour créer une transition CSS personnalisé, sélectionnez un nom de classe qui correspond au nom de votre transition, par exemple "slide", et ensuite définissez vos règles CSS "in" et "out" pour profiter des transitions ou des keyframes d'animation :</p>
+
+				<pre><code>.slide.in {
+			    -webkit-transform: translateX(0);
+			    -webkit-animation-name: slideinfromright;
+			}
+
+			.slide.out {
+			    -webkit-transform: translateX(-100%);
+			    -webkit-animation-name: slideouttoleft;
+			}
+
+			@-webkit-keyframes slideinfromright {
+			    from { -webkit-transform: translateX(100%); }
+			    to { -webkit-transform: translateX(0); }
+			}
+			@-webkit-keyframes slideouttoleft {
+			    from { -webkit-transform: translateX(0); }
+			    to { -webkit-transform: translateX(-100%); }
+			}
+				</code></pre>
+
+				<p>Lors d'une transition de page à base de CSS, jQuery Mobile place le nom de la classe de la transition sur les deux pages "de" et "à" impliquées dans la transition. Il place ensuite une classe "out" sur la page "de", et la classe "in" sur la page "à". La présence de ces classes sur les éléments de la page "de" et "à" déclenche alors les règles CSS de l'animation définies ci-dessus. À partir de la version 1.1 de jQuery Mobile, les ajouts de classe d'animation sont mis en file d'attente,  plutôt que simultanément, ce qui produit une séquence "sortir puis entrer", qui est plus favorable pour le rendu des mobiles que notre séquence de transition précédente simultanée.</p>
+
+				<p>Si votre transition prend en charge une direction inverse, vous avez besoin pour créer des règles CSS qui utilisent en plus la classe <code>reverse</code> pour le nom de la classe de transition et pour les classes "in" et "out" :</p>
+
+				<pre><code>.slide.in.reverse {
+				    -webkit-transform: translateX(0);
+				    -webkit-animation-name: slideinfromleft;
+				}
+
+				.slide.out.reverse {
+				    -webkit-transform: translateX(100%);
+				    -webkit-animation-name: slideouttoright;
+				}
+
+				@-webkit-keyframes slideinfromleft {
+				    from { -webkit-transform: translateX(-100%); }
+				    to { -webkit-transform: translateX(0); }
+				}
+
+				@-webkit-keyframes slideouttoright {
+				    from { -webkit-transform: translateX(0); }
+				    to { -webkit-transform: translateX(100%); }
+				}
+				</code></pre>
+
+				<p>Après que les règles CSS soient en place, il vous suffit de spécifier le nom de votre transition au sein de l'attribut @data-transition d'un lien de navigation :</p>
+
+				<pre><code>&lt;a href="#page2" data-transition="slide"&gt;Page 2&lt;/a&gt;
+				</code></pre>
+
+				<p>Lorsque l'utilisateur clique sur le lien de navigation, jQuery Mobile invoquera votre transition quand il accèdera à la page mentionnée dans le lien.</p>
+
+				<p>Dans le cas où vous vous poseriez la question pourquoi aucune des règles CSS ci-dessus ne spécifient aucun assouplissement (easing) ou durée, c'est parce que le CSS pour jQuery Mobile définit l'assouplissement et la durée par défaut dans les règles suivantes :</p>
+
+				<pre><code>
+		.in {
+			-webkit-animation-timing-function: ease-out;
+			-webkit-animation-duration: 350ms;
+			-moz-animation-timing-function: ease-out;
+			-moz-animation-duration: 350ms;
+		}
+
+		.out {
+			-webkit-animation-timing-function: ease-in;
+			-webkit-animation-duration: 225ms;
+			-moz-animation-timing-function: ease-in;
+			-moz-animation-duration: 225;
+		}
+				</code></pre>
+
+				<p>Si vous avez besoin de spécifier un assouplissement ou une durée différente, ajoutez simplement la propriété CSS3 appropriée à vos règles de transition de page personalisées.</p>
+				
+				
+		<h2>Création de transition personnalisée basée sur le JavaScript</h2>
+
+		<p>Quand un utilisateur clique sur un lien dans une page, jQuery Mobile contrôles si le lien spécifie un attribut <code>@data-transition</code>. La valeur de cet attribut est le nom de la transition à utiliser lors de l'affichage de la page visée par le lien. S'il n'y a pas d'attribut <code>@data-transition</code>, le nom de la transition spécifié par l'option de configuration <code>$.mobile.defaultPageTransition</code> est utilisé pour les pages et <code>$.mobile.defaultDialogTransition</code> est utilisé pour les boîtes de dialogue.</p>
+
+		<p>Après que la nouvelle page soit chargée, le dictionnaire <code>$.mobile.transitionHandlers</code> est utilisé pour voir si une fonction de gestion de transition est enregistrée pour le nom de la transition donnée. Si un gestionnaire est trouvé, ce gestionnaire est invoqué pour démarrer et gérer la transition. Si aucun gestionnaire n'est trouvé, le gestionnaire spécifié par l'option de configuration <code>$.mobile.defaultTransitionHandler</code> est invoqué.</p>
+
+		<p>Par défaut, le dictionnaire <code>$.mobile.transitionHandlers</code> n'est peuplé que d'une entrée de gestionnaire unique dénommé "default". Ce gestionnaire joue un double objectif, soit l'exécution d'une transition "none", qui supprime la classe <code>"ui-page-active"</code> de la page, lorsque nous sommes en transition "de", et le place sur la page lors de la transition "à", soit une transition animée CSS3 dans la file d'attente, comme celle expliquée ci-dessus. Si la transition est à "none", elle sera instantanée : aucune animation, aucune fanfare.</p>
+
+		<p>Le <code>$.mobile.defaultTransitionHandler</code> pointe vers une fonction de gestionnaire qui suppose que le nom est un nom de classe CSS, et met en œuvre la section ci-dessus " Transitions basées sur du pur CSS3".</p>
+
+		<p>Le gestionnaire de transition est disponible sur l'espace de nommage $.mobile :</p>
+
+		<pre><code>
+$.mobile.transitionHandlers[ "default" ];
+		</code></pre>
+
+		<h3>Gestionnaires de transition</h3>
+
+		<p>Un gestionnaire de transition est une fonction avec la signature d'appel suivante :</p>
+
+		<pre><code>function myTransitionHandler(name, reverse, $to, $from)
+{
+    var deferred = new $.Deferred();
+
+    // Effectue toute action ou mise en place nécessaire au lancement
+    // votre transition ici. La seule exigence est que
+    // chaque fois que la transition terminée, votre code appelle
+    // deferred.resolve(name, reverse, $to, $from).
+
+    // Return un promise.
+    return deferred.promise();
+}
+		</code></pre>
+
+		<p>Votre gestionnaire doit créer un objet Deferred et retourner une Promise à l'appelant. La Promise est utilisée pour communiquer à l'appelant quand votre transition est réellement complète. C'est à vous d'appeler <code>deferred.resolve()</code> au bon moment. Si vous êtes débutant sur les objets Deferred, vous pouvez trouver de la documentation <a href="http://api.jquery.com/category/deferred-object/" rel="nofollow">ici</a>.</p>
+
+		<h3>Enregistrement et invocation de votre gestionnaire de transition</h3>
+
+		<p>Une fois que vous avez créé une fonction de gestionnaire de transition, vous devez le dire à jQuery Mobile. Pour faire cela, ajoutez simplement votre gestionnaire au dictionnaire <code>$.mobile.transitionHandlers</code>. Rappelez-vous, la clé utilisée doit être le nom de votre transition. Ce nom est également le même nom qui sera utilisé dans l'attribut <code>@data-transition</code> sur n'importe quel lien de navigation.</p>
+
+		<pre><code>// Definit votre gestionnaire de transition :
+
+function myTransitionHandler(name, reverse, $to, $from)
+{
+    var deferred = new $.Deferred();
+
+    // Effectue toute action ou mise en place nécessaire au lancement
+    // votre transition ici. La seule exigence est que
+    // chaque fois que la transition terminée, votre code appelle
+    // deferred.resolve(name, reverse, $to, $from).
+
+    // Return un promise.
+    return deferred.promise();
+}
+
+// L'enregistrer avec jQuery Mobile :
+
+$.mobile.transitionHandlers["myTransition"] = myTransitionHandler;
+		</code></pre>
+
+		<p>Une fois que vous avez enregistré votre gestionnaire, vous pouvez appeler votre transition en plaçant un attribut <code>data-transition</code> sur un lien :</p>
+
+		<pre><code>&lt;a href="#page2" data-transition="myTransition"&gt;Page 2&lt;/a&gt;
+		</code></pre>
+
+		<p>Lorsque l'utilisateur clique sur le lien ci-dessus, votre gestionnaire de transition sera appelé après que la page soit chargée et qu'elle soit prête à être affichée.</p>
+
+		<h3>Substitution d'une transition CSS avec votre propre gestionnaire</h3>
+
+		<p>Comme mentionné précédemment le gestionnaire de transition par défaut suppose que tout nom de transition autre que "none" est une classe CSS pour être mis sur les éléments "from" et "to" pour lancer une animation CSS3. Si vous souhaitez remplacer l'une de ces transitions CSS construite en interne, il vous suffit d'enregistrer votre propre gestionnaire avec le même nom que la transition de page CSS que vous souhaitez remplacer. Ainsi, par exemple, si je voulais remplacer la transition CSS "slide" contruite en interne avec ma propre transition basée sur JavaScript, je devrais simplement faire ce qui suit :</p>
+
+		<pre><code>// Definit votre gestionnaire de transition :
+
+function myTransitionHandler(name, reverse, $to, $from)
+{
+    var deferred = new $.Deferred();
+
+    // Effectue toute action ou mise en place nécessaire au lancement
+    // votre transition ici. La seule exigence est que
+    // chaque fois que la transition terminée, votre code appelle
+    // deferred.resolve(name, reverse, $to, $from).
+
+    // Return un promise.
+    return deferred.promise();
+}
+
+// L'enregistrer avec jQuery Mobile :
+
+$.mobile.transitionHandlers["slide"] = myTransitionHandler;
+		</code></pre>
+
+		<p>Une fois que vous avez fait cela, quand la transition "slide" est appelée, votre gestionnaire, au lieu de celui par défaut, sera appelé pour effectuer la transition.</p>
+
+		<h3>Substitution du gestionnaire de transition par défaut</h3>
+
+		<p>La fonction <code>$.mobile.css3TransitionHandler</code> est le gestionnaire de transition par défaut qui est invoquée quand un nom de transition est utilisé et qu'il ne se trouve pas dans le dictionnaire <code>$.mobile.transitionHandlers</code>. Si vous souhaitez installer votre propre gestionnaire personnalisé par défaut, il vous suffit de définir le <code>$.mobile.defaultTransitionHandler</code> par votre gestionnaire :</p>
+
+		<pre><code>// Definit votre gestionnaire de transition par défaut:
+
+function myTransitionHandler(name, reverse, $to, $from)
+{
+    var deferred = new $.Deferred();
+
+    // Effectue toute action ou mise en place nécessaire au lancement
+    // votre transition ici. La seule exigence est que
+    // chaque fois que la transition terminée, votre code appelle
+    // deferred.resolve(name, reverse, $to, $from).
+
+    // Return un promise.
+    return deferred.promise();
+}
+
+$.mobile.defaultTransitionHandler = myTransitionHandler;
+		</code></pre>
+
+		<p>Une fois que vous avez fait cela, votre gestionnaire sera appelé à chaque fois qu'un nom de transition est utilisé mais ne se trouve pas dans le dictionnaire <code>$.mobile.transitionHandlers</code>.</p>
+		
+		<h2>Un modèle pour le développement de gestionnaire de transition personnalisée</h2>
+		<p>Les gestionnaires de transition impliquent un certain nombre d'opérations critiques : le masquage des pages existantes, l'affichage de la nouvelle page, le défilement soit vers le haut ou soit le rappel d'une position du défilement sur cette nouvelle page, l'activation de ​​la nouvelle page et l'ajout des séquences d'animation et de synchronisation que vous souhaitez. Au cours du développement, nous vous recommandons d'utiliser <code>jquery.mobile.transitions.js</code> comme référence de codage.</p>
+			
+		<h2>Transitions et position du défilement</h2>
+		<p>L'une des choses principales de jQuery Mobile est de stocker votre position de défilement avant de commencer une transition afin qu'il puisse vous ramener au même endroit lorsque vous retournez sur la page en cliquant le bouton "Précédent" ou en fermant une boîte de dialogue. Voici les mêmes boutons que ceux du haut de la page pour tester la logique de défilement.</p>
+		
+	
+		</div><!--/content-primary -->		
+
+		<div class="content-secondary">
+
+			<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+					<h3>Aussi dans cette rubrique</h3>
+
+					<ul data-role="listview" data-theme="c" data-dividertheme="d">
+						<li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
+						<li><a href="page-anatomy.html">Anatomie d'une page</a></li>
+						<li><a href="page-template.html" data-ajax="false">Modèle de page unique</a></li>
+						<li><a href="multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
+						<li><a href="page-titles.html">Titres de page</a></li>
+						<li><a href="page-links.html">Liaison de pages</a></li>
+						<li><a href="page-transitions.html">Transitions de page</a></li>
+						<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+						<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
+						<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
+						<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>
+						<li><a href="page-scripting.html">Écriture des scripts des pages</a></li>
+						<li><a href="phonegap.html">Application PhoneGap</a></li>
+						<li><a href="touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
+						<li><a href="pages-themes.html">Thématisation des pages</a></li>
+					</ul>
+			</div>
+		</div>		
+
+	</div><!-- /content -->
+	
+</div></body>
+</html>
+

@@ -2,7 +2,7 @@
 //>>description: Applies classes for grid styling.
 //>>label: CSS Grid Tool
 
-define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navigation.pushstate" ], function() {
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jquery.mobile.navigation.pushstate" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window, undefined ) {
 	var	$html = $( "html" ),
@@ -30,42 +30,88 @@ define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navig
 
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
-	var $loader = $( "<div class='ui-loader ui-body-a ui-corner-all'><span class='ui-icon ui-icon-loading spin'></span><h1></h1></div>" );
+	var loaderClass = "ui-loader",
+		$loader = $( "<div class='" + loaderClass + "'><span class='ui-icon ui-icon-loading'></span><h1></h1></div>" );
+	
+	// For non-fixed supportin browsers. Position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
+	function fakeFixLoader(){
+		$loader
+			.css({
+				top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
+				activeBtn.length && activeBtn.offset().top || 100
+			});		
+	}
+	
+	// check position of loader to see if it appears to be "fixed" to center
+	// if not, use abs positioning
+	function checkLoaderPosition(){
+		if( $loader.offset().top < $window.scrollTop() ){
+			$loader.addClass( "ui-loader-fakefix" );
+			fakeFixLoader();
+			$window
+				.unbind( "scroll", checkLoaderPosition )
+				.bind( "scroll", fakeFixLoader );
+		}
+	}
+	
 
 	$.extend($.mobile, {
 		// turn on/off page loading message.
-		showPageLoadingMsg: function() {
+		showPageLoadingMsg: function( theme, msgText, textonly ) {
+			$html.addClass( "ui-loading" );
+			
 			if ( $.mobile.loadingMessage ) {
-				var activeBtn = $( "." + $.mobile.activeBtnClass ).first();
+				var activeBtn = $( "." + $.mobile.activeBtnClass ).first(),
+					theme = theme || $.mobile.loadingMessageTheme,
+					// text visibility from argument takes priority
+					textVisible = textonly || $.mobile.loadingMessageTextVisible;
+					
 
 				$loader
+					.attr( "class", loaderClass + " ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
 					.find( "h1" )
-						.text( $.mobile.loadingMessage )
+						.text( msgText || $.mobile.loadingMessage )
 						.end()
-					.appendTo( $.mobile.pageContainer )
-					// position at y center (if scrollTop supported), above the activeBtn (if defined), or just 100px from top
-					.css({
-						top: $.support.scrollTop && $window.scrollTop() + $window.height() / 2 ||
-						activeBtn.length && activeBtn.offset().top || 100
-					});
+					.appendTo( $.mobile.pageContainer );
+					
+				checkLoaderPosition();
+				$window.bind( "scroll", checkLoaderPosition );
 			}
-
-			$html.addClass( "ui-loading" );
 		},
 
 		hidePageLoadingMsg: function() {
 			$html.removeClass( "ui-loading" );
+			
+			if( $.mobile.loadingMessage ){
+				$loader.removeClass( "ui-loader-fakefix" );
+			}
+			
+			$( window ).unbind( "scroll", fakeFixLoader );
 		},
 
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $pages = $( ":jqmData(role='page')" );
+			var $dialogs, $pages = $( ":jqmData(role='page')" );
 
-			// if no pages are found, create one with body's inner html
+			// if no pages are found, check for dialogs or create one with body's inner html
 			if ( !$pages.length ) {
-				$pages = $( "body" ).wrapInner( "<div data-" + $.mobile.ns + "role='page'></div>" ).children( 0 );
+				$dialogs = $( ":jqmData(role='dialog')" );
+
+				// if there are no pages but a dialog is present, load it as a page
+				if( $dialogs.length ) {
+					// alter the attribute so it will be treated as a page unpon enhancement
+					// TODO allow for the loading of a dialog as the first page (many considerations)
+					$dialogs.first().attr( "data-" + $.mobile.ns + "role", "page" );
+
+					// remove the first dialog from the set of dialogs since it's now a page
+					// add it to the empty set of pages to be loaded by the initial changepage
+					$pages = $pages.add( $dialogs.get().shift() );
+				} else {
+					$pages = $( "body" ).wrapInner( "<div data-" + $.mobile.ns + "role='page'></div>" ).children( 0 );
+				}
 			}
+
 
 			// add dialogs, set data-url attrs
 			$pages.add( ":jqmData(role='dialog')" ).each(function() {
@@ -101,24 +147,6 @@ define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navig
 		}
 	});
 
-	// This function injects a meta viewport tag to prevent scaling. Off by default, on by default when touchOverflow scrolling is enabled
-	function disableZoom() {
-		var cont = "user-scalable=no",
-			meta = $( "meta[name='viewport']" );
-
-		if( meta.length ){
-			meta.attr( "content", meta.attr( "content" ) + ", " + cont );
-		}
-		else{
-			$( "head" ).prepend( "<meta>", { "name": "viewport", "content": cont } );
-		}
-	}
-
-	// if touch-overflow is enabled, disable user scaling, as it creates usability issues
-	if( $.support.touchOverflow && $.mobile.touchOverflowEnabled && !$.mobile.touchOverflowZoomEnabled ){
-		disableZoom();
-	}
-
 	// initialize events now, after mobileinit has occurred
 	$.mobile._registerInternalEvents();
 
@@ -132,6 +160,15 @@ define( [ "jquery.mobile.core", "jquery.mobile.navigation", "jquery.mobile.navig
 		// it should be 1 in most browsers, but android treats 1 as 0 (for hiding addr bar)
 		// so if it's 1, use 0 from now on
 		$.mobile.defaultHomeScroll = ( !$.support.scrollTop || $(window).scrollTop() === 1 ) ? 0 : 1;
+
+
+		// TODO: Implement a proper registration mechanism with dependency handling in order to not have exceptions like the one below
+		//auto self-init widgets for those widgets that have a soft dependency on others
+		if ( $.fn.controlgroup ) {
+			$( document ).bind( "pagecreate create", function( e ){
+				$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
+			});
+		}
 
 		//dom-ready inits
 		if( $.mobile.autoInitializePage ){

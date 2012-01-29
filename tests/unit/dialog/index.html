@@ -5,8 +5,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Suite de test du dialogue de jQuery Mobile</title>
-
-	<script src="../../../js/jquery.js"></script>
+	<script src="../../../external/requirejs/require.js"></script>
+	<script src="../../../js/jquery.tag.inserter.js"></script>
 	<script>
 		$(document).bind('mobileinit',function(){
 			// Expect content to inherit this theme when not explicitly set
@@ -16,7 +16,6 @@
 	<script src="../jquery.setNameSpace.js"></script>
 	<script src="../../jquery.testHelper.js"></script>
 	<script src="../../../external/qunit.js"></script>
-	<script src="../../../external/requirejs/require.js"></script>
 	<script>
 		$.testHelper.asyncLoad([
 			[
@@ -32,7 +31,7 @@
 	</script>
 
 
-	<link rel="stylesheet"  href="../../../css/themes/default/"/>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css"/>
 	<link rel="stylesheet" href="../../../external/qunit.css"/>
 
 	<script src="../swarminject.js"></script>
