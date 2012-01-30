@@ -9,6 +9,7 @@
 			fullscreen: false,
 			tapToggle: true,
 			tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed",
+			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
 			
 			// Browser detection! Weeee, here we go...
@@ -222,6 +223,11 @@
 				.bind( "vclick", function( e ){
 					if( o.tapToggle && !$( e.target ).closest( o.tapToggleBlacklist ).length ){
 						self.toggle();
+					}
+				})
+				.bind( "focusin focusout", function( e ){
+					if( screen.width < 500 && $( e.target ).is( o.hideDuringFocus ) && !$( e.target ).closest( ".ui-header-fixed, .ui-footer-fixed" ).length ){
+						self[ ( e.type === "focusin" && self._visible ) ? "hide" : "show" ]();
 					}
 				});
 		},

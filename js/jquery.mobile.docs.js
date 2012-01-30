@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 9ce232f42aa12fd5a71a6ba7764af7e0f696695a <> Date: Sat Jan 28 10:13:06 2012 -0800
+* jQuery Mobile Framework Git Build: SHA1: 0b858d2571aebcbac81b371c8ceb39a2e5c5ca40 <> Date: Mon Jan 30 11:47:24 2012 -0800
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -6667,6 +6667,7 @@ $( document ).bind( "pagecreate create", function( e ){
 			fullscreen: false,
 			tapToggle: true,
 			tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed",
+			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
 			
 			// Browser detection! Weeee, here we go...
@@ -6880,6 +6881,11 @@ $( document ).bind( "pagecreate create", function( e ){
 				.bind( "vclick", function( e ){
 					if( o.tapToggle && !$( e.target ).closest( o.tapToggleBlacklist ).length ){
 						self.toggle();
+					}
+				})
+				.bind( "focusin focusout", function( e ){
+					if( screen.width < 500 && $( e.target ).is( o.hideDuringFocus ) && !$( e.target ).closest( ".ui-header-fixed, .ui-footer-fixed" ).length ){
+						self[ ( e.type === "focusin" && self._visible ) ? "hide" : "show" ]();
 					}
 				});
 		},
