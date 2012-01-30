@@ -53,7 +53,7 @@
 			
 			<dt><code>transition</code> <em>string</em></dt>
 			<dd>
-				<p class="default">Pa défaut : "slide" (ce qui finit par utiliser slideup et slidedown)</p>
+				<p class="default">Par défaut : "slide" (ce qui finit par utiliser slideup et slidedown)</p>
 				<p>La transition qui devrait être utilisé pour afficher et masquer une barre d'outils fixes. Les valeurs possibles sont "none", "fade" et "slide" (ou vous pouvez écrire votre propre transition CSS et l'utiliser). Cette option est également définie comme un attribut de données : <code>data-transition=""fade""</code></p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ transition: "fade" }</strong>);</code></pre>
 			</dd>
@@ -89,9 +89,16 @@ $.mobile.fixedToolbars
 			
 			<dt><code>tapToggleBlacklist</code> <em>string</em></dt>
 			<dd>
-				<p class="default">par défaut : "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed"</p>
+				<p class="default">Par défaut : "a, .ui-header-fixed, .ui-footer-fixed"</p>
 				<p>Une liste des sélecteurs jQuery qui doivent être ignorées pour le basculement-tapé des barres d'outils.</p>			
 				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed" }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>hideDuringFocus</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "input, select, textarea"</p>
+				<p>Une liste des sélecteurs jQuery qui devrait entraîner les barres d'outils à se masquer à l'exception des barres d'outils fixes.</p>			
+				<pre><code>$("[data-role=header]").fixedtoolbar(<strong>{ hideDuringFocus: "input, select, textarea" }</strong>);</code></pre>
 			</dd>
 			
 			
@@ -120,8 +127,8 @@ $( document ).bind("mobileinit", function(){
 			
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
-				<p class="default">default: ":jqmData(position='fixed')"</p>
-				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les data roles, etc) qui seront automatiquement initialisés comme des barres d'outils fixes. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
+				<p class="default">Par défaut : ":jqmData(position='fixed')"</p>
+				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les data roles, etc) qui seront automatiquement initialisés comme des barres d'outils fixes. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../api/globalconfig.html">l'événement mobileinit</a> :</p>
 				<pre><code>$( document ).bind( "mobileinit", function(){
 	<strong>$.mobile.fixedtoolbar.prototype.options.initSelector = ".myselector";</strong>
 });
