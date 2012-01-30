@@ -4,11 +4,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile Docs - Lists</title>
-	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />
-	<script src="../../jquery.js"></script>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<script src="../../js/jquery.js"></script>
   <script type="text/javascript" src="stats/perf.js"></script>
   <script type="text/javascript" src="stats/startup.js"></script>
-	<script src="../../jquery.mobile.min.js"></script>
+	<script src="../../js/"></script>
 </head>
 <body>
 

@@ -4,12 +4,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Mobile Docs - Sample form response</title> 
-	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />  
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
-	<script src="../../jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
+	<script src="../../js/jquery.js"></script>
+	
 	<script src="../assets/js/jqm-docs.js"></script>
-	<script src="../../jquery.mobile.min.js"></script>
+	<script src="../../js/"></script>
 </head> 
 <body> 
 

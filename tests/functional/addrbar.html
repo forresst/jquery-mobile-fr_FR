@@ -5,11 +5,11 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>jQuery Mobile : Journal d'événement</title>
-	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../docs/assets/css/jqm-docs.css" />
-	<script src="../../jquery.js"></script>
-	<script src="../../jquery.mobile.min.js"></script>
-	
+	<script src="../../js/jquery.tag.inserter.js"></script>
+	<script data-main="../../js/jquery.mobile" src="../../external/requirejs/require.js"></script>
+
 	<script>
 	$(function(){
 	$( "a" ).bind("tap click",function( e ){
@@ -19,28 +19,28 @@
 			return false;
 		})
 		.bind("tap click", false);
-	});	
+	});
 	</script>
-	
+
 	<style>
 		#jqm-home {
 			height: 500px;
 		}
 	</style>
-</head> 
-<body> 
+</head>
+<body>
 <div  data-role="page"  data-theme="b" id="jqm-home">
 	<div  data-role="header">
 		<h1>Journal d'événement</h1>
 	</div>
-	
+
 	<div  data-role="content">
 		<p>Les événements tactile sur cette page seront enregistrés ci dessous, en les ajoutant au début de la partie supérieure dès qu'ils arrivent.</p>
-		
+
 		<a href="foo.html"  data-role="button">Cliquez moi</a>
-		
+
 		<ul  data-role="listview" id="log">
-			
+
 		</ul>
 
 	</div>

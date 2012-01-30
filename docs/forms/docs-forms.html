@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html>
+<html class="ui-mobile-rendering">
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Docs jQuery Mobile - Formulaires</title>
-	<link rel="stylesheet"  href="../../jquery.mobile.min.css" />
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
-	<script src="../../jquery.js"></script>
-	<script src="../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
-	<script src="../assets/js/jqm-docs.js"></script>
-	<script src="../../jquery.mobile.min.js"></script>
+
+	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
 </head>
 <body>
 
@@ -207,7 +206,7 @@ myswitch.slider("refresh");
 $(document).bind('mobileinit',function(){
 	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>
 });
-		</pre></code>
+		</code></pre>
 
 <p>Un cas particulier est celui des selects. L'exemple ci-dessus permettra d'éviter toute augmentation de prise de place sur les éléments select dans la page si <code>select</code> est inclus. Si vous souhaitez conserver les performances natives, l'aspect et la convivialité du menu lui-même et profiter de l'augmentation visuelle du bouton de sélection par Mobile jQuery, vous pouvez définir <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> à true dans une fonction de rappel <code>mobileinit</code> comme un paramètre global ou utilisez <code>data-native="true"</code> au cas par cas.</p>
 
