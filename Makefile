@@ -28,6 +28,8 @@ RUN_JS = @@java -XX:ReservedCodeCacheSize=64m -classpath build/js.jar:build/goog
 # When no build target is specified, all gets ran
 all: init css js zip notify
 
+# alias for init to follow normal build conventions
+clean: init
 
 # Build and minify the CSS files
 css: init
@@ -86,12 +88,10 @@ docs: init
 # Create the output directory. This is in a separate step so its not dependant on other targets
 init:
 	# -------------------------------------------------
-	# Building jQuery Mobile in the "${OUTPUT}" folder
+	# Cleaning build output
 	@@rm -rf ${OUTPUT}
 	@@rm -rf tmp
 	@@mkdir -p ${OUTPUT}
-	# -------------------------------------------------
-
 
 # Build and minify the JS files
 js: init
@@ -146,7 +146,8 @@ zip: init css js
 # For jQuery Team Use Only
 #
 # -------------------------------------------------
-build_latest: init css docs js zip
+# NOTE the init (which removes previous build output) has been removed to prevent a gap in service
+build_latest: css docs js zip
 
 deploy_latest:
 	# Time to put these on the CDN
@@ -158,13 +159,11 @@ deploy_latest:
 latest: build_latest deploy_latest
 
 # Build the nightly backups. This is done on a server cronjob
-nightlies: init css js docs zip
+nightlies: css js docs zip
 	# Time to put these on the CDN
 	@@mkdir -p tmp/nightlies
 	@@mv ${OUTPUT} tmp/nightlies/$$(date "+%Y%m%d")
 	@@scp -qr tmp/nightlies/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/nightlies/
-	# Do some cleanup to wrap it up
-	@@rm -rf tmp
 	# -------------------------------------------------
 
 
