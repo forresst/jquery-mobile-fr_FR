@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 7cb56bb303a8e23424bcf30d48ac1beb3670865c <> Date: Mon Jan 30 13:29:01 2012 -0800
+* jQuery Mobile Framework Git Build: SHA1: bd86a62f473713e7249ae35958be2720dd3ea57b <> Date: Thu Feb 2 15:49:34 2012 +0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -4515,10 +4515,16 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 
 		$navbar.delegate( "a", "vclick", function( event ) {
 			if( !$(event.target).hasClass("ui-disabled") ) {
-				$navbtns.not( ".ui-state-persist" ).removeClass( $.mobile.activeBtnClass );
+				$navbtns.removeClass( $.mobile.activeBtnClass );
 				$( this ).addClass( $.mobile.activeBtnClass );
 			}
 		});
+		
+		// Buttons in the navbar with ui-state-persist class should regain their active state before page show
+		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
+			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
+		});
+		
 	}
 });
 
@@ -6669,6 +6675,7 @@ $( document ).bind( "pagecreate create", function( e ){
 			tapToggleBlacklist: "a, input, select, textarea, .ui-header-fixed, .ui-footer-fixed",
 			hideDuringFocus: "input, textarea, select",
 			updatePagePadding: true,
+			trackPersistentToolbars: true,
 			
 			// Browser detection! Weeee, here we go...
 			// Unfortunately, position:fixed is costly, not to mention probably impossible, to feature-detect accurately.
@@ -6789,13 +6796,30 @@ $( document ).bind( "pagecreate create", function( e ){
 						});
 					}
 				})
-				.bind( "pagebeforehide", function(){
+				.bind( "pagebeforehide", function( e, ui ){
 					if( o.disablePageZoom ){
 						$.mobile.zoom.enable( true );
 					}
 					if( o.updatePagePadding ){
 						$( window ).unbind( "throttledresize." + self.widgetName );
-					}	
+					}
+					
+					if( o.trackPersistentToolbars ){
+						var thisFooter = $( ".ui-footer-fixed:jqmData(id)", this ),
+							thisHeader = $( ".ui-header-fixed:jqmData(id)", this ),
+							nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ),
+							nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage );
+		
+							if( nextFooter.length || nextHeader.length ){
+					
+								nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
+				
+								ui.nextPage.one( "pageshow", function(){
+									nextFooter.add( nextHeader ).appendTo( this );
+								} );
+							}
+					}
+					
 				});
 		},
 		

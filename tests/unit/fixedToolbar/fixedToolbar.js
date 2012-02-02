@@ -54,9 +54,9 @@
 			
 			function() {
 		
-				ok( $( '#classes-test-g' ).hasClass('fade'), 'The fade class should be applied by default');
+				ok( $( '#classes-test-g' ).hasClass('slidedown'), 'The slidedown class should be applied by default');
 				ok( $( '#classes-test-b' ).hasClass('in'), 'The "in" class should be applied by default');
-				ok( !$( '#classes-test-h' ).hasClass('fade'), 'The fade class should not be applied when the header has a data-transition of "none"');
+				ok( !$( '#classes-test-h' ).hasClass('slidedown'), 'The slidedown class should not be applied when the header has a data-transition of "none"');
 		
 				ok( !$( '#classes-test-h' ).hasClass('in'), 'The "in" class should not be applied when the header has a data-transition of "none"');
 				ok( $( '#classes-test-i' ).hasClass('slidedown'), 'The "slidedown" class should  be applied when the header has a data-transition of "slide"');
@@ -84,7 +84,7 @@
 	});
 	
 	test( "Meta viewport content is restored to previous state, and zooming renabled, after pagebeforehide", function(){
-		$.mobile.zoom.enable();
+		$.mobile.zoom.enable( true );
 		var defaultZoom = $.mobile.fixedtoolbar.prototype.options.disablePageZoom;
 		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", true );
 		
@@ -93,21 +93,21 @@
 		$( ".ui-page-active" ).trigger( "pagebeforehide" );
 		ok( $.mobile.zoom.enabled, "Viewport scaling is enabled." ); 		
 		$( ".ui-page-active .ui-header-fixed" ).fixedtoolbar("option", "disablePageZoom", defaultZoom );
-		$.mobile.zoom.enable();
+		$.mobile.zoom.enable( true );
 	});
 	
 	test( "User zooming is not disabled when the header is visible and disablePageZoom is false", function(){
-		$.mobile.zoom.enable();
+		$.mobile.zoom.enable( true );
 		var defaultZoom = $.mobile.fixedtoolbar.prototype.options.disablePageZoom;
-		$( ":jqmData(position='fixed')" ).fixedtoolbar( "option", "disablePageZoom", false );
+		$( ".ui-page :jqmData(position='fixed')" ).fixedtoolbar( "option", "disablePageZoom", false );
 
 		$( ".ui-page-active" ).trigger( "pagebeforeshow" );
 		
 		ok( $.mobile.zoom.enabled, "Viewport scaling is not disabled before page show." );
 
-		$( ":jqmData(position='fixed')" ).fixedtoolbar( "option", "disablePageZoom", defaultZoom );
+		$( ".ui-page :jqmData(position='fixed')" ).fixedtoolbar( "option", "disablePageZoom", defaultZoom );
 		
-		$.mobile.zoom.enable();
+		$.mobile.zoom.enable( true );
 	});
 	
 
@@ -211,6 +211,39 @@
 	});
 	
 	
+	asyncTest( "The persistent headers and footers are working properly", function() {
+
+		expect( 3 );	
+				
+		$( "#persist-test-b,#persist-test-a" ).page();
+						
+		var nextpageheader =  $( "#persist-test-b .ui-header-fixed" ),
+			nextpagefooter =  $( "#persist-test-b .ui-footer-fixed" );
+		
+
+		$.testHelper.sequence([
+			function(){
+				ok( nextpageheader.length && nextpagefooter.length, "next page has fixed header and fixed footer" );
+				$.mobile.changePage( "#persist-test-a" );		
+			},
+			
+			function(){
+				$( "#persist-test-b" )
+					.one( "pagebeforeshow", function(){
+						ok( nextpageheader.parent( ".ui-mobile-viewport" ).length, "fixed header and footer are now a child of page container" )
+					});
+				
+				$.mobile.changePage( "#persist-test-b" );
+			},
+			
+			function() {
+				ok( nextpageheader.parent( ".ui-page" ).length, "fixed header and footer are now a child of page again" );
+				$.mobile.changePage( "#default" );
+				start();
+			}
+			
+		], 900);
+	});
 	
 	
 	

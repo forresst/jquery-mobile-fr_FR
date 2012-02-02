@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 7cb56bb303a8e23424bcf30d48ac1beb3670865c <> Date: Mon Jan 30 13:29:01 2012 -0800
+* jQuery Mobile Framework Git Build: SHA1: bd86a62f473713e7249ae35958be2720dd3ea57b <> Date: Thu Feb 2 15:49:34 2012 +0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -985,9 +985,9 @@ a.ui-link-inherit {
 	box-shadow: inset 0px 1px 4px 			rgba(0,0,0,.2);
 }
 .ui-icon-shadow {
-	-moz-box-shadow: 0px 1px 0 				rgba(255,255,255,.4);
-	-webkit-box-shadow: 0px 1px 0 			rgba(255,255,255,.4);
-	box-shadow: 0px 1px 0 					rgba(255,255,255,.4);
+	-moz-box-shadow: 0px 1px 0 				rgba(255,255,255,.4) ;
+	-webkit-box-shadow: 0px 1px 0 			rgba(255,255,255,.4) ;
+	box-shadow: 0px 1px 0 					rgba(255,255,255,.4) ;
 }
 .ui-btn:focus {
 	outline: 0;
@@ -1025,11 +1025,11 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 .ui-loading .ui-loader { display: block; }
 .ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; box-shadow: 0 1px 1px -1px #fff; left: 50%; border:0; }
-.ui-loader-default { background: none; opacity: .18; width: 46px; height: 46px; margin-left: -18px; margin-top: -18px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
+.ui-loader-default { background: none; opacity: .18; width: 46px; height: 46px; margin-left: -18px; margin-top: -18px; }
 .ui-loader-verbose { width: 200px; opacity: .88; height: auto; margin-left: -110px; padding: 10px; }
 .ui-loader-default h1 { font-size: 0; width: 0; height: 0; overflow: hidden; }
 .ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
-.ui-loader .ui-icon {  display: block; margin: 0; width: 46px; height: 46px; background-color: transparent; }
+.ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 46px; height: 46px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
 .ui-loader-verbose .ui-icon { margin: 0 auto 10px; }
 .ui-loader-textonly { padding: 15px; margin-left: -115px;  }
 .ui-loader-textonly .ui-icon { display: none; }
@@ -1570,9 +1570,6 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-page-header-fullscreen .ui-fixed-hidden,
 .ui-page-footer-fullscreen .ui-fixed-hidden {
 	left: -99999em;
-}
-.ui-footer-duplicate {
-	display: none;
 }
 .ui-header-fixed .ui-btn,
 .ui-footer-fixed .ui-btn { 

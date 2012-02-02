@@ -116,6 +116,13 @@ dd h4 { margin:15px 0 0 0; }
 	background-image:      -o-linear-gradient(#74b042, #56A00E); 
 	background-image:         linear-gradient(#74b042, #56A00E);		
 }
+.ui-bar-f, 
+.ui-bar-f input, 
+.ui-bar-f select, 
+.ui-bar-f textarea, 
+.ui-bar-f button {
+	font-family: Helvetica, Arial, sans-serif ;
+}
 .ui-bar-f,
 .ui-bar-f .ui-link-inherit {
 	color: 					#fff;
