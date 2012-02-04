@@ -1,3 +1,9 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Applies classes for grid styling.
+//>>label: CSS Grid Tool
+
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jquery.mobile.navigation.pushstate", "../external/requirejs/depend!./jquery.mobile.hashchange[jquery]" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 ( function( $, window, undefined ) {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
@@ -174,3 +180,6 @@
 		$window.load( $.mobile.silentScroll );
 	});
 }( jQuery, this ));
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

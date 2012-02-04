@@ -1,3 +1,7 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Hashchange event
+//>>label: Hashchange
+//>>excludeEnd("jqmBuildExclude");
 
 
 // Script: jQuery hashchange event

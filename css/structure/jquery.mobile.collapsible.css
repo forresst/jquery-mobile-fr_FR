@@ -10,10 +10,11 @@
 	display: block;
 	margin:  0 -8px;
 	padding: 10px 16px;
-	border-top:  none;      
-	background-image: none; 
-	font-weight: normal;    
+	border-top:  none;      /* Overrides ui-btn-up-* */
+	background-image: none; /* Overrides ui-btn-up-* */
+	font-weight: normal;    /* Overrides ui-btn-up-* */
 }
 .ui-collapsible-content-collapsed { display: none; }
+
 .ui-collapsible-set { margin: .5em 0; }
 .ui-collapsible-set .ui-collapsible { margin: -1px 0 0; }

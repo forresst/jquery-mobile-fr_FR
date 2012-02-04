@@ -1,3 +1,9 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Behavior for "fixed" headers and footers
+//>>label: Fixedtoolbar
+
+define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jquery.mobile.page", "./jquery.mobile.page.sections", "./jquery.mobile.zoom" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 
@@ -29,7 +35,6 @@
 					ffversion = !!ffmatch && ffmatch[ 1 ],
 					operammobilematch = ua.match( /Opera Mobile\/([0-9]+)/ ),
 					omversion = !!operammobilematch && operammobilematch[ 1 ],
-					
 					w = window;
 
 				if(
@@ -49,6 +54,9 @@
 					||
 					// WebOS less than 3
 					( "palmGetResource" in window && wkversion && wkversion < 534 )
+					||
+					// MeeGo
+					( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 )
 				){
 					return true;
 				}
@@ -169,7 +177,7 @@
 			// This behavior only applies to "fixed", not "fullscreen"
 			if( this.options.fullscreen ){ return; }
 
-			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.height() );
+			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
 		},
 		
 		show: function( notransition ){
@@ -263,3 +271,6 @@
 	});	
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

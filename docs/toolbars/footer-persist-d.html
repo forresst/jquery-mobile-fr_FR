@@ -1,0 +1,90 @@
+<!DOCTYPE html> 
+<html class="ui-mobile-rendering"> 
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Framework jQuery Mobile - Pied de page persistant C</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
+
+	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
+</head> 
+<body> 
+	<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f" data-position="fixed" data-id="foo">
+		<h1>Info</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div>
+	
+	<div data-role="content">
+		<div class="content-primary">
+		<h2>A propos des barres d'outils persistantes</h2>
+		<p>Cette page est une démo des barres d'outils persistantes. Cliquez sur un des liens dans le pied de page, et vous pourrez voir la transtion du contenu de la page, l'entête et le pied de page persistants restent en place sur ces pages durant l'animation vers la nouvelle page HTML.</p>
+		<p>Pour que le framework applique le comportement persistant, ajouter l'attribut <code>data-id</code> au pied de page de toutes les pages HTML afin d'avoir le même ID. C'est simple : si la page où vous naviguez a une entête ou un pied avec les mêmes <code>data-id</code>, les barres d'outils apparaissent fixes en dehors de la transition. Chacune de ces pages a une transition différente pour tester comment cela fonctionne.</p>
+		
+		<p>Généralement, la technique de la barre d'outils persistante sera combinée avec le positionnement fixe. Dans cet exemple, le pied de page a aussi une barre de navigation :</p>
+	
+<pre><code>	
+&lt;div data-role="footer"<strong> data-id="foo1" data-position="fixed"</strong>&gt;
+	&lt;div data-role="navbar"&gt;
+		&lt;ul&gt;
+			&lt;li&gt;&lt;a href="a.html"&gt;Amis&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="b.html"&gt;Albums&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="c.html"&gt;Emails&lt;/a&gt;&lt;/li&gt;
+			&lt;li&gt;&lt;a href="d.html" &gt;Info&lt;/a&gt;&lt;/li&gt;
+		&lt;/ul&gt;
+	&lt;/div&gt;&lt;!-- /navbar --&gt;
+&lt;/div&gt;&lt;!-- /footer --&gt;
+</code></pre>
+		<p>Pour définir un statut actif sur l'un des éléments dans la barre d'outils persistante, ajouter une classe <code>ui-state-persist</code> supplémentaire à <code>ui-btn-active</code> correspondant à l'ancre.</p>
+		
+<pre><code>	
+&lt;li&gt;&lt;a href="d.html" <strong>class="ui-btn-active ui-state-persist"</strong>&gt;Info&lt;/a&gt;&lt;/li&gt;
+</code></pre>
+
+		<h3>Une remarque à propos des transitions</h3>
+		<p>Les <a href="../pages/page-transitions.html">transitions de page</a> : slide, slideup, slidedown, fade ou none fonctionnent correctement avec les barres d'outils persistantes. Toutefois, les transitions 3D intensives, comme flip, turn et flow, peuvent causer avec cette technique des problèmes de performance, de positionnement et d'animation, donc nous ne recommandons pas leur utilisation.</p>
+		
+		</div><!--/content-primary -->		
+
+		<div class="content-secondary">
+
+				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+						<h3>Aussi dans cette rubrique</h3>
+
+						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+							<li data-role="list-divider">Barres d'outils</li>
+							<li><a href="docs-bars.html">Les bases de la barre d'outils</a></li>
+							<li><a href="docs-headers.html">Barres d'entête</a></li>
+							<li><a href="docs-footers.html">Barres de pied de page</a></li>
+							<li><a href="docs-navbar.html">Barres de navigation</a></li>
+							<li><a href="bars-fixed.html">Positionnement fixe</a></li>
+							<li data-theme="a"><a href="footer-persist-a.html">Barres d'outils persistantes</a></li>
+							<li><a href="bars-themes.html">Thématisation des barres d'outils</a></li>
+
+						</ul>
+				</div>
+			</div>		
+
+		</div><!-- /content -->
+
+		<div data-role="footer" data-id="foo1" data-position="fixed">
+			<div data-role="navbar">
+				<ul>
+					<li><a href="footer-persist-a.html">Amis</a></li>
+					<li><a href="footer-persist-b.html">Albums</a></li>
+					<li><a href="footer-persist-c.html">Emails</a></li>
+					<li><a href="footer-persist-d.html" data-transition="slideup" class="ui-btn-active ui-state-persist">Info</a></li>
+				</ul>
+			</div><!-- /navbar -->
+		</div><!-- /footer -->
+
+		</div><!-- /page -->
+
+		</body>
+		</html>

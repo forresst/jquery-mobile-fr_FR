@@ -1,3 +1,9 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Corner-rounding for groups of buttons, checks, radios, etc
+//>>label: Controlgroups
+
+define( [ "jquery", "./jquery.mobile.buttonMarkup" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.fn.controlgroup = function( options ) {
@@ -44,3 +50,6 @@ $.fn.controlgroup = function( options ) {
 // The pagecreate handler for controlgroup is in jquery.mobile.init because of the soft-dependency on the wrapped widgets
 
 })(jQuery);
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

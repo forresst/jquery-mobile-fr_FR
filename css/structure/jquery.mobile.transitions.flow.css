@@ -1,4 +1,4 @@
-
+/* flow transition */
 .flow {
 	-webkit-transform-origin: 50% 30%;
 	-moz-transform-origin: 50% 30%;	
@@ -21,6 +21,7 @@
 	-moz-animation-timing-function: ease;
 	-moz-animation-duration: 350ms;
 }
+
 .flow.in {
 	-webkit-transform: translateX(0) scale(1);
 	-webkit-animation-name: flowinfromright;
@@ -31,16 +32,19 @@
 	-moz-animation-timing-function: ease;
 	-moz-animation-duration: 350ms;
 }
+
 .flow.out.reverse {
 	-webkit-transform: translateX(100%);
 	-webkit-animation-name: flowouttoright;
 	-moz-transform: translateX(100%);
 	-moz-animation-name: flowouttoright;
 }
+
 .flow.in.reverse {
 	-webkit-animation-name: flowinfromleft;
 	-moz-animation-name: flowinfromleft;
 }
+
 @-webkit-keyframes flowouttoleft {
     0% { -webkit-transform: translateX(0) scale(1); }
 	60%, 70% { -webkit-transform: translateX(0) scale(.7); }
@@ -51,6 +55,7 @@
 	60%, 70% { -moz-transform: translateX(0) scale(.7); }
     100% { -moz-transform:  translateX(-100%) scale(.7); }
 }
+
 @-webkit-keyframes flowouttoright {
     0% { -webkit-transform: translateX(0) scale(1); }
 	60%, 70% { -webkit-transform: translateX(0) scale(.7); }
@@ -61,6 +66,7 @@
 	60%, 70% { -moz-transform: translateX(0) scale(.7); }
     100% { -moz-transform:  translateX(100%) scale(.7); }
 }
+
 @-webkit-keyframes flowinfromleft {
     0% { -webkit-transform: translateX(-100%) scale(.7); }
 	30%, 40% { -webkit-transform: translateX(0) scale(.7); }

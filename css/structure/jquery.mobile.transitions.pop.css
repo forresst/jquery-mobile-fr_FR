@@ -2,6 +2,7 @@
 	-webkit-transform-origin: 50% 50%;
 	-moz-transform-origin: 50% 50%;
 }
+
 .pop.in {
 	-webkit-transform: scale(1);
 	-moz-transform: scale(1);
@@ -11,6 +12,7 @@
 	-webkit-animation-duration: 350ms;
 	-moz-animation-duration: 350ms;
 }
+
 .pop.out {
 	-webkit-animation-name: fadeout;
 	-moz-animation-name: fadeout;
@@ -18,16 +20,19 @@
 	-webkit-animation-duration: 100ms;
 	-moz-animation-duration: 100ms;
 }
+
 .pop.in.reverse {
 	-webkit-animation-name: fadein;
 	-moz-animation-name: fadein;
 }
+
 .pop.out.reverse {
 	-webkit-transform: scale(.8);
 	-moz-transform: scale(.8);
 	-webkit-animation-name: popout;
 	-moz-animation-name: popout;
 }
+
 @-webkit-keyframes popin {
     from {
         -webkit-transform: scale(.8);
@@ -38,6 +43,7 @@
         opacity: 1;
     }
 }
+
 @-moz-keyframes popin {
     from {
         -moz-transform: scale(.8);
@@ -48,6 +54,7 @@
         opacity: 1;
     }
 }
+
 @-webkit-keyframes popout {
     from {
         -webkit-transform: scale(1);
@@ -58,6 +65,7 @@
         opacity: 0;
     }
 }
+
 @-moz-keyframes popout {
     from {
         -moz-transform: scale(1);

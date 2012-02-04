@@ -1,3 +1,11 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: The base file for jQM
+//>>label: Core
+//>>group: core
+//>>required: true
+
+define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobile.widget" ], function( $, __version__ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 	var nsNormalizeDict = {};
@@ -36,13 +44,13 @@
 
 		// Set default page transition - 'none' for no transitions
 		defaultPageTransition: "fade",
-		
+
 		// Set maximum window width for transitions to apply - 'false' for no limit
 		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
 		minScrollBack: 10,
-		
+
 		// DEPRECATED: the following property is no longer in use, but defined until 2.0 to prevent conflicts
 		touchOverflowEnabled: false,
 
@@ -55,13 +63,13 @@
 
 		// Error response message - appears when an Ajax page request fails
 		pageLoadErrorMessage: "Error Loading Page",
-		
+
 		// Should the text be visble in the loading message?
 		loadingMessageTextVisible: false,
-		
+
 		// When the text is visible, what theme does the loading box use?
 		loadingMessageTheme: "a",
-		
+
 		// For error messages, which theme does the box uses?
 		pageLoadErrorMessageTheme: "e",
 
@@ -70,14 +78,12 @@
 
 		pushStateEnabled: true,
 
+		// allows users to opt in to ignoring content by marking a parent element as
+		// data-ignored
+		ignoreContentEnabled: false,
+
 		// turn of binding to the native orientationchange due to android orientation behavior
 		orientationChangeEnabled: true,
-
-		// Support conditions that must be met in order to proceed
-		// default enhanced qualifications are media query support OR IE 7+
-		gradeA: function(){
-			return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
-		},
 
 		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
@@ -264,4 +270,7 @@
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
 

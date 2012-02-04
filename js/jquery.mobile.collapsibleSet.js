@@ -1,3 +1,9 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: For creating grouped collapsible content areas.
+//>>label: Collapsible Sets
+
+define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.collapsible" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.collapsibleset", $.mobile.widget, {
@@ -76,3 +82,6 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

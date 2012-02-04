@@ -1,4 +1,7 @@
 //set up the theme switcher on the homepage
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+define( function() {
+//>>excludeEnd("jqmBuildExclude");
 
 //Réduction de la page de navigation après utilisation
 $(function(){
@@ -43,7 +46,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
       });
 
       message
-        .append( "<h3>Remarque : Il est possible que la navigation ne fonctionne pas si la documentation est visualisée localement</h3>" )
+        .append( "<h3>Remarques : Il est possible que la navigation ne fonctionne pas si la documentation est visualisée localement</h3>" )
         .append( "<p>La navigation axée AJAX qui est utilisée dans la documentation de jQuery Mobile peut avoir besoin d'être visualisée sur un serveur web pour fonctionner dans certains navigateurs. Si vous voyez un message d'erreur lorsque vous cliquez sur un lien, essayez un autre navigateur ou <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>consultez l'aide</a>.</p>" );
 
       $( document ).bind( "pagecreate", function( event ) {
@@ -51,4 +54,84 @@ if ( location.protocol.substr(0,4)  === 'file' ||
       });
     });
   });
+} else {
+  $( document ).bind( "mobileinit", function() {
+    
+    // Entête pour le site mobile.jquery-fr.com
+/*     var entetes = function() {
+      var entete = $( '<div>' , {
+          'class': "ui-bar ui-bar-a"
+      });
+
+      entete
+        .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
+        .append( "<a href='http://www.jquery-fr.com'>Documentation française jQuery</a>" )
+        .append( "<a href='http://www.jquery-fr.com/forum'>Forum français dédié à jQuery</a>" );
+
+      $( "div.type-home" ).prepend( entete );
+      $( "div.type-interior" ).prepend( entete );
+      $( "div.type-index" ).prepend( entete );
+    }; */
+  
+    $( 'div.type-home' ).live( 'pagebeforecreate',function(event){
+       var entete = $( '<div>' , {
+          'class': "ui-bar ui-bar-a"
+      });
+
+      entete
+        .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
+        .append( "<a href='http://www.jquery-fr.com'>Documentation française jQuery</a>" )
+        .append( "<a href='http://www.jquery-fr.com/forum'>Forum français dédié à jQuery</a>" );
+
+      $( "div.type-home" ).prepend( entete );
+    });
+
+    $( 'div.type-interior' ).live( 'pagebeforecreate',function(event){
+       var entete = $( '<div>' , {
+          'class': "ui-bar ui-bar-a"
+      });
+
+      entete
+        .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
+        .append( "<a href='http://www.jquery-fr.com'>Documentation française jQuery</a>" )
+        .append( "<a href='http://www.jquery-fr.com/forum'>Forum français dédié à jQuery</a>" );
+
+      $( "div.type-interior" ).prepend( entete );
+    });
+
+    $( 'div.type-index' ).live( 'pagebeforecreate',function(event){
+       var entete = $( '<div>' , {
+          'class': "ui-bar ui-bar-a"
+      });
+
+      entete
+        .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
+        .append( "<a href='http://www.jquery-fr.com'>Documentation française jQuery</a>" )
+        .append( "<a href='http://www.jquery-fr.com/forum'>Forum français dédié à jQuery</a>" );
+
+      $( "div.type-index" ).prepend( entete );
+    });
+
+    // Google analytics pour mobile.jquery-fr.com
+    $("div").live("pagebeforeshow",function(event,ui) {
+      var header = $("div[data-role='header'] h1",$(this));
+      var title = $.trim(header.text());
+      modtitle = "/" + title + ".html";
+      _gaq.push(["_trackPageview",modtitle]);
+      console.log(modtitle);
+    });
+
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-28940436-1']);
+    _gaq.push(['_setDomainName', 'jquery-fr.com']);
+
+   (function() {
+     var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+     ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+  });
 }
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

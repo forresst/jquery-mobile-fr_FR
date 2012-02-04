@@ -1,3 +1,9 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Form Buttons
+//>>label: links that proxy to native input/buttons
+
+define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup"  ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.button", $.mobile.widget, {
@@ -109,7 +115,10 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$.mobile.button.prototype.enhanceWithin( e.target );
+	$.mobile.button.prototype.enhanceWithin( e.target, true );
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

@@ -14,11 +14,6 @@
 <body> 
 
 	<div data-role="page" class="type-interior">
-	<div class="ui-bar ui-bar-a">
-	<h1>JQuery Mobile, documentation en français</h1>
-	<a href="http://www.jquery-fr.com">www.jquery-fr.com</a>
-	<a href="http://www.jquery-fr.com/forum">Forum</a>
-	</div>
 
 		<div data-role="header" data-theme="f">
 		<h1>Textes de saisie</h1>
@@ -83,6 +78,11 @@
 			<div data-role="fieldcontain">
 	         <label for="number">Nombre :</label>
 	         <input type="number" name="number" id="number" value="" />
+			</div>
+			
+			<div data-role="fieldcontain">
+	         <label for="number-pattern">Nombre + modèle :</label>
+	         <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="" placeholder="Pattern attribute [0-9]* for a numeric keypad" />
 			</div>
 			
 			<div data-role="fieldcontain">

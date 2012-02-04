@@ -1,3 +1,9 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Utility methods for enabling and disabling user scaling (pinch zoom)
+//>>label: zoomhandling
+
+define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 ( function( $ ) {
 	var	meta = $( "meta[name=viewport]" ),
         initialContent = meta.attr( "content" ),
@@ -28,3 +34,6 @@
 	});
 
 }( jQuery ));
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

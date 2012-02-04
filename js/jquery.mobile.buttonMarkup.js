@@ -1,3 +1,9 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: For making button-like links.
+//>>label: Buttons
+
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
@@ -208,3 +214,6 @@ $( document ).bind( "pagecreate create", function( e ){
 
 })( jQuery );
 
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

@@ -1,3 +1,9 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Widget factory extentions for mobile.
+//>>label: Widget Factory Extensions
+
+define( [ "jquery", "../external/requirejs/depend!./jquery.ui.widget[jquery]" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.widget", {
@@ -31,15 +37,33 @@ $.widget( "mobile.widget", {
 		return options;
 	},
 
-	enhanceWithin: function( target ) {
-		// TODO remove dependency on the page widget for the keepNative.
-		// Currently the keepNative value is defined on the page prototype so
-		// the method is as well
-		var page = $.mobile.closestPageData( $(target) ),
+	enhanceWithin: function( target, useKeepNative ) {
+		var page, keepNative, widgetElements;
+
+		widgetElements = $( this.options.initSelector, target );
+
+		// if ignoreContentEnabled is set to true the framework should
+		// only enhance the selected elements when they do NOT have a
+		// parent with the data-namespace-ignore attribute
+		if ( $.mobile.ignoreContentEnabled ) {
+			if ( !widgetElements.closest( ":jqmData(ignore)").length ) {
+				widgetElements[ this.widgetName ]();
+			}
+		} else if( useKeepNative ) {
+			// TODO remove dependency on the page widget for the keepNative.
+			// Currently the keepNative value is defined on the page prototype so
+			// the method is as well
+			page = $.mobile.closestPageData( $(target) );
 			keepNative = (page && page.keepNativeSelector()) || "";
 
-		$( this.options.initSelector, target ).not( keepNative )[ this.widgetName ]();
+			widgetElements.not( keepNative )[ this.widgetName ]();
+		} else {
+			widgetElements[ this.widgetName ]();
+		}
 	}
 });
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

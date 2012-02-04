@@ -1,3 +1,11 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Assorted support tests.
+//>>label: Support Tests
+//>>group: core
+//>>required: true
+
+define( [  "jquery", "./jquery.mobile.media", "./jquery.mobile.core" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 var fakeBody = $( "<body>" ).prependTo( "html" ),
@@ -126,6 +134,12 @@ var nokiaLTE7_3 = (function(){
 			ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );
 })();
 
+// Support conditions that must be met in order to proceed
+// default enhanced qualifications are media query support OR IE 7+
+$.mobile.gradeA = function(){
+	return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
+};
+
 $.mobile.ajaxBlacklist =
 			// BlackBerry browsers, pre-webkit
 			window.blackberry && !window.WebKitPoint ||
@@ -149,3 +163,6 @@ if ( !$.support.boxShadow ) {
 }
 
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

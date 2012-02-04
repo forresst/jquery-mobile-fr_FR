@@ -1,3 +1,11 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Custom events and shortcuts.
+//>>label: Events
+//>>group: core
+//>>required: true
+
+define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.media", "./jquery.mobile.support", "./jquery.mobile.vmouse" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 // add new event shortcuts
@@ -342,3 +350,6 @@ $.each({
 });
 
 })( jQuery, this );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");

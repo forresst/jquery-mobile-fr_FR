@@ -2,18 +2,22 @@
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
 @-moz-keyframes fadein {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
 @-webkit-keyframes fadeout {
     from { opacity: 1; }
     to { opacity: 0; }
 }
+
 @-moz-keyframes fadeout {
     from { opacity: 1; }
     to { opacity: 0; }
 }
+
 .fade.out {
 	opacity: 0;
 	-webkit-animation-duration: 125ms;
@@ -21,6 +25,7 @@
 	-moz-animation-duration: 125ms;
 	-moz-animation-name: fadeout;
 }
+
 .fade.in {
 	opacity: 1;
 	-webkit-animation-duration: 225ms;

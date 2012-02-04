@@ -1,3 +1,9 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: Applies classes for grid styling.
+//>>label: CSS Grid Tool
+
+define( [ "jquery" ], function( $ ) {
+//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.fn.grid = function( options ) {
@@ -44,3 +50,6 @@ $.fn.grid = function( options ) {
 	});
 };
 })( jQuery );
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+});
+//>>excludeEnd("jqmBuildExclude");
