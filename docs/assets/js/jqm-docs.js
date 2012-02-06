@@ -58,21 +58,6 @@ if ( location.protocol.substr(0,4)  === 'file' ||
   $( document ).bind( "mobileinit", function() {
     
     // Entête pour le site mobile.jquery-fr.com
-/*     var entetes = function() {
-      var entete = $( '<div>' , {
-          'class': "ui-bar ui-bar-a"
-      });
-
-      entete
-        .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
-        .append( "<a href='http://www.jquery-fr.com'>Documentation française jQuery</a>" )
-        .append( "<a href='http://www.jquery-fr.com/forum'>Forum français dédié à jQuery</a>" );
-
-      $( "div.type-home" ).prepend( entete );
-      $( "div.type-interior" ).prepend( entete );
-      $( "div.type-index" ).prepend( entete );
-    }; */
-  
     $( 'div.type-home' ).live( 'pagebeforecreate',function(event){
        var entete = $( '<div>' , {
           'class': "ui-bar ui-bar-a"
@@ -113,12 +98,24 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     });
 
     // Google analytics pour mobile.jquery-fr.com
-    $("div").live("pagebeforeshow",function(event,ui) {
-      var header = $("div[data-role='header'] h1",$(this));
-      var title = $.trim(header.text());
-      modtitle = "/" + title + ".html";
-      _gaq.push(["_trackPageview",modtitle]);
-      console.log(modtitle);
+    $( '[data-role=page]' ).live( 'pageshow', function (event, ui) {
+        try 
+        {
+            if ( location.hash )
+            {
+            	url = location.hash;
+            }
+            else 
+            {
+               url = defaulturl;
+            }
+            _gaq.push( ['_trackPageview', url] );
+        } 
+        catch( error ) 
+        {
+	  // Oh no! Call the catch logger
+ 
+        }
     });
 
     var _gaq = _gaq || [];
