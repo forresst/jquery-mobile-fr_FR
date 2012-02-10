@@ -26,11 +26,11 @@
 			
 			<p>jQuery Mobile est conçu pour fonctionner avec les conventions de liaison d'une simple page. Essentiellement, vous pouvez lier des pages et des ressources comme vous le feriez normalement, et jQuery Mobile gérera automatiquement les requêtes de page dans un modèle de page unique, utilisant Ajax, si possible. Lorsqu'Ajax n'est pas possible (comme une url qui n'est pas dans le même domaine ou si cela est spécifié en utilisant certains attributs sur le lien), une demande http normal est utilisée à la place.</p> 
 
-			<p>L'objectif de ce modèle est de permettre aux développeurs de créer des sites Web en utilisant les meilleures pratiques - où les liens ordinaires "fonctionneront" sans aucune configuration spéciale - tout en créant une expérience riche, comme une native qui ne peut être réalisé avec des requêtes HTTP standard.</p> 
+			<p>L'objectif de ce modèle est de permettre aux développeurs de créer des sites Web en utilisant les meilleures pratiques - où les liens ordinaires "fonctionneront" sans aucune configuration spéciale - tout en créant une expérience riche qui ne peut pas être réalisée avec des requêtes HTTP standard.</p> 
 			
-			<h2>Comportement du lien par défaut : Ajax</h2> 
+			<h2>Le comportement  par défaut du lien : Ajax</h2> 
 							
-			<p>Afin de permettre des transitions de page animée, tous les liens qui pointent vers une page externe (ex. products.html) sera chargée via Ajax. Pour le faire discrètement, le framework parse le <code>href</code> du lien pour formuler une requête Ajax (Hijax) et afficher l'icône de chargement. Tout cela se fait automatiquement par jQuery Mobile.</p>
+			<p>Afin de permettre des transitions de page animée, tous les liens qui pointent vers des pages externes (ex. products.html) seront chargées via Ajax. Pour le faire discrètement, le framework parse le <code>href</code> du lien pour formuler une requête Ajax (Hijax) et affiche l'icône de chargement. Tout cela se fait automatiquement par jQuery Mobile.</p>
 				
 			<p>Si la requête Ajax est réussie, le contenu de la page est ajoutée au DOM, tous les widgets mobiles sont auto-initialisés et la nouvelle page est animée dans la vue avec une transition de page.</p>
 			
@@ -112,10 +112,10 @@
 							<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
 								<li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
-								<li><a href="page-anatomy.html">Anatomie d'une page</a></li>
+								<li><a href="page-anatomy.html">Anatomie de la page</a></li>
 								<li><a href="page-template.html" data-ajax="false">Modèle de page unique</a></li>
 								<li><a href="multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
-								<li><a href="page-titles.html">Titres de page</a></li>
+								<li><a href="page-titles.html">Titres des pages</a></li>
 								<li data-theme="a"><a href="page-links.html">Liaison de pages</a></li>
 								<li><a href="page-transitions.html" data-ajax="false">Transitions de page</a></li>
 								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>

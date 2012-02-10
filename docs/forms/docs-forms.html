@@ -40,6 +40,19 @@
 <h2>Conventions de balisage</h2>
 <p>Lors de la construction des formulaires utilisé dans jQuery Mobile, la plupart des directives standard utilisées pour créer des formulaires qui soumettent habituellement un HTTP post ou get, sont toujours applicables. Cependant, une chose à garder à l'esprit est que l'attribut  <code>id</code> des contrôles de formulaire doivent être non seulement unique sur une page donnée, mais aussi unique à travers les pages d'un site. C'est parce que le modèle de navigation d'une seule page de jQuery Mobile permet à de nombreuses "pages" différentes d'être présentes dans le DOM au même moment, vous devez donc faire attention à un usage unique de l'attribut <code>id</code> ainsi il y aura seulement un de chaque dans les DOM (et bien sûr, n'oubliez pas de les associer correctement avec l'élément <code>label</code> via l'attribut <code>for</code>).</p>
 
+	<h2>Éléments de taille mini</h2>
+
+	<p>Pour avoir une version plus compacte de tous les éléments et boutons du formulaire, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="forms-all-mini.html">version mini</a>. Ceci est utile dans les barres d'outils et les espaces restreints, mais cela demeure faciles à taper. Il est possible d'ajouter cet attribut à un fieldcontainer pour le définir sur un certain nombre d'éléments à la fois.</p>
+
+<pre><code>	
+&lt;label for="basic"&gt;Texte de saisie :&lt;/label&gt;
+&lt;input type="text" name="name" id="basic" <strong>data-mini="true"</strong> /&gt;
+	</code></pre>
+
+	<p>Ceci va produire une saisie pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
+	 <label for="mini">Saisie de texte :</label>
+	 <input type="text" name="name" id="mini" value="" data-mini="true" />
+
 	<h2>Cacher les labels accessible</h2>
 	<p>Par amour pour l'accessibilité, jQuery Mobile exige que tous les éléments du formulaire soient appareillés avec un <code>label</code> significatif. Pour cacher les labels en les laissant visibles aux technologies d'assistance, par exemple, lorsque qu'on laisse l'attribut <code>plaholder</code> d'un élément qui sert comme label, appliquez la classe d'aide <code>ui-hidden-accessible</code> au label lui-même :</p>
 <code>
@@ -225,6 +238,7 @@ $(document).bind('mobileinit',function(){
 					<li data-role="list-divider">Éléments de formulaire</li>
 					<li data-theme="a"><a href="docs-forms.html">Formulaires basiques</a></li>
 					<li><a href="forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="forms-all-mini.html">Gallerie d'élement de formulaire mini</a></li>
 					<li><a href="textinputs/">Textes de saisie</a></li>
 					<li><a href="search/">Recherche</a></li>
 					<li><a href="slider/">Curseur</a></li>

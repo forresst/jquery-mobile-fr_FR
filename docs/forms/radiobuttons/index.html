@@ -82,7 +82,39 @@
 	         	<label for="radio-pet-4a">Lézard</label>
 	    </fieldset>
 
+		<h2>Version mini</h2>
 
+		<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
+
+<pre><code>			
+&lt;fieldset data-role="controlgroup" <strong>data-mini="true"</strong>&gt;
+
+    	&lt;input type="radio" name="radio-choice-1" id="radio-mini-1" value="choice-1" checked="checked" /&gt;
+
+    	&lt;label for="radio-mini-1"&gt;Crédit&lt;/label&gt;
+    	&lt;input type="radio" name="radio-choice-1" id="radio-mini-2" value="choice-2"  /&gt;
+
+    	&lt;label for="radio-mini-2"&gt;Débit&lt;/label&gt;
+    	&lt;input type="radio" name="radio-choice-1" id="radio-mini-3" value="choice-3"  /&gt;
+
+    	&lt;label for="radio-mini-3"&gt;Encaisser&lt;/label&gt;
+&lt;/fieldset&gt;
+</code></pre>
+
+		<p>Ceci va produire un radio bouton pas aussi grand que la version standard et disposant d'une taille inférieure.</p>
+		
+		<fieldset data-role="controlgroup" data-mini="true">
+	         	<input type="radio" name="radio-choice-1" id="radio-mini-1" value="choice-1" checked="checked" />
+	         	<label for="radio-mini-1">Crédit</label>
+	         	<input type="radio" name="radio-choice-1" id="radio-mini-2" value="choice-2"  />
+	         	<label for="radio-mini-2">Débit</label>
+	         	<input type="radio" name="radio-choice-1" id="radio-mini-3" value="choice-3"  />
+	         	<label for="radio-mini-3">Encaisser</label>
+	    </fieldset>
+		
+		<h2>Conteneurs de champs</h2>
+		
+		<p>Optionnellement, enveloppez les radios bouton dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
 	<pre><code>	
 <strong>&lt;div data-role="fieldcontain"&gt;
 </strong>    &lt;fieldset data-role="controlgroup"&gt;

@@ -16,7 +16,7 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Formulaires</h1>
+		<h1>Formulaires minis</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
 	</div><!-- /header -->
 
@@ -25,30 +25,28 @@
 
 		<form action="#" method="get">
 
-			<h2>Éléments de formulaire</h2>
+			<h2>Éléments de formulaire minis</h2>
 
-			<p>Cette page contient diverses améliorations progressive des contrôles de formulaire. Les éléments natifs sont parfois cachés de la vue, mais leurs valeurs sont maintenus de sorte que le formulaire peut être soumis normalement. Les navigateurs qui ne supportent pas les contrôles personnalisés pourront toujours offrir une expérience utilisable, car tous sont basés sur des éléments de formulaire natif.</p>
-			
-			<p>Il y a un ensemble complet d'éléments de formulaire <a href="forms-all-mini.html">en taille mini</a> qui sont utiles pour les barres d'outils ou des espaces plus étroits. <a href="forms-all-compare.html">Comparez les éléments de formulaire minis et normals</a> côte à côte.</p>
+			<p>Tous les contrôles de formulaire acceptent l'attribut <code>data-mini="true"</code> qui rend une version plus petite des éléments du formulaire que la <a href="forms-all.html">version standard</a>. Dans le cas des boutons groupés, l'attribut <code>data-mini="true"</code> peut être ajouter au controlgroup qui les contient. <a href="forms-all-compare.html">Comparez les éléments de formulaire minis et normals</a> côte à côte.</p>
 
 			<div data-role="fieldcontain">
 	         <label for="name">Saisie de texte :</label>
-	         <input type="text" name="name" id="name" value=""  />
+	         <input type="text" name="name" id="name" value="" data-mini="true" />
 			</div>
 
 			<div data-role="fieldcontain">
 			<label for="textarea">Zone de texte :</label>
-			<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+			<textarea cols="40" rows="8" name="textarea" id="textarea" data-mini="true"></textarea>
 			</div>
 
 			<div data-role="fieldcontain">
 	         <label for="search">Saisie pour recherche :</label>
-	         <input type="search" name="password" id="search" value=""  />
+	         <input type="search" name="password" id="search" value=""  data-mini="true" />
 			</div>
 
 			<div data-role="fieldcontain">
 				<label for="slider2">Interrupteur :</label>
-				<select name="slider2" id="slider2" data-role="slider">
+				<select name="slider2" id="slider2" data-role="slider" data-mini="true">
 					<option value="off">Arrêt</option>
 					<option value="on">Marche</option>
 				</select>
@@ -56,11 +54,11 @@
 
 			<div data-role="fieldcontain">
 				<label for="slider">Curseur :</label>
-			 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+			 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-mini="true" />
 			</div>
 
 			<div data-role="fieldcontain">
-			<fieldset data-role="controlgroup">
+			<fieldset data-role="controlgroup" data-mini="true">
 				<legend>Choisissez les collations que vous souhaitez :</legend>
 				<input type="checkbox" name="checkbox-1a" id="checkbox-1a" class="custom" />
 				<label for="checkbox-1a">Cheetos</label>
@@ -77,7 +75,7 @@
 			</div>
 
 			<div data-role="fieldcontain">
-			<fieldset data-role="controlgroup" data-type="horizontal">
+			<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 		    	<legend>Style de police  :</legend>
 		    	<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
 				<label for="checkbox-6">b</label>
@@ -91,7 +89,7 @@
 			</div>
 
 			<div data-role="fieldcontain">
-			    <fieldset data-role="controlgroup">
+			    <fieldset data-role="controlgroup" data-mini="true">
 			    	<legend>Choisir un animal :</legend>
 			         	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
 			         	<label for="radio-choice-1">Chat</label>
@@ -108,7 +106,7 @@
 			</div>
 
 			<div data-role="fieldcontain">
-			    <fieldset data-role="controlgroup" data-type="horizontal">
+			    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
 			     	<legend>Mise en page de la vue :</legend>
 			         	<input type="radio" name="radio-choice-b" id="radio-choice-c" value="on" checked="checked" />
 			         	<label for="radio-choice-c">Liste</label>
@@ -121,7 +119,7 @@
 
 			<div data-role="fieldcontain">
 				<label for="select-choice-1" class="select">Choisissez la méthode d'expédition :</label>
-				<select name="select-choice-1" id="select-choice-1">
+				<select name="select-choice-1" id="select-choice-1" data-mini="true">
 					<option value="standard">Lent : 7 jours</option>
 					<option value="rush">Rapide : 3 jours</option>
 					<option value="express">Express : Le lendemain</option>
@@ -131,7 +129,7 @@
 
 			<div data-role="fieldcontain">
 				<label for="select-choice-3" class="select">Votre pays :</label>
-				<select name="select-choice-3" id="select-choice-3">
+				<select name="select-choice-3" id="select-choice-3" data-mini="true">
 					<option value="AL">Alabama</option>
 					<option value="AK">Alaska</option>
 					<option value="AZ">Arizona</option>
@@ -187,7 +185,7 @@
 
 			<div data-role="fieldcontain">
 				<label for="select-choice-a" class="select">Choisissez la méthode d'expédition :</label>
-				<select name="select-choice-a" id="select-choice-a" data-native-menu="false">
+				<select name="select-choice-a" id="select-choice-a" data-native-menu="false" data-mini="true">
 					<option>Exemple de menu personnalisé</option>
 					<option value="standard">Lent : 7 jours</option>
 					<option value="rush">Rapide : 3 jours</option>
@@ -198,8 +196,8 @@
 
 		<div class="ui-body ui-body-b">
 		<fieldset class="ui-grid-a">
-				<div class="ui-block-a"><button type="submit" data-theme="d">Annuler</button></div>
-				<div class="ui-block-b"><button type="submit" data-theme="a">Valider</button></div>
+				<div class="ui-block-a"><button type="submit" data-theme="d" data-mini="true">Annuler</button></div>
+				<div class="ui-block-b"><button type="submit" data-theme="a" data-mini="true">Valider</button></div>
 	    </fieldset>
 		</div>
 	</form>
@@ -215,8 +213,8 @@
 				
 					<li data-role="list-divider">Éléments de formulaire</li>
 					<li><a href="docs-forms.html">Formulaires basiques</a></li>
-					<li data-theme="a"><a href="forms-all.html">Gallerie d'élement de formulaire</a></li>
-					<li><a href="forms-all-mini.html">Gallerie d'élement de formulaire mini</a></li>
+					<li><a href="forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li data-theme="a"><a href="forms-all-mini.html">Gallerie d'élement de formulaire mini</a></li>
 					<li><a href="textinputs/">Textes de saisie</a></li>
 					<li><a href="search/">Recherche</a></li>
 					<li><a href="slider/">Curseur</a></li>

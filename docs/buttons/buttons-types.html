@@ -46,7 +46,20 @@
 		<p>Produit ce bouton <strong>basé sur un lien</strong> :</p>
 		<a href="index.html" data-role="button">Bouton de lien</a>
 		
-		<p>Liens stylisé comme les boutons qui ont tous les mêmes options visuelles comme sur un formulaire boutons ci-dessous, mais il y a quelques différences importantes. Les liens basé sur les boutons ne font pas parti du plugin <code>button</code> et sont seulement utilisé par le plugin <code>buttonMarkup</code> pour générer les styles de bouton ainsi les méthodes de bouton de formulaire (enable, disable, refresh) ne sont pas supportés. Si vous avez besoin de désactiver un lien basé sur bouton (ou tout autre élément), il est possible de lui appliquer la classe  ui-disabled avec JavaScript afin de réaliser le même effet.</p>
+		<p><strong>Remarque :</strong> les liens stylisés comme les boutons qui ont tous les mêmes options visuelles basés sur un bouton de formulaire ci-dessous, mais il y a quelques différences importantes. Les liens basés sur les boutons ne font pas partis du plugin <code>button</code> et sont seulement utilisés par le plugin <code>buttonMarkup</code> pour générer les styles de bouton ainsi les méthodes de bouton de formulaire (enable, disable, refresh) ne sont pas supportés. Si vous avez besoin de désactiver un lien basé sur bouton (ou tout autre élément), il est possible de lui appliquer la classe  ui-disabled avec JavaScript afin de réaliser le même effet.</p>
+		
+		<h2>Taille mini</h2>
+
+		<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> au bouton pour créer une <a href="../forms/forms-all-mini.html">version mini</a>. </p>
+
+<pre><code>	
+	&lt;a href="index.html" data-role="button"&gt;Bouton de lien&lt;/a  <strong>data-mini="true"</strong> &gt;
+</code></pre>
+
+		<p>Ceci va produire une entrée de recherche pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
+         <a href="index.html" data-role="button" data-mini="true">Bouton de lien</a>
+		
+		
 		
 		<h2>Boutons de formulaire</h2>
 		<p>Pour facilité le style, le framework convertit automatiquement tout élément <code>button</code> ou <code>input</code> avec un <code>type</code> de <code>submit</code>, <code>reset</code>, <code>button</code> ou <code>image</code> dans un bouton stylisé personnalisé - il n'est pas nécessaire d'ajouter l'attribut <code> data-role="button"</code>. Toutefois, si nécessaire, vous pouvez appeler directement le plugin bouton sur n'importe quel sélecteur, comme n'importe quel plugin jQuery :</p>

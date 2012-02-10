@@ -42,7 +42,7 @@
 			
 			<p>Le framework trouvera tous les éléments <code>select</code> et les améliorera automatiquement dans des menus de sélection, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique d'un select, ajouter l'attribut <code>data-role="none"</code> au <code>select</code>.</p>
 			
-			<pre><code>
+<pre><code>
 &lt;label for="select-choice-0" class="select"&gt;Mode de livraison :&lt;/label&gt;
 &lt;select name="select-choice-0" id="select-choice-1"&gt;
    &lt;option value="standard"&gt;Lent : 7 jours&lt;/option&gt;
@@ -50,19 +50,42 @@
    &lt;option value="express"&gt;Express : le lendemain&lt;/option&gt;
    &lt;option value="overnight"&gt;De nuit&lt;/option&gt;
 &lt;/select&gt;
-			</code></pre>
+</code></pre>
 
 			<p>Cela va produire un menu de sélection de base. Les styles par défaut définissent la largeur de champ de saisie à 100% du conteneur parent et empile les labels sur une ligne distincte.</p>
 
-				<label for="select-choice-0" class="select">Mode de livraison :</label>
-				<select name="select-choice-0" id="select-choice-1">
-					<option value="standard">Lent : 7 jours</option>
-					<option value="rush">Rapide : 3 jours</option>
-					<option value="express">Express : Le lendemain</option>
-					<option value="overnight">De nuit</option>
-				</select>
+			<label for="select-choice-0" class="select">Mode de livraison :</label>
+			<select name="select-choice-0" id="select-choice-1">
+				<option value="standard">Lent : 7 jours</option>
+				<option value="rush">Rapide : 3 jours</option>
+				<option value="express">Express : Le lendemain</option>
+				<option value="overnight">De nuit</option>
+			</select>
 
+			<h2>Version mini</h2>
+
+			<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
+
+<pre><code>	
+&lt;label for="select-choice-min" class="select"&gt;Mode de livraison :&lt;/label&gt;
+&lt;select name="select-choice-min" id="select-choice-1" <strong>data-mini="true"</strong>&gt;
+   &lt;option value="standard"&gt;Lent : 7 jours&lt;/option&gt;
+   &lt;option value="rush"&gt;Rapide : 3 jours&lt;/option&gt;
+   &lt;option value="express"&gt;Express : le lendemain&lt;/option&gt;
+   &lt;option value="overnight"&gt;De nuit&lt;/option&gt;
+&lt;/select&gt; 
+</code></pre>
 			
+			<p>Ceci va produire une sélection pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
+			<label for="select-choice-min" class="select">Mode de livraison :</label>
+			<select name="select-choice-0" id="select-choice-min" data-mini="true">
+				<option value="standard">Lent : 7 jours</option>
+				<option value="rush">Rapide : 3 jours</option>
+				<option value="express">Express : Le lendemain</option>
+				<option value="overnight">De nuit</option>
+			</select>
+
+			<h2>Conteneurs de champs</h2>
 			<p>Optionnellement, enveloppez-les dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
 <pre><code>
 <strong>&lt;div data-role="fieldcontain"&gt;
@@ -145,32 +168,32 @@
 		<option value="WI">Wisconsin</option>
 		<option value="WY">Wyoming</option>
 	</select>
-</div><!--
-<p>The following example organizes the options into <code>optgroup</code> elements:</p>
+</div>
+
+<h2>Optgroups</h2>
+<p>L'exemple suivant organise les options dans les éléments de <code>optgroup</code>. La prise en charge de cette fonction dans les sélections de mobile est chaotique, mais cela s'améliore.</p>
 
 <div data-role="fieldcontain">
-	<label for="select-choice-nc" class="select">Preferred delivery:</label>
+	<label for="select-choice-nc" class="select">Livreur souhaité :</label>
 	<select name="select-choice-8" id="select-choice-nc">
 		<optgroup label="FedEx">
-			<option value="firstOvernight">First Overnight</option>
-			<option value="expressSaver">Express Saver</option>
-			<option value="ground">Ground</option>
+			<option value="firstOvernight">D'abord la Nuit</option>
+			<option value="expressSaver">Sauveur express</option>
+			<option value="ground">Sur le terrain</option>
 		</optgroup>
 		<optgroup label="UPS">
-			<option value="firstOvernight">First Overnight</option>
-			<option value="expressSaver">Express Saver</option>
-			<option value="ground">Ground</option>
+			<option value="firstOvernight">D'abord la Nuit</option>
+			<option value="expressSaver">Sauveur express</option>
+			<option value="ground">Sur le terrain</option>
 		</optgroup>
 		<optgroup label="US Mail">
-			<option value="standard">Standard: 7 day</option>
-			<option value="rush">Rush: 3 days</option>
-			<option value="express">Express: next day (disabled)</option>
-			<option value="overnight">Overnight</option>
+			<option value="standard">Lent : 7 jours</option>
+			<option value="rush">Rapide : 3 jours</option>
+			<option value="express">Express : Le lendemain (désactivé)</option>
+			<option value="overnight">De nuit</option>
 		</optgroup>
 	</select>
 </div>
--->
-
 
 
 
@@ -365,6 +388,7 @@ $('select').selectmenu();
 					<li data-role="list-divider">Éléments de formulaire</li>
 					<li><a href="../docs-forms.html">Formulaires basiques</a></li>
 					<li><a href="../forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="../forms-all-mini.html">Gallerie d'élement de formulaire mini</a></li>
 					<li><a href="../textinputs/index.html">Textes de saisie</a></li>
 					<li><a href="../search/">Saisie d'une recherche</a></li>
 					<li><a href="../slider/">Curseur</a></li>

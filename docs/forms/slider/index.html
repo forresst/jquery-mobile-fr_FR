@@ -38,17 +38,60 @@
 			<p>Lorsque vous faites glisser le curseur, le framework met à jour la valeur de l'entrée natif (et vice-versa) afin qu'ils soient toujours en phase, ce qui garantit que la valeur est soumise avec le formulaire.</p>
 			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
 
-			<p>Le framework trouvera tous les éléments <code>input</code> avec un <code>type="range"</code> et les améliorera automatiquement dans un curseur avec une saisie complémentaire, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique de cette entrée dans un curseur, ajouter l'attribut <code>data-role="none"</code> à l'<code>input</code> et enveloppez les d'un <code>div</code> avec l'attribut <code> data-role="fieldcontain"</code> pour les grouper. Dans cet exemple, les limites acceptables sont de 0 à 100 et la graduation est de 5. </p>
+			<p>Le framework trouvera tous les éléments <code>input</code> avec un <code>type="range"</code> et les améliorera automatiquement dans un curseur avec une saisie complémentaire, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique de cette entrée dans un curseur, ajouter l'attribut <code>data-role="none"</code> à l'<code>input</code> et enveloppez les d'un <code>div</code> avec l'attribut <code> data-role="fieldcontain"</code> pour les grouper. Dans cet exemple, les limites acceptables sont de 0 à 100. </p>
 
 <pre><code>
-   &lt;label for="slider-0"&gt;Curseur :&lt;/label&gt;
-   &lt;input type="range" name="slider" id="slider-0" value="25" min="0" max="100" step="5" /&gt;
+&lt;label for="slider-0"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider" id="slider-0" value="60" min="0" max="100" /&gt;
 </code></pre>
 
 				<p>Le curseur par défaut est affiché avec ces paramètres comme ceci :</p>
-					<label for="slider-0">Curseur en saisie :</label>
-					<input type="range" name="slider-1" id="slider-0" value="25" min="0" max="100" step="5" />
+				<label for="slider-0">Curseur en saisie :</label>
+				<input type="range" name="slider-1" id="slider-0" value="60" min="0" max="100" />
+				
+				<h2>Définir une incrémentation</h2>
 
+				<p>Pour forcer le curseur à se déplacer avec une incrémentation spécifique, ajoutez l'attribut HTML5 <code>step</code> à l'input. Par défaut, step est à 1, mais dans cet exemple, step est à 50 et la valeur maximale est 500./p&gt;
+
+<pre><code>
+&lt;label for="slider-step"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider" id="slider-step" value="150" min="0" max="500" <strong>step="50"</strong> /&gt;
+</code></pre>
+
+				<p>Ceci va produire un crseur qui se déplace de 10 en 10. Si la valeur saisie n'est pas valide avec l'incrémentation, la valeur sera réinitialisée vers la valeur la plus proche.</p>
+		        <label for="slider-step">Curseur en saisie :</label>
+				<input type="range" name="slider-1" id="slider-step" value="150" min="0" max="500" step="50" />
+				
+				
+				<h2>Mette en évidence la partie remplie</h2>
+
+				<p>Pour mettre en évidence une partie remplie sur la piste jusqu'à la position du curseur, ajouter l'attribut <code>data-highlight="true"</code> à l'input. La partie remplie utilise le nuancier du statut actif. </p>
+
+<pre><code>
+&lt;label for="slider-fill"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider" id="slider-fill" value="60" min="0" max="100" <strong>data-highlight="true"</strong> /&gt;
+</code></pre>
+
+				<p>Ceci va produire une saisie pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
+		        <label for="slider-min">Curseur en saisie :</label>
+				<input type="range" name="slider-1" id="slider-min" value="60" min="0" max="100" data-highlight="true" />
+	
+				
+				<h2>Version mini</h2>
+
+				<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
+
+<pre><code>
+&lt;label for="slider-0"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider" id="slider-0" value="25" min="0" max="100" data-highlight="true" <strong>data-mini="true"</strong> /&gt;
+</code></pre>
+
+				<p>Ceci va produire une saisie pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
+		        <label for="slider-min">Curseur en saisie :</label>
+				<input type="range" name="slider-1" id="slider-min" value="25" min="0" max="100" data-highlight="true" data-mini="true" />
+
+				<h2>Conteneurs de champs</h2>
+					
 				<p>Optionnellement, enveloppez le balisage du curseur dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long. Dans cet exemple, l'attribut <code>step</code> est omis pour permettre toutes les valeurs entières d'être sélectionnées.</p>
 
 
@@ -59,13 +102,13 @@
 <strong>&lt;/div&gt;
 </strong></code></pre>
 
-						<p>Le curseur est maintenant affiché comme ceci :</p>
-						<div data-role="fieldcontain">
-							<label for="slider-1">Curseur en saisie :</label>
-							<input type="range" name="slider-1" id="slider-1" value="25" min="0" max="100" />
-						</div>
+			<p>Le curseur est maintenant affiché comme ceci :</p>
+			<div data-role="fieldcontain">
+				<label for="slider-1">Curseur en saisie :</label>
+				<input type="range" name="slider-1" id="slider-1" value="25" min="0" max="100" />
+			</div>
 
-						<p>Les curseurs répondent également à des commandes via des touches. Les touches flèche vers la droite, flèche vers le haut et haut de page augmentent la valeur, flèche gauche, flèche vers le bas, et bas de page pour la diminuer. Pour déplacer le curseur à sa valeur minimum ou maximum, utilisez respectivement la touche début et fin.</p>
+			<p>Les curseurs répondent également à des commandes via des touches. Les touches flèche vers la droite, flèche vers le haut et haut de page augmentent la valeur, flèche gauche, flèche vers le bas, et bas de page pour la diminuer. Pour déplacer le curseur à sa valeur minimum ou maximum, utilisez respectivement la touche début et fin.</p>
 
 
 		<h2>Appel du plugin curseur</h2>
@@ -105,6 +148,7 @@ $('input').slider();
 					<li data-role="list-divider">Éléments de formulaire</li>
 					<li><a href="../docs-forms.html">Formulaires basiques</a></li>
 					<li><a href="../forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="../forms-all-mini.html">Gallerie d'élement de formulaire mini</a></li>
 					<li><a href="../textinputs/index.html">Textes de saisie</a></li>
 					<li><a href="../search/">Saisie d'une recherche</a></li>
 					<li data-theme="a"><a href="index.html">Curseur</a></li>

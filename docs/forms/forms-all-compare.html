@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html class="ui-mobile-rendering">
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Comparaison de taille d'élément de formulaire</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Tailles de formulaires</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+
+		<form action="#" method="get">
+
+			<h2>Comparaison de taille de formulaire</h2>
+
+			<p>Tous les contrôles de formulaire acceptent l'attribut <code>data-mini="true"</code> qui rend une version plus petite des éléments améliorés. Dans le cas des boutons groupés, l'attribut <code>data-mini="true"</code> peut être ajouter au controlgroup qui les contient.</p>
+
+			<style>
+				table { width:100%; border-bottom:1px solid #ccc; border-collapse: collapse; }
+				th { text-align:left; margin-right:50px; display:none; }
+				th h3 { margin:.6em 0; }
+				th, td { vertical-align:top; border-top:1px solid #ccc; padding: 4px 10px; }
+			</style>
+
+		<table margin="0">
+			<tr>
+				<th><h3><a href="search/index.html">Recherche</a></h3></th>
+				<td>
+					<label for="search-full" class="ui-hidden-accessible">Saisie pour recherche :</label>
+			        <input type="search" name="name" id="search-full" value="" />
+				</td>
+				<td>
+					<label for="text-mini" class="ui-hidden-accessible">Saisie pour recherche :</label>
+			        <input type="search" name="name" id="search-mini" value="" data-mini="true" />	
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="textinputs/index.html">Texte</a></h3></th>
+				<td>
+					<label for="text-full" class="ui-hidden-accessible">Saisie de texte :</label>
+			        <input type="text" name="name" id="text-full" value="" />
+				</td>
+				<td>
+					<label for="text-mini" class="ui-hidden-accessible">Saisie de texte :</label>
+			        <input type="text" name="name" id="text-mini" value="" data-mini="true" />	
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="textinputs/index.html">Zone de texte</a></h3></th>
+				<td>
+					<label for="textarea-full" class="ui-hidden-accessible">Zone de texte :</label>
+					<textarea name="textarea" id="textarea-full"></textarea>
+				</td>
+				<td>
+					<label for="textarea-mini" class="ui-hidden-accessible">Zone de texte :</label>
+					<textarea name="textarea" id="textarea-mini" data-mini="true"></textarea>	
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="switch/index.html">Interrupteur</a></h3></th>
+				<td>
+					<label for="flip-full" class="ui-hidden-accessible">Interrupteur :</label>
+					<select name="slider" id="flip-full" data-role="slider">
+						<option value="off">Arrêt</option>
+						<option value="on">Marche</option>
+					</select>
+				</td>
+				<td>
+					<label for="flip-mini" class="ui-hidden-accessible">Interrupteur :</label>
+					<select name="slider" id="flip-mini" data-role="slider" data-mini="true">
+						<option value="off">Arrêt</option>
+						<option value="on">Marche</option>
+					</select>	
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="slider/index.html">Curseur</a></h3></th>
+				<td style="padding-top:14px;">
+					<label for="slider-full" class="ui-hidden-accessible">Curseur en saisie :</label>
+					<input type="range" name="slider-1" id="slider-full" value="25" min="0" max="100" data-highlight="true" class="ui-hidden-accessible" />
+				</td>
+				<td style="padding-top:16px;">
+					<label for="slider-mini" class="ui-hidden-accessible">Curseur en saisie :</label>
+					<input type="range" name="slider-1" id="slider-mini" value="25" min="0" max="100" data-highlight="true" data-mini="true" class="ui-hidden-accessible" />
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="select/index.html">Sélection</a></h3></th>
+				<td>
+					<label for="select-full" class="ui-hidden-accessible">Mode de livraison :</label>
+					<select name="select-choice-0" id="select-full">
+						<option value="standard">Lent : 7 jours</option>
+						<option value="rush">Rapide : 3 jours</option>
+						<option value="express">Express : Le lendemain</option>
+						<option value="overnight">De nuit</option>
+					</select>
+				</td>
+				<td>
+					<label for="select-mini" class="ui-hidden-accessible">Mode de livraison :</label>
+					<select name="select-choice-0" id="select-mini" data-mini="true">
+						<option value="standard">Lent : 7 jours</option>
+						<option value="rush">Rapide : 3 jours</option>
+						<option value="express">Express : Le lendemain</option>
+						<option value="overnight">De nuit</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="checkboxes/index.html">Case à cocher</a></h3></th>
+				<td>
+					<fieldset data-role="controlgroup">
+						<input type="checkbox" name="checkbox-1a" id="c-full-1" />
+						<label for="c-full-1">Pommes</label>
+						<input type="checkbox" name="checkbox-2a" id="c-full-2" />
+						<label for="c-full-2">Oranges</label>
+						<input type="checkbox" name="checkbox-3a" id="c-full-3" />
+						<label for="c-full-3">Bananes</label>
+				    </fieldset>
+				</td>
+				<td>
+					<fieldset data-role="controlgroup" data-mini="true">
+						<input type="checkbox" name="checkbox-1a" id="c-mini-1" />
+						<label for="c-mini-1">Pommes</label>
+						<input type="checkbox" name="checkbox-2a" id="c-mini-2" />
+						<label for="c-mini-2">Oranges</label>
+						<input type="checkbox" name="checkbox-3a" id="c-mini-3" />
+						<label for="c-mini-3">Bananes</label>
+				    </fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="checkboxes/index.html">Case à cocher</a></h3></th>
+				<td>
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<input type="checkbox" name="checkbox-1a" id="c-full-4" />
+						<label for="c-full-4">B</label>
+						<input type="checkbox" name="checkbox-2a" id="c-full-5" />
+						<label for="c-full-5">I</label>
+						<input type="checkbox" name="checkbox-3a" id="c-full-6" />
+						<label for="c-full-6">U</label>
+				    </fieldset>
+				</td>
+				<td>
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+						<input type="checkbox" name="checkbox-1a" id="c-mini-4" />
+						<label for="c-mini-4">B</label>
+						<input type="checkbox" name="checkbox-2a" id="c-mini-5" />
+						<label for="c-mini-5">I</label>
+						<input type="checkbox" name="checkbox-3a" id="c-mini-6" />
+						<label for="c-mini-6">U</label>
+				    </fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="radiobuttons/index.html">Radio boutons</a></h3></th>
+				<td>
+					<fieldset data-role="controlgroup">
+				         	<input type="radio" name="radio-choice-1" id="radio-full-1" value="choice-1" checked="checked" />
+				         	<label for="radio-full-1">Crédit</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-full-2" value="choice-2"  />
+				         	<label for="radio-full-2">Débit</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-full-3" value="choice-3"  />
+				         	<label for="radio-full-3">Encaisser</label>
+				    </fieldset>
+				</td>
+				<td>
+					<fieldset data-role="controlgroup" data-mini="true">
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-1" value="choice-1" checked="checked" />
+				         	<label for="radio-mini-1">Crédit</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-2" value="choice-2"  />
+				         	<label for="radio-mini-2">Débit</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-3" value="choice-3"  />
+				         	<label for="radio-mini-3">Encaisser</label>
+				    </fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="radiobuttons/index.html">Radio bouton</a></h3></th>
+				<td>
+					<fieldset data-role="controlgroup" data-type="horizontal">
+				         	<input type="radio" name="radio-choice-1" id="radio-full-4" value="choice-1" checked="checked" />
+				         	<label for="radio-full-4">Design</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-full-5" value="choice-2"  />
+				         	<label for="radio-full-5">Code</label>
+				    </fieldset>
+				</td>
+				<td>
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-4" value="choice-1" checked="checked" />
+				         	<label for="radio-mini-4">Design</label>
+				         	<input type="radio" name="radio-choice-1" id="radio-mini-5" value="choice-2"  />
+				         	<label for="radio-mini-5">Code</label>
+				    </fieldset>
+				</td>
+			</tr>
+			<tr>
+				<th><h3><a href="radiobuttons/index.html">Radio bouton</a></h3></th>
+				<td>
+					<button type="submit">Bouton</button>
+				</td>
+				<td>
+					<button type="submit" data-mini="true">Bouton</button>
+				</td>
+			</tr>
+		</table>
+			
+		</form>
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Éléments de formulaire</li>
+					<li><a href="docs-forms.html">Formulaires basiques</a></li>
+					<li><a href="forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li data-theme="a"><a href="forms-all-mini.html">Gallerie d'élement de formulaire mini</a></li>
+					<li><a href="textinputs/">Textes de saisie</a></li>
+					<li><a href="search/">Recherche</a></li>
+					<li><a href="slider/">Curseur</a></li>
+					<li><a href="switch/">Interrupteur</a></li>
+					<li><a href="radiobuttons/">Radio boutons</a></li>
+					<li><a href="checkboxes/">Cases à cocher</a></li>
+					<li><a href="selects/">Menus de sélection</a></li>
+					<li><a href="forms-themes.html">Thématisation des formulaires</a></li>
+					<li><a href="forms-all-native.html">Eléments natifs de formulaire</a></li>
+					<li><a href="forms-sample.html">Soumission de formulaire</a></li>
+					
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
