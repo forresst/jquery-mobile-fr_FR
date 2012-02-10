@@ -48,6 +48,21 @@
 			
 	         <label for="basic">Saisie de texte :</label>
 	         <input type="text" name="name" id="basic" value="" />
+	
+			<h2>Version mini</h2>
+
+			<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
+
+<pre><code>	
+&lt;label for="basic"&gt;Texte de saisie :&lt;/label&gt;
+&lt;input type="text" name="name" id="basic" value="" <strong>data-mini="true"</strong> /&gt;
+</code></pre>
+			
+			<p>Ceci va produire une saisie pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
+	         <label for="mini">Saisie de texte :</label>
+	         <input type="text" name="name" id="mini" value="" data-mini="true" />
+
+			<h2>Conteneurs de champs</h2>
 
 			<p>Optionnellement, enveloppez-les dans un conteneur avec l'attribut <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
 
@@ -65,7 +80,7 @@
 			</div>
 						
 			
-			<h3>Plus de types de saisie de texte</h3>
+			<h2>Plus de types de saisie de texte</h2>
 			<p>Dans jQuery Mobile, vous pouvez utiliser les types existants et nouveaux de saisie tels que <code>password</code>, <code>email</code>, <code>tel</code>, <code>number</code>, et bien d'autres Certaines valeurs de type sont rendues différemment selon les navigateurs - par exemple, Chrome affiche le rendu de l'input <code>range</code> comme un curseur - ainsi nous standardisons leur apparence en changeant dynamiquement leur type en <code>text</code> (Actuellement, cela s'applique à <code>&gt;range</code> et <code>search</code>). Vous pouvez configurer les types d'entrée qui sont dégradés en <code>text</code> avec les options du plugin <code>page</code>.</p>
 			
 			<p>Un avantage majeur de l'utilisation de ces types d'entrée plus spécifique si cela sur des appareils mobiles, claviers spécialisés que la vitesse de saisie de données sont offerts à la place du clavier de texte standard. Essayez les inputs suivants sur un appareil mobile pour voir, dans quel cas ils affichent les claviers personnalisés sur différentes plateformes.</p>
@@ -198,6 +213,7 @@ $('input').textinput();
 					<li data-role="list-divider">Éléments de formulaire</li>
 					<li><a href="../docs-forms.html">Formulaires basiques</a></li>
 					<li><a href="../forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="../forms-all-mini.html">Gallerie d'élement de formulaire mini</a></li>
 					<li data-theme="a"><a href="index.html">Textes de saisie</a></li>
 					<li><a href="../search/">Saisie d'une recherche</a></li>
 					<li><a href="../slider/">Curseur</a></li>

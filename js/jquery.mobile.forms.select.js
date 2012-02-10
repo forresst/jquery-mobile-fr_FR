@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Consistent styling for native select menus.
 //>>label: Enhanced Native Selects
+//>>group: forms
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -23,7 +24,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		nativeMenu: true,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "select:not(:jqmData(role='slider'))"
+		initSelector: "select:not(:jqmData(role='slider'))",
+		mini: false
 	},
 
 	_button: function(){
@@ -89,7 +91,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					inline: options.inline,
 					corners: options.corners,
 					shadow: options.shadow,
-					iconshadow: options.iconshadow
+					iconshadow: options.iconshadow,
+					mini: options.mini
 				});
 
 		// Opera does not properly support opacity on select elements

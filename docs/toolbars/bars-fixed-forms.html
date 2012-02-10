@@ -10,24 +10,253 @@
 
 	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
 	<script src="../../js/jquery.js"></script>
+
 </head> 
 <body> 
 
 <div data-role="page" class="type-interior">
 
-	<div data-role="header" data-position="fixed" data-theme="f">
+	<div data-role="header" data-theme="a">
 
-		<h1>Barres d'outils fixes</h1>
+		<h1>Fixe + Formulaires</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+		<div data-role="fieldcontain">
+			<label for="search" class="ui-hidden-accessible">Recherche :</label>
+	        <input type="search" name="password" id="search" placeholder="Search..." value="" />
+		</div>
 	</div>
 	
 	<div data-role="content">
 		<div class="content-primary">
-		<h2>Barres d'outils fixes</h2>
+			
+			<div>
+				
+				<div>
+					<a href="index.html" data-role="button" data-icon="delete" data-inline="true" data-mini="true" data-iconpos="left">Supprimer</a> <a href="index.html" data-role="button" data-icon="delete" data-inline="true" data-mini="true" data-iconpos="right">Supprimer</a> <a href="index.html" data-role="button" data-icon="delete" data-inline="true" data-mini="true" data-iconpos="top">Supprimer</a> <a href="index.html" data-role="button" data-icon="delete" data-inline="true" data-mini="true" data-iconpos="bottom">Supprimer</a>
+				</div>
+
+				<div>
+					<a href="index.html" data-role="button" data-icon="delete" data-mini="true" data-iconpos="left">Supprimer</a> <a href="index.html" data-role="button" data-icon="delete" data-mini="true" data-iconpos="right">Supprimer</a> <a href="index.html" data-role="button" data-icon="delete" data-mini="true" data-iconpos="top">Supprimer</a> <a href="index.html" data-role="button" data-icon="delete" data-mini="true" data-iconpos="bottom">Supprimer</a>
+				</div>
+	
+				<style type="text/css" media="screen">
+					div[style~="display:inline-block;"] { float: left; max-width: 280px; }
+				</style>
+				
+				<div style="display:inline-block;">
+				<a href="docs-bars.html" data-role="button" data-mini="true" data-inline="true">Alignement mini</a>
+				</div>
+
+				<div style="display:inline-block;">
+					<select name="select-mini" id="select-mini" data-mini="true" data-inline="true">
+						<option value="standard">Lent : 7 jours</option>
+						<option value="rush">Rapide : 3 jours</option>
+						<option value="express">Express : Le lendemain</option>
+						<option value="overnight">De nuit</option>
+					</select>
+				</div>
+
+				<div style="display:inline-block; width:260px;">
+				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" data-mini="true" />
+				</div>
+				
+				<div style="display:inline-block;">
+					<select name="slider" id="flip-b" data-mini="true" data-role="slider">
+						<option value="off">Arrêt</option>
+						<option value="on">Marche</option>
+					</select>
+				</div>
+
+				<div style="display:inline-block; width:200px; padding-right: 15px;">
+					<input type="text" name="password" id="search" value="" data-mini="true" />
+				</div>	
+			
+				<div style="display:inline-block; width:200px;">
+					<input type="search" name="password" id="search" value="" data-mini="true" />
+				</div>
+				
+			</div>
+
+			<div data-role="fieldcontain">
+				<a href="docs-bars.html" data-role="button">Normal</a> <a href="docs-bars.html" data-role="button" data-mini="true">Mini</a> <a href="docs-bars.html" data-role="button" data-inline="true">Normal aligné</a> <a href="docs-bars.html" data-role="button" data-mini="true" data-inline="true">Mini aligné</a>
+			</div>
+			
+			<div data-role="controlgroup" data-mini="true">
+				<a href="index.html" data-role="button">Oui</a> <a href="index.html" data-role="button">Non</a> <a href="index.html" data-role="button">Peut être</a>
+			</div>
+			
+			<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+				<a href="index.html" data-role="button">Oui</a> <a href="index.html" data-role="button">Non</a> <a href="index.html" data-role="button">Peut être</a>
+			</div>
+			
+
+			<label for="select-full" class="select">Sélection :</label>
+			<select name="select-full" id="select-full">
+				<option value="standard">Lent : 7 jours</option>
+				<option value="rush">Rapide : 3 jours</option>
+				<option value="express">Express : Le lendemain</option>
+				<option value="overnight">De nuit</option>
+			</select>
+
+			<label for="select-mini" class="select">Mini Sélection :</label>
+			<select name="select-mini" id="select-mini" data-mini="true">
+				<option value="standard">Lent : 7 jours</option>
+				<option value="rush">Rapide : 3 jours</option>
+				<option value="express">Express : Le lendemain</option>
+				<option value="overnight">De nuit</option>
+			</select>
+				
+			<label for="select-mini-inline" class="select">Mini Sélection alignée :</label>
+			<select name="select-mini" id="select-mini" data-mini="true" data-inline="true">
+				<option value="standard">Lent : 7 jours</option>
+				<option value="rush">Rapide : 3 jours</option>
+				<option value="express">Express : Le lendemain</option>
+				<option value="overnight">De nuit</option>
+			</select>
+				
+				<fieldset data-role="controlgroup">
+					<label for="slider">Curseur :</label>
+					<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" />
+				</fieldset>
+				<label for="slider">Curseur :</label>
+			 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" data-mini="true" />
+				
+				<div data-role="fieldcontain">
+
+					<fieldset data-role="controlgroup">
+						<legend>Snacks :</legend>
+					
+						<input type="checkbox" name="checkbox-3a" id="checkbox-3a" class="custom" />
+						<label for="checkbox-3a">Fritos</label>
+
+						<input type="checkbox" name="checkbox-4a" id="checkbox-4a" class="custom" />
+						<label for="checkbox-4a">Sun Chips</label>
+				    </fieldset>
+				
+					<fieldset data-role="controlgroup" data-mini="true">
+						<legend>Snacks :</legend>
+					
+						<input type="checkbox" name="checkbox-1a" id="checkbox-1a" class="custom" />
+						<label for="checkbox-1a">Cheetos</label>
+
+						<input type="checkbox" name="checkbox-2a" id="checkbox-2a" class="custom" />
+						<label for="checkbox-2a">Doritos</label>
+
+				    </fieldset>
+				
+				</div>
+
+				<div data-role="fieldcontain">
+					<fieldset data-role="controlgroup" data-type="horizontal">
+				    	<legend>Style de police  :</legend>
+				    	<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
+						<label for="checkbox-6">b</label>
+
+						<input type="checkbox" name="checkbox-7" id="checkbox-7" class="custom" />
+						<label for="checkbox-7"><em>i</em></label>
+
+						<input type="checkbox" name="checkbox-8" id="checkbox-8" class="custom" />
+						<label for="checkbox-8">u</label>
+				    </fieldset>
+				
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+				    	<legend>Style de police  :</legend>
+				    	<input type="checkbox" name="checkbox-6" id="checkbox-6" class="custom" />
+						<label for="checkbox-6">b</label>
+
+						<input type="checkbox" name="checkbox-7" id="checkbox-7" class="custom" />
+						<label for="checkbox-7"><em>i</em></label>
+
+						<input type="checkbox" name="checkbox-8" id="checkbox-8" class="custom" />
+						<label for="checkbox-8">u</label>
+				    </fieldset>
+					
+					<div data-role="controlgroup">
+						<label for="flip-a">Interrupteur :</label>
+						<select name="slider" id="flip-a" data-role="slider">
+							<option value="off">Arrêt</option>
+							<option value="on">Marche</option>
+						</select> 
+					</div>
+					
+					<fieldset data-role="controlgroup">
+						<label for="flip-b">Interrupteur :</label>
+						<select name="slider" id="flip-b" data-mini="true" data-role="slider">
+							<option value="off">Arrêt</option>
+							<option value="on">Marche</option>
+						</select> 
+					</fieldset>
+
+					<div data-role="fieldcontain">
+						<label for="name">Saisie de texte :</label>
+						<input type="text" name="name" id="name" value="" data-mini="true" />
+					</div>
+					
+					<div data-role="fieldcontain">
+						<label for="name">Saisie de texte :</label>
+						<input type="text" name="name" id="name" value="" />
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="textarea">Zone de texte :</label>
+						<textarea cols="40" rows="8" name="textarea" id="textarea" data-mini="true"></textarea>
+					</div>
+					
+					<div data-role="fieldcontain">
+						<label for="textarea">Zone de texte :</label>
+						<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="search">Saisie pour recherche :</label>
+						<input type="search" name="password" id="search" value="" data-mini="true" />
+					</div>
+
+					<div data-role="fieldcontain">
+						<label for="search">Saisie pour recherche :</label>
+						<input type="search" name="password" id="search" value="" />
+					</div>
+				
+				</div>
+				
+				<div data-role="collapsible" data-mini="true">
+					<h3>Section 1</h3>
+					<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis ouvert par défaut, car j'ai l'attribut <code>data-collapsed="false"</code>.</p>
+				</div>
+
+				<div data-role="collapsible" data-mini="false">
+					<h3>Section 1</h3>
+					<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis ouvert par défaut, car j'ai l'attribut <code>data-collapsed="false"</code>.</p>
+				</div>
+				
+				<div data-role="collapsible-set" data-mini="true">
+					<div data-role="collapsible">
+						<h3>Section 1</h3>
+						<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis ouvert par défaut, car j'ai l'attribut <code>data-collapsed="false"</code>.</p>
+					</div>
+					<div data-role="collapsible">
+						<h3>Section 2</h3>
+						<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis caché par défaut, parce que j'ai l'état "collapsed", vous avez besoin d'ouvrir l'entête pour me voir.</p>
+
+					</div>
+				</div>
+				
+				<div data-role="collapsible-set">
+					<div data-role="collapsible">
+						<h3>Section 1</h3>
+						<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis ouvert par défaut, car j'ai l'attribut <code>data-collapsed="false"</code>.</p>
+					</div>
+					<div data-role="collapsible">
+						<h3>Section 2</h3>
+						<p>Je suis le contenu pliable dans un ensemble donc cela fonctionne comme un accordéon. Je suis caché par défaut, parce que j'ai l'état "collapsed", vous avez besoin d'ouvrir l'entête pour me voir.</p>
+
+					</div>
+				</div>
+
+				<h2>Barres d'outils fixes</h2>
 		<p>Ceci est une démonstration des entêtes et des pieds de page "fixes" utilisés dans le framework jQuery Mobile. Le contenu de la page se déroule naturellement, nous permettant de profiter du défilement natif au lieu d'écrire une solution de contournement de faux défilement. Les divs de l'entête et du pied de page sont donc dans le flux du document, mais chaque fois qu'ils sont hors de l'affichage, le framework les re-positionnera dynamiquement dans la vue si le navigateur supporte cette fonctionnalité, sinon ils vont tout simplement rester en ligne.</p>
 		<p>Pour activer ce comportement sur ​​une entête ou un pied de page, ajoutez l'attribut <code>data-position="fixed"</code> au conteneur de la barre d'outils.</p>
 
-		<a href="bars-fixed-forms-a.html" data-role="button">Démonstration de formulaires dans des barres d'outils fixes</a>
 		
 		<h2>Appuyez pour choisir la visibilité</h2>
 		<p>Pour choisir la visibilité des barres d'outils fixes, appuyez sur l'écran. Par exemple, si les barres d'outils fixes sont visibles, appuyez sur l'écran pour cacher les barres d'outils et pour profiter pleinement de l'écran complet pour le contenu. En tapant de nouveau cela ramènera l'affichage des barres d'outils. </p>
@@ -159,11 +388,52 @@ $.mobile.fixedToolbars
 					</div>
 				</div>		
 
-			</div><!-- /content -->
+			</div><!-- /content --><!--
+			<div data-role="footer" data-theme="a" data-position="fixed">
+	
+				<div class="ui-grid-c" style="margin:5px 10px;">
+					<div class="ui-block-a">
+	
+						<label for="scope" class="ui-hidden-accessible">Search within:</label>
+						<select name="scope" id="scope" data-mini="true">
+							<option value="All">All</option>
+							<option value="Books">Books</option>
+							<option value="DVDs">DVDs</option>
+							<option value="Electronics">Electronics</option>
+							<option value="Food">Food</option>
+							<option value="Music">Music</option>
+						</select>
+					</div>
+					
+					<div class="ui-block-b">
+						<label for="slider2" class="ui-hidden-accessible">Flip switch:</label>
+						<select name="slider2" id="slider2" data-role="slider">
+							<option value="off">Off</option>
+							<option value="on">On</option>
+						</select>
+					</div>
+					
+					<div class="ui-block-c">
+						<label for="slider" class="ui-hidden-accessible">Slider:</label>
+					 	<input type="range" name="slider" id="slider" value="0" min="0" max="100"  />
+					</div>
+					
+					<div class="ui-block-d">
+					    <fieldset data-role="controlgroup">
+					    	<legend class="ui-hidden-accessible">Choose a pet:</legend>
+					         	<input type="radio" name="radio-choice-1" id="radio-choice-1" value="choice-1" checked="checked" />
+					         	<label for="radio-choice-1">Cat</label>
 
-			<div data-role="footer" class="footer-docs" data-theme="a" data-position="fixed">
-					<h1>Pied de page fixe</h1>
-			</div>
+					         	<input type="radio" name="radio-choice-1" id="radio-choice-2" value="choice-2"  />
+					         	<label for="radio-choice-2">Dog</label>
+					    </fieldset>
+					</div>
+					
+				</div>
+
+			</div> -->
+
+	
 
 			</div><!-- /page -->
 

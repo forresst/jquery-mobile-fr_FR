@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Docs jQuery Mobile - Curseurs</title>
+	<title>Docs jQuery Mobile - Interrupteur</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
 	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
@@ -35,9 +35,9 @@
     
 			<p>Un interrupteur "flip" binaire est un élément d'interface commune sur les appareils mobiles qui est utilisé pour saisie de données binaires marche/arrêt ou vrai/faux . Vous pouvez soit faire glisser l'interrupteur comme un curseur ou appuyez sur un des côtés de l'interrupteur.</p>
 			
-				<p>Pour créer un interrupteur, commencer avec un <code>select</code> avec deux options. La première option sera stylisé comme un interrupteur à l'état "marche" et le second sera stylisé comme un interrupteur à l'état "arrêt" de ce fait, écrivez vos options en conséquence. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux interrupteurs.</p>
+			<p>Pour créer un interrupteur, commencer avec un <code>select</code> avec deux options. La première option sera stylisé comme un interrupteur à l'état "marche" et le second sera stylisé comme un interrupteur à l'état "arrêt" de ce fait, écrivez vos options en conséquence. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux interrupteurs.</p>
 				
-				<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
+			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
 				
 <pre><code>	
 &lt;label for="flip-a"&gt;Select slider:&lt;/label&gt;
@@ -54,7 +54,27 @@
 				<option value="off">Arrêt</option>
 				<option value="on">Marche</option>
 			</select> 
-				
+
+			<h2>Version mini</h2>
+
+			<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
+
+<pre><code>	
+&lt;label for="flip-a"&gt;Sélectionnez le curseur :&lt;/label&gt;
+&lt;select name="slider" id="flip-a" data-role="slider"&gt; <strong>data-mini="true"</strong>
+	&lt;option value="off"&gt;Arrêt&lt;/option&gt;
+	&lt;option value="on"&gt;Marche&lt;/option&gt;
+&lt;/select&gt;
+</code></pre>
+			
+			<p>Ceci va produire un interrupteur pas aussi grand que la version standard et disposant d'une taille inférieure.</p>
+			<label for="flip-min">Interrupteur :</label>
+			<select name="slider" id="flip-min" data-role="slider" data-mini="true">
+				<option value="off">Arrêt</option>
+				<option value="on">Marche</option>
+			</select> 
+
+			<h2>Conteneurs de champs</h2>
 			 <p>Optionnellement, enveloppez le balisage de l'interrupteur dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
 
 <pre><code>	
@@ -70,8 +90,8 @@
 		<div data-role="fieldcontain">
 			<label for="flip-b">Interrupteur :</label>
 			<select name="slider" id="flip-b" data-role="slider">
-				<option value="no">Non</option>
-				<option value="yes">Oui</option>
+				<option value="nope">Non</option>
+				<option value="yep">Oui</option>
 			</select> 
 		</div>
 						
@@ -93,8 +113,8 @@
 				<div data-role="fieldcontain">
 					<label for="flip-c">Interrupteur :</label>
 					<select name="slider" id="flip-c" data-role="slider" data-theme="a">
-						<option value="no">Non</option>
-						<option value="yes">Oui</option>
+						<option value="hate">Je déteste</option>
+						<option value="love">J'aime</option>
 					</select> 
 				</div>
 				
@@ -128,6 +148,7 @@ $('select').slider();
 					<li data-role="list-divider">Éléments de formulaire</li>
 					<li><a href="../docs-forms.html">Formulaires basiques</a></li>
 					<li><a href="../forms-all.html">Gallerie d'élement de formulaire</a></li>
+					<li><a href="../forms-all-mini.html">Gallerie d'élement de formulaire mini</a></li>
 					<li><a href="../textinputs/index.html">Textes de saisie</a></li>
 					<li><a href="../search/">Saisie d'une recherche</a></li>
 					<li><a href="../slider/">Curseur</a></li>

@@ -45,12 +45,12 @@
 
 	<h2>Déplier au chargement</h2>
 			
-		<p>Pour déplier le contenu quand la page se charge, ajoutez l'attribut <code>data-collapsed="false"</code> à l'enveloppe.</p>
+	<p>Pour déplier le contenu quand la page se charge, ajoutez l'attribut <code>data-collapsed="false"</code> à l'enveloppe.</p>
 
-	<code>		
-			
-	&lt;div data-role="collapsible" <strong>data-collapsed="false"&gt;</strong>
-	</code>
+<code>		
+		
+&lt;div data-role="collapsible" <strong>data-collapsed="false"&gt;</strong>
+</code>
 
 		<p>Ce code va créer un widget pliable comme ceci :</p>
 	
@@ -60,6 +60,22 @@
 				<p>Je suis le contenu pliable. Je suis déplier par défaut, parce que j'ai l'état "collapsed" défini à false.</p>
 			</div>
 	
+			<h2>Mini pliables</h2>
+
+			<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
+
+		<code>		
+				
+		&lt;div data-role="collapsible" <strong>data-mini="true"&gt;</strong>
+		</code>
+
+		<p>Ce code va créer un mini widget pliable comme ceci :</p>
+
+		<div data-role="collapsible" data-mini="true">
+			<h3>Je suis l'entête mini</h3>
+			<p>Je suis le contenu pliable. Je suis déplier par défaut, parce que j'ai l'état "collapsed" défini à false.</p>
+		</div>
+					
 	<h2>Thématisation du contenu pliable</h2>
 	
 		
