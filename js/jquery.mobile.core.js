@@ -193,6 +193,22 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			return $target
 				.closest(':jqmData(role="page"), :jqmData(role="dialog")')
 				.data("page");
+		},
+
+		// TODO not excited about the name here :/
+		// TODO use parentNode traversal to speed things up
+		enhanceable: function( $set ) {
+			var count = $set.length, $newSet = $();
+
+			for( var i = 0; i < count; i++ ) {
+				var $element = $set.eq(i);
+
+				if ( !$element.closest( ":jqmData(enhance='false')").length ) {
+					$newSet = $newSet.add( $element );
+				}
+			}
+
+			return $newSet;
 		}
 	}, $.mobile );
 

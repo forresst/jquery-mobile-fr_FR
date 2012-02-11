@@ -7,9 +7,16 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
+	var $workingSet = this;
+
+	// trim the working set when ignoring content is switched on
+	if( $.mobile.ignoreContentEnabled ){
+		$workingSet = $.mobile.enhanceable( $workingSet );
+	}
+
 	options = options || {};
-	for ( var i = 0; i < this.length; i++ ) {
-		var el = this.eq( i ),
+	for ( var i = 0; i < $workingSet.length; i++ ) {
+		var el = $workingSet.eq( i ),
 			e = el[ 0 ],
 			o = $.extend( {}, $.fn.buttonMarkup.defaults, {
 				icon:       options.icon       !== undefined ? options.icon       : el.jqmData( "icon" ),
@@ -54,6 +61,8 @@ $.fn.buttonMarkup = function( options ) {
 
 		if ( o.mini ) {
 			buttonClass += " ui-mini";
+		} else if ( o.mini === false ) {
+			buttonClass += " ui-fullsize"; // Used to control styling in headers/footers, where buttons default to `mini` style.
 		}
 
 		if ( o.icon ) {
@@ -150,7 +159,7 @@ var attachEvents = function() {
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				
+
 				if( $.support.touch ) {
 					hov = setTimeout(function() {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-down-" + theme );
@@ -173,11 +182,11 @@ var attachEvents = function() {
 		"vmouseover focus": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
-				
+
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
-				
+
 				if( $.support.touch ) {
 					foc = setTimeout(function() {
 						$btn.removeClass( "ui-btn-up-" + theme ).addClass( "ui-btn-hover-" + theme );
@@ -190,12 +199,12 @@ var attachEvents = function() {
 		"vmouseout blur scrollstart": function( event ) {
 			var btn = closestEnabledButton( event.target ),
 				$btn, theme;
-				
+
 			if ( btn ) {
 				$btn = $( btn );
 				theme = $btn.attr( "data-" + $.mobile.ns + "theme" );
 				$btn.removeClass( "ui-btn-hover-" + theme  + " ui-btn-down-" + theme ).addClass( "ui-btn-up-" + theme );
-				
+
 				hov && clearTimeout( hov );
 				foc && clearTimeout( foc );
 			}
