@@ -44,19 +44,30 @@
 			ok( success, "mousedown executed without exception");
 		}
 	});
-	
+
 	// Test for issue #3141:
 	test( "Elements with â€œdata-mini='true'â€� should have â€œui-miniâ€� class attached to enhanced element.", function(){
 		var $mini = $("#mini"),
 			$full = $("full"),
 			$minicontrol = $('#mini-control');
-			
-			console.log($minicontrol.find('.ui-btn'))
+
 		ok( $full.not('ui-mini'), "Original element does not have data attribute, enhanced version does not recieve .ui-mini.");
 		ok( $mini.is('.ui-mini'), "Original element has data attribute, enhanced version recieves .ui-mini." );
 		ok( $minicontrol.is('.ui-mini'), "Controlgroup has data attribute and recieves .ui-mini.");
-		
+
 	});
 
-	
+	test( "buttonMarkup should discard elements in ignored containers", function() {
+		var $enhanced = $("#enhanced-button"), $ignored = $("#ignored");
+
+		$.mobile.ignoreContentEnabled = true;
+
+		$enhanced.buttonMarkup();
+		ok( $enhanced.is( ".ui-btn" ), "normal link is enhanced" );
+
+		$ignored.buttonMarkup();
+		ok( !$ignored.is( ".ui-btn" ), "ignored is left" );
+
+		$.mobile.ignoreContentEnabled = false;
+	});
 })(jQuery);
