@@ -17,7 +17,7 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Menus de sélection</h1>
-		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
@@ -102,6 +102,14 @@
 				<p>Définit la couleur de la couche de recouvrement pour la boîte de dialogue basée sur des menus de sélection et la bordure extérieure des petits menus personnalisés. Il accepte une seule lettre de A à Z qui correspond aux échantillons inclus dans votre thème. Par défaut, les couleurs de blocs de contenu pour l'échantillon A seront utilisés pour les superpositions. Cette option est également définie comme un attribut de données : <code>ui-body-d</code></p>
 				<pre><code>$('select').selectmenu(<strong>{ overlayTheme: "d" }</strong>);</code></pre>
 			</dd>
+			
+			<dt><code>preventFocusZoom</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">Par défaut : true sur les plateformes iOS</p>
+				<p>Cette option désactive temporairement le zoom de la page quand une sélection personnalisée est actuellement utilisée, ce qui empêche les appareils iOS d'effectuer un zoom de la page dans la sélection. Par défaut, iOS fait souvent un zoom sur les contrôles de formulaire, et le comportement est souvent inutile et intrusif dans les mises en pages optimisés pour le mobile. Cette option est également définie comme un attribut de données : <code>data-prevent-focus-zoom="true"</code></p>				
+				<pre><code>$('select').selectmenu(<strong>{ preventFocusZoom: true }</strong>);</code></pre>
+			</dd>
+			
 			
 			<dt><code>shadow</code> <em>boolean</em></dt>
 			<dd>

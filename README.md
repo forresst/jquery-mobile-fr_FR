@@ -5,7 +5,7 @@ ATTENTION : Ce dépôt est une copie du dépôt officiel sur github du
 
 Le but de ce dépôt est de permettre une traduction complète de la documentation de jQuery Mobile en français.
 
-Vous pouvez visualiser [en ligne la documentation traduite](http://forresst.github.com/jquery-mobile-fr_FR)
+Vous pouvez visualiser [en ligne la documentation traduite](http://mobile.jquery-fr.com)
 
 Cette documentation est en cours de traduction. Cela signifie qu'elle est traduite de manière
 soit incomplète, soit inexacte. En attendant que cette traduction soit terminée, vous pouvez consulter la
