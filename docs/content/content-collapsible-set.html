@@ -89,6 +89,30 @@
 			</div>
 		</div>
 		
+		<h2>Positionnement d'icône</h2>
+		<p>Le positionnement par défaut des icônes dans les entêtes des pliables peut être modifié en utilisant l'attribut <code>data-iconpos</code>, soit au niveau du <code>collapsible-set</code> ou sur un pliable individuel de base.</p>
+		
+		<div data-role="collapsible-set" data-theme="c" data-iconpos="right">
+			<div data-role="collapsible">
+				<h3>Section 1</h3>
+				<p>Hérite du positionnement d'icône de l'attribut <code>data-iconpos="right"</code> du parent.</p>
+			</div>
+			<div data-role="collapsible" data-iconpos="left">
+				<h3>Section 2</h3>
+				<p>data-iconpos="left"</p>
+			</div>
+			<div data-role="collapsible" data-iconpos="bottom">
+				<h3>Section 3</h3>
+				<p>data-iconpos="bottom"</p>
+			</div>
+			<div data-role="collapsible" data-iconpos="top">
+				<h3>Section 4</h3>
+				<p>data-iconpos="top"</p>
+			</div>
+		</div>
+		
+		
+		
 		<h2>Thématisation du contenu pliable</h2>
 		<p>L'attribut standard <code>data-theme</code> peut être utilisé pour définir la couleur de chaque pliable dans un ensemble. Pour fournir un regroupement plus claire visuellement du contenu des entêtes, ajoutez l'attribut  <code>data-content-theme</code> avec une lettre de l'échantillon. Cela ajoute une couleur de fond thématisé et des bordures pour le bloc de contenu. Pour une thématisation cohérente, ajouter ces attributs à l'ensemble pliable parent .</p>
 
@@ -114,7 +138,6 @@
 			</div>
 		</div>
 
-
 		<h2>Thématisation des sections individuelles</h2>
 		<p>Pour avoir des sections individuelles différentes dans un groupe de style, ajouter les attributs <code>data-theme</code> et <code>data-content-theme</code> pour les pliables spécifiques.</p>
 
@@ -122,7 +145,6 @@
 			<div data-role="collapsible" data-theme="b" data-content-theme="b">
 				<h3>Section entête, échantillon B</h3>
 				<p>Contenu pliable, échantillon B</p>
-
 			</div>
 			<div data-role="collapsible" data-theme="a" data-content-theme="a">
 				<h3>Section entête, échantillon A</h3>
