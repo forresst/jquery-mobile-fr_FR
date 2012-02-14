@@ -9,30 +9,42 @@
 	<link rel="stylesheet" href="_assets/css/jqm-docs.css"/>
 
 	<script data-main="../js/jquery.mobile.docs" src="../external/requirejs/require.js"></script>
+	
 </head> 
 <body> 
 	<div data-role="page" data-theme="a" class="nav-search">
-
+		
 	<div data-role="content">   
+
+	<style>
+
+		.nav-search .ui-content {
+			margin-top:16px;
+		}
+		.nav-search .ui-corner-top {
+			-moz-border-radius: 0;
+			-webkit-border-radius: 0;
+			border-radius: 0;
+		}
+		.nav-search .ui-bar-a {
+			background-image:none;
+			background-color:#555;
+		}
+		.nav-search .ui-btn-up-a {
+			background-image:none;
+			background-color:#333333;
+		}
+		.nav-search .ui-btn-inner {
+			border-top: 1px solid #888;
+			border-color: rgba(255, 255, 255, .1);
+		}
+	</style>
 	
-		<style>
-
-			.nav-search .ui-content {
-				margin-top:16px;
-			}
-			.nav-search .ui-corner-top {
-				-moz-border-radius: 0;
-				-webkit-border-radius: 0;
-				border-radius: 0;
-			}
-			.nav-search .ui-bar-a {
-				background-color:#444;
-			}
-			.nav-search .ui-btn-up-a {
-				background-color:#333;
-			}
-		</style>
-
+	<script>
+		$('body').delegate('.nav-search', 'pageshow', function( e ) {
+			$('.ui-input-text').attr("autofocus", true)
+		});			
+	</script>
 	
 	<ul data-role="listview" data-theme="a" data-divider-theme="a" data-filter="true" data-filter-theme="a" data-filter-placeholder="Search documentation...">
 			<li data-filtertext="wai-aria voiceover accessibility screen reader">
@@ -44,7 +56,7 @@
 			<li data-filtertext="ajax navigation model hashchange changePage pushstate replacestate history popstate rel=external ajaxEnabled changepage basetag data-url sub-hash subpageidentifier target Application Cache ajaxPrefilter responseText isLocal subPageUrlKey silentscroll page parameters router backbone">
 				<a href="pages/page-navmodel.html">Modèle de navigation Ajax</a>
 			</li>
-			<li data-filtertext="page viewport meta tag disable enable zoom width=device-width, initial-scale=1 header content footer single multipage template boilerplate">
+			<li data-filtertext="anatomy of page viewport meta tag disable enable zoom width=device-width, initial-scale=1 header content footer single multipage template boilerplate">
 				<a href="pages/page-anatomy.html">Anatomie de la page</a>
 			</li>
 			<li data-filtertext="events api animationComplete transition css">
@@ -56,16 +68,16 @@
 			<li data-filtertext="button icon sprite png arrow delete plus minus check gear refresh forward back grid star alert info home search positioning iconpos top bottom left right notext custom disc white black">
 				<a href="buttons/buttons-icons.html"> Icônes des boutons</a>
 			</li>
-			<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide">
+			<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
 				<a href="pages/page-cache.html">Mise en cache des pages</a>
 			</li>
-			<li data-filtertext="input forms multi select checkbox grouped horizontal toggle legend">
+			<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
 				<a href="forms/checkboxes/">Case à cocher</a>
 			</li>
 			<li data-filtertext="collapsible expandable content block spindown disclosure triangle tree nested">
 				<a href="content/content-collapsible.html">Contenu pliable</a>
 			</li>		
-			<li data-filtertext="data attribute guide api list help">
+			<li data-filtertext="data attribute guide api list help reference">
 				<a href="api/data-attributes.html">Référence de l'attribut de données</a>
 			</li>
 			<li data-filtertext="page dialog modal overlay theme data-rel=dialog transition rel=back closeBtnText button history">
@@ -77,10 +89,10 @@
 			<li data-filtertext="dynamically injecting pages changePage pagebeforechange preventDefault json query params scripting generate markup manual backbone api hash templating mvc">
 				<a href="pages/page-dynamic.html">Injection dynamique des pages</a>
 			</li>
-			<li data-filtertext="events api document.ready pageinit touch virtual mouse orientationchange scroll pageload change load transition initialization remove layout animationcomplete transitions">
+			<li data-filtertext="events api document.ready pageinit touch tap taphold swipe swipeleft swiperight virtual mouse vmouseover vmousedown vmousemove vmouseup vclick vmousecancel orientationchange scrollstart scrollstop pageload pagebeforeload pageloadfailed pagebeforechange pagechange pagechangefailed pagebeforeshow change load transition pagebeforehide pageshow pagehide initialization pagebeforecreate pagecreate pageinit pageremove updatelayout animationcomplete transitions">
 				<a href="api/events.html">API des événements</a>
 			</li>
-			<li data-filtertext="input forms flip toggle switch on off select">
+			<li data-filtertext="input forms flip toggle switch on off select slider">
 				<a href="forms/switch/">Interrupteur</a>
 			</li>
 			<li data-filtertext="introduction help features overview">
@@ -89,11 +101,11 @@
 			<li data-filtertext="toolbars fixed headers footers scroll tap to hide show toggle">
 				<a href="toolbars/docs-bars.html">Barres d'outils fixes</a>
 			</li>
-			<li data-filtertext="forms makrup conventions introduction action label hide accessibly mini disabling fieldcontainer fieldset legend Auto-initialization">
+			<li data-filtertext="forms makrup conventions introduction action label hide accessibly mini disabling fieldcontainer fieldset legend auto-initialization">
 				<a href="forms/docs-forms.html">Introduction des formulaires</a>
 			</li>
-			<li data-filtertext="all forms elements gallery preview sample">
-				<a href="forms/forms-all.html">Galerie d'élément de formulaire</a>
+			<li data-filtertext="all forms elements gallery preview sample preview">
+				<a href="forms/forms-all.html">Gallerie d'élement de formulaire</a>
 			</li>
 			<li data-filtertext="toolbars fixed headers footers scroll tap to hide show toggle">
 				<a href="toolbars/bars-fullscreen.html">Barres d'outils pleines écrans</a>
@@ -104,19 +116,19 @@
 			<li data-filtertext="global optionss settings document.ready mobileinit ns namespace autoInitializePage subPageUrlKey activePageClass activeBtnClass ajaxEnabled linkBindingEnabled hashListeningEnabled pushStateEnabled defaultPageTransition touchOverflowEnabled defaultDialogTransition minScrollBack loadingMessage loadingMessageTheme pageLoadErrorMessage pageLoadErrorMessageTheme loadingMessageTextVisible gradeA">
 				<a href="api/globalconfig.html">Options globales (mobileinit)</a>
 			</li>
-			<li data-filtertext="grouped buttons toggle">
+			<li data-filtertext="grouped buttons toggle side">
 				<a href="buttons/buttons-grouped.html">Groupement des boutons</a>
 			</li>
-			<li data-filtertext="toolbars fixed headers scroll tap to hide show toggle">
+			<li data-filtertext="toolbars fixed headers scroll tap to hide show toggle heading">
 				<a href="toolbars/docs-headers.html">Barres d'outils d'entête</a>
 			</li>
 			<li data-filtertext="accessibility accessibly forms labels hide hiding">
 				<a href="forms/docs-forms.html">Cacher les éléments accessibles</a>
 			</li>
-			<li data-filtertext="html default styles formatting semantics">
+			<li data-filtertext="html default styles formatting semantics markup">
 				<a href="content/content-html.html">Formatage HTML</a>
 			</li>
-			<li data-filtertext="button inline smaller less wide">
+			<li data-filtertext="button inline smaller less wide narrow">
 				<a href="buttons/buttons-inline.html">Alignement des boutons</a>
 			</li>
 			<li data-filtertext="listview link inset styled padding rounded">
@@ -128,7 +140,7 @@
 			<li data-filtertext="events api updatelayout hide show height scroll remove inject">
 				<a href="api/events.html">Événements de mise en page</a>
 			</li>
-			<li data-filtertext="layout grid columns side-by-side flow positioning">
+			<li data-filtertext="layout grid columns side-by-side flow positioning block float left right center">
 				<a href="content/content-grids.html">Grille de mise en page (colonnes)</a>
 			</li>
 			<li data-filtertext="link tel mailto target external rel ajax">
@@ -138,7 +150,7 @@
 				<a href="lists/lists-ul.html">Liste chainée</a>
 			</li>
 			<li data-filtertext="listview link count bubble">
-				<a href="lists/lists-divider.html">Liste avec bulle compteur</a>
+				<a href="lists/lists-count.html">Liste avec bulle compteur</a>
 			</li>
 			<li data-filtertext="listview link divider grouping read only header">
 				<a href="lists/lists-divider.html">Séparateurs de liste</a>
@@ -149,17 +161,17 @@
 			<li data-filtertext="listview link markup overview conventions types">
 				<a href="lists/index.html">Aperçu de liste</a>
 			</li>
-			<li data-filtertext="methods api">
+			<li data-filtertext="methods api mobile changePage loadPage jqmData jqmRemoveData showPageLoadingMsg hidePageLoadingMsg fixedToolbars.show fixedToolbars.hide path.parseUrl path.makePathAbsolute path.makeUrlAbsolute path.isSameDomain path.isRelativeUrl path.isAbsoluteUrl base silentScroll activePage">
 				<a href="api/methods.html">API des méthodes</a>
 			</li>
 			<li data-filtertext="listview link thumbnail images large square">
 				<a href="lists/lists-thumbnails.html">Liste avec miniatures</a>
 			</li>
 			<li data-filtertext="forms smaller compact mini toolbars">
-				<a href="forms/forms-all-mini.html">Éléments des formulaires minis</a>
+				<a href="forms/forms-all-mini.html">Éléments de formulaire minis</a>
 			</li>
-			<li data-filtertext="forms native not styled">
-				<a href="forms/forms-all-native.html">Éléments natifs de formulaire</a>
+			<li data-filtertext="forms native not styled role none">
+				<a href="forms/forms-all-native.html">Eléments natifs de formulaire</a>
 			</li>
 			<li data-filtertext="link navbar navigation tabs">
 				<a href="toolbars/docs-navbar.html">Barres de navigation</a>
@@ -222,7 +234,7 @@
 				<a href="lists/lists-readonly.html">Liste en lecture seul</a>
 			</li>
 			<li data-filtertext="refresh forms elements property change update programatically checked selectedindex value update widget input text slider switch select button checkbox radiobutton">
-				<a href="forms/docs-forms.html">Actualisation des éléments des formulaires</a>
+				<a href="forms/docs-forms.html">Rafraîchissant des éléments de formulaire</a>
 			</li>
 			<li data-filtertext="scripting pages loading scripts executing scripts document.ready() api developer firing fire pagecreate pageinit changing pages loading enhancing create refresh scolling silentscroll binding to mouse touch events passing url parameters backbone router">
 				<a href="pages/page-scripting.html">Écriture des scripts des pages</a>
@@ -230,10 +242,10 @@
 			<li data-filtertext="events api scrollstart scrollstop flick">
 				<a href="api/events.html">Événements de scroll</a>
 			</li>
-			<li data-filtertext="listview search filter">
+			<li data-filtertext="listview search filter autocomplete refine">
 				<a href="lists/lists-search.html">Filtre de recherche</a>
 			</li>
-			<li data-filtertext="listview search filter hidden data">
+			<li data-filtertext="listview search filter hidden extra meta data">
 				<a href="lists/lists-search-filtertext.html">Filtre de recherche des données cachées</a>
 			</li>
 			<li data-filtertext="input forms single select option selected index placeholder fullscreen optgroup grouped horizontal custom menu">
@@ -242,7 +254,7 @@
 			<li data-filtertext="input forms range slider highlight step min max value">
 				<a href="forms/slider/">Curseur</a>
 			</li>
-			<li data-filtertext="link listview multiple button splitbutton">
+			<li data-filtertext="link listview multiple button splitbutton secondary action">
 				<a href="lists/lists-split.html">Liste de bouton séparé</a>
 			</li>
 			<li data-filtertext="forms submit method action post get ajax navigation">
