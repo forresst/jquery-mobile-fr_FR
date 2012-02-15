@@ -1,8 +1,3 @@
-//set up the theme switcher on the homepage
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-define( function() {
-//>>excludeEnd("jqmBuildExclude");
-
 //Réduction de la page de navigation après utilisation
 $(function(){
 	$('body').delegate('.content-secondary .ui-collapsible-content', 'click',  function(){
@@ -129,6 +124,3 @@ if ( location.protocol.substr(0,4)  === 'file' ||
    })();
   });
 }
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");
