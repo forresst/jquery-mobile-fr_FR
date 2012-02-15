@@ -8,8 +8,10 @@
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
-	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
 	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
 </head> 
 <body> 
 
@@ -26,7 +28,7 @@
 		<h2>Les titres avec la navigation Ajax</h2>
 		
 		<p>Lorsque vous chargez la première page d'un site construit avec jQuery Mobile, et ensuite, vous cliquez sur un lien ou vous soumettez un formulaire, Ajax est utilisé pour tirer le contenu de la page requêtée. La possession des deux pages dans le DOM est essentielle pour permettre les transitions animées, mais l'inconvénient avec cette approche est que le titre de la page est toujours celui de la première page, au lieu d'être celui de la page suivante que vous êtes en train de visualiser.</p>
-		<p>Pour remédier à cela, jQuery mobile analyse automatiquement le <code>title</code> de la page tirée via AJAX et change l'attribut <code>title</code> du document parent pour le faire correspondre.</p>		
+		<p>Pour remédier à cela, jQuery Mobile analyse automatiquement le <code>title</code> de la page tirée via AJAX et change l'attribut <code>title</code> du document parent pour correspondre au nouveau titre.</p>		
 		
 		<h2>Les titres dans les modèles multi-page</h2>
 		
