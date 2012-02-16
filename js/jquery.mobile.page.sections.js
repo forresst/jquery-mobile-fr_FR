@@ -1,9 +1,3 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Theming and layout of headers, footers, and content areas
-//>>label: Page Sections
-
-define( [ "jquery", "./jquery.mobile.page", "./jquery.mobile.core", "./jquery.mobile.buttonMarkup" ], function( $ ) {
-//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.mobile.page.prototype.options.backBtnText  = "Back";
@@ -87,6 +81,3 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 });
 
 })( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");

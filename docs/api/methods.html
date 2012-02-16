@@ -10,7 +10,7 @@
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/assets/js/jqm-docs.js"></script>
-	<script src="../../js/"></script>
+	<script src="../../js/jquery.mobile.docs.js"></script>
 
 </head> 
 <body> 
@@ -163,14 +163,24 @@ $.mobile.loadPage( "searchresults.php", {
 			
 			
 			
-			<dt><code>$.mobile.showPageLoadingMsg</code> (<em></em>)</dt>
+			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
 			<dd>Voir le message de chargement de page, qui est configurable via $.mobile.loadingMessage.</dd>
-			
-			<dd>Exemple :
+			<dd>
+				<dl>
+					<dt><code>·</code> Arguments</dt>
+					<dd><code>theme</code> (<em>string</em>, par défaut : "a") Le nuancier du thème pour le message.</dd>
+					<dd><code>msgText</code> (<em>string</em>, par défaut: "loading") Le texte du message.</dd>
+					<dd><code>textonly</code> (<em>boolean</em>, par défaut : false) Si true, l'image "spinner" sera cachée quand le message s'affichera.</dd>
+				</dl>
+			</dd>
+			<dd>Exemples :
 			<pre>
 			<code>
-<strong>//Affiche le chargeur de page</strong> 			
-$.mobile.showPageLoadingMsg();	
+<strong>// Appelle le chargeur de la page</strong> 			
+$.mobile.showPageLoadingMsg();
+
+<strong>// utilise le nuancier "b" du thème, un message personnalisé et pas de spinner</strong> 			
+$.mobile.showPageLoadingMsg("b", "This is only a test", true);
 			</code>
 			</pre>
 			
@@ -179,13 +189,13 @@ $.mobile.showPageLoadingMsg();
 			
 			
 			
-			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em></em>)</dt>
+			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
 			<dd>Masque le message de chargement de page, qui est configurable via $.mobile.loadingMessage.</dd>
 			
 			<dd>Exemple :
 			<pre>
 			<code>
-<strong>//Masque le chargeur de page</strong> 			
+<strong>// cache la page de chargement</strong> 			
 $.mobile.hidePageLoadingMsg();	
 			</code>
 			</pre>

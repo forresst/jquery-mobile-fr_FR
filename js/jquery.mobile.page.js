@@ -1,9 +1,3 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Basic page formatting.
-//>>label: Pages
-
-define( [ "jquery", "./jquery.mobile.widget" ], function( $ ) {
-//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.page", $.mobile.widget, {
@@ -37,6 +31,3 @@ $.widget( "mobile.page", $.mobile.widget, {
 	}
 });
 })( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");

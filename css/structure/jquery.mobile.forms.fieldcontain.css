@@ -9,14 +9,12 @@
 	position: absolute;
 	top: 0;
 }
-
 .ui-header .ui-field-contain-left {
 	left: 1em;
 }
 .ui-header .ui-field-contain-right {
 	right: 1em;
 }
-
 @media all and (min-width: 450px){
 	.ui-field-contain, .ui-mobile fieldset.ui-field-contain { border-width: 0; padding: 0; margin: 1em 0; }
 }

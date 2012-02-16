@@ -1,11 +1,3 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Assorted support tests.
-//>>label: Support Tests
-//>>group: core
-//>>required: true
-
-define( [  "jquery", "./jquery.mobile.media", "./jquery.mobile.core" ], function( $ ) {
-//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 var fakeBody = $( "<body>" ).prependTo( "html" ),
@@ -163,6 +155,3 @@ if ( !$.support.boxShadow ) {
 }
 
 })( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");

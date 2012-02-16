@@ -1,4 +1,4 @@
-/* slide transition */
+
 .slide.out {
 	-webkit-transform: translateX(-100%);
 	-webkit-animation-name: slideouttoleft;
@@ -7,7 +7,6 @@
 	-webkit-animation-duration: 225ms;
 	-moz-animation-duration: 225ms;
 }
-
 .slide.in {
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: fadein;
@@ -16,7 +15,6 @@
 	-webkit-animation-duration: 200ms;
 	-moz-animation-duration: 200ms;
 }
-
 .slide.out.reverse {
 	-webkit-transform: translateX(100%);
 	-webkit-animation-name: slideouttoright;
@@ -25,7 +23,6 @@
 	-webkit-animation-duration: 200ms;
 	-moz-animation-duration: 200ms;
 }
-
 .slide.in.reverse {
 	-webkit-transform: translateX(0);
 	-webkit-animation-name: fadein;
@@ -34,7 +31,6 @@
 	-webkit-animation-duration: 200ms;
 	-moz-animation-duration: 200ms;
 }
-
 @-webkit-keyframes slideouttoleft {
     from { -webkit-transform: translateX(0); }
     to { -webkit-transform: translateX(-100%); }
@@ -43,7 +39,6 @@
     from { -moz-transform: translateX(0); }
     to { -moz-transform: translateX(-100%); }
 }
-
 @-webkit-keyframes slideouttoright {
     from { -webkit-transform: translateX(0); }
     to { -webkit-transform: translateX(100%); }

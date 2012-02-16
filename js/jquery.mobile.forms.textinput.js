@@ -1,10 +1,3 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Enhances and consistently styles text inputs.
-//>>label: Text Inputs
-//>>group: forms
-
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.degradeInputs", "./jquery.mobile.buttonMarkup", "./jquery.mobile.zoom"  ], function( $ ) {
-//>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
 $.widget( "mobile.textinput", $.mobile.widget, {
@@ -145,6 +138,3 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");

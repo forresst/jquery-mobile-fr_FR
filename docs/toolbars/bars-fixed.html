@@ -8,55 +8,75 @@
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
 
+	<script data-main="../../js/jquery.mobile.docs" src="../../external/requirejs/require.js"></script>
 	<script src="../../js/jquery.js"></script>
-	<script src="../../docs/assets/js/jqm-docs.js"></script>
-	<script src="../../js/"></script>
-
 </head> 
 <body> 
 
 <div data-role="page" class="type-interior">
 
 	<div data-role="header" data-position="fixed" data-theme="f">
-
 		<h1>Barres d'outils fixes</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
 	</div>
 	
 	<div data-role="content">
 		<div class="content-primary">
-		<h2>Barres d'outils fixes</h2>
-		<p>Ceci est une démonstration des entêtes et des pieds de page "fixes" utilisés dans le framework jQuery Mobile. Le contenu de la page se déroule naturellement, nous permettant de profiter du défilement natif au lieu d'écrire une solution de contournement de faux défilement. Les divs de l'entête et du pied de page sont donc dans le flux du document, mais chaque fois qu'ils sont hors de l'affichage, le framework les re-positionnera dynamiquement dans la vue si le navigateur supporte cette fonctionnalité, sinon ils vont tout simplement rester en ligne.</p>
-		<p>Pour activer ce comportement sur ​​une entête ou un pied de page, ajoutez l'attribut <code>data-position="fixed"</code> au conteneur de la barre d'outils.</p>
-
-		<a href="bars-fixed-forms-a.html" data-role="button">Démonstration de formulaires dans des barres d'outils fixes</a>
+				<h2>Barres d'outils fixes</h2>
+				
+			    <ul data-role="controlgroup" data-type="horizontal" class="localnav">
+			      <li><a href="bars-fixed.html" data-role="button" data-transition="fade" class="ui-btn-active">Bases</a></li>
+			      <li><a href="bars-fixed-options.html" data-role="button" data-transition="fade">Options</a></li>
+			      <li><a href="bars-fixed-methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+			      <li><a href="bars-fixed-events.html" data-role="button" data-transition="fade">Événements</a></li>
+			    </ul>
+				
+				
+		<p>Dans les navigateurs qui supportent <code>position: fixed</code>, (<em>généralement, la plupart des navigateurs de bureaux, iOS5+, Android 2.2+, BlackBerry 6, et d'autres encore</em>), les barres d'outils qui utilisent le plugin "fixedtoolbar" seront fixées à la partie supérieure ou inférieure de la fenêtre, tandis que le contenu de la page défilera librement entre les deux. Dans les navigateurs qui ne supportent pas le positionnement fixe, les barres d'outils se replieront vers du statique, le positionnement est intégré dans la page. </p>
 		
-		<h2>Appuyez pour choisir la visibilité</h2>
-		<p>Pour choisir la visibilité des barres d'outils fixes, appuyez sur l'écran. Par exemple, si les barres d'outils fixes sont visibles, appuyez sur l'écran pour cacher les barres d'outils et pour profiter pleinement de l'écran complet pour le contenu. En tapant de nouveau cela ramènera l'affichage des barres d'outils. </p>
-		<p>Il est possible de fermer le robinet du comportement de bascule de la visibilité comme ceci :</p>
-<pre><code>
-$.mobile.fixedToolbars
-   .setTouchToggleEnabled(false);
-</code></pre>
+		<p>Pour activer ce comportement sur ​​une entête ou un pied de page, ajoutez l'attribut <code>data-position="fixed"</code> à un élément header ou footer de JQuery Mobile.</p>
+		
+		<p>Exemple de balisage d'une entête fixe :</p>
+		<pre><code>	
+&lt;div data-role="header" <strong>data-position="fixed"</strong>&gt;
+	&lt;h1&gt;Entête fixe !&lt;/h1&gt;
+&lt;/div&gt;
+		</code></pre>
+		
+		<p>Exemple de balisage d'un pied de page fixe :</p>
+		<pre><code>	
+&lt;div data-role="footer" <strong>data-position="fixed"</strong>&gt;
+	&lt;h1&gt;Pied de page fixe !&lt;/h1&gt;
+&lt;/div&gt;
+		</code></pre>
+
+		<h2>Formulaires dans les barres d'outils</h2>
+		<p>Dans jQuery Mobile 1.1, tous les éléments de formulaire sont maintenant testé pour fonctionner correctement dans les barres d'outils et une version plus compacte de <a href="../forms/forms-all-mini.html">taille mini</a> est recommandée pour l'utiliser dans les barres d'outils. Les pages suivantes sont proposées pour tester les barres d'outils fixes et les éléments de formulaires : <a href="bars-fixed-forms-a.html">application démo</a>, <a href="bars-fixed-forms-b.html">saisies de texte</a>, <a href="bars-fixed-forms-c.html">recherche</a>, <a href="bars-fixed-forms-d.html">radio bouton</a>, <a href="bars-fixed-forms-e.html">case à cocher</a>, <a href="bars-fixed-forms-f.html">curseur</a>, <a href="bars-fixed-forms-g.html">sélection</a> et  <a href="bars-fixed-forms-h.html">boutons</a>.
+		</p>
+		<p>Notez que l'interaction des barres d'outils fixes et l'utilisation du clavier à l'écran sur de nombreuses plateformes mobiles peuvent causer des problèmes lorsque ceux-ci interagissent, ainsi nous recommandons d'éviter l'utilisation de saisie de texte ou d'autres éléments qui ouvrent le clavier en bas de page.</p>
+		
+		<h2>Barres d'outils pleines écrans</h2>
+		<p>Les barres d'outils "plein écran" se positionnent en haut du contenu à chaque fois qu'elles sont visibles, et à la différence des barres d'outils fixes habituelles, les barres d'outils "plein écran" ne se replient pas vers un positionnement statique lors d'un basculement (afficher/masquer), au lieu de cela elles disparaissent entièrement de l'écran. Les barres d'outils "plein écran" sont idéales pour les interfaces plus immersive, comme une visionneuse de photos qui est censé remplir tout l'écran avec la photo. <a href="bars-fullscreen.html">Cette page</a> montre les barres d'outils qui utilise l'option fullscreen.</p>
+		
+				<p>Pour activer cette option sur une entête ou un pied de page fixe, ajouter l'attribut <code>data-fullscreen</code> à l'élément.</p>
+		
+				<pre><code>	
+&lt;div data-role="header" data-position="fixed" data-fullscreen="true"&gt;
+	&lt;h1&gt;Entête fixe !&lt;/h1&gt;
+&lt;/div&gt;
+				</code></pre>
+		
+		
 	
-		<h2>Mise à jour du positionnement de la barre d'outils</h2>
-		<p>Si la hauteur de la page change, soit par l'injection dynamique de balisage, ou par des widgets qui cachent ou plient le contenu, cela peut rejeter le positionnement dynamique des barres d'outils. Pour demander manuellement à la barre d'outils de se repositionner, puis apparaitre en fondu, utilisez <code>$.mobile.fixedToolbars.show();</code>. Pour les faire apparaître immédiatement, sans le fondu :</p>
-<pre><code>
-$.mobile.fixedToolbars
-   .show(true);
-</code></pre>
-			 
-		<p>Il y a aussi un événement <code>updatelayout</code> qui peut être utilisé pour déclencher les barres d'outils pour se repositionner. Les développeurs qui créent des applications dynamiques qui injectent du contenu dans la page en cours peuvent également déclencher manuellement cet événement <code><a href="../api/events.html">updatelayout</a></code> pour assurer la mise à jour des composants sur la page en réponse à du nouveau contenu qui vient d'être ajouté. Cet événement est utilisé en interne dans les plugins de pliable et de filtre de liste et il est puissant parce qu'il n'est pas spécifique à la barre d'outils, n'importe quel widget peut être construit pour écouter l'événement <code>updatelayout</code> pour mettre à jour le widget dans la réponse.</p>
+		<h2>Les changements dans jQuery Mobile 1.1</h2>
 		
+		<p>Avant la version 1.1, jQuery Mobile utilisait dynamiquement les barres d'outils repositionnées pour donner l'effet d'une entête fixe, car très peu de navigateurs mobiles supportaient la propriété CSS <code>position:fixed</code>. Et en simulant une fixation grâce à l'utilisation de "faux" JavaScript,  le comportement du débordement du défilement réduisait le nombre de navigateur supporté, en plus cela se comportait de façon anormale sur certaines plateformes. Ce comportement n'était pas idéal et jQuery Mobile 1.1 a pris une nouvelle approche pour les barres d'outils fixes qui permet un support beaucoup plus large. Maintenant le framework offre de véritables barres d'outils fixes sur les nombreuses plateformes populaires, au lieu d'un positionnement statique dégradé pour les plateformes ne pouvant le supporter.</p>
 		
-		<h2>Limitations connues</h2>
+<div class="ui-body ui-body-e">		
+		<h2>N'est plus pris en charge : touchOverflowEnabled</h2>
 		
-		<p>jQuery Mobile utilise dynamiquement les barres d'outils repositionnées pour l'effet d'entête fixe, car très peu de navigateurs mobiles supporte la propriété CSS <code>position:fixed</code>. Bien que notre fonctionnalité de barre d'outils fixe fonctionne assez bien, il y a un certain nombre de limitations techniques qui peuvent faire que les barres d'outils semblent défiler avec la page. La plupart de ces problèmes de rendu sont dus au fait que de nombreuses plateformes mobiles (iOS, Android, etc) essentiellement  prennent une capture d'écran statique de la page et affichent cette image pendant le défilement au lieu d'utiliser le rendu HTML réel. Ceci améliore la performance du défilement, mais quand le défilement s'effectue rapidement, les barres d'outils seront "brûlées" dans la copie d'écran de page avant que notre script ne puisse les cacher ainsi elles semblent défiler avec la page. Nous avons optimisé cela autant que nous le pouvions, mais il va y avoir des situations où les barres d'outils fixes ne fonctionneront pas parfaitement à cause des limitations du navigateur, donc il est important de le souligner si vous souhaitez utiliser cette fonctionnalité.</p>
-		
-		<h2>Des véritables barres d'outils fixes : touchOverflowEnabled</h2>
-		
-		<p>Afin de parvenir à de véritables barres d'outils fixes, un navigateur a besoin de supporter <code>position:fixed</code> ou <code>overflow:auto</code>. Heureusement, ce support arrive sur les plateformes mobiles afin que nous puissions y parvenir avec les standards du web. Dans jQuery Mobile, nous avons ajouté une fonction globale appelée <code>touchOverflowEnabled</code>qui exploite la propriété CSS <code>overflow:auto</code>sur les plateformes supportées, comme iOS5. Lorsqu'elle est activée, le framework encapsule chaque page dans un conteneur avec son défilement interne. Cela nous permet de positionner les barres d'outils en dehors du corps de défilement afin qu'elles restent véritablement en place tout le temps. Pour en savoir plus sur cette fonctionnalité sur les <a href="../api/globalconfig.html">options globales</a> de page ou la <a href="../config/touchOverflow.html">démonstration</a> de cette fonctionnalité (actuellement iOS5 seulement, les autres navigateurs se rabattront dynamiquement sur les barres d'outils fixes repositionnés).</p>
-
+		<p>Avant la version 1.1 de jQuery Mobile, le véritable support de la barre d'outils fixe dépendait du support natif du navigateur avec la propriété CSS <code>overflow-scrolling: touch</code>, qui est actuellement pris en charge que par iOS5. Depuis la version 1.1, jQuery Mobile n'utilise plus du tout cette propriété CSS. Nous avons enlevé tous les usages internes de cette propriété dans le framework, toutefois, nous avons laissé l'objet $.mobile défini globalement pour éviter que sa suppression puisse causer des problèmes avec les applications existantes. Cette propriété est marquée pour suppression, donc s'il vous plaît mettez à jour votre code pour ne plus l'utiliser. Cependant, le test du support pour cette propriété reste défini sous <code>$.support</code> et nous n'avons pas l'intention d'enlever ce test pour l'instant. </p>
+</div>
 		<hr>
 	
 		
@@ -153,8 +173,7 @@ $.mobile.fixedToolbars
 								<li><a href="docs-footers.html">Barres de pied de page</a></li>
 								<li><a href="docs-navbar.html">Barres de navigation</a></li>
 								<li data-theme="a"><a href="bars-fixed.html">Positionnement fixe</a></li>
-								<li><a href="bars-fullscreen.html">Positionnement plein écran</a></li>
-								<li><a href="footer-persist-a.html">Barre de navigation persistante de pied page</a></li>
+								<li><a href="footer-persist-a.html">Barres d'outils persistantes</a></li>
 								<li><a href="bars-themes.html">Thématisation des barres d'outils</a></li>
 
 							</ul>

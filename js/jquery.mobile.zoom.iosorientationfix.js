@@ -1,9 +1,3 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Fixes the iOS orientation change bug using a jQM version of this technique https://github.com/scottjehl/iOS-Orientationchange-Fix
-//>>label: iOS orientation change bugfix
-
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( $ ) {
-//>>excludeEnd("jqmBuildExclude");
 ( function( $, window ) {
 	
 	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
@@ -38,6 +32,3 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.zoom" ], function( 
 		.bind( "devicemotion.iosorientationfix", checkTilt );
 
 }( jQuery, this ));
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");

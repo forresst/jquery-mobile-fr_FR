@@ -1,15 +1,3 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Formats groups of links as nav bars.
-//>>label: Navigation Bars
-
-define( [
-	"jquery",
-	"./jquery.mobile.core",
-	"./jquery.mobile.event",
-	"../external/requirejs/depend!./jquery.mobile.hashchange[jquery]",
-	"./jquery.mobile.page",
-	"./jquery.mobile.transition" ], function( $ ) {
-//>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
 	//define vars for interal use
@@ -1433,6 +1421,3 @@ define( [
 	};//_registerInternalEvents callback
 
 })( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");

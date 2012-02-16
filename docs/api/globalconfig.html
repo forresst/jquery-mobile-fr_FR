@@ -10,7 +10,7 @@
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/assets/js/jqm-docs.js"></script>
-	<script src="../../js/"></script>
+	<script src="../../js/jquery.mobile.docs.js"></script>
 
 </head>
 <body>
@@ -94,12 +94,14 @@ $(document).bind("mobileinit", function(){
 	<dt><code>activePageClass</code> <em>string</em>, par défaut, "ui-page-active"</dt>
 	<dd>La classe attribuée à la page actuellement visible et pendant les transitions</dd>
 
-
 	<dt><code>activeBtnClass</code> <em>string</em>, par défaut: "ui-btn-active"</dt>
 	<dd>La classe utilisée pour le statut du bouton "actif" depuis le framework de CSS.</dd>
 
 	<dt><code>ajaxEnabled</code> <em>boolean</em>, par défaut: true</dt>
 	<dd>jQuery Mobile gérera automatiquement les clics sur les liens et soumettra le formulaire grâce à Ajax, quand cela est possible. Si c'est à false, l'écoute de l'url hash sera désactivé, ainsi les urls se chargeront comme des requêtes HTTP régulières.</dd>
+
+	<dt><code>allowCrossDomainPages</code> <em>boolean</em>, par défaut: false</dt>
+	<dd>Lorsque jQuery Mobile tente de charger une page externe, la requête passe par <code>$.mobile.loadPage()</code>. Ceci permettra seulement les requêtes inter-domaines si <code>$.mobile.allowCrossDomainPages</code> est défini à true. Parce que le framework jQuery Mobile piste quelle page est considérée au sein de hash de location du navigateur, il est possible pour une attaque par script inter-site (XSS) de se produire si le code XSS en question peut manipuler le hash et le définir à une URL inter-domaine de son choix. Ceci est la raison principale pour que le paramètre par défaut pour $.mobile.allowCrossDomainPages soit défini sur false. Dans les applications PhoneGap qui doivent "phone home" en chargeant des ressources hors d'un serveur distant, <code>$.support.cors</code> ET <code>$.mobile.allowCrossDomainPages</code> doivent être définis sur true.</dd>
 
 	<dt><code>linkBindingEnabled</code> <em>boolean</em>, par défaut : true</dt>
 	<dd>jQuery Mobile liera automatiquement les clics sur les balises d'ancrage dans votre document. Le paramétrage de ces options à false empêchera  tous les ancrages à l'ajout d'<em>including</em> gérant le clic de l'état du bouton actif et de lien alternatif flouté. Cela ne devrait être utilisé que lorsque l'on tente de déléguer la gestion du clic à une autre bibliothèque ou un code personnalisé.</dd>

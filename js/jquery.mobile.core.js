@@ -1,11 +1,3 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: The base file for jQM
-//>>label: Core
-//>>group: core
-//>>required: true
-
-define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobile.widget" ], function( $, __version__ ) {
-//>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
 	var nsNormalizeDict = {};
@@ -286,7 +278,4 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 		return $.find( expr, null, null, [ node ] ).length > 0;
 	};
 })( jQuery, this );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");
 

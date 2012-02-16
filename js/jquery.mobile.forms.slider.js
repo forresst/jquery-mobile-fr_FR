@@ -1,10 +1,3 @@
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-//>>description: Slider form widget
-//>>label: Slider
-//>>group: forms
-
-define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.widget", "./jquery.mobile.forms.textinput", "./jquery.mobile.buttonMarkup" ], function( $ ) {
-//>>excludeEnd("jqmBuildExclude");
 ( function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
@@ -53,14 +46,24 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			miniClass = ( this.options.mini || control.jqmData("mini") ) ? " ui-slider-mini" : "",
 
-			valuebg = control.jqmData("highlight") && cType != "select" ? $( "<div class='ui-slider-bg ui-btn-active ui-btn-corner-all'></div>" ).prependTo( slider ) : false,
 
 			domHandle = document.createElement('a'),
 			handle = $( domHandle ),
 			domSlider = document.createElement('div'),
 			slider = $( domSlider ),
+
+			valuebg = control.jqmData("highlight") && cType != "select" ? (function() {
+				var bg = document.createElement('div');
+				bg.className = 'ui-slider-bg ui-btn-active ui-btn-corner-all';
+				return $( bg ).prependTo( slider );
+			})() : false,
+
 			options;
 
+		domSlider.setAttribute('role','application');
+		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
+		domHandle.className = 'ui-slider-handle';
+		domSlider.appendChild(domHandle);
 
 		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
 				.attr({
@@ -71,24 +74,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					"aria-valuetext": val(),
 					"title": val(),
 					"aria-labelledby": labelID
-				}),
-
-		domSlider.setAttribute('role','application');
-		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all'].join("");
-		domHandle.className = 'ui-slider-handle';
-		domSlider.appendChild(domHandle);
-
-		handle
-			.buttonMarkup({ corners: true, theme: theme, shadow: true })
-			.attr({
-				"role": "slider",
-				"aria-valuemin": min,
-				"aria-valuemax": max,
-				"aria-valuenow": val(),
-				"aria-valuetext": val(),
-				"title": val(),
-				"aria-labelledby": labelID
-			}),
+				});
 
 		$.extend( this, {
 			slider: slider,
@@ -417,6 +403,3 @@ $( document ).bind( "pagecreate create", function( e ){
 });
 
 })( jQuery );
-//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
-});
-//>>excludeEnd("jqmBuildExclude");
