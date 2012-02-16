@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html class="ui-mobile-rendering">
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Configuration</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+
+	<script src="../../external/requirejs/require.js"></script>
+	<script src="../../js/jquery.js"></script>
+	<script>
+	$(document).bind("mobileinit", function(){
+		$.mobile.loadingMessageTextVisible = true;
+	});
+	</script>
+	<script>
+		require( {
+			baseUrl: "../../js"
+		}) ( [ "jquery.mobile.docs" ] )
+	</script>
+</head>
+<body>
+
+	<div data-role="page">
+	<script>
+		$(document).on("click", ".show-page-loading-msg", function() {
+			var $this = $( this ),
+				theme = $this.jqmData("theme") || $.mobile.loadingMessageTheme,
+				msgText = $this.jqmData("msgtext") || $.mobile.loadingMessage,
+				textonly = !!$this.jqmData("textonly");
+			$.mobile.showPageLoadingMsg(theme, msgText, textonly);
+		})
+		.on("click", ".hide-page-loading-msg", function() {
+			$.mobile.hidePageLoadingMsg();
+		});
+	</script>
+
+	<div data-role="header" data-theme="f">
+		<h1>Configuration appliquée</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse" class="ui-btn-right jqm-home">Accueil</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+
+		<h2>Le texte de loadingMessage est maintenant visible</h2>
+		<p>Pour tester, cliquez sur le bouton ci-dessous et de parcourez les docs. Notez que si un lien provoque un rafraîchissement, ce paramètre sera perdue et les paramètres par défaut seront vus.</p>
+		<a href="../../index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Navigation dans les docs</a>
+
+		<p>Pour afficher le message de chargement à la demande :</p>
+		<pre><code>$.mobile.showPageLoadingMsg();</code></pre>
+		<p>Cliquez sur les boutons ci-dessous pour afficher et masquer le message de chargement avec les options par défaut.</p>
+		<div data-role="controlgroup">
+			<button class="show-page-loading-msg" data-inline="false" data-icon="arrow-r" data-iconpos="right">Afficher</button> <button class="hide-page-loading-msg" data-inline="false" data-icon="delete" data-iconpos="right">Masquer</button>
+		</div>
+
+		<h2>Thématisation du message de chargement</h2>
+		<p>Pour afficher le message de chargement avec différent thème et message :</p>
+		<pre><code>$.mobile.showPageLoadingMsg(<strong>"a", "Chargement theme a..."</strong>);</code></pre>
+		<p>Le thème et le message peuvent être changés à la volée en appelant à nouveau la méthode. Cliquez les boutons ci-dessous pour voir le message de chargement avec le thème indiqué.</p>
+		<div data-role="controlgroup">
+			<button class="show-page-loading-msg" data-theme="a" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme a...">Thème a</button> <button class="show-page-loading-msg" data-theme="b" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme b...">Thème b</button> <button class="show-page-loading-msg" data-theme="c" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme c...">Thème c</button> <button class="show-page-loading-msg" data-theme="d" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme d...">Thème d</button> <button class="show-page-loading-msg" data-theme="e" data-icon="arrow-r" data-iconpos="right" data-msgtext="Loading theme e...">Thème e</button> <button class="hide-page-loading-msg" data-icon="delete" data-iconpos="right">Masquer</button>
+		</div>
+
+		<h2>Messages seulement avec du texte</h2>
+		<p>Pour afficher le message de chargement sans image :</p>
+		<pre><code>$.mobile.showPageLoadingMsg("a", "Pas d'image", <strong>true</strong>);</code></pre>
+		<p>Cliquez le bouton ci-dessous pour voir le message de chargement sans image.</p>
+		<div data-role="controlgroup">
+			<button class="show-page-loading-msg" data-textonly="true" data-msgtext="Look Ma, no spinner!" data-icon="arrow-r" data-iconpos="right">Afficher</button> <button class="hide-page-loading-msg" data-inline="false" data-icon="delete" data-iconpos="right">Masquer</button>
+		</div>
+
+
+		</div><!-- /ui-body wrapper -->
+</div><!-- /page -->
+
+</body>
+</html>

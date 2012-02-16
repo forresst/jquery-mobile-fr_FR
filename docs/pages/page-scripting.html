@@ -32,28 +32,33 @@
 			
 			<p> Cela signifie que tous les scripts et les styles référencés du <code>head</code> d'une page n'auront aucun effet <em>quand une page est chargée via Ajax</em>, mais ils <strong>seront exécutés si la page est demandée normalement via HTTP</strong>. En écrivant les sites Jquery Mobile, les deux scénarios doivent être envisagés. La raison pour laquelle le <code>head</code> d'une page est ignoré, lorsque qu'elle est requêtée via Ajax, est que le potentiel de re-exécuter le même JavaScript est très élevé (il est courant de faire référence aux mêmes scripts dans chaque page d'un site) . En raison de la complexité pour tenter de contourner ce problème, nous laissons la tâche d'exécution des scripts de la page spécifique pour le développeur et assumons que les scripts du <code>head</code> sont uniquement prévus pour être exécutés une fois par session de navigation.</p>
 			
-			<p>L'approche la plus simple lors de la construction d'un site JQuery Mobile est de faire référence au même ensemble de feuilles de style et aux scripts dans le head de chaque page. Si vous avez besoin de charger des scripts ou des styles spécifiques pour une page particulière, nous recommandons la liaison logique à l'événement <code>pagecreate</code> (les détails ci-dessous) pour exécuter du code nécessaire quand une page spécifique est créée (qui peut être déterminée par ses <code>id</code> attribués ou par d'autres manières). Suite à cette approche, cela garantira que le code s'exécute si la page est chargée directement ou est tirée et affichée via Ajax.</p>
+			<p>L'approche la plus simple lors de la construction d'un site JQuery Mobile est de faire référence au même ensemble de feuilles de style et aux scripts dans le head de chaque page. Si vous avez besoin de charger des scripts ou des styles spécifiques pour une page particulière, nous recommandons la liaison logique à l'événement <code>pageinit</code> (les détails ci-dessous) pour exécuter du code nécessaire quand une page spécifique est créée (qui peut être déterminée par ses <code>id</code> attribués ou par d'autres manières). Suite à cette approche, cela garantira que le code s'exécute si la page est chargée directement ou est tirée et affichée via Ajax.</p>
 			
 			<p>Une autre approche pour la page spécifique serait d'inclure des scripts à la fin de l'élément <code>body</code>. Si vous incluez vos scripts personnalisés de cette façon, soyez conscient que ces scripts s'exécuteront lorsque cette page sera chargée via Ajax ou une requête réguliere HTTP, donc si ces scripts sont les mêmes sur chaque page, vous aurez probablement des problèmes. Si vous incluez les scripts de cette façon, nous vous recommandons d'englober le contenu de votre page dans un élément <code>data-role="page"</code> et de placer des scripts qui sont référencés sur chaque page en dehors de cet élément. Les scripts qui sont uniques à cette page peuvent être placés dans cet élément, afin de s'assurer qu'ils s'exécutent lorsque la page est récupérée via Ajax.</p>
 			
-			<h2>pagecreate = DOM ready</h2> 
+			<h2>pageinit = DOM prêt</h2> 
 
-			<p>Une des premières choses que les gens apprennent en jQuery est d'utiliser la fonction <code>$(document).ready()</code> pour exécuter du code spécifique du DOM dès que le DOM est prêt (qui survient souvent bien avant l'événement <code>onload</code>). Cependant, dans un site jQuery Mobilde et dans les applications, les pages sont requêtées et injectées dans le même DOM où l'utilisateur navigue, donc l'événement ready du DOM n'est pas aussi utile, car il ne s'exécute que pour la première page. Pour exécuter du code à chaque fois qu'une nouvelle page est chargée et créée dans jQuery Mobile, vous pouvez lier l'événement <a href="../api/events.html"><code>pagecreate</code></a>. </p>
+			<p>Une des premières choses que les gens apprennent en jQuery est d'utiliser la fonction <code>$(document).ready()</code> pour exécuter du code spécifique du DOM dès que le DOM est prêt (qui survient souvent bien avant l'événement <code>onload</code>). Cependant, dans un site jQuery Mobilde et dans les applications, les pages sont requêtées et injectées dans le même DOM où l'utilisateur navigue, donc l'événement ready du DOM n'est pas aussi utile, car il ne s'exécute que pour la première page. Pour exécuter du code à chaque fois qu'une nouvelle page est chargée et créée dans jQuery Mobile, vous pouvez lier l'événement <a href="../api/events.html"><code>pageinit</code></a>. </p>
 			
-			<p>L'événement  <code>pagecreate</code> est déclenché sur une page où il est initialisé, juste après que l'initialisation se produise. La plupart des widgets officiels de jQuery Mobile s'auto-initialisent en se basant sur cet événement, et vous pouvez définir votre code pour faire la même chose.</p>
+			<p>L'événement  <code>pageinit</code> est déclenché sur une page où il est initialisé, juste après que l'initialisation se produise. La plupart des widgets officiels de jQuery Mobile s'auto-initialisent en se basant sur cet événement, et vous pouvez définir votre code pour faire la même chose.</p>
 <pre><code>
-$( document ).delegate("#aboutPage", "pagecreate", function() {
+$( document ).delegate("#aboutPage", "pageinit", function() {
   alert('Une page avec un ID "aboutPage" vient juste d'être créée par jQuery Mobile !');
 });
 </code></pre>
 
-	<p>Si vous souhaitez manipuler le contenu d'une page <em>avant</em> que l'événement pagecreate se déclenche et que les widgets soient auto-initialisés, vous pouvez lier à la place l'évènement <code>pagebeforecreate</code> :</p>
+	<p>Si vous souhaitez manipuler le contenu d'une page <em>avant</em> que l'événement pageinit se déclenche et que les widgets soient auto-initialisés, vous pouvez lier à la place l'évènement <code>pagebeforecreate</code> :</p>
 	
 <pre><code>
 $( document ).delegate("#aboutPage", "pagebeforecreate", function() {
   alert('Une page avec un ID "aboutPage" est sur le point d'être créée par jQuery Mobile!');
 });
 </code></pre>
+
+			<h4 style="margin:.5em 0">Remarque importante : <code>pageCreate()</code> contre <code>pageInit()</code></h4>
+			<p>Avant la version bêta 2, il était recommandait de lier l'événement <code>pagecreate</code>, pour ceux qui voulaient manipuler une page améliorée par jQuery mobile et le balisage de widget.  Dans la version bêta 2, un changement interne a été faite pour dissocier chacun des widgets en liant l'événement <code>pagecreate</code> à la place des appels directs aux méthodes du widget. Par conséquence, les utilisateurs qui liaient <code>pagecreate</code> dans<code>mobileinit</code> trouvaient la liaison d'exécution avant que le balisage ait été amélioré par tous les plugins. En accord avec le cycle de vie de production des widgets de jQuery UI, la méthode d'initialisation est appelée <strong>après</strong> la méthode de création, de sorte que l'événement <code>pageinit</code> se synchronise correctement avec la manipulation d'amélioration du DOM et/ou des objets Javascript. En bref, si vous utilisiez précédemment <code>pagecreate</code> pour manipuler le balisage amélioré avant que la page ait été montré, il est très probable que vous  devrez migrer vers 'pageinit'.
+			</p>
+		
 
 			<h2>Changement des pages</h2> 
 			<p>Si vous voulez changer la page active en cours avec JavaScript, vous pouvez utiliser la méthode <a href="../api/methods.html"><code>changePage</code></a>. Il y a beaucoup de méthodes et propriétés que vous pouvez définir lors du changement de pages, mais voici deux exemples simples :</p>
@@ -76,7 +81,7 @@ $.mobile.loadPage( "about/us.html" );
 </code></pre>
 
 			<h2>Amélioration de nouvelle balise</h2> 
-			<p>Le plugin page envoie un événement <code>pagecreate</code>, où la plupart des widgets l'utilisent pour s'auto-initialiser. Tant que le script du plugin du widget est référencé, il va automatiquement améliorer toutes les instances des widgets qu'il trouve sur la page.</p>		
+			<p>Le plugin page envoie un événement <code>pageinit</code>, où la plupart des widgets l'utilisent pour s'auto-initialiser. Tant que le script du plugin du widget est référencé, il va automatiquement améliorer toutes les instances des widgets qu'il trouve sur la page.</p>		
 			<p>Toutefois, si vous générez de nouvelles balises côté client ou chargez de contenu via Ajax et l'injectez dans une page, vous pouvez déclencher l'événement <code>create</code> pour gérer l'auto-initialisation de tous les plugins contenus dans le nouveau balisage. Cela peut être déclenché sur tout élément (même le <code>div</code> de la page lui-même),  en vous épargnant la tâche d'initialisation manuelle de chaque plugin (voir ci-dessous).</p> 
 			<p>Par exemple, si un bloc de balises HTML (par exemple un formulaire de connexion) a été chargé à travers Ajax, déclenchez l'événement <code>create</code> pour transformer automatiquement tous les widgets qu'il contient (<a href="http://jquerymobile.com/test/docs/forms/textinputs/index.html">inputs</a> et <a href="http://jquerymobile.com/test/docs/buttons/index.html">buttons</a> dans ce cas) dans les versions améliorées. Le code de ce scénario serait :</p> 
 <pre style="margin: 25px 0;"><code style="font-size: 12px;">$( ...new markup that contains widgets... ).appendTo( ".ui-page" ).trigger( "create" );

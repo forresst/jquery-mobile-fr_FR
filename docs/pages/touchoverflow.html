@@ -25,7 +25,13 @@
 	<div data-role="content">
 		<div class="content-primary">		
 			
-			<h2 id="ios5">touchOverflow : les transitions de page sont considérablement améliorées et les barres d'outils sont vraiment fixes</h2>
+			<div class="ui-body ui-body-e">		
+					<h2>touchOverflowEnabled: Déprécié dans 1.1.0</h2>
+
+					<p>Avant la version 1.1 de jQuery Mobile, le véritable support de la barre d'outils fixe dépendait du support natif du navigateur avec la propriété CSS <code>overflow-scrolling: touch</code>, qui est actuellement pris en charge que par iOS5. Depuis la version 1.1, jQuery Mobile n'utilise plus du tout cette propriété CSS. Nous avons enlevé tous les usages internes de cette propriété dans le framework, toutefois, nous avons laissé l'objet $.mobile défini globalement pour éviter que sa suppression puisse causer des problèmes avec les applications existantes. Cette propriété est marquée pour suppression, donc s'il vous plaît mettez à jour votre code pour ne plus l'utiliser. Cependant, le test du support pour cette propriété reste défini sous <code>$.support</code> et nous n'avons pas l'intention d'enlever ce test pour l'instant. </p>
+			</div>
+			
+			<h2 id="ios5">touchOverflow : Améliore les transitions de page et les vraies barres d'outils fixes</h2>
 			
 			<p>Actuellement, la page que vous visualisez et celle qui vous permet de vous dirigez vers d'autres pages sont positionnées l'une à côté de l'autre dans la fenêtre, ce qui nous permet de tirer parti du défilement natif de la plupart des périphériques. L'inconvénient de cette approche est que comme les deux pages partagent le même viewport , quand une transition de page commence, nous devons d'abord défiler vers le haut du document, puis commencer l'animation afin de s'assurer que les pages soient alignées verticalement. Si vous cliquez sur le bouton Retour, nous avons besoin pour défiler vers le haut, de transition, puis restaurer la position précédente du défilement. Puisque les navigateurs mobiles sont assez lents, ces mouvements de défilement peuvent nuire au flux de l'expérience.</p>
 			

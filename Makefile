@@ -3,7 +3,9 @@
 VER = sed "s/v@VERSION/$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd")/"
 VER_MIN = "/*! jQuery Mobile v$$(git log -1 --format=format:"Git Build: SHA1: %H <> Date: %cd") jquerymobile.com | jquery.org/license */"
 VER_OFFICIAL = $(shell cat version.txt)
-SED_VER_API = sed 's/__version__/"${VER_OFFICIAL}"/g'
+SED_VER_REPLACE = 's/__version__/"${VER_OFFICIAL}"/g'
+SED_VER_API = sed ${SED_VER_REPLACE}
+SED_INPLACE_EXT = "whyunowork"
 deploy: VER = sed "s/v@VERSION/${VER_OFFICIAL}/"
 deploy: VER_MIN = "/*! jQuery Mobile v${VER_OFFICIAL} jquerymobile.com | jquery.org/license */"
 
@@ -35,13 +37,13 @@ endif
 # When no build target is specified, all gets ran
 all: css js zip notify
 
-clean: 
+clean:
 	# -------------------------------------------------
 	# Cleaning build output
 	@@rm -rf ${OUTPUT}
 	@@rm -rf tmp
 
-# Create the output directory. 
+# Create the output directory.
 init:
 	@@mkdir -p ${OUTPUT}
 
@@ -84,7 +86,7 @@ docs: init
 	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o build/docs.build.js \
-		dir=../tmp/demos
+		dir=tmp/demos
 	# ... Prepend versioned license to jquery.mobile.js
 	@@cat LICENSE-INFO.txt  | ${VER} > tmp/demos/LICENSE-INFO.txt
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/js/jquery.mobile.js > tmp/demos/js/jquery.mobile.js.tmp
@@ -96,7 +98,9 @@ docs: init
 	@@cat tmp/demos/LICENSE-INFO.txt | cat - tmp/demos/css/themes/default/${NAME}.css > tmp/demos/css/themes/default/${NAME}.css.tmp
 	@@mv tmp/demos/css/themes/default/${NAME}.css.tmp tmp/demos/css/themes/default/${NAME}.css
 	# ... replace "js/" with "js/jquery.mobile.docs.js"
-	@@find tmp/demos -name "*.html" -exec sed -i 's@js/"@js/jquery.mobile.docs.js"@' {} \;
+	@@ # NOTE the deletion here is required by gnu/bsd sed differences
+	@@find tmp/demos -name "*.html" -exec sed -i${SED_INPLACE_EXT} -e 's@js/"@js/jquery.mobile.docs.js"@' {} \;
+	@@find tmp/demos -name "*${SED_INPLACE_EXT}" -exec rm {} \;
 	# ... Move and zip up the the whole folder
 	@@rm -f ${OUTPUT}/${NAME}.docs.zip
 	@@cd tmp/demos && rm -f *.php && rm -f Makefile
@@ -112,7 +116,7 @@ js: init
 	${RUN_JS} \
 		external/r.js/dist/r.js \
 	 	-o baseUrl="js" \
-		include=jquery.mobile \
+		name=jquery.mobile \
 		exclude=jquery,../external/requirejs/order,../external/requirejs/depend,../external/requirejs/text,../external/requirejs/text!../version.txt \
 		out=${OUTPUT}/${NAME}.compiled.js \
 		pragmasOnSave.jqmBuildExclude=true \
@@ -162,14 +166,17 @@ zip: init css js
 # NOTE the clean (which removes previous build output) has been removed to prevent a gap in service
 build_latest: css docs js zip
 
+# Push the latest git version to the CDN. This is done on a post commit hook
 deploy_latest:
 	# Time to put these on the CDN
 	@@scp -qr ${OUTPUT}/* jqadmin@code.origin.jquery.com:/var/www/html/code.jquery.com/mobile/latest/
 	# -------------------------------------------------
 
-# Push the latest git version to the CDN. This is done on a post commit hook
 # TODO target name preserved to avoid issues during refactor, latest -> deploy_latest
 latest: build_latest deploy_latest
+	# ... Copy over the lib js, avoid the compiled stuff, to get the defines for tests/unit/*
+	@@ # TODO centralize list of built files
+	@@find js -name "*.js" -not \( -name "*.docs.js"  -name "*.mobile.js" \)  | xargs -L1 -I FILENAME cp FILENAME ${OUTPUT}/demos/js/
 
 # Build the nightly backups. This is done on a server cronjob
 nightlies: css js docs zip
@@ -190,7 +197,7 @@ deploy: init css js docs zip
 	@@mv ${OUTPUT}/demos tmp/${VER_OFFICIAL}
 	# Create the Demos/Docs/Tests/Tools for jQueryMobile.com
 	# ... By first replacing the paths
-	# TODO update jQuery Version replacement on deploy
+	@@ # TODO update jQuery Version replacement on deploy
 	@@find tmp/${VER_OFFICIAL} -type f \
 		\( -name '*.html' -o -name '*.php' \) \
 		-exec perl -pi -e \
