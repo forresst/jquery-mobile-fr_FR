@@ -60,8 +60,8 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 
       entete
         .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
-        .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right'>Documentation française jQuery</a>" )
-        .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right'>Forum français dédié à jQuery</a>" );
+        .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right' data-mini='true'>Documentation française jQuery</a>" )
+        .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right' data-mini='true'>Forum français dédié à jQuery</a>" );
 
       $( "div.type-home" ).prepend( entete );
     });
@@ -73,8 +73,8 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 
       entete
         .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
-        .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right'>Documentation française jQuery</a>" )
-        .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right'>Forum français dédié à jQuery</a>" );
+        .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right' data-mini='true'>Documentation française jQuery</a>" )
+        .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right' data-mini='true'>Forum français dédié à jQuery</a>" );
 
       $( "div.type-interior" ).prepend( entete );
     });
@@ -86,8 +86,8 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 
       entete
         .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
-        .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right'>Documentation française jQuery</a>" )
-        .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right'>Forum français dédié à jQuery</a>" );
+        .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right' data-mini='true'>Documentation française jQuery</a>" )
+        .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right' data-mini='true'>Forum français dédié à jQuery</a>" );
 
       $( "div.type-index" ).prepend( entete );
     });
