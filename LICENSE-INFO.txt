@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 758fe3d52e706765d060d30685685a5e00df0342 <> Date: Thu Feb 16 14:50:22 2012 -0500
+* jQuery Mobile Framework Git Build: SHA1: f4e5636042ab176e1e9a3aa18bd11649a0fcd8c6 <> Date: Sun Feb 19 23:23:02 2012 -0500
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project

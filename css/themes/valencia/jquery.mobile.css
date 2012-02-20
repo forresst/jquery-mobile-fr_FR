@@ -888,8 +888,8 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-loader-verbose { width: 200px; opacity: .88; height: auto; margin-left: -110px; padding: 10px; }
 .ui-loader-default h1 { font-size: 0; width: 0; height: 0; overflow: hidden; }
 .ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
-.ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 46px; height: 46px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
-.ui-loader-verbose .ui-icon { margin: 0 auto 10px; }
+.ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 44px; height: 44px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
+.ui-loader-verbose .ui-icon { margin: 0 auto 10px; opacity: .75; }
 .ui-loader-textonly { padding: 15px; margin-left: -115px;  }
 .ui-loader-textonly .ui-icon { display: none; }
 .ui-loader-fakefix { position: absolute; }
@@ -1576,14 +1576,11 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-checkbox input,.ui-radio input { position:absolute; left:20px; top:50%; width: 10px; height: 10px;  margin:-5px 0 0 0; outline: 0 !important; z-index: 1; }
 .ui-field-contain, fieldset.ui-field-contain { padding: .8em 0; margin: 0; border-width: 0 0 1px 0; overflow: visible; }
 .ui-field-contain:first-child { border-top-width: 0; }
-.ui-header .ui-field-contain,
-.ui-footer .ui-field-contain {
-	width: 25%;
-}
 .ui-header .ui-field-contain-left,
 .ui-header .ui-field-contain-right {
 	position: absolute;
 	top: 0;
+	width: 25%;
 }
 .ui-header .ui-field-contain-left {
 	left: 1em;
@@ -1596,8 +1593,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 .ui-select { display: block; position: relative; }
 .ui-select select { position: absolute; left: -9999px; top: -9999px; }
-.ui-select .ui-btn { overflow: hidden; }
-.ui-select .ui-btn { opacity: 1; }
+.ui-select .ui-btn { overflow: hidden; opacity: 1; margin: 0; }
 .ui-select .ui-btn select { cursor: pointer; -webkit-appearance: button; left: 0; top:0; width: 100%;  min-height: 1.5em; min-height: 100%; height: 3em; max-height: 100%; opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); z-index: 2; }
 .ui-select .ui-disabled { opacity: .3; }
 @-moz-document url-prefix() {.ui-select .ui-btn select { opacity: 0.0001; }}
@@ -1624,7 +1620,9 @@ label.ui-select { font-size: 16px; line-height: 1.4;  font-weight: normal; margi
 .ui-selectmenu .ui-header h1:after { content: '.'; visibility: hidden; }
 label.ui-input-text { font-size: 16px; line-height: 1.4; display: block; font-weight: normal; margin: 0 0 .3em; }
 input.ui-input-text, textarea.ui-input-text { background-image: none; padding: .4em; line-height: 1.4; font-size: 16px; display: block; width: 97%; outline: 0; }
-input.ui-input-text { -webkit-appearance: none; }
+.ui-header input.ui-input-text,
+.ui-footer input.ui-input-text { margin-left: 1.25%; padding: .4em 1%; width: 95.5% } 
+ input.ui-input-text { -webkit-appearance: none; }
 textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; -moz-transition: height 200ms linear; -o-transition: height 200ms linear; transition: height 200ms linear; }
 .ui-input-search { padding: 0 30px; background-image: none; position: relative; }
 .ui-icon-searchfield:after { position: absolute; left: 7px; top: 50%; margin-top: -9px; content: ""; width: 18px; height: 18px; opacity: .5; }

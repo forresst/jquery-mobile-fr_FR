@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 758fe3d52e706765d060d30685685a5e00df0342 <> Date: Thu Feb 16 14:50:22 2012 -0500
+* jQuery Mobile Framework Git Build: SHA1: f4e5636042ab176e1e9a3aa18bd11649a0fcd8c6 <> Date: Sun Feb 19 23:23:02 2012 -0500
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -380,9 +380,7 @@ $.widget( "mobile.widget", {
 		// if ignoreContentEnabled is set to true the framework should
 		// only enhance the selected elements when they do NOT have a
 		// parent with the data-namespace-ignore attribute
-		if ( $.mobile.ignoreContentEnabled ) {
-			$widgetElements = $.mobile.enhanceable( $widgetElements );
-		}
+		$widgetElements = $.mobile.enhanceable( $widgetElements );
 
 		if ( useKeepNative && $widgetElements.length ) {
 			// TODO remove dependency on the page widget for the keepNative.
@@ -592,6 +590,10 @@ $.widget( "mobile.widget", {
 		// TODO not excited about the name here :/
 		// TODO use parentNode traversal to speed things up
 		enhanceable: function( $set ) {
+			if( !$.mobile.ignoreContentEnabled ){
+				return $set;
+			}
+
 			var count = $set.length, $newSet = $();
 
 			for( var i = 0; i < count; i++ ) {
@@ -658,6 +660,11 @@ $.widget( "mobile.widget", {
 	// to return the html encoded version of the text in all cases. (thus the name)
 	$.fn.getEncodedText = function() {
 		return $( "<div/>" ).text( $(this).text() ).html();
+	};
+
+	// fluent helper function for the mobile namespaced equivalent
+	$.fn.jqmEnhanceable = function() {
+		return $.mobile.enhanceable( this );
 	};
 
 	// Monkey-patching Sizzle to filter the :jqmData selector
@@ -4023,7 +4030,7 @@ $.fn.fieldcontain = function( options ) {
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ){
-	$( ":jqmData(role='fieldcontain')", e.target ).fieldcontain();
+	$( ":jqmData(role='fieldcontain')", e.target ).jqmEnhanceable().fieldcontain();
 });
 
 })( jQuery );
@@ -4087,14 +4094,13 @@ $( document ).bind( "pagecreate create", function( e ){
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
-	var $workingSet = this;
+	var self = this,
+	    $workingSet = this.filter( function( i, el ) {
+	        return !self.eq( i ).hasClass( "ui-btn" );
+	    });
 
-	// trim the working set when ignoring content is switched on
-	if( $.mobile.ignoreContentEnabled ){
-		$workingSet = $.mobile.enhanceable( $workingSet );
-	}
-
-	options = options || {};
+	// Enforce options to be of type string
+	options = ( options && ( $.type( options ) == "object" ) )? options : {};
 	for ( var i = 0; i < $workingSet.length; i++ ) {
 		var el = $workingSet.eq( i ),
 			e = el[ 0 ],
@@ -4121,6 +4127,7 @@ $.fn.buttonMarkup = function( options ) {
 
 		$.each(o, function(key, value) {
 			e.setAttribute( "data-" + $.mobile.ns + key, value );
+			el.jqmData(key, value);
 		});
 
 		// Check if this element is already enhanced
@@ -4190,8 +4197,10 @@ $.fn.buttonMarkup = function( options ) {
 			buttonClass += " ui-shadow";
 		}
 
+		if (buttonElements)
+			el.removeClass((buttonElements.bcls || ""));
 		el.removeClass( "ui-link" ).addClass( buttonClass );
-				
+
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;
@@ -4213,6 +4222,7 @@ $.fn.buttonMarkup = function( options ) {
 		// Assign a structure containing the elements of this button to the elements of this button. This
 		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
 		buttonElements = {
+			bcls  : buttonClass,
 			outer : e,
 			inner : buttonInner,
 			text  : buttonText,
@@ -4344,13 +4354,16 @@ $.mobile.page.prototype.options.footerTheme  = "a";
 $.mobile.page.prototype.options.contentTheme = null;
 
 $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagecreate", function( e ) {
-	
+
 	var $page = $( this ),
 		o = $page.data( "page" ).options,
 		pageRole = $page.jqmData( "role" ),
 		pageTheme = o.theme;
-	
-	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", this ).each(function() {
+
+	$( ":jqmData(role='header'), :jqmData(role='footer'), :jqmData(role='content')", this )
+		.jqmEnhanceable()
+		.each(function() {
+
 		var $this = $( this ),
 			role = $this.jqmData( "role" ),
 			theme = $this.jqmData( "theme" ),
@@ -4359,12 +4372,12 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 			leftbtn,
 			rightbtn,
 			backBtn;
-			
-		$this.addClass( "ui-" + role );	
+
+		$this.addClass( "ui-" + role );
 
 		//apply theming and markup modifications to page,header,content,footer
 		if ( role === "header" || role === "footer" ) {
-			
+
 			var thisTheme = theme || ( role === "header" ? o.headerTheme : o.footerTheme ) || pageTheme;
 
 			$this
@@ -4379,11 +4392,11 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 			rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 
 			leftbtn = leftbtn || $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
-			
+
 			rightbtn = rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
-			
+
 			// Auto-add back btn on pages beyond first view
-			if ( o.addBackBtn && 
+			if ( o.addBackBtn &&
 				role === "header" &&
 				$( ".ui-page" ).length > 1 &&
 				$this.jqmData( "url" ) !== $.mobile.path.stripHash( location.hash ) &&
@@ -4392,7 +4405,7 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 				backBtn = $( "<a href='#' class='ui-btn-left' data-"+ $.mobile.ns +"rel='back' data-"+ $.mobile.ns +"icon='arrow-l'>"+ o.backBtnText +"</a>" )
 					// If theme is provided, override default inheritance
 					.attr( "data-"+ $.mobile.ns +"theme", o.backBtnTheme || thisTheme )
-					.prependTo( $this );				
+					.prependTo( $this );
 			}
 
 			// Page title
@@ -4641,7 +4654,8 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		$navbar.addClass( "ui-navbar" )
 			.attr( "role","navigation" )
 			.find( "ul" )
-				.grid({ grid: this.options.grid });
+			.jqmEnhanceable()
+			.grid({ grid: this.options.grid });
 
 		if ( !iconpos ) {
 			$navbar.addClass( "ui-navbar-noicons" );
@@ -4664,7 +4678,6 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		$navbar.closest( ".ui-page" ).bind( "pagebeforeshow", function() {
 			$navbtns.filter( ".ui-state-persist" ).addClass( $.mobile.activeBtnClass );
 		});
-
 	}
 });
 
@@ -5087,7 +5100,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			input = this.element,
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
-			label = input.closest( "form,fieldset,:jqmData(role='page')" ).find( "label" ).filter( "[for='" + input[ 0 ].id + "']" ),
+			label = $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[ 0 ].id + "']" ),
 			inputtype = input.attr( "type" ),
 			mini = input.closest( "form,fieldset" ).jqmData('mini'),
 			checkedState = inputtype + "-on",
@@ -5406,13 +5419,6 @@ $( document ).bind( "pagecreate create", function( e ){
 (function( $, undefined ) {
 
 $.fn.controlgroup = function( options ) {
-	var $workingSet = this;
-
-	// trim the working set when ignoring content is switched on
-	if( $.mobile.ignoreContentEnabled ){
-		$workingSet = $.mobile.enhanceable( $workingSet );
-	}
-
 	function flipClasses( els, flCorners  ) {
 		els.removeClass( "ui-btn-corner-all ui-shadow" )
 			.eq( 0 ).addClass( flCorners[ 0 ] )
@@ -5420,7 +5426,7 @@ $.fn.controlgroup = function( options ) {
 			.last().addClass( flCorners[ 1 ] ).addClass( "ui-controlgroup-last" );
 	}
 
-	return $workingSet.each(function() {
+	return this.each(function() {
 		var $el = $( this ),
 			o = $.extend({
 						direction: $el.jqmData( "type" ) || "vertical",
@@ -5462,10 +5468,11 @@ $.fn.controlgroup = function( options ) {
 (function( $, undefined ) {
 
 $( document ).bind( "pagecreate create", function( e ){
-	
-	//links within content areas
+
+	//links within content areas, tests included with page
 	$( e.target )
 		.find( "a" )
+		.jqmEnhanceable()
 		.not( ".ui-btn, .ui-link-inherit, :jqmData(role='none'), :jqmData(role='nojs')" )
 		.addClass( "ui-link" );
 
@@ -7279,7 +7286,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					
 
 				$loader
-					.attr( "class", loaderClass + " ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
+					.attr( "class", loaderClass + " ui-corner-all ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
 					.find( "h1" )
 						.text( msgText || $.mobile.loadingMessage )
 						.end()
@@ -7377,7 +7384,9 @@ $( document ).bind( "pagecreate create", function( e ){
 		//auto self-init widgets for those widgets that have a soft dependency on others
 		if ( $.fn.controlgroup ) {
 			$( document ).bind( "pagecreate create", function( e ){
-				$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
+				$( ":jqmData(role='controlgroup')", e.target )
+					.jqmEnhanceable()
+					.controlgroup({ excludeInvisible: false });
 			});
 		}
 

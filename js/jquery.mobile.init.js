@@ -62,7 +62,7 @@
 					
 
 				$loader
-					.attr( "class", loaderClass + " ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
+					.attr( "class", loaderClass + " ui-corner-all ui-body-" + ( theme || "a" ) + " ui-loader-" + ( textVisible ? "verbose" : "default" ) + ( textonly ? " ui-loader-textonly" : "" ) )
 					.find( "h1" )
 						.text( msgText || $.mobile.loadingMessage )
 						.end()
@@ -160,7 +160,9 @@
 		//auto self-init widgets for those widgets that have a soft dependency on others
 		if ( $.fn.controlgroup ) {
 			$( document ).bind( "pagecreate create", function( e ){
-				$( ":jqmData(role='controlgroup')", e.target ).controlgroup({ excludeInvisible: false });
+				$( ":jqmData(role='controlgroup')", e.target )
+					.jqmEnhanceable()
+					.controlgroup({ excludeInvisible: false });
 			});
 		}
 
