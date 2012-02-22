@@ -146,9 +146,19 @@ $.mobile.loadPage( "searchresults.php", {
 			</pre>
 			
 			</dd>
-			
-			
-			<dt><code>jqmData(), jqmRemoveData()</code> (<em>method</em>)</dt>
+
+			<dt><code>$.fn.jqmEnhanceable()</code> (<em>method</em>)</dt>
+			<dd>Pour les utilisateurs souhaitant respecter les éléments parents de <code>data-enhance=false</code> au cours de l'amélioration manuel ou personnalisé le plugin de création, jQuery Mobile offre la  méthode de filtrage <code>$.fn.jqmEnhanceable</code>.</dd>
+			<dd>
+				<dl>
+					<dt><code>·</code> Paramètres :</dt>
+					<dd>Lorsque <code>$.mobile.ignoreContentEnabled</code> est défini à true, cette méthode va traverser les nœuds parents pour chaque élément du DOM dans l'objet jQuery, et où il trouve un parent de <code>data-enhance=false</code>, le fils sera retiré de l'ensemble.</dd>
+					<dt><code>·</code> Avertissement :</dt>
+					<dd>L'opération de traverser tous les éléments parents peuvent être coûteux, même pour de petits ensembles d'objets jQuery.</dd>
+				</dl>
+			</dd>
+
+			<dt><code>$.fn.jqmData(), $.fn.jqmRemoveData()</code> (<em>method</em>)</dt>
 			<dd>Lorsque vous travaillez avec jQuery Mobile, <code>jqmData</code> et <code>jqmRemoveData</code> devrait être utilisée à la place des méthodes de base de jQuery <code>data</code> et <code>removeData</code> (à noter que cela inclut $.fn.data, $.fn.removeData et les utilitaires $.data, $.removeData et $.hasData), car ils les intègrent automatiquement pour obtenir et définir des attributs de données d'espace de nommage (même si aucun espace de nommage est en cours d'utilisation).</dd>
 			<dd>
 				<dl>

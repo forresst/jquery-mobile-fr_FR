@@ -103,12 +103,15 @@ $(document).bind("mobileinit", function(){
 	<dt><code>hashListeningEnabled</code> <em>boolean</em>, par défaut : true</dt>
 	<dd>jQuery Mobile écoutera et gérera automatiquement les changements vers location.hash. La désactivation empêchera jQuery Mobile de manipuler les changements de hash, ce qui vous permet de le gérer vous-même, ou tout simplement pour utiliser de simples liens dans un document qui défilent vers un ID particulier.</dd>
 
+	<dt><code>ignoreContentEnabled</code> <em>boolean</em>, par défaut : false</dt>
+	<dd><em>Avertissement :</em> La définition de cette propriété à true provoque la dégradation des performances sur l'amélioration. Une fois définie, toutes les améliorations automatiques réalisés par le framework pour chaque élément améliorable du balisage de l'utilisateur vérifiera d'abord le nœud parent de <code>data-enhance=false</code>. Si on en trouve un, le balisage sera ignoré. Ce réglage et l'attribut de  données qui l'accompagne fournissent un mécanisme qui permet aux utilisateurs d'éviter l'amélioration sur de larges sections de balisage.</dd>
+
 	<dt><code>linkBindingEnabled</code> <em>boolean</em>, par défaut : true</dt>
 	<dd>jQuery Mobile liera automatiquement les clics sur les balises d'ancrage dans votre document. Le paramétrage de ces options à false empêchera  tous les ancrages à l'ajout d'<em>including</em> gérant le clic de l'état du bouton actif et de lien alternatif flouté. Cela ne devrait être utilisé que lorsque l'on tente de déléguer la gestion du clic à une autre bibliothèque ou un code personnalisé.</dd>
 
 	<dt><code>loadingMessage</code> <em>string</em>, par défaut : "loading"</dt>
 	<dd>Définit le texte qui apparaît quand une page se charge. Si c'est à false, le message n'apparaîtra pas du tout.</dd>
-	
+
 	<dt><code>loadingMessageTextVisible</code> <em>string</em>, par défaut : false</dt>
 	<dd>Si le texte doit être visible lorsque le message de chargement est indiqué. (Remarque : Actuellement, le texte est toujours visible pour les erreurs de chargement)</dd>
 

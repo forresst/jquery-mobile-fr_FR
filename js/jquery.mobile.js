@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: f4e5636042ab176e1e9a3aa18bd11649a0fcd8c6 <> Date: Sun Feb 19 23:23:02 2012 -0500
+* jQuery Mobile Framework Git Build: SHA1: a4170c4f734098e60969adecf109f83902099a20 <> Date: Tue Feb 21 16:22:58 2012 -0800
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -4041,10 +4041,7 @@ $( document ).bind( "pagecreate create", function( e ){
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
-	var self = this,
-	    $workingSet = this.filter( function( i, el ) {
-	        return !self.eq( i ).hasClass( "ui-btn" );
-	    });
+	var $workingSet = this;
 
 	// Enforce options to be of type string
 	options = ( options && ( $.type( options ) == "object" ) )? options : {};
@@ -5185,7 +5182,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		this._getInputSet().each(function() {
 			var $this = $(this);
 
-			if ( $this.is( ":checked" ) || self.inputtype === "checkbox" ) {
+			// NOTE getAttribute is used here to deal with an issue with the :checked
+			//      selector. see #3597
+			if ( this.getAttribute( "checked" ) || self.inputtype === "checkbox" ) {
 				$this.trigger( "change" );
 			}
 		})

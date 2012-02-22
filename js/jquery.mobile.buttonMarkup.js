@@ -1,10 +1,7 @@
 ( function( $, undefined ) {
 
 $.fn.buttonMarkup = function( options ) {
-	var self = this,
-	    $workingSet = this.filter( function( i, el ) {
-	        return !self.eq( i ).hasClass( "ui-btn" );
-	    });
+	var $workingSet = this;
 
 	// Enforce options to be of type string
 	options = ( options && ( $.type( options ) == "object" ) )? options : {};

@@ -25,8 +25,76 @@
 	<div data-role="content">
 		<div class="content-primary">
 		
-		<h2>Événements de la navigation AJAX</h2>
-		<p>Le système de navigation AJAX possède un ensemble complet d'événements à chaque étape du processus qui peuvent être exploités pour prendre le contrôle complet du chargement de la page, de l'amélioration et du processus de transition. Voici un aperçu de la chronologie des événements :</p>
+		<h2>Framework, Page et événements de navigation</h2>
+		<p>Le système de navigation et le widget de jQuery Mobile disposent d'un jeu complet d'événements à chaque étape du chargement de la page et lors du processus de changement de page, qui peuvent être exploités pour prendre le contrôle complet. Cette page mettra en évidence les événements les plus couramment utilisés et ce qu'ils font, elle fournira aussi la chronologie de ces événements lorsqu'ils sont déclenchés pendant le chargement et les transitions.</p>
+		
+		
+		<h3>Événements du framework</h3>
+		
+		<p>Lorsque jQuery Mobile s'initialise,il déclenche un événement sur le <code>document</code> qui est spécifiquement conçu pour surcharger le framework et les plugins par défaut. Cet événement est appelé <code>mobileinit</code>, et en le liant, vous pouvez vous assurer que toutes les options de configuration de plugin ou globale peuvent être modifiées par n'importe quelle valeur que vous souhaitez, avant qu'elles ne soient utilisées par l'exécution initiale du framework.
+ </p>
+		
+
+			<pre>
+				<code>
+$(document).bind("mobileinit", function(){
+  //Appliquer des remplacements ici
+});
+				</code>
+			</pre>
+		
+		<p>L'aspect délicat de mobileinit, c'est que vous avez besoin de le lier avant que jQuery Mobile s'exécute, ainsi un flux typique de mobileinit doit se produire dans un script qui est référencé après jQuery, mais avant jQuery Mobile.</p>
+		
+		<p>Il convient de noter que même si vous pouvez lier d'autres événements à l'intérieur d'une fonction de rappel <code>mobileinit</code>, il est probable que vous obtiendrez des résultats indésirables. C'est parce que de nombreux événements, tels que les événements de page ci-dessous, sont destinés aux développeurs externes pour utiliser les plugins de jQuery Mobile <em>après</em> qu'il soit chargé.</p>
+		
+		<h3>Événements de création de page</h3>
+		
+		<p>Dans une application jQuery Mobile, chaque vue est connue comme une page. Les pages commencent généralement par un élément HTML standard avec un attribut <code>data-role="page"</code>, et le widget de page du framework améliore cet élément en un contrôle de page jQuery Mobile. Dans le processus d'amélioration de cette page, le widget envoie plusieurs événements qui vous permettent d'accéder à cette page et à ses éléments enfants à différents stades de la création.</p>
+		
+			<p>Ces événements sont :</p>
+		
+		<dl>
+				<dt>pagecreate</dt>
+				
+				<dd>Cet événement est déclenché sur une page lorsqu'elle est initialisée la première fois par le plugin de page. Pagecreate est l'événement le plus utile pour améliorer progressivement le balisage d'une page lors de son premier chargement , et de ce fait, beaucoup de widgets standards jQuery Mobile se lient à pagecreate pour ainsi améliorer le balisage dans les pages ! Si vous liez pagecreate dans n'importe quel script qui est référencé après le framework jQuery Mobile, tous les widgets natifs de jQuery Mobile, dans cette page, seront améliorés avant que votre fonction de rappel d'événement s'exécute. En d'autres termes, vous aurez affaire à des composants jQuery Mobile améliorés.</dd>
+				
+				<dt>pagebeforecreate</dt>
+				
+				<dd>Cet événement est déclenché sur un élément de la page juste avant qu'il soit créé par le plugin de la page Bien que l'événement pagecreate vous permet généralement de travailler avec une page <strong>après</strong> que le balisage ait été amélioré par jQuery Mobile, pagebeforecreate vous donne un accès lorsque le balisage n'a pas encore été amélioré. Pagebeforecreate est utile pour modifier le balisage avant les widgets de jQuery Mobile. </dd>
+				
+				<dt>pageinit</dt>
+				
+				<dd>PageInit est très similaire à pagecreate, sauf qu'aucun des widgets standards jQuery Mobile se lient à lui, et il est garanti que son exécution s'effectue après que toutes les fonctions de rappel liées à pagecreate soient terminés. Si vous avez besoin de lier un événement de création de page par l'intermédiaire d'un script qui est référencé avant jQuery Mobile, la liaison à pageinit veillera à ce que vous traitiez avec des contrôles de page améliorés (alors que pagecreate ne le fera pas, dans ce cas précis.)</dd>
+				
+				
+		</dl>
+		
+		
+		<h3>Événements de navigation de page</h3>
+		<p>Après que les pages soient créées, elles sont souvent affichées et cachées une ou plusieurs fois tout au long de l'utilisation d'une application jQuery Mobile. Pour les navigateurs de grade-A, avec le support de la navigation Ajax , le modèle de navigation jQM gère les comportements et les déclenchement des événements utiles de cette page aux différentes étapes lors du processus d'affichage, de masquage et de changement.</p>
+		
+		<dl> 
+			
+			<dt>pagebeforeshow</dt>
+			<dd>description ici</dd>
+			
+		
+			<dt>pageshow</dt>
+			<dd>description ici</dd>
+			
+			<dt>pagebeforehide</dt>
+			<dd>description ici</dd>
+			
+			
+			<dt>pagehide</dt>
+			<dd>description ici</dd>
+			
+		<dl>
+		
+		<h3>Chronologie</h3>
+		<p>Voici un aperçu de la chronologie des événements pour le changement d'une page</p>
+		
+		
 		<style>
 		.nav-flow ul,  .nav-flow li { margin:0; list-style-type: none; text-align:center; line-height:150%; }
 		.nav-flow h3 { margin:0; }

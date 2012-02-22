@@ -127,7 +127,16 @@
 					<td>Lettre de l'échantillon (a-z) - Définit pour tous les pliables de l'ensemble</td>
 				</tr>
 			</table>
-			
+
+			<h2><a href="../pages/page-anatomy.html">Contenu</a></h2>
+			<p>Conteneur avec <code>data-role="content"</code></p>
+			<table>
+				<tr>
+					<th>data-theme</th>
+					<td>Lettre de l'échantillon (a-z)</td>
+				</tr>
+			</table>
+
 			<h2><a href="../pages/page-dialogs.html">Boîte de dialogue</a></h2>
 			<p>Page avec <code>data-role="page"</code> lié avec <code>data-rel="dialog"</code> sur l'ancrage.</p>
 			<table>
@@ -157,15 +166,15 @@
 				</tr>
 			</table>
 
-			<h2><a href="../pages/page-anatomy.html">Contenu</a></h2>
-			<p>Conteneur avec <code>data-role="content"</code></p>
+			<h2><a href="globalconfig.html">Amélioration</a></h2>
+			<p>Conteneur avec <code>data-enhance="false"</code></p>
 			<table>
 				<tr>
-					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<th>data-enhance</th>
+					<td>true | false</td>
 				</tr>
 			</table>
-
+			<p>Tous les éléments du DOM au sein d'un conteneur avec <code>data-enhance="false"</code>, sauf pour les éléments <code>data-role="page|dialog"</code>, seront ignorés lors de l'amélioration initiale et des événements <code>create</code> ultérieurs à condition que le <code>$.mobile.ignoreContentEnabled</code> soit défini avant l'amélioration (par exemple dans un bind de <code>mobileinit</code>).</p>
 
 			<h2><a href="../forms/docs-forms.html">Conteneur de champ</a></h2>
 			<p>Conteneur avec <code>data-role="fieldcontain"</code> enveloppé autour d'une paire d'élément label/form</p>
