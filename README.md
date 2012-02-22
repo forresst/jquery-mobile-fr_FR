@@ -102,7 +102,11 @@ Sinon, avec l'ajout du chargement asynchrone, vous pouvez utiliser le simple ser
 
     $ python -m SimpleHTTPServer 8000
 
-Et dans votre navigateur visitez [localhost:8000](http://localhost:8000).
+Et dans votre navigateur visitez [localhost:8000](http://localhost:8000/tests/unit/core/). REMARQUE : Les docs ne se chargeront pas car ils sont tributaires de l'include "/js/" qui exige php. Pour d'autres travaux de développement tels que les tests unitaires et les tests des pages personnalisées en utilisant
+
+    <script data-main="js/jquery.mobile.docs" src="external/requirejs/require.js"></script>
+
+cela vous permettra de charger des modules de manière asynchrone, sans php. S'il vous plaît noter que l'exemple ci-dessus suppose qu'il est inclus dans une page à la racine du répertoire où le serveur HTTP a été exécuté.
 
 Support AMD dans le développement
 =================================
