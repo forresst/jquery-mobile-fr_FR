@@ -42,13 +42,13 @@ Une fois que vous avez votre propre dépôt cloné sur votre ordinateur :
 
     make docs
 
-Les docs seront construits et disponibles dans le dossier compiled/demos.  Vous pouvez déplacer ce dossier sur votre serveur web ou
+Les docs seront construits et disponibles dans le dossier compiled/demos. Vous pouvez déplacer ce dossier sur votre serveur web ou
 un autre emplacement. Il n'a pas de dépendances avec autre chose à part un serveur web HTML de base.
 
 
 Soumettre des bugs
 ==================
-Si vous pensez que vous avez trouvé un bug, s'il vous plaît reportez le en suivant ces instructions :  
+Si vous pensez que vous avez trouvé un bug, s'il vous plaît reportez le en suivant ces instructions :
 
 1. Visitez le [Issue tracker : https://github.com/jquery/jquery-mobile/issues](https://github.com/jquery/jquery-mobile/issues)
 2. Créez un ticket expliquant le problème et le résultat attendu (Note du traducteur : La communauté jQuery Mobile parle en anglais, donc évitez le français)
@@ -80,7 +80,7 @@ Exécuter localement les démos & les docs jQuery Mobile
 Pour prévisualiser localement, vous aurez besoin de cloner localement ce dépôt et de faire pointer votre serveur web Apache & PHP à
 la racine du répertoire (un serveur web est requis, car PHP et .htaccess sont utilisés pour combiner des fichiers de développement).
 
-Si vous n'avez pas actuellement de serveur web fonctionnant localement, il y a quelques options. 
+Si vous n'avez pas actuellement de serveur web fonctionnant localement, il y a quelques options.
 
 Si vous êtes sur un Mac, vous pouvez essayer en mettant jQuery Mobile dans votre dossier des sites et activer le partage Internet via "Préférences 
 Système". De là, vous trouverez une URL où vous pourrez parcourir les dossiers dans votre répertoire de sites à partir d'un navigateur.
@@ -108,10 +108,10 @@ Et dans votre navigateur visitez [localhost:8000](http://localhost:8000/tests/un
 
 cela vous permettra de charger des modules de manière asynchrone, sans php. S'il vous plaît noter que l'exemple ci-dessus suppose qu'il est inclus dans une page à la racine du répertoire où le serveur HTTP a été exécuté.
 
-Support AMD dans le développement
-=================================
+AMD Support in Development
+==========================
 
-Veuillez garder à l'esprit que le chargement asynchrone n'est pas supporté pour la production et est principalement utilisé pour le processus de construction du projet.
+Veuillez garder à l'esprit que le chargement asynchrone n'est pas supporté pour la production et est principalement utilisé pour le processus de construction du projet. Par conséquent les développeurs doivent s'attendre à un flash initial du contenu non stylisé, qui ne se produira pas si la bibliothèque est compilée.
 
 Si vous trouvez des bugs de dépendance lorsque vous utilisez le support de chargement asynchrone pour le développement veuillez le préciser dans le suivi des problèmes github.
 
@@ -127,6 +127,6 @@ Pour créer un nouveau thème :
 4. Accédez à la racine du dossier jQuery-Mobile.
 5. Exécutez la commande suivante pour construire jQuery Mobile. (THEME est le nom du répertoire pour votre thème de l'étape 1.) :
 
-    make THEME=YourThemeName
-    
+    make THEME=VotreNomDeTheme
+
 6. Les fichiers compilés seront situés dans le dossier "compiled" à la racine de jQuery-Mobile.

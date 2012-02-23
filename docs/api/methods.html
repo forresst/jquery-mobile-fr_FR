@@ -1,19 +1,19 @@
-<!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<!DOCTYPE html>
+<html class="ui-mobile-rendering">
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Docs jQuery Mobile - Méthodes</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Méthodes</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 
-</head> 
-<body> 
+</head>
+<body>
 
 <div data-role="page" class="type-interior">
 
@@ -26,14 +26,14 @@
 	<div class="content-primary">
 
 	  <p>jQuery Mobile propose plusieurs méthodes et propriétés sur l'objet $.mobile pour les utiliser dans vos applications.</p>
-		
+
 
 		<dl>
 			<dt><code>$.mobile.changePage</code> (<em>method</em>)</dt>
 			<dd>Changer par programmation la transition d'une page à une autre. Cette méthode est utilisée en interne pour le chargement et la transition d'une page qui survient losrqu'on clique sur un lien ou lorsqu'on soumet un formulaire, à condition que ces fonctionnalités soient activées.</dd>
-			
+
 			<dd>
-				
+
 				<dl>
 					<dt><code>·</code> Arguments</dt>
 					<dd><code>to</code> (<em>string ou object</em>, obligatoire)
@@ -41,8 +41,8 @@
 				<li>String : URL absolut ou relative. ("about/us.html")</li>
 							<li>Object : une collection d'objet jQuery. (<code>$("#about")</code>)</li>
 						</ul>
-					</dd>	
-						
+					</dd>
+
 					<dd><code>options</code> (<em>object</em>, facultatif)
 						<ul>
 							<li>Propriétés :
@@ -65,7 +65,7 @@
 									<li><code>showLoadMsg</code> (<em>boolean</em>, par défaut : true) Décide ou non d'afficher le message de chargement lors du chargement des pages externes.</li>
 									<li><code>role</code> (<em>string</em>, par défaut : undefined) La valeur du data-role à utiliser lors de l'affichage de la page. Par défaut, il est indéfini ce qui signifie qu'il s'appuit sur la valeur du @data-role défini sur l'élément.</li>
 									<li><code>transition</code> (<em>string</em>, par défaut : $.mobile.defaultPageTransition) La transition à utiliser lors de l'affichage de la page. </li>
-									<li><code>type</code> (<em>string</em>, par défaut : "get") Spécifie la méthode ("get" ou "post") à utiliser lors d'une requête d'une page. 
+									<li><code>type</code> (<em>string</em>, par défaut : "get") Spécifie la méthode ("get" ou "post") à utiliser lors d'une requête d'une page.
 										<ul>
 											<li>Utilisé uniquement lorsque l'argument 'to' de changePage() est une URL.</li>
 										</ul>
@@ -73,45 +73,45 @@
 								</ul>
 							</li>
 						</ul>
-					</dd>	
+					</dd>
 
 				</dl>
 			</dd>
-			
+
 			<dd>Exemples :
 			<pre>
 			<code>
-<strong>//transition vers la page "about us" avec la transition slideup</strong> 			
-$.mobile.changePage( "about/us.html", { transition: "slideup"} );	
+<strong>//transition vers la page "about us" avec la transition slideup</strong>
+$.mobile.changePage( "about/us.html", { transition: "slideup"} );
 
-<strong>//transition vers la page "search results", en utilisant les données d'un formulaire avec l'ID "search"" 	</strong>	
+<strong>//transition vers la page "search results", en utilisant les données d'un formulaire avec l'ID "search"" 	</strong>
 $.mobile.changePage( "searchresults.php", {
-	type: "post", 
+	type: "post",
 	data: $("form#search").serialize()
-});		
+});
 
-<strong>//transition vers la page "confirm" avec la transition "pop" transition sans le mettre dans l'historique	</strong>		
+<strong>//transition vers la page "confirm" avec la transition "pop" transition sans le mettre dans l'historique	</strong>
 $.mobile.changePage( "../alerts/confirm.html", {
 	transition: "pop",
 	reverse: false,
 	changeHash: false
-});	
-		
+});
+
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-			
+
+
 			<dt><code>$.mobile.loadPage</code> (<em>method</em>)</dt>
 			<dd>Charge une page externe, améliore son contenu et l'insére dans le DOM. Cette méthode est appelée en interne par la fonction changePage() lorsque son premier argument est une URL. Cette fonction n'affecte pas la page active en cours, cela peut être utilisé pour charger les pages en arrière plan. La fonction retourne un objet "deferred promise" qui sera résolu (resolve) après l'amélioration et l'insertion de la page dans le document.</dd>
-			
+
 			<dd>
-				
+
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>url</code> (<em>string ou object</em>, obligatoires) Une URL relative ou absolue.</dd>	
-						
+					<dd><code>url</code> (<em>string ou object</em>, obligatoires) Une URL relative ou absolue.</dd>
+
 					<dd><code>options</code> (<em>object</em>, facultatif)
 						<ul>
 							<li>Propriétés :
@@ -121,41 +121,30 @@ $.mobile.changePage( "../alerts/confirm.html", {
 									<li><code>pageContainer</code> (jQuery collection, par défaut: $.mobile.pageContainer) Indique l'élément qui doit contenir la page après son chargement. </li>
 									<li><code>reloadPage</code> (<em>boolean</em>, par défaut : false) Force le rechargement d'une page, même si elle est déjà dans le DOM du conteneur de la page. </li>
 									<li><code>role</code> (<em>string</em>, par défaut : undefined) La valeur du data-role à utiliser lors de l'affichage de la page. Par défaut, il est indéfini ce qui signifie qu'il s'appuit sur la valeur du @data-role défini sur l'élément.</li>
-									<li><code>type</code> (<em>string</em>, par défaut : "get") Spécifie la méthode ("get" ou "post") à utiliser lors d'une requête d'une page. 
+									<li><code>type</code> (<em>string</em>, par défaut : "get") Spécifie la méthode ("get" ou "post") à utiliser lors d'une requête d'une page.
 									</li>
 								</ul>
 							</li>
 						</ul>
-					</dd>	
+					</dd>
 
 				</dl>
 			</dd>
-			
+
 			<dd>Exemples :
 			<pre>
 			<code>
-<strong>//charge la page "about us" dans le DOM</strong>			
-$.mobile.loadPage( "about/us.html" );	
+<strong>//charge la page "about us" dans le DOM</strong>
+$.mobile.loadPage( "about/us.html" );
 
-<strong>//charge la page "search results", en utilisant data comme formulaire avec l'ID "search"" 	</strong>	
+<strong>//charge la page "search results", en utilisant data comme formulaire avec l'ID "search"" 	</strong>
 $.mobile.loadPage( "searchresults.php", {
-	type: "post", 
+	type: "post",
 	data: $("form#search").serialize()
-});				
+});
 			</code>
 			</pre>
-			
-			</dd>
 
-			<dt><code>$.fn.jqmEnhanceable()</code> (<em>method</em>)</dt>
-			<dd>Pour les utilisateurs souhaitant respecter les éléments parents de <code>data-enhance=false</code> au cours de l'amélioration manuel ou personnalisé le plugin de création, jQuery Mobile offre la  méthode de filtrage <code>$.fn.jqmEnhanceable</code>.</dd>
-			<dd>
-				<dl>
-					<dt><code>·</code> Paramètres :</dt>
-					<dd>Lorsque <code>$.mobile.ignoreContentEnabled</code> est défini à true, cette méthode va traverser les nœuds parents pour chaque élément du DOM dans l'objet jQuery, et où il trouve un parent de <code>data-enhance=false</code>, le fils sera retiré de l'ensemble.</dd>
-					<dt><code>·</code> Avertissement :</dt>
-					<dd>L'opération de traverser tous les éléments parents peuvent être coûteux, même pour de petits ensembles d'objets jQuery.</dd>
-				</dl>
 			</dd>
 
 			<dt><code>$.fn.jqmData(), $.fn.jqmRemoveData()</code> (<em>method</em>)</dt>
@@ -170,9 +159,29 @@ $.mobile.loadPage( "searchresults.php", {
 				</dl>
 			</dd>
 
-			
-			
-			
+
+			<dt><code>$.fn.jqmEnhanceable()</code> (<em>method</em>)</dt>
+			<dd>Pour les utilisateurs souhaitant respecter les éléments parents de <code>data-enhance=false</code> au cours de l'amélioration manuel ou personnalisé le plugin de création, jQuery Mobile offre la  méthode de filtrage <code>$.fn.jqmEnhanceable</code>.</dd>
+			<dd>
+				<dl>
+					<dt><code>·</code> Paramètres :</dt>
+					<dd>Lorsque <code>$.mobile.ignoreContentEnabled</code> est défini à true, cette méthode va traverser les nœuds parents pour chaque élément du DOM dans l'objet jQuery, et où il trouve un parent de <code>data-enhance=false</code>, le fils sera retiré de l'ensemble.</dd>
+					<dt><code>·</code> Avertissement :</dt>
+					<dd>L'opération de traverser tous les éléments parents peuvent être coûteux, même pour de petits ensembles d'objets jQuery.</dd>
+				</dl>
+			</dd>
+
+			<dt><code>$.fn.jqmHijackable()</code> (<em>method</em>)</dt>
+			<dd>Pour les utilisateurs souhaitant respecter les éléments parents de <code>data-ajax=false</code> durant la la liaison du formulaire et du lien, jQuery Mobile offre la  méthode de filtrage <code>$.fn.jqmHijackable</code>.</dd>
+			<dd>
+				<dl>
+					<dt><code>·</code> Paramètres :</dt>
+					<dd>Lorsque <code>$.mobile.ignoreContentEnabled</code> est défini à true, cette méthode va traverser les nœuds parents pour chaque élément du DOM dans l'objet jQuery, et où il trouve un parent de <code>data-ajax=false</code>, le fils sera retiré de l'ensemble.</dd>
+					<dt><code>·</code> Avertissement :</dt>
+					<dd>L'opération de traverser tous les éléments parents peuvent être coûteux, même pour de petits ensembles d'objets jQuery.</dd>
+				</dl>
+			</dd>
+
 			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
 			<dd>Voir le message de chargement de page, qui est configurable via $.mobile.loadingMessage.</dd>
 			<dd>
@@ -186,51 +195,51 @@ $.mobile.loadPage( "searchresults.php", {
 			<dd>Exemples :
 			<pre>
 			<code>
-<strong>// Appelle le chargeur de la page</strong> 			
+<strong>//Appelle le chargeur de la page</strong>
 $.mobile.showPageLoadingMsg();
 
-<strong>// utilise le nuancier "b" du thème, un message personnalisé et pas de spinner</strong> 			
-$.mobile.showPageLoadingMsg("b", "This is only a test", true);
+<strong>//utilise le nuancier "b" du thème, un message personnalisé et pas de spinner</strong>
+$.mobile.showPageLoadingMsg("b", "C'est seulement un test", true);
 			</code>
 			</pre>
-			
+
 			</dd>
 
-			
-			
-			
+
+
+
 			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
 			<dd>Masque le message de chargement de page, qui est configurable via $.mobile.loadingMessage.</dd>
-			
+
 			<dd>Exemple :
 			<pre>
 			<code>
-<strong>// cache la page de chargement</strong> 			
-$.mobile.hidePageLoadingMsg();	
+<strong>//cache la page de chargement</strong>
+$.mobile.hidePageLoadingMsg();
 			</code>
 			</pre>
-			
+
 			</dd>
-			
+
 			<dt><code>$.mobile.fixedToolbars.show</code> (<em>method</em>)</dt>
 			<dd>Méthode utile pour afficher l'entête et/ou le bas de page fixes de la page active en cours au sein de la fenêtre. Notez que les entêtes/pieds de page fixes ne sont jamais vraiment caché. Le basculement de l'état afficher/masquer de la barre d'outils est vraiment basculer s'ils sont  oui ou non alignés dans le contenu de la page, ou affichés dans la fenêtre comme s'ils étaient fixes.</dd>
 			<dd>
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>immediately</code> (<em>boolean</em>, facultatif) Si c'est à true, n'importe quel entête ou pied de page fixe pour la page active en cours est affiché immédiatement dans la fenêtre. Si c'est à false ou non défini, l'entête/pied de page fixe apparaîtra avec l'effet fade-in après un délai de 100 millisecondes. Notez que d'autres événements tels que l'événement resize ou scroll du document peut entraîner un délai supplémentaire avant le début de l'animation de l'affichage de l'entête/pied de page.</dd>							
+					<dd><code>immediately</code> (<em>boolean</em>, facultatif) Si c'est à true, n'importe quel entête ou pied de page fixe pour la page active en cours est affiché immédiatement dans la fenêtre. Si c'est à false ou non défini, l'entête/pied de page fixe apparaîtra avec l'effet fade-in après un délai de 100 millisecondes. Notez que d'autres événements tels que l'événement resize ou scroll du document peut entraîner un délai supplémentaire avant le début de l'animation de l'affichage de l'entête/pied de page.</dd>
 				</dl>
 			</dd>
 			<dd>Exemple :
 			<pre>
 			<code>
-<strong>// Affiche entête/pied de page fixe avec une animation fade.</strong> 			
-$.mobile.fixedToolbars.show();	
+<strong>// ffiche entête/pied de page fixe avec une animation fade.</strong>
+$.mobile.fixedToolbars.show();
 
-<strong>// Affiche entête/pied de page fixé immédiatement.</strong>
-$.mobile.fixedToolbars.show(true);	
+<strong>// ffiche entête/pied de page fixé immédiatement.</strong>
+$.mobile.fixedToolbars.show(true);
 			</code>
 			</pre>
-			
+
 			</dd>
 
 			<dt><code>$.mobile.fixedToolbars.hide</code> (<em>method</em>)</dt>
@@ -238,35 +247,35 @@ $.mobile.fixedToolbars.show(true);
 			<dd>
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>immediately</code> (<em>boolean</em>, facultatifl) Si c'est à true, n'importe quelle entête ou pied de page fixé pour la page active en cours est immédiatement placé (après le flux) avec le contenu de la page, ce qui signifie que cela permet de faire défiler avec le contenu et ne sera visible que lorsque vous regardez le haut ou le bas de la page dans la fenêtre. Si c'est à false ou indéterminée, l'entête/pied de page fixe disparaîtra avec l'effet fade-out après un délai de 100 millisecondes. Notez que d'autres événements tels que l'événement resize ou scroll du document peut entraîner un délai supplémentaire avant le début de l'animation du masquage de l'entête/pied de page.</dd>							
+					<dd><code>immediately</code> (<em>boolean</em>, facultatifl) Si c'est à true, n'importe quelle entête ou pied de page fixé pour la page active en cours est immédiatement placé (après le flux) avec le contenu de la page, ce qui signifie que cela permet de faire défiler avec le contenu et ne sera visible que lorsque vous regardez le haut ou le bas de la page dans la fenêtre. Si c'est à false ou indéterminée, l'entête/pied de page fixe disparaîtra avec l'effet fade-out après un délai de 100 millisecondes. Notez que d'autres événements tels que l'événement resize ou scroll du document peut entraîner un délai supplémentaire avant le début de l'animation du masquage de l'entête/pied de page.</dd>
 				</dl>
 			</dd>
 			<dd>Exemple :
 			<pre>
 			<code>
-<strong>// Masque entête/pied de page fixe avec une animation fade.</strong> 			
-$.mobile.fixedToolbars.hide();	
+<strong>// Masque entête/pied de page fixe avec une animation fade.</strong>
+$.mobile.fixedToolbars.hide();
 
 <strong>// Masque entête/pied de page fixe immédiatement.</strong>
-$.mobile.fixedToolbars.hide(true);	
+$.mobile.fixedToolbars.hide(true);
 			</code>
 			</pre>
-			
+
 			</dd>
-            
+
 			<dt><code>$.mobile.path.parseUrl</code> (<em>method</em>)</dt>
 			<dd>Une méthode utile pour analyser une URL et ses variantes relatives à un objet qui rend l'accès à des composants de l'URL facilement. Lors de l'analyse des variantes relatives, l'objet résultant contiendra les valeurs vide pour les composants manquants (comme le protocole, l'hôte, etc...). Aussi, lors de l'analyse des URL qui n'ont pas authority, tels que : urls, la propriété pathname de l'objet contiendra les données après les deux points du protocol/scheme.</dd>
-			
+
 			<dd>
-				
+
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>url</code> (<em>string</em>, obligatoire) Une URL relative ou absolue.</dd>	
-						
+					<dd><code>url</code> (<em>string</em>, obligatoire) Une URL relative ou absolue.</dd>
+
 					<dt><code>·</code> Valeur retournée</dt>
 					<dd>
 						<p>Cette fonction retourne un objet qui contient les différentes composantes de l'URL  de type strings. Les propriétés de l'objet imitent l'objet location du navigateur :</p>
-						<dl>	
+						<dl>
 							<dt><code>hash</code></dt>
 							<dd>Le composant fragment de l'URL, y comprisle caractère de séparation '#'.</dd>
 							<dt><code>host</code></dt>
@@ -283,31 +292,31 @@ $.mobile.fixedToolbars.hide(true);
 							<dd>Le protocole de l'URL, y comprisle caractère de séparation ':'.</dd>
 							<dt><code>search</code></dt>
 							<dd>Le composant query de l'URL y compris le caractère '?'.</dd>
-						</dl>	
+						</dl>
 						<p>Mais il contient aussi des propriétés supplémentaires qui fournissent des accès à des composants supplémentaires ainsi que certains formulaires courant d'URL accès pour les développeurs :</p>
-						<dl>	
-							<dt><code>authority</code></dt>	
-							<dd>Les composants username, password et host de l'URL</dd>	
+						<dl>
+							<dt><code>authority</code></dt>
+							<dd>Les composants username, password et host de l'URL</dd>
 							<dt><code>directory</code></dt>
-							<dd>Le composant directory du chemin d'accès sans le nom du fichier.</dd>	
-							<dt><code>domain</code></dt>	
-							<dd>Les composants protocol et authority de l'URL.</dd>	
-							<dt><code>filename</code></dt>	
-							<dd>Le nom du fichier dans le composant  pathname sans le répertoire.</dd>	
-							<dt><code>hrefNoHash</code></dt>	
-							<dd>L'URL d'origine moins le composant fragment (hash).</dd>	
-							<dt><code>hrefNoSearch</code></dt>	
-							<dd>L'URL d'origine moins les composants query (search) et fragment (hash).</dd>	
-							<dt><code>password</code></dt>	
-							<dd>Le mot de passe contenu dans le composant authority.</dd>	
-							<dt><code>username</code></dt>	
-							<dd>Le nom d'utilisateur contenues dans le composant authority.</dd>	
-						</dl>	
-					</dd>	
-						
+							<dd>Le composant directory du chemin d'accès sans le nom du fichier.</dd>
+							<dt><code>domain</code></dt>
+							<dd>Les composants protocol et authority de l'URL.</dd>
+							<dt><code>filename</code></dt>
+							<dd>Le nom du fichier dans le composant  pathname sans le répertoire.</dd>
+							<dt><code>hrefNoHash</code></dt>
+							<dd>L'URL d'origine moins le composant fragment (hash).</dd>
+							<dt><code>hrefNoSearch</code></dt>
+							<dd>L'URL d'origine moins les composants query (search) et fragment (hash).</dd>
+							<dt><code>password</code></dt>
+							<dd>Le mot de passe contenu dans le composant authority.</dd>
+							<dt><code>username</code></dt>
+							<dd>Le nom d'utilisateur contenues dans le composant authority.</dd>
+						</dl>
+					</dd>
+
 				</dl>
 			</dd>
-			
+
 			<dd>Exemples :
 			<pre>
 			<code>
@@ -334,21 +343,21 @@ $.mobile.fixedToolbars.hide(true);
 var obj = $.mobile.path.parseUrl("http://jblas:password@mycompany.com:8080/mail/inbox?msg=1234");
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.makePathAbsolute</code> (<em>method</em>)</dt>
 			<dd>Méthode utilisée pour convertir le chemin relatif  d'un fichier ou d'un répertoire en absolu.</dd>
 			<dd>
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>relPath</code> (<em>string</em>, obligatoire) un chemin relatif d'un fichier ou d'un répertoire.</dd>	
-					<dd><code>absPath</code> (<em>string</em>, obligatoire) un fichier absolu ou un chemin relatif à utiliser.</dd>	
-						
+					<dd><code>relPath</code> (<em>string</em>, obligatoire) un chemin relatif d'un fichier ou d'un répertoire.</dd>
+					<dd><code>absPath</code> (<em>string</em>, obligatoire) un fichier absolu ou un chemin relatif à utiliser.</dd>
+
 					<dt><code>·</code> Valeur retournée</dt>
-					<dd>Cette fonction retourne une chaîne qui est une version absolue du chemin relatif passé.</dd>	
-						
+					<dd>Cette fonction retourne une chaîne qui est une version absolue du chemin relatif passé.</dd>
+
 				</dl>
 			</dd>
 			<dd>Exemples :
@@ -363,20 +372,20 @@ var absPath = $.mobile.path.makePathAbsolute("../../foo/file.html", "/a/b/c/bar.
 			</code>
 			</pre>
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.makeUrlAbsolute</code> (<em>method</em>)</dt>
 			<dd>Méthode utilisée pour convertir une URL relative en une URL absolue.</dd>
 			<dd>
-				
+
 				<dl>
 					<dt>Arguments</dt>
-					<dd><code>relUrl</code> (<em>string</em>, obligatoire) une URL relative.</dd>	
-					<dd><code>absUrl</code> (<em>string</em>, obligatoire) une URL absolue à utiliser.</dd>	
-						
+					<dd><code>relUrl</code> (<em>string</em>, obligatoire) une URL relative.</dd>
+					<dd><code>absUrl</code> (<em>string</em>, obligatoire) une URL absolue à utiliser.</dd>
+
 					<dt>Valeur retournée</dt>
-					<dd>Cette fonction retourne une chaîne qui est une version absolue de l'URL relative passée à la fonction.</dd>	
-						
+					<dd>Cette fonction retourne une chaîne qui est une version absolue de l'URL relative passée à la fonction.</dd>
+
 				</dl>
 			</dd>
 			<dd>Exemples :
@@ -399,22 +408,22 @@ var absUrl = $.mobile.path.makeUrlAbsolute("#bar", "http://foo.com/a/b/c/test.ht
 
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.isSameDomain</code> (<em>method</em>)</dt>
 			<dd>Méthode utilisé pour comparer le domain de 2 URLs.</dd>
 			<dd>
-				
+
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>url1</code> (<em>string</em>, obligatoire) une URL relative.</dd>	
-					<dd><code>url2</code> (<em>string</em>, obligatoire) une URL absolue à utiliser.</dd>	
-						
+					<dd><code>url1</code> (<em>string</em>, obligatoire) une URL relative.</dd>
+					<dd><code>url2</code> (<em>string</em>, obligatoire) une URL absolue à utiliser.</dd>
+
 					<dt>Valeur retournée</dt>
-					<dd>Cette fonction retourne un booléen à true si les domaines correspondent, sinon false.</dd>	
-						
+					<dd>Cette fonction retourne un booléen à true si les domaines correspondent, sinon false.</dd>
+
 				</dl>
 			</dd>
 			<dd>Exemples :
@@ -434,21 +443,21 @@ var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://bar.
 
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.isRelativeUrl</code> (<em>method</em>)</dt>
 			<dd>Méthode utilisée pour déterminer si une URL est une variante relative.</dd>
 			<dd>
-				
+
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>url</code> (<em>string</em>, obligatoire) Une URL relative ou absolue.</dd>	
-						
+					<dd><code>url</code> (<em>string</em>, obligatoire) Une URL relative ou absolue.</dd>
+
 					<dt><code>·</code> Valeur retournée</dt>
-					<dd>Cette fonction retourne un booléen à true si l'URL est relative, false, si elle est absolue.</dd>	
-						
+					<dd>Cette fonction retourne un booléen à true si l'URL est relative, false, si elle est absolue.</dd>
+
 				</dl>
 			</dd>
 			<dd>Exemples :
@@ -475,21 +484,21 @@ var isRel = $.mobile.path.isRelativeUrl("#foo");
 
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.path.isAbsoluteUrl</code> (<em>method</em>)</dt>
 			<dd>Méthode utiliser pour déterminer si une URL est absolue.</dd>
 			<dd>
-				
+
 				<dl>
 					<dt><code>·</code> Arguments</dt>
-					<dd><code>url</code> (<em>string</em>, obligatoire) Une URL relative ou absolue.</dd>	
-						
+					<dd><code>url</code> (<em>string</em>, obligatoire) Une URL relative ou absolue.</dd>
+
 					<dt><code>·</code> Valeur retournée</dt>
-					<dd>Cette fonction retourne un booléen à true si l'URL est absolue, sinon false.</dd>	
-						
+					<dd>Cette fonction retourne un booléen à true si l'URL est absolue, sinon false.</dd>
+
 				</dl>
 			</dd>
 			<dd>Exemples :
@@ -516,15 +525,15 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 
 			</code>
 			</pre>
-			
+
 			</dd>
-			
-            
+
+
 			<dt><code>$.mobile.base</code> (<em>methods, properties</em>)</dt>
 			<dd>Utilitaires pour travailler avec l'élément de base générée. TODO: document as public API is finalized.</dd>
-			
-			
-			
+
+
+
 			<dt><code>$.mobile.silentScroll</code> (<em>method</em>)</dt>
 			<dd>Faites défiler jusqu'à une position particulière Y, sans déclencher l'écouteurs d'événement de scroll.</dd>
 			<dd>
@@ -533,38 +542,38 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 					<dd><code>yPos</code> (<em>number</em>, defaults to 0). Passez un certain nombre pour faire défiler vers cet emplacement Y.</dd>
 				</dl>
 			</dd>
-			
+
 			<dd>Exemples :
 			<pre>
 			<code>
-<strong>//scroll de 100px</strong> 			
-$.mobile.silentScroll(100);	
+<strong>//scroll de 100px</strong>
+$.mobile.silentScroll(100);
 			</code>
 			</pre>
-			
-			</dd>
-			
 
-			
-			
-			
+			</dd>
+
+
+
+
+
 			<dt><code>$.mobile.activePage</code> (<em>property</em>)</dt>
 			<dd>Référence à la page actuellement en vue.</dd>
-			
-			
-			
-			
-		</dl>			
-	</div><!--/content-secondary -->		
-	
+
+
+
+
+		</dl>
+	</div><!--/content-secondary -->
+
 	<div class="content-secondary">
-		
+
 		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
-			
+
 				<h3>Aussi dans cette rubrique</h3>
-				
+
 				<ul data-role="listview"  data-theme="c" data-dividertheme="d">
-				
+
 					<li data-role="list-divider">API</li>
 					<li><a href="../../docs/api/globalconfig.html">Configuration par défaut</a></li>
 					<li><a href="../../docs/api/events.html">Événements</a></li>
@@ -573,14 +582,14 @@ $.mobile.silentScroll(100);
 					<li><a href="../../docs/api/themes.html">Framework de Théme</a></li>
 				</ul>
 		</div>
-	</div>		
+	</div>
 
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
 		<p>© 2011 The jQuery Project</p>
 </div>
-	
+
 </div><!-- /page -->
 
 </body>
