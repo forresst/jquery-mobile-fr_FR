@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: a4170c4f734098e60969adecf109f83902099a20 <> Date: Tue Feb 21 16:22:58 2012 -0800
+* jQuery Mobile Framework Git Build: SHA1: ec3e602bd2d3389287e7f21636bd18713ccd7fbb <> Date: Wed Feb 22 18:15:53 2012 -0800
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1201,7 +1201,7 @@ $.widget( "mobile.widget", {
 	},
 
 	enhanceWithin: function( target, useKeepNative ) {
-		this.enhance( $(this.options.initSelector, $(target)), useKeepNative );
+		this.enhance( $( this.options.initSelector, $( target )), useKeepNative );
 	},
 
 	enhance: function( targets, useKeepNative ) {
@@ -1417,9 +1417,16 @@ $.widget( "mobile.widget", {
 				.data("page");
 		},
 
-		// TODO not excited about the name here :/
-		// TODO use parentNode traversal to speed things up
 		enhanceable: function( $set ) {
+			return this.haveParents( $set, ":jqmData(enhance='false')" );
+		},
+
+		hijackable: function( $set ) {
+			return this.haveParents( $set, ":jqmData(ajax='false')" );
+		},
+
+		// TODO use parentNode traversal to speed things up
+		haveParents: function( $set, selector ) {
 			if( !$.mobile.ignoreContentEnabled ){
 				return $set;
 			}
@@ -1429,7 +1436,7 @@ $.widget( "mobile.widget", {
 			for( var i = 0; i < count; i++ ) {
 				var $element = $set.eq(i);
 
-				if ( !$element.closest( ":jqmData(enhance='false')").length ) {
+				if ( !$element.closest(selector).length ) {
 					$newSet = $newSet.add( $element );
 				}
 			}
@@ -1495,6 +1502,10 @@ $.widget( "mobile.widget", {
 	// fluent helper function for the mobile namespaced equivalent
 	$.fn.jqmEnhanceable = function() {
 		return $.mobile.enhanceable( this );
+	};
+
+	$.fn.jqmHijackable = function() {
+		return $.mobile.hijackable( this );
 	};
 
 	// Monkey-patching Sizzle to filter the :jqmData selector
@@ -2556,7 +2567,7 @@ $.mobile.transitionFallbacks = {};
 			autofocus.focus();
 			return;
 		}
-		
+
 		if( pageTitle.length ) {
 			pageTitle.focus();
 		}
@@ -3326,10 +3337,15 @@ $.mobile.transitionFallbacks = {};
 		//bind to form submit events, handle with Ajax
 		$( document ).delegate( "form", "submit", function( event ) {
 			var $this = $( this );
+
 			if( !$.mobile.ajaxEnabled ||
-				$this.is( ":jqmData(ajax='false')" ) ) {
-					return;
-				}
+					// test that the form is, itself, ajax false
+					$this.is(":jqmData(ajax='false')") ||
+					// test that $.mobile.ignoreContentEnabled is set and
+					// the form or one of it's parents is ajax=false
+					!$this.jqmHijackable().length ) {
+				return;
+			}
 
 			var type = $this.attr( "method" ),
 				target = $this.attr( "target" ),
@@ -3375,12 +3391,20 @@ $.mobile.transitionFallbacks = {};
 		//add active state on vclick
 		$( document ).bind( "vclick", function( event ) {
 			// if this isn't a left click we don't care. Its important to note
-			// that when the virtual event is generated it will create
-			if ( event.which > 1 || !$.mobile.linkBindingEnabled ){
+			// that when the virtual event is generated it will create the which attr
+			if ( event.which > 1 || !$.mobile.linkBindingEnabled ) {
 				return;
 			}
 
 			var link = findClosestLink( event.target );
+
+			// split from the previous return logic to avoid find closest where possible
+			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+			// can be avoided
+			if ( !$(link).jqmHijackable().length ) {
+				return;
+			}
+
 			if ( link ) {
 				if ( path.parseUrl( link.getAttribute( "href" ) || "#" ).hash !== "#" ) {
 					removeActiveLinkClass( true );
@@ -3402,19 +3426,20 @@ $.mobile.transitionFallbacks = {};
 				return;
 			}
 
-			var link = findClosestLink( event.target );
+			var link = findClosestLink( event.target ), $link = $( link ), httpCleanup;
 
 			// If there is no link associated with the click or its not a left
 			// click we want to ignore the click
-			if ( !link || event.which > 1) {
+			// TODO teach $.mobile.hijackable to operate on raw dom elements so the link wrapping
+			// can be avoided
+			if ( !link || event.which > 1 || !$link.jqmHijackable().length ) {
 				return;
 			}
 
-			var $link = $( link ),
-				//remove active link class if external (then it won't be there if you come back)
-				httpCleanup = function(){
-					window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
-				};
+			//remove active link class if external (then it won't be there if you come back)
+			httpCleanup = function(){
+				window.setTimeout( function() { removeActiveLinkClass( true ); }, 200 );
+			};
 
 			// If there's data cached for the real href value, set the link's href back to it again. This pairs with an address bar workaround from the vclick handler
 			if( $link.jqmData( "href" ) ){
@@ -4508,8 +4533,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	},
 	_create: function() {
 		var $el = this.element.addClass( "ui-collapsible-set" ),
-			o = this.options,
-			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
+			o = this.options;
 
 		// Inherit the theme from collapsible-set
 		if ( !o.theme ) {
@@ -4522,7 +4546,6 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 
 		// Initialize the collapsible set if it's not already initialized
 		if ( !$el.jqmData( "collapsiblebound" ) ) {
-
 			$el
 				.jqmData( "collapsiblebound", true )
 				.bind( "expand collapse", function( event ) {
@@ -4543,32 +4566,42 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 						.closest( ".ui-collapsible" )
 						.siblings( ".ui-collapsible" )
 						.trigger( "collapse" );
-
 				});
-
-			// clean up borders
-			collapsiblesInSet.each( function() {
-				$( this ).find( $.mobile.collapsible.prototype.options.heading )
-					.find( "a" ).first()
-					.add( ".ui-btn-inner" )
-					.removeClass( "ui-corner-top ui-corner-bottom" );
-			});
-
-			collapsiblesInSet.first()
-				.find( "a" )
-					.first()
-					.addClass( "ui-corner-top" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-top" );
-
-			collapsiblesInSet.last()
-				.jqmData( "collapsible-last", true )
-				.find( "a" )
-					.first()
-					.addClass( "ui-corner-bottom" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-bottom" );
 		}
+	},
+
+	_init: function() {
+		this.refresh();
+	},
+
+	refresh: function() {
+		var $el = this.element,
+			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
+
+		$.mobile.collapsible.prototype.enhance( collapsiblesInSet );
+
+		// clean up borders
+		collapsiblesInSet.each( function() {
+			$( this ).find( $.mobile.collapsible.prototype.options.heading )
+				.find( "a" ).first()
+				.add( ".ui-btn-inner" )
+				.removeClass( "ui-corner-top ui-corner-bottom" );
+		});
+
+		collapsiblesInSet.first()
+			.find( "a" )
+				.first()
+				.addClass( "ui-corner-top" )
+				.find( ".ui-btn-inner" )
+					.addClass( "ui-corner-top" );
+
+		collapsiblesInSet.last()
+			.jqmData( "collapsible-last", true )
+			.find( "a" )
+				.first()
+				.addClass( "ui-corner-bottom" )
+				.find( ".ui-btn-inner" )
+					.addClass( "ui-corner-bottom" );
 	}
 });
 

@@ -1,19 +1,19 @@
-<!DOCTYPE html> 
-<html class="ui-mobile-rendering"> 
+<!DOCTYPE html>
+<html class="ui-mobile-rendering">
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Docs jQuery Mobile - Référence de l'attribut de données</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" /> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Référence de l'attribut de données</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/assets/js/jqm-docs.js"></script>
 	<script src="../../js/jquery.mobile.docs.js"></script>
 
-</head> 
-<body> 
+</head>
+<body>
 
 <div data-role="page" class="type-interior">
 
@@ -167,14 +167,20 @@
 			</table>
 
 			<h2><a href="globalconfig.html">Amélioration</a></h2>
-			<p>Conteneur avec <code>data-enhance="false"</code></p>
+			<p>Conteneur avec <code>data-enhance="false"</code> ou <code>data-ajax="false"</code></p>
 			<table>
 				<tr>
 					<th>data-enhance</th>
-					<td>true | false</td>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
+					<th>data-ajax</th>
+					<td><strong>true</strong> | false</td>
 				</tr>
 			</table>
 			<p>Tous les éléments du DOM au sein d'un conteneur avec <code>data-enhance="false"</code>, sauf pour les éléments <code>data-role="page|dialog"</code>, seront ignorés lors de l'amélioration initiale et des événements <code>create</code> ultérieurs à condition que le <code>$.mobile.ignoreContentEnabled</code> soit défini avant l'amélioration (par exemple dans un bind de <code>mobileinit</code>).</p>
+
+			<p>Les éléments d'un lien ou d'un formulaire à l'intérieur des conteneurs <code>data-enhance="false"</code> seront ignorés par la fonctionnalité de navigation du framework lorsque <code>$.mobile.ignoreContentEnabled</code> est défini à true.</p>
 
 			<h2><a href="../forms/docs-forms.html">Conteneur de champ</a></h2>
 			<p>Conteneur avec <code>data-role="fieldcontain"</code> enveloppé autour d'une paire d'élément label/form</p>
@@ -432,7 +438,7 @@
 				<tr>
 					<th>data-theme</th>
 					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td>
-				</tr>	
+				</tr>
 			</table>
 			<p>Plusieurs sélection peuvent être enveloppées dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour les regrouper verticalement. Ajoutez l'attribut <code>data-type="horizontal"</code> pour que les sélections soit côte à côte.</p>
 
@@ -478,7 +484,7 @@
 				</tr>
 			</table>
 
-		</div><!--/content -->		
+		</div><!--/content -->
 
 	<div class="content-secondary">
 
@@ -496,7 +502,7 @@
 					<li><a href="../../docs/api/themes.html">Framework de Théme</a></li>
 				</ul>
 		</div>
-	</div>		
+	</div>
 
 </div><!-- /content -->
 

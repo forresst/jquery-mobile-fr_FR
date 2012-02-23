@@ -187,9 +187,16 @@
 				.data("page");
 		},
 
-		// TODO not excited about the name here :/
-		// TODO use parentNode traversal to speed things up
 		enhanceable: function( $set ) {
+			return this.haveParents( $set, ":jqmData(enhance='false')" );
+		},
+
+		hijackable: function( $set ) {
+			return this.haveParents( $set, ":jqmData(ajax='false')" );
+		},
+
+		// TODO use parentNode traversal to speed things up
+		haveParents: function( $set, selector ) {
 			if( !$.mobile.ignoreContentEnabled ){
 				return $set;
 			}
@@ -199,7 +206,7 @@
 			for( var i = 0; i < count; i++ ) {
 				var $element = $set.eq(i);
 
-				if ( !$element.closest( ":jqmData(enhance='false')").length ) {
+				if ( !$element.closest(selector).length ) {
 					$newSet = $newSet.add( $element );
 				}
 			}
@@ -265,6 +272,10 @@
 	// fluent helper function for the mobile namespaced equivalent
 	$.fn.jqmEnhanceable = function() {
 		return $.mobile.enhanceable( this );
+	};
+
+	$.fn.jqmHijackable = function() {
+		return $.mobile.hijackable( this );
 	};
 
 	// Monkey-patching Sizzle to filter the :jqmData selector

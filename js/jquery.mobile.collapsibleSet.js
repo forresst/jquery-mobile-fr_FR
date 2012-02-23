@@ -6,8 +6,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	},
 	_create: function() {
 		var $el = this.element.addClass( "ui-collapsible-set" ),
-			o = this.options,
-			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
+			o = this.options;
 
 		// Inherit the theme from collapsible-set
 		if ( !o.theme ) {
@@ -20,7 +19,6 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 
 		// Initialize the collapsible set if it's not already initialized
 		if ( !$el.jqmData( "collapsiblebound" ) ) {
-
 			$el
 				.jqmData( "collapsiblebound", true )
 				.bind( "expand collapse", function( event ) {
@@ -41,32 +39,42 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 						.closest( ".ui-collapsible" )
 						.siblings( ".ui-collapsible" )
 						.trigger( "collapse" );
-
 				});
-
-			// clean up borders
-			collapsiblesInSet.each( function() {
-				$( this ).find( $.mobile.collapsible.prototype.options.heading )
-					.find( "a" ).first()
-					.add( ".ui-btn-inner" )
-					.removeClass( "ui-corner-top ui-corner-bottom" );
-			});
-
-			collapsiblesInSet.first()
-				.find( "a" )
-					.first()
-					.addClass( "ui-corner-top" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-top" );
-
-			collapsiblesInSet.last()
-				.jqmData( "collapsible-last", true )
-				.find( "a" )
-					.first()
-					.addClass( "ui-corner-bottom" )
-						.find( ".ui-btn-inner" )
-							.addClass( "ui-corner-bottom" );
 		}
+	},
+
+	_init: function() {
+		this.refresh();
+	},
+
+	refresh: function() {
+		var $el = this.element,
+			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
+
+		$.mobile.collapsible.prototype.enhance( collapsiblesInSet );
+
+		// clean up borders
+		collapsiblesInSet.each( function() {
+			$( this ).find( $.mobile.collapsible.prototype.options.heading )
+				.find( "a" ).first()
+				.add( ".ui-btn-inner" )
+				.removeClass( "ui-corner-top ui-corner-bottom" );
+		});
+
+		collapsiblesInSet.first()
+			.find( "a" )
+				.first()
+				.addClass( "ui-corner-top" )
+				.find( ".ui-btn-inner" )
+					.addClass( "ui-corner-top" );
+
+		collapsiblesInSet.last()
+			.jqmData( "collapsible-last", true )
+			.find( "a" )
+				.first()
+				.addClass( "ui-corner-bottom" )
+				.find( ".ui-btn-inner" )
+					.addClass( "ui-corner-bottom" );
 	}
 });
 

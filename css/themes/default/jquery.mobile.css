@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: a4170c4f734098e60969adecf109f83902099a20 <> Date: Tue Feb 21 16:22:58 2012 -0800
+* jQuery Mobile Framework Git Build: SHA1: ec3e602bd2d3389287e7f21636bd18713ccd7fbb <> Date: Wed Feb 22 18:15:53 2012 -0800
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -753,8 +753,13 @@ a.ui-link-inherit {
 }
 .ui-disabled,
 .ui-disabled a {
+	cursor: default !important;
 	pointer-events: none;
-	cursor: default;
+}
+.ui-disabled .ui-btn-text {
+	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=30)";
+	filter: alpha(opacity=30);
+	zoom: 1;
 }
 .ui-icon,
 .ui-icon-searchfield:after {
@@ -1025,8 +1030,8 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 .ui-loading .ui-loader { display: block; }
 .ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; box-shadow: 0 1px 1px -1px #fff; left: 50%; border:0; }
-.ui-loader-default { background: none; opacity: .18; width: 46px; height: 46px; margin-left: -18px; margin-top: -18px; }
-.ui-loader-verbose { width: 200px; opacity: .88; height: auto; margin-left: -110px; padding: 10px; }
+.ui-loader-default { background: none; opacity: .18; width: 46px; height: 46px; margin-left: -23px; margin-top: -23px; }
+.ui-loader-verbose { width: 200px; opacity: .88; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
 .ui-loader-default h1 { font-size: 0; width: 0; height: 0; overflow: hidden; }
 .ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
 .ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 44px; height: 44px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
