@@ -108,7 +108,7 @@ dd h4 { margin:15px 0 0 0; }
 	background: 			#74b042;
 	color: 					#fff;
 	font-weight: bold;
-	text-shadow: 0 -1px 1px #234403;	
+	text-shadow: 0 1px 1px #335413;	
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#74b042), to(#56A00E)); 
 	background-image: -webkit-linear-gradient(#74b042, #56A00E); 
 	background-image:    -moz-linear-gradient(#74b042, #56A00E); 
@@ -136,7 +136,7 @@ dd h4 { margin:15px 0 0 0; }
 	background: 			#56A00E;
 	font-weight: bold;
 	color: 					#fff;
-	text-shadow: 0 -1px 1px #234403;
+	text-shadow: 0 1px 1px #234403;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#74b042), to(#56A00E)); 
 	background-image: -webkit-linear-gradient(#74b042, #56A00E); 
 	background-image:    -moz-linear-gradient(#74b042, #56A00E); 
@@ -152,7 +152,7 @@ dd h4 { margin:15px 0 0 0; }
 	background: 			#6EBC1F;
 	font-weight: bold;
 	color: 					#fff;
-	text-shadow: 0 -1px 1px #234403;
+	text-shadow: 0 1px 1px #234403;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#8FC963), to(#6EBC1F)); 
 	background-image: -webkit-linear-gradient(#8FC963, #6EBC1F); 
 	background-image:    -moz-linear-gradient(#8FC963, #6EBC1F); 
@@ -168,7 +168,7 @@ dd h4 { margin:15px 0 0 0; }
 	background: 			#3d3d3d;
 	font-weight: bold;
 	color: 					#fff;
-	text-shadow: 0 -1px 1px #234403;
+	text-shadow: 0 1px 1px #234403;
 	background-image: -webkit-gradient(linear, left top, left bottom, from(#56A00E), to(#64A234)); 
 	background-image: -webkit-linear-gradient(#56A00E, #64A234); 
 	background-image:    -moz-linear-gradient(#56A00E, #64A234); 

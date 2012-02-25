@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: ec3e602bd2d3389287e7f21636bd18713ccd7fbb <> Date: Wed Feb 22 18:15:53 2012 -0800
+* jQuery Mobile Framework Git Build: SHA1: 0a90d8e80ccf12c0a4a48cb203d17fb643f9b7f9 <> Date: Fri Feb 24 22:53:42 2012 -0800
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1418,25 +1418,39 @@ $.widget( "mobile.widget", {
 		},
 
 		enhanceable: function( $set ) {
-			return this.haveParents( $set, ":jqmData(enhance='false')" );
+			return this.haveParents( $set, "enhance" );
 		},
 
 		hijackable: function( $set ) {
-			return this.haveParents( $set, ":jqmData(ajax='false')" );
+			return this.haveParents( $set, "ajax" );
 		},
 
-		// TODO use parentNode traversal to speed things up
-		haveParents: function( $set, selector ) {
+		haveParents: function( $set, attr ) {
 			if( !$.mobile.ignoreContentEnabled ){
 				return $set;
 			}
 
-			var count = $set.length, $newSet = $();
+			var count = $set.length,
+				$newSet = $(),
+				e, $element, excluded;
 
-			for( var i = 0; i < count; i++ ) {
-				var $element = $set.eq(i);
+			for ( var i = 0; i < count; i++ ) {
+				$element = $set.eq( i );
+				excluded = false;
+				e = $set[ i ];
 
-				if ( !$element.closest(selector).length ) {
+				while ( e ) {
+					var c = e.getAttribute ? e.getAttribute( "data-" + $.mobile.ns + attr ) : "";
+
+					if ( c === "false" ) {
+						excluded = true;
+						break;
+					}
+
+					e = e.parentNode;
+				}
+
+				if ( !excluded ) {
 					$newSet = $newSet.add( $element );
 				}
 			}
@@ -4578,7 +4592,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		var $el = this.element,
 			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
 
-		$.mobile.collapsible.prototype.enhance( collapsiblesInSet );
+		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
 
 		// clean up borders
 		collapsiblesInSet.each( function() {
@@ -7289,29 +7303,15 @@ $( document ).bind( "pagecreate create", function( e ){
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $dialogs, $pages = $( ":jqmData(role='page')" );
-
-			// if no pages are found, check for dialogs or create one with body's inner html
+			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" );
+			
+			// if no pages are found, create one with body's inner html
 			if ( !$pages.length ) {
-				$dialogs = $( ":jqmData(role='dialog')" );
-
-				// if there are no pages but a dialog is present, load it as a page
-				if( $dialogs.length ) {
-					// alter the attribute so it will be treated as a page unpon enhancement
-					// TODO allow for the loading of a dialog as the first page (many considerations)
-					$dialogs.first().attr( "data-" + $.mobile.ns + "role", "page" );
-
-					// remove the first dialog from the set of dialogs since it's now a page
-					// add it to the empty set of pages to be loaded by the initial changepage
-					$pages = $pages.add( $dialogs.get().shift() );
-				} else {
-					$pages = $( "body" ).wrapInner( "<div data-" + $.mobile.ns + "role='page'></div>" ).children( 0 );
-				}
+				$pages = $( "body" ).wrapInner( "<div data-" + $.mobile.ns + "role='page'></div>" ).children( 0 );
 			}
-
-
+			
 			// add dialogs, set data-url attrs
-			$pages.add( ":jqmData(role='dialog')" ).each(function() {
+			$pages.each(function() {
 				var $this = $(this);
 
 				// unless the data url is already set set it to the pathname
