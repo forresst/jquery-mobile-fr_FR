@@ -1077,7 +1077,7 @@ define( [
 		settings.reverse = settings.reverse || historyDir < 0;
 
 		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
-			.done(function( name, reverse, $to, $from ) {
+			.done(function( name, reverse, $to, $from, alreadyFocused ) {
 				removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
@@ -1085,14 +1085,13 @@ define( [
 					settings.duplicateCachedPage.remove();
 				}
 
-				//remove initial build class (only present on first pageshow)
-				$html.removeClass( "ui-mobile-rendering" );
-
 				// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
 				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965
 				// https://github.com/jquery/jquery-mobile/issues/2965
-				$.mobile.focusPage( toPage );
+				if( !alreadyFocused ){
+					$.mobile.focusPage( toPage );
+				}
 
 				releasePageTransitionLock();
 
@@ -1384,7 +1383,7 @@ define( [
 
 				// If current active page is not a dialog skip the dialog and continue
 				// in the same direction
-				if(!$.mobile.activePage.is( ".ui-dialog-page" )) {
+				if(!$.mobile.activePage.is( ".ui-dialog" )) {
 					//determine if we're heading forward or backward and continue accordingly past
 					//the current dialog
 					urlHistory.directHashChange({
