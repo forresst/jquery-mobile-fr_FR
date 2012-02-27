@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 0a90d8e80ccf12c0a4a48cb203d17fb643f9b7f9 <> Date: Fri Feb 24 22:53:42 2012 -0800
+* jQuery Mobile Framework Git Build: SHA1: 818c2f219ef1bff97f4596aaf6c005fd8f7a2b44 <> Date: Mon Feb 27 19:12:54 2012 +0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -2154,6 +2154,9 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 			if( !none ){
 				$to.animationComplete( doneIn );
 			}
+			
+			// Send focus to page as it is now display: block
+			$.mobile.focusPage( $to );
 
 			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
 			$to.height( screenHeight + toScroll );
@@ -2174,7 +2177,7 @@ function outInTransitionHandler( name, reverse, $to, $from ) {
 				.height( "" )
 				.parent().removeClass( viewportClass );
 
-			deferred.resolve( name, reverse, $to, $from );
+			deferred.resolve( name, reverse, $to, $from, true );
 		};
 		
 	$to
@@ -3272,7 +3275,7 @@ $.mobile.transitionFallbacks = {};
 		settings.reverse = settings.reverse || historyDir < 0;
 
 		transitionPages( toPage, fromPage, settings.transition, settings.reverse )
-			.done(function( name, reverse, $to, $from ) {
+			.done(function( name, reverse, $to, $from, alreadyFocused ) {
 				removeActiveLinkClass();
 
 				//if there's a duplicateCachedPage, remove it from the DOM now that it's hidden
@@ -3280,14 +3283,13 @@ $.mobile.transitionFallbacks = {};
 					settings.duplicateCachedPage.remove();
 				}
 
-				//remove initial build class (only present on first pageshow)
-				$html.removeClass( "ui-mobile-rendering" );
-
 				// Send focus to the newly shown page. Moved from promise .done binding in transitionPages
 				// itself to avoid ie bug that reports offsetWidth as > 0 (core check for visibility)
 				// despite visibility: hidden addresses issue #2965
 				// https://github.com/jquery/jquery-mobile/issues/2965
-				$.mobile.focusPage( toPage );
+				if( !alreadyFocused ){
+					$.mobile.focusPage( toPage );
+				}
 
 				releasePageTransitionLock();
 
@@ -3579,7 +3581,7 @@ $.mobile.transitionFallbacks = {};
 
 				// If current active page is not a dialog skip the dialog and continue
 				// in the same direction
-				if(!$.mobile.activePage.is( ".ui-dialog-page" )) {
+				if(!$.mobile.activePage.is( ".ui-dialog" )) {
 					//determine if we're heading forward or backward and continue accordingly past
 					//the current dialog
 					urlHistory.directHashChange({
@@ -3932,10 +3934,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			headerCloseButton = $( "<a href='#' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" ),
 			dialogWrap = $("<div/>", {
 					"role" : "dialog",
-					"class" : "ui-dialog ui-corner-all ui-overlay-shadow"
+					"class" : "ui-dialog-contain ui-corner-all ui-overlay-shadow"
 				});
 
-		$el.addClass( "ui-dialog-page ui-overlay-" + this.options.overlayTheme );
+		$el.addClass( "ui-dialog ui-overlay-" + this.options.overlayTheme );
 		
 		// Class the markup for dialog styling
 		// Set aria role
@@ -3983,7 +3985,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			// if there's an overlay theme, we're going to remove it from the page container.
 			// First though, check that the incoming page isn't a dialog with the same theme. If so, don't remove.
 			if( self.options.overlayTheme ){
-				if( !ui.nextPage || !ui.nextPage.is( ".ui-dialog-page.ui-overlay-" + self.options.overlayTheme ) ){
+				if( !ui.nextPage || !ui.nextPage.is( ".ui-dialog.ui-overlay-" + self.options.overlayTheme ) ){
 					$.mobile.pageContainer.removeClass( "ui-overlay-" + self.options.overlayTheme );
 				}	
 			}
@@ -7236,8 +7238,12 @@ $( document ).bind( "pagecreate create", function( e ){
 		$.mobile.ajaxEnabled = false;
 	}
 
-	// add mobile, initial load "rendering" classes to docEl
+	// Add mobile, initial load "rendering" classes to docEl
 	$html.addClass( "ui-mobile ui-mobile-rendering" );
+	
+	// This is a fallback. If anything goes wrong (JS errors, etc), or events don't fire, 
+	// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
+	setTimeout( hideRenderingClass, 5000 );
 
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
@@ -7263,6 +7269,11 @@ $( document ).bind( "pagecreate create", function( e ){
 				.unbind( "scroll", checkLoaderPosition )
 				.bind( "scroll", fakeFixLoader );
 		}
+	}
+	
+	//remove initial build class (only present on first pageshow)
+	function hideRenderingClass(){
+		$html.removeClass( "ui-mobile-rendering" );
 	}
 	
 
@@ -7332,6 +7343,9 @@ $( document ).bind( "pagecreate create", function( e ){
 
 			// cue page loading message
 			$.mobile.showPageLoadingMsg();
+			
+			//remove initial build class (only present on first pageshow)
+			hideRenderingClass();
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ) {

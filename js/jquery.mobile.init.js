@@ -19,8 +19,12 @@
 		$.mobile.ajaxEnabled = false;
 	}
 
-	// add mobile, initial load "rendering" classes to docEl
+	// Add mobile, initial load "rendering" classes to docEl
 	$html.addClass( "ui-mobile ui-mobile-rendering" );
+	
+	// This is a fallback. If anything goes wrong (JS errors, etc), or events don't fire, 
+	// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
+	setTimeout( hideRenderingClass, 5000 );
 
 	// loading div which appears during Ajax requests
 	// will not appear if $.mobile.loadingMessage is false
@@ -46,6 +50,11 @@
 				.unbind( "scroll", checkLoaderPosition )
 				.bind( "scroll", fakeFixLoader );
 		}
+	}
+	
+	//remove initial build class (only present on first pageshow)
+	function hideRenderingClass(){
+		$html.removeClass( "ui-mobile-rendering" );
 	}
 	
 
@@ -115,6 +124,9 @@
 
 			// cue page loading message
 			$.mobile.showPageLoadingMsg();
+			
+			//remove initial build class (only present on first pageshow)
+			hideRenderingClass();
 
 			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
 			if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ) {

@@ -51,6 +51,7 @@
 }
 .ui-overlay-a {
 	background-image: none;
+	border-width: 0;
 }
 .ui-body-a,
 .ui-body-a input,
@@ -181,6 +182,7 @@
 }
 .ui-overlay-b {
 	background-image: none;
+	border-width: 0;
 }
 .ui-body-b,
 .ui-body-b input,
@@ -310,6 +312,7 @@
 }
 .ui-overlay-c {
 	background-image: none;
+	border-width: 0;
 }
 .ui-body-c,
 .ui-body-c input,
@@ -438,6 +441,7 @@
 }
 .ui-overlay-d {
 	background-image: none;
+	border-width: 0;
 }
 .ui-body-d,
 .ui-body-d input,
@@ -567,6 +571,7 @@
 }
 .ui-overlay-e {
 	background-image: none;
+	border-width: 0;
 }
 .ui-body-e,
 .ui-body-e input,
