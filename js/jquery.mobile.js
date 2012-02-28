@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 818c2f219ef1bff97f4596aaf6c005fd8f7a2b44 <> Date: Mon Feb 27 19:12:54 2012 +0700
+* jQuery Mobile Framework Git Build: SHA1: 57aff2fe7823b4818919acbc402018881bb9afce <> Date: Tue Feb 28 13:28:57 2012 +0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1236,7 +1236,7 @@ $.widget( "mobile.widget", {
 	$.mobile = $.extend( {}, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.1pre",
+		version: "1.1.0-rc.1",
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -5819,9 +5819,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options;
 
+        domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
+		domHandle.setAttribute('href','#');
 		domSlider.appendChild(domHandle);
 
 		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
@@ -5925,7 +5927,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			self.refresh( event );
 			return false;
-		});
+		})
+		.bind( "vclick", false );
 
 		slider.add( document )
 			.bind( "vmouseup", function() {
@@ -6936,7 +6939,8 @@ $( document ).bind( "pagecreate create", function( e ){
 			// The following function serves to rule out some popular browsers with known fixed-positioning issues
 			// This is a plugin option like any other, so feel free to improve or overwrite it
 			supportBlacklist: function(){
-				var ua = navigator.userAgent,
+				var w = window,
+					ua = navigator.userAgent,
 					platform = navigator.platform,
 					// Rendering engine is Webkit, and capture major version
 					wkmatch = ua.match( /AppleWebKit\/([0-9]+)/ ),
@@ -6944,9 +6948,10 @@ $( document ).bind( "pagecreate create", function( e ){
 					ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
 					ffversion = !!ffmatch && ffmatch[ 1 ],
 					operammobilematch = ua.match( /Opera Mobile\/([0-9]+)/ ),
-					omversion = !!operammobilematch && operammobilematch[ 1 ],
-					w = window;
-
+					bbmatch = w.blackberry && w.navigator.appVersion.match( /Version\/([0-9]+)/ ),
+					bbversion = !!bbmatch && parseInt( bbmatch[ 1 ], 10 ),
+					omversion = !!operammobilematch && operammobilematch[ 1 ];
+					
 				if(
 					// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
 					( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 )
@@ -6964,6 +6969,9 @@ $( document ).bind( "pagecreate create", function( e ){
 					||
 					// WebOS less than 3
 					( "palmGetResource" in window && wkversion && wkversion < 534 )
+					||
+					// BlackBerry six and below.
+					( w.blackberry && bbversion < 7 )
 					||
 					// MeeGo
 					( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 )
