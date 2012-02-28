@@ -30,19 +30,20 @@
 
 			<h2>La structure d'une page mobile</h2> 
 
-			<p>Un site jQuery Mobile doit commencer par un 'doctype' HTML5 pour profiter pleinement de toutes les fonctionnalités du framework. (Les anciens appareils possédant des navigateurs qui ne comprennent pas le HTML5 vont ignorer le 'doctype' et divers attributs personnalisés.) Dans le 'head', les références pour jQuery, jQuery Mobile et le CSS du thème mobile sont tous nécessaires pour démarrer les choses. Nous recommandons un lien vers les fichiers hébergés sur le CDN de jQuery pour de meilleures performances :</p> 
+			<p>Un site jQuery Mobile doit commencer par un 'doctype' HTML5 pour profiter pleinement de toutes les fonctionnalités du framework. (Les anciens appareils possédant des navigateurs qui ne comprennent pas le HTML5 vont ignorer le 'doctype' et divers attributs personnalisés.) </p>
+			<p>Dans le 'head', les références pour jQuery, jQuery Mobile et le CSS du thème mobile sont tous nécessaires pour démarrer les choses. jQuery Mobile 1.1 fonctionne avec les versions 1.6.4 et 1.7.1 de jQuery. Nous recommandons un lien vers les fichiers hébergés sur le CDN de jQuery pour de meilleures performances : </p>
 
 <pre><code>
-&lt;!DOCTYPE html&gt; 
+<strong>&lt;!DOCTYPE html&gt; </strong>
 &lt;html&gt; 
 	&lt;head&gt; 
 	&lt;title&gt;Titre de la page&lt;/title&gt; 
 	
 	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt; 
 
-	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" /&gt;
-	&lt;script src="http://code.jquery.com/jquery-1.6.4.min.js"&gt;&lt;/script&gt;
-	&lt;script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"&gt;&lt;/script&gt;
+	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" /&gt;
+	&lt;script src="http://code.jquery.com/jquery-1.7.1.min.js"&gt;&lt;/script&gt;
+	&lt;script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"&gt;&lt;/script&gt;
 &lt;/head&gt; 
 
 &lt;body&gt; 
@@ -92,9 +93,9 @@
 	
 	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt; 
 
-	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.css" /&gt;
-	&lt;script src="http://code.jquery.com/jquery-1.6.4.min.js"&gt;&lt;/script&gt;
-	&lt;script src="http://code.jquery.com/mobile/1.0/jquery.mobile-1.0.min.js"&gt;&lt;/script&gt;
+	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.css" /&gt;
+	&lt;script src="http://code.jquery.com/jquery-1.7.1.min.js"&gt;&lt;/script&gt;
+	&lt;script src="http://code.jquery.com/mobile/1.1.0-rc.1/jquery.mobile-1.1.0-rc.1.min.js"&gt;&lt;/script&gt;
 &lt;/head&gt; 
 &lt;body&gt; 
 
@@ -215,7 +216,7 @@
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>© 2011 The jQuery Project</p>
+					<p>© 2011-12 The jQuery Project</p>
 			</div>
 
 			</div><!-- /page -->

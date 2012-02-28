@@ -67,9 +67,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options;
 
+        domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
+		domHandle.setAttribute('href','#');
 		domSlider.appendChild(domHandle);
 
 		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
@@ -173,7 +175,8 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			self.refresh( event );
 			return false;
-		});
+		})
+		.bind( "vclick", false );
 
 		slider.add( document )
 			.bind( "vmouseup", function() {
