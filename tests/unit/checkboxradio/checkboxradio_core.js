@@ -88,11 +88,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.last()[0].getAttribute( 'checked' ) == "checked" );
+				ok( $radioBtns.last().prop( 'checked' ), "last input is checked" );
 				ok( $radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is an active button" );
 
-				ok( $radioBtns.first()[0].getAttribute( 'checked' ) !== "checked" );
+				ok( !$radioBtns.first().prop( 'checked' ), "first input label is not active" );
 				ok( !$radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is not active" );
 
@@ -102,11 +102,11 @@
 			},
 
 			function(){
-				ok( $radioBtns.first()[0].getAttribute( 'checked' ) == "checked");
+				ok( $radioBtns.first().prop( 'checked' ));
 				ok( $radioBtns.first().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"first input label is an active button" );
 
-				ok( $radioBtns.last()[0].getAttribute( 'checked' ) !== "checked");
+				ok( !$radioBtns.last().prop( 'checked' ));
 				ok( !$radioBtns.last().siblings( 'label' ).hasClass( 'ui-radio-on' ),
 					"last input label is not active" );
 
@@ -181,5 +181,62 @@
 				start();
 			}
 		], 2000);
+	});
+
+
+	test( "theme should be inherited", function() {
+		var $inherited = $( "#checkbox-inherit-theme" ),
+		    $explicit = $( "#checkbox-explicit-theme" );
+
+		ok( $inherited.siblings("label").hasClass( "ui-btn-up-a" ), "should inherit from page" );
+		ok( $explicit.siblings("label").hasClass( "ui-btn-up-b" ), "should not inherit" );
+	});
+
+	asyncTest( "form submission should include radio button values", function() {
+		var $form = $( "#radio-form" ), $input = $form.find("input").first();
+
+		$.testHelper.pageSequence([
+			function() {
+				$input.click();
+				$form.submit();
+			},
+
+			function( timeout ){
+				ok( location.search.indexOf("radio1=1") >= 0, "the radio was checked" );
+
+				// if the changepage in the previous function failed don't go back
+				if( !timeout ){
+					window.history.back();
+				}
+			},
+
+			function(){
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "form submission should include checkbox button values", function() {
+		var $form = $( "#check-form" ), $inputs = $form.find("input");
+
+		$.testHelper.pageSequence([
+			function() {
+				$inputs.click();
+				$form.submit();
+			},
+
+			function( timeout ){
+				ok( location.search.indexOf("checkbox-form=on") >= 0, "the first checkbox was checked" );
+				ok( location.search.indexOf("checkbox-form-2=on") >= 0, "the second checkbox was checked" );
+				// if the changepage in the previous function failed don't go back
+				if( !timeout ){
+					window.history.back();
+				}
+			},
+
+			function(){
+				start();
+			}
+		]);
 	});
 })(jQuery);
