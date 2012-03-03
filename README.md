@@ -66,7 +66,7 @@ Si vous pensez que vous avez trouvé un bug, s'il vous plaît reportez le en sui
         * [jsfiddle](http://jsfiddle.net)
 3. Soumettez le problème.
 
-Recommandé: [modèle de ticket JS Bin avec les instructions](http://jsbin.com/obowiw/edit)
+Recommandé: [modèle de ticket JS Bin avec les instructions](http://jsbin.com/omacox/edit)
 
 Soumettre des correctifs
 ========================
