@@ -31,8 +31,8 @@
 
 			<ul> 
 				<li>Il tire parti des <strong>propriétés CSS3</strong> pour ajouter des coins arrondis, des ombres aux boites et aux textes et des gradients à la place des images, permettant que le fichier de thème soit très léger et en réduisant les requêtes au serveur.</li>
-				<li>Les thèmes comprennent plusieurs <strong>"échantillons" de couleur</strong> - Composées chacune d'une barre d'en-tête, d'un corps de contenu et les états du bouton qui peuvent être librement mélangés et combinés pour créer la texture visuelle - pour rendre  le design le plus riche possible.</li> 
-				<li><strong>La thématisation ouverte</strong> permet jusqu'à 26 échantillons uniques par thème, à ajouter de la variété quasi illimitée aux conceptions.</li> 
+				<li>Les thèmes comprennent plusieurs <strong>"nuanciers" de couleur</strong> - Composées chacune d'une barre d'en-tête, d'un corps de contenu et les états du bouton qui peuvent être librement mélangés et combinés pour créer la texture visuelle - pour rendre  le design le plus riche possible.</li> 
+				<li><strong>La thématisation ouverte</strong> permet jusqu'à 26 nuanciers uniques par thème, à ajouter de la variété quasi illimitée aux conceptions.</li> 
 				<li>Tous les contextes utilisent maintenant <strong>les gradients CSS3</strong> pour réduire considérablement la taille du fichier et le nombre de requêtes au serveur.</li> 
 				<li>Un <strong>ensemble d'icône simplifiée</strong> incluant ceux les plus couramment utilisés pour le mobile, dans un sprite pour réduire le poids de l'image.</li> 
 			</ul>
@@ -41,13 +41,13 @@
 		<a href="http://www.jquerymobile.com/themeroller" rel="external"><img src="../_assets/images/themroller-mobile-logo.png" width="250" style="float:right; margin-left:25px;" alt="Logo Mobile du Themroller"></a>
 		La meilleure façon de créer des thèmes personnalisés, c'est avec <a href="http://www.jquerymobile.com/themeroller" rel="external">l'outil Themeroller</a>. Il vous permet de créer un thème, puis de télécharger un fichier CSS personnalisé qui est prêt à être déposé dans votre projet.
 		
-		<h2>Thèmes &amp; échantillons</h2>
+		<h2>Thèmes &amp; nuanciers</h2>
 		
 		<p>La clé du système des thèmes est la séparation de la couleur et de la texture, grâce à des styles structuraux qui définissent les choses comme la marge et les dimensions. Cela permet que les textures et les couleurs du thème soient définies une fois dans la feuille de style et soient mélangées, appariées et combinées pour obtenir un large éventail d'effets visuels. </p>
 		
-		<p>Chaque thème comprend plusieurs paramètres globaux, y compris la famille de police, les ombres portées pour les superpositions et les valeurs du rayon du coin pour les boutons et les boîtes. En outre, le thème peut inclure plusieurs "échantillons" de couleur, chacun avec des valeurs de couleur pour les barres, les blocs de contenu, les éléments de liste et de bouton et la police <code>text-shadow</code>. </p>
+		<p>Chaque thème comprend plusieurs paramètres globaux, y compris la famille de police, les ombres portées pour les superpositions et les valeurs du rayon du coin pour les boutons et les boîtes. En outre, le thème peut inclure plusieurs "nuanciers" de couleur, chacun avec des valeurs de couleur pour les barres, les blocs de contenu, les éléments de liste et de bouton et la police <code>text-shadow</code>. </p>
 		
-		<p>Le thème par défaut de jQuery Mobile comprend 5 échantillons qui sont donnés par des lettres (a, b, c, d, e) pour une référence rapide. Pour faire la cartographie des échantillons de couleur uniforme dans nos widgets, nous avons suivi la convention que l'échantillon "a" est le plus haut niveau de priorité visuelle (noir dans notre thème par défaut), "b" est de niveau secondaire (bleu) et "c" est le niveau de référence (gris) que nous utilisons par défaut dans de nombreuses situations, "d" pour un autre niveau secondaire et "e" comme un échantillon d'accent. Les thèmes peuvent avoir des échantillons supplémentaires pour les couleurs d'accent ou des situations spécifiques. Par exemple, vous pouvez ajouter un nouvel échantillon "f" qui a une barre et un bouton rouge pour une utilisation dans des situations d'erreur. </p>
+		<p>Le thème par défaut de jQuery Mobile comprend 5 nuanciers qui sont donnés par des lettres (a, b, c, d, e) pour une référence rapide. Pour faire la cartographie des nuanciers de couleur uniforme dans nos widgets, nous avons suivi la convention que le nuancier "a" est le plus haut niveau de priorité visuelle (noir dans notre thème par défaut), "b" est de niveau secondaire (bleu) et "c" est le niveau de référence (gris) que nous utilisons par défaut dans de nombreuses situations, "d" pour un autre niveau secondaire et "e" comme un nuancier pour mettre en valeur. Les thèmes peuvent avoir des nuanciers supplémentaires pour des couleurs de mise en valeur ou des situations spécifiques. Par exemple, vous pouvez ajouter un nouveau nuancier "f" qui a une barre et un bouton rouge pour une utilisation dans des situations d'erreur. </p>
 		
 		<p>La plupart des changements de thème peuvent être fait en utilisant Themeroller, mais c'est aussi simple de modifier manuellement les nuanciers de base dans le thème par défaut et/ ou d'ajouter des nuanciers supplémentaires en éditant le fichier css du thème. Il suffit de copier un bloc de styles swatch, renommer les classes avec le nom de la nouvelle lettre du nuancier et de régler les couleurs comme bon vous semble.</p>
 		
@@ -63,12 +63,12 @@
 			<div class="ui-bar ui-bar-e">Barre E - <a href="#" data-role="none" class="ui-link">Link</a></div>
 		</div><!-- end swatch-bars -->
 		
-		<p>Par défaut, le cadre assigne l'échantillon "a" à toutes les en-têtes et pieds de page, parce que ce sont généralement de haute priorité de donnée visuelle dans une application. Pour définir la couleur d'une barre d'une couleur différente de l'échantillon, ajoutez simplement l'attribut <code>data-theme</code> à votre entête ou un pied de page et spécifiez une lettre d'échantillon différent ('b' ou 'd', par exemple) et la couleur de l'échantillon du thème indiqué sera appliquée. En savoir plus sur la <a href="../toolbars/bars-themes.html">barre d'outil de thématisation</a>.</p>
+		<p>Par défaut, le cadre assigne le nuancier "a" à toutes les en-têtes et pieds de page, parce que ce sont généralement de haute priorité de donnée visuelle dans une application. Pour définir la couleur d'une barre d'une couleur différente du nuancier, ajoutez simplement l'attribut <code>data-theme</code> à votre entête ou un pied de page et spécifiez une lettre de nuancier différent ('b' ou 'd', par exemple) et la couleur du nuancier du thème indiqué sera appliquée. En savoir plus sur la <a href="../toolbars/bars-themes.html">barre d'outil de thématisation</a>.</p>
 		
 		
 		
 		<h3>Blocs de contenu</h3>
-		<p>Le thème par défaut inclut également des valeurs d'échantillon de couleur pour une utilisation dans des blocs de contenu, conçu pour être coordonner avec les échantillons de couleur de l'en-tête dans le thème. </p>
+		<p>Le thème par défaut inclut également des valeurs de nuancier de couleur pour une utilisation dans des blocs de contenu, conçu pour être coordonner avec les nuanciers de couleur de l'entête dans le thème. </p>
 		
 		<div class="swatch-preview">	
 			<div class="ui-body ui-body-a">Bloc A - <a href="#">Link</a></div>
@@ -110,7 +110,7 @@
 		
 
 		<h2>Listes &amp; Boutons</h2>
-		<p>Chaque échantillon inclut également des styles par défaut pour des éléments interactifs comme les éléments de liste et les boutons.</p>
+		<p>Chaque nuancier inclut également des styles par défaut pour des éléments interactifs comme les éléments de liste et les boutons.</p>
 		<ul data-role="listview" data-inset="true" data-theme="a">
 			<li><a href="index.html">Élément de liste</a></li>
 			<li><a href="index.html">Élément de liste</a></li>
@@ -137,7 +137,7 @@
 		</ul>
 		
 		
-		<p>Un bouton est inclus pour chaque échantillon dans le thème. Chaque bouton possède des styles pour les états normal, hover/focus et pressed.</p>
+		<p>Un bouton est inclus pour chaque nuancier dans le thème. Chaque bouton possède des styles pour les états normal, hover/focus et pressed.</p>
 		
 		<div class="swatch-preview">
 			<a href="index.html" data-role="button" data-theme="a" data-icon="arrow-l">Button A</a>
@@ -148,7 +148,7 @@
 		</div><!-- end swatch-bars -->
 		
 		
-		<p>Par défaut, n'importe quel bouton qui est placé dans une barre est attribué automatiquement  à une lettre de l'échantillon qui correspond à la barre ou la boîte de contenu de son parent,  pour intégrer visuellement le bouton dans le thème parent comme un caméléon, comme indiqué ici :</p>
+		<p>Par défaut, n'importe quel bouton qui est placé dans une barre est attribué automatiquement  à une lettre du nuancier qui correspond à la barre ou la boîte de contenu de son parent,  pour intégrer visuellement le bouton dans le thème parent comme un caméléon, comme indiqué ici :</p>
 		
 		<div class="swatch-preview">
 			<div data-role="header" data-theme="a"><h1>Barre A</h1><a href="index.html" data-icon="arrow-l">Bouton A</a></div>
@@ -158,9 +158,9 @@
 			<div data-role="header" data-theme="e"><h1>Barre E</h1><a href="index.html" data-icon="arrow-l">Bouton E</a></div>
 		</div><!-- end swatch-bars -->
 		
-		<p>Ce comportement par défaut rend facile la répercution du changement de thème à travers une page en définissant un échantillon de thème sur un parent car vous savez que les boutons seront maintenu avec le même poids relatif visuelle à travers les thèmes. De même les éléments de formulaire utilisent les styles de boutons, ils pourront également à s'adapter à leur conteneur parent. </p>
+		<p>Ce comportement par défaut rend facile la répercution du changement de thème à travers une page en définissant un nuancier de thème sur un parent car vous savez que les boutons seront maintenu avec le même poids relatif visuelle à travers les thèmes. De même les éléments de formulaire utilisent les styles de boutons, ils pourront également à s'adapter à leur conteneur parent. </p>
 			
-		<p>Si vous voulez ajouter l'accent visuel à un bouton et l'aider à se démarquer visuellement de sa barre d'outils parent, une couleur alternative de l'échantillon peut être définie par l'ajout d'un <code>data-theme="a"</code> à l'ancre. Une fois qu'une couleur alternative de l'échantillon est définie sur un bouton dans le balisage, le framework ne va pas écraser cette couleur si le thème parent est changé, parce que vous avez fait un choix conscient pour le définir.</p>
+		<p>Si vous voulez ajouter l'accent visuel à un bouton et l'aider à se démarquer visuellement de sa barre d'outils parent, une couleur alternative du nuancier peut être définie par l'ajout d'un <code>data-theme="a"</code> à l'ancre. Une fois qu'une couleur alternative du nuancier est définie sur un bouton dans le balisage, le framework ne va pas écraser cette couleur si le thème parent est changé, parce que vous avez fait un choix conscient pour le définir.</p>
 		
 		<div class="swatch-bars">
 			<div data-role="header" data-theme="a" class="ui-bar" >
@@ -214,7 +214,7 @@
 <p>En savoir plus sur  la <a href="../lists/lists-themes.html">thématisation de liste</a> et la <a href="../buttons/buttons-themes.html">thématisation de bouton</a>.</p>
 
 		<h3>État "Active" globale</h3>
-		<p>Le framework jQuery Mobile utilise un seul échantillon de niveau de thème appelé "active" (bleu clair dans le thème par défaut) pour constamment indiquer l'état sélectionné, indépendamment de l'échantillon individuel du widget donné. Nous appliquons ceci dans les contrôles de navigation et de formulaire chaque fois qu'il y a un besoin d'indiquer ce qui est actuellement sélectionné. Parce que cet échantillon de thème est conçu pour un retour utilisateur clair et cohérent, il ne peut pas être remplacé via le balisage, il est fixé une fois dans le thème et appliqué par le framework à chaque fois qu'un état sélectionné ou actif est nécessaire. Le style de cet état est dans la feuille de style du thème dans les règles de style <code>ui-btn-actif</code>.</p>
+		<p>Le framework jQuery Mobile utilise un seul nuancier de niveau de thème appelé "active" (bleu clair dans le thème par défaut) pour constamment indiquer l'état sélectionné, indépendamment du nuancier individuel du widget donné. Nous appliquons ceci dans les contrôles de navigation et de formulaire chaque fois qu'il y a un besoin d'indiquer ce qui est actuellement sélectionné. Parce que ce nuancier de thème est conçu pour un retour utilisateur clair et cohérent, il ne peut pas être remplacé via le balisage, il est fixé une fois dans le thème et appliqué par le framework à chaque fois qu'un état sélectionné ou actif est nécessaire. Le style de cet état est dans la feuille de style du thème dans les règles de style <code>ui-btn-actif</code>.</p>
 		
 		<fieldset data-role="controlgroup"  data-type="horizontal" data-role="fieldcontain">
 	     	<legend>Active est utilisé pour l'état sur ces bascules :</legend>
@@ -272,8 +272,8 @@
 					<li><a href="../../docs/api/globalconfig.html">Configuration par défaut</a></li>
 					<li><a href="../../docs/api/events.html">Événements</a></li>
 					<li><a href="../../docs/api/methods.html">Méthodes &amp; Utilitaires</a></li>
-					<li><a href="../../docs/api/data-attributes.html">Référence de l'attribut de données</a></li>
-					<li data-theme="a"><a href="../../docs/api/themes.html">Framework de Théme</a></li>
+					<li><a href="../../docs/api/data-attributes.html">Référence de l'attribut data-</a></li>
+					<li data-theme="a"><a href="../../docs/api/themes.html">Framework de Thème</a></li>
 	
 					</ul>
 		</div>

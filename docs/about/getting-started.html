@@ -70,7 +70,7 @@
 		<p>À l'intérieur de votre conteneur de contenu, vous pouvez ajouter tous les <a href="../content/content-html.html">éléments HTML</a> standard - titres, listes, paragraphes, etc. Vous pouvez écrire vos propres styles personnalisés pour créer des mises en page personnalisées en ajoutant une feuille de style personnalisée au <code>head</code> après la feuille de style de jQuery Mobile.</p> 
 		
 		<h2>Faire une liste</h2>
-		<p>jQuery Mobile comprend un ensemble diversifié de <a href="../lists/docs-lists.html" id="" title="docs-lists">listes</a> communes qui sont codées sous forme de listes avec un <code>data-role="listview"</code> ajouté. Voici une simple liste liée qui a un rôle de <code>listview</code>. Nous allons faire afin que cela ressemble à un module en ajoutant un <code>data-inset="true"</code> et nous ajouterons un filtre de recherche dynamique avec l'attribut <code>data-filter="true"</code>.</p>
+		<p>jQuery Mobile comprend un ensemble diversifié de <a href="../lists/docs-lists.html" id="" title="docs-lists">listes</a> communes qui sont codées sous forme de listes avec l'ajout d'un <code>data-role="listview"</code>. Voici une simple liste liée qui a un rôle <code>listview</code>. Nous allons faire ainsi pour que cela ressemble à un module intégré en ajoutant un <code>data-inset="true"</code> et nous ajouterons un filtre de recherche dynamique avec l'attribut <code>data-filter="true"</code>.</p>
 
 <pre><code>
 &lt;ul <strong>data-role="listview" data-inset="true" data-filter="true"</strong>&gt;
@@ -94,7 +94,7 @@
 
 		
 		<h2>Ajouter un curseur</h2>
-		<p>Le framework contient un ensemble complet d'<a href="../forms/forms-all.html">éléments de formulaire</a> qui sont automatiquement améliorés en widgets tactiles conviviales stylisés. Voici un curseur fait avec un nouvel input HTML5 de type range, il n'y a pas besoin de <code>data-role</code>. Assurez vous d'envelopper ceux-ci dans un élément <code>form</code> et toujours bien associer un <code>label</code> pour chaque élément du formulaire.</p> 
+		<p>Le framework contient un ensemble complet d'<a href="../forms/forms-all.html">éléments de formulaire</a> qui sont automatiquement améliorés en widgets tactiles conviviales et stylisés. Voici un curseur qui est fait avec un nouvel input HTML5 de type range, il n'y a pas besoin de <code>data-role</code>. Assurez vous de l'envelopper dans un élément <code>form</code> et de toujours bien associer un <code>label</code> pour chaque élément du formulaire.</p> 
 		
 <pre><code>
 &lt;form&gt;
@@ -111,7 +111,7 @@
 
 		
 		<h2>Faire un bouton</h2>
-		<p>Il existe plusieurs façons de faire des <a href="../buttons/buttons-types.html" title="buttons-types">boutons</a>, mais la possibilité de transformer un lien en bouton est donc plus facile à cliquer. Il suffit de commencer avec un lien et de lui ajouter un attribut <code>data-role="button"</code>. Vous pouvez ajouter une <a href="../buttons/buttons-icons.html">icône</a> avec l'attribut <code>data-icon</code> et éventuellement définir sa position avec l'attribut <code>data-iconpos</code>.</p>
+		<p>Il existe plusieurs façons de faire des <a href="../buttons/buttons-types.html" title="buttons-types">boutons</a>, mais la possibilité de transformer un lien en un bouton est plus facile à cliquer. Il suffit de commencer avec un lien et de lui ajouter un attribut <code>data-role="button"</code>. Vous pouvez ajouter une <a href="../buttons/buttons-icons.html">icône</a> avec l'attribut <code>data-icon</code> et éventuellement définir sa position avec l'attribut <code>data-iconpos</code>.</p>
 
 <pre><code>
 &lt;a href="#" <strong>data-role="button" data-icon="star"</strong>&gt;Bouton étoile&lt;/a&gt;
@@ -121,9 +121,9 @@
 
 
 		
-		<h2>Jouer avec les échantillons de thème</h2>
-		<p>jQuery Mobile a un <a href="../api/themes.html" id="">framework de thème</a> robuste qui supporte jusqu'à 26 ensembles de couleurs de barre d'outils, de contenu et de bouton, appelé "Swatch" (Echantillon). Ajoutez juste l'attribut <code>data-theme="e"</code> à n'importe quels widgets sur cette page : page, entête, liste, curseur ou bouton pour le passer en jaune. Essayez les différentes lettres (de a à e) d'échantillon dans le thème par défaut pour mélanger et assortir les échantillons. </p>
-		<p>Astuce intéressante : ajoutez l'échanillon du thème à la page et regardez comment tous les widgets à l'intérieur du contenu hériteront automatiquement du thème (les entêtes n'héritent pas, ils sont par défaut avec l'échantillon A).</p>
+		<h2>Jouer avec les nuanciers du thème</h2>
+		<p>jQuery Mobile a un <a href="../api/themes.html" id="">framework de thème</a> robuste qui supporte jusqu'à 26 ensembles de couleurs de barre d'outils, de contenu et de bouton, appelé "Swatch" (Nuancier). Ajoutez juste l'attribut <code>data-theme="e"</code> à n'importe quels widgets sur cette page : page, entête, liste, curseur ou bouton pour le passer en jaune. Essayez les différentes lettres de nuancier (de a à e) dans le thème par défaut pour mélanger et assortir les nuanciers. </p>
+		<p>Astuce intéressante : ajoutez le nuancier du thème à la page et regardez comment tous les widgets à l'intérieur du contenu hériteront automatiquement du thème (les entêtes n'héritent pas, elles sont par défaut avec le nuancier A).</p>
 		
 <code>&lt;a href="#" data-role="button" data-icon="star" <strong>data-theme="a"</strong>&gt;Button&lt;/a&gt;</code>
 		
@@ -133,10 +133,10 @@
 		<a href="#" data-role="button" data-icon="star" data-theme="d">data-theme="d"</a>
 		<a href="#" data-role="button" data-icon="star" data-theme="e">data-theme="e"</a>
 	
-	<p>Lorsque vous êtes prêt à créer un thème personnalisé, utilisez <a href="http://www.jquerymobile.com/themeroller" rel="external">ThemeRoller</a> pour glisser et déposer, puis télécharger un thème personnalisé.</p>
+	<p>Lorsque vous êtes prêt à créer un thème personnalisé, utilisez <a href="http://www.jquerymobile.com/themeroller" rel="external">ThemeRoller</a>, puis télécharger le thème personnalisé.</p>
 	
-	<h2>Pour continuer et construire des chose</h2>
-	<p>Ce n'est qu'effleurer la surface de toutes les choses cool que vous pouvez construire avec jQuery Mobile sans trop d'effort. N'oubliez pas d'explorer la <a href="../pages/page-links.html" id="" title="page-links">liaison de pages</a>, l'<a href="../pages/page-transitions.html" id="" title="page-transitions">ajout des transitions de page animées</a> et la <a href="../pages/page-dialogs.html" id="" title="page-dialogs">création des boîtes de dialogue</a>. Utilisez la <a href="../api/data-attributes.html" id="" title="data-attributes">référence data-attribute</a> afin de pouvoir jouer avec d'autres attributs <code>data-</code>. </p>
+	<h2>Pour continuer et construire des choses</h2>
+	<p>Ce n'est qu'effleurer la surface de toutes les choses cool que vous pouvez construire sans trop d'effort avec jQuery Mobile. N'oubliez pas d'explorer la <a href="../pages/page-links.html" id="" title="page-links">liaison de pages</a>, l'<a href="../pages/page-transitions.html" id="" title="page-transitions">ajout des transitions de page animées</a> et la <a href="../pages/page-dialogs.html" id="" title="page-dialogs">création des boîtes de dialogue</a>. Utilisez la <a href="../api/data-attributes.html" id="" title="data-attributes">référence de l'attribut data-</a> afin de pouvoir jouer avec d'autres attributs <code>data-</code>. </p>
 	
 	<p><strong>Plus d'infos du développeur ?</strong> Bien, oubliez tout ce que nous venons de voir (blague). Si vous ne voulez pas utiliser le système de configuration de l'attribut  <code>data-</code>, vous pouvez prendre le contrôle complet de tout et appelez les plugins directement parce que ce sont simplement tous des plugins jQuery standard intégré avec l'ensemble des widgets de l'interface utilisateur. Veillez à creuser dans la <a href="../api/globalconfig.html" id="" title="globalconfig">configuration globale</a>, les <a href="../api/events.html" id="" title="events">événements</a> et les <a href="../api/methods.html" id="" title="methods">méthodes</a>. Puis lisez l'écriture <a href="../pages/page-scripting.html" id="" title="page-scripting">des scripts des pages</a>, la <a href="../pages/page-dynamic.html" id="" title="page-dynamic">génération des pages dynamiques</a> et la construction <a href="../pages/phonegap.html" id="" title="phonegap">d'applications PhoneGap</a>.</p>
 		</div><!--/content-primary -->		
