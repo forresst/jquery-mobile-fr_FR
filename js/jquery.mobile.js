@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 57aff2fe7823b4818919acbc402018881bb9afce <> Date: Tue Feb 28 13:28:57 2012 +0700
+* jQuery Mobile Framework Git Build: SHA1: a7151b95cfdc90d118b4b2acf28c0fe79b6e125f <> Date: Mon Mar 5 18:53:00 2012 -0800
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1223,6 +1223,10 @@ $.widget( "mobile.widget", {
 		}
 
 		$widgetElements[ this.widgetName ]();
+	},
+
+	raise: function( msg ) {
+		throw "Widget [" + this.widgetName + "]: " + msg;
 	}
 });
 
@@ -1385,7 +1389,7 @@ $.widget( "mobile.widget", {
 
 			var e = el[ 0 ],
 				ltr = "",
-				re = /ui-(bar|body)-([a-z])\b/,
+				re = /ui-(bar|body|overlay)-([a-z])\b/,
 				c, m;
 
 			while ( e ) {
@@ -2099,15 +2103,35 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 
 	_create: function() {
-
+		
+		var self = this;
+		
 		// if false is returned by the callbacks do not create the page
-		if( this._trigger( "beforecreate" ) === false ){
+		if( self._trigger( "beforecreate" ) === false ){
 			return false;
 		}
 
-		this.element
+		self.element
 			.attr( "tabindex", "0" )
-			.addClass( "ui-page ui-body-" + this.options.theme );
+			.addClass( "ui-page ui-body-" + self.options.theme )
+			.bind( "pagebeforehide", function(){
+				self.removeContainerBackground();
+			} )
+			.bind( "pagebeforeshow", function(){
+				self.setContainerBackground();
+			} );
+
+	},
+	
+	removeContainerBackground: function(){
+		$.mobile.pageContainer.removeClass( "ui-overlay-" + $.mobile.getInheritedTheme( this.element ) );
+	},
+	
+	// set the page container background to the page theme
+	setContainerBackground: function( theme ){
+		if( this.options.theme ){
+			$.mobile.pageContainer.addClass( "ui-overlay-" + ( theme || this.options.theme ) );
+		}
 	},
 
 	keepNativeSelector: function() {
@@ -2720,7 +2744,11 @@ $.mobile.transitionFallbacks = {};
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
-		$( "." + $.mobile.activePageClass ).css( "min-height", getScreenHeight() );
+		var aPage = $( "." + $.mobile.activePageClass ),
+			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
+			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) );
+				
+		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB );
 	}
 
 	//shared page enhancements
@@ -3943,14 +3971,15 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		// Set aria role
 		$el
 			.wrapInner( dialogWrap )
-			.find( ":jqmData(role='header')" )
-				.prepend( headerCloseButton )
-			.end()
-			.find(':first-child')
-				.addClass( "ui-corner-top" )
-			.end()
-			.find( ":last-child" )
-				.addClass( "ui-corner-bottom" );
+			.children()
+				.find( ":jqmData(role='header')" )
+					.prepend( headerCloseButton )
+				.end()
+				.children( ':first-child')
+					.addClass( "ui-corner-top" )
+				.end()
+				.children( ":last-child" )
+					.addClass( "ui-corner-bottom" );
 
 		// this must be an anonymous function so that select menu dialogs can replace
 		// the close method. This is a change from previously just defining data-rel=back
@@ -3981,18 +4010,13 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		})
 		.bind( "pagehide", function( e, ui ) {
 			$( this ).find( "." + $.mobile.activeBtnClass ).removeClass( $.mobile.activeBtnClass );
-			
-			// if there's an overlay theme, we're going to remove it from the page container.
-			// First though, check that the incoming page isn't a dialog with the same theme. If so, don't remove.
-			if( self.options.overlayTheme ){
-				if( !ui.nextPage || !ui.nextPage.is( ".ui-dialog.ui-overlay-" + self.options.overlayTheme ) ){
-					$.mobile.pageContainer.removeClass( "ui-overlay-" + self.options.overlayTheme );
-				}	
-			}
 		})
+		// Override the theme set by the page plugin on pageshow
 		.bind( "pagebeforeshow", function(){
 			if( self.options.overlayTheme ){
-				$.mobile.pageContainer.addClass( "ui-overlay-" + self.options.overlayTheme );
+				self.element
+					.page( "removeContainerBackground" )
+					.page( "setContainerBackground", self.options.overlayTheme );
 			}
 		});
 	},
@@ -4311,6 +4335,12 @@ var attachEvents = function() {
 				hov && clearTimeout( hov );
 				foc && clearTimeout( foc );
 			}
+		},
+		"focusin focus": function( event ){
+			$( closestEnabledButton( event.target ) ).addClass( $.mobile.focusClass );
+		},
+		"focusout blur": function( event ){
+			$( closestEnabledButton( event.target ) ).removeClass( $.mobile.focusClass );
 		}
 	});
 
@@ -4398,7 +4428,6 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 				.addClass( "ui-title" )
 				// Regardless of h element number in src, it becomes h1 for the enhanced page
 				.attr({
-					"tabindex": "0",
 					"role": "heading",
 					"aria-level": "1"
 				});
@@ -4449,18 +4478,18 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		if ( collapsibleSet.length ) {
 			// Inherit the theme from collapsible-set
 			if ( !o.theme ) {
-				o.theme = collapsibleSet.jqmData( "theme" );
+				o.theme = collapsibleSet.jqmData("theme") || $.mobile.getInheritedTheme( collapsibleSet, "c" );
 			}
 			// Inherit the content-theme from collapsible-set
 			if ( !o.contentTheme ) {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
-			
-            // Gets the preference icon position in the set
-            if ( !o.iconPos ) {
-                o.iconPos = collapsibleSet.jqmData( "iconpos" );
-            }
-			
+
+			// Gets the preference icon position in the set
+			if ( !o.iconPos ) {
+				o.iconPos = collapsibleSet.jqmData( "iconpos" );
+			}
+
 			if( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
 			}
@@ -4484,7 +4513,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					mini: o.mini,
 					theme: o.theme
 				})
-			.add( ".ui-btn-inner" )
+			.add( ".ui-btn-inner", $el )
 				.addClass( "ui-corner-top ui-corner-bottom" );
 
 		//events
@@ -4553,7 +4582,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 
 		// Inherit the theme from collapsible-set
 		if ( !o.theme ) {
-			o.theme = $el.jqmData( "theme" );
+			o.theme = $.mobile.getInheritedTheme( $el, "c" );
 		}
 		// Inherit the content-theme from collapsible-set
 		if ( !o.contentTheme ) {
@@ -5109,6 +5138,10 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			return;
 		}
 
+		if( !label.length ){
+			this.raise( inputtype + " inputs require a label for enhancement" );
+		}
+
 		// Expose for other methods
 		$.extend( this, {
 			label: label,
@@ -5119,9 +5152,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			uncheckedicon: uncheckedicon
 		});
 
-		// If there's no selected theme...
+		// If there's no selected theme check the data attr
 		if( !this.options.theme ) {
-			this.options.theme = this.element.jqmData( "theme" );
+			this.options.theme = $.mobile.getInheritedTheme( this.element, "c" );
 		}
 
 		label.buttonMarkup({
@@ -5132,11 +5165,10 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		});
 
 		// Wrap the input + label in a div
-		var wrapper = document.createElement('div');		
-		wrapper.className = 'ui-' + inputtype;	
-		input[0].parentNode.insertBefore(wrapper,input[0]);
-		wrapper.appendChild(input[0]);				
-		wrapper.appendChild(label[0]);
+		var wrapper = document.createElement('div');
+		wrapper.className = 'ui-' + inputtype;
+
+		input.add( label ).wrapAll( wrapper );
 
 		label.bind({
 			vmouseover: function( event ) {
@@ -5152,8 +5184,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				}
 
 				self._cacheVals();
-				input.attr( "checked", inputtype === "radio" && true || !input.attr( "checked" ) );
-				//input.prop( "checked", inputtype === "radio" && true || !input.attr( "checked" ) );
+
+				input.prop( "checked", inputtype === "radio" && true || !input.prop( "checked" ) );
 
 				// trigger click handler's bound directly to the input as a substitute for
 				// how label clicks behave normally in the browsers
@@ -5165,12 +5197,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				// Input set for common radio buttons will contain all the radio
 				// buttons, but will not for checkboxes. clearing the checked status
 				// of other radios ensures the active button state is applied properly
-				self._getInputSet().not( input ).removeAttr( "checked" );
+				self._getInputSet().not( input ).prop( "checked", false );
 
 				self._updateAll();
 				return false;
 			}
-
 		});
 
 		input
@@ -5185,11 +5216,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 					// Adds checked attribute to checked input when keyboard is used
 					if ( $this.is( ":checked" ) ) {
 
-						$this.attr( "checked", "checked" );
-						self._getInputSet().not($this).removeAttr( "checked" );
+						$this.prop( "checked", true);
+						self._getInputSet().not($this).prop( "checked", false );
 					} else {
 
-						$this.removeAttr( "checked" );
+						$this.prop( "checked", false );
 					}
 
 					self._updateAll();
@@ -5233,7 +5264,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 			// NOTE getAttribute is used here to deal with an issue with the :checked
 			//      selector. see #3597
-			if ( this.getAttribute( "checked" ) || self.inputtype === "checkbox" ) {
+			if ( $this.prop( "checked" ) || self.inputtype === "checkbox" ) {
 				$this.trigger( "change" );
 			}
 		})
@@ -5247,8 +5278,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 		// input[0].checked expando doesn't always report the proper value
 		// for checked='checked'
-
-		if ( input[ 0 ].getAttribute( "checked" ) ) {
+		if ( $( input[ 0 ] ).prop( "checked" ) ) {
 			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass );
 			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
 		} else {
@@ -5264,7 +5294,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	},
 
 	disable: function() {
-		this.element.attr( "disabled", true ).parent().addClass( "ui-disabled" );
+		this.element.prop( "disabled", true ).parent().addClass( "ui-disabled" );
 	},
 
 	enable: function() {
@@ -5307,8 +5337,13 @@ $.widget( "mobile.button", $.mobile.widget, {
 	 	 	!$el.hasClass( "ui-btn" ) && $el.buttonMarkup();
 	 	 	return;
  	 	}
-		
-		
+
+		// get the inherited theme
+		// TODO centralize for all widgets
+		if ( !this.options.theme ) {
+			this.options.theme = $.mobile.getInheritedTheme( this.element, "c" );
+		}
+
 		// TODO: Post 1.1--once we have time to test thoroughly--any classes manually applied to the original element should be carried over to the enhanced element, with an `-enhanced` suffix. See https://github.com/jquery/jquery-mobile/issues/3577
 		/* if( $el[0].className.length ) {
 			classes = $el[0].className;
@@ -5316,7 +5351,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		if( !!~$el[0].className.indexOf( "ui-btn-left" ) ) {
 			classes = "ui-btn-left";
 		}
-		
+
 		if(  !!~$el[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = "ui-btn-right";
 		}
@@ -5551,9 +5586,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
 			clearbtn = $( "<a href='#' class='ui-input-clear' title='clear text'>clear text</a>" )
-				.tap(function( event ) {
-					input.val( "" ).focus();
-					input.trigger( "change" );
+				.bind('click', function( event ) {
+					input
+						.val( "" )
+						.focus()
+						.trigger( "change" );
 					clearbtn.addClass( "ui-input-clear-hidden" );
 					event.preventDefault();
 				})
@@ -5823,7 +5860,6 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join("");
 		domHandle.className = 'ui-slider-handle';
-		domHandle.setAttribute('href','#');
 		domSlider.appendChild(domHandle);
 
 		handle.buttonMarkup({ corners: true, theme: theme, shadow: true })
@@ -6442,17 +6478,18 @@ $( document ).bind( "pagecreate create", function( e ){
 			headerTitle = $( "<h1>", {
 				"class": "ui-title"
 			}).appendTo( header ),
+			
+			menuPageContent,
+			menuPageClose,
+			headerClose;
 
+		if( widget.isMultiple ) {
 			headerClose = $( "<a>", {
 				"text": widget.options.closeText,
 				"href": "#",
 				"class": "ui-btn-left"
-			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup(),
-
-			menuPageContent,
-			
-			menuPageClose;
-
+			}).attr( "data-" + $.mobile.ns + "iconpos", "notext" ).attr( "data-" + $.mobile.ns + "icon", "delete" ).appendTo( header ).buttonMarkup();
+		}
 
 		$.extend( widget, {
 			select: widget.select,
@@ -6499,11 +6536,16 @@ $( document ).bind( "pagecreate create", function( e ){
 
 				// Events for list items
 				self.list.attr( "role", "listbox" )
-					.delegate( ".ui-li>a", "focusin", function() {
-						$( this ).attr( "tabindex", "0" );
+					.bind( "focusin", function( e ){
+						$( e.target )
+							.attr( "tabindex", "0" )
+							.trigger( "vmouseover" );
+						
 					})
-					.delegate( ".ui-li>a", "focusout", function() {
-						$( this ).attr( "tabindex", "-1" );
+					.bind( "focusout", function( e ){
+						$( e.target )
+							.attr( "tabindex", "-1" )
+							.trigger( "vmouseout" );
 					})
 					.delegate( "li:not(.ui-disabled, .ui-li-divider)", "click", function( event ) {
 
@@ -6543,7 +6585,11 @@ $( document ).bind( "pagecreate create", function( e ){
 						switch ( event.keyCode ) {
 							// up or left arrow keys
 						 case 38:
-							prev = li.prev();
+							prev = li.prev().not( ".ui-selectmenu-placeholder" );
+							
+							if( prev.is( ".ui-li-divider" ) ) {
+								prev = prev.prev();
+							}
 
 							// if there's a previous option, focus it
 							if ( prev.length ) {
@@ -6551,7 +6597,7 @@ $( document ).bind( "pagecreate create", function( e ){
 									.blur()
 									.attr( "tabindex", "-1" );
 
-								prev.find( "a" ).first().focus();
+								prev.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
 							}
 
 							return false;
@@ -6560,6 +6606,10 @@ $( document ).bind( "pagecreate create", function( e ){
 							// down or right arrow keys
 						 case 40:
 							next = li.next();
+							
+							if( next.is( ".ui-li-divider" ) ) {
+								next = next.next();
+							}
 
 							// if there's a next option, focus it
 							if ( next.length ) {
@@ -6567,7 +6617,7 @@ $( document ).bind( "pagecreate create", function( e ){
 									.blur()
 									.attr( "tabindex", "-1" );
 
-								next.find( "a" ).first().focus();
+								next.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
 							}
 
 							return false;
@@ -6610,12 +6660,14 @@ $( document ).bind( "pagecreate create", function( e ){
 				});
 
 				// Close button on small overlays
-				self.headerClose.click( function() {
-					if ( self.menuType == "overlay" ) {
-						self.close();
-						return false;
-					}
-				});
+				if( self.isMultiple ){ 
+					self.headerClose.click( function() {
+						if ( self.menuType == "overlay" ) {
+							self.close();
+							return false;
+						}
+					});
+				}
 
 				// track this dependency so that when the parent page
 				// is removed on pagehide it will also remove the menupage
@@ -6663,7 +6715,11 @@ $( document ).bind( "pagecreate create", function( e ){
 							if ( self.isMultiple ) {
 								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
-								item.addClass( $.mobile.activeBtnClass );
+								if( item.is( ".ui-selectmenu-placeholder" ) ) {
+									item.next().addClass( $.mobile.activeBtnClass );
+								} else {
+									item.addClass( $.mobile.activeBtnClass );
+								}
 							}
 						}
 					});
@@ -6718,7 +6774,7 @@ $( document ).bind( "pagecreate create", function( e ){
 				}, 300);
 
 				function focusMenuItem() {
-					self.list.find( $.mobile.activeBtnClass ).focus();
+					self.list.find( "." + $.mobile.activeBtnClass + " a" ).focus();
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
@@ -6740,15 +6796,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					}
 
 					self.menuPage.one( "pageshow", function() {
-						// silentScroll() is called whenever a page is shown to restore
-						// any previous scroll position the page may have had. We need to
-						// wait for the "silentscroll" event before setting focus to avoid
-						// the browser"s "feature" which offsets rendering to make sure
-						// whatever has focus is in view.
-						$( window ).one( "silentscroll", function() {
-							focusMenuItem();
-						});
-
+						focusMenuItem();
 						self.isOpen = true;
 					});
 
@@ -6870,17 +6918,12 @@ $( document ).bind( "pagecreate create", function( e ){
 					item.setAttribute(dataIconAttr,dataIcon);					
 					item.className = classes.join(" ");
 					item.setAttribute('role','option');
-					item.setAttribute('tabindex','-1');
+					anchor.setAttribute('tabindex','-1');
 					item.appendChild(anchor);					
 					fragment.appendChild(item);
 				}	
-				fragment.firstChild.setAttribute('tabindex',0);
-				self.list[0].appendChild(fragment);
 
-				// Hide header close link for single selects
-				if ( !this.isMultiple ) {
-					this.headerClose.hide();
-				}
+				self.list[0].appendChild(fragment);
 
 				// Hide header if it's not a multiselect and there's no placeholder
 				if ( !this.isMultiple && !placeholder.length ) {
@@ -7072,16 +7115,17 @@ $( document ).bind( "pagecreate create", function( e ){
 							nextFooter = thisFooter.length && ui.nextPage && $( ".ui-footer-fixed:jqmData(id='" + thisFooter.jqmData( "id" ) + "')", ui.nextPage ),
 							nextHeader = thisHeader.length && ui.nextPage && $( ".ui-header-fixed:jqmData(id='" + thisHeader.jqmData( "id" ) + "')", ui.nextPage );
 
+						nextFooter = nextFooter || $();
+
 							if( nextFooter.length || nextHeader.length ){
 
 								nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
 
 								ui.nextPage.one( "pageshow", function(){
 									nextFooter.add( nextHeader ).appendTo( this );
-								} );
+								});
 							}
 					}
-
 				});
 		},
 

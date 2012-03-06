@@ -10,7 +10,7 @@
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/assets/js/jqm-docs.js"></script>
-	<script src="../../js/jquery.mobile.docs.js"></script>
+	<script src="../../js/jquery.mobile.js"></script>
 
 </head> 
 <body> 
@@ -111,7 +111,7 @@
 		<p>Par défaut, toutes les transitions sauf fade ont besoin de la transformation 3D. Les appareils qui ne supportent pas la 3D, utiliseront la transition fade, indépendamment de la transition spécifiée. Nous faisons cela de manière pro-active sur les transitions avancées pour exclure les plateformes peu performantes comme Android 2.x et s'assurer ainsi une utilisation toujours fluide. Notez qu'il existe des plateformes telles que Android 3.0 qui supportent techniquement les transformations 3D, mais qui ont toujours une performance d'animation faible donc cela ne garantit pas que chaque navigateur sera à 100% sans scintillement, mais nous essayons de régler ce problème .</p>
 		
 		<p>La transition de repli pour les navigateurs qui ne prennent pas en charge les transformations 3D peut être configurée pour chaque type de transition, mais par défaut, nous spécifions "fade" comme transition de repli. Par exemple, cela définira la transition de repli "none" pour la transition slideout :</p>
-		<code>$.mobile.fallbackTransition.slideout = "none"</code>
+		<code>$.mobile.transitionFallbacks.slideout = "none"</code>
 		
 		<h2>Définition de largeur maximum pour les transitions</h2>
 		<p>Par défaut, les transitions peuvent être désactivées (définies à "none") lorsque la largeur de la fenêtre est plus grande qu'une certaine largeur de pixel. Cette fonctionnalité est utile car les transitions peuvent être gênantes ou peu performantes sur les grands écrans. Cette valeur est configurable via l'option globale <code>$.mobile.maxTransitionWidth</code>, qui par défaut est à <code>false</code>. L'option accepte n'importe quel nombre représentant une largeur en pixel ou la valeur <code>false</code>. Si elle n'est pas à <code>false</code>, le gestionnaire va utiliser une transition "none" lorsque la largeur de la fenêtre est plus grande que la valeur spécifiée</p>

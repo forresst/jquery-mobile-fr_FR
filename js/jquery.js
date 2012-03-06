@@ -1,3 +1,7 @@
+//>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
+//>>description: jQuery 1.7.1 core library
+//>>label: jQuery Core
+//>>excludeEnd("jqmBuildExclude");
 
 
 /*!

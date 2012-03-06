@@ -10,7 +10,7 @@
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/assets/js/jqm-docs.js"></script>
-	<script src="../../js/jquery.mobile.docs.js"></script>
+	<script src="../../js/jquery.mobile.js"></script>
 
 </head>
 <body>
@@ -26,7 +26,7 @@
 
 		<div class="content-primary">
 			<h2>Référence de l'attribut data-</h2>
-			<p>Le framework  jQuery Mobile utilise les attributs HTML5 <code>data-</code> pour permettre l'initialisation et la configuration des widgets basé sur le balisage. Ces attributs sont complètement optionnels, en appelant les plugins manuellement et en passant les options directement, cela est également supporté. Pour éviter les conflits de noms avec d'autres plugins ou des frameworks qui utilisent également les attributs <code>data-</code>, définissez un espace de nommage personnalisé en modifiant l'<a href="globalconfig.html">option globale <code>ns</code></a>.<p>
+			<p>Le framework  jQuery Mobile utilise les attributs HTML5 <code>data-</code> pour permettre l'initialisation et la configuration des widgets basés sur le balisage. Ces attributs sont complètement optionnels, en appelant les plugins manuellement et en passant les options directement, cela est également supporté. Pour éviter les conflits de noms avec d'autres plugins ou des frameworks qui utilisent également les attributs <code>data-</code>, définissez un espace de nommage personnalisé en modifiant l'<a href="globalconfig.html">option globale <code>ns</code></a>.<p>
 
 				<style>
 					table { width:100%; border-bottom:1px solid #ccc; }
@@ -35,7 +35,7 @@
 				</style>
 
 			<h2><a href="../buttons/buttons-types.html">Bouton</a></h2>
-			<p>Liens avec <code>data-role="button"</code>. Les boutons basés sur l'input et les éléments button sont améliorés automatiquement, donc pas besoin de <code>data-role</code></p>
+			<p>Les liens avec le <code>data-role="button"</code>. Les boutons basés sur l'input et les éléments button sont améliorés automatiquement, donc pas besoin de <code>data-role</code></p>
 			<table>
 				<tr>
 					<th>data-corners</th>
@@ -67,10 +67,10 @@
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 			</table>
-			<p>Plusieurs boutons peuvent être enveloppés dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour les regrouper verticalement. Ajoutez l'attribut <code>data-type="horizontal"</code> pour que les boutons soit côte à côte.</p>
+			<p>Plusieurs boutons peuvent être enveloppés dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour les regrouper verticalement. Ajoutez l'attribut <code>data-type="horizontal"</code> pour que les boutons soient côte à côte.</p>
 
 
 			<h2><a href="../forms/checkboxes/">Case à cocher</a></h2>
@@ -82,11 +82,11 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
+					<td>none (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td>
+					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 			</table>
 
@@ -99,7 +99,7 @@
 				</tr>
 				<tr>
 					<th>data-content-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 				<tr>
 					<th>data-mini</th>
@@ -107,16 +107,16 @@
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 			</table>
 
 			<h2><a href="../content/content-collapsible-set.html">Ensemble de pliable</a></h2>
-			<p>Un nombre et des pliables enveloppé dans un conteneur avec le <code>data-role="collapsible-set"</code></p>
+			<p>Un nombre de pliables enveloppés dans un conteneur avec le <code>data-role="collapsible-set"</code></p>
 			<table>
 				<tr>
 					<th>data-content-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Définit pour tous les pliables de l'ensemble</td>
+					<td>Lettre du nuancier (a-z) - Défini pour l'ensemble des pliables</td>
 				</tr>
 				<tr>
 					<th>data-mini</th>
@@ -124,7 +124,7 @@
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Définit pour tous les pliables de l'ensemble</td>
+					<td>Lettre du nuancier (a-z) - Défini pour l'ensemble des pliables</td>
 				</tr>
 			</table>
 
@@ -133,12 +133,12 @@
 			<table>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 			</table>
 
 			<h2><a href="../pages/page-dialogs.html">Boîte de dialogue</a></h2>
-			<p>Page avec <code>data-role="page"</code> lié avec <code>data-rel="dialog"</code> sur l'ancrage.</p>
+			<p>Page avec <code>data-role="page"</code> lié avec un <code>data-rel="dialog"</code> sur l'ancre.</p>
 			<table>
 				<tr>
 					<th>data-close-btn-text</th>
@@ -154,11 +154,11 @@
 				</tr>
 				<tr>
 					<th>data-overlay-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Thème de substitution lorsque la page est ouverte dans une boîte de dialogue</td>
+					<td>Lettre du nuancier (a-z) - Thème de substitution lorsque la page est ouverte dans une boîte de dialogue</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 				<tr>
 					<th>data-title</th>
@@ -194,15 +194,15 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
+					<td>none (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td>
+					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 				<tr>
 					<th>data-track-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td>
+					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 			</table>
 
@@ -219,7 +219,7 @@
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 			</table>
 
@@ -232,7 +232,7 @@
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 			</table>
 
@@ -270,11 +270,11 @@
 			<table>
 				<tr>
 					<th>data-count-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 				<tr>
 					<th>data-dividertheme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 				<tr>
 					<th>data-filter</th>
@@ -286,7 +286,7 @@
 				</tr>
 				<tr>
 					<th>data-filter-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 				<tr>
 					<th>data-inset</th>
@@ -298,11 +298,11 @@
 				</tr>
 				<tr>
 					<th>data-split-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td><td>
+					<td>Lettre du nuancier (a-z)</td><td>
 				</td></tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 			</table>
 
@@ -323,7 +323,7 @@
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z) - peut également être définie sur chaque LI</td>
+					<td>Lettre du nuancier (a-z) - peut également être définie sur chaque LI</td>
 				</tr>
 			</table>
 			<h2><a href="../toolbars/docs-navbar.html">Barre de navigation</a></h2>
@@ -339,7 +339,7 @@
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z) - peut également être définie sur chaque LI</td>
+					<td>Lettre du nuancier (a-z) - peut également être définie sur chaque LI</td>
 				</tr>
 			</table>
 			<h2><a href="../pages/page-anatomy.html">Page</a></h2>
@@ -355,7 +355,7 @@
 				</tr>
 				<tr>
 					<th>data-back-btn-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 				<tr>
 					<th>data-close-btn-text</th>
@@ -371,11 +371,11 @@
 				</tr>
 				<tr>
 					<th>data-overlay-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Thème de substitution lorsque la page est ouverte dans une boîte de dialogue</td>
+					<td>Lettre du nuancier (a-z) - Thème de substitution lorsque la page est ouverte dans une boîte de dialogue</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z)</td>
+					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 				<tr>
 					<th>data-title</th>
@@ -392,11 +392,11 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
+					<td>none (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td>
+					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 			</table>
 
@@ -425,7 +425,7 @@
 				</tr>
 				<tr>
 					<th>data-overlay-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Thème de substitution pour les sélections non natives</td>
+					<td>Lettre du nuancier (a-z) - Thème de substitution pour les sélections non natives</td>
 				</tr>
 				<tr>
 					<th>data-placeholder</th>
@@ -433,11 +433,11 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
+					<td>none (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td>
+					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 			</table>
 			<p>Plusieurs sélection peuvent être enveloppées dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour les regrouper verticalement. Ajoutez l'attribut <code>data-type="horizontal"</code> pour que les sélections soit côte à côte.</p>
@@ -455,15 +455,15 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
+					<td>none (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td>
+					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 				<tr>
 					<th>data-track-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td>
+					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 			</table>
 
@@ -476,11 +476,11 @@
 				</tr>
 				<tr>
 					<th>data-role</th>
-					<td>aucun (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
+					<td>none (empêche l'auto-amélioration d'utiliser le contrôle natif)</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
-					<td>Lettre de l'échantillon (a-z) - Ajouté à l'élément du formulaire</td>
+					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 			</table>
 
@@ -498,8 +498,8 @@
 					<li><a href="../../docs/api/globalconfig.html">Configuration par défaut</a></li>
 					<li><a href="../../docs/api/events.html">Événements</a></li>
 					<li><a href="../../docs/api/methods.html">Méthodes &amp; Utilitaires</a></li>
-					<li data-theme="a"><a href="../../docs/api/data-attributes.html">Référence de l'attribut de données</a></li>
-					<li><a href="../../docs/api/themes.html">Framework de Théme</a></li>
+					<li data-theme="a"><a href="../../docs/api/data-attributes.html">Référence de l'attribut data-</a></li>
+					<li><a href="../../docs/api/themes.html">Framework de Thème</a></li>
 				</ul>
 		</div>
 	</div>
