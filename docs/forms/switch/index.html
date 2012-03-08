@@ -56,7 +56,20 @@
 				<option value="off">Arrêt</option>
 				<option value="on">Marche</option>
 			</select> 
-
+			
+			<p>Le contrôle est proportionnellement réduite, donc si vous l'utilisez des mots plus longs, vous pouvez simplement ajouter une ligne de CSS pour le mettre à la largeur que vous désirez. Par exemple, <code>div.ui-slider-switch { width: 9em }</code> produira :</p>
+		
+			<style type="text/css" media="screen">
+			.switch-longdesc div.ui-slider-switch { width: 9em; }
+			</style>
+			<div class="switch-longdesc">
+				<label for="flip-min">Interrupteur :</label>
+				<select name="slider" id="flip-min" data-role="slider">
+					<option value="off">Interrupteur Off</option>
+					<option value="on">Interrupteur On</option>
+				</select> 
+			</div>
+			
 			<h2>Version mini</h2>
 
 			<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
@@ -74,7 +87,8 @@
 			<select name="slider" id="flip-min" data-role="slider" data-mini="true">
 				<option value="off">Arrêt</option>
 				<option value="on">Marche</option>
-			</select> 
+			</select>
+			
 
 			<h2>Conteneurs de champs</h2>
 			 <p>Optionnellement, enveloppez le balisage de l'interrupteur dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
@@ -170,7 +184,7 @@ $('select').slider();
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>© 2011-12 The jQuery Project</p>
+		<p>﻿© 2011-12 The jQuery Project</p>
 </div>
 	
 </div><!-- /page -->
