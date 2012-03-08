@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: a7151b95cfdc90d118b4b2acf28c0fe79b6e125f <> Date: Mon Mar 5 18:53:00 2012 -0800
+* jQuery Mobile Framework Git Build: SHA1: d6e9fe5da7455cfba20bb44a539d70602b8b729b <> Date: Wed Mar 7 20:34:50 2012 -0800
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1104,7 +1104,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
 .ui-header, .ui-footer { position: relative; overflow: hidden; border-left-width: 0; border-right-width: 0; }
 .ui-header .ui-btn-left,
-.ui-header .ui-btn-right { position: absolute; top: -5px; }
+.ui-header .ui-btn-right,
+.ui-footer .ui-btn-left,
+.ui-footer .ui-btn-right { position: absolute; top: -5px; }
 .ui-header .ui-btn-left,
 .ui-footer .ui-btn-left { left: 5px; }
 .ui-header .ui-btn-right,
@@ -1635,6 +1637,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-footer-fixed {
 	left: 0;
 	right: 0;
+	width: 100%;
 	position: fixed;
 	z-index: 1000;
 }
@@ -1642,8 +1645,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	top: 0;
 }
 .ui-footer-fixed {
-	bottom: -1px;
-	padding-bottom: 1px;
+	bottom: 0;
 }
 .ui-header-fullscreen,
 .ui-footer-fullscreen {
@@ -1779,6 +1781,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-dialog-contain { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; }
 .ui-dialog .ui-header {
 	margin-top: 15%;
+	border: 0;
 }
 .ui-dialog .ui-header, 
 .ui-dialog .ui-content, 
@@ -1874,7 +1877,7 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 .ui-input-search .ui-input-clear { position: absolute; right: 0; top: 50%; margin-top: -13px; }
 .ui-mini .ui-input-clear { right: -3px; }
 .ui-input-search .ui-input-clear-hidden { display: none; }
-input.ui-mini, .ui-mini input { font-size: 14px !important; }
+input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
 textarea.ui-mini { height: 45px; }
 /* orientation adjustments - incomplete!*/
 @media all and (min-width: 450px){
@@ -1959,7 +1962,7 @@ div.ui-slider-switch.ui-slider-mini { width: 4.5em; height: 29px; }
 div.ui-slider-switch.ui-slider-mini .ui-slider-inneroffset { margin: 0 15px 0 14px; }
 div.ui-slider-switch.ui-slider-mini .ui-slider-handle { width: 25px; height: 25px; margin: 1px 0 0 -13px; }
 div.ui-slider-switch.ui-slider-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px; padding: 0; margin: 0; }
-span.ui-slider-label { position: absolute; text-align: center; width: 100%; overflow: hidden; font-size: 16px; top: 0; line-height: 2; min-height: 100%; border-width: 0; }
+span.ui-slider-label { position: absolute; text-align: center; width: 100%; overflow: hidden; font-size: 16px; top: 0; line-height: 2; min-height: 100%; border-width: 0; white-space: nowrap; }
 .ui-slider-mini span.ui-slider-label { font-size: 14px; }
 span.ui-slider-label-a { z-index: 1; left: 0; text-indent: -1.5em; }
 span.ui-slider-label-b { z-index: 0; right: 0; text-indent: 1.5em;}

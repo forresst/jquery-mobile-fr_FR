@@ -8,15 +8,17 @@
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
 
-	<script src="../js/jquery.js"></script>
-	<script src="../docs/assets/js/jqm-docs.js"></script>
-	<script src="../js/jquery.mobile.js"></script>
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/assets/js/jqm-docs.js"></script>
 
 	<script>
 		$(document).bind("mobileinit", function(){
-			$.mobile.defaultPageTransition = 'fade';
+			$.mobile.defaultPageTransition = 'flow';
 		});
 	</script>
+	
+	<script src="../../js/jquery.mobile.js"></script>
+	
 
 </head> 
 <body> 
@@ -30,7 +32,7 @@
 
 	<div data-role="content">
 		
-		<h2>defaultPageTransition est désormais "fade"</h2>
+		<h2>defaultPageTransition est maintenant "flow"</h2>
 		<p>Pour tester, cliquez sur le bouton ci-dessous et de parcourez les docs. Notez que si un lien provoque un rafraîchissement, ce paramètre sera perdue et les paramètres par défaut seront vus.</p>
 		<a href="../../index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Navigation dans les docs</a>
 
