@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html class="ui-mobile-rendering">
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile -Aperçu des listes</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Listes</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+	<div class="content-primary">
+		<h2>Apparence d'une liste</h2>
+
+		<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+			<li><a href="docs-lists.html" data-role="button" data-transition="fade">Bases</a></li>
+			<li><a href="lists-options.html" data-role="button" data-transition="fade" class="ui-btn-active">Options</a></li>
+			<li><a href="lists-methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+			<li><a href="lists-events.html" data-role="button" data-transition="fade">Événements</a></li>
+		</ul>
+
+		<p>Le plugin listview a les options suivantes :</p>
+
+		<dl>
+			<dt><code>countTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "c"</p>
+				<p>Définit le jeu de couleurs (nuancier) pour les éléments <a href="lists-count.html">bulles compteur</a> de la liste. Il accepte une seule lettre de A à Z qui correspond aux nuanciers inclus dans votre thème. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.countTheme = "a";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données :  <code>data-count-theme="a"</code>.</p>
+			</dd>
+
+			<dt><code>dividerTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "b"</p>
+				<p>Définit le jeu de couleurs (nuancier) pour les <a href="lists-divider.html">séparateurs</a> de liste. Il accepte une seule lettre de A à Z qui correspond aux nuanciers inclus dans votre thème. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.dividerTheme = "a";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données :  <code>data-dividertheme="a"</code>.</p>
+			</dd>
+
+			<dt><code>filter</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">par défaut : false</p>
+				<p>Ajoutez une <a href="lists-search.html">barre de recherche</a> aux listes. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.filter = true;</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-filter="true"</code>.</p>
+			</dd>
+
+			<dt><code>filterCallback</code> <em>function</em></dt>
+			<dd>
+				<p>La fonction pour déterminer quels éléments de la liste sont à masquer lorsque la zone de saisie du <a href="lists-search.html">filtre de recherche</a> change. La fonction accepte deux arguments -- le texte de la liste d'éléments (ou la valeur <code>data-filtertext</code> si présente) et la chaine de recherche. Retourne <code>true</code> pour masquer l'élément, <code>false</code> pour le laisser visible. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.filterCallback = function( text, searchValue ) {
+        // Seuls les éléments affichés sont ceux qui *commence* avec la chaine de recherche
+        return text.toLowerCase().substring( 0, searchValue.length ) !== searchValue;
+    };</strong>
+});
+</code></pre>
+			</dd>
+
+			<dt><code>filterPlaceholder</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "Filter items..."</p>
+				<p>Le texte du placeholder utilisé dans les <a href="lists-search.html">barres de recherche</a>. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.filterPlaceholder = "Rechercher...";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données :  <code>data-filter-placeholder="Rechercher..."</code>.</p>
+			</dd>
+
+			<dt><code>filterTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "c"</p>
+				<p>Définit le jeu de couleurs (nuancier) pour la <a href="lists-search.html">barre de recherche</a>. Il accepte une seule lettre de A à Z qui correspond aux nuanciers inclus dans votre thème. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.filterTheme = "a";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-filter-theme="a"</code>.</p>
+			</dd>
+
+			<dt><code>headerTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "b"</p>
+				<p>Définit le jeu de couleurs (nuancier) pour les entêtes de <a href="lists-nested.html">liste intégrée</a> des sous pages. Il accepte une seule lettre de A à Z qui correspond aux nuanciers inclus dans votre thème. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.headerTheme = "a";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données :  <code>data-header-theme="a"</code>.</p>
+			</dd>
+
+			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
+			<dd>
+				<p class="default">Par défaut: ":jqmData(role='listview')"</p>
+				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les data roles, etc) qui seront automatiquement initialisés comme des listes. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.initSelector = ".mylistview";</strong>
+});
+</code></pre>
+			</dd>
+
+			<dt><code>inset</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">par défaut : false</p>
+				<p>Ajouter les styles de <a href="lists-inset.html">liste intégrée</a> styles. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.inset = true;</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-inset="true"</code>.</p>
+			</dd>
+
+			<dt><code>splitIcon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "arrow-r"</p>
+				<p>Applique une icône de l'<a href="../buttons/buttons-icons.html">ensemble d'icônes</a> à tous les <a href="lists-split.html">boutons de liste</a>. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.splitIcon = "a";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-split-icon="a"</code>.</p>
+			</dd>
+
+			<dt><code>splitTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "b"</p>
+				<p>Définit le jeu de couleurs (nuancier) pour les <a href="lists-split.html">boutons de liste</a>. Il accepte une seule lettre de A à Z qui correspond aux nuanciers inclus dans votre thème. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.splitTheme = "a";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-split-theme="a"</code>.</p>
+			</dd>
+
+			<dt><code>theme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">par défaut : null, hérité d'un parent</p>
+				<p>Définit le jeu de couleurs (nuancier) pour ce widget. Il accepte une seule lettre de A à Z qui correspond aux nuanciers inclus dans votre thème. Par défaut, il hérite de la même couleur de nuancier que le conteneur parent qui le possède s'il n'est pas explicitement défini. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.theme = "a";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-theme="a"</code>.</p>
+			</dd>
+
+		</dl>	
+
+	</div><!--/content-primary -->
+
+	<div class="content-secondary">
+
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+				<h3>Aussi dans cette rubrique</h3>
+
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+					<li data-role="list-divider">Apparence d'une liste</li>
+					<li data-theme="a"><a href="docs-lists.html">Listes de bases &amp; API</a></li>
+					<li><a href="lists-ul.html">Liste chainée de base</a></li>
+					<li><a href="lists-nested.html">Liste imbriquée</a></li>
+					<li><a href="lists-ol.html">Liste numérotée</a></li>
+
+					<li><a href="lists-split.html">Liste de bouton séparé</a></li>
+					<li><a href="lists-divider.html">Séparateurs de liste</a></li>
+					<li><a href="lists-count.html">Bulle compteur</a></li>
+					<li><a href="lists-thumbnails.html">Miniatures</a></li>
+					<li><a href="lists-icons.html">Icônes</a></li>
+					<li><a href="lists-formatting.html">Formatage du contenu</a></li>
+					<li><a href="lists-search.html">Barre de filtre de recherche</a></li>
+					<li><a href="lists-search-inset.html">Encart barre de filtre de recherche</a></li>
+					<li><a href="lists-search-with-dividers.html">Barre de filtre de recherche avec séparateurs</a></li>
+					<li><a href="lists-search-filtertext.html">Filtre de recherche des données cachées</a></li>
+
+					<li><a href="lists-readonly.html">Listes en lecture seule</a></li>
+					<li><a href="lists-readonly-inset.html">Encart listes en lecture seule</a></li>
+					<li><a href="lists-forms.html">Listes avec formulaires</a></li>
+					<li><a href="lists-forms-inset.html">Encart listes avec formulaires</a></li>
+
+					<li><a href="lists-inset.html">Encart avec listes stylées</a></li>
+					<li><a href="lists-performance.html">Test de performance de liste</a></li>
+					<li><a href="lists-themes.html">Liste thématisée</a></li>
+
+				</ul>
+		</div>
+	</div>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="footer-docs" data-theme="c">
+			<p>﻿© 2011-12 The jQuery Project</p>
+	</div>
+
+	</div><!-- /page -->
+
+</body>
+</html>
