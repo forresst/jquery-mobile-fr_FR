@@ -49,7 +49,7 @@
 		  </ul>
 			<p>Ces notifications sont déclenchées sur l'élément conteneur parent (<code>$.mobile.pageContainer</code>) des pages, et déborde sur tout le chemin jusqu'à l'élément document et window.</p>
 <p>Pour les applications souhaitant injecter des pages, ou radicalement modifier le contenu d'une page existante, basée sur des données non-HTML, tels que JSON ou un objet JS en mémoire, l'événement <code>pagebeforechange</code> est très utile car il vous donne un crochet pour l'analyse des URL ou d'un élément de la page de l'application qui est demandé pour charger ou pour basculer, et pour court-circuiter le comportement par défaut de <code>changePage()</code> en appelant simplement <code>preventDefault()</code> sur l'événement <code>pagebeforechange</code>.</p>
-<p>Pour illustrer cette technique, jetez un œil à cet <a href="dynamic-samples/sample-reuse-page.html" rel="external">échantillon de travail</a>. Dans cet échantillon, la page principale commence avec une liste de catégories où l'utilisateur a la possibilité de naviguer. Les éléments actuels dans chaque catégorie sont stockées dans un objet JavaScript en mémoire, à des fins d'illustration, mais les données peuvent vraiment venir de n'importe où.</p>
+<p>Pour illustrer cette technique, jetez un œil à cet <a href="dynamic-samples/sample-reuse-page.html" rel="external">exemple de travail</a>. Dans cet exemple, la page principale commence avec une liste de catégories où l'utilisateur a la possibilité de naviguer. Les éléments actuels dans chaque catégorie sont stockées dans un objet JavaScript en mémoire, à des fins d'illustration, mais les données peuvent vraiment venir de n'importe où.</p>
 <pre><code>
 var categoryData = {
 	animals: {
@@ -186,7 +186,7 @@ function showCategory( urlObj, options )
 		// Obtient l'objet qui représente la catégorie
 		// qui nous intéresse. Notez qu'à ce stade, nous pourrions
 		// lancé à la place une requête Ajax pour récupérer les données, mais
-		// pour les besoins de cet échantillon, il est déjà en mémoire.
+		// pour les besoins de cet exemple, il est déjà en mémoire.
 		category = categoryData[ categoryName ],
 
 		// Les pages que nous utilisons pour afficher notre contenu est déjà dans
@@ -276,7 +276,7 @@ function showCategory( urlObj, options )
 								<li><a href="multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
 								<li><a href="page-titles.html">Titres des pages</a></li>
 								<li><a href="page-links.html">Liaison de pages</a></li>
-								<li><a href="page-transitions.html" data-ajax="false">Transitions de page</a></li>
+								<li><a href="page-transitions.html">Transitions de page</a></li>
 								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
