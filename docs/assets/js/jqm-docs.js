@@ -51,45 +51,37 @@ if ( location.protocol.substr(0,4)  === 'file' ||
   });
 } else {
   $( document ).bind( "mobileinit", function() {
-    
+
+    var entete = $( '<div>' , {
+          'class': "ui-bar ui-bar-a"
+         });
+
+    entete
+      .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
+      .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right' data-mini='true'>Documentation française jQuery</a>" )
+      .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right' data-mini='true'>Forum français dédié à jQuery</a>" );
+
+    var infoadd = $( '<p>' , {
+          'class': "info-add"
+         });
+
+    infoadd
+      .append( "<a href='https://github.com/forresst/jquery-mobile-fr_FR'>(Projet de la documentation en français)</a>" );
+
     // Entête pour le site mobile.jquery-fr.com
     $( 'div.type-home' ).live( 'pagebeforecreate',function(event){
-       var entete = $( '<div>' , {
-          'class': "ui-bar ui-bar-a"
-      });
-
-      entete
-        .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
-        .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right' data-mini='true'>Documentation française jQuery</a>" )
-        .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right' data-mini='true'>Forum français dédié à jQuery</a>" );
-
       $( "div.type-home" ).prepend( entete );
+      $( "div.footer-docs" ).append( infoadd );
     });
 
     $( 'div.type-interior' ).live( 'pagebeforecreate',function(event){
-       var entete = $( '<div>' , {
-          'class': "ui-bar ui-bar-a"
-      });
-
-      entete
-        .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
-        .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right' data-mini='true'>Documentation française jQuery</a>" )
-        .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right' data-mini='true'>Forum français dédié à jQuery</a>" );
-
       $( "div.type-interior" ).prepend( entete );
+      $( "div.footer-docs" ).append( infoadd );
     });
 
     $( 'div.type-index' ).live( 'pagebeforecreate',function(event){
-       var entete = $( '<div>' , {
-          'class': "ui-bar ui-bar-a"
-      });
-
-      entete
-        .append( "<h1>JQuery Mobile, documentation en français   </h1>" )
-        .append( "<a href='http://www.jquery-fr.com' class='ui-btn-right' data-mini='true'>Documentation française jQuery</a>" )
-        .append( "<a href='http://www.jquery-fr.com/forum' class='ui-btn-right' data-mini='true'>Forum français dédié à jQuery</a>" );
-
-      $( "div.type-index" ).prepend( entete );
+       $( "div.type-index" ).prepend( entete );
+       $( "div.footer-docs" ).append( infoadd );
     });
 
     // Google analytics pour mobile.jquery-fr.com
