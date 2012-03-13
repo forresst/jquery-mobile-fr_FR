@@ -38,6 +38,7 @@
 
 <div data-nstest-role="page" data-nstest-theme="a">
 	<div data-nstest-role="content">
+
 		<div data-nstest-role="fieldcontain">
 			<fieldset data-nstest-role="controlgroup">
 				<legend>Acceptez les termes :</legend>
@@ -135,6 +136,16 @@
 		<legend>Acceptez les termes :</legend>
 		<input type="checkbox" name="checkbox-explicit-theme" id="checkbox-explicit-theme" data-nstest-theme="b"/>
 		<label for="checkbox-explicit-theme">toto</label>
+	</fieldset>
+</div>
+		
+<div data-nstest-role="fieldcontain">
+	<fieldset data-nstest-role="controlgroup">
+		<input type="checkbox" name="topicon" id="topicon" class="custom" data-nstest-iconpos="top" />
+		<label for="topicon">J'accepte</label>
+
+		<input type="checkbox" name="bottomicon" id="bottomicon" class="custom" />
+		<label for="bottomicon" data-nstest-iconpos="bottom">J'accepte</label>
 	</fieldset>
 </div>
 
