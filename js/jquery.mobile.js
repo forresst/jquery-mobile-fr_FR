@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 32cd04ab2089024bbe836d22096e3166f0b76f67 <> Date: Thu Mar 8 19:45:38 2012 -0800
+* jQuery Mobile Framework Git Build: SHA1: fd39008a69d5735ba66f6b4d762c0877065d8de4 <> Date: Mon Mar 12 16:58:48 2012 -0400
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1468,7 +1468,10 @@ $.widget( "mobile.widget", {
 	$.fn.jqmData = function( prop, value ) {
 		var result;
 		if ( typeof prop != "undefined" ) {
-			result = this.data( prop ? $.mobile.nsNormalize( prop ) : prop, value );
+			if ( prop ) {
+				prop = $.mobile.nsNormalize( prop );
+			}
+			result = this.data.apply( this, arguments.length < 2 ? [ prop ] : [ prop, value ] );
 		}
 		return result;
 	};
@@ -2124,7 +2127,7 @@ $.widget( "mobile.page", $.mobile.widget, {
 	},
 	
 	removeContainerBackground: function(){
-		$.mobile.pageContainer.removeClass( "ui-overlay-" + $.mobile.getInheritedTheme( this.element ) );
+		$.mobile.pageContainer.removeClass( "ui-overlay-" + $.mobile.getInheritedTheme( this.element.parent() ) );
 	},
 	
 	// set the page container background to the page theme
@@ -4160,19 +4163,22 @@ $.fn.buttonMarkup = function( options ) {
 		if ( attachEvents && !buttonElements) {
 			attachEvents();
 		}
+		
+		// if not, try to find closest theme container	
+		if ( !o.theme ) {
+			o.theme = $.mobile.getInheritedTheme( el, "c" );	
+		}		
 
 		buttonClass = "ui-btn ui-btn-up-" + o.theme;
+		buttonClass += o.inline ? " ui-btn-inline" : "";
+		buttonClass += o.shadow ? " ui-shadow" : "";
+		buttonClass += o.corners ? " ui-btn-corner-all" : "";
 
-		if ( o.inline ) {
-			buttonClass += " ui-btn-inline";
+		if ( o.mini !== undefined ) {
+			// Used to control styling in headers/footers, where buttons default to `mini` style.
+			buttonClass += o.mini ? " ui-mini" : " ui-fullsize";
 		}
-
-		if ( o.mini ) {
-			buttonClass += " ui-mini";
-		} else if ( o.mini && o.mini === false ) {
-			buttonClass += " ui-fullsize"; // Used to control styling in headers/footers, where buttons default to `mini` style.
-		}
-
+		
 		if ( o.icon ) {
 			o.icon = "ui-icon-" + o.icon;
 			o.iconpos = o.iconpos || "left";
@@ -4191,37 +4197,38 @@ $.fn.buttonMarkup = function( options ) {
 				el.attr( "title", el.getEncodedText() );
 			}
 		}
+    
+		innerClass += o.corners ? " ui-btn-corner-all" : "";
 
-		if ( o.corners ) {
-			buttonClass += " ui-btn-corner-all";
-			innerClass += " ui-btn-corner-all";
+		if ( o.iconpos && o.iconpos === "notext" && !el.attr( "title" ) ) {
+			el.attr( "title", el.getEncodedText() );
 		}
 
-		if ( o.shadow ) {
-			buttonClass += " ui-shadow";
+		if ( buttonElements ) {
+			el.removeClass( buttonElements.bcls || "" );
 		}
-
-		if (buttonElements)
-			el.removeClass((buttonElements.bcls || ""));
 		el.removeClass( "ui-link" ).addClass( buttonClass );
 
 		buttonInner.className = innerClass;
 
 		buttonText.className = textClass;
-		if (!buttonElements)
+		if ( !buttonElements ) {
 			buttonInner.appendChild( buttonText );
+		}
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
-			if (!(buttonElements && buttonElements.icon))
+			if ( !(buttonElements && buttonElements.icon) ) {
 				buttonInner.appendChild( buttonIcon );
+			}
 		}
 
 		while ( e.firstChild && !buttonElements) {
 			buttonText.appendChild( e.firstChild );
 		}
 
-		if (!buttonElements)
+		if ( !buttonElements ) {
 			e.appendChild( buttonInner );
+		}
 
 		// Assign a structure containing the elements of this button to the elements of this button. This
 		// will allow us to recognize this as an already-enhanced button in future calls to buttonMarkup().
@@ -4236,8 +4243,9 @@ $.fn.buttonMarkup = function( options ) {
 		$.data(e,           'buttonElements', buttonElements);
 		$.data(buttonInner, 'buttonElements', buttonElements);
 		$.data(buttonText,  'buttonElements', buttonElements);
-		if (buttonIcon)
+		if (buttonIcon) {
 			$.data(buttonIcon, 'buttonElements', buttonElements);
+		}
 	}
 
 	return this;
@@ -4693,6 +4701,7 @@ $( document ).bind( "pagecreate create", function( e ){
 var listCountPerPage = {};
 
 $.widget( "mobile.listview", $.mobile.widget, {
+
 	options: {
 		theme: null,
 		countTheme: "c",
@@ -4700,16 +4709,21 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		dividerTheme: "b",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
+		mini: false,
 		inset: false,
 		initSelector: ":jqmData(role='listview')"
 	},
 
 	_create: function() {
-		var t = this;
-
+		var t = this,
+			listviewClasses = "";
+			
+		listviewClasses += t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "";
+		listviewClasses += t.element.jqmData( "mini" ) || t.options.mini === true ? " ui-mini" : "";
+		
 		// create listview markup
 		t.element.addClass(function( i, orig ) {
-			return orig + " ui-listview " + ( t.options.inset ? " ui-listview-inset ui-corner-all ui-shadow " : "" );
+			return orig + " ui-listview " + listviewClasses;
 		});
 
 		t.refresh( true );
@@ -4839,7 +4853,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon, imgParents, img;
+			a, last, splittheme, countParent, icon, imgParents, img, linkIcon;
 
 		if ( counter ) {
 			$list.find( ".ui-li-dec" ).remove();
@@ -4881,6 +4895,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 						last = a.last();
 						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
+						linkIcon = last.jqmData("icon");
 
 						last.appendTo(item)
 							.attr( "title", last.getEncodedText() )
@@ -4900,7 +4915,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 										corners: true,
 										theme: splittheme,
 										iconpos: "notext",
-										icon: icon || listspliticon || o.splitIcon
+										// link icon overrides list item icon overrides ul element overrides options
+										icon: linkIcon || icon || listspliticon || o.splitIcon
 									})
 								);
 					}
@@ -5095,14 +5111,18 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	_create: function() {
 		var self = this,
 			input = this.element,
+			inheritAttr = function( input, dataAttr ) {
+				return input.jqmData( dataAttr ) || input.closest( "form,fieldset" ).jqmData( dataAttr )
+			},
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
-			label = $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[ 0 ].id + "']" ),
-			inputtype = input.attr( "type" ),
-			mini = input.closest( "form,fieldset" ).jqmData('mini'),
+			label = $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
+			inputtype = input[0].type,
+			mini = inheritAttr( input, "mini" ),
 			checkedState = inputtype + "-on",
 			uncheckedState = inputtype + "-off",
 			icon = input.parents( ":jqmData(type='horizontal')" ).length ? undefined : uncheckedState,
+			iconpos = inheritAttr( input, "iconpos" ),
 			activeBtn = icon ? "" : " " + $.mobile.activeBtnClass,
 			checkedClass = "ui-" + checkedState + activeBtn,
 			uncheckedClass = "ui-" + uncheckedState,
@@ -5136,7 +5156,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			theme: this.options.theme,
 			icon: icon,
 			shadow: false,
-			mini: mini
+			mini: mini,
+			iconpos: iconpos
 		});
 
 		// Wrap the input + label in a div
@@ -5215,20 +5236,18 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 	_cacheVals: function() {
 		this._getInputSet().each(function() {
-			var $this = $(this);
-
-			$this.jqmData( "cacheVal", $this.is( ":checked" ) );
+			$(this).jqmData( "cacheVal", this.checked );
 		});
 	},
 
 	//returns either a set of radios with the same name attribute, or a single checkbox
 	_getInputSet: function(){
-		if(this.inputtype == "checkbox") {
+		if(this.inputtype === "checkbox") {
 			return this.element;
 		}
 
 		return this.element.closest( "form,fieldset,:jqmData(role='page')" )
-			.find( "input[name='"+ this.element.attr( "name" ) +"'][type='"+ this.inputtype +"']" );
+			.find( "input[name='"+ this.element[0].name +"'][type='"+ this.inputtype +"']" );
 	},
 
 	_updateAll: function() {
@@ -5237,9 +5256,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		this._getInputSet().each(function() {
 			var $this = $(this);
 
-			// NOTE getAttribute is used here to deal with an issue with the :checked
-			//      selector. see #3597
-			if ( $this.prop( "checked" ) || self.inputtype === "checkbox" ) {
+			if ( this.checked || self.inputtype === "checkbox" ) {
 				$this.trigger( "change" );
 			}
 		})
@@ -5247,13 +5264,11 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 	},
 
 	refresh: function() {
-		var input = this.element,
+		var input = this.element[0],
 			label = this.label,
 			icon = label.find( ".ui-icon" );
 
-		// input[0].checked expando doesn't always report the proper value
-		// for checked='checked'
-		if ( $( input[ 0 ] ).prop( "checked" ) ) {
+		if ( input.checked ) {
 			label.addClass( this.checkedClass ).removeClass( this.uncheckedClass );
 			icon.addClass( this.checkedicon ).removeClass( this.uncheckedicon );
 		} else {
@@ -5261,7 +5276,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			icon.removeClass( this.checkedicon ).addClass( this.uncheckedicon );
 		}
 
-		if ( input.is( ":disabled" ) ) {
+		if ( input.disabled ) {
 			this.disable();
 		} else {
 			this.enable();
