@@ -1,0 +1,109 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile Docs - Contenu pliable</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../js/"></script>
+
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+			<h1>Contenu pliable</h1>
+			<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+		</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		<h2>Contenu pliable</h2>
+		
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="content-collapsible.html" data-role="button" data-transition="fade">Bases</a></li>
+				<li><a href="content-collapsible-options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="content-collapsible-methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+				<li><a href="content-collapsible-events.html" data-role="button" data-transition="fade" class="ui-btn-active">Événements</a></li>
+			</ul>
+
+			<p>Liez les événements directement au conteneur, typiquement un élément <code>div</code>. Utilisez les <a href="../api/events.html">évènements virtuels</a> de jQuery Mobile ou liez les évènements standard de JavaScript tel que change, focus, blur, etc... :</p>
+			<pre><code>
+$( ".selector" ).bind( "collapse", function(event, ui) {
+  ...
+});
+</code></pre>
+
+			<p>Le plugin pliable a les événements personnalisés suivants :</p>
+
+	<dl>
+
+		<dt><code>create</code> déclenché quand un pliable est créé</dt>
+		<dd>
+
+			<pre><code>
+$( ".selector" ).collapsible({
+   create: function(event, ui) { ... }
+});
+			</code></pre>
+		</dd>
+
+		<dt><code>collapse</code> déclenché quand un pliable est réduit</dt>
+		<dd>
+
+			<pre><code>
+$( ".selector" ).collapsible({
+   collapse: function(event, ui) { ... }
+});
+			</code></pre>
+		</dd>
+
+		<dt><code>expand</code> déclenché quand un pliable est déplié</dt>
+		<dd>
+
+			<pre><code>
+$( ".selector" ).collapsible({
+   expand: function(event, ui) { ... }
+});
+			</code></pre>
+		</dd>
+
+	</dl>
+
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+					<li data-role="list-divider">Formatage de contenu</li>
+					<li><a href="content-html.html">Styles HTML de base</a></li>
+					<li><a href="content-grids.html">Grille de mise en page (colonnes)</a></li>
+					<li data-theme="a"><a href="content-collapsible.html">Blocs de contenu pliable</a></li>
+					<li><a href="content-collapsible-set.html">Ensembles pliable (accordéons)</a></li>
+					<li><a href="content-themes.html">Thématisation du contenu</a></li>
+	
+				</ul>
+		</div>
+	</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>﻿© 2011-12 The jQuery Project</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>
