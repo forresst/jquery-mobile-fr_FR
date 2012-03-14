@@ -18,21 +18,28 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Contenu pliable</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
-	</div><!-- /header -->
+			<h1>Contenu pliable</h1>
+			<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+		</div><!-- /header -->
 
-	<div data-role="content">
-		<div class="content-primary">
-		
-		<h2>Balisage du contenu pliable</h2>
-		<p>Pour créer un bloc de contenu  pliable, créez un conteneur et ajouter l'attribut <code> data-role="collapsible"</code>. L'utilisation de l'attribut  <code>data-content-theme</code> vous permet de définir un thème pour le contenu du pliable. Regardez la <a href="../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux pliables.</p>
+		<div data-role="content">
+			<div class="content-primary">
+			<h2>Contenu pliable</h2>
+			
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="content-collapsible.html" data-role="button" data-transition="fade" class="ui-btn-active">Bases</a></li>
+				<li><a href="content-collapsible-options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="content-collapsible-methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+				<li><a href="content-collapsible-events.html" data-role="button" data-transition="fade">Événements</a></li>
+			</ul>
 
-		<p>Directement à l'intérieur de ce conteneur, ajoutez un élément entête (H1-H6). Le framework stylisera l'entête pour ressembler à un bouton cliquable et ajoutera une icône "+" à gauche pour indiquer qu'il est extensible.</p>
-	
-		<p>Après l'entête, ajoutez n'importe quel balisage HTML que vous voulez être pliable. Le framework terminera ce balisage dans un conteneur qui sera caché/affiché lorsque l'entête sera cliqué.</p>
+			<p>Pour créer un bloc de contenu  pliable, créez un conteneur et ajouter l'attribut <code> data-role="collapsible"</code>. L'utilisation de l'attribut  <code>data-content-theme</code> vous permet de définir un thème pour le contenu du pliable. Regardez la <a href="../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux pliables.</p>
+
+			<p>Directement à l'intérieur de ce conteneur, ajoutez un élément entête (H1-H6). Le framework stylisera l'entête pour ressembler à un bouton cliquable et ajoutera une icône "+" à gauche pour indiquer qu'il est extensible.</p>
 		
-		<p>Par défaut, le contenu sera réduit.</p>
+			<p>Après l'entête, ajoutez n'importe quel balisage HTML que vous voulez être pliable. Le framework terminera ce balisage dans un conteneur qui sera caché/affiché lorsque l'entête sera cliqué.</p>
+			
+			<p>Par défaut, le contenu sera réduit.</p>
 <pre><code>		
 &lt;div <strong>data-role="collapsible"</strong>&gt;
    &lt;h3&gt;Je suis l'entête&lt;/h3&gt;

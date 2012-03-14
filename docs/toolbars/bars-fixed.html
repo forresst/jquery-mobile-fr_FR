@@ -75,16 +75,16 @@
 		<p>Avant la version 1.1, jQuery Mobile utilisait dynamiquement les barres d'outils repositionnées pour donner l'effet d'une entête fixe, car très peu de navigateurs mobiles supportaient la propriété CSS <code>position:fixed</code>. Et en simulant une fixation grâce à l'utilisation de "faux" JavaScript,  le comportement du débordement du défilement réduisait le nombre de navigateur supporté, en plus cela se comportait de façon anormale sur certaines plateformes. Ce comportement n'était pas idéal et jQuery Mobile 1.1 a pris une nouvelle approche pour les barres d'outils fixes qui permet un support beaucoup plus large. Maintenant le framework offre de véritables barres d'outils fixes sur les nombreuses plateformes populaires, au lieu d'un positionnement statique dégradé pour les plateformes ne pouvant le supporter.</p>
 		
 		<h3>Polyfill pour les anciennes plateformes</h3>
-		<p>Le plugin de barre d'outils fixe se dégrade gracieusement dans les plateformes qui ne supportent pas correctement le CSS <code>position:fixed</code> , comme l'iOS4.3. Si vous avez encore besoin de supporter les barres d'outils fixes sur cette plateforme (avec le comportement afficher/Masquer) qui était incluse dans les versions précédentes, nous avons développé un polyfill que vous pouvez utiliser.</p>
+		<p>Le plugin de barre d'outils fixe se dégrade gracieusement dans les plateformes qui ne supportent pas correctement le CSS <code>position:fixed</code> , comme l'iOS4.3. Si vous avez encore besoin de supporter les barres d'outils fixes sur cette plateforme (avec le comportement afficher/Masquer) qui était incluse dans les versions précédentes, Filament Group a développé un polyfill que vous pouvez utiliser.</p>
 		
 		<ul>
-				<li><a href="https://gist.github.com/2020916">Github Gist avec CSS et JavaScript requis pour le polyfill des barres d'outils fixes</a></li>
-				<li><a href="http://bl.ocks.org/d/2020916/">L'URL de démonstration en utilisant le code dans le Gist ci-dessus</a></li>
+				<li><a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">C'est le dépôt du code Github avec les CSS et JavaScript requis pour le polyfill des barres d'outils fixes</a></li>
+				<li><a href="http://filamentgroup.github.com/jQuery-Mobile-FixedToolbar-Legacy-Polyfill/">L'URL de démonstration en utilisant le code dans le dépôt ci-dessus</a></li>
 		</ul>
 		
 		<p>Il suffit d'inclure les fichiers CSS et JS après vos références à jQuery Mobile et les barres d'outils fixes travailleront de la même manière que jQuery Mobile 1.0 dans iOS4.3, avec l'ajout de la nouvelle API pour le plugin fixedtoolbar 1.1.</p>
 		
-		<p>Si vous avez des améliorations à suggérer, faites un fork du <a href="https://gist.github.com/2020916">gist</a> sur github et faites le nous savoir !</p>
+		<p>Si vous avez des améliorations à suggérer, faites un fork du <a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">gist</a> sur github et faites le nous savoir !</p>
 		
 <div class="ui-body ui-body-e">		
 		<h2>N'est plus pris en charge : touchOverflowEnabled</h2>
