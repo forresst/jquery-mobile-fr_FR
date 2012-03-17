@@ -57,18 +57,34 @@
 				<option value="on">Marche</option>
 			</select> 
 			
-			<p>Le contrôle est proportionnellement réduite, donc si vous l'utilisez des mots plus longs, vous pouvez simplement ajouter une ligne de CSS pour le mettre à la largeur que vous désirez. Par exemple, <code>div.ui-slider-switch { width: 9em }</code> produira :</p>
+			
+			<h2>Labels plus long</h2>
+			<p>Le contrôle est proportionnellement réduite, afin d'utiliser des labels plus longs, on peut simplement ajouter une ligne de CSS mettant l'interrupteur à la largeur désirée. Par exemple, voici le balisage suivant :</p>
+<pre><code>
+&lt;div class="containing-element"&gt;
+	&lt;label for="flip-min"&gt;Interrupteur :&lt;/label&gt;
+	&lt;select name="slider" id="flip-min" data-role="slider"&gt;
+		&lt;option value="off"&gt;Interrupteur Off&lt;/option&gt;
+		&lt;option value="on"&gt;Interrupteur On&lt;/option&gt;
+	&lt;/select&gt;
+&lt;/div&gt;
+</code></pre>
+	
+			<p><code>.containing-element .ui-slider-switch { width: 9em }</code> produira :</p>
 		
 			<style type="text/css" media="screen">
-			.switch-longdesc div.ui-slider-switch { width: 9em; }
+			.containing-element .ui-slider-switch { width: 9em; }
 			</style>
-			<div class="switch-longdesc">
+			
+			<div class="containing-element">
 				<label for="flip-min">Interrupteur :</label>
 				<select name="slider" id="flip-min" data-role="slider">
 					<option value="off">Interrupteur Off</option>
 					<option value="on">Interrupteur On</option>
 				</select> 
 			</div>
+			
+			<p>Comme certains styles par défaut dépendent des fieldcontains, notez que vous devrez peut-être veiller à ce que des styles personnalisés s'applique aux interrupteurs au sein des fieldcontains en utilisant <code>.ui-field-contain div.ui-slider-switch { width: [...]; }</code>.</p>
 			
 			<h2>Version mini</h2>
 
@@ -114,7 +130,7 @@
 				
 		<h2>Thématisation de l'interrupteur</h2>	
 		
-		<p>Comme tous les éléments de formulaire, ce widget hérite automatiquement du thème du conteneur parent. POUR choisir un nuancier de couleur de thème spécifique, spécifiez l'attribut <code>data-theme</code> sur le select et spécifiez une lettre de nuancier.</p>	
+		<p>Comme tous les éléments de formulaire, ce widget héritera automatiquement du thème du conteneur parent. Pour choisir un nuancier de couleur de thème spécifique, spécifiez l'attribut <code>data-theme</code> sur le select et spécifiez une lettre de nuancier.</p>	
 		
 <pre><code>	
 &lt;div data-role="fieldcontain"&gt;

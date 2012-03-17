@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: d640e387e8edceb6d44b9eec77b41f8cfe5bb52e <> Date: Tue Mar 13 20:53:19 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 01a136cff0b65d492682e56a6291913600fe9f38 <> Date: Fri Mar 16 15:58:33 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -84,7 +84,7 @@ function createVirtualEvent( event, eventType ) {
 
 	// addresses separation of $.event.props in to $.event.mouseHook.props and Issue 3280
 	// https://github.com/jquery/jquery-mobile/issues/3280
-	if ( t.search(/mouse/) >-1 ) {
+	if ( t.search( /^(mouse|click)/ ) > -1 ) {
 		props = mouseEventProps;
 	}
 
@@ -4218,6 +4218,7 @@ $.fn.buttonMarkup = function( options ) {
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
 			if ( !(buttonElements && buttonElements.icon) ) {
+				buttonIcon.appendChild( document.createTextNode("\u00a0") );
 				buttonInner.appendChild( buttonIcon );
 			}
 		}
