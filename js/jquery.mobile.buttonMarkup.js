@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: For making button-like links.
 //>>label: Buttons
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.button.css
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.vmouse" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
@@ -116,6 +117,7 @@ $.fn.buttonMarkup = function( options ) {
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
 			if ( !(buttonElements && buttonElements.icon) ) {
+				buttonIcon.appendChild( document.createTextNode("\u00a0") );
 				buttonInner.appendChild( buttonIcon );
 			}
 		}
