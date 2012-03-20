@@ -77,6 +77,9 @@
 				<h1>Modifier le contact</h1>
 				<a href="index.html" data-icon="check">Enregistrer</a>
 			</div>
+			
+			<h3>Fabrication des boutons se démarquant visuellement</h3>
+			
 			<p>Les boutons adoptent automatiquement la couleur du nuancier de la barre où ils sont positionnés, de sorte qu'un lien dans une barre d'entête avec la couleur "a" sera également stylisé comme les boutons colorés "a". C'est simple de faire un bouton qui ressort visuellement - ici, nous ajoutons l'attribut <code> data-theme</code> et définissons le nuancier de couleur pour le bouton à "b" pour mettre en évidence le bouton "Enregistrer".</p>
 			
 			<pre><code>			
@@ -114,6 +117,28 @@
 				<h1>Titre de la page</h1>
 				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
 			</div>
+			
+			
+				<h3>Ajouter des boutons aux barres d'outils sans entête</h3>
+	
+			<p>Le titre dans la barre d'entête a une certaine marge qui vous donnera la hauteur de la barre. Si vous choisissez de ne pas utiliser le titre, vous aurez besoin d'ajouter un élément avec <code>class="ui-title"</code> car la barre ne peut avoir une hauteur correcte et s'afficher correctement.</p> 
+
+		
+<div class="highlight"> 
+<pre><code>
+&lt;div data-role="header" data-position="inline"&gt; 
+	&lt;a href="index.html" data-icon="gear" class="ui-btn-right"&gt;Options&lt;/a&gt;
+	&lt;span class="ui-title" /&gt;
+&lt;/div&gt;
+	
+</code></pre> 
+</div> 
+
+			<div data-role="header" >
+				<a href="index.html" data-icon="gear" class="ui-btn-right">Options</a>
+				<span class="ui-title" />
+			</div>
+			
 			
 			
 		<h2>Ajout des boutons Retour</h2>
