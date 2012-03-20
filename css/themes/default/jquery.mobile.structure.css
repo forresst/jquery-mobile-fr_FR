@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 01a136cff0b65d492682e56a6291913600fe9f38 <> Date: Fri Mar 16 15:58:33 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: da7237abaac3d8c7add80028aa4ef7e26db6b356 <> Date: Mon Mar 19 17:04:39 2012 -0400
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -654,7 +654,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-collapsible-content-collapsed { display: none; }
 .ui-collapsible-set { margin: .5em 0; }
 .ui-collapsible-set .ui-collapsible { margin: -1px 0 0; }
-.ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: 0em 0 .5em; }
+.ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: 0em 0 .5em; zoom: 1; }
 .ui-bar .ui-controlgroup { margin: 0 .3em; }
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
 .ui-controlgroup-controls { display: block; width: 100%;}
@@ -665,7 +665,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
 .ui-controlgroup-horizontal { padding: 0; }
 .ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select { display: inline-block; margin: 0 -5px 0 0; }
-.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; margin: 0 -1px 0 0; }
+.ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; clear: none; margin: 0 -1px 0 0; }
 .ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn,
 .ui-controlgroup-horizontal .ui-checkbox:last-child, .ui-controlgroup-horizontal .ui-radio:last-child { margin-right: 0; }
 .ui-controlgroup-horizontal .ui-controlgroup-last { margin-right: 0; }
@@ -705,7 +705,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-dialog { 
 	margin-top: -15px;  
 }
-.ui-checkbox, .ui-radio { position:relative;  margin: .2em 0 .5em; z-index: 1;  }
+.ui-checkbox, .ui-radio { position: relative; clear: both; margin: .2em 0 .5em; z-index: 1;  }
 .ui-checkbox .ui-btn, .ui-radio .ui-btn { margin: 0; text-align: left; z-index: 2; }
 .ui-checkbox .ui-btn-inner, .ui-radio .ui-btn-inner { white-space: normal; }
 .ui-checkbox .ui-btn-icon-left .ui-btn-inner,.ui-radio .ui-btn-icon-left .ui-btn-inner { padding-left: 45px; }

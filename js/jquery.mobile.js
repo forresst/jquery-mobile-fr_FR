@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 01a136cff0b65d492682e56a6291913600fe9f38 <> Date: Fri Mar 16 15:58:33 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: da7237abaac3d8c7add80028aa4ef7e26db6b356 <> Date: Mon Mar 19 17:04:39 2012 -0400
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -2733,14 +2733,9 @@ $.mobile.transitionFallbacks = {};
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function getScreenHeight(){
-		var orientation 	= $.event.special.orientationchange.orientation(),
-			port			= orientation === "portrait",
-			winMin			= port ? 480 : 320,
-			screenHeight	= port ? screen.availHeight : screen.availWidth,
-			winHeight		= Math.max( winMin, $( window ).height() ),
-			pageMin			= Math.min( screenHeight, winHeight );
-
-		return pageMin;
+		// Native innerHeight returns more accurate value for this across platforms, 
+		// jQuery version is here as a normalized fallback for platforms like Symbian
+		return window.innerHeight || $( window ).height();
 	}
 
 	$.mobile.getScreenHeight = getScreenHeight;
@@ -6981,11 +6976,11 @@ $( document ).bind( "pagecreate create", function( e ){
 					wkversion = !!wkmatch && wkmatch[ 1 ],
 					ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
 					ffversion = !!ffmatch && ffmatch[ 1 ],
-					operammobilematch = ua.match( /Opera Mobile\/([0-9]+)/ ),
+					operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
 					bbmatch = w.blackberry && w.navigator.appVersion.match( /Version\/([0-9]+)/ ),
 					bbversion = !!bbmatch && parseInt( bbmatch[ 1 ], 10 ),
 					omversion = !!operammobilematch && operammobilematch[ 1 ];
-					
+
 				if(
 					// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
 					( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 )
@@ -6993,7 +6988,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					// Opera Mini
 					( w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" )
 					||
-					( operammobilematch && omverson < 7458 )
+					( operammobilematch && omversion < 7458 )
 					||
 					//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
 					( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 )
@@ -7307,7 +7302,11 @@ $( document ).bind( "pagecreate create", function( e ){
 	// check position of loader to see if it appears to be "fixed" to center
 	// if not, use abs positioning
 	function checkLoaderPosition(){
-		if( $loader.offset().top < $window.scrollTop() ){
+		var offset = $loader.offset(),
+			scrollTop = $window.scrollTop(),
+			screenHeight = $.mobile.getScreenHeight();
+
+		if( offset.top < scrollTop || (offset.top - scrollTop) > screenHeight ) {
 			$loader.addClass( "ui-loader-fakefix" );
 			fakeFixLoader();
 			$window
@@ -7352,6 +7351,7 @@ $( document ).bind( "pagecreate create", function( e ){
 			}
 
 			$( window ).unbind( "scroll", fakeFixLoader );
+			$( window ).unbind( "scroll", checkLoaderPosition );
 		},
 
 		// find and enhance the pages in the dom and transition to the first page.
