@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: da7237abaac3d8c7add80028aa4ef7e26db6b356 <> Date: Mon Mar 19 17:04:39 2012 -0400
+* jQuery Mobile Framework Git Build: SHA1: 1203f5f14c71c8f744faad15ab22bc56ed4376f6 <> Date: Wed Mar 21 14:51:23 2012 -0400
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1102,7 +1102,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-bar, .ui-body { position: relative; padding: .4em 15px;  overflow: hidden; display: block;  clear:both;  }
 .ui-bar { font-size: 16px; margin: 0; }
 .ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
-.ui-header, .ui-footer { position: relative; overflow: hidden; border-left-width: 0; border-right-width: 0; }
+.ui-header, .ui-footer { position: relative; border-left-width: 0; border-right-width: 0; }
 .ui-header .ui-btn-left,
 .ui-header .ui-btn-right,
 .ui-footer .ui-btn-left,
@@ -1781,7 +1781,8 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-dialog-contain { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; }
 .ui-dialog .ui-header {
 	margin-top: 15%;
-	border: 0;
+	border: none;
+	overflow: hidden;
 }
 .ui-dialog .ui-header, 
 .ui-dialog .ui-content, 

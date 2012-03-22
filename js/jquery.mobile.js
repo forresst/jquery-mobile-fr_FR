@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: da7237abaac3d8c7add80028aa4ef7e26db6b356 <> Date: Mon Mar 19 17:04:39 2012 -0400
+* jQuery Mobile Framework Git Build: SHA1: 1203f5f14c71c8f744faad15ab22bc56ed4376f6 <> Date: Wed Mar 21 14:51:23 2012 -0400
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -5501,28 +5501,31 @@ $( document ).bind( "pagecreate create", function( e ){
 	var	meta = $( "meta[name=viewport]" ),
         initialContent = meta.attr( "content" ),
         disabledZoom = initialContent + ",maximum-scale=1, user-scalable=no",
-        enabledZoom = initialContent + ",maximum-scale=10, user-scalable=yes";
+        enabledZoom = initialContent + ",maximum-scale=10, user-scalable=yes",
+		disabledInitially = /(user-scalable[\s]*=[\s]*no)|(maximum-scale[\s]*=[\s]*1)[$,\s]/.test( initialContent );
 	
 	$.mobile.zoom = $.extend( {}, {
-		enabled: true,
+		enabled: !disabledInitially,
 		locked: false,
 		disable: function( lock ) {
-			if( !$.mobile.zoom.locked ){
+			if( !disabledInitially && !$.mobile.zoom.locked ){
 	        	meta.attr( "content", disabledZoom );
 	        	$.mobile.zoom.enabled = false;
 				$.mobile.zoom.locked = lock || false;
 			}
 		},
 		enable: function( unlock ) {
-			if( !$.mobile.zoom.locked || unlock ){
+			if( !disabledInitially && ( !$.mobile.zoom.locked || unlock === true ) ){
 		        meta.attr( "content", enabledZoom );
 		        $.mobile.zoom.enabled = true;
 				$.mobile.zoom.locked = false;
 			}
 		},
 		restore: function() {
-	        meta.attr( "content", initialContent );
-	        $.mobile.zoom.enabled = true;
+			if( !disabledInitially ){
+	        	meta.attr( "content", initialContent );
+	        	$.mobile.zoom.enabled = true;
+			}
 		}
 	});
 
