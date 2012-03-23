@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 1203f5f14c71c8f744faad15ab22bc56ed4376f6 <> Date: Wed Mar 21 14:51:23 2012 -0400
+* jQuery Mobile Framework Git Build: SHA1: 5f7cadc38c74e38e997d413002aebae5dfcc2532 <> Date: Thu Mar 22 17:18:05 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -5538,7 +5538,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		theme: null,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type])"
+		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type])",
+		clearSearchButtonText: "clear text"
 	},
 
 	_create: function() {
@@ -5574,7 +5575,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		if ( input.is( "[type='search'],:jqmData(type='search')" ) ) {
 
 			focusedEl = input.wrap( "<div class='ui-input-search ui-shadow-inset ui-btn-corner-all ui-btn-shadow ui-icon-searchfield" + themeclass + miniclass + "'></div>" ).parent();
-			clearbtn = $( "<a href='#' class='ui-input-clear' title='clear text'>clear text</a>" )
+			clearbtn = $( "<a href='#' class='ui-input-clear' title='" + o.clearSearchButtonText + "'>" + o.clearSearchButtonText + "</a>" )
 				.bind('click', function( event ) {
 					input
 						.val( "" )
@@ -6850,6 +6851,7 @@ $( document ).bind( "pagecreate create", function( e ){
 				var self = this,
 					o = this.options,
 					placeholder = this.placeholder,
+					needPlaceholder = true,
 					optgroups = [],
 					lis = [],
 					dataIcon = self.isMultiple ? "checkbox-off" : "false";
@@ -6889,15 +6891,18 @@ $( document ).bind( "pagecreate create", function( e ){
 							fragment.appendChild(divider);
 							optGroup = optLabel;
 						}
-					}															
-										
-					if (!placeholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" )) ) {
+					}
+
+					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length == 0 || $option.jqmData( "placeholder" ))) {
+						needPlaceholder = false;
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
-						}						
-						placeholder = self.placeholder = text;									
+						}
+						if (!placeholder) {
+							placeholder = self.placeholder = text;
+						}
 					}
-															
+
 					var item = document.createElement('li');															
 					if ( option.disabled ) {
 						classes.push( "ui-disabled" );
@@ -6980,8 +6985,6 @@ $( document ).bind( "pagecreate create", function( e ){
 					ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
 					ffversion = !!ffmatch && ffmatch[ 1 ],
 					operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
-					bbmatch = w.blackberry && w.navigator.appVersion.match( /Version\/([0-9]+)/ ),
-					bbversion = !!bbmatch && parseInt( bbmatch[ 1 ], 10 ),
 					omversion = !!operammobilematch && operammobilematch[ 1 ];
 
 				if(
@@ -7001,9 +7004,6 @@ $( document ).bind( "pagecreate create", function( e ){
 					||
 					// WebOS less than 3
 					( "palmGetResource" in window && wkversion && wkversion < 534 )
-					||
-					// BlackBerry six and below.
-					( w.blackberry && bbversion < 7 )
 					||
 					// MeeGo
 					( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 )
