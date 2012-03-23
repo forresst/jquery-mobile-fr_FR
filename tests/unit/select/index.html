@@ -365,6 +365,23 @@
   <select name="keep-native" id="keep-native" class="should-be-native">
     <option></option>
   </select>
+
+	<div data-nstest-role="fieldcontain" id="optgroup-and-placeholder-container">
+		<select name="optgroup-and-placeholder" id="optgroup-and-placeholder" data-nstest-native-menu="false">
+			<option>Choisissez la méthode d'expédition</option>
+			<optgroup label="USPS">
+				<option value="standard" selected>Lent : 7 jours</option>
+				<option value="rush">Rapide : 3 jours</option>
+				<option value="express">Express : Le lendemain</option>
+				<option value="overnight">De nuit</option>
+			</optgroup>
+			<optgroup label="FedEx">
+				<option value="firstOvernight">D'abord la Nuit</option>
+				<option value="expressSaver">Sauveur express</option>
+				<option value="ground">Sur le terrain</option>
+			</optgroup>
+		</select>
+	</div>
 </div>
 
 

@@ -51,11 +51,6 @@
 	&lt;h1&gt;Pied de page fixe !&lt;/h1&gt;
 &lt;/div&gt;
 		</code></pre>
-
-		<h2>Formulaires dans les barres d'outils</h2>
-		<p>Dans jQuery Mobile 1.1, tous les éléments de formulaire sont maintenant testé pour fonctionner correctement dans les barres d'outils et une version plus compacte de <a href="../forms/forms-all-mini.html">taille mini</a> est recommandée pour l'utiliser dans les barres d'outils. Les pages suivantes sont proposées pour tester les barres d'outils fixes et les éléments de formulaires : <a href="bars-fixed-forms-a.html">application démo</a>, <a href="bars-fixed-forms-b.html">saisies de texte</a>, <a href="bars-fixed-forms-c.html">recherche</a>, <a href="bars-fixed-forms-d.html">radio bouton</a>, <a href="bars-fixed-forms-e.html">case à cocher</a>, <a href="bars-fixed-forms-f.html">curseur</a>, <a href="bars-fixed-forms-g.html">sélection</a> et  <a href="bars-fixed-forms-h.html">boutons</a>.
-		</p>
-		<p>Notez que l'interaction des barres d'outils fixes et l'utilisation du clavier à l'écran sur de nombreuses plateformes mobiles peuvent causer des problèmes lorsque ceux-ci interagissent, ainsi nous recommandons d'éviter l'utilisation de saisie de texte ou d'autres éléments qui ouvrent le clavier en bas de page.</p>
 		
 		<h2>Barres d'outils pleines écrans</h2>
 		<p>Les barres d'outils "plein écran" se positionnent en haut du contenu à chaque fois qu'elles sont visibles, et à la différence des barres d'outils fixes habituelles, les barres d'outils "plein écran" ne se replient pas vers un positionnement statique lors d'un basculement (afficher/masquer), au lieu de cela elles disparaissent entièrement de l'écran. Les barres d'outils "plein écran" sont idéales pour les interfaces plus immersive, comme une visionneuse de photos qui est censé remplir tout l'écran avec la photo. <a href="bars-fullscreen.html">Cette page</a> montre les barres d'outils qui utilise l'option fullscreen.</p>
@@ -67,9 +62,12 @@
 	&lt;h1&gt;Entête fixe !&lt;/h1&gt;
 &lt;/div&gt;
 				</code></pre>
+
+
+		<h2>Formulaires dans les barres d'outils</h2>
 		
+		<p>Bien que tous les éléments de formulaire sont maintenant testés pour fonctionner correctement dans les barres d'outils <em>statiques</em> pour jQuery Mobile 1.1, nous vous recommandons de nombreux tests lors de l'utilisation des éléments de formulaire dans  les barres d'outils <em>fixed</em> ou dans tous les éléments <code>position: fixed</code>. Cela peut potentiellement déclencher un certain nombre de problèmes imprévisibles dans différents navigateurs mobiles, Android 2.2/2.3 en particulier (détaillé dans les <b>Problèmes connus dans Android 2.2/2.3</b>).</p>
 		
-	
 		<h2>Les changements dans jQuery Mobile 1.1</h2>
 		
 		<p>Avant la version 1.1, jQuery Mobile utilisait dynamiquement les barres d'outils repositionnées pour donner l'effet d'une entête fixe, car très peu de navigateurs mobiles supportaient la propriété CSS <code>position:fixed</code>. Et en simulant une fixation grâce à l'utilisation de "faux" JavaScript,  le comportement du débordement du défilement réduisait le nombre de navigateur supporté, en plus cela se comportait de façon anormale sur certaines plateformes. Ce comportement n'était pas idéal et jQuery Mobile 1.1 a pris une nouvelle approche pour les barres d'outils fixes qui permet un support beaucoup plus large. Maintenant le framework offre de véritables barres d'outils fixes sur les nombreuses plateformes populaires, au lieu d'un positionnement statique dégradé pour les plateformes ne pouvant le supporter.</p>
@@ -85,6 +83,21 @@
 		<p>Il suffit d'inclure les fichiers CSS et JS après vos références à jQuery Mobile et les barres d'outils fixes travailleront de la même manière que jQuery Mobile 1.0 dans iOS4.3, avec l'ajout de la nouvelle API pour le plugin fixedtoolbar 1.1.</p>
 		
 		<p>Si vous avez des améliorations à suggérer, faites un fork du <a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">gist</a> sur github et faites le nous savoir !</p>
+		
+		<h2>Problèmes connus dans Android 2.2/2.3</h2>	
+		<p>La mise en œuvre de <code>position: fixed;</code> dans Android 2.2/2.3 peut, en conjonction avec des styles apparemment sans rapport avec des modèles de balisage, provoquer un certain nombre de problème étrange en particulier dans le cas des éléments  <code>position: absolute</code> à l'intérieur d'éléments <code>position: fixed</code>. Bien que nous ayons fait de notre mieux pour contourner un certain nombre de ces bugs uniques relevant de la bibliothèque, notez que des styles personnalisés peuvent causer un certain nombre de problèmes mais limité à :</p>
+		<ul>
+			<li>Les éléments de formulaire situés ailleurs sur la page des menus de sélection  en particulier, peuvent ne pas répondre à une interaction utilisateur quand un élément <em>vide</em> positionné en absolu est placé dans un élément à position fixe. Dans de rares cas et spécifiques à Android 2.2, cela peut causer sur <em>la totalité des pages</em> un échec à une interaction utilisateur. Cela peut apparemment être résolu en ajoutant n'importe quel caractère à l'élément positionné en  absolu, y compris un espace insécable, et même dans certains cas des espaces.</li>
+			<li>Le problème ci-dessus peut également être déclenché par une image positionné en absolu à l'intérieur d'un élément en position fixe, mais <em>seulement</em> lorsque cette image est utilisée avec <em>autre chose que ses dimensions inhérentes</em>. Si une hauteur ou une largeur est spécifiée sur l'image en utilisant le CSS, ou si le src de l'image n'est pas valide (donc n'ayant pas de hauteur et de largeur inhérente), ce problème peut se produire. Si une image par exemple de 50x50 pixels est placée dans un élément fixe et est laissé à ses dimensions inhérentes, cette question ne semble pas se produire.</li>
+			<li>Quand un élément <code>position: fixed</code> apparaît n'importe où sur une page, la plupart des transformations 2D CSS échoueront. Curieusement, seuls les transformations <code>translate</code> semblent ne pas être affectées par cela. Encore plus étrange, ce problème est résolu en réglant le CSS <code>opacity</code> à .9 ou moins sur le parent de l'élément fixe.</li>
+			<li>La combinaison de <code>position: fixed</code> et des propriétés overflow est à éviter, car les deux ensembles sont connus pour causer des problèmes imprévisibles dans les anciennes versions de l'OS Android.</li>
+			<li>Tout élément qui déclenche le clavier à l'écran, lorsqu'il est placé dans un élément <code>position: fixed</code>, ne parviendra pas à répondre à la saisie de l'utilisateur lorsque vous utilisez autre chose que le clavier par défaut. Cela inclut Swype, XT9 ou, à priori, toute méthode de saisie en dehors de la norme non-intuitive du clavier.</li>
+		</ul>
+			
+		<p>Alors que nous allons continuer à essayer de trouver des façons d'atténuer ces bugs du mieux que nous le pouvons, nous vous conseillons actuellement lors de l'implémentation des barres d'outils fixes contenant des styles utilisateur compliqués et des éléments de formulaire de faire de nombreux essais dans toutes les versions du navigateur natif d'Android.</p>
+		
+		<p>Les pages suivantes sont proposées pour tester les barres d'outils fixes et les éléments de formulaires : <a href="bars-fixed-forms-a.html">application démo</a>, <a href="bars-fixed-forms-b.html">saisies de texte</a>, <a href="bars-fixed-forms-c.html">recherche</a>, <a href="bars-fixed-forms-d.html">radio bouton</a>, <a href="bars-fixed-forms-e.html">case à cocher</a>, <a href="bars-fixed-forms-f.html">curseur</a>, <a href="bars-fixed-forms-g.html">sélection</a> et  <a href="bars-fixed-forms-h.html">boutons</a>.</p>
+		
 		
 <div class="ui-body ui-body-e">		
 		<h2>N'est plus pris en charge : touchOverflowEnabled</h2>

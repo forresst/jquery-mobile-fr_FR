@@ -132,6 +132,9 @@
 		<h2>Conteneurs de champs</h2>
 		<p>Pour améliorer le style des labels et des éléments de formulaire sur des écrans plus larges, nous vous conseillons d'envelopper un <code>div</code> ou <code>fieldset</code> avec l'attribut <code> data-role="fieldcontain"</code> autour de chaque élément label/form. Ce framework permet d'aligner les entrées et les labels associée côte à côte, et casser les éléments ci-dessous de niveau de bloc empilés ~480px. Le framework va également ajouter une bordure inférieure mince pour agir comme un séparateur de champ.</p>
 
+		<h2>Formulaires dans les barres d'outils</h2>
+		<p>Bien que tous les éléments de formulaire sont maintenant testés pour fonctionner correctement dans les barres d'outils <em>statiques</em> pour jQuery Mobile 1.1, nous vous recommandons de nombreux tests lors de l'utilisation des éléments de formulaire dans  les barres d'outils <em>fixed</em> ou dans tous les éléments <code>position: fixed</code>. Cela peut potentiellement déclencher un certain nombre de problèmes imprévisibles dans différents navigateurs mobiles, Android 2.2/2.3 en particulier (détaillé dans les <a href="http://jqm.dev/docs/toolbars/bars-fixed.html">Problèmes connus dans Android 2.2/2.3</a>).</p>
+
 		<p>Par exemple :</p>
 <pre><code>
 &lt;div data-role="fieldcontain"&gt;

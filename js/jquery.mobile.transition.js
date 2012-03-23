@@ -2,7 +2,8 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Page change transition core
 //>>label: Transition Core
-//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.transition.css
+//>>group: Transitions
+//>>css: ../css/themes/default/jquery.mobile.theme.css, ../css/structure/jquery.mobile.transitions.css
 
 define( [ "jquery", "./jquery.mobile.core" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
