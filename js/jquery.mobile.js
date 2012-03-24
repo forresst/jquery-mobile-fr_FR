@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 5f7cadc38c74e38e997d413002aebae5dfcc2532 <> Date: Thu Mar 22 17:18:05 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 42b08c195625177e8b5c5a96ca261c9111c14a00 <> Date: Fri Mar 23 23:08:37 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -5420,8 +5420,8 @@ $.widget( "mobile.button", $.mobile.widget, {
 			this.enable();
 		}
 
-                // Grab the button's text element from its implementation-independent data item
-		$(this.button.data( 'buttonElements' ).text).text( $el.text() || $el.val() );
+		// Grab the button's text element from its implementation-independent data item
+		$( this.button.data( 'buttonElements' ).text ).text( $el.text() || $el.val() );
 	}
 });
 
@@ -6204,7 +6204,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		corners: true,
 		shadow: true,
 		iconshadow: true,
-		menuPageTheme: "b",
 		overlayTheme: "a",
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
@@ -6468,7 +6467,7 @@ $( document ).bind( "pagecreate create", function( e ){
 			headerTitle = $( "<h1>", {
 				"class": "ui-title"
 			}).appendTo( header ),
-			
+
 			menuPageContent,
 			menuPageClose,
 			headerClose;
@@ -6530,7 +6529,7 @@ $( document ).bind( "pagecreate create", function( e ){
 						$( e.target )
 							.attr( "tabindex", "0" )
 							.trigger( "vmouseover" );
-						
+
 					})
 					.bind( "focusout", function( e ){
 						$( e.target )
@@ -6576,7 +6575,7 @@ $( document ).bind( "pagecreate create", function( e ){
 							// up or left arrow keys
 						 case 38:
 							prev = li.prev().not( ".ui-selectmenu-placeholder" );
-							
+
 							if( prev.is( ".ui-li-divider" ) ) {
 								prev = prev.prev();
 							}
@@ -6596,7 +6595,7 @@ $( document ).bind( "pagecreate create", function( e ){
 							// down or right arrow keys
 						 case 40:
 							next = li.next();
-							
+
 							if( next.is( ".ui-li-divider" ) ) {
 								next = next.next();
 							}
@@ -6650,7 +6649,7 @@ $( document ).bind( "pagecreate create", function( e ){
 				});
 
 				// Close button on small overlays
-				if( self.isMultiple ){ 
+				if( self.isMultiple ){
 					self.headerClose.click( function() {
 						if ( self.menuType == "overlay" ) {
 							self.close();
@@ -6768,11 +6767,11 @@ $( document ).bind( "pagecreate create", function( e ){
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
-					
-					self.menuPage.appendTo( $.mobile.pageContainer ).page();					
+
+					self.menuPage.appendTo( $.mobile.pageContainer ).page();
 					self.menuPageContent = menuPage.find( ".ui-content" );
 					self.menuPageClose = menuPage.find( ".ui-header a" );
-					
+
 					// prevent the parent page from being removed from the DOM,
 					// otherwise the results of selecting a list item in the dialog
 					// fall into a black hole
@@ -6859,30 +6858,30 @@ $( document ).bind( "pagecreate create", function( e ){
 				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
 
 				var $options = self.select.find("option"),
-					numOptions = $options.length,                      
-					select = this.select[ 0 ],                         
-					dataPrefix = 'data-' + $.mobile.ns,                 
-					dataIndexAttr = dataPrefix + 'option-index', 
+					numOptions = $options.length,
+					select = this.select[ 0 ],
+					dataPrefix = 'data-' + $.mobile.ns,
+					dataIndexAttr = dataPrefix + 'option-index',
 					dataIconAttr = dataPrefix + 'icon',
 					dataRoleAttr = dataPrefix + 'role',
 					fragment = document.createDocumentFragment(),
 					optGroup;
-									
-				for (var i = 0; i < numOptions;i++){				
+
+				for (var i = 0; i < numOptions;i++){
 					var option = $options[i],
 						$option = $(option),
 						parent = option.parentNode,
-						text = $option.text(),			
-						anchor  = document.createElement('a');
-						classes = [];				
-					
-					anchor.setAttribute('href','#');							
-					anchor.appendChild(document.createTextNode(text));	
-					
-					// Are we inside an optgroup?									
+						text = $option.text(),
+						anchor  = document.createElement('a'),
+						classes = [];
+
+					anchor.setAttribute('href','#');
+					anchor.appendChild(document.createTextNode(text));
+
+					// Are we inside an optgroup?
 					if (parent !== select && parent.nodeName.toLowerCase() === "optgroup"){
 						var optLabel = parent.getAttribute('label');
-						if ( optLabel != optGroup) {						
+						if ( optLabel != optGroup) {
 							var divider = document.createElement('li');
 							divider.setAttribute(dataRoleAttr,'list-divider');
 							divider.setAttribute('role','option');
@@ -6903,19 +6902,19 @@ $( document ).bind( "pagecreate create", function( e ){
 						}
 					}
 
-					var item = document.createElement('li');															
+					var item = document.createElement('li');
 					if ( option.disabled ) {
 						classes.push( "ui-disabled" );
 						item.setAttribute('aria-disabled',true);
 					}
 					item.setAttribute(dataIndexAttr,i);
-					item.setAttribute(dataIconAttr,dataIcon);					
+					item.setAttribute(dataIconAttr,dataIcon);
 					item.className = classes.join(" ");
 					item.setAttribute('role','option');
 					anchor.setAttribute('tabindex','-1');
-					item.appendChild(anchor);					
+					item.appendChild(anchor);
 					fragment.appendChild(item);
-				}	
+				}
 
 				self.list[0].appendChild(fragment);
 
@@ -6945,8 +6944,9 @@ $( document ).bind( "pagecreate create", function( e ){
 		});
 	};
 
-	$( document ).delegate( "select", "selectmenubeforecreate", function(){
-		var selectmenuWidget = $( this ).data( "selectmenu" );
+	// issue #3894 - core doesn't triggered events on disabled delegates
+	$( document ).bind( "selectmenubeforecreate", function( event ){
+		var selectmenuWidget = $( event.target ).data( "selectmenu" );
 
 		if( !selectmenuWidget.options.nativeMenu ){
 			extendSelect( selectmenuWidget );
