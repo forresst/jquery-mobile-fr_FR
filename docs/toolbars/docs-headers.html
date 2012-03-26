@@ -80,7 +80,7 @@
 			
 			<h3>Fabrication des boutons se démarquant visuellement</h3>
 			
-			<p>Les boutons adoptent automatiquement la couleur du nuancier de la barre où ils sont positionnés, de sorte qu'un lien dans une barre d'entête avec la couleur "a" sera également stylisé comme les boutons colorés "a". C'est simple de faire un bouton qui ressort visuellement - ici, nous ajoutons l'attribut <code> data-theme</code> et définissons le nuancier de couleur pour le bouton à "b" pour mettre en évidence le bouton "Enregistrer".</p>
+			<p>Les boutons adoptent automatiquement la couleur du nuancier de la barre où ils sont positionnés, de sorte qu'un lien dans une barre d'entête avec la couleur "a" sera également stylisé comme les boutons colorés "a". C'est simple de faire un bouton qui se démarque visuellement. Ici, nous ajoutons l'attribut <code> data-theme</code> et définissons le nuancier de couleur pour le bouton à "b" pour mettre en évidence le bouton "Enregistrer".</p>
 			
 			<pre><code>			
 &lt;div data-role="header" data-position="inline"&gt;
@@ -121,7 +121,7 @@
 			
 				<h3>Ajouter des boutons aux barres d'outils sans entête</h3>
 	
-			<p>Le titre dans la barre d'entête a une certaine marge qui vous donnera la hauteur de la barre. Si vous choisissez de ne pas utiliser le titre, vous aurez besoin d'ajouter un élément avec <code>class="ui-title"</code> car la barre ne peut avoir une hauteur correcte et s'afficher correctement.</p> 
+			<p>Le titre dans la barre d'entête a une certaine marge qui vous donnera la hauteur de la barre. Si vous choisissez de ne pas utiliser le titre, vous aurez besoin d'ajouter un élément avec <code>class="ui-title"</code> car la barre ne peut avoir une bonne hauteur et s'afficher correctement.</p> 
 
 		
 <div class="highlight"> 
@@ -146,7 +146,8 @@
 		<p>jQuery Mobile a une fonctionnalité pour automatiquement créer et d'ajouter des boutons "retour" pour l'entête, bien qu'elle soit désactivée par défaut. Ceci est principalement utile dans les applications installées sans habillage, tels que celles qui fonctionnent dans une vue web app native. Le framework génère automatiquement un bouton "retour" sur une entête lorsque l'option <code>addBackBtn</code> du plugin page est à true. Cela peut aussi être définie via le balisage si le div de la page a un attribut <code>data-add-back-btn="true"</code>. </p> 
 		
 		
-		<p>Si vous utilisez l'attribut <code>data-rel="back"</code> sur une ancre, tout clic sur cette ancre imitera le bouton retour, remontant une entrée de l'historique et en ignorant le href par défaut de l'ancre. Ceci est particulièrement utile lors de la liaison de retour vers une page nommée, comme un lien qui s'appelle "accueil", ou lors de la génération des boutons "retour" avec JavaScript, comme un bouton pour fermer une fenêtre de dialogue. Lorsque vous utilisez cette fonctionnalité dans votre balisage source, <strong>assurez vous de fournir un href significatif qui pointe réellement sur l'URL de la page de référence (cela permettra à la fonction de travailler pour les utilisateurs de C-Grade navigateurs)</strong>. Aussi, s'il vous plaît garder à l'esprit que si vous voulez juste une transition inverse sans réellement retourner dans l'historique, vous devez utiliser à la place l'attribut <code>data-direction="reverse"</code>.</p>	
+		<p>Si vous utilisez l'attribut <code>data-rel="back"</code> sur une ancre, tout clic sur cette ancre imitera le bouton retour, remontant une entrée de l'historique et en ignorant le href par défaut de l'ancre. Ceci est particulièrement utile lors de la liaison de retour vers une page nommée, comme un lien qui s'appelle "accueil", ou lors de la génération des boutons "retour" avec JavaScript, comme un bouton pour fermer une fenêtre de dialogue. Lorsque vous utilisez cette fonctionnalité dans votre balisage source, <strong>assurez vous de fournir un href significatif qui pointe réellement sur l'URL de la page de référence. Cela permettra à la fonction de travailler pour les utilisateurs de navigateurs de C-Grade.</strong></p>
+                <p>Si vous voulez juste une transition inverse sans réellement retourner dans l'historique, vous devez utiliser à la place l'attribut <code>data-direction="reverse"</code>.</p>	
 			
 		<h2>Personnalisation du texte du bouton Retour</h2>	
 		
@@ -158,7 +159,7 @@
 			<h2>Configurations personnalisées de l'entête</h2>
 			<p>Si vous avez besoin de créer une entête qui ne suit pas la configuration par défaut, il suffit d'envelopper votre balisage personnalisé de style dans un conteneur, comme un <code>div</code>. Le plugin n'appliquera pas automatiquement la logique du bouton pour le contenu enveloppé dans l'entête de sorte que vous puissiez écrire des styles personnalisés pour la mise en forme du contenu de votre entête.</p> 
 
-			<p>Il est également possible de créer des barres personnalisées sans jamais utiliser le data-role de l'entête. Par exemple, commencez avec n'importe quel conteneur et ajoutez la classe <code>ui-bar</code> pour demander un espacement standard de la barre et ajoutez la classe <code>ui-bar-b</code> pour attribuer les styles du nuancier de la barre à partir de votre thème (le "b" peut être n'importe quelle lettre du nuancier).</p>
+			<p>Il est également possible de créer des barres personnalisées sans jamais utiliser le data-role de l'entête. Par exemple, commencez avec n'importe quel conteneur et ajoutez la classe <code>ui-bar</code> pour demander un espacement standard de la barre et ajoutez la classe <code>ui-bar-b</code> pour attribuer les styles du nuancier de la barre à partir de votre thème. (Le "b" peut être n'importe quelle lettre du nuancier.)</p>
 			
 			<pre><code>
 &lt;div <strong>class="ui-bar ui-bar-b"</strong>&gt;
@@ -173,7 +174,7 @@
 				
 				<p>Notez que <code>.ui-bar</code> ne doit pas être ajouté à l'entête ou au pied de page des barres qui s'étendent sur toute la largeur de la page, car l'espacement supplémentaire entraînera un élément sur ​​toute la largeur qui sortira de son conteneur parent. Pour ajouter de l'espace à l'intérieur d'une barre d'outils sur toute la largeur il est recommandé d'envelopper le contenu de la barre d'outils dans un élément, et d'appliquer l'espacement à cet élément.</p>
 				
-				<p>En écrivant certains styles simples, il est facile de construire des barres de petit message comme ceci :</p><!-- Yes, the inline styles aren't recommended in a real system but they are used to simply illustrate how to tweak CSS -->
+				<p>En écrivant certains styles simples, il est facile de construire des barres de message comme ceci :</p><!-- Yes, the inline styles aren't recommended in a real system but they are used to simply illustrate how to tweak CSS -->
 					
 					<div class="ui-bar ui-bar-e">
 						<h3 style="float:left; margin-top:8px;">Ceci est un message d'alerte avec un bouton pour le fermer. </h3>

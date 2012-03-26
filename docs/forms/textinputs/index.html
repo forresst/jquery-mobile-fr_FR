@@ -46,7 +46,7 @@
     &lt;input type="text" name="name" id="basic" value=""  /&gt;
 </code></pre>		
 
-			<p>Cela va produire une saisie de texte de base. Les styles par défaut définissent la largeur de champ de saisie à 100% du conteneur parent et empile les labels sur une ligne distincte.</p>
+			<p>Cela va produire une saisie de texte de base. Les styles par défaut définissent la largeur du champ de saisie à 100% du conteneur parent et empile les labels sur une ligne distincte.</p>
 			
 	         <label for="basic">Saisie de texte :</label>
 	         <input type="text" name="name" id="basic" value="" />
@@ -83,7 +83,7 @@
 						
 			
 			<h2>Plus de types de saisie de texte</h2>
-			<p>Dans jQuery Mobile, vous pouvez utiliser les types existants et nouveaux de saisie tels que <code>password</code>, <code>email</code>, <code>tel</code>, <code>number</code>, et bien d'autres Certaines valeurs de type sont rendues différemment selon les navigateurs - par exemple, Chrome affiche le rendu de l'input <code>range</code> comme un curseur - ainsi nous standardisons leur apparence en changeant dynamiquement leur type en <code>text</code> (Actuellement, cela s'applique à <code>&gt;range</code> et <code>search</code>). Vous pouvez configurer les types d'entrée qui sont dégradés en <code>text</code> avec les options du plugin <code>page</code>.</p>
+			<p>Dans jQuery Mobile, vous pouvez utiliser les types existants et nouveaux de saisie tels que <code>password</code>, <code>email</code>, <code>tel</code>, <code>number</code>, et bien d'autres Certaines valeurs de type sont rendus différemment selon les navigateurs. Par exemple, Chrome rend l'input <code>range</code> comme un curseur. jQuery Mobile standardise l'apparence de <code>range</code> et <code>search</code> dynamiquement en changeant leur type en <code>text</code>. Vous pouvez configurer les types d'entrée qui sont dégradés en <code>text</code> avec les options du plugin <code>page</code>.</p>
 			
 			<p>Un avantage majeur de l'utilisation de ces types d'entrée plus spécifique si cela sur des appareils mobiles, claviers spécialisés que la vitesse de saisie de données sont offerts à la place du clavier de texte standard. Essayez les inputs suivants sur un appareil mobile pour voir, dans quel cas ils affichent les claviers personnalisés sur différentes plateformes.</p>
 			
@@ -165,7 +165,7 @@ Je suis une zone de saisie basique. Si cela est pré-rempli avec du contenu, la 
 <strong>&lt;/textarea&gt;</strong>
 </code></pre>	
 
-			<p>Ceci va produire une zone de saisie de base avec la largeur fixée à 100% du conteneur parent et le label empilés sur un ligne séparée. La zone de saisie va croître pour s'adapter aux nouvelles lignes que vous ajouterez :</p>
+			<p>Ceci va produire une zone de saisie de base avec la largeur définie à 100% du conteneur parent et le label empilés sur un ligne séparée. La zone de saisie va croître pour s'adapter aux nouvelles lignes que vous ajouterez :</p>
 			<label for="textarea-a">Zone de texte :</label>
 			<textarea name="textarea" id="textarea-a">
 Je suis une zone de saisie de base. Si cela est pré-rempli avec du contenu, la hauteur sera automatiquement ajusté sans avoir à faire de scroll. C'est une caractéristique très pratique.
@@ -187,14 +187,14 @@ Je suis une zone de saisie de base. Si cela est pré-rempli avec du contenu, la 
 			
 			<h2>Appel du plugin textinput</h2>
 
-			<p>Ce plugin sera automatiquement initialiser sur n'importe quelle page qui contient une zone de saisie ou n'importe quel type de texte ci-dessous, pas besoin de l'attribut <code>data-role</code> dans le balisage. Cependant, si nécessaire, vous pouvez appeler directement le plugin <code>textinput</code> sur n'importe quel sélecteur, comme n'importe quel plugin jQuery :</p>
+			<p>Ce plugin sera automatiquement initialiser sur n'importe quelle page qui contient une zone de saisie ou n'importe quel type de texte listé au dessus, pas besoin de l'attribut <code>data-role</code> dans le balisage. Cependant, si nécessaire, vous pouvez appeler directement le plugin <code>textinput</code> sur n'importe quel sélecteur, comme n'importe quel plugin jQuery :</p>
 			<pre><code>
 $('input').textinput();			
 			</code></pre>
 			
 			
 			<h2>Types de saisie dégradés</h2>
-			<p>jQuery mobile dégrade plusieurs types d'entrée HTML5 pour revenir à  type=text, or type=number, après l'ajout de contrôles renforcés. Par exemple, les saisies avec un type range sont améliorés avec un contrôle de curseur personnalisé et leur type est mis à number pour offrir un saisie de formulaire utilisable à côté du curseur. Les saisies de type search sont dégradées vers type=text après que nous ayons ajouté nos propres styles thématisable de saisie de recherche.</p>
+			<p>jQuery Mobile dégrade plusieurs types d'entrée HTML5 pour revenir à  type=text, ou type=number, après l'ajout de contrôles améliorés. Par exemple, les saisies avec un type range sont améliorés avec un contrôle de curseur personnalisé et leur type est mis à number pour offrir un saisie de formulaire utilisable à côté du curseur. Les saisies de type search sont dégradées vers type=text après que nous ayons ajouté nos propres styles thématisable de saisie de recherche.</p>
 			<p>Le plugin page contient une liste des types de saisie, qui sont mis à true ce qui signifie qu'ils vont se dégrader en type=text, false ce qui signifie qu'ils ne vont pas être modifiés, ou une chaîne telle que "number", ce qui signifie qu'ils vont être convertis dans ce type (comme le cas de type=range).</p>
 		
 			<p>Vous pouvez configurer les types qui sont modifiés via l'option <code>degradeInputs</code> du plugin de la page, qui peut être manipulé en externe via<code>$.mobile.page.prototype.options.degradeInputs</code>, qui a les propriétés : color, date, datetime, "datetime-local", email, month, number, range, search, tel, time, url et week. Soyez sûr de configurer cela à l'intérieur d'un gestionnaire d'évènement lié à l'événement <code>mobileinit</code>, afin qu'il s'applique à la première page ainsi qu'aux pages suivantes qui seront chargées.</p>	

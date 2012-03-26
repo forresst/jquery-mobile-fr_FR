@@ -40,7 +40,7 @@
 
 
 <h2>Conventions de balisage</h2>
-<p>Lors de la construction des formulaires utilisé dans jQuery Mobile, la plupart des directives standard utilisées pour créer des formulaires qui soumettent habituellement un HTTP post ou get, sont toujours applicables. Cependant, une chose à garder à l'esprit est que l'attribut  <code>id</code> des contrôles de formulaire doivent être non seulement unique sur une page donnée, mais aussi unique à travers les pages d'un site. C'est parce que le modèle de navigation d'une seule page de jQuery Mobile permet à de nombreuses "pages" différentes d'être présentes dans le DOM au même moment, vous devez donc faire attention à un usage unique de l'attribut <code>id</code> ainsi il y aura seulement un de chaque dans les DOM (et bien sûr, n'oubliez pas de les associer correctement avec l'élément <code>label</code> via l'attribut <code>for</code>).</p>
+<p>Lors de la construction des formulaires utilisé dans jQuery Mobile, la plupart des directives standard utilisées pour créer des formulaires qui soumettent un HTTP post ou get, sont toujours applicables. De plus, les attributs  <code>id</code> des contrôles de formulaire doivent être non seulement unique sur une page donnée, mais aussi unique à travers les pages d'un site. C'est parce que le modèle de navigation d'une seule page de jQuery Mobile permet à de nombreuses "pages" différentes d'être présentes dans le DOM au même moment. Vous devez donc faire attention à un usage unique de l'attribut <code>id</code> ainsi il y aura seulement un de chaque dans le DOM. Vérifiez de les associer correctement avec l'élément <code>label</code> via l'attribut <code>for</code>).</p>
 
 	<h2>Éléments de taille mini</h2>
 
@@ -130,7 +130,7 @@
 	<p>Notez que vous pouvez désactiver les boutons créés à partir du balisage basé sur <code>button</code> ou <code>input</code>, mais pas les liens avec un rôle de bouton. Les liens ne comporte pas de fonction parallèles désactivé en HTML, si vous avez besoin de désactiver un lien basé sur bouton (ou tout autre élément), il est possible de lui appliquer la classe <code>ui-disabled</code> avec JavaScript afin de réaliser le même effet. </p>
 	
 		<h2>Conteneurs de champs</h2>
-		<p>Pour améliorer le style des labels et des éléments de formulaire sur des écrans plus larges, nous vous conseillons d'envelopper un <code>div</code> ou <code>fieldset</code> avec l'attribut <code> data-role="fieldcontain"</code> autour de chaque élément label/form. Ce framework permet d'aligner les entrées et les labels associée côte à côte, et casser les éléments ci-dessous de niveau de bloc empilés ~480px. Le framework va également ajouter une bordure inférieure mince pour agir comme un séparateur de champ.</p>
+		<p>Pour améliorer le style des labels et des éléments de formulaire sur des écrans plus larges, enveloppez un <code>div</code> ou <code>fieldset</code> avec l'attribut <code> data-role="fieldcontain"</code> autour de chaque élément label/form. Ce framework permet d'aligner les entrées et les labels associée côte à côte, et casser les éléments ci-dessous de niveau de bloc empilés ~480px. Le framework va également ajouter une bordure inférieure mince pour agir comme un séparateur de champ.</p>
 
 		<h2>Formulaires dans les barres d'outils</h2>
 		<p>Bien que tous les éléments de formulaire sont maintenant testés pour fonctionner correctement dans les barres d'outils <em>statiques</em> pour jQuery Mobile 1.1, nous vous recommandons de nombreux tests lors de l'utilisation des éléments de formulaire dans  les barres d'outils <em>fixed</em> ou dans tous les éléments <code>position: fixed</code>. Cela peut potentiellement déclencher un certain nombre de problèmes imprévisibles dans différents navigateurs mobiles, Android 2.2/2.3 en particulier (détaillé dans les <a href="http://jqm.dev/docs/toolbars/bars-fixed.html">Problèmes connus dans Android 2.2/2.3</a>).</p>
@@ -154,7 +154,7 @@
 		
 		
 	<h2>Auto-initialisation des éléments de formulaire</h2>
-	<p>Par défaut, jQuery mobile va automatiquement améliorer certains contrôles de formulaire natifs en riches composants tactiles. Ceci est géré en interne par la recherche des éléments de formulaire via le nom de la balise et par l'exploitation d'une méthode de plugin sur ces éléments, afin par exemple, un élément <code>select</code> soit trouvé et initialisé avec le plugin "selectmenu", tandis qu'un  élément <code>input</code> avec un <code>type="checkbox"</code> sera amélioré avec le plugi "checkboxradio". Une fois initialisé, vous pouvez vous adresser à ces composants améliorés par programmationà travers leurs méthodes d'API de Widget jQuery UI - voir les options, les méthodes et les événements énumérés sur la page de documentation de chaque plugin formulaire pour plus de détails. </p>
+	<p>Par défaut, jQuery mobile va automatiquement améliorer certains contrôles de formulaire natifs en riches composants tactiles. Ceci est géré en interne par la recherche des éléments de formulaire via le nom de la balise et par l'exploitation d'une méthode de plugin sur ces éléments. Par exemple, un élément <code>select</code> soit trouvé et initialisé avec le plugin "selectmenu", tandis qu'un  élément <code>input</code> avec un <code>type="checkbox"</code> sera amélioré avec le plugin "checkboxradio". Une fois initialisé, vous pouvez vous adresser à ces composants améliorée par programmation à travers leurs méthodes d'API de Widget jQuery UI. Regardez les options, les méthodes et les événements énumérés sur la page de documentation de chaque plugin formulaire pour plus de détails. </p>
 
 	<h2>Initialisation des groupes d'éléments de formulaire injectés dynamiquement</h2> 
 	<p>Si vous devez générer de nouvelles balises côté client ou charger le contenu via AJAX et l'injecter dans une page, vous pouvez déclencher l''événement <code>create</code> pour gérer l'auto-initialisation de tous les plugins contenus dans le nouveau balisage. Cela peut être déclenché sur tout élément (même le div page lui-même),  en vous épargnant la tâche d'initialisation manuelle de chaque plugin (voir ci-dessous).</p> 
@@ -219,14 +219,14 @@ myswitch.slider("refresh");
 </code></pre>
 
 
-	<p>Ou, si vous voulez éviter l'auto-initialisation sans ajouter des attributs à votre balisage, vous pouvez personnaliser le sélecteur qui est utilisé pour empêcher l'auto-initialisation en configurant l'option <code>keepNative</code> du plugin (qui est par défaut à  <code>[data-role="none"]</code>). Soyez sûr de configurer cette option à l'intérieur d'un gestionnaire d'évènement lié à l'événement <code>mobileinit</code>, afin qu'il s'applique à la première page ainsi qu'aux pages suivantes qui seront chargées.</p>
+	<p>Si vous voulez éviter l'auto-initialisation sans ajouter des attributs à votre balisage, vous pouvez personnaliser le sélecteur qui est utilisé pour empêcher l'auto-initialisation en configurant l'option <code>keepNative</code> du plugin (qui est par défaut à  <code>[data-role="none"]</code>). Soyez sûr de configurer cette option à l'intérieur d'un gestionnaire d'évènement lié à l'événement <code>mobileinit</code>, afin qu'il s'applique à la première page ainsi qu'aux pages suivantes qui seront chargées.</p>
 		<pre><code>
 $(document).bind('mobileinit',function(){
 	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>
 });
 		</code></pre>
 
-<p>Un cas particulier est celui des selects. L'exemple ci-dessus permettra d'éviter toute augmentation de prise de place sur les éléments select dans la page si <code>select</code> est inclus. Si vous souhaitez conserver les performances natives, l'aspect et la convivialité du menu lui-même et profiter de l'augmentation visuelle du bouton de sélection par Mobile jQuery, vous pouvez définir <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> à true dans une fonction de rappel <code>mobileinit</code> comme un paramètre global ou utilisez <code>data-native="true"</code> au cas par cas.</p>
+<p>Un cas particulier est celui des selects. L'exemple ci-dessus permettra d'éviter toute augmentation de prise de place sur les éléments select dans la page si <code>select</code> est inclus. Si vous souhaitez conserver les performances natives, l'aspect et la convivialité du menu lui-même et profiter de l'augmentation visuelle du bouton de sélection par jQuery Mobile, vous pouvez définir <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> à true dans une fonction de rappel <code>mobileinit</code> comme un paramètre global ou utilisez <code>data-native="true"</code> au cas par cas.</p>
 
 		
 
