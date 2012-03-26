@@ -32,7 +32,7 @@
 			           
             
             <h2>Exemple de formulaire Ajax par défaut</h2>
-            <p>Cela démontre la manipulation automatisée d'Ajax lors de soumission de formulaire. Le formulaire ci-dessous est configuré pour envoyer régulièrement une requête <code>get</code> à <code>forms-sample-response.php</code>. A la soumission, jQuery Mobile s'assurera que l'URL spécifiée est en mesure d'être récupéré via Ajax, et la traitera de manière appropriée. Gardez à l'esprit que tout comme la soumission de formulaire HTTP ordinaire, jQuery Mobile permet un <code>get</code> sur les pages de résultat pour être marqué en mettant à jour la table de hachage d'Url lorsque la réponse est réussie. En outre, comme la soumission de formulaire ordinaire, les requêtes <code>post</code> ne contiennent pas de paramètres de requête dans la table de hachage, de sorte qu'ils ne soient pas marquable.</p>
+            <p>Cela démontre la manipulation automatisée d'Ajax lors de soumission de formulaire. Le formulaire ci-dessous est configuré pour envoyer une requête <code>GET</code> à <code>forms-sample-response.php</code>. A la soumission, jQuery Mobile s'assurera que l'URL spécifiée est en mesure d'être récupéré via Ajax, et la traitera de manière appropriée. Gardez à l'esprit que tout comme la soumission de formulaire HTTP ordinaire, jQuery Mobile permet un <code>get</code> sur les pages de résultat pour être marqué en mettant à jour la table de hachage d'Url lorsque la réponse est réussie. En outre, comme la soumission de formulaire ordinaire, les requêtes <code>post</code> ne contiennent pas de paramètres de requête dans la table de hachage, de sorte qu'ils ne soient pas marquable.</p>
 			<form action="forms-sample-response.php" method="get" class="ui-body ui-body-a ui-corner-all">
 				<fieldset>
 					<div data-role="fieldcontain">
@@ -50,7 +50,7 @@
 			
 			<h2>Exemple de formulaire Non-Ajax</h2>
 			
-			 <p>Pour éviter que les soumissions de formulaire soient automatiquement gérées avec l'Ajax, ajoutez l'attribut <code>data-ajax="false"</code> à l'élément du formulaire. Vous pouvez également activer entièrement la manipulation de formulaire Ajax via l'<a href="../api/globalconfig.html">option de configuration globale</a> <code>ajaxEnabled</code>.</p>
+			 <p>Pour éviter que les soumissions de formulaire soient automatiquement gérées avec l'Ajax, ajoutez l'attribut <code>data-ajax="false"</code> à l'élément du formulaire. Vous pouvez également activer entièrement la manipulation du formulaire Ajax via l'<a href="../api/globalconfig.html">option de configuration globale</a> <code>ajaxEnabled</code>.</p>
 			
             <p>Le formulaire ci-dessous est identique à celui du dessus sauf pour l'ajout de l'attribut <code>data-ajax="false"</code>. Lorsque le bouton de soumission est pressé, cela se traduira par une actualisation complète de la page.</p>
 			<form action="forms-sample-response.php" method="get" data-ajax="false" class="ui-body ui-body-a ui-corner-all">
@@ -69,8 +69,8 @@
 			</form>
 			
 			<h2>Auto-soumission des formulaires</h2>
-			<p>Tout comme dans du HTML ordinaire, on peut également soumettre des formulaires vers la même URL que celle que vous consultez actuellement en définissant l'attribut <code>action</code> de ce formulaire vers cette URL. <A href="forms-sample-selfsubmit.php">Cette page le démontre.</a></p>
-			<p>Quand une requête  <code>post</code> est soumise à une page qui est déjà dans les DOM (qui se produit communément lorsque vous soumettez un formulaire à la même URL actuellement visible), l'URL de réponse sera identique à celle de la page existante, car les requêtes <code>post</code> ne rajoutent pas de paramètres dans la requête de la chaîne de l'URL. Dans cette situation, jQuery mobile va remplacer la page qui a soumis le formulaire avec la page retournée dans le corps de la réponse.</p>
+			<p>Vous pouvez également soumettre des formulaires vers la même URL que celle que vous consultez actuellement en définissant l'attribut <code>action</code> de ce formulaire vers cette URL. <A href="forms-sample-selfsubmit.php">Cette page le démontre.</a></p>
+			<p>Quand une requête <code>POST</code> est soumise à une page qui est déjà dans les DOM (qui se produit communément lorsque vous soumettez un formulaire à la même URL actuellement visible), l'URL de réponse sera identique à celle de la page existante, car les requêtes <code>post</code> ne rajoutent pas de paramètres dans la requête de la chaîne de l'URL. Dans cette situation, jQuery mobile va remplacer la page qui a soumis le formulaire avec la page retournée dans le corps de la réponse.</p>
 
 			</div><!--/content-primary -->		
 

@@ -53,14 +53,14 @@
 				
 				<h2>Définir une incrémentation</h2>
 
-				<p>Pour forcer le curseur à se déplacer avec une incrémentation spécifique, ajoutez l'attribut HTML5 <code>step</code> à l'input. Par défaut, step est à 1, mais dans cet exemple, step est à 50 et la valeur maximale est 500./p&gt;
+				<p>Pour forcer le curseur à se déplacer avec une incrémentation spécifique, ajoutez l'attribut <code>step</code> à l'input. Par défaut, step est à 1, mais dans cet exemple, step est à 50 et la valeur maximale est 500.</p>
 
 <pre><code>
 &lt;label for="slider-step"&gt;Curseur :&lt;/label&gt;
 &lt;input type="range" name="slider" id="slider-step" value="150" min="0" max="500" <strong>step="50"</strong> /&gt;
 </code></pre>
 
-				<p>Ceci va produire un crseur qui se déplace de 10 en 10. Si la valeur saisie n'est pas valide avec l'incrémentation, la valeur sera réinitialisée vers la valeur la plus proche.</p>
+				<p>Ceci va produire un curseur qui se déplace de 10 en 10. Si la valeur saisie n'est pas valide avec l'incrémentation, la valeur sera réinitialisée vers la valeur la plus proche.</p>
 		        <label for="slider-step">Curseur en saisie :</label>
 				<input type="range" name="slider-1" id="slider-step" value="150" min="0" max="500" step="50" />
 				
@@ -74,7 +74,6 @@
 &lt;input type="range" name="slider" id="slider-fill" value="60" min="0" max="100" <strong>data-highlight="true"</strong> /&gt;
 </code></pre>
 
-				<p>Ceci va produire une saisie pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
 		        <label for="slider-min">Curseur en saisie :</label>
 				<input type="range" name="slider-1" id="slider-min" value="60" min="0" max="100" data-highlight="true" />
 	

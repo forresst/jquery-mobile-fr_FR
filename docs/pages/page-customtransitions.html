@@ -30,49 +30,52 @@
 
 				<p>Pour créer une transition CSS personnalisé, sélectionnez un nom de classe qui correspond au nom de votre transition, par exemple "slide", et ensuite définissez vos règles CSS "in" et "out" pour profiter des transitions ou des keyframes d'animation :</p>
 
-				<pre><code>.slide.in {
-			    -webkit-transform: translateX(0);
-			    -webkit-animation-name: slideinfromright;
-			}
+				<pre><code>
+		.slide.in {
+		 	-webkit-transform: translateX(0);
+			-webkit-animation-name: slideinfromright;
+		}
+			
+		.slide.out {
+			-webkit-transform: translateX(-100%);
+			-webkit-animation-name: slideouttoleft;
+		}
 
-			.slide.out {
-			    -webkit-transform: translateX(-100%);
-			    -webkit-animation-name: slideouttoleft;
-			}
-
-			@-webkit-keyframes slideinfromright {
-			    from { -webkit-transform: translateX(100%); }
-			    to { -webkit-transform: translateX(0); }
-			}
-			@-webkit-keyframes slideouttoleft {
-			    from { -webkit-transform: translateX(0); }
-			    to { -webkit-transform: translateX(-100%); }
-			}
+		@-webkit-keyframes slideinfromright {
+			from { -webkit-transform: translateX(100%); }
+			to { -webkit-transform: translateX(0); }
+		}
+		
+		@-webkit-keyframes slideouttoleft {
+			from { -webkit-transform: translateX(0); }
+			to { -webkit-transform: translateX(-100%); }
+		}
 				</code></pre>
 
 				<p>Lors d'une transition de page à base de CSS, jQuery Mobile place le nom de la classe de la transition sur les deux pages "de" et "à" impliquées dans la transition. Il place ensuite une classe "out" sur la page "de", et la classe "in" sur la page "à". La présence de ces classes sur les éléments de la page "de" et "à" déclenche alors les règles CSS de l'animation définies ci-dessus. À partir de la version 1.1 de jQuery Mobile, les ajouts de classe d'animation sont mis en file d'attente,  plutôt que simultanément, ce qui produit une séquence "sortir puis entrer", qui est plus favorable pour le rendu des mobiles que notre séquence de transition précédente simultanée.</p>
 
 				<p>Si votre transition prend en charge une direction inverse, vous avez besoin pour créer des règles CSS qui utilisent en plus la classe <code>reverse</code> pour le nom de la classe de transition et pour les classes "in" et "out" :</p>
 
-				<pre><code>.slide.in.reverse {
-				    -webkit-transform: translateX(0);
-				    -webkit-animation-name: slideinfromleft;
-				}
+				<pre><code>
+		.slide.in.reverse {
+			-webkit-transform: translateX(0);
+			-webkit-animation-name: slideinfromleft;
+		}
 
-				.slide.out.reverse {
-				    -webkit-transform: translateX(100%);
-				    -webkit-animation-name: slideouttoright;
-				}
+		.slide.out.reverse {
+			-webkit-transform: translateX(100%);
+			-webkit-animation-name: slideouttoright;
+		}
 
-				@-webkit-keyframes slideinfromleft {
-				    from { -webkit-transform: translateX(-100%); }
-				    to { -webkit-transform: translateX(0); }
-				}
+		@-webkit-keyframes slideinfromleft {
+			from { -webkit-transform: translateX(-100%); }
+			to { -webkit-transform: translateX(0); }
+		}
 
-				@-webkit-keyframes slideouttoright {
-				    from { -webkit-transform: translateX(0); }
-				    to { -webkit-transform: translateX(100%); }
-				}
+		@-webkit-keyframes slideouttoright {
+			from { -webkit-transform: translateX(0); }
+			to { -webkit-transform: translateX(100%); }
+		}
 				</code></pre>
 
 				<p>Après que les règles CSS soient en place, il vous suffit de spécifier le nom de votre transition au sein de l'attribut @data-transition d'un lien de navigation :</p>
@@ -123,7 +126,8 @@ $.mobile.transitionHandlers[ "default" ];
 
 		<p>Un gestionnaire de transition est une fonction avec la signature d'appel suivante :</p>
 
-		<pre><code>function myTransitionHandler(name, reverse, $to, $from)
+		<pre><code>
+function myTransitionHandler(name, reverse, $to, $from)
 {
     var deferred = new $.Deferred();
 
@@ -143,7 +147,8 @@ $.mobile.transitionHandlers[ "default" ];
 
 		<p>Une fois que vous avez créé une fonction de gestionnaire de transition, vous devez le dire à jQuery Mobile. Pour faire cela, ajoutez simplement votre gestionnaire au dictionnaire <code>$.mobile.transitionHandlers</code>. Rappelez-vous, la clé utilisée doit être le nom de votre transition. Ce nom est également le même nom qui sera utilisé dans l'attribut <code>@data-transition</code> sur n'importe quel lien de navigation.</p>
 
-		<pre><code>// Definit votre gestionnaire de transition :
+		<pre><code>
+// Definit votre gestionnaire de transition :
 
 function myTransitionHandler(name, reverse, $to, $from)
 {
