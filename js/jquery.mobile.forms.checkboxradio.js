@@ -25,7 +25,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			},
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
-			label = $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
+			parentLabel = $( input ).closest( "label" ),
+			label = parentLabel.length ? parentLabel : $( input ).closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
 			inputtype = input[0].type,
 			mini = inheritAttr( input, "mini" ),
 			checkedState = inputtype + "-on",
@@ -40,10 +41,6 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 
 		if ( inputtype !== "checkbox" && inputtype !== "radio" ) {
 			return;
-		}
-
-		if( !label.length ){
-			this.raise( inputtype + " inputs require a label for enhancement" );
 		}
 
 		// Expose for other methods

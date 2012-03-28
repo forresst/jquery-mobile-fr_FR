@@ -129,7 +129,7 @@
 		ok( !$("input.should-be-native").parent().is("div.ui-checkbox") );
 	});
 
-	test( "Elements with â€œdata-mini='true'â€� should have â€œui-miniâ€� class attached to enhanced element.", function(){
+	test( "Elements with \u201cdata-mini='true'\u201d should have \u201cui-mini\u201d class attached to enhanced element.", function(){
 		var full = document.getElementById("radio-full"),
 			$fulllbl = $('[for="radio-full"]'),
 			mini = document.getElementById("radio-mini"),
@@ -239,28 +239,30 @@
 		]);
 	});
 
-	test( "no label raises an exception", function() {
-		expect( 1 );
+  test( "nested label checkbox still renders", function() {
+    var $checkbox = $( "#checkbox-nested-label" );
 
-		try {
-			$( "#checkbox-exception" ).checkboxradio();
-		} catch (e) {
-			ok( e.toString().indexOf( "[checkboxradio]" ) >= 0, "checkboxradio exception raised" );
-		}
-	});
+    try {
+      $checkbox.checkboxradio();
+    } catch (e) {
+      ok( false, "checkboxradio exception raised: " + e.toString());
+    }
 
-	test( "nested label checkbox still renders", function() {
-		var $checkbox = $( "#checkbox-nested-label" );
+    ok( $checkbox.parent().hasClass("ui-checkbox"), "enhancement has occured");
+  });
+  
+  test( "nested label (no [for]) checkbox still renders", function() {
+    var $checkbox = $( "#checkbox-nested-label-no-for" );
 
-		try {
-			$checkbox.checkboxradio();
-		} catch (e) {
-			ok( false, "checkboxradio exception raised: " + e.toString());
-		}
+    try {
+      $checkbox.checkboxradio();
+    } catch (e) {
+      ok( false, "checkboxradio exception raised: " + e.toString());
+    }
 
-		ok( $checkbox.parent().hasClass("ui-checkbox"), "enhancement has occured");
-	});
-	
+    ok( $checkbox.parent().hasClass("ui-checkbox"), "enhancement has occured");
+  });
+  
 	test( "Icon positioning", function() {
 		var bottomicon = $("[for='bottomicon']")
 			topicon = $("[for='topicon']");

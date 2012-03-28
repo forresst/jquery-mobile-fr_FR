@@ -40,18 +40,23 @@
 		
 		<p>Les contrôles du radio bouton et de la case à cocher ci-dessous utilisent le balisage standard input/label, mais sont stylisés pour être plus "tactiles". Le contrôle stylisé que vous voyez est réellement l'élément label, qui se trouve sur l'input réel, donc si les images ne se chargent pas, vous aurez encore un contrôle fonctionnel. Dans la plupart des navigateurs, en cliquant le label cela déclenche automatiquement un clic sur l'input, mais nous avons du déclencher la mise à jour manuellement pour quelques navigateurs mobiles qui ne font pas cela nativement. Sur le bureau, ces contrôles sont accessible par le clavier et le lecteur d'écran. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux cases à cocher.</p>
 
-		<p>Pour créer une seule case, ajoutez un  <code>input</code> avec un attribut <code>type="checkbox"</code> et un <code>label</code> correspondant. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés.</p>
+		<p>Pour créer une seule case, ajoutez un  <code>input</code> avec un attribut <code>type="checkbox"</code> et un <code>label</code> correspondant. Si le <code>input</code> n'est pas enveloppé dans le <code>label</code> correspondant, veuillez définir l'attribut <code>for</code> du <code>label</code> pour correspondre à l'ID de <code>input</code> ainsi ils seront sémantiquement associés.</p>
 		
 		<pre><code>	
-&lt;input type="checkbox" name="checkbox-1" id="checkbox-0" class="custom" /&gt;
+&lt;label&gt;&lt;input type="checkbox" name="checkbox-1" /&gt; J'accepte &lt;/label&gt;
+			
+&lt;input type="checkbox" name="checkbox-0" id="checkbox-0" class="custom" /&gt;
 &lt;label for="checkbox-0"&gt;J'accepte&lt;/label&gt;
 		</code></pre>
-		
-		<p>Ceci va produire une case à cocher de base. Les styles par défaut auront la largeur de l'élément définies à 100% du conteneur parent.</p>
+				
+		<p>Ceci va produire deux cases à cocher de base. Les styles par défaut auront la largeur de l'élément définies à 100% du conteneur parent.</p>
 					
+		<label> <input type="checkbox" name="checkbox-1 "/> J'accepte</label>
+		
 		<input type="checkbox" name="checkbox-0" id="checkbox-0" class="custom" />
 		<label for="checkbox-0">J'accepte</label>
-					
+		
+		
 		<h2>Version mini</h2>
 
 		<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
