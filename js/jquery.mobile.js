@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 6ed10b7bc94bf2c6d0badcc9baf277a1fe076f8b <> Date: Mon Mar 26 18:11:21 2012 -0400
+* jQuery Mobile Framework Git Build: SHA1: 3ef15b89cc878739291a7649e108e0628ae8e67c <> Date: Wed Mar 28 17:03:54 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -4174,6 +4174,12 @@ $.fn.buttonMarkup = function( options ) {
 			buttonClass += o.mini ? " ui-mini" : " ui-fullsize";
 		}
 		
+		if ( o.inline !== undefined ) {			
+			// Used to control styling in headers/footers, where buttons default to `mini` style.
+			buttonClass += o.inline === false ? " ui-btn-block" : " ui-btn-inline";
+		}
+		
+		
 		if ( o.icon ) {
 			o.icon = "ui-icon-" + o.icon;
 			o.iconpos = o.iconpos || "left";
@@ -4251,7 +4257,6 @@ $.fn.buttonMarkup.defaults = {
 	corners: true,
 	shadow: true,
 	iconshadow: true,
-	inline: false,
 	wrapperEls: "span"
 };
 
@@ -4380,14 +4385,16 @@ $( document ).delegate( ":jqmData(role='page'), :jqmData(role='dialog')", "pagec
 				// Add ARIA role
 				.attr( "role", role === "header" ? "banner" : "contentinfo" );
 
-			// Right,left buttons
-			$headeranchors	= $this.children( "a" );
-			leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
-			rightbtn = $headeranchors.hasClass( "ui-btn-right" );
+			if( role === "header") {
+				// Right,left buttons
+				$headeranchors	= $this.children( "a" );
+				leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
+				rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 
-			leftbtn = leftbtn || $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
+				leftbtn = leftbtn || $headeranchors.eq( 0 ).not( ".ui-btn-right" ).addClass( "ui-btn-left" ).length;
 
-			rightbtn = rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
+				rightbtn = rightbtn || $headeranchors.eq( 1 ).addClass( "ui-btn-right" ).length;
+			}
 
 			// Auto-add back btn on pages beyond first view
 			if ( o.addBackBtn &&
@@ -4665,6 +4672,7 @@ $.widget( "mobile.navbar", $.mobile.widget, {
 		$navbtns.buttonMarkup({
 			corners:	false,
 			shadow:		false,
+			inline:     true,
 			iconpos:	iconpos
 		});
 
