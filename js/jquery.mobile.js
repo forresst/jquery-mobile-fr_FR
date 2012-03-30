@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 3ef15b89cc878739291a7649e108e0628ae8e67c <> Date: Wed Mar 28 17:03:54 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: a2e54d1e4c586c56810a4c7dc9b8872e325a3d47 <> Date: Thu Mar 29 17:48:08 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1275,7 +1275,7 @@ $.widget( "mobile.widget", {
 		maxTransitionWidth: false,
 
 		// Minimum scroll distance that will be remembered when returning to a page
-		minScrollBack: 10,
+		minScrollBack: 250,
 
 		// DEPRECATED: the following property is no longer in use, but defined until 2.0 to prevent conflicts
 		touchOverflowEnabled: false,
@@ -2153,82 +2153,140 @@ $.widget( "mobile.page", $.mobile.widget, {
 
 (function( $, window, undefined ) {
 
-function outInTransitionHandler( name, reverse, $to, $from ) {
+var createHandler = function( sequential ){
 	
-	// override name if there's no 3D transform support and a fallback is defined, or if not, to "none"
-	if( name && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ name ] ){
-		name = $.mobile.transitionFallbacks[ name ];
+	// Default to sequential
+	if( sequential === undefined ){
+		sequential = true;
 	}
 	
-	var deferred = new $.Deferred(),
-		reverseClass = reverse ? " reverse" : "",
-		active	= $.mobile.urlHistory.getActive(),
-		toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
-		screenHeight = $.mobile.getScreenHeight(),
-		viewportClass = "ui-mobile-viewport-transitioning viewport-" + name,
-		maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
-		none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
-		doneOut = function() {
+	return function( name, reverse, $to, $from ) {
 
-			if ( $from ) {
+		var deferred = new $.Deferred(),
+			reverseClass = reverse ? " reverse" : "",
+			active	= $.mobile.urlHistory.getActive(),
+			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
+			screenHeight = $.mobile.getScreenHeight(),
+			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
+			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
+			toggleViewportClass = function(){
+				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
+			},
+			scrollPage = function(){
+				// By using scrollTo instead of silentScroll, we can keep things better in order
+				// Just to be precautios, disable scrollstart listening like silentScroll would
+				$.event.special.scrollstart.enabled = false;
+				
+				window.scrollTo( 0, toScroll );
+				
+				// reenable scrollstart listening like silentScroll would
+				setTimeout(function() {
+					$.event.special.scrollstart.enabled = true;
+				}, 150 );
+			},
+			cleanFrom = function(){
 				$from
 					.removeClass( $.mobile.activePageClass + " out in reverse " + name )
 					.height( "" );
-			}
-			
-			$to.addClass( $.mobile.activePageClass );
-			
-			if( !none ){
-				$to.animationComplete( doneIn );
-			}
-			
-			// Send focus to page as it is now display: block
-			$.mobile.focusPage( $to );
-
-			// Jump to top or prev scroll, sometimes on iOS the page has not rendered yet.
-			$to.height( screenHeight + toScroll );
+			},
+			startOut = function(){
+				// if it's not sequential, call the doneOut transition to start the TO page animating in simultaneously
+				if( !sequential ){
+					doneOut();
+				}
+				else {
+					$from.animationComplete( doneOut );	
+				}
 				
-			$.mobile.silentScroll( toScroll );
+				// Set the from page's height and start it transitioning out
+				// Note: setting an explicit height helps eliminate tiling in the transitions
+				$from
+					.height( screenHeight + $(window ).scrollTop() )
+					.addClass( name + " out" + reverseClass );
+			},
 			
-			$to.addClass( name + " in" + reverseClass );
-			
-			if( none ){
-				doneIn();
-			}
-			
-		},
-		
-		doneIn = function() {
-			$to
-				.removeClass( "out in reverse " + name )
-				.height( "" )
-				.parent().removeClass( viewportClass );
+			doneOut = function() {
 
-			deferred.resolve( name, reverse, $to, $from, true );
-		};
+				if ( $from && sequential ) {
+					cleanFrom();
+				}
+				
+				startIn();
+			},
+			
+			startIn = function(){	
+			
+				$to.addClass( $.mobile.activePageClass );				
+			
+				// Send focus to page as it is now display: block
+				$.mobile.focusPage( $to );
+
+				// Set to page height
+				$to.height( screenHeight + toScroll );
+				
+				scrollPage();
+				
+				if( !none ){
+					$to.animationComplete( doneIn );
+				}
+				
+				$to.addClass( name + " in" + reverseClass );
+				
+				if( none ){
+					doneIn();
+				}
+				
+			},
 		
-	$to
-		.parent().addClass( viewportClass );
+			doneIn = function() {
+			
+				if ( !sequential ) {
+					
+					if( $from ){
+						cleanFrom();
+					}
+				}
+			
+				$to
+					.removeClass( "out in reverse " + name )
+					.height( "" );
+				
+				toggleViewportClass();
+				
+				// In some browsers (iOS5), 3D transitions block the ability to scroll to the desired location during transition
+				// This ensures we jump to that spot after the fact, if we aren't there already.
+				if( $( window ).scrollTop() !== toScroll ){
+					scrollPage();
+				}
+
+				deferred.resolve( name, reverse, $to, $from, true );
+			};
+
+		toggleViewportClass();
 	
-	if ( $from && !none ) {
-		$from
-			.animationComplete( doneOut )
-			.height( screenHeight + $(window ).scrollTop() )
-			.addClass( name + " out" + reverseClass );
-	}
-	else {	
-		doneOut();
-	}
+		if ( $from && !none ) {
+			startOut();
+		}
+		else {
+			doneOut();
+		}
 
-	return deferred.promise();
+		return deferred.promise();
+	};
 }
 
+// generate the handlers from the above
+var sequentialHandler = createHandler(),
+	simultaneousHandler = createHandler( false );
+
 // Make our transition handler the public default.
-$.mobile.defaultTransitionHandler = outInTransitionHandler;
+$.mobile.defaultTransitionHandler = sequentialHandler;
 
 //transition handler dictionary for 3rd party transitions
 $.mobile.transitionHandlers = {
-	"default": $.mobile.defaultTransitionHandler
+	"default": $.mobile.defaultTransitionHandler,
+	"sequential": sequentialHandler,
+	"simultaneous": simultaneousHandler
 };
 
 $.mobile.transitionFallbacks = {};
@@ -2710,7 +2768,12 @@ $.mobile.transitionFallbacks = {};
 
 		//clear page loader
 		$.mobile.hidePageLoadingMsg();
-
+		
+		// If transition is defined, check if css 3D transforms are supported, and if not, if a fallback is specified
+		if( transition && !$.support.cssTransform3d && $.mobile.transitionFallbacks[ transition ] ){
+			transition = $.mobile.transitionFallbacks[ transition ];
+		}
+		
 		//find the transition handler for the specified transition. If there
 		//isn't one in our transitionHandlers dictionary, use the default one.
 		//call the handler immediately to kick-off the transition.
@@ -3841,6 +3904,10 @@ $.mobile.transitionFallbacks.pop = "fade";
 
 (function( $, window, undefined ) {
 
+// Use the simultaneous transition handler for slide transitions
+$.mobile.transitionHandlers.slide = $.mobile.transitionHandlers.simultaneous;
+
+// Set the slide transition's fallback to "fade"
 $.mobile.transitionFallbacks.slide = "fade";
 
 })( jQuery, this );
@@ -5307,7 +5374,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		theme: null,
 		icon: null,
 		iconpos: null,
-		inline: null,
+		inline: false,
 		corners: true,
 		shadow: true,
 		iconshadow: true,
@@ -6205,7 +6272,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		disabled: false,
 		icon: "arrow-d",
 		iconpos: "right",
-		inline: null,
+		inline: false,
 		corners: true,
 		shadow: true,
 		iconshadow: true,

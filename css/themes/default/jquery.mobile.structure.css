@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 3ef15b89cc878739291a7649e108e0628ae8e67c <> Date: Wed Mar 28 17:03:54 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: a2e54d1e4c586c56810a4c7dc9b8872e325a3d47 <> Date: Thu Mar 29 17:48:08 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -48,7 +48,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-header .ui-btn-right,
 .ui-footer .ui-btn-right { right: 5px; }
 .ui-footer .ui-btn-icon-notext,
-.ui-header .ui-btn-icon-notext { top: -1px; }
+.ui-header .ui-btn-icon-notext { top: 6px; }
 .ui-header .ui-title, .ui-footer .ui-title { min-height: 1.1em; text-align: center; font-size: 16px; display: block; margin: .6em 30% .8em;  padding: 0;  text-overflow: ellipsis; overflow: hidden; white-space: nowrap; outline: 0 !important; }
 .ui-footer .ui-title { margin: .6em 15px .8em;  }
 .ui-content { border-width: 0; overflow: visible; overflow-x: hidden; padding: 15px; }
@@ -174,37 +174,21 @@ div.ui-mobile-viewport { overflow-x: hidden; }
         opacity: 0;
     }
 }
-.slide.out {
-	-webkit-transform: translateX(-100%);
-	-webkit-animation-name: slideouttoleft;
-	-moz-transform: translateX(-100%);
-	-moz-animation-name: slideouttoleft;
-	-webkit-animation-duration: 225ms;
-	-moz-animation-duration: 225ms;
+@-webkit-keyframes slideinfromright {
+    from { -webkit-transform: translateX(100%); }
+    to { -webkit-transform: translateX(0); }
 }
-.slide.in {
-	-webkit-transform: translateX(0);
-	-webkit-animation-name: fadein;
-	-moz-transform: translateX(0);
-	-moz-animation-name: fadein;
-	-webkit-animation-duration: 200ms;
-	-moz-animation-duration: 200ms;
+@-moz-keyframes slideinfromright {
+    from { -webkit-transform: translateX(100%); }
+    to { -webkit-transform: translateX(0); }
 }
-.slide.out.reverse {
-	-webkit-transform: translateX(100%);
-	-webkit-animation-name: slideouttoright;
-	-moz-transform: translateX(100%);
-	-moz-animation-name: slideouttoright;
-	-webkit-animation-duration: 200ms;
-	-moz-animation-duration: 200ms;
+@-webkit-keyframes slideinfromleft {
+    from { -webkit-transform: translateX(-100%); }
+    to { -webkit-transform: translateX(0); }
 }
-.slide.in.reverse {
-	-webkit-transform: translateX(0);
-	-webkit-animation-name: fadein;
-	-moz-transform: translateX(0);
-	-moz-animation-name: fadein;
-	-webkit-animation-duration: 200ms;
-	-moz-animation-duration: 200ms;
+@-moz-keyframes slideinfromleft {
+    from { -webkit-transform: translateX(-100%); }
+    to { -webkit-transform: translateX(0); }
 }
 @-webkit-keyframes slideouttoleft {
     from { -webkit-transform: translateX(0); }
@@ -221,6 +205,68 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 @-moz-keyframes slideouttoright {
     from { -moz-transform: translateX(0); }
     to { -moz-transform: translateX(100%); }
+}
+.slide.out, .slide.in {
+	-webkit-animation-timing-function: ease-out;
+	-webkit-animation-duration: 350ms;
+	-moz-animation-timing-function: ease-out;
+	-moz-animation-duration: 350ms;
+}
+.slide.out {
+	-webkit-transform: translateX(-100%);
+	-webkit-animation-name: slideouttoleft;
+	-moz-transform: translateX(-100%);
+	-moz-animation-name: slideouttoleft;
+}
+.slide.in {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: slideinfromright;
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideinfromright;
+}
+.slide.out.reverse {
+	-webkit-transform: translateX(100%);
+	-webkit-animation-name: slideouttoright;
+	-moz-transform: translateX(100%);
+	-moz-animation-name: slideouttoright;
+}
+.slide.in.reverse {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: slideinfromleft;
+	-moz-transform: translateX(0);
+	-moz-animation-name: slideinfromleft;
+}
+.slidefade.out {
+	-webkit-transform: translateX(-100%);
+	-webkit-animation-name: slideouttoleft;
+	-moz-transform: translateX(-100%);
+	-moz-animation-name: slideouttoleft;
+	-webkit-animation-duration: 225ms;
+	-moz-animation-duration: 225ms;
+}
+.slidefade.in {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: fadein;
+	-moz-transform: translateX(0);
+	-moz-animation-name: fadein;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
+}
+.slidefade.out.reverse {
+	-webkit-transform: translateX(100%);
+	-webkit-animation-name: slideouttoright;
+	-moz-transform: translateX(100%);
+	-moz-animation-name: slideouttoright;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
+}
+.slidefade.in.reverse {
+	-webkit-transform: translateX(0);
+	-webkit-animation-name: fadein;
+	-moz-transform: translateX(0);
+	-moz-animation-name: fadein;
+	-webkit-animation-duration: 200ms;
+	-moz-animation-duration: 200ms;
 }
 .slidedown.out {
 	-webkit-animation-name: fadeout;

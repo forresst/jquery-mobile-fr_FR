@@ -33,12 +33,16 @@
 				<pre><code>
 		.slide.in {
 		 	-webkit-transform: translateX(0);
+			-moz-transform: translateX(0);
 			-webkit-animation-name: slideinfromright;
+			-moz-animation-name: slideinfromright;
 		}
 			
 		.slide.out {
 			-webkit-transform: translateX(-100%);
+			-moz-transform: translateX(-100%);
 			-webkit-animation-name: slideouttoleft;
+			-moz-animation-name: slideouttoleft;
 		}
 
 		@-webkit-keyframes slideinfromright {
@@ -50,6 +54,17 @@
 			from { -webkit-transform: translateX(0); }
 			to { -webkit-transform: translateX(-100%); }
 		}
+	
+		@-moz-keyframes slideinfromright {
+			from { -moz-transform: translateX(100%); }
+			to { -moz-transform: translateX(0); }
+		}
+		
+		@-moz-keyframes slideouttoleft {
+			from { -moz-transform: translateX(0); }
+			to { -moz-transform: translateX(-100%); }
+		}
+		
 				</code></pre>
 
 				<p>Lors d'une transition de page à base de CSS, jQuery Mobile place le nom de la classe de la transition sur les deux pages "de" et "à" impliquées dans la transition. Il place ensuite une classe "out" sur la page "de", et la classe "in" sur la page "à". La présence de ces classes sur les éléments de la page "de" et "à" déclenche alors les règles CSS de l'animation définies ci-dessus. À partir de la version 1.1 de jQuery Mobile, les ajouts de classe d'animation sont mis en file d'attente,  plutôt que simultanément, ce qui produit une séquence "sortir puis entrer", qui est plus favorable pour le rendu des mobiles que notre séquence de transition précédente simultanée.</p>
@@ -59,12 +74,16 @@
 				<pre><code>
 		.slide.in.reverse {
 			-webkit-transform: translateX(0);
+			-moz-transform: translateX(0);
 			-webkit-animation-name: slideinfromleft;
+			-moz-animation-name: slideinfromleft;
 		}
 
 		.slide.out.reverse {
 			-webkit-transform: translateX(100%);
+			-moz-transform: translateX(100%);
 			-webkit-animation-name: slideouttoright;
+			-moz-animation-name: slideouttoright;
 		}
 
 		@-webkit-keyframes slideinfromleft {
@@ -76,6 +95,17 @@
 			from { -webkit-transform: translateX(0); }
 			to { -webkit-transform: translateX(100%); }
 		}
+		
+		@-moz-keyframes slideinfromleft {
+			from { -moz-transform: translateX(-100%); }
+			to { -moz-transform: translateX(0); }
+		}
+
+		@-moz-keyframes slideouttoright {
+			from { -moz-transform: translateX(0); }
+			to { -moz-transform: translateX(100%); }
+		}
+		
 				</code></pre>
 
 				<p>Après que les règles CSS soient en place, il vous suffit de spécifier le nom de votre transition au sein de l'attribut @data-transition d'un lien de navigation :</p>
