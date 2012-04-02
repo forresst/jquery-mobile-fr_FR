@@ -18,13 +18,14 @@
 <div data-role="page" class="type-interior">
 
 	<div data-role="header" data-theme="f">
-		<h1>Groupement des boutons</h1>
+		<h1>Groupé</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 		<div class="content-primary">
 		
+		<h2>Groupement des boutons</h2>
 		<p>Occasionnellement, vous voudrez peut-être un ensemble de boutons pour former un seul bloc qui ressemble à une composante de navigation. Pour obtenir cet effet, envelopper un ensemble de boutons dans un container avec l'attribut <code> data-role="controlgroup"</code> — le framework créera un groupe de boutons verticale, enlèvera toutes les marges et les ombres portées entre les boutons et laissera seulement  l'arrondi du premier et dernier bouton de la série pour créer un effet de regroupement. </p>
 <pre><code>
 &lt;div data-role="controlgroup"&gt;
@@ -46,9 +47,19 @@
 		<div data-role="controlgroup" data-type="horizontal">
 			<a href="index.html" data-role="button">Oui</a> <a href="index.html" data-role="button">Non</a> <a href="index.html" data-role="button">Peut être</a>
 		</div>
+		
+		<p>Mini horizontal boutons groupés en ajoutant <code>data-mini="true</code> au controlgroup :</p>
+		<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+			<a href="index.html" data-role="button">Oui</a> <a href="index.html" data-role="button">Non</a> <a href="index.html" data-role="button">Peut être</a>
+		</div>
 			
 		<p>Boutons groupés horizontalement avec des icônes:</p>
 		<div data-role="controlgroup" data-type="horizontal" >
+			<a href="index.html" data-role="button" data-icon="plus">Ajouter</a><a href="index.html" data-role="button" data-icon="delete">Supprimer</a>
+		</div>
+		
+		<p>Mini horizontal boutons groupés avec icônes en ajoutant <code>data-mini="true</code> au controlgroup :</p>
+		<div data-role="controlgroup" data-type="horizontal" data-mini="true">
 			<a href="index.html" data-role="button" data-icon="plus">Ajouter</a><a href="index.html" data-role="button" data-icon="delete">Supprimer</a>
 		</div>
 		

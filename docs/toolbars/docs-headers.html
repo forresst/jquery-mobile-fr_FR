@@ -18,14 +18,14 @@
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Barres d'entête</h1>
+		<h1>Entêtes</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
 	</div><!-- /header -->
 
 	<div data-role="content">
 		<div class="content-primary">	
 			<h2>Structure d'entête</h2>
-			<p>L'<code>entête</code> est une barre d'outils en haut de la page qui contient généralement le texte du titre de page et des boutons optionnels placés à la gauche et/ou à la droite du titre pour la navigation ou pour des actions.</p> 
+			<p>L'<code>entête</code> est une barre d'outils en haut de la page qui contient généralement le texte du titre de page et des boutons optionnels placés à la gauche et/ou à la droite du titre pour la navigation ou pour des actions. Les entêtes peuvent être de façon optionnelle positionnées comme <a href="bars-fixed.html">fixes</a> de sorte qu'elles restent en haut de l'écran tout le temps au lieu de défiler avec la page.</p> 
 			
 			<p>Le texte du titre est normalement un élément de titre H1 mais c'est possible d'utiliser n'importe quel niveau de titre (H1-H6) pour permettre une flexibilité sémantique. Par exemple, une page contenant plusieurs 'pages' mobile peut utiliser un élément H1 sur 'page' d'accueil et un élément H2 sur les pages secondaires. Tous les niveaux de titre sont de style identique par défaut pour maintenir une cohérence visuelle.</p> 
 
@@ -169,7 +169,7 @@
 
 			<p>Ceci produira cette barre :</p>
 				<div class="ui-bar ui-bar-b">
-					<h3>e suis juste un div avec des classes de barre et un <a href="#" data-role="button">Bouton</a></h3>
+					<h3>Je suis juste un div avec des classes de barre et un <a href="#" data-role="button" data-inline="true" data-mini="true">Bouton</a> mini aligné</h3>
 				</div>
 				
 				<p>Notez que <code>.ui-bar</code> ne doit pas être ajouté à l'entête ou au pied de page des barres qui s'étendent sur toute la largeur de la page, car l'espacement supplémentaire entraînera un élément sur ​​toute la largeur qui sortira de son conteneur parent. Pour ajouter de l'espace à l'intérieur d'une barre d'outils sur toute la largeur il est recommandé d'envelopper le contenu de la barre d'outils dans un élément, et d'appliquer l'espacement à cet élément.</p>
@@ -177,9 +177,8 @@
 				<p>En écrivant certains styles simples, il est facile de construire des barres de message comme ceci :</p><!-- Yes, the inline styles aren't recommended in a real system but they are used to simply illustrate how to tweak CSS -->
 					
 					<div class="ui-bar ui-bar-e">
-						<h3 style="float:left; margin-top:8px;">Ceci est un message d'alerte avec un bouton pour le fermer. </h3>
-						<div style="float:right; margin-top:4px;"><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Bouton</a></div>
-						<p style="clear:both; font-size:85%; margin-bottom:8px;">Et voici un texte supplémentaire dans un paragraphe.</p>
+						
+						<h3 style="display:inline-block; width:92%; margin-top:5px;">Ceci est un message d'alerte. </h3><div style="display:inline-block; width:8%; margin-top:0px;"><a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Abandonner</a></div><p style="font-size:85%; margin:-.3em 0 1em;">Et voici un texte supplémentaire dans un paragraphe.</p>
 					</div>
 				</div><!--/content-primary -->		
 

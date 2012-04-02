@@ -38,6 +38,9 @@
 			<p>Création de ce bouton avec une icône :</p>
 			<a href="index.html" data-role="button" data-icon="delete">Supprimer</a>
 			
+			<p>Un bouton plus compact avec l'attribut <code> data-inline="true"</code> ajouté au bouton :</p>
+			<a href="index.html" data-role="button" data-icon="delete" data-mini="true">Supprimer</a>
+			
 			<h2>Ensemble d'icône</h2>
 			
 			<p>Les attributs <code> data-icon</code> suivants peuvent être référencés pour créer les icônes ci-dessous :</p>
@@ -108,6 +111,17 @@
 		<p>Création de ce bouton avec une icône uniquement :</p>
 			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Supprimer</a>
 
+
+
+			<h2>Mini &amp; Alignement</h2>
+			<p>Les attributs <a href="../forms/forms-all-mini.html">mini</a> et <a href="buttons-inline.html">inline</a> peuvent être ajoutés pour produire des boutons plus compacts :<p>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="left" data-mini="true" data-inline="true">Delete</a>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="right" data-mini="true" data-inline="true">Delete</a>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="top" data-mini="true" data-inline="true">Delete</a>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="bottom" data-mini="true" data-inline="true">Delete</a>
+			<a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext" data-mini="true" data-inline="true">Delete</a>
+			
+			
 		<h2>Icônes personnalisées</h2>
 		<p>Pour utiliser des icônes personnalisés, spécifiez une valeur <code>data-icon</code> qui a un nom unique, comme <code>myapp-email</code> et le plugin bouton générera une classe en préfixant <code>ui-icon-</code> à la valeur <code> data-icon</code> et l'appliquera au bouton :  <code>ui-icon-myapp-email</code>. </p>
 		<p>Vous pouvez alors écrire une règle CSS qui cible la classe <code>ui-icon-myapp-email</code> pour spécifier la source d'arrière plan de l'icône. Afin de maintenir une cohérence visuelle avec le reste des icônes, créez une icône blanche de 18x18 pixels enregistrées au format PNG-8 avec transparence alpha.</p>
@@ -129,7 +143,7 @@
 </code></pre>			
 		 	
 		<h2>Les icônes et les thèmes</h2>
-		<p>Le demi-cercle noir transparent derrière l'icône blanche assure un bon contraste sur n'importe quelle couleur de fond de sorte qu'il fonctionne bien avec le système de thématisation de jQuery Mobile. Voici des exemples d'une même icône positionnée sur une gamme de différents nuanciers de couleurs dans le thème.</p><!-- A themed -->
+		<p>Le demi-cercle noir transparent derrière l'icône blanche assure un bon contraste sur n'importe quelle couleur de fond de sorte qu'il fonctionne bien avec le système de thématisation de jQuery Mobile. Voici des exemples d'une même icône positionnée sur une gamme de différents nuanciers de couleurs avec <a href="buttons-themes.html">des boutons thématisés</a>.</p><!-- A themed -->
 		
 		
 		<p><strong>Nuancier "A"</strong> des boutons sur le thème</p>
