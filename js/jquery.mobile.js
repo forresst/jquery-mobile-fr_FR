@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: a2e54d1e4c586c56810a4c7dc9b8872e325a3d47 <> Date: Thu Mar 29 17:48:08 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 0f9c75291ce90eec523248b12aa68b9c61cb30c9 <> Date: Mon Apr 2 00:14:17 2012 -0400
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -4993,7 +4993,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					}
 				} else if ( item.jqmData( "role" ) === "list-divider" ) {
 
-					itemClass += " ui-li-divider ui-btn ui-bar-" + dividertheme;
+					itemClass += " ui-li-divider ui-bar-" + dividertheme;
 					item.attr( "role", "heading" );
 
 					//reset counter when a divider heading is encountered
