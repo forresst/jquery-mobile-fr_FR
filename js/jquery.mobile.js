@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 0f9c75291ce90eec523248b12aa68b9c61cb30c9 <> Date: Mon Apr 2 00:14:17 2012 -0400
+* jQuery Mobile Framework Git Build: SHA1: 93b621d0505d048e12b253b213b9349746731ff9 <> Date: Tue Apr 3 11:17:21 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -7093,7 +7093,7 @@ $( document ).bind( "pagecreate create", function( e ){
 			var self = this,
 				o = self.options,
 				$el = self.element,
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer",
+				tbtype = $el.is( ":jqmData(role='header')" ) ? "header" : "footer",
 				$page = $el.closest(".ui-page");
 
 			// Feature detecting support for
@@ -7202,22 +7202,30 @@ $( document ).bind( "pagecreate create", function( e ){
 
 			$el.closest( ".ui-page" ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
 		},
-
-		show: function( notransition ){
-			var hideClass = "ui-fixed-hidden",
+		
+		_useTransition: function( notransition ){
+			var $win = $( window ),
 				$el = this.element,
-				$win = $( window ),
 				scroll = $win.scrollTop(),
 				elHeight = $el.height(),
 				pHeight = $el.closest( ".ui-page" ).height(),
-				viewportHeight = Math.min( screen.height, $win.height() ),
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer";
-
-				if( !notransition && ( this.options.transition && this.options.transition !== "none" &&
-					(
+				viewportHeight = $.mobile.getScreenHeight(),
+				tbtype = $el.is( ":jqmData(role='header')" ) ? "header" : "footer";
+				
+			return !notransition &&
+				( this.options.transition && this.options.transition !== "none" &&
+				(
 					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
 					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
-					) || this.options.fullscreen ) ){
+				) || this.options.fullscreen
+				);
+		},
+
+		show: function( notransition ){
+			var hideClass = "ui-fixed-hidden",
+				$el = this.element;
+
+				if( this._useTransition( notransition ) ){
 				$el
 					.removeClass( "out " + hideClass )
 					.addClass( "in" );
@@ -7231,20 +7239,10 @@ $( document ).bind( "pagecreate create", function( e ){
 		hide: function( notransition ){
 			var hideClass = "ui-fixed-hidden",
 				$el = this.element,
-				$win = $( window ),
-				scroll = $win.scrollTop(),
-				elHeight = $el.height(),
-				pHeight = $el.closest( ".ui-page" ).height(),
-				viewportHeight = Math.min( screen.height, $win.height() ),
-				tbtype = $el.is( ".ui-header" ) ? "header" : "footer",
 				// if it's a slide transition, our new transitions need the reverse class as well to slide outward
 				outclass = "out" + ( this.options.transition === "slide" ? " reverse" : "" );
 
-			if( !notransition && ( this.options.transition && this.options.transition !== "none" &&
-					(
-					( tbtype === "header" && !this.options.fullscreen && scroll > elHeight ) ||
-					( tbtype === "footer" && !this.options.fullscreen && scroll + viewportHeight < pHeight - elHeight )
-					) || this.options.fullscreen ) ){
+			if( this._useTransition( notransition ) ){
 				$el
 					.addClass( outclass )
 					.removeClass( "in" )

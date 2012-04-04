@@ -46,7 +46,7 @@
 
 	<p>Pour avoir une version plus compacte de tous les éléments et boutons du formulaire, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="forms-all-mini.html">version mini</a>. Ceci est utile dans les barres d'outils et les espaces restreints, mais cela demeure faciles à taper. Il est possible d'ajouter cet attribut à un fieldcontainer pour le définir sur un certain nombre d'éléments à la fois.</p>
 
-<pre><code>	
+<pre><code>
 &lt;label for="basic"&gt;Texte de saisie :&lt;/label&gt;
 &lt;input type="text" name="name" id="basic" <strong>data-mini="true"</strong> /&gt;
 	</code></pre>
@@ -86,12 +86,12 @@
 
 	<h2>Désactivation des éléments de formulaire</h2>
 	<p>Tous les widgets jQuery Mobile peuvent être désactivés dans le balisage en ajoutant l'attribut standard <code>disabled</code> à l'élément, comme vous le feriez avec des contrôles natifs. Chaque widget de formulaire a ainsi les méthodes standard <code>disable</code> et <code>enable</code> qui sont documentées avec chaque widget de formulaire. Voici quelques exemples de widgets désactivés : </p>
-	
+
 	<div data-role="fieldcontain">
      <label for="foo">Saisie de texte :</label>
      <input type="text" name="name" id="foo" value="" disabled />
 	</div>
-	
+
 	<div data-role="fieldcontain">
 	<fieldset data-role="controlgroup">
     	<legend>Sexe :</legend>
@@ -109,13 +109,13 @@
 		<option value="off">Arrêt</option>
 		<option value="on">Marche</option>
 	</select>
-    </div>    
+    </div>
 
     <div data-role="fieldcontain">
 	<label for="slider">Bande passante max :</label>
 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" disabled />
     </div>
-    
+
 	<div data-role="fieldcontain">
 		<label for="select-choice-x" class="select">Livraison :</label>
 		<select name="select-shipper" id="select-choice-x" disabled>
@@ -125,10 +125,10 @@
 			<option value="express">Express</option>
 			<option value="overnight">De nuit</option>
 		</select>
-	</div> 
-	
+	</div>
+
 	<p>Notez que vous pouvez désactiver les boutons créés à partir du balisage basé sur <code>button</code> ou <code>input</code>, mais pas les liens avec un rôle de bouton. Les liens ne comporte pas de fonction parallèles désactivé en HTML, si vous avez besoin de désactiver un lien basé sur bouton (ou tout autre élément), il est possible de lui appliquer la classe <code>ui-disabled</code> avec JavaScript afin de réaliser le même effet. </p>
-	
+
 		<h2>Conteneurs de champs</h2>
 		<p>Pour améliorer le style des labels et des éléments de formulaire sur des écrans plus larges, enveloppez un <code>div</code> ou <code>fieldset</code> avec l'attribut <code> data-role="fieldcontain"</code> autour de chaque élément label/form. Ce framework permet d'aligner les entrées et les labels associée côte à côte, et casser les éléments ci-dessous de niveau de bloc empilés ~480px. Le framework va également ajouter une bordure inférieure mince pour agir comme un séparateur de champ.</p>
 
@@ -151,13 +151,13 @@
 		</div>
 
 		<p>Pour des exemples supplémentaires, consultez la <a href="forms-all.html">galerie des éléments de formulaire</a></p>
-		
-		
+
+
 	<h2>Auto-initialisation des éléments de formulaire</h2>
 	<p>Par défaut, jQuery mobile va automatiquement améliorer certains contrôles de formulaire natifs en riches composants tactiles. Ceci est géré en interne par la recherche des éléments de formulaire via le nom de la balise et par l'exploitation d'une méthode de plugin sur ces éléments. Par exemple, un élément <code>select</code> soit trouvé et initialisé avec le plugin "selectmenu", tandis qu'un  élément <code>input</code> avec un <code>type="checkbox"</code> sera amélioré avec le plugin "checkboxradio". Une fois initialisé, vous pouvez vous adresser à ces composants améliorée par programmation à travers leurs méthodes d'API de Widget jQuery UI. Regardez les options, les méthodes et les événements énumérés sur la page de documentation de chaque plugin formulaire pour plus de détails. </p>
 
-	<h2>Initialisation des groupes d'éléments de formulaire injectés dynamiquement</h2> 
-	<p>Si vous devez générer de nouvelles balises côté client ou charger le contenu via AJAX et l'injecter dans une page, vous pouvez déclencher l''événement <code>create</code> pour gérer l'auto-initialisation de tous les plugins contenus dans le nouveau balisage. Cela peut être déclenché sur tout élément (même le div page lui-même),  en vous épargnant la tâche d'initialisation manuelle de chaque plugin (voir ci-dessous).</p> 
+	<h2>Initialisation des groupes d'éléments de formulaire injectés dynamiquement</h2>
+	<p>Si vous devez générer de nouvelles balises côté client ou charger le contenu via AJAX et l'injecter dans une page, vous pouvez déclencher l''événement <code>create</code> pour gérer l'auto-initialisation de tous les plugins contenus dans le nouveau balisage. Cela peut être déclenché sur tout élément (même le div page lui-même),  en vous épargnant la tâche d'initialisation manuelle de chaque plugin (voir ci-dessous).</p>
 
 	<p>Par exemple, si un bloc de balises HTML (par exemple un formulaire de connexion) a été chargé à travers Ajax, déclenchez la création d'événements pour transformer automatiquement tous les widgets qu'il contient (les entrées et les boutons dans ce cas) dans les versions améliorées. Le code de ce scénario serait :</p>
 
@@ -226,20 +226,25 @@ $(document).bind('mobileinit',function(){
 });
 		</code></pre>
 
+  	<p>Alternativement vous pouvez utilisez l'attribut <code>data-enhance="false"</code> sur l'élément parent avec <code>$.mobile.ignoreContentEnabled</code> défini à true. Attention cependant, cela entraînera une pénalité de performance pour chaque élément dans la page qui serait par ailleurs amélioré car jQuery Mobile doit traverser l'ensemble des parents pour s'occuper de ces éléments.</p>
+
 <p>Un cas particulier est celui des selects. L'exemple ci-dessus permettra d'éviter toute augmentation de prise de place sur les éléments select dans la page si <code>select</code> est inclus. Si vous souhaitez conserver les performances natives, l'aspect et la convivialité du menu lui-même et profiter de l'augmentation visuelle du bouton de sélection par jQuery Mobile, vous pouvez définir <code>$.mobile.selectmenu.prototype.options.nativeMenu</code> à true dans une fonction de rappel <code>mobileinit</code> comme un paramètre global ou utilisez <code>data-native="true"</code> au cas par cas.</p>
 
-		
 
-	</div><!--/content-primary -->		
-	
+	<h2>Fichier en entrée</h2>
+	<p>Utiliser un formulaire multipart avec un fichier d'entrée n'est pas supporté par ajax. Dans ce cas, vous devez décorer le formulaire parent avec<code>data-ajax="false"</code> pour s'assurer que le formulaire est soumis correctement au serveur.</p>
+
+
+	</div><!--/content-primary -->
+
 	<div class="content-secondary">
-		
+
 		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
-			
+
 				<h3>Aussi dans cette rubrique</h3>
-				
+
 				<ul data-role="listview" data-theme="c" data-dividertheme="d">
-				
+
 					<li data-role="list-divider">Éléments de formulaire</li>
 					<li data-theme="a"><a href="docs-forms.html">Formulaires basiques</a></li>
 					<li><a href="forms-all.html">Gallerie d'élement de formulaire</a></li>
@@ -254,18 +259,18 @@ $(document).bind('mobileinit',function(){
 					<li><a href="forms-themes.html">Thématisation des formulaires</a></li>
 					<li><a href="forms-all-native.html">Eléments natifs de formulaire</a></li>
 					<li><a href="forms-sample.html">Soumission de formulaire</a></li>
-					
-	
+
+
 				</ul>
 		</div>
-	</div>		
+	</div>
 
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
 		<p>﻿© 2011-12 The jQuery Project</p>
 </div>
-	
+
 </div><!-- /page -->
 
 </body>

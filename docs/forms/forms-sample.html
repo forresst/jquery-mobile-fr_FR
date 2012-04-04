@@ -1,10 +1,10 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Docs jQuery Mobile - Exemple de soumission de formulaire</title> 
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Exemple de soumission de formulaire</title>
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
 
@@ -12,8 +12,8 @@
 	<script src="../../docs/assets/js/jqm-docs.js"></script>
 	<script src="../../js/jquery.mobile.js"></script>
 
-</head> 
-<body> 
+</head>
+<body>
 
 	<div data-role="page" class="type-interior">
 
@@ -24,13 +24,13 @@
 
 	<div data-role="content">
 			<div class="content-primary">
-			
+
 			<h2>Soumission de formulaire Ajax</h2>
 
 			<p>Dans jQuery Mobile, les soumissions de formulaire sont automatiquement gérées en utilisant Ajax, dans la mesure du possible, en créant une transition en douceur entre le formulaire et la page de résultat. Pour assurer que votre formulaire soumet comme prévu, veillez à spécifier les propriétés <code>action</code> et <code>method</code> sur votre élément de formulaire. Sans spécifications, la méthode sera par défaut à <code>get</code> et l'<code>action</code> sera par défaut le chemin relatif de la page actuelle (trouvé via <code>$.mobile.path.get()</code>)</p>
 			<p>Les formulaires acceptent aussi les attributs pour les transitions comme des ancres, tels que <code>data-transition="pop"</code> et <code>data-direction="reverse"</code>. Pour soumettre un formulaire sans Ajax, vous pouvez soit désactiver la gestion de formulaire Ajax globalement, ou par formulaire via l'attribut <code>data-ajax="false"</code>. L'attribut <code>target</code> (comme dans <code>target="_blank"</code>) est aussi respecté sur les formulaires, et sera la cible par défaut au traitement du navigateur lorsque le formulaire sera soumis. Notez que contrairement à des ancres, l'attribut <code>rel</code> n'est pas autorisé sur les formulaires.</p>
-			           
-            
+
+
             <h2>Exemple de formulaire Ajax par défaut</h2>
             <p>Cela démontre la manipulation automatisée d'Ajax lors de soumission de formulaire. Le formulaire ci-dessous est configuré pour envoyer une requête <code>GET</code> à <code>forms-sample-response.php</code>. A la soumission, jQuery Mobile s'assurera que l'URL spécifiée est en mesure d'être récupéré via Ajax, et la traitera de manière appropriée. Gardez à l'esprit que tout comme la soumission de formulaire HTTP ordinaire, jQuery Mobile permet un <code>get</code> sur les pages de résultat pour être marqué en mettant à jour la table de hachage d'Url lorsque la réponse est réussie. En outre, comme la soumission de formulaire ordinaire, les requêtes <code>post</code> ne contiennent pas de paramètres de requête dans la table de hachage, de sorte qu'ils ne soient pas marquable.</p>
 			<form action="forms-sample-response.php" method="get" class="ui-body ui-body-a ui-corner-all">
@@ -47,11 +47,11 @@
 					<button type="submit" data-theme="b" name="submit" value="submit-value">Valider</button>
 				</fieldset>
 			</form>
-			
+
 			<h2>Exemple de formulaire Non-Ajax</h2>
-			
+
 			 <p>Pour éviter que les soumissions de formulaire soient automatiquement gérées avec l'Ajax, ajoutez l'attribut <code>data-ajax="false"</code> à l'élément du formulaire. Vous pouvez également activer entièrement la manipulation du formulaire Ajax via l'<a href="../api/globalconfig.html">option de configuration globale</a> <code>ajaxEnabled</code>.</p>
-			
+
             <p>Le formulaire ci-dessous est identique à celui du dessus sauf pour l'ajout de l'attribut <code>data-ajax="false"</code>. Lorsque le bouton de soumission est pressé, cela se traduira par une actualisation complète de la page.</p>
 			<form action="forms-sample-response.php" method="get" data-ajax="false" class="ui-body ui-body-a ui-corner-all">
 				<fieldset>
@@ -67,12 +67,12 @@
 					<button type="submit" data-theme="b" name="submit" value="submit-value">Valider</button>
 				</fieldset>
 			</form>
-			
+
 			<h2>Auto-soumission des formulaires</h2>
 			<p>Vous pouvez également soumettre des formulaires vers la même URL que celle que vous consultez actuellement en définissant l'attribut <code>action</code> de ce formulaire vers cette URL. <A href="forms-sample-selfsubmit.php">Cette page le démontre.</a></p>
 			<p>Quand une requête <code>POST</code> est soumise à une page qui est déjà dans les DOM (qui se produit communément lorsque vous soumettez un formulaire à la même URL actuellement visible), l'URL de réponse sera identique à celle de la page existante, car les requêtes <code>post</code> ne rajoutent pas de paramètres dans la requête de la chaîne de l'URL. Dans cette situation, jQuery mobile va remplacer la page qui a soumis le formulaire avec la page retournée dans le corps de la réponse.</p>
 
-			</div><!--/content-primary -->		
+			</div><!--/content-primary -->
 
 			<div class="content-secondary">
 
@@ -86,7 +86,7 @@
 							<li><a href="docs-forms.html">Formulaires basiques</a></li>
 							<li><a href="forms-all.html">Gallerie d'élement de formulaire</a></li>
 							<li><a href="forms-all-mini.html">Gallerie d'élement de formulaire mini</a></li>
-              			  	<li><a href="textinputs/">Textes de saisie</a></li>
+              <li><a href="textinputs/">Textes de saisie</a></li>
 							<li><a href="search/">Recherche</a></li>
 							<li><a href="slider/">Curseur</a></li>
 							<li><a href="switch/">Interrupteur</a></li>
@@ -96,11 +96,11 @@
 							<li><a href="forms-themes.html">Thématisation des formulaires</a></li>
 							<li><a href="forms-all-native.html">Eléments natifs de formulaire</a></li>
 							<li data-theme="a"><a href="forms-sample.html">Soumission de formulaire</a></li>
-							
+
 
 						</ul>
 				</div>
-			</div>		
+			</div>
 
 		</div><!-- /content -->
 
