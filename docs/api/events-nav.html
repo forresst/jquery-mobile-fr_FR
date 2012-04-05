@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="ui-mobile-rendering">
+<html>
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
@@ -11,7 +11,7 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
-
+	
 </head>
 <body>
 
@@ -56,15 +56,15 @@ $(document).bind("mobileinit", function(){
 		<dl>
 				<dt>pagecreate</dt>
 				
-				<dd>Cet événement est déclenché sur une page lorsqu'elle est initialisée la première fois par le plugin de page. Pagecreate est l'événement le plus utile pour améliorer progressivement le balisage d'une page lors de son premier chargement , et de ce fait, beaucoup de widgets standards jQuery Mobile se lient à pagecreate pour ainsi améliorer le balisage dans les pages ! Si vous liez pagecreate dans n'importe quel script qui est référencé après le framework jQuery Mobile, tous les widgets natifs de jQuery Mobile, dans cette page, seront améliorés avant que votre fonction de rappel d'événement s'exécute. En d'autres termes, vous aurez affaire à des composants jQuery Mobile améliorés.</dd>
+				<dd>Cet événement est déclenché sur une page lorsqu'elle est initialisée la première fois par le plugin de page. <code>pagecreate</code> est l'événement le plus utile pour améliorer progressivement le balisage d'une page lors de son premier chargement , et de ce fait, beaucoup de widgets standards jQuery Mobile se lient à <code>pagecreate</code> pour ainsi améliorer le balisage dans les pages ! Si vous liez <code>pagecreate</code> dans n'importe quel script qui est référencé après le framework jQuery Mobile, tous les widgets natifs de jQuery Mobile, dans cette page, seront améliorés avant que votre fonction de rappel d'événement s'exécute. En d'autres termes, vous aurez affaire à des composants jQuery Mobile améliorés.</dd>
 				
 				<dt>pagebeforecreate</dt>
 				
-				<dd>Cet événement est déclenché sur un élément de la page juste avant qu'il soit créé par le plugin de la page Bien que l'événement pagecreate vous permet généralement de travailler avec une page <strong>après</strong> que le balisage ait été amélioré par jQuery Mobile, pagebeforecreate vous donne un accès lorsque le balisage n'a pas encore été amélioré. Pagebeforecreate est utile pour modifier le balisage avant les widgets de jQuery Mobile. </dd>
+				<dd>Cet événement est déclenché sur un élément de la page juste avant qu'il soit créé par le plugin de la page Bien que l'événement <code>pagecreate</code> vous permet généralement de travailler avec une page <strong>après</strong> que le balisage ait été amélioré par jQuery Mobile, <code>pagebeforecreate</code> vous donne un accès lorsque le balisage n'a pas encore été amélioré. <code>pagebeforecreate</code> est utile pour modifier le balisage avant les widgets de jQuery Mobile. </dd>
 				
 				<dt>pageinit</dt>
 				
-				<dd>PageInit est très similaire à pagecreate, sauf qu'aucun des widgets standards jQuery Mobile se lient à lui, et il est garanti que son exécution s'effectue après que toutes les fonctions de rappel liées à pagecreate soient terminés. Si vous avez besoin de lier un événement de création de page par l'intermédiaire d'un script qui est référencé avant jQuery Mobile, la liaison à pageinit veillera à ce que vous traitiez avec des contrôles de page améliorés (alors que pagecreate ne le fera pas, dans ce cas précis.)</dd>
+				<dd><code>pageinit</code> est très similaire à <code>pagecreate</code>, sauf qu'aucun des widgets standards jQuery Mobile se lient à lui, et il est garanti que son exécution s'effectue après que toutes les fonctions de rappel liées à <code>pagecreate</code> soient terminés. Si vous avez besoin de lier un événement de création de page par l'intermédiaire d'un script qui est référencé avant jQuery Mobile, la liaison à <code>pageinit</code> veillera à ce que vous traitiez avec des contrôles de page améliorés (alors que <code>pagecreate</code> ne le fera pas, dans ce cas précis.)</dd>
 				
 				
 		</dl>
@@ -73,35 +73,66 @@ $(document).bind("mobileinit", function(){
 		<h3>Événements de navigation de page</h3>
 		<p>Après que les pages soient créées, elles sont souvent affichées et cachées une ou plusieurs fois tout au long de l'utilisation d'une application jQuery Mobile. Pour les navigateurs de grade-A, avec le support de la navigation Ajax , le modèle de navigation jQM gère les comportements et les déclenchement des événements utiles de cette page aux différentes étapes lors du processus d'affichage, de masquage et de changement.</p>
 		
+		<h4>Événements d'affichage de page</h4>
+		<p>Les événements d'affichage de page (<code>pagebeforeshow</code> et <code>pageshow</code>) sont garantis de se déclencher à chaque fois qu'une page est affichée, si vous ouvrez une page unique, ou la transition entre deux pages. La cible de l'événement est la page qui est montrée.</p>
+		
 		<dl> 
 			
 			<dt>pagebeforeshow</dt>
-			<dd>description ici</dd>
+			<dd>Un événement déclenché sur une page avant qu'elle ne soit montrée.</dd>
 			
 		
 			<dt>pageshow</dt>
-			<dd>description ici</dd>
-			
+			<dd>Un événement déclenché sur une page après qu'elle soit montrée.</dd>
+		</dl>	
+		
+		<h4>Événements de masquage de page</h4>
+		<p>Les événements de masquage de page (<code>pagebeforehide</code> et <code>pagehide</code>) se déclenchent seulement lors de la transition entre deux pages, ou quand une page sortante est cachée en faveur d'une nouvelle. La cible de l'événement est la page qui est montrée.</p>
+		<dl>	
 			<dt>pagebeforehide</dt>
-			<dd>description ici</dd>
+			<dd>Un événement déclenché sur une page avant qu'elle ne soit masquée.</dd>
 			
 			
 			<dt>pagehide</dt>
-			<dd>description ici</dd>
+			<dd>Un événement déclenché sur une page après qu'elle soit masquée.</dd>
 			
 		<dl>
+			
+			
+		<p>Lorsqu'une seule page est affichée et qu'aucune page n'est visible, seul les événements <code>pagebeforeshow</code> et <code>pageshow</code> se déclenchent, et dans cet ordre.</p>
 		
-		<h3>Chronologie</h3>
-		<p>Voici un aperçu de la chronologie des événements pour le changement d'une page</p>
-		
-		
+		<p>Au cours d'une transition entre deux pages, les 4 événements ci-dessus se déclenche, dans cet ordre :</p>
 		<style>
-		.nav-flow ul,  .nav-flow li { margin:0; list-style-type: none; text-align:center; line-height:150%; }
+		.nav-flow ol,  .nav-flow li { margin:0; list-style-type: none; text-align:center; line-height:150%; }
 		.nav-flow h3 { margin:0; }
 		.nav-flow em { color:#999; }
 		</style>	
 		
-		<ul class="nav-flow">
+		<ol class="nav-flow">
+			<li><h3>pagebeforehide</h3></li>
+			<li>↓</li>
+			<li><h3>pagebeforeshow</h3></li>
+			<li>↓</li>
+			<li><h3>pagehide</h3></li>
+			<li>↓</li>
+			<li><h3>pageshow</h3></li>
+		</ol>
+		
+		
+		
+			
+		
+		<h3>Chronologie</h3>
+		
+		
+		
+		
+		<p>Voici un aperçu de la chronologie des événements pour le changement d'une page</p>
+		
+		
+		
+		
+		<ol class="nav-flow">
 			<li><h3>mobileinit</h3> <em>Définissez les options globales ici</em></li>
 			<li>↓</li>
 			<li><h3>pagebeforechange</h3></li>
@@ -128,7 +159,7 @@ $(document).bind("mobileinit", function(){
 			<li><h3>pagechange</h3></li>
 			<li>↓</li>
 			<li><em>Terminé</em></li>
-		</ul>
+		</ol>
 
 		<p>Vous pouvez lier ces événements comme vous le feriez avec les autres événements jQuery en utilisant <code>live()</code> ou <code>bind()</code>.</p>
 
@@ -139,8 +170,8 @@ $(document).bind("mobileinit", function(){
       <p>  &nbsp;</p>
 		<div class="ui-body ui-body-e">
 		<h4 style="margin:.5em 0">Important : <code>pageCreate()</code> contre <code>pageInit()</code></h4>
-   <p> Avant la version bêta 2, il était recommandait de lier l'événement <code>pagecreate</code>, pour ceux qui voulaient manipuler une page améliorée par jQuery mobile et le balisage de widget.  Dans la version bêta 2, un changement interne a été faite pour dissocier chacun des widgets en liant l'événement <code>pagecreate</code> à la place des appels directs aux méthodes du widget. Par conséquence, les utilisateurs qui liaient <code>pagecreate</code> dans<code>mobileinit</code> trouvaient la liaison d'exécution avant que le balisage ait été amélioré par tous les plugins. En accord avec le cycle de vie de production des widgets de jQuery UI, la méthode d'initialisation est appelée <strong>après</strong> la méthode de création, de sorte que l'événement <code>pageinit</code> se synchronise correctement avec la manipulation d'amélioration du DOM et/ou des objets Javascript. En bref, si vous utilisiez précédemment <code>pagecreate</code> pour manipuler le balisage amélioré avant que la page ait été montré, il est très probable que vous  devrez migrer vers 'pageinit'.
-		</p></div>
+   <p> Avant la version bêta 2, il était recommandait de lier l'événement <code>pagecreate</code>, pour ceux qui voulaient manipuler une page améliorée par jQuery mobile et le balisage de widget.  Dans la version bêta 2, un changement interne a été faite pour dissocier chacun des widgets en liant l'événement <code>pagecreate</code> à la place des appels directs aux méthodes du widget. Par conséquence, les utilisateurs qui liaient <code>pagecreate</code> depuis <code>mobileinit</code> trouvaient la liaison d'exécution avant que le balisage ait été amélioré par tous les plugins. En accord avec le cycle de vie de production des widgets de jQuery UI, la méthode d'initialisation est appelée <strong>après</strong> la méthode de création, de sorte que l'événement <code>pageinit</code> se synchronise correctement avec la manipulation d'amélioration du DOM et/ou des objets Javascript.</p>
+</div>
 
 		
 
