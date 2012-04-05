@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 93b621d0505d048e12b253b213b9349746731ff9 <> Date: Tue Apr 3 11:17:21 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 18e709ea9071f49d4801fab418969ac7d67f12b2 <> Date: Wed Apr 4 11:11:57 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -7105,7 +7105,7 @@ $( document ).bind( "pagecreate create", function( e ){
 			$el.addClass( "ui-"+ tbtype +"-fixed" );
 
 			// "fullscreen" overlay positioning
-			if( $el.jqmData( "fullscreen" ) ){
+			if( o.fullscreen ){
 				$el.addClass( "ui-"+ tbtype +"-fullscreen" );
 				$page.addClass( "ui-page-" + tbtype + "-fullscreen" );
 			}
@@ -7287,9 +7287,17 @@ $( document ).bind( "pagecreate create", function( e ){
 	});
 
 	//auto self-init widgets
-	$( document ).bind( "pagecreate create", function( e ){
-		$.mobile.fixedtoolbar.prototype.enhanceWithin( e.target );
-	});
+	$( document )
+		.bind( "pagecreate create", function( e ){
+			
+			// DEPRECATED in 1.1: support for data-fullscreen=true|false on the page element.
+			// This line ensures it still works, but we recommend moving the attribute to the toolbars themselves.
+			if( $( e.target ).jqmData( "fullscreen" ) ){
+				$( $.mobile.fixedtoolbar.prototype.options.initSelector, e.target ).not( ":jqmData(fullscreen)" ).jqmData( "fullscreen", true );
+			}
+			
+			$.mobile.fixedtoolbar.prototype.enhanceWithin( e.target );
+		});
 
 })( jQuery );
 

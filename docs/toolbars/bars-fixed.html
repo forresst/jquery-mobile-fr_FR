@@ -34,7 +34,7 @@
 			    </ul>
 				
 				
-		<p>Dans les navigateurs qui supportent <code>position: fixed</code>, (la plupart des navigateurs de bureaux, iOS5+, Android 2.2+, BlackBerry 6, et d'autres), les barres d'outils qui utilisent le plugin "fixedtoolbar" seront fixées à la partie supérieure ou inférieure de la fenêtre, tandis que le contenu de la page défilera librement entre les deux. Dans les navigateurs qui ne supportent pas le positionnement fixe, les barres d'outils se replieront vers du statique, le positionnement est intégré dans la page. </p>
+		<p>Dans les navigateurs qui supportent <code>position: fixed</code>, (la plupart des navigateurs de bureaux, iOS5+, Android 2.2+, BlackBerry 6, et d'autres), les barres d'outils qui utilisent le plugin "fixedtoolbar" seront fixées à la partie supérieure ou inférieure de la fenêtre, tandis que le contenu de la page défilera librement entre les deux. Dans les navigateurs qui ne supportent pas le positionnement fixe, les barres d'outils resteront positionnées dans le flux, en haut ou en bas de la page. </p>
 		
 		<p>Pour activer ce comportement sur ​​une entête ou un pied de page, ajoutez l'attribut <code>data-position="fixed"</code> à un élément header ou footer de JQuery Mobile.</p>
 		
@@ -83,6 +83,10 @@
 		<p>Il suffit d'inclure les fichiers CSS et JS après vos références à jQuery Mobile et les barres d'outils fixes travailleront de la même manière que jQuery Mobile 1.0 dans iOS4.3, avec l'ajout de la nouvelle API pour le plugin fixedtoolbar 1.1.</p>
 		
 		<p>Si vous avez des améliorations à suggérer, faites un fork du <a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">gist</a> sur github et faites le nous savoir !</p>
+		
+		<h2>Problème connu avec les contrôles de formulaire à l'intérieur des barres d'outils fixes et de scroll par programmation</h2>	
+		<p>Un problème obscur existe dans iOS5 et certaines plateformes Android où le contrôle de formulaire placé à l'intérieur de conteneurs fixes peut perdre sa zone active lorsque la fenêtre est par programmation scroller (en utilisant  <code>window.scrollTo</code> par exemple). Ce n'est pas un problème spécifique à jQuery Mobile, mais à cause de cela, nous recommandons de ne pas faire défiler un document par programmation lors de l'utilisation des contrôles de formulaire à l'intérieur de barre d'outils fixe de jQuery Mobile. <a href="https://github.com/scottjehl/Device-Bugs/issues/1">Ce ticket</a> du <a href="https://github.com/scottjehl/Device-Bugs/">projet des bugs d'appareils</a> explique ce problème plus en détail.</p>
+		
 		
 		<h2>Problèmes connus dans Android 2.2/2.3</h2>	
 		<p>La mise en œuvre de <code>position: fixed;</code> dans Android 2.2/2.3 peut, en conjonction avec des styles apparemment sans rapport avec des modèles de balisage, provoquer un certain nombre de problème étrange en particulier dans le cas des éléments  <code>position: absolute</code> à l'intérieur d'éléments <code>position: fixed</code>. Bien que nous ayons fait de notre mieux pour contourner un certain nombre de ces bugs uniques relevant de la bibliothèque, notez que des styles personnalisés peuvent causer un certain nombre de problèmes.</p>
