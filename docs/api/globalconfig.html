@@ -91,6 +91,9 @@ $(document).bind("mobileinit", function(){
 	<dt><code>autoInitializePage</code> <em>boolean</em>, par défaut : true</dt>
 	<dd>Quand le DOM est prêt, le framework devrait automatiquement appeler <code>$.mobile.initializePage</code>. Si c'est à false, la page ne sera pas initialisée et sera visuellement cachée jusqu'à ce que <code>$.mobile.initializePage</code> soit appelé manuellement.</dd>
 
+	<dt><code>buttonMarkup.hoverDelay</code> <em>integer</em>, par défaut : 200</dt>
+	<dd>Définit le délai pour les appareils tactiles pour ajouter les classes hover et down sur les interactions tactiles pour les boutons du framework. La réduction du délai se traduit par un sentiment ui plus responsive, mais se traduit souvent par  un downstate appliqué pendant le défilement de la page.</dd>
+
 	<dt><code>defaultDialogTransition</code> <em>string</em>, par défaut : 'pop'</dt>
 	<dd>Définit la transition par défaut pour les changements de boîte de dialogue qui utilise Ajax. Définissez à 'none' pour qu'il n'y ait pas de transitions.</dd>
 
@@ -132,10 +135,10 @@ $(document).bind("mobileinit", function(){
 
 	<dt><code>pageLoadErrorMessage</code> <em>string</em>, par défaut: "Error Loading Page"</dt>
 	<dd>Définit le texte qui apparaît quand une page ne se charge pas grâce à l'Ajax.</dd>
-	
+
 	<dt><code>pageLoadErrorMessageTheme</code> <em>string</em>, par défaut : "e"</dt>
 	<dd>Définit le thème utilisé pour les boîtes de message d'erreur.</dd>
-	
+
 	<dt><code>pushStateEnabled</code> <em>boolean</em>, par défaut : true</dt>
 	<dd>Amélioration pour utiliser <code>history.replaceState</code> dans les navigateurs pris en charge, pour convertir les URL basées sur le hash Ajax dans le chemin du document complet. Notez que nous <a href="../pages/page-navmodel.html">recommandons</a> la désactivation de cette fonction si l'Ajax est désactivé ou si l'utilisation intensive des liens externes est utilisée.</dd>
 
@@ -169,7 +172,7 @@ $(document).bind("mobileinit", function(){
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>﻿© 2011-12 The jQuery Project</p>
+		<p>© 2011-12 The jQuery Foundation</p>
 </div>
 
 </div><!-- /page -->
