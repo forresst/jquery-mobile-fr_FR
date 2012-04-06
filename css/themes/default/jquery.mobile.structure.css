@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 18e709ea9071f49d4801fab418969ac7d67f12b2 <> Date: Wed Apr 4 11:11:57 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 7fe46f0d04323825e517ea4c4526d41fac8fc9de <> Date: Thu Apr 5 20:02:14 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -179,16 +179,16 @@ div.ui-mobile-viewport { overflow-x: hidden; }
     to { -webkit-transform: translateX(0); }
 }
 @-moz-keyframes slideinfromright {
-    from { -webkit-transform: translateX(100%); }
-    to { -webkit-transform: translateX(0); }
+    from { -moz-transform: translateX(100%); }
+    to { -moz-transform: translateX(0); }
 }
 @-webkit-keyframes slideinfromleft {
     from { -webkit-transform: translateX(-100%); }
     to { -webkit-transform: translateX(0); }
 }
 @-moz-keyframes slideinfromleft {
-    from { -webkit-transform: translateX(-100%); }
-    to { -webkit-transform: translateX(0); }
+    from { -moz-transform: translateX(-100%); }
+    to { -moz-transform: translateX(0); }
 }
 @-webkit-keyframes slideouttoleft {
     from { -webkit-transform: translateX(0); }
@@ -648,7 +648,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-navbar-expanded .ui-navbar-noicons .ui-btn .ui-btn-inner { padding-top: 1.8em; padding-bottom: 1.9em; }
 .ui-btn { display: block; text-align: center; cursor:pointer;  position: relative; margin: .5em 5px; padding: 0; }
 .ui-mini { margin: .25em 5px; }
-.ui-btn-inner { padding: .6em 25px; min-width:1.2em; display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; position: relative; zoom: 1; }
+.ui-btn-inner { padding: .6em 20px; min-width: .75em; display: block; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; position: relative; zoom: 1; }
 .ui-btn input, .ui-btn button { z-index: 2; }
 .ui-btn-left, .ui-btn-right, .ui-btn-inline { display: inline-block; }
 .ui-btn-block { display: block; }
@@ -665,25 +665,21 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-btn-text { position: relative; z-index: 1; width: 100%; }
 .ui-btn-icon-notext .ui-btn-text { position: absolute; left: -9999px; }
 .ui-btn-icon-left .ui-btn-inner { padding-left: 40px; }
-.ui-mini.ui-btn-icon-left .ui-btn-inner { padding-left: 30px; }
 .ui-btn-icon-right .ui-btn-inner { padding-right: 40px; }
-.ui-mini.ui-btn-icon-right .ui-btn-inner { padding-right: 30px; }
 .ui-btn-icon-top .ui-btn-inner { padding-top: 40px; }
-.ui-mini.ui-btn-icon-top .ui-btn-inner { padding-top: 30px; }
 .ui-btn-icon-bottom .ui-btn-inner { padding-bottom: 40px; }
-.ui-mini.ui-btn-icon-bottom .ui-btn-inner { padding-bottom: 30px; }
 .ui-header .ui-btn-icon-left .ui-btn-inner,
 .ui-footer .ui-btn-icon-left .ui-btn-inner,
-.ui-mini .ui-btn-icon-left .ui-btn-inner { padding-left: 28px; }
+.ui-mini .ui-btn-icon-left .ui-btn-inner { padding-left: 30px; }
 .ui-header .ui-btn-icon-right .ui-btn-inner,
 .ui-footer .ui-btn-icon-right .ui-btn-inner,
-.ui-mini .ui-btn-icon-right .ui-btn-inner { padding-right: 28px; }
+.ui-mini .ui-btn-icon-right .ui-btn-inner { padding-right: 30px; }
 .ui-header .ui-btn-icon-top .ui-btn-inner,
 .ui-footer .ui-btn-icon-top .ui-btn-inner,
-.ui-mini .ui-btn-icon-top .ui-btn-inner { padding: 28px 3px .5em 3px; }
+.ui-mini .ui-btn-icon-top .ui-btn-inner { padding: 30px 3px .5em 3px; }
 .ui-header .ui-btn-icon-bottom .ui-btn-inner,
 .ui-footer .ui-btn-icon-bottom .ui-btn-inner,
-.ui-mini .ui-btn-icon-bottom .ui-btn-inner { padding: .55em 3px 33px 3px; }
+.ui-mini .ui-btn-icon-bottom .ui-btn-inner { padding: .55em 3px 30px 3px; }
 .ui-btn-icon-notext .ui-icon { display: block; z-index: 0;}
 .ui-btn-icon-left .ui-btn-inner .ui-icon, .ui-btn-icon-right .ui-btn-inner .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
 .ui-btn-icon-top .ui-btn-inner .ui-icon, .ui-btn-icon-bottom .ui-btn-inner .ui-icon { position: absolute; left: 50%;  margin-left: -9px; }
@@ -693,16 +689,20 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-btn-icon-bottom .ui-icon { top: auto; bottom: 10px; }
 .ui-header .ui-btn-icon-left .ui-icon,
 .ui-footer .ui-btn-icon-left .ui-icon,
-.ui-mini.ui-btn-icon-left .ui-icon { left: 5px; }
+.ui-mini.ui-btn-icon-left .ui-icon,
+.ui-mini .ui-btn-icon-left .ui-icon { left: 5px; }
 .ui-header .ui-btn-icon-right .ui-icon,
 .ui-footer .ui-btn-icon-right .ui-icon,
-.ui-mini.ui-btn-icon-right .ui-icon { right: 5px; }
+.ui-mini.ui-btn-icon-right .ui-icon,
+.ui-mini .ui-btn-icon-right .ui-icon { right: 5px; }
 .ui-header .ui-btn-icon-top .ui-icon,
 .ui-footer .ui-btn-icon-top .ui-icon,
-.ui-mini.ui-btn-icon-top .ui-icon { top: 5px; }
+.ui-mini.ui-btn-icon-top .ui-icon,
+.ui-mini .ui-btn-icon-top .ui-icon { top: 5px; }
 .ui-header .ui-btn-icon-bottom .ui-icon,
 .ui-footer .ui-btn-icon-bottom .ui-icon,
-.ui-mini.ui-btn-icon-bottom .ui-icon { bottom: 5px; }
+.ui-mini.ui-btn-icon-bottom .ui-icon,
+.ui-mini .ui-btn-icon-bottom .ui-icon { bottom: 5px; }
 .ui-btn-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: button; opacity: .1; cursor: pointer; background: #fff; background: rgba(255,255,255,0); filter: Alpha(Opacity=.0001); font-size: 1px; border: none; text-indent: -9999px; }
 .ui-collapsible { margin: .5em 0; }
 .ui-collapsible-heading { font-size: 16px; display: block; margin: 0 -8px; padding: 0; border-width: 0 0 1px 0; position: relative; }
@@ -738,7 +738,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
 .ui-controlgroup-horizontal { padding: 0; }
 .ui-controlgroup-horizontal .ui-btn-inner { text-align:center; }
-.ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select { display: inline-block; margin: 0 -5px 0 0; }
+.ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select { display: inline-block; margin: 0 -6px 0 0; }
 .ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; clear: none; margin: 0 -1px 0 0; }
 .ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn,
 .ui-controlgroup-horizontal .ui-checkbox:last-child, .ui-controlgroup-horizontal .ui-radio:last-child { margin-right: 0; }

@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 18e709ea9071f49d4801fab418969ac7d67f12b2 <> Date: Wed Apr 4 11:11:57 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 7fe46f0d04323825e517ea4c4526d41fac8fc9de <> Date: Thu Apr 5 20:02:14 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1240,7 +1240,7 @@ $.widget( "mobile.widget", {
 	$.mobile = $.extend( {}, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.1.0-rc.1",
+		version: "1.1.0-rc.2",
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -1310,6 +1310,10 @@ $.widget( "mobile.widget", {
 
 		// turn of binding to the native orientationchange due to android orientation behavior
 		orientationChangeEnabled: true,
+
+		buttonMarkup: {
+			hoverDelay: 200
+		},
 
 		// TODO might be useful upstream in jquery itself ?
 		keyCode: {
@@ -1939,17 +1943,37 @@ $.event.special.swipe = {
 	// It seems that some device/browser vendors use window.orientation values 0 and 180 to
 	// denote the "default" orientation. For iOS devices, and most other smart-phones tested,
 	// the default orientation is always "portrait", but in some Android and RIM based tablets,
-	// the default orientation is "landscape". The following code injects a landscape orientation
-	// media query into the document to figure out what the current orientation is, and then
-	// makes adjustments to the portrait_map if necessary, so that we can properly
-	// decode the window.orientation value whenever get_orientation() is called.
+	// the default orientation is "landscape". The following code attempts to use the window
+	// dimensions to figure out what the current orientation is, and then makes adjustments
+	// to the to the portrait_map if necessary, so that we can properly decode the
+	// window.orientation value whenever get_orientation() is called.
+	//
+	// Note that we used to use a media query to figure out what the orientation the browser
+	// thinks it is in:
+	//
+	//     initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
+	//
+	// but there was an iPhone/iPod Touch bug beginning with iOS 4.2, up through iOS 5.1,
+	// where the browser *ALWAYS* applied the landscape media query. This bug does not
+	// happen on iPad.
+
 	if ( $.support.orientation ) {
 
-		// Use a media query to figure out the true orientation of the device at this moment.
-		// Note that we've initialized the portrait map values to 0 and 180, *AND* we purposely
-		// use a landscape media query so that if the device/browser does not support this particular
-		// media query, we default to the assumption that portrait is the default orientation.
-		initial_orientation_is_landscape = $.mobile.media("all and (orientation: landscape)");
+		// Check the window width and height to figure out what the current orientation
+		// of the device is at this moment. Note that we've initialized the portrait map
+		// values to 0 and 180, *AND* we purposely check for landscape so that if we guess
+		// wrong, , we default to the assumption that portrait is the default orientation.
+		// We use a threshold check below because on some platforms like iOS, the iPhone
+		// form-factor can report a larger width than height if the user turns on the
+		// developer console. The actual threshold value is somewhat arbitrary, we just
+		// need to make sure it is large enough to exclude the developer console case.
+
+		var ww = window.innerWidth || $( window ).width(),
+			wh = window.innerHeight || $( window ).height(),
+			landscape_threshold = 50;
+
+		initial_orientation_is_landscape = ww > wh && ( ww - wh ) > landscape_threshold;
+
 
 		// Now check to see if the current window.orientation is 0 or 180.
 		initial_orientation_is_default = portrait_map[ window.orientation ];
@@ -4347,8 +4371,8 @@ function closestEnabledButton( element ) {
 }
 
 var attachEvents = function() {
-	var hoverDelay = 200,
-		hov, foc;
+	var hoverDelay = $.mobile.buttonMarkup.hoverDelay, hov, foc;
+
 	$( document ).bind( {
 		"vmousedown vmousecancel vmouseup vmouseover vmouseout focus blur scrollstart": function( event ) {
 			var theme,
@@ -4642,6 +4666,10 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 			o.contentTheme = $el.jqmData( "content-theme" );
 		}
 
+		if ( !o.corners ) {
+			o.corners = $el.jqmData( "corners" ) === undefined ? true : false;
+		}
+
 		// Initialize the collapsible set if it's not already initialized
 		if ( !$el.jqmData( "collapsiblebound" ) ) {
 			$el
@@ -4674,6 +4702,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 
 	refresh: function() {
 		var $el = this.element,
+			o = this.options,
 			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" );
 
 		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
@@ -4689,7 +4718,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		collapsiblesInSet.first()
 			.find( "a" )
 				.first()
-				.addClass( "ui-corner-top" )
+				.addClass( o.corners ? "ui-corner-top" : "" )
 				.find( ".ui-btn-inner" )
 					.addClass( "ui-corner-top" );
 
@@ -4697,7 +4726,7 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 			.jqmData( "collapsible-last", true )
 			.find( "a" )
 				.first()
-				.addClass( "ui-corner-bottom" )
+				.addClass( o.corners ? "ui-corner-bottom" : "" )
 				.find( ".ui-btn-inner" )
 					.addClass( "ui-corner-bottom" );
 	}

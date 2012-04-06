@@ -24,14 +24,14 @@
 
 	<div data-role="content">
 		<div class="content-primary">
-			
-		
+
+
 			<h2>Construction d'applications PhoneGap avec jQuery Mobile</h2>
-			
+
 			<p><a href="http://phonegap.com/" rel="external">PhoneGap</a> est une plateforme d'application HTML5 qui permet aux développeurs de concevoir des applications natives avec les technologies web et d'obtenir un accès aux API et aux app stores. Les applications sont construites comme des pages HTML normales et envellopées pour fonctionner comme une application native ou dans un UIWebView ou WebView (un navigateur sans chrome, dénommé ci-après comme un WebView). Depuis PhoneGap est souvent utilisé en conjonction avec jQuery Mobile, nous avons voulu offrir quelques conseils et recommandations pour vous aider à démarrer. </p>
 
 			<p>Le document de l'application initiale est chargé par l'application PhoneGap par une URL locale file://. Cela signifie que si vous souhaitez extraire les pages du serveur distant de votre entreprise (téléphone de maison), vous devez vous référer à eux avec des URL absolues à votre serveur. Parce que votre document provient d'une URL file://, le chargement des pages ou des ressources de votre serveur distant est considéré comme une requête inter-domaine qui peut être bloquée dans certains scénarios. </p>
-			
+
 			<p>Votre capacité à accéder des pages inter-domaine dans une application jQuery Mobile PhoneGap est contrôlé par deux choses principales :  <code>$.support.cors</code> et <code>$.mobile.allowCrossDomainPages</code>, et peut également être influencé par la fonctionnalité liste blanche plus tard dans les construction de PhoneGap.</p>
 
 			<h2>$.support.cors</h2>
@@ -39,6 +39,10 @@
 			<p>Au cœur de jQuery, il y a un booléen <a href="http://api.jquery.com/jQuery.support/" rel="external">$.support.cors</a> qui indique si oui ou non jQuery pense que le navigateur supporte la fonctionnalité W3C "<a hre="http://www.w3.org/TR/cors/" rel="external">Partage des ressources inter-origine (Cross-Origin Resource Sharing)</a>" afin de supporter les requêtes inter-domaines.</p>
 
 			<p>Comme jQuery Mobile repose sur la fonctionnalité $.ajax() du noyau de jQuery,<code>$.support.cors</code> doit être défini à <code>true</code> pour dire à  <code>$.ajax</code> de charger des pages inter-domaines. Nous avons entendu dire que webviews sur certaines plateformes, comme le BlackBerry, supporte le chargement inter-domaine, mais que le noyau de jQuery définit la valeur de <code>$.support.cors</code> incorrectement  à <code>false</code> ce qui désactive les requêtes $.ajax() inter-domaines et cela causera l'échec de chargement de la page ou des ressources. </p>
+
+			<h2>$.mobile.buttonMarkup.hoverDelay</h2>
+
+			<p>Si vous trouvez que l'état down/hover du bouton (listes, boutons, liens etc) est léthargique, le paramétrage <code>$.mobile.buttonMarkup.hoverDelay</code> peut être utile. Cela réduira le temps entre l'événement tactile et l'application de la classe concernée, mais il aura également plus de chance que la même classe soit appliquée même lorsque l'utilisateur fait du défilement (par exemple, au cours d'une longue liste de liens).</p>
 
 			<h2>$.mobile.allowCrossDomainPages</h2>
 
@@ -67,9 +71,9 @@
 			<p><strong>Android applique un timeout lors du chargement des URL dans un webview</strong> qui peut être trop court pour vos besoins. Vous pouvez modifier ce délai en éditant une classe Java générée par le plugin Eclipse pour Android :</p>
 
 			<code>super.setIntegerProperty("loadUrlTimeoutValue", 60000);</code>
-			
-			
-			
+
+
+
       </div><!--/content-primary -->
 		
 
@@ -102,7 +106,7 @@
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>﻿© 2011-12 The jQuery Project</p>
+					<p>© 2011-12 The jQuery Foundation</p>
 			</div>
 
 			</div><!-- /page -->
