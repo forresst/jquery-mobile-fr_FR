@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 7fe46f0d04323825e517ea4c4526d41fac8fc9de <> Date: Thu Apr 5 20:02:14 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: bce9b8300470730e6549c94f5f563fa4d01c9301 <> Date: Tue Apr 10 16:01:16 2012 -0400
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -7174,8 +7174,8 @@ $( document ).bind( "pagecreate create", function( e ){
 					if( o.disablePageZoom ){
 						$.mobile.zoom.disable( true );
 					}
-					if( o.visibleOnPageShow ){
-						self.show( true );
+					if( !o.visibleOnPageShow ){
+						self.hide( true );
 					}
 				} )
 				.bind( "webkitAnimationStart animationstart updatelayout", function(){
@@ -7219,7 +7219,7 @@ $( document ).bind( "pagecreate create", function( e ){
 				});
 		},
 
-		_visible: false,
+		_visible: true,
 
 		// This will set the content element's top or bottom padding equal to the toolbar's height
 		updatePagePadding: function() {
