@@ -1,6 +1,7 @@
 //>>excludeStart("jqmBuildExclude", pragmas.jqmBuildExclude);
 //>>description: Behavior for "fixed" headers and footers
-//>>label: Fixedtoolbar
+//>>label: Toolbars: Fixed
+//>>group: Widgets
 //>>css: ../css/themes/default/jquery.mobile.theme.css,../css/structure/jquery.mobile.fixedToolbar.css
 
 define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.mobile.navigation", "./jquery.mobile.page", "./jquery.mobile.page.sections", "./jquery.mobile.zoom" ], function( $ ) {
@@ -124,8 +125,8 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 					if( o.disablePageZoom ){
 						$.mobile.zoom.disable( true );
 					}
-					if( o.visibleOnPageShow ){
-						self.show( true );
+					if( !o.visibleOnPageShow ){
+						self.hide( true );
 					}
 				} )
 				.bind( "webkitAnimationStart animationstart updatelayout", function(){
@@ -169,7 +170,7 @@ define( [ "jquery", "./jquery.mobile.widget", "./jquery.mobile.core", "./jquery.
 				});
 		},
 
-		_visible: false,
+		_visible: true,
 
 		// This will set the content element's top or bottom padding equal to the toolbar's height
 		updatePagePadding: function() {
