@@ -97,8 +97,8 @@ $(document).bind("mobileinit", function(){
 	<dt><code>defaultDialogTransition</code> <em>string</em>, par défaut : 'pop'</dt>
 	<dd>Définit la transition par défaut pour les changements de boîte de dialogue qui utilise Ajax. Définissez à 'none' pour qu'il n'y ait pas de transitions.</dd>
 
-	<dt><code>defaultPageTransition</code> <em>string</em>, par défaut : 'slide'</dt>
-	<dd>Définit la transition par défaut pour les changements de page lors de l'utilisation d'Ajax. Définissez à 'none' pour qu'il n'y ait pas de transitions.</dd>
+	<dt><code>defaultPageTransition</code> <em>string</em>, par défaut : 'fade'</dt>
+	<dd>Définit la transition par défaut pour les changements de page lors de l'utilisation d'Ajax. Remarque : le par défaut a changé de 'slide' en 'fade' depuis la version 1.1. Définissez à 'none' pour qu'il n'y ait pas de transitions.</dd>
 
 	<dt><code>gradeA</code> <em>fonction qui retourne un boolean</em>, par défaut : Une fonction retournant la valeur de $.support.mediaquery</dt>
 	<dd>N'importe quelles conditions de support qui doivent être respectées pour passer.</dd>
@@ -146,7 +146,7 @@ $(document).bind("mobileinit", function(){
 	<dd>Le paramètre d'url est utilisé pour le référencement des sous-pages de widget-généré (comme ceux générés par des listes imbriquées). Cela se traduit par <em>example.html<strong>&amp;ui-page=</strong>subpageIdentifier</em>. Le segment hash avant &amp;ui-page= est utilisé par le framework pour faire une requête Ajax vers l'URL où se trouve la sous-page.</dd>
 
 	<dt><code>touchOverflowEnabled</code> <em>boolean</em>, par défaut : false</dt>
-	<dd>Active le lissage des transitions de page et des barres d'outils fixes dans les périphériques qui supportent les propriétés CSS <code>overflow:</code> et <code>overflow-scrolling: touch; </code>.</dd>
+	<dd>Active le lissage des transitions de page et des barres d'outils fixes dans les périphériques qui supportent les propriétés CSS <code>overflow:</code> et <code>overflow-scrolling: touch; </code>. <strong>Remarque : Déprécié depuis 1.1.0.</strong></dd>
 
 </dl>
 	</div><!--/content-secondary -->
