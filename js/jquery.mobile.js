@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: db342b1f315c282692791aa870455901fdb46a55 <> Date: Thu Apr 12 15:34:53 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 63269e8d3f9705becf1dab454c08caac3fdd7e4f <> Date: Fri Apr 13 14:24:45 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1640,7 +1640,7 @@ function validStyle( prop, value, check_vend ) {
 		check_vends = check_vend ? [ check_vend ] : vendors,
 		ret;
 
-	for( i = 0; i < check_vends.length; i++ ) {
+	for( var i = 0; i < check_vends.length; i++ ) {
 		check_style( check_vends[i] );
 	}
 	return !!ret;
@@ -2973,7 +2973,8 @@ $.mobile.transitionFallbacks = {};
 		// attribute and in need of enhancement.
 		if ( page.length === 0 && dataUrl && !path.isPath( dataUrl ) ) {
 			page = settings.pageContainer.children( "#" + dataUrl )
-				.attr( "data-" + $.mobile.ns + "url", dataUrl );
+				.attr( "data-" + $.mobile.ns + "url", dataUrl )
+				.jqmData( "url", dataUrl );
 		}
 
 		// If we failed to find a page in the DOM, check the URL to see if it
@@ -3510,7 +3511,7 @@ $.mobile.transitionFallbacks = {};
 					type:		type && type.length && type.toLowerCase() || "get",
 					data:		$this.serialize(),
 					transition:	$this.jqmData( "transition" ),
-					direction:	$this.jqmData( "direction" ),
+					reverse:	$this.jqmData( "direction" ) === "reverse",
 					reloadPage:	true
 				}
 			);
@@ -3642,8 +3643,7 @@ $.mobile.transitionFallbacks = {};
 
 			//use ajax
 			var transition = $link.jqmData( "transition" ),
-				direction = $link.jqmData( "direction" ),
-				reverse = ( direction && direction === "reverse" ) ||
+				reverse = $link.jqmData( "direction" ) === "reverse" ||
 							// deprecated - remove by 1.0
 							$link.jqmData( "back" ),
 
@@ -5343,7 +5343,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			return this.element;
 		}
 
-		return this.element.closest( "form,fieldset,:jqmData(role='page')" )
+		return this.element.closest( "form,fieldset,:jqmData(role='page'),:jqmData(role='dialog')" )
 			.find( "input[name='"+ this.element[0].name +"'][type='"+ this.inputtype +"']" );
 	},
 
@@ -6347,11 +6347,11 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		if( !!~this.element[0].className.indexOf( "ui-btn-left" ) ) {
 			classes =  " ui-btn-left";
 		}
-		
+
 		if(  !!~this.element[0].className.indexOf( "ui-btn-right" ) ) {
 			classes = " ui-btn-right";
 		}
-		
+
 		this.select = this.element.wrap( "<div class='ui-select" + classes + "'>" );
 		this.selectID  = this.select.attr( "id" );
 		this.label = $( "label[for='"+ this.selectID +"']" ).addClass( "ui-select" );
@@ -6382,7 +6382,6 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 
 			// TODO values buttonId and menuId are undefined here
 			button = this.button
-				.text( $( this.select[ 0 ].options.item( selectedIndex ) ).text() )
 				.insertBefore( this.select )
 				.buttonMarkup( {
 					theme: options.theme,
@@ -6394,6 +6393,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 					iconshadow: options.iconshadow,
 					mini: options.mini
 				});
+
+		this.setButtonText();
 
 		// Opera does not properly support opacity on select elements
 		// In Mini, it hides the element, but not its text
@@ -6480,16 +6481,24 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	},
 
 	setButtonText: function() {
-		var self = this, selected = this.selected();
+		var self = this,
+			selected = this.selected(),
+			text = this.placeholder,
+			span = $( document.createElement("span") );
 
-		this.button.find( ".ui-btn-text" ).text( function() {
-			if ( !self.isMultiple ) {
-				return selected.text();
+		this.button.find( ".ui-btn-text" ).html(function() {
+			if ( selected.length ) {
+				text = selected.map(function() {
+					return $( this ).text();
+				}).get().join( ", " );
+			} else {
+				text = self.placeholder;
 			}
 
-			return selected.length ? selected.map( function() {
-				return $( this ).text();
-			}).get().join( ", " ) : self.placeholder;
+			// TODO possibly aggregate multiple select option classes
+			return span.text( text )
+				.addClass( self.select.attr("class") )
+				.addClass( selected.attr("class") );
 		});
 	},
 
