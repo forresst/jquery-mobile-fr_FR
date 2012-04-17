@@ -189,6 +189,35 @@
 			<h2><a href="../forms/docs-forms.html">Conteneur de champ</a></h2>
 			<p>Conteneur avec <code>data-role="fieldcontain"</code> enveloppé autour d'une paire d'élément label/form</p>
 
+			<h2><a href="../toolbars/bars-fixed.html">Barres d'outils fixe</a></h2>
+			<p>Conteneur avec <code>data-role="header"</code> ou <code>data-role="footer"</code> plus l'attribut <code>data-position="fixed"</code></p>
+			<table>
+				<tr>
+					<th>data-disable-page-zoom</th>
+					<td><strong>true</strong> | false - Possibilité de mise à l'échelle pour les pages avec des barres d'outils fixes</td>
+				</tr>
+				<tr>
+					<th>data-fullscreen</th>
+					<td>true | <strong>false</strong> - Paramétrage des barres d'outils pour être <strong>au dessus</strong> du contenu de la page</td>
+				</tr>
+				<tr>
+					<th>data-tap-toggle</th>
+					<td><strong>true</strong> | false - Possibilité de basculer la visibilité de la barre d'outils par l'utilisateur (taper/cliquer)</td>
+				</tr>
+				<tr>
+					<th>data-transition</th>
+					<td><strong>slide</strong> | fade | none - Affiche/Masque la transition lorsqu'on tape/clique</td>
+				</tr>
+				<tr>
+					<th>data-update-page-padding</th>
+					<td><strong>true</strong> | false - Automatique/Css-Utilisateur basé sur la gestion de l'espace des barres d'outils</td>
+				</tr>
+				<tr>
+					<th>data-visible-on-page-show</th>
+					<td><strong>true</strong> | false - visibilité des barres d'outils lorsque la page parent est affiché</td>
+				</tr>
+			</table>
+
 			<h2><a href="../forms/switch/">Interrupteur</a></h2>
 			<p>Select avec <code>data-role="slider"</code>, deux options seulement</p>
 			<table>
@@ -347,7 +376,7 @@
 				</tr>
 				<tr>
 					<th>data-iconpos</th>
-					<td><strong>left</strong> | right | top | bottom |  notext</td>
+					<td>left | right | <strong>top</strong> | bottom |  notext</td>
 				</tr>
 				<tr>
 					<th>data-theme</th>
@@ -417,11 +446,11 @@
 			<table>
 				<tr>
 					<th>data-icon</th>
-					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+					<td>home | delete | plus | arrow-u | <strong>arrow-d</strong> | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search | false  </td>
 				</tr>
 				<tr>
 					<th>data-iconpos</th>
-					<td><strong>left</strong> | right | top | bottom |  notext</td>
+					<td>left | <strong>right</strong> | top | bottom |  notext</td>
 				</tr>
 				<tr>
 					<th>data-inline</th>

@@ -68,6 +68,8 @@ Si vous pensez que vous avez trouvé un bug, s'il vous plaît reportez le en sui
 
 Recommandé: [modèle de ticket JS Bin avec les instructions](http://jsbin.com/omacox/edit)
 
+Les problèmes concernant le Theme Roller de jQuery Mobile peuvent être sousmis au [dépôt Theme Roller : https://github.com/jquery/web-jquery-mobile-theme-roller](https://github.com/jquery/web-jquery-mobile-theme-roller)
+
 Soumettre des correctifs
 ========================
 Pour contribuer au code et corriger des bugs de jQuery Mobile : faites un fork de ce projet sur Github, apporter les modifications au code dans votre fork,
