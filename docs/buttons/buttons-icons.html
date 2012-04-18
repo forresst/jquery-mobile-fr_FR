@@ -38,7 +38,7 @@
 			<p>Création de ce bouton avec une icône :</p>
 			<a href="index.html" data-role="button" data-icon="delete">Supprimer</a>
 			
-			<p>Un bouton plus compact avec l'attribut <code> data-inline="true"</code> ajouté au bouton :</p>
+			<p>Un bouton plus compact avec l'attribut <code>data-mini="true"</code> ajouté au bouton :</p>
 			<a href="index.html" data-role="button" data-icon="delete" data-mini="true">Supprimer</a>
 			
 			<h2>Ensemble d'icône</h2>
@@ -131,7 +131,7 @@
 	background-image: url("app-icon-email.png");
 }</code></pre>
 
-		<p>Cela va créer l'icône avec une résolution standard, mais de nombreux appareils ont maintenant un affichage en très haute résolution, comme l'écran Retina de l'iPhone 4. Pour ajouter une icône HD, créez une icône qui est 36x36 pixels (exactement le double de la taille de 18 pixels), et ajoutez la deuxième règle qui utilise le média query <code>-webkit-min-device-pixel-ratio: 2</code> pour cibler une seule règle d'affichage de haute résolution. Précisez l'image de fond pour le fichier d'icône HD et définissez la taille de fond à 18x18 pixels qui s'adaptera sur l'icône 36 pixels dans le même espace de 18 pixels. Le block du média query peut envelopper plusieurs règles d'icône :</p>
+		<p>Cela va créer l'icône avec une résolution standard, mais de nombreux appareils ont maintenant un affichage en très haute résolution, comme l'écran Retina de l'iPhone 4. Pour ajouter une icône HD, créez une icône de 36x36 pixels (exactement le double de la taille de 18 pixels), et ajoutez la deuxième règle qui utilise le média query <code>-webkit-min-device-pixel-ratio: 2</code> pour cibler une seule règle d'affichage de haute résolution. Précisez l'image de fond pour le fichier d'icône HD et définissez la taille de fond à 18x18 pixels qui s'adaptera sur l'icône 36 pixels dans le même espace de 18 pixels. Le block du média query peut envelopper plusieurs règles d'icône :</p>
 <pre><code>
 @media only screen and (-webkit-min-device-pixel-ratio: 2) {
 	.ui-icon-myapp-email {
