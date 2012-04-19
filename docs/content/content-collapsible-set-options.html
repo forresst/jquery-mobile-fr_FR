@@ -36,6 +36,28 @@
 			<p>Le plugin pliable a les options suivantes :</p>
 
 		<dl>
+			<dt><code>collapsedIcon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "plus"</p>
+				<p>Définit l'icône pour les conteneurs des entêtes des pliables dans l'état plié. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsibleset.prototype.options.collapsedIcon = "arrow-r";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-collapsed-icon="arrow-r"</code>.</p>
+			</dd>
+
+			<dt><code>expandedIcon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "plus"</p>
+				<p>Définit l'icône pour les conteneurs des entêtes des pliables dans l'état déplié. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsibleset.prototype.options.expandedIcon = "arrow-r";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-expanded-icon="arrow-r"</code>.</p>
+			</dd>
+
 			<dt><code>iconpos</code> <em>string</em></dt>
 			<dd>
 				<p class="default">par défaut : "left"</p>

@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 5df40b25bac3275592571ba4b7f994524355f860 <> Date: Tue Apr 17 15:38:38 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: c64c1a4bd22519dec48f687f5cb2fc757c7dfb13 <> Date: Wed Apr 18 17:50:35 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -520,8 +520,6 @@ if ( eventCaptureSupported ) {
 	}, true);
 }
 })( jQuery, window, document );
-
-
 
 // Script: jQuery hashchange event
 // 
@@ -1467,7 +1465,7 @@ $.widget( "mobile.widget", {
 	$.mobile = $.extend( {}, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.1.0",
+		version: "1.2.0-pre",
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -4759,7 +4757,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		heading: "h1,h2,h3,h4,h5,h6,legend",
 		theme: null,
 		contentTheme: null,
-		iconTheme: "d",
 		mini: false,
 		initSelector: ":jqmData(role='collapsible')"
 	},
@@ -4769,6 +4766,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			o = this.options,
 			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.children( o.heading ).first(),
+			collapsedIcon = $el.jqmData("collapsed-icon") || o.collapsedIcon,
+			expandedIcon = $el.jqmData("expanded-icon") || o.expandedIcon,
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).find( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" );
 
@@ -4789,6 +4788,14 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
 
+			// Get the preference for collapsed icon in the set
+			if ( !o.collapsedIcon ) {
+				o.collapsedIcon = collapsibleSet.jqmData( "collapsed-icon" );
+			}
+			// Get the preference for expanded icon in the set
+			if ( !o.expandedIcon ) {
+				o.expandedIcon = collapsibleSet.jqmData( "expanded-icon" );
+			}
 			// Gets the preference icon position in the set
 			if ( !o.iconPos ) {
 				o.iconPos = collapsibleSet.jqmData( "iconpos" );
@@ -4799,6 +4806,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			}
 		}
 		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
+
+		collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon || "plus";
+		expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon || "minus";
 
 		collapsibleHeading
 			//drop heading in before content
@@ -4813,7 +4823,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					shadow: false,
 					corners: false,
 					iconpos: $el.jqmData( "iconpos" ) || o.iconPos || "left",
-					icon: "plus",
+					icon: collapsedIcon,
 					mini: o.mini,
 					theme: o.theme
 				})
@@ -4837,8 +4847,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							.text( isCollapse ? o.expandCueText : o.collapseCueText )
 						.end()
 						.find( ".ui-icon" )
-							.toggleClass( "ui-icon-minus", !isCollapse )
-							.toggleClass( "ui-icon-plus", isCollapse );
+							.toggleClass( "ui-icon-" + expandedIcon, !isCollapse )
+							.toggleClass( "ui-icon-" + collapsedIcon, isCollapse );
 
 					$this.toggleClass( "ui-collapsible-collapsed", isCollapse );
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
@@ -4938,7 +4948,8 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		collapsiblesInSet.each( function() {
 			$( this ).find( $.mobile.collapsible.prototype.options.heading )
 				.find( "a" ).first()
-				.add( ".ui-btn-inner" )
+				.removeClass( "ui-corner-top ui-corner-bottom" )
+				.find( ".ui-btn-inner" )
 				.removeClass( "ui-corner-top ui-corner-bottom" );
 		});
 
