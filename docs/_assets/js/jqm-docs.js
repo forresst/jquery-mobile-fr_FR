@@ -5,6 +5,20 @@ $(function(){
 	});
 });
 
+// Affiche la version de jQM
+$(function() {
+	var version = $.mobile.version || "dev",
+		words = version.split( "-" ),
+		ver = words[0],
+		str = (words[1] || "Final"),
+		html = ver;
+
+	str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+	if ( $.mobile.version && str ) {
+		html += " <b>" + str + "</b>";
+	}
+	$( "p.jqm-version" ).html( html );
+})
 
 // Désactiver AJAX pour la navigation des fichiers locaux
 if ( location.protocol.substr(0,4)  === 'file' ||
