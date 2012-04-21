@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: c64c1a4bd22519dec48f687f5cb2fc757c7dfb13 <> Date: Wed Apr 18 17:50:35 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 6b8e64a346bfdd8d5fe5de7705aee5459fb880a1 <> Date: Fri Apr 20 14:45:52 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1689,6 +1689,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	width: 100%;
 	position: fixed;
 	z-index: 1000;
+}
+.ui-page-pre-in {
+	opacity: 0;
 }
 .ui-header-fixed {
 	top: 0;

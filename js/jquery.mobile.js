@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: c64c1a4bd22519dec48f687f5cb2fc757c7dfb13 <> Date: Wed Apr 18 17:50:35 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 6b8e64a346bfdd8d5fe5de7705aee5459fb880a1 <> Date: Fri Apr 20 14:45:52 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -2418,6 +2418,7 @@ var createHandler = function( sequential ){
 			screenHeight = $.mobile.getScreenHeight(),
 			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
 			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
+			toPreClass = " ui-page-pre-in",
 			toggleViewportClass = function(){
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
 			},
@@ -2465,7 +2466,7 @@ var createHandler = function( sequential ){
 			
 			startIn = function(){	
 			
-				$to.addClass( $.mobile.activePageClass );				
+				$to.addClass( $.mobile.activePageClass + toPreClass );				
 			
 				// Send focus to page as it is now display: block
 				$.mobile.focusPage( $to );
@@ -2479,7 +2480,9 @@ var createHandler = function( sequential ){
 					$to.animationComplete( doneIn );
 				}
 				
-				$to.addClass( name + " in" + reverseClass );
+				$to
+					.removeClass( toPreClass )
+					.addClass( name + " in" + reverseClass );
 				
 				if( none ){
 					doneIn();
@@ -3534,6 +3537,16 @@ $.mobile.transitionFallbacks = {};
 		if( fromPage && fromPage[0] === toPage[0] && !settings.allowSamePageTransition ) {
 			isPageTransitioning = false;
 			mpc.trigger( "pagechange", triggerData );
+
+			// Even if there is no page change to be done, we should keep the urlHistory in sync with the hash changes
+			if( settings.fromHashChange ) {
+				urlHistory.directHashChange({
+					currentUrl:	url,
+					isBack:		function() {},
+					isForward:	function() {}
+				});
+			}
+
 			return;
 		}
 
@@ -3565,6 +3578,9 @@ $.mobile.transitionFallbacks = {};
 			}
 		} catch(e) {}
 
+		// Record whether we are at a place in history where a dialog used to be - if so, do not add a new history entry and do not change the hash either
+		var alreadyThere = false;
+
 		// If we're displaying the page as a dialog, we don't want the url
 		// for the dialog content to be used in the hash. Instead, we want
 		// to append the dialogHashKey to the url of the current page.
@@ -3573,6 +3589,17 @@ $.mobile.transitionFallbacks = {};
 			// be an empty string. Moving the undefined -> empty string back into
 			// urlHistory.addNew seemed imprudent given undefined better represents
 			// the url state
+
+			// If we are at a place in history that once belonged to a dialog, reuse
+			// this state without adding to urlHistory and without modifying the hash.
+			// However, if a dialog is already displayed at this point, and we're
+			// about to display another dialog, then we must add another hash and
+			// history entry on top so that one may navigate back to the original dialog
+			if ( active.url.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" ) ) {
+				settings.changeHash = false;
+				alreadyThere = true;
+			}
+
 			url = ( active.url || "" ) + dialogHashKey;
 		}
 
@@ -3600,7 +3627,7 @@ $.mobile.transitionFallbacks = {};
 			|| ( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
 		//add page to history stack if it's not back or forward
-		if( !historyDir ) {
+		if( !historyDir && !alreadyThere ) {
 			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl, settings.role );
 		}
 
@@ -4934,7 +4961,14 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 	},
 
 	_init: function() {
+		var $el = this.element,
+			collapsiblesInSet = $el.children( ":jqmData(role='collapsible')" ),
+			expanded = collapsiblesInSet.filter( ":jqmData(collapsed='false')" );
 		this.refresh();
+
+		// Because the corners are handled by the collapsible itself and the default state is collapsed
+		// That was causing https://github.com/jquery/jquery-mobile/issues/4116
+		expanded.trigger( "expand" );
 	},
 
 	refresh: function() {
@@ -5683,7 +5717,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 
 		// Add ARIA role
 		this.button = $( "<div></div>" )
-			.text( $el.text() || $el.val() )
+			[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() )
 			.insertBefore( $el )
 			.buttonMarkup({
 				theme: o.theme,
@@ -5760,7 +5794,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 
 		// Grab the button's text element from its implementation-independent data item
-		$( this.button.data( 'buttonElements' ).text ).text( $el.text() || $el.val() );
+		$( this.button.data( 'buttonElements' ).text )[ $el.html() ? "html" : "text" ]( $el.html() || $el.val() );
 	}
 });
 
