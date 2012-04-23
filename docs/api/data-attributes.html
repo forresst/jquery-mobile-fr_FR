@@ -70,8 +70,7 @@
 					<td>Lettre du nuancier (a-z)</td>
 				</tr>
 			</table>
-			<p>Plusieurs boutons peuvent être enveloppés dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour les regrouper verticalement. Ajoutez l'attribut <code>data-type="horizontal"</code> pour que les boutons soient côte à côte.</p>
-
+			<p>Plusieurs boutons peuvent être enveloppés dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour les regrouper verticalement. Ajoutez l'attribut <code>data-type="horizontal"</code> pour que les boutons soient côte à côte. Ajoutez <code>data-mini="true"</code> pour obtenir une version de taille mini/compact pour tous les boutons qui apparaissent dans le controlgroup. </p>
 
 			<h2><a href="../forms/checkboxes/">Case à cocher</a></h2>
 			<p>Des paires de labels et d'inputs avec le <code>type="checkbox"</code> sont automatiquement améliorés, donc pas besoin de <code>data-role</code></p>
@@ -89,6 +88,7 @@
 					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 			</table>
+			<p>Plusieurs cases à cocher peuvent être enveloppés dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour regrouper verticalement l'ensemble. Ajoutez l'attribut <code>data-type="horizontal"</code> pour que les cases à cocher soit côte à côte. Ajoutez <code>data-mini="true"</code> pour obtenir une version de taille mini/compact pour toutes les cases à cocher qui apparaissent dans le controlgroup. </p>
 
 			<h2><a href="../content/content-collapsible.html">Pliable</a></h2>
 			<p>Un titre et le contenu enveloppé dans un conteneur avec le <code>data-role="collapsible"</code></p>
@@ -145,8 +145,21 @@
 				</tr>
 			</table>
 
+			<h2><a href="../buttons/buttons-grouped.html">Controlgroup</a></h2>
+			<p>Conteneur DIV ou FIELDSET avec <code>data-role="controlgroup"</code>. Visuellement intègre de multiples bouton de saisie stylisés en un seul type (<a href="../forms/checkboxes/">cases à cocher</a>, <a href="../buttons/buttons-types.html">lien basés sur les boutons</a>, <a href="../forms/radiobuttons/">radio boutons</a>, <a href="../forms/selects/">sélections</a>) dans un groupe. Pour regrouper les cases à cocher et les radio boutons de formulaire, le conteneur <code>fieldset</code> est recommandé dans un conteneur div avec <code>data-role="fieldcontain"</code> pour améliorer le style des labels.</p>
+			<table>
+				<tr>
+					<th>data-mini</th>
+					<td>true | <strong>false</strong> - version d'une taille compacte pour tous les éléments d'un controlgroup</td>
+				</tr>
+				<tr>
+					<th>data-type</th>
+					<td>horizontal | <strong>vertical</strong> - Pour l'alignement horizontal ou vertical des éléments </td>
+				</tr>
+			</table>
+
 			<h2><a href="../pages/page-dialogs.html">Boîte de dialogue</a></h2>
-			<p>Page avec <code>data-role="page"</code> lié avec un <code>data-rel="dialog"</code> sur l'ancre.</p>
+			<p>Conteneur avec <code>data-role="dialog"</code> ou lié avec <code>data-rel="dialog"</code> sur l'ancre.</p>
 			<table>
 				<tr>
 					<th>data-close-btn-text</th>
@@ -302,7 +315,7 @@
 				</tr>
 				<tr>
 					<th>data-transition</th>
-					<td><strong>slide</strong> | slideup | slidedown | pop | fade | flip</td>
+					<td><strong>fade</strong> | flip | flow | pop | slide | slidedown | slidefade | slideup | turn | none</td>
 				</tr>
 			</table>
 
@@ -356,7 +369,7 @@
 				</tr>
 				<tr>
 					<th>data-icon</th>
-					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
+					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search | false</td>
 				</tr>
 				<tr>
 					<th>data-role</th>
@@ -367,13 +380,11 @@
 					<td>Lettre du nuancier (a-z) - peut également être définie sur chaque LI</td>
 				</tr>
 			</table>
+			<p>L'attribut <code>data-icon</code> est seulement applicable pour l'élément de liste, s'il contient un lien.</p>
+
 			<h2><a href="../toolbars/docs-navbar.html">Barre de navigation</a></h2>
 			<p>Un nombre de LI enveloppé dans un conteneur avec <code>data-role="navbar"</code></p>
 			<table>
-				<tr>
-					<th>data-icon</th>
-					<td>home | delete | plus | arrow-u | arrow-d | check | gear | grid | star | custom | arrow-r | arrow-l | minus | refresh | forward | back | alert | info | search</td>
-				</tr>
 				<tr>
 					<th>data-iconpos</th>
 					<td>left | right | <strong>top</strong> | bottom |  notext</td>
@@ -383,6 +394,8 @@
 					<td>Lettre du nuancier (a-z) - peut également être définie sur chaque LI</td>
 				</tr>
 			</table>
+			<p>Pour ajouter des icônes aux éléments de la barre de navigation, l'attribut <code>data-icon</code> est utilisé, spécifiant une icône mobile standard pour chaque élément.</p>
+
 			<h2><a href="../pages/page-anatomy.html">Page</a></h2>
 			<p>Conteneur avec <code>data-role="page"</code></p>
 			<table>
@@ -440,6 +453,7 @@
 					<td>Lettre du nuancier (a-z) - Ajouté à l'élément du formulaire</td>
 				</tr>
 			</table>
+						<p>Plusieurs radio boutons peuvent être enveloppés dans un conteneur avec l'attribut <code>data-role="controlgroup"</code> pour les regrouper verticalement. Ajoutez l'attribut <code>data-type="horizontal"</code> pour que les radio boutons soient côte à côte. Ajoutez <code>data-mini="true"</code> pour obtenir une version de taille mini/compact pour tous les radio boutons qui apparaissent dans le controlgroup. </p>
 
 			<h2><a href="../forms/selects/">Sélection</a></h2>
 			<p>Tous les éléments de formulaire <code>select</code> sont améliorés automatiquement, donc pas besoin de <code>data-role</code></p>
