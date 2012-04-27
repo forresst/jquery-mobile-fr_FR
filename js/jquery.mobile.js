@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 9e924e63c7828ea20b88a84b06d8e4ffa9ef5503 <> Date: Tue Apr 24 10:45:24 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 8eaa0e3a344c8700b686bfee5b43b634116f4d02 <> Date: Thu Apr 26 14:53:59 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -18,7 +18,7 @@
 		// Browser globals
 		factory( root.jQuery, root, doc );
 	}
-}( this, document, function ( $, window, document, undefined ) {
+}( this, document, function ( jQuery, window, document, undefined ) {
 
 
 // This plugin is an experiment for abstracting away the touch and mouse
@@ -4350,6 +4350,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			}
 		})
 		.bind( "pagehide", function( e, ui ) {
+			self._isClosed = false;
 			$( this ).find( "." + $.mobile.activeBtnClass ).removeClass( $.mobile.activeBtnClass );
 		})
 		// Override the theme set by the page plugin on pageshow
@@ -4364,7 +4365,10 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 
 	// Close method goes back in history
 	close: function() {
-		window.history.back();
+		if ( !this._isClosed ) {
+			this._isClosed = true;
+			window.history.back();
+		}
 	}
 });
 
