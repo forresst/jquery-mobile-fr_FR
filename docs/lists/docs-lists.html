@@ -34,7 +34,7 @@
 			</ul>
 
 			<h2>Listes chainées de base</h2>
-			<p>Une vue de liste est codée comme une simple liste non ordonnée contenant des éléments lié à une liste avec l'attribut <code> data-role="listview"</code>. jQuery Mobile appliquera tous les styles nécessaires pour transformer cette liste en vue de liste mobile conviviale avec un indicateur d'une flèche vers la droite, et qui remplit toute la largeur de la fenêtre de navigateur. Lorsque vous appuyez sur l'élément de liste, le framework va déclencher un clic sur le premier lien à l'intérieur de l'élément de la liste, puis émettre une requête AJAX de l'URL dans le lien, créer la nouvelle page dans les DOM, puis lancer une transition de page. Regardez la <a href="../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux listes.</p> 
+			<p>Une vue de liste est codée comme une simple liste non ordonnée contenant des éléments lié à une liste avec l'attribut <code> data-role="listview"</code>. jQuery Mobile appliquera tous les styles nécessaires pour transformer cette liste en vue de liste mobile conviviale avec un indicateur d'une flèche vers la droite, et qui remplit toute la largeur de la fenêtre de navigateur. Lorsque vous appuyez sur l'élément de liste, le framework va déclencher un clic sur le premier lien à l'intérieur de l'élément de la liste, puis émettre une requête AJAX de l'URL dans le lien, créer la nouvelle page dans les DOM, puis lancer une transition de page. Regardez la <a href="../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux listes.</p>
 			<p>Voici le balisage HTML pour une liste de base chainées.</p>
 
 <pre><code>
@@ -76,6 +76,31 @@
 			<a href="lists-divider.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de séparateur de liste</a>
 
 
+			<h2>Autodividers</h2>
+
+			<p>Une liste peut être configurée pour générer automatiquement des séparateurs pour ces éléments. Cela est possible en ajoutant un attribut <code>data-autodividers="true"</code> à n'importe quelle liste.</p>
+
+			<p>Par défaut, le texte utilisé pour créer des séparations est la première lettre en majuscule du texte du lien de l'élément (pour les listes de liens) ou le texte de l'élément (pour les listes en lecture seule). Alternativement, si vous utilisez des éléments de liste  formatée, vous pouvez spécifier le texte diviseur en définissant l'option <code>autodividersSelector</code>  sur la liste par programmation. Par exemple, pour ajouter un sélecteur personnalisé à l'élément avec <code>id="mylistview"</code> :</p>
+
+<pre><code>
+$("#mylistview").listview({
+  autodividers: true,
+
+  // la fonction selector est passée à l'élément &lt;li&gt; depuis la liste,
+  // cela retourne un texte de séparateur approprié pour l'élément &lt;li&gt;
+  // par une chaine de caractère
+  autodividersSelector: function ( li ) {
+    var out = /* générer une chaine basée sur le contenu de li */;
+    return out;
+  }
+});
+</code></pre>
+
+			<p>Si de nouveaux éléments sont ajoutés ou retirés de la liste, les séparateurs  <em>ne sont pas</em> automatiquement mis à jour : vous devez appeler <code>refresh()</code> sur la liste pour redessiner les séparateurs.</p>
+
+			<a href="lists-autodividers.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple Autodividers</a>
+
+
 			<h2>Filtre de recherche</h2>
 			<p>jQuery Mobile fournit un moyen très facile de filtrer une liste avec une fonction de recherche simple, côté client. Pour faire une liste filtrable, ajoutez simplement l'attribut <code>data-filter="true"</code> à la liste. Le framework ajoutera ensuite une boîte de recherche au dessus de la liste et ajoutera le comportement de filtre aux éléments de la liste qui ne contiennent pas la chaîne de recherche saisie par l'utilisateur. Le texte par défaut du placeholder est "Filter items...". Pour configurer le texte du placeholder dans la saisie de recherche, vous pouvez soit <a href="../api/globalconfig.html">lier l'événement <code>mobileinit</code></a> et définir l'option <code>$.mobile.listview.prototype.options.filterPlaceholder</code> avec une chaîne de votre choix ou utiliser le data-attribute <code>data-filter-placeholder</code> sur votre liste. Par défaut la boîte de recherche va hériter du thème de son parent. Le thème de la boîte de recherche peut être configurée en utilisant le data-attribute <code>data-filter-theme</code> sur votre liste.</p>
 
@@ -114,7 +139,7 @@
 			<h2>Appel du plugin listview</h2>
 			<p>Vous pouvez appeler directement le plugin listview sur n'importe quel sélecteur, comme n'importe quel plugin normal de jQuery :</p>
 			<code>$('#mylist').listview();</code>
-			
+
 			<h2>Mise à jour des listes</h2>
 			<p>Si vous ajoutez des éléments à une liste, vous aurez besoin d'appeler la méthode <code>refresh()</code> sur elle-même pour mettre à jour les styles et créer des listes imbriquées qui sont ajoutés. Par exemple :</p>
 			<code>$('#mylist').listview('refresh');</code>
@@ -140,6 +165,7 @@
 
 							<li><a href="lists-split.html">Liste de bouton séparé</a></li>
 							<li><a href="lists-divider.html">Séparateurs de liste</a></li>
+							<li><a href="lists-autodividers.html">Autodividers</a></li>
 							<li><a href="lists-count.html">Bulle compteur</a></li>
 							<li><a href="lists-thumbnails.html">Miniatures</a></li>
 							<li><a href="lists-icons.html">Icônes</a></li>
@@ -172,4 +198,3 @@
 
 		</body>
 		</html>
-

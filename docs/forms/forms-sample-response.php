@@ -9,7 +9,7 @@
 	<script src="../../js/jquery.js"></script>
 	
 	<script src="../assets/js/jqm-docs.js"></script>
-	<script src="../../js/"></script>
+	<script src="../../js/jquery.mobile.js"></script>
 </head> 
 <body> 
 
