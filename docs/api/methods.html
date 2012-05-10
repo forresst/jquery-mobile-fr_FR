@@ -84,13 +84,13 @@
 <strong>//transition vers la page "about us" avec la transition slideup</strong>
 $.mobile.changePage( "about/us.html", { transition: "slideup"} );
 
-<strong>//transition vers la page "search results", en utilisant les données d'un formulaire avec l'ID "search"" 	</strong>
+<strong>//transition vers la page "search results", en utilisant les données d'un formulaire avec l'ID "search""</strong>
 $.mobile.changePage( "searchresults.php", {
 	type: "post",
 	data: $("form#search").serialize()
 });
 
-<strong>//transition vers la page "confirm" avec la transition "pop" transition sans le mettre dans l'historique	</strong>
+<strong>//transition vers la page "confirm" avec la transition "pop" transition sans le mettre dans l'historique</strong>
 $.mobile.changePage( "../alerts/confirm.html", {
 	transition: "pop",
 	reverse: false,
