@@ -113,13 +113,22 @@ $(document).bind("mobileinit", function(){
 	<dd>jQuery Mobile liera automatiquement les clics sur les balises d'ancrage dans votre document. Le paramétrage de ces options à false empêchera  tous les ancrages à l'ajout d'<em>including</em> gérant le clic de l'état du bouton actif et de lien alternatif flouté. Cela ne devrait être utilisé que lorsque l'on tente de déléguer la gestion du clic à une autre bibliothèque ou un code personnalisé.</dd>
 
 	<dt><code>loadingMessage</code> <em>string</em>, par défaut : "loading"</dt>
-	<dd>Définit le texte qui apparaît quand une page se charge. Si c'est à false, le message n'apparaîtra pas du tout.</dd>
+	<dd>
+    Définit le texte qui apparaît quand une page se charge. Si c'est à false, le message n'apparaîtra pas du tout.
+    <p class="ui-bar-e">Déprécié en 1.2 - utilisez <code>$.mobile.loading.text</code> à la place</p>
+  </dd>
 
 	<dt><code>loadingMessageTextVisible</code> <em>boolean</em>, par défaut : false</dt>
-	<dd>Si le texte doit être visible lorsque le message de chargement est indiqué. Le texte est toujours visible pour les erreurs de chargement.</dd>
+	<dd>
+    Si le texte doit être visible lorsque le message de chargement est indiqué. Le texte est toujours visible pour les erreurs de chargement.
+    <p class="ui-bar-e">Déprécié en 1.2 - utilisez <code>$.mobile.loading.textVisible</code> à la place</p>
+  </dd>
 
 	<dt><code>loadingMessageTheme</code> <em>string</em>, par défaut : "a"</dt>
-	<dd>Le thème utilisé pour les boîtes de message de chargement, lorsque le texte est visible.</dd>
+	<dd>
+    Le thème utilisé pour les boîtes de message de chargement, lorsque le texte est visible.
+    <p class="ui-bar-e">Déprécié en 1.2 - utilisez <code>$.mobile.loading.theme</code> à la place</p>
+  </dd>
 
 	<dt><code>minScrollBack</code> <em>string</em>, par défaut : 250</dt>
 	<dd>La distance minimale de défilement qui restera en mémoire lors du retour à une page.</dd>

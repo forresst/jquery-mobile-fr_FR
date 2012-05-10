@@ -40,7 +40,11 @@
 		<h2>Evénements tactiles</h2>
 		<dl>
 			<dt><code>tap</code></dt>
-			<dd>Se déclenche après un un événement tactile rapide, complet.</dd>
+			<dd><p>Se déclenche après un un événement tactile rapide, complet.</p>
+			  <ul>
+			  	<li><code>tapholdThreshold</code> (par défaut : 750ms) Cette valeur détermine combien de temps l'utilisateur doit maintenir avant que l'événement taphold soit déclenché sur l'élément cible.</li>
+			  </ul>
+      </dd>
 
 			<dt><code>taphold</code></dt>
 			<dd>Se déclenche après un appui long (près d'une seconde).</dd>
@@ -98,7 +102,7 @@
 		<h2>Événement de changement d'orientation</h2>
 		<dl>
 			<dt><code>orientationchange</code></dt>
-			<dd>Se déclenche lors d'un changement d'orientation du périphérique (en le tournant verticalement ou horizontalement). Lorsque cet événement est lié, votre fonction de rappel peut exploiter un second argument, qui contient une propriété <code>orientation</code> égale à "portrait" ou "landscape". Ces valeurs sont également ajoutés comme des classes à l'élément HTML, cela vous permet de les exploiter dans vos sélecteurs CSS. Notez que nous avons actuellement lier l'événement resize quand <code>orientationchange</code> n'est pas supporté nativement ou lorsque <code>$.mobile.orientationChangeEnabled</code> est défini à false.</dd>
+			<dd>Se déclenche lors d'un changement d'orientation du périphérique (en le tournant verticalement ou horizontalement). Lorsque cet événement est lié, votre fonction de rappel peut exploiter un second argument, qui contient une propriété <code>orientation</code> égale à "portrait" ou "landscape". Notez que nous avons actuellement lier l'événement resize quand <code>orientationchange</code> n'est pas supporté nativement ou lorsque <code>$.mobile.orientationChangeEnabled</code> est défini à false.</dd>
 			<div class="ui-body ui-body-e">
 				<h4>Timing de orientationchange</h4>
 

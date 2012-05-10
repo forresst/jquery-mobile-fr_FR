@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 3f4343d7b43a76a92aa48c8739a453acb810e0b8 <> Date: Tue May 1 14:30:45 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 50ac5724004392a667d1ca7c99ea439b86066a94 <> Date: Wed May 9 16:37:17 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -1781,7 +1781,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-mini .ui-btn-icon-bottom .ui-btn-inner { padding: .55em 3px 30px 3px; }
 /*btn icon positioning*/
 .ui-btn-icon-notext .ui-icon { display: block; z-index: 0;}
-.ui-btn-icon-left .ui-btn-inner .ui-icon, .ui-btn-icon-right .ui-btn-inner .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
+.ui-btn-icon-left > .ui-btn-inner > .ui-icon, .ui-btn-icon-right > .ui-btn-inner > .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
 .ui-btn-icon-top .ui-btn-inner .ui-icon, .ui-btn-icon-bottom .ui-btn-inner .ui-icon { position: absolute; left: 50%;  margin-left: -9px; }
 .ui-btn-icon-left .ui-icon { left: 10px; }
 .ui-btn-icon-right .ui-icon { right: 10px; }
@@ -1905,6 +1905,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-checkbox .ui-mini.ui-btn-icon-right .ui-icon, .ui-radio .ui-mini.ui-btn-icon-right .ui-icon { right: 9px; }
 /* input, label positioning */
 .ui-checkbox input,.ui-radio input { position:absolute; left:20px; top:50%; width: 10px; height: 10px;  margin:-5px 0 0 0; outline: 0 !important; z-index: 1; }
+.ui-checkbox label,.ui-radio label { -moz-user-select: none; -webkit-user-select: none; -ms-user-select: none; }
 .ui-field-contain, fieldset.ui-field-contain { padding: .8em 0; margin: 0; border-width: 0 0 1px 0; overflow: visible; }
 .ui-field-contain:first-child { border-top-width: 0; }
 .ui-header .ui-field-contain-left,
