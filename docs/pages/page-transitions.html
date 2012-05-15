@@ -1,19 +1,19 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html>
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Docs jQuery Mobile - Transitions</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Transitions</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
 
-</head> 
-<body> 
+</head>
+<body>
 
 	<div data-role="page" class="type-interior">
 
@@ -23,8 +23,8 @@
 	</div><!-- /header -->
 
 	<div data-role="content">
-		<div class="content-primary">		
-		<h2>Transitions de page</h2> 
+		<div class="content-primary">
+		<h2>Transitions de page</h2>
 
 		<p>Le framework jQuery Mobile comprend un ensemble d'effets de transition à base de CSS qui peuvent être appliqués à n'importe quel lien de page ou de soumission de formulaire avec la navigation ajax : </p>
 
@@ -101,39 +101,39 @@
 <code><code>
 &lt;a href="index.html" <strong>data-transition="pop"</strong>&gt;Je ferais Pop&lt;/a&gt;
 </code></code>
-		
+
 		<p>Lorsque le bouton Retour est pressé, le framework appliquera automatiquement la version inversée de la transition qui a été utilisée pour afficher la page. Pour spécifier que la version inversée de la transition doit être utilisée, ajouter l'attribut <code>data-direction="reverse"</code> au lien.</p>
-				
+
 		<h2>Configuration globale des transitions</h2>
-		
+
 		<p>Réglez l'<a href="../api/globalconfig.html">option globale</a> <code>defaultPageTransition</code> si vous préférez une transition par défaut différente. Les boîtes de dialogue ont une autre option appelée <code>defaultDialogTransition</code> qui peut également être configurée.</p>
-	
+
 
 		<h2>Navigateurs pris en charge et performance</h2>
 		<p>Toutes les transitions sont construites avec des animations keyframe du CSS, qui comprennent à la fois <code>-webkit</code> (les règles fournisseur préfixés pour iOS, BlackBerry, Android et les navigateurs Safari et Chrome) et <code>-moz </code> (les règles pour les navigateurs Firefox). Le support, pour les animations avec des keyframes et pour la fluidité de transition, est déterminé par la version du navigateur et du matériel. Si les animations ne sont pas supportées, le système se repliera sans risque vers une solution n'utilisant pas les transitions. Pour éviter de façon pro-active que la transition se retrouve dans des situations où les performances médiocres, nous excluons les navigateurs qui n'ont pas les transformations 3D, nous fournissons une transition de repli et appliquons une largeur maximum lorsque les transitions sont appliquées.</p>
-		
+
 		<h2>Définition de transitions de repli lorsque les transformations 3D ne sont pas supportées</h2>
 		<p>Par défaut, toutes les transitions sauf fade ont besoin de la transformation 3D. Les appareils qui ne supportent pas la 3D, utiliseront la transition fade, indépendamment de la transition spécifiée. Nous faisons cela de manière pro-active sur les transitions avancées pour exclure les plateformes peu performantes comme Android 2.x et s'assurer ainsi une utilisation toujours fluide. Notez qu'il existe des plateformes telles que Android 3.0 qui supportent techniquement les transformations 3D, mais qui ont toujours une performance d'animation faible donc cela ne garantit pas que chaque navigateur sera à 100% sans scintillement, mais nous essayons de régler ce problème .</p>
-		
+
 		<p>La transition de repli pour les navigateurs qui ne prennent pas en charge les transformations 3D peut être configurée pour chaque type de transition, mais par défaut, nous spécifions "fade" comme transition de repli. Par exemple, cela définira la transition de repli "none" pour la transition slideout :</p>
 		<code>$.mobile.transitionFallbacks.slideout = "none"</code>
-		
+
 		<h2>Définition de largeur maximum pour les transitions</h2>
 		<p>Par défaut, les transitions peuvent être désactivées (définies à "none") lorsque la largeur de la fenêtre est plus grande qu'une certaine largeur de pixel. Cette fonctionnalité est utile car les transitions peuvent être gênantes ou peu performantes sur les grands écrans. Cette valeur est configurable via l'option globale <code>$.mobile.maxTransitionWidth</code>, qui par défaut est à <code>false</code>. L'option accepte n'importe quel nombre représentant une largeur en pixel ou la valeur <code>false</code>. Si elle n'est pas à <code>false</code>, le gestionnaire va utiliser une transition "none" lorsque la largeur de la fenêtre est plus grande que la valeur spécifiée</p>
 
-		
 
-	
+
+
 
 		<h2>Création de transitions personnalisées</h2>
 
-		<p>jQuery Mobile permet l'ajout de  <a href="page-customtransitions.html">transitions personnalisées</a> au dictionnaire <code>$.mobile.transitionHandlers</code> afin que vous puissiez étendre la sélection des transitions sur votre site ou application. 
+		<p>jQuery Mobile permet l'ajout de  <a href="page-customtransitions.html">transitions personnalisées</a> au dictionnaire <code>$.mobile.transitionHandlers</code> afin que vous puissiez étendre la sélection des transitions sur votre site ou application.
 
-			
 
-		
 
-				</div><!--/content-primary -->		
+
+
+				</div><!--/content-primary -->
 
 				<div class="content-secondary">
 
@@ -149,6 +149,7 @@
 								<li><a href="page-titles.html">Titres des pages</a></li>
 								<li><a href="page-links.html">Liaison de pages</a></li>
 								<li data-theme="a"><a href="page-transitions.html">Transitions de page</a></li>
+								<li><a href="loader.html">Widget de chargement de page</a></li>
 								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
@@ -159,7 +160,7 @@
 								<li><a href="pages-themes.html">Thématisation des pages</a></li>
 							</ul>
 					</div>
-				</div>		
+				</div>
 
 			</div><!-- /content -->
 

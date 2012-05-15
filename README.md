@@ -36,6 +36,11 @@ Clonez ce dépôt et contruisez les fichiers js et css (vous aurez besoin que Gi
 Une version complète et une version minifiée du JavaScript de jQuery Mobile et des fichiers CSS seront créés dans un dossier nommé
 "compiled". Il y a aussi maintenant une structure seulement pour les fichiers css ainsi vous pouvez ajouter vos propres thèmes.
 
+Alternativement, si vous avez installé node.js vous pouvez exécuter
+
+    npm install
+    node node_modules/.bin/grunt <js|css|docs|zip|clean|init>
+
 Comment construire une version autonome de Docs/Demos
 =====================================================
 Une fois que vous avez votre propre dépôt cloné sur votre ordinateur :
@@ -44,6 +49,7 @@ Une fois que vous avez votre propre dépôt cloné sur votre ordinateur :
 
 Les docs seront construits et disponibles dans le dossier compiled/demos. Vous pouvez déplacer ce dossier sur votre serveur web ou
 un autre emplacement. Il n'a pas de dépendances avec autre chose à part un serveur web HTML de base.
+
 
 
 Soumettre des bugs

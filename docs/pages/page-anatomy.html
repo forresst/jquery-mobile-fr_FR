@@ -173,6 +173,8 @@
 		
 		<p>MERCI DE NOTER : Puisque nous utilisons le hash pour suivre l'historique de navigation pour toutes les 'pages' Ajax, il n'est pas possible actuellement de faire un lien vers une ancre (<code>index.html#foo</code>) sur une page en jQuery Mobile. Car le framework va chercher une 'page' avec un <code>ID</code> <code>#foo</code> au lieu d'utiliser le comportement natif qui consiste à se déplacer vers le contenu de cet <code>ID</code>.</p>
 		
+		<p>L'attribut  <code>id</code> de tous vos éléments doivent être non seulement unique sur une page donnée, mais aussi unique à travers les pages d'un site. C'est parce que le modèle de navigation d'une seule page de jQuery Mobile permet à de nombreuses "pages" différentes d'être présentes dans le DOM au même moment. Cette disposition s'applique également lorsque vous utilisez un modèle multi-page, puisque tous les "pages" sur le modèle sont chargés en une seule fois.</p>
+		
 		
 <h2>C'est des conventions, ce n'est pas des obligations</h2>
 
@@ -200,6 +202,7 @@
 								<li><a href="page-titles.html">Titres des pages</a></li>
 								<li><a href="page-links.html">Liaison de pages</a></li>
 								<li><a href="page-transitions.html">Transitions de page</a></li>
+								<li><a href="loader.html">Widget de chargement de page</a></li>
 								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>

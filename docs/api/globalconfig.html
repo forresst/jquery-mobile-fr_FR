@@ -115,22 +115,22 @@ $(document).bind("mobileinit", function(){
 	<dt><code>loadingMessage</code> <em>string</em>, par défaut : "loading"</dt>
 	<dd>
     Définit le texte qui apparaît quand une page se charge. Si c'est à false, le message n'apparaîtra pas du tout.
-    <p class="ui-bar-e">Déprécié en 1.2 - utilisez <code>$.mobile.loading.text</code> à la place</p>
+    <p class="ui-bar-e">Déprécié en 1.2 - utilisez <code>$.mobile.loader.prototype.options.text</code> à la place. Voir les <a href="../../docs/pages/loader.html">docs loader</a> pour plus d'informations.</p>
   </dd>
 
 	<dt><code>loadingMessageTextVisible</code> <em>boolean</em>, par défaut : false</dt>
 	<dd>
     Si le texte doit être visible lorsque le message de chargement est indiqué. Le texte est toujours visible pour les erreurs de chargement.
-    <p class="ui-bar-e">Déprécié en 1.2 - utilisez <code>$.mobile.loading.textVisible</code> à la place</p>
+    <p class="ui-bar-e">Déprécié en 1.2 - utilisez <code>$.mobile.loader.prototype.options.textVisible</code> à la place. Voir les <a href="../../docs/pages/loader.html">docs loader</a> pour plus d'informations.</p>
   </dd>
 
 	<dt><code>loadingMessageTheme</code> <em>string</em>, par défaut : "a"</dt>
 	<dd>
     Le thème utilisé pour les boîtes de message de chargement, lorsque le texte est visible.
-    <p class="ui-bar-e">Déprécié en 1.2 - utilisez <code>$.mobile.loading.theme</code> à la place</p>
+    <p class="ui-bar-e">Déprécié en 1.2 - utilisez <code>$.mobile.loader.prototype.options.theme</code> à la place. Voir les <a href="../../docs/pages/loader.html">docs loader</a> pour plus d'informations.</p>
   </dd>
 
-	<dt><code>minScrollBack</code> <em>string</em>, par défaut : 250</dt>
+	<dt><code>minScrollBack</code> <em>integer</em>, par défaut : 250</dt>
 	<dd>La distance minimale de défilement qui restera en mémoire lors du retour à une page.</dd>
 
 	<dt><code>ns</code> <em>string</em>, par défaut : ""</dt>
