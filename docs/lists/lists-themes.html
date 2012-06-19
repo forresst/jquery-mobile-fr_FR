@@ -11,7 +11,6 @@
 	<script src="../../js/jquery.js"></script>
 	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/"></script>
-
 </head> 
 <body> 
 
@@ -103,21 +102,77 @@
 		
 		<h2>Thématisation des icônes</h2>
 		
-		<p>L'icône par défaut pour chaque élément de la liste est <code>arrow-r</code>. Pour remplacer cela, définissez l'attribut <code> data-icon</code> sur l'élément de liste souhaité avec le <a href="../buttons/buttons-icons.html">nom d'une icône standard</a>. Pour éviter les icônes d'apparaître à chaque fois, définissez l'attribut <code> data-icon</code> à "false".</p>
+		<p>L'icône par défaut pour chaque élément contenant un lien est <code>arrow-r</code>. Pour remplacer cela, définissez l'attribut <code>data-icon</code> sur l'élément de liste souhaité avec le <a href="../buttons/buttons-icons.html">nom d'une icône standard</a>. Pour éviter les icônes d'apparaître à chaque fois, définissez l'attribut <code> data-icon</code> à "false". Avec un peu de styles personnalisés il est également possible d'utiliser des icônes de parties tierces.</p>
+		<p>Balisage de la liste :</p>
 <pre>
 <code>
-&lt;li data-icon="info"&gt;&lt;a href="#"&gt;Informations&lt;/a&gt;&lt;/li&gt;
-&lt;li data-icon="alert"&gt;&lt;a href="#"&gt;Alertes&lt;/a&gt;&lt;/li&gt;
-&lt;li data-icon="false"&gt;&lt;a href="#"&gt;Aucun icône&lt;/a&gt;&lt;/li&gt;
+&lt;ul data-role="listview" data-inset="true" data-theme="b"&gt;
+	&lt;li data-role="list-divider"&gt;Séparateur&lt;/li&gt;
+	&lt;li data-icon="home"&gt;&lt;a href="#"&gt;data-icon="home"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="delete"&gt;&lt;a href="#"&gt;data-icon="delete"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="plus"&gt;&lt;a href="#"&gt;data-icon="plus"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="arrow-u"&gt;&lt;a href="#"&gt;data-icon="arrow-u"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="arrow-d"&gt;&lt;a href="#"&gt;data-icon="arrow-d"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="check"&gt;&lt;a href="#"&gt;data-icon="check"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="gear"&gt;&lt;a href="#"&gt;data-icon="gear"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="grid"&gt;&lt;a href="#"&gt;data-icon="grid"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="star"&gt;&lt;a href="#"&gt;data-icon="star"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="custom" id="coffeeicon"&gt;&lt;a href="#"&gt;custom-icon&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="arrow-r"&gt;&lt;a href="#"&gt;data-icon="arrow-r"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="arrow-l"&gt;&lt;a href="#"&gt;data-icon="arrow-l"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="minus"&gt;&lt;a href="#"&gt;data-icon="minus"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="refresh"&gt;&lt;a href="#"&gt;data-icon="refresh"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="forward"&gt;&lt;a href="#"&gt;data-icon="forward"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="back"&gt;&lt;a href="#"&gt;data-icon="back"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="alert"&gt;&lt;a href="#"&gt;data-icon="alert"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="info"&gt;&lt;a href="#"&gt;data-icon="info"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="search"&gt;&lt;a href="#"&gt;data-icon="search"&lt;/a&gt;&lt;/li&gt;
+	&lt;li data-icon="false"&gt;&lt;a href="#"&gt;data-icon="false"&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 </code>
 </pre>
-		<ul data-role="listview" data-inset="true">
+		<p>Styles pour l'icône personnalisée :</p>
+<pre>
+<code>
+&lt;style&gt;
+	#coffeeicon .ui-icon-custom {
+	background-image: url("../toolbars/glyphish-icons/34-coffee.png");
+	background-position: 2px 2px;
+	background-size: 90%; }
+&lt;/style&gt;
+</code>
+</pre>
+		<style>
+			#coffeeicon .ui-icon-custom {
+			background-image: url("../toolbars/glyphish-icons/34-coffee.png");
+			background-position: 2px 1px;
+			background-size: 90%; }
+		</style>
+
+		<ul data-role="listview" data-inset="true" data-theme="b">
 			<li data-role="list-divider">Séparateur</li>
-			<li data-icon="info"><a href="#">Informations</a></li>
-			<li data-icon="alert"><a href="#">Alertes</a></li>
-			<li data-icon="false"><a href="#">Aucun icône</a></li>
+			<li data-icon="home"><a href="#">data-icon="home"</a></li>
+			<li data-icon="delete"><a href="#">data-icon="delete"</a></li>
+			<li data-icon="plus"><a href="#">data-icon="plus"</a></li>
+			<li data-icon="arrow-u"><a href="#">data-icon="arrow-u"</a></li>
+			<li data-icon="arrow-d"><a href="#">data-icon="arrow-d"</a></li>
+			<li data-icon="check"><a href="#">data-icon="check"</a></li>
+			<li data-icon="gear"><a href="#">data-icon="gear"</a></li>
+			<li data-icon="grid"><a href="#">data-icon="grid"</a></li>
+			<li data-icon="star"><a href="#">data-icon="star"</a></li>
+			<li data-icon="custom" id="coffeeicon"><a href="#">custom-icon</a></li>
+			<li data-icon="arrow-r"><a href="#">data-icon="arrow-r"</a></li>
+			<li data-icon="arrow-l"><a href="#">data-icon="arrow-l"</a></li>
+			<li data-icon="minus"><a href="#">data-icon="minus"</a></li>
+			<li data-icon="refresh"><a href="#">data-icon="refresh"</a></li>
+			<li data-icon="forward"><a href="#">data-icon="forward"</a></li>
+			<li data-icon="back"><a href="#">data-icon="back"</a></li>
+			<li data-icon="alert"><a href="#">data-icon="alert"</a></li>
+			<li data-icon="info"><a href="#">data-icon="info"</a></li>
+			<li data-icon="search"><a href="#">data-icon="search"</a></li>
+			<li data-icon="false"><a href="#">data-icon="false"</a></li>
 		</ul>
-	
+		<p>Icône personnalisée par Joseph Wain / <a href="http://glyphish.com/">glyphish.com</a>. Sous licence <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
 		
 		<h2>Thématisation des boutons séparés</h2>
 		
@@ -190,35 +245,35 @@
 		
 		<h2>Exemples de tous les nuanciers d'une liste de base</h2>
 		
-		<p>Nuancier <strong>A</strong></p>
+		<p>Nuancier <strong>"a"</strong> sur la liste</p>
 		<ul data-role="listview" data-inset="true" data-theme="a">
 			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
 			<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
 		</ul>
 		
-		<p>Nuancier <strong>B</strong></p>
+		<p>Nuancier <strong>"b"</strong> sur la liste</p>
 		<ul data-role="listview" data-inset="true" data-theme="b">
 			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
 			<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
 		</ul>
 		
-		<p>Nuancier <strong>C</strong></p>
+		<p>Nuancier <strong>"c"</strong> sur la liste</p>
 		<ul data-role="listview" data-inset="true" data-theme="c">
 			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
 			<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
 		</ul>
 		
-		<p>Nuancier <strong>D</strong></p>
+		<p>Nuancier <strong>"d"</strong> sur la liste</p>
 		<ul data-role="listview" data-inset="true" data-theme="d">
 			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
 			<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
 		</ul>
 		
-		<p>Nuancier <strong>E</strong></p>
+		<p>Nuancier <strong>"e"</strong> sur la liste</p>
 		<ul data-role="listview" data-inset="true" data-theme="e">
 			<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
 			<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>

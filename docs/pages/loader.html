@@ -16,6 +16,27 @@
 <body>
 
 	<div data-role="page" class="type-interior">
+	<script>
+		$(document).on("click", ".show-page-loading-msg", function() {
+			var $this = $( this ),
+				theme = $this.jqmData("theme") || $.mobile.loader.prototype.options.theme,
+				msgText = $this.jqmData("msgtext") || $.mobile.loader.prototype.options.text,
+				textVisible = $this.jqmData("textvisible") || $.mobile.loader.prototype.options.textVisible,
+				textonly = !!$this.jqmData("textonly");
+				html = $this.jqmData("html") || "";
+			$.mobile.loading( 'show', {
+					text: msgText,
+					textVisible: textVisible,
+					theme: theme,
+					textonly: textonly,
+					html: html
+			});
+		})
+		.on("click", ".hide-page-loading-msg", function() {
+			$.mobile.loading( 'hide' );
+		});
+	</script>
+
 
 		<div data-role="header" data-theme="f">
 		  <h1>Widget de chargement de Page</h1>
@@ -55,6 +76,12 @@ $.mobile.loading( 'show', {
 });
           </code>
         </pre>
+
+	<h2>Exemples de chargeur</h2>
+	<div data-role="controlgroup">
+		<button class="show-page-loading-msg" data-theme="a" data-textonly="false" data-textvisible="false" data-msgtext="" data-icon="arrow-r" data-iconpos="right">Chargeur par défaut</button> <button class="show-page-loading-msg" data-theme="a" data-textonly="true" data-textvisible="true" data-msgtext="Text only loader" data-icon="arrow-r" data-iconpos="right">Texte seulement</button> <button class="show-page-loading-msg" data-theme="a" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme a" data-icon="arrow-r" data-iconpos="right">Thème a</button> <button class="show-page-loading-msg" data-theme="b" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme b" data-icon="arrow-r" data-iconpos="right">Thème b</button> <button class="show-page-loading-msg" data-theme="c" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme c" data-icon="arrow-r" data-iconpos="right">Thème c</button> <button class="show-page-loading-msg" data-theme="d" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme d" data-icon="arrow-r" data-iconpos="right">Thème d</button> <button class="show-page-loading-msg" data-theme="e" data-textonly="false" data-textvisible="true" data-msgtext="Loading theme e" data-icon="arrow-r" data-iconpos="right">Thème e</button> <button class="show-page-loading-msg" data-theme="a" data-textonly="true" data-textvisible="true" data-msgtext="Custom Loader" data-icon="arrow-r" data-html="<span class='ui-bar ui-overlay-c ui-corner-all'><img src='../_assets/images/jquery-logo.png' /><h2>is loading for you ...</h2></span>" data-iconpos="right">HTML personnalisé</button> <button class="hide-page-loading-msg" data-icon="delete" data-iconpos="right">Masquer</button>
+	</div>
+
 			</div><!--/content-primary -->
 
 			<div class="content-secondary">
@@ -72,7 +99,8 @@ $.mobile.loading( 'show', {
 						<li><a href="page-links.html">Liaison de pages</a></li>
 						<li><a href="page-transitions.html">Transitions de page</a></li>
 						<li data-theme="a"><a href="loader.html">Widget de chargement de page</a></li>
-            <li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+            					<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+            					<li><a href="popup/index.html">Popups</a></li>
 						<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 						<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 						<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>

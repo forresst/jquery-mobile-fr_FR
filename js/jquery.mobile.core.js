@@ -2,10 +2,10 @@
 //>>description: Base file for jQuery Mobile
 //>>label: Core
 //>>group: Core
-//>>required: true
-//>>css: ../css/structure/jquery.mobile.core.css
+//>>css.structure: ../css/structure/jquery.mobile.core.css
+//>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobile.widget" ], function( $, __version__ ) {
+define( [ "jquery", "text!../version.txt" ], function( $, __version__ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -149,25 +149,24 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 			return nsNormalizeDict[ prop ] || ( nsNormalizeDict[ prop ] = $.camelCase( $.mobile.ns + prop ) );
 		},
 
+		// Find the closest parent with a theme class on it. Note that
+		// we are not using $.fn.closest() on purpose here because this
+		// method gets called quite a bit and we need it to be as fast
+		// as possible.
 		getInheritedTheme: function( el, defaultTheme ) {
-
-			// Find the closest parent with a theme class on it. Note that
-			// we are not using $.fn.closest() on purpose here because this
-			// method gets called quite a bit and we need it to be as fast
-			// as possible.
-
 			var e = el[ 0 ],
 				ltr = "",
 				re = /ui-(bar|body|overlay)-([a-z])\b/,
 				c, m;
 
 			while ( e ) {
-				var c = e.className || "";
-				if ( ( m = re.exec( c ) ) && ( ltr = m[ 2 ] ) ) {
+				c = e.className || "";
+				if ( c && ( m = re.exec( c ) ) && ( ltr = m[ 2 ] ) ) {
 					// We found a parent with a theme class
 					// on it so bail from this loop.
 					break;
 				}
+
 				e = e.parentNode;
 			}
 
@@ -236,7 +235,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 	// ensures all data is set and retrieved using jQuery Mobile's data namespace
 	$.fn.jqmData = function( prop, value ) {
 		var result;
-		if ( typeof prop != "undefined" ) {
+		if ( typeof prop !== "undefined" ) {
 			if ( prop ) {
 				prop = $.mobile.nsNormalize( prop );
 			}
@@ -247,7 +246,7 @@ define( [ "jquery", "../external/requirejs/text!../version.txt", "./jquery.mobil
 
 	$.jqmData = function( elem, prop, value ) {
 		var result;
-		if ( typeof prop != "undefined" ) {
+		if ( typeof prop !== "undefined" ) {
 			result = $.data( elem, prop ? $.mobile.nsNormalize( prop ) : prop, value );
 		}
 		return result;

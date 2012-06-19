@@ -56,7 +56,8 @@
 			<p>Pour les liens générés par JavaScript, vous pouvez simplement définir l'attribut href à "#" et utilisez l'attribut <code>data-rel="back"</code>. Vous pouvez aussi appeler la méthode <code>close()</code> de la boîte de dialogue pour fermer par programmation les boîtes de dialogue, par exemple : <code>$('.ui-dialog').dialog('close')</code>. </p>
 			
 			<h3>Paramètrage du texte du bouton de fermeture</h3>
-			<p>Tout comme le plugin page, vous pouvez définir le texte du bouton de fermeture d'une boîte de dialogue grâce à l'option ou à l'attribut de données. L'option peut être configurée pour toutes les boîtes de dialogue en liant l'événement <code>mobileinit</code> et en définissant la propriété <code>$.mobile.dialog.prototype.options.closeBtnText</code> en une chaîne de votre choix, ou vous pouvez placer l'attribut de données <code>data-close-btn-text</code> pour configurer le texte de votre balisage.</p>
+			<p>Tout comme le plugin page, vous pouvez définir le texte du bouton de fermeture d'une boîte de dialogue grâce à l'option ou à l'attribut de données. Cette option est utilisée pour personnaliser le texte du bouton de fermeture qui est utile pour traduire ceci dans différentes langues. Ceci est affiché par défaut comme un bouton d'icône seule, de sorte que le texte n'est pas visible à l'écran, mais est lisible par les lecteurs d'écran et c'est donc une fonctionnalité d'accessibilité importante. L'option peut être configurée pour toutes les boîtes de dialogue en liant l'événement <code>mobileinit</code> et en définissant la propriété <code>$.mobile.dialog.prototype.options.closeBtnText</code> en une chaîne de votre choix, ou vous pouvez placer l'attribut de données <code>data-close-btn-text</code> pour configurer le texte de votre balisage.
+			</p>
 			
 			<h2>Historique &amp; comportement du bouton Retour</h2>
 			<p>Les boîtes de dialogue sont généralement utilisés pour supporter des actions au sein d'une page, le framework n'inclut pas les boîtes de dialogue dans le suivi de l'historique d'état du hash. Cela signifie que les boîtes dialogues n'apparaîtront pas dans la chronologie de votre historique de navigation lorsque le bouton Retour sera cliqué. Par exemple, si vous êtes sur une page, cliquez sur un lien pour ouvrir une boîte de dialogue, fermez la boîte de dialogue, puis naviguer vers une autre page, si vous deviez cliquer sur le bouton Précédent du navigateur, à ce stade, vous reviendrez à la première page, et non pas sur la boîte de dialogue.</p>
@@ -107,6 +108,7 @@
 								<li><a href="page-transitions.html">Transitions de page</a></li>
 								<li><a href="loader.html">Widget de chargement de page</a></li>
 								<li data-theme="a"><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>

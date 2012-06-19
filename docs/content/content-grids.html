@@ -61,7 +61,7 @@
 		
 		<p>Comme vous le voyez ci-dessus, les blocs de la grille par défaut n'ont pas de style visuel, ils présentent simplement le contenu côte à côte.</p>
 		
-		<p>Les classes de la grille peuvent être appliqué à n'importe quel conteneur. Dans le prochain exemple, nous ajoutons <code>ui-grid-a</code> à <code>fieldset</code> et appliquons les classes <code>ui-block</code> aux deux boutons pour les étirer chacun à 50% de la largeur de l'écran :</p>
+		<p>Les classes de la grille peuvent être appliqué à n'importe quel conteneur. Dans le prochain exemple, nous ajoutons <code>ui-grid-a</code> à <code>fieldset</code> et appliquons les classes <code>ui-block</code> aux conteneurs de chaque boutons pour les étirer chacun à 50% de la largeur de l'écran :</p>
 
 <pre><code>
 &lt;fieldset class="ui-grid-a"&gt;
@@ -74,7 +74,26 @@
 				<div class="ui-block-a"><button type="submit" data-theme="c">Annuler</button></div>
 				<div class="ui-block-b"><button type="submit" data-theme="b">Valider</button></div>	   
 	    </fieldset>
-	    
+
+	    <p>Veuillez noter que le framework ajoute la marge à gauche et à droite des boutons dans une grille. Pour un unique bouton, vous pouvez utiliser un conteneur avec la classe <code>ui-grid-solo</code> et enveloppez le bouton dans un div avec la classe <code>ui-block-a</code> Comme pour l'exemple ci-dessous. De cette façon, le bouton recevra la même marge.</p>
+		 
+<pre><code>
+&lt;div class="ui-grid-a"&gt;
+	&lt;div class="ui-block-a"&gt;&lt;button type="button" data-theme="c"&gt;Précédent&lt;/button&gt;&lt;/div&gt;
+	&lt;div class="ui-block-b"&gt;&lt;button type="button" data-theme="c"&gt;Suivant&lt;/button&gt;&lt;/div&gt;	   
+&lt;/div&gt;
+&lt;div class="ui-grid-solo"&gt;
+	&lt;div class="ui-block-a"&gt;&lt;button type="v" data-theme="b"&gt;Plus&lt;/button&gt;&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+
+		<div class="ui-grid-a">
+				<div class="ui-block-a"><button type="button" data-theme="c">Précédent</button></div>
+				<div class="ui-block-b"><button type="button" data-theme="c">Suivant</button></div>	   
+		</div>
+		<div class="ui-grid-solo">
+				<div class="ui-block-a"><button type="button" data-theme="b">Plus</button></div>
+		</div>
 	    
 	    <p>Les classes de thème (pas les attributs data-theme) du <a href="../api/themes.html">système de thématisation</a> peuvent être ajoutées à un élément, y compris les grilles. Sur les blocs ci-dessous, nous ajoutons deux classes : <code>ui-bar</code> pour ajouter l'espacement de la barre par défaut et <code>ui-bar-e</code> pour appliquer le fond dégradé et le style de police pour le nuancier de thème "e" de la barre d'outils. A des fins d'illustration, un attribut d'alignement  <code>style="height:120px"</code> est également ajouté à chaque grille pour mettre à chacun une hauteur standard. </p>
 			

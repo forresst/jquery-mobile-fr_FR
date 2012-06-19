@@ -14,8 +14,8 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"jquery.mobile.forms.select",
-				"jquery.mobile.forms.select.custom",
+				"widgets/forms/select",
+				"widgets/forms/select.custom",
 				"defineKeepNative.js"
 			],
 			[ "jquery.mobile.init" ],
@@ -84,6 +84,14 @@
 			<option value="rush">Rapide : 3 jours</option>
 			<option value="express">Express : Le lendemain</option>
 			<option value="overnight">De nuit</option>
+		</select>
+	</div>
+
+	<div data-nstest-role="popup" id="popup-containing-select">
+		<select name="select-choice-inside-popup" id="select-choice-inside-popup" data-nstest-native-menu="false">
+			<option value="abracadabra">Abracadabra</option>
+			<option value="simsalabim">Simsalabim</option>
+			<option value="csiribu-csiriba">Csiribu-Csiriba</option>
 		</select>
 	</div>
 
@@ -384,10 +392,6 @@
 	</div>
 
 	<select name="select-disabled-enhancetest" id="select-disabled-enhancetest" disabled="disabled" data-nstest-native-menu="false">
-		<option value="standard">Lent : 7 jours</option>
-		<option value="rush">Rapide : 3 jours</option>
-		<option value="express">Express : Le lendemain</option>
-		<option value="overnight">De nuit</option>
 		<option value="overnight">disabled enhance test</option>
 	</select>
 
@@ -419,7 +423,6 @@
 		<option value="overnight">De nuit</option>
 	</select>
 </div>
-
 
 <div id="enhancetest">
 	<select name="select-enhancetest" id="select-enhancetest">

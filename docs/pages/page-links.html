@@ -51,9 +51,9 @@
 
 		<h2>Liaison dans un document multi-page</h2> 
 		
-			<p>Un unique document HTML peut contenir un ou plusieurs conteneurs de 'page' en empilant simplement plusieurs divs avec le <code> data-role</code> de <code>"page"</code>. Cela vous permet de construire un petit site ou une application dans un seul document HTML, jQuery Mobile affichera, lorsque la page se chargera, simplement la première 'page' qu'il trouvera dans l'ordre du code source.</p> 
+			<p>Un unique document HTML peut contenir un ou plusieurs conteneurs de "page" en empilant simplement plusieurs divs avec le <code> data-role</code> de <code>"page"</code>. Cela vous permet de construire un petit site ou une application dans un seul document HTML, jQuery Mobile affichera, lorsque la page se chargera, simplement la première "page" qu'il trouvera dans l'ordre du code source.</p> 
 			
-			<p>Si un lien dans un document multi-page pointe vers une ancre (<code># foo</code>), le framework regardera vers l'enveloppe de la page avec cet ID (<code>id="foo"</code>). S'il trouve une page dans le document HTML, il fera la transition vers la nouvelle page. Vous pouvez facilement naviguer entre les "pages" locales, internes et les pages externes dans jQuery Mobile. Les deux auront le même aspect pour l'utilisateur final, sauf que les pages externes afficheront l'icône Ajax pendant le chargement. Dans les deux cas, jQuery mobile met à jour le hash de l'URL de la page pour activer le support du bouton retour, du lien profond et du marque-page. </p>
+			<p>Si un lien dans un document multi-page pointe vers une ancre (<code># foo</code>), le framework regardera vers l'enveloppe de la page avec cet ID (<code>id="foo"</code>). S'il trouve une page dans le document HTML, il fera la transition vers la nouvelle page. Vous pouvez facilement naviguer entre les "pages" locales, internes et les pages externes dans jQuery Mobile. Les deux auront le même aspect pour l'utilisateur final, sauf que les pages externes afficheront l'icône Ajax pendant le chargement. Dans les deux cas, jQuery mobile met à jour le hash de l'URL de la page pour activer le support du bouton retour, du lien profond et du marque-page.</p>
 		
 		<p>Il est important de noter que si vous avez une liaison d'une page mobile, qui a été chargée via Ajax, à une page qui contient plusieurs pages internes, vous devez ajouter un <code>rel="external"</code> ou un <code>data-ajax="false"</code> au lien. Ceci indique au framework de faire un rechargement de la page complète pour vider le hash Ajax dans l'URL. Cela est essentiel car les pages Ajax utilisent le hash (<code>#</code>) pour suivre l'historique d'Ajax, alors que plusieurs pages internes utilisent le hash pour indiquer les pages internes donc il y aura des conflits dans le hash entre ces deux modes.</p>
 		
@@ -122,6 +122,7 @@
 								<li><a href="page-transitions.html">Transitions de page</a></li>
 								<li><a href="loader.html">Widget de chargement de page</a></li>
 								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>

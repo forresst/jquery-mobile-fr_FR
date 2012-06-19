@@ -7,7 +7,6 @@
 	<title>Docs jQuery Mobile - Sélection</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
@@ -128,7 +127,7 @@ $(document).bind('mobileinit',function(){
 
 	<div data-role="fieldcontain">
 		<label for="select-choice-7" class="select">Mode de livraison :</label>
-		<select name="select-choice-7" id="select-choice-7">
+		<select name="select-choice-7" id="select-choice-7" data-native-menu="false">
 			<option value="standard">Lent : 7 jours</option>
 			<option value="rush" disabled="disabled">Rapide : 3 jours</option>
 			<option value="express">Express : Le lendemain</option>
@@ -312,7 +311,7 @@ $.mobile.selectmenu.prototype.options.hidePlaceholderMenuItems = false;
 		</select>
 	</div>
     
-	<p>L'attribut <code>data-overlay-theme</code> peut être ajouté à un élément de sélection pour définir la couleur de la couche superposée du menu de sélection personnalisé basé sur une boîte de dialogue et la bordure extérieure des menus personnalisés plus petit. Par défaut, les couleurs de blocs de contenu du nuancier A seront utilisés pour les superpositions.</p>
+	<p>L'attribut <code>data-overlay-theme</code> peut être ajouté à un élément de sélection pour définir la couleur de la couche superposée du menu de sélection personnalisé basé sur une boîte de dialogue et la bordure extérieure des menus personnalisés plus petit. Par défaut, les couleurs de blocs de contenu du nuancier "a" seront utilisés pour les superpositions.</p>
       
 	<div data-role="fieldcontain">
 		<label for="select-choice-15" class="select">Taille</label>

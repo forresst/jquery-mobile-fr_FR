@@ -5,14 +5,19 @@
 
 
 define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery.mobile.navigation",
-	"./jquery.mobile.navigation.pushstate", "./jquery.mobile.loader", "../external/requirejs/depend!./jquery.hashchange[jquery]" ], function( $ ) {
+	"./jquery.mobile.navigation.pushstate", "./widgets/loader", "depend!./jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 ( function( $, window, undefined ) {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
 			$window = $( window );
 
- 	// trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
+	//remove initial build class (only present on first pageshow)
+	function hideRenderingClass(){
+		$html.removeClass( "ui-mobile-rendering" );
+	}
+
+	// trigger mobileinit event - useful hook for configuring $.mobile settings before they're used
 	$( window.document ).trigger( "mobileinit" );
 
 	// support conditions
@@ -34,11 +39,6 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 	// This is a fallback. If anything goes wrong (JS errors, etc), or events don't fire,
 	// this ensures the rendering class is removed after 5 seconds, so content is visible and accessible
 	setTimeout( hideRenderingClass, 5000 );
-
-	//remove initial build class (only present on first pageshow)
-	function hideRenderingClass(){
-		$html.removeClass( "ui-mobile-rendering" );
-	}
 
 	$.extend($.mobile, {
 		// find and enhance the pages in the dom and transition to the first page.
@@ -77,8 +77,14 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 			//remove initial build class (only present on first pageshow)
 			hideRenderingClass();
 
-			// if hashchange listening is disabled or there's no hash deeplink, change to the first page in the DOM
-			if ( !$.mobile.hashListeningEnabled || !$.mobile.path.stripHash( location.hash ) ) {
+			// if hashchange listening is disabled, there's no hash deeplink,
+			// the hash is not valid (contains more than one # or does not start with #)
+			// or there is no page with that hash, change to the first page in the DOM
+			// Remember, however, that the hash can also be a path!
+			if ( ! ( $.mobile.hashListeningEnabled &&
+				$.mobile.path.isHashValid( location.hash ) &&
+				( $( location.hash + ':jqmData(role="page")' ).length ||
+					$.mobile.path.isPath( location.hash ) ) ) ) {
 				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
 			}
 			// otherwise, trigger a hashchange to load a deeplink
@@ -89,7 +95,7 @@ define( [ "jquery", "./jquery.mobile.core", "./jquery.mobile.support", "./jquery
 	});
 
 	// initialize events now, after mobileinit has occurred
-	$.mobile._registerInternalEvents();
+	$.mobile.navreadyDeferred.resolve();
 
 	// check which scrollTop value should be used by scrolling to 1 immediately at domready
 	// then check what the scroll top is. Android will report 0... others 1

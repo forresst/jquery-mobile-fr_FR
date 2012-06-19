@@ -151,6 +151,10 @@
 	asyncTest( "should go back to top level when the back button is clicked", function() {
 		$.testHelper.pageSequence([
 			function(){
+				$.mobile.changePage("#nested-list-test");
+			},
+
+			function(){
 				$.mobile.changePage("#nested-list-test&ui-page=0-0");
 			},
 
@@ -158,8 +162,8 @@
 				window.history.back();
 			},
 
-			function(){
-				ok($('#nested-list-test').hasClass('ui-page-active'), 'Transitions back to the parent nested page');
+			function( timeout ){
+				ok($.mobile.activePage.is('#nested-list-test'), 'Transitions back to the parent nested page');
 				start();
 			}
 		]);
@@ -1028,6 +1032,22 @@
 
 					same( $elem.find("span.ui-icon-" + order[i]).length, 1, "there should be one " + order[i] + " icon" );
 				});
+
+				window.history.back();
+			},
+
+			start
+		]);
+	});
+
+	asyncTest( "links in list dividers are ignored", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage("#list-divider-ignore-link");
+			},
+
+			function() {
+				same($.mobile.activePage.find("#ignored-link .ui-btn-inner").length, 0, "no buttons in list dividers");
 
 				window.history.back();
 			},

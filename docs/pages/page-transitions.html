@@ -86,11 +86,22 @@
 			<tr>
 				<th><h3>none</h3></th>
 				<td><a href="page-transitions-dialog.html" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">dialog</a></td>
-				<td><a href="page-transitions-page.html" data-role="button" data-rel="dialog" data-transition="none" data-inline="true">page</a></td>
+				<td><a href="page-transitions-page.html" data-role="button" data-transition="none" data-inline="true">page</a></td>
 			</tr>
 		</table>
+        <div class="ui-body ui-body-e">
+            <p><strong>Important :</strong> Certaines plateformes ont actuellement des problèmes avec les transitions. Nous travaillons sur une solution pour résoudre le problème pour tout le monde. Si vous rencontrez des scintillements et des flash pendant ou à la fin de la transition, nous suggérons la solution suivante. Notez que cette solution de contournement doit être minutieusement testé sur la plateforme cible avant le déploiement. Cette solution de contournement est connu pour causer des problèmes de performances et des plantages du navigateur sur certaines plateformes en particulier Android. Ajoutez le code suivant à votre CSS personnalisé.
+            </p>
+            <code>
+                
+                .ui-page { -webkit-backface-visibility: hidden; }
+            
+            </code>
+            <p>
+                <a rel="external" href="page-transitions-flash-workaround.html">Cette page</a> est implémentée avec le contournement. <strong>Testez le soigneusement.</strong>
+            </p>
 
-
+        </div>
 <p><strong>Seules les transitions fade sont visibles ?</strong> : Pour apercevoir tous les types de transition, vous devez être sur un navigateur qui supporte les transformations 3D. Par défaut, les dispositifs qui ne supportent pas la 3D (Comme Android 2.x), se replient sur "fade" pour tous les types de transition. Le comportement est configurable (voir ci-dessous).</p>
 
 <p><strong>Les transitions ont été initialement inspiré par <a href="http://www.jqtouch.com/">jQTouch</a></strong>. Elles ont depuis été reconstruites, mais les accessoires de David  Kaneda et Jonathan Stark sont l'orientation initiale.</p>
@@ -151,6 +162,7 @@
 								<li data-theme="a"><a href="page-transitions.html">Transitions de page</a></li>
 								<li><a href="loader.html">Widget de chargement de page</a></li>
 								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>

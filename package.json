@@ -3,7 +3,7 @@
   "description": "dependencies for the grunt based build",
   "version": "0.0.1",
   "scripts": {
-		"lint" : "grunt"
+    "lint" : "grunt"
   },
   "main": "grunt.js",
   "repository": {
@@ -12,8 +12,11 @@
   },
   "dependencies": {
     "grunt":  "0.3.x",
-		"requirejs": "1.0.8",
-    "sqwish": "0.2.0"
+    "grunt-css": "0.2.0",
+    "grunt-junit": "0.1.4",
+    "requirejs": "1.0.8",
+    "glob-whatev": "~0.1.4",
+    "rimraf": "2.0.1"
   },
   "engine": {
     "node": ">=6.0"

@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Framework jQuery Mobile - Pied de page persistant C</title> 
+	<title>Framework jQuery Mobile - Pied de page persistant D</title> 
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
@@ -14,45 +14,74 @@
 
 </head> 
 <body> 
+
 	<div data-role="page" class="type-interior">
 
-	<div data-role="header" data-theme="f" data-position="fixed" data-id="foo">
-		<h1>Info</h1>
+		<div data-role="header" data-theme="f" data-position="fixed" data-id="foo">
+		<h1>Boîte de réception</h1>
 		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
 	</div>
 	
 	<div data-role="content">
 		<div class="content-primary">
-		<h2>A propos des barres d'outils persistantes</h2>
-		<p>Cette page est une démo des barres d'outils persistantes. Cliquez sur un des liens dans le pied de page, et vous pourrez voir la transtion du contenu de la page. L'entête et le pied de page persistants restent en place sur ces pages durant l'animation vers la nouvelle page HTML.</p>
-		<p>Pour que le framework applique le comportement persistant, ajouter le même attribut <code>data-id</code> aux entêtes et/ou aux pied de page de toutes les pages HTML dans la navigation. C'est simple : si la page où vous naviguez a une entête ou un pied de page avec les mêmes <code>data-id</code>, les barres d'outils apparaissent fixes en dehors de la transition. Chacune des pages dans cette démo a une transition différente pour tester comment cela fonctionne.</p>
-		
-		<p>Généralement, la technique de la barre d'outils persistante sera combinée avec le positionnement fixe. Dans cet exemple, le pied de page a aussi une barre de navigation :</p>
-	
-<pre><code>	
-&lt;div data-role="footer"<strong> data-id="foo1" data-position="fixed"</strong>&gt;
-	&lt;div data-role="navbar"&gt;
-		&lt;ul&gt;
-			&lt;li&gt;&lt;a href="a.html"&gt;Amis&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href="b.html"&gt;Albums&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href="c.html"&gt;Emails&lt;/a&gt;&lt;/li&gt;
-			&lt;li&gt;&lt;a href="d.html" &gt;Info&lt;/a&gt;&lt;/li&gt;
-		&lt;/ul&gt;
-	&lt;/div&gt;&lt;!-- /navbar --&gt;
-&lt;/div&gt;&lt;!-- /footer --&gt;
-</code></pre>
-		<p>Pour définir un statut actif sur l'un des éléments dans la barre d'outils persistante, ajouter une classe <code>ui-state-persist</code> supplémentaire à <code>ui-btn-active</code> correspondant à l'ancre.</p>
-		
-<pre><code>	
-&lt;li&gt;&lt;a href="d.html" <strong>class="ui-btn-active ui-state-persist"</strong>&gt;Info&lt;/a&gt;&lt;/li&gt;
-</code></pre>
+		<ul data-role="listview" data-theme="d" data-dividertheme="e" data-filter="true" data-filter-theme="d" data-filter-placeholder="Search messages...">
+			<li data-role="list-divider">Vendredi 8 octobre 2010 <span class="ui-li-count">2</span></li>
+			<li><a href="#">
+				<h3>Stephen Weber</h3>
+				</a><p><strong>Vous avez été invité à la réunion Filament Group à Boston, MA</strong></p>
+				<p>Hé Stephen, si vous êtes disponible demain à 10 heures, nous avons une réunion avec l'équipe jQuery.</p>
+				<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+			</a></li>
+			<li><a href="#">
+				<h3>Equipe jQuery</h3>
+				</a><p><strong>Planning de la conférence de Boston</strong></p>
+				<p>Pour préparation de la prochaine conférence à Boston, nous avons besoin de commencer à rassembler une liste de sponsors et conférenciers.</p>
+				<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+			</a></li>
+			<li data-role="list-divider">Jeudi 7 Octobre 2010 <span class="ui-li-count">1</span></li>
+			<li><a href="#">
+				<h3>Avery Walker</h3>
+				</a><p><strong>Re: Ce soir dîner</strong></p>
+				<p>Bien sûr, planifions la réunion à Cuisine Highland à 8:00 ce soir. Ne peux pas attendre ! </p>
+				<p class="ui-li-aside"><strong>4:48</strong>PM</p>
+			</a></li>
+			<li data-role="list-divider">Mercredi 6 Octobre 2010 <span class="ui-li-count">3</span></li>
+			<li><a href="#">
+				<h3>Amazon.com</h3>
+				</a><p><strong>4 Livres pour enfants pour le prix de 3</strong></p>
+				<p>Comme celui qui a acheté des livres pour enfants à partir de notre boutique 4-pour-3, vous pouvez être intéressé par ces livres présentés.</p>
+				<p class="ui-li-aside"><strong>12:47</strong>PM</p>
+			</a></li>
+			<li><a href="#">
+				<h3>Mike Taylor</h3>
+				</a><p><strong>Re: Ce week-end dans le Maine</strong></p>
+				<p>Salut , désolé mais je ne peux pas faire Vacationland ce week-end. Peut-être le week-end prochain ? Peut-être le week-end prochain ?</p>
+				<p class="ui-li-aside"><strong>6:24</strong>AM</p>
+			</a></li>
+			<li><a href="#">
+				<h3>Redfin</h3>
+				</a><p><strong>Mises à jour listing Redfin pour aujourd'hui</strong></p>
+				<p>Il y a 3 mises à jour pour la maison sur votre liste : 1 mise à jour de la liste MLS et 2 maisons sous contrat.</p>
+				<p class="ui-li-aside"><strong>5:52</strong>AM</p>
+			</a></li>
+				<li data-role="list-divider">Mardi 5 Octobre 2010 <span class="ui-li-count">3</span></li>
+				<li><a href="index.html">
+					<h3>Angela Smith</h3>
+					</a><p><strong>Demande de lien</strong></p>
+					<p>Mon nom est Angela Smith, SEO Consultant. J'ai beaucoup apprécié regarder votre site et je me demandais si vous seriez intéressé par le lien fourni.</p>
+					<p class="ui-li-aside"><strong>6:24</strong>AM</p>
+				</a></li>
+				<li><a href="index.html">
+					<h3>Mike Taylor</h3>
+					</a><p><strong>Ce week-end dans le Maine</strong></p>
+					<p>Ça sonne bien, laissez-moi vérifier dans notre planning.</p>
+					<p class="ui-li-aside"><strong>6:24</strong>AM</p>
+				</a></li>
+		</ul>
 
-		<h3>Une remarque à propos des transitions</h3>
-		<p>Les <a href="../pages/page-transitions.html">transitions de page</a> : slide, slideup, slidedown, fade ou none fonctionnent correctement avec les barres d'outils persistantes. Toutefois, les transitions 3D intensives, comme flip, turn et flow, peuvent causer avec cette technique des problèmes de performance, de positionnement et d'animation, donc nous ne recommandons pas leur utilisation.</p>
-		
-		</div><!--/content-primary -->		
+			</div><!--/content-primary -->		
 
-		<div class="content-secondary">
+			<div class="content-secondary">
 
 				<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 
@@ -78,10 +107,10 @@
 		<div data-role="footer" data-id="foo1" data-position="fixed">
 			<div data-role="navbar">
 				<ul>
-					<li><a href="footer-persist-a.html" data-prefetch="true">Amis</a></li>
-					<li><a href="footer-persist-b.html" data-prefetch="true">Albums</a></li>
-					<li><a href="footer-persist-c.html" data-prefetch="true">Emails</a></li>
-					<li><a href="footer-persist-d.html" data-prefetch="true" data-transition="slideup" class="ui-btn-active ui-state-persist">Info</a></li>
+					<li><a href="footer-persist-a.html" data-prefetch="true" data-transition="slideup">Info</a></li>
+					<li><a href="footer-persist-b.html" data-prefetch="true">Amis</a></li>
+					<li><a href="footer-persist-c.html" data-prefetch="true">Albums</a></li>
+					<li><a href="footer-persist-d.html" data-prefetch="true" class="ui-btn-active ui-state-persist">Emails</a></li>
 				</ul>
 			</div><!-- /navbar -->
 		</div><!-- /footer -->

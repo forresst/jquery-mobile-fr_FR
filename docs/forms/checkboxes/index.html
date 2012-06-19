@@ -7,7 +7,6 @@
 	<title>Docs jQuery Mobile Docs - Cases à cocher</title> 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
@@ -40,7 +39,7 @@
 		
 		<p>Les contrôles du radio bouton et de la case à cocher ci-dessous utilisent le balisage standard input/label, mais sont stylisés pour être plus "tactiles". Le contrôle stylisé que vous voyez est réellement l'élément label, qui se trouve sur l'input réel, donc si les images ne se chargent pas, vous aurez encore un contrôle fonctionnel. Dans la plupart des navigateurs, en cliquant le label cela déclenche automatiquement un clic sur l'input, mais nous avons du déclencher la mise à jour manuellement pour quelques navigateurs mobiles qui ne font pas cela nativement. Sur le bureau, ces contrôles sont accessible par le clavier et le lecteur d'écran. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux cases à cocher.</p>
 
-		<p>Pour créer une seule case, ajoutez un  <code>input</code> avec un attribut <code>type="checkbox"</code> et un <code>label</code> correspondant. Si le <code>input</code> n'est pas enveloppé dans le <code>label</code> correspondant, veuillez définir l'attribut <code>for</code> du <code>label</code> pour correspondre à l'ID de <code>input</code> ainsi ils seront sémantiquement associés.</p>
+		<p>Pour créer une seule case, ajoutez un  <code>input</code> avec un attribut <code>type="checkbox"</code> et un <code>label</code> correspondant. Si le <code>input</code> n'est pas enveloppé dans le <code>label</code> correspondant, veuillez définir l'attribut <code>for</code> du <code>label</code> pour correspondre à l'<code>id</code> de l'<code>input</code> ainsi ils seront sémantiquement associés.</p>
 		
 		<pre><code>	
 &lt;label&gt;&lt;input type="checkbox" name="checkbox-1" /&gt; J'accepte &lt;/label&gt;

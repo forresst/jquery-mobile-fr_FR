@@ -14,10 +14,13 @@
 	<script>
 		$.testHelper.asyncLoad([
 			[
-				"jquery.mobile.page",
-				"jquery.mobile.page.sections"
+				"widgets/page",
+				"widgets/page.sections"
 			],
-			[ "page_core.js" ],
+			[
+				"jquery.mobile.buttonMarkup",
+				"page_core.js"
+			],
 			[ "jquery.mobile.init" ]
 		]);
 	</script>
