@@ -7,7 +7,6 @@
 	<title>Docs jQuery Mobile - Curseur</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/assets/js/jqm-docs.js"></script>
 	<script src="../../../js/jquery.mobile.js"></script>
@@ -38,18 +37,18 @@
 			<p>Pour ajouter un widget curseur à votre page, utiliser l'<code>input</code> standard avec l'attribut <code>type="range"</code>. L'entrée <code>value</code> est utilisé pour configurer la position de départ du curseur et la valeur est peuplée dans la zone de saisie. Précisez les valeurs des attributs <code>min</code> et <code>max</code> pour régler la fourchette du curseur. Si vous voulez contraindre l'entrée des incréments spécifiques ajouter l'attribut <code>step</code>. Définissez l'attribut <code>value</code> pour régler la valeur initiale. Le framework analysera ces attributs pour configurer le widget curseur. Regardez la <a href="../../api/data-attributes.html">référence des attributs data-</a> pour voir tous les attributs possibles que vous pouvez ajouter aux curseurs.</p>
 
 			<p>Lorsque vous faites glisser le curseur, le framework met à jour la valeur de l'entrée natif (et vice-versa) afin qu'ils soient toujours en phase, ce qui garantit que la valeur est soumise avec le formulaire.</p>
-			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
+			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'<code>id</code> de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
 
 			<p>Le framework trouvera tous les éléments <code>input</code> avec un <code>type="range"</code> et les améliorera automatiquement dans un curseur avec une saisie complémentaire, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique de cette entrée dans un curseur, ajouter l'attribut <code>data-role="none"</code> à l'<code>input</code> et enveloppez les d'un <code>div</code> avec l'attribut <code> data-role="fieldcontain"</code> pour les grouper. Dans cet exemple, les limites acceptables sont de 0 à 100. </p>
 
 <pre><code>
-&lt;label for="slider-0"&gt;Curseur :&lt;/label&gt;
-&lt;input type="range" name="slider" id="slider-0" value="60" min="0" max="100" /&gt;
+&lt;label for="slider-1"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider-1" id="slider-1" value="60" min="0" max="100" /&gt;
 </code></pre>
 
 				<p>Le curseur par défaut est affiché avec ces paramètres comme ceci :</p>
-				<label for="slider-0">Curseur en saisie :</label>
-				<input type="range" name="slider-1" id="slider-0" value="60" min="0" max="100" />
+				<label for="slider-1">Curseur en saisie :</label>
+				<input type="range" name="slider-1" id="slider-1" value="60" min="0" max="100" />
 				
 				<h2>Définir une incrémentation</h2>
 
@@ -57,12 +56,12 @@
 
 <pre><code>
 &lt;label for="slider-step"&gt;Curseur :&lt;/label&gt;
-&lt;input type="range" name="slider" id="slider-step" value="150" min="0" max="500" <strong>step="50"</strong> /&gt;
+&lt;input type="range" name="slider-step" id="slider-step" value="150" min="0" max="500" <strong>step="50"</strong> /&gt;
 </code></pre>
 
 				<p>Ceci va produire un curseur qui se déplace de 10 en 10. Si la valeur saisie n'est pas valide avec l'incrémentation, la valeur sera réinitialisée vers la valeur la plus proche.</p>
 		        <label for="slider-step">Curseur en saisie :</label>
-				<input type="range" name="slider-1" id="slider-step" value="150" min="0" max="500" step="50" />
+				<input type="range" name="slider-step" id="slider-step" value="150" min="0" max="500" step="50" />
 				
 				
 				<h2>Mette en évidence la partie remplie</h2>
@@ -71,11 +70,11 @@
 
 <pre><code>
 &lt;label for="slider-fill"&gt;Curseur :&lt;/label&gt;
-&lt;input type="range" name="slider" id="slider-fill" value="60" min="0" max="100" <strong>data-highlight="true"</strong> /&gt;
+&lt;input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" <strong>data-highlight="true"</strong> /&gt;
 </code></pre>
 
-		        <label for="slider-min">Curseur en saisie :</label>
-				<input type="range" name="slider-1" id="slider-min" value="60" min="0" max="100" data-highlight="true" />
+		        <label for="slider-fill">Curseur en saisie :</label>
+				<input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" data-highlight="true" />
 	
 				
 				<h2>Version mini</h2>
@@ -83,13 +82,13 @@
 				<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
 
 <pre><code>
-&lt;label for="slider-0"&gt;Curseur :&lt;/label&gt;
-&lt;input type="range" name="slider" id="slider-0" value="25" min="0" max="100" data-highlight="true" <strong>data-mini="true"</strong> /&gt;
+&lt;label for="slider-mini"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider-mini" id="slider-mini" value="25" min="0" max="100" data-highlight="true" <strong>data-mini="true"</strong> /&gt;
 </code></pre>
 
-				<p>Ceci va produire une saisie pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
-		        <label for="slider-min">Curseur en saisie :</label>
-				<input type="range" name="slider-1" id="slider-min" value="25" min="0" max="100" data-highlight="true" data-mini="true" />
+				<p>Ceci va produire un curseur pas aussi grand que la version standard et disposant d'une taille inférieure. La saisie a aussi une taille plus petite.</p>
+		        <label for="slider-mini">Curseur en saisie :</label>
+				<input type="range" name="slider-mini" id="slider-mini" value="25" min="0" max="100" data-highlight="true" data-mini="true" />
 
 				<h2>Conteneurs de champs</h2>
 					
@@ -98,15 +97,15 @@
 
 <pre><code>
 <strong>&lt;div data-role="fieldcontain"&gt;
-</strong>   &lt;label for="slider"&gt;Curseur :&lt;/label&gt;
-   &lt;input type="range" name="slider" id="slider" value="25" min="0" max="100"  /&gt;
+</strong>   &lt;label for="slider-2"&gt;Curseur :&lt;/label&gt;
+   &lt;input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100"  /&gt;
 <strong>&lt;/div&gt;
 </strong></code></pre>
 
 			<p>Le curseur est maintenant affiché comme ceci :</p>
 			<div data-role="fieldcontain">
-				<label for="slider-1">Curseur en saisie :</label>
-				<input type="range" name="slider-1" id="slider-1" value="25" min="0" max="100" />
+				<label for="slider-2">Curseur en saisie :</label>
+				<input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100" />
 			</div>
 
 			<p>Les curseurs répondent également à des commandes via des touches. Les touches flèche vers la droite, flèche vers le haut et haut de page augmentent la valeur, flèche gauche, flèche vers le bas, et bas de page pour la diminuer. Pour déplacer le curseur à sa valeur minimum ou maximum, utilisez respectivement la touche début et fin.</p>
@@ -125,15 +124,15 @@ $('input').slider();
 
 		<pre><code>
 &lt;div data-role="fieldcontain"&gt;
-	&lt;label for="slider-2"&gt;Curseur :&lt;/label&gt;
-	&lt;input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100" <strong>data-theme="a" data-track-theme="b"</strong> /&gt;
+	&lt;label for="slider-3"&gt;Curseur :&lt;/label&gt;
+	&lt;input type="range" name="slider-3" id="slider-3" value="25" min="0" max="100" <strong>data-theme="a" data-track-theme="b"</strong> /&gt;
 &lt;/div&gt;
 		</code></pre>
 
 		<p>Ceci va produire un curseur thématisé :</p>
 		<div data-role="fieldcontain">
-			<label for="slider-2">Curseur en saisie :</label>
-			<input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100" data-theme="a" data-track-theme="b" />
+			<label for="slider-3">Curseur en saisie :</label>
+			<input type="range" name="slider-3" id="slider-3" value="25" min="0" max="100" data-theme="a" data-track-theme="b" />
 		</div>
 		</form>
 	</div><!--/content-primary -->

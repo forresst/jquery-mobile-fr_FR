@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Popup</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
+
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/assets/js/jqm-docs.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Popup</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+	</div><!-- /header -->
+
+	<div data-role="content" class="ui-body">
+		<div class="content-primary">
+
+			<h2>Popup</h2>
+
+			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Bases</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
+			</ul>
+
+			<p>Pour transformer n'importe quel div en popup, ajoutez l'attribut <code>data-role="popup"</code> au div. Si vous voulez que le popup apparaisse quand l'utilisateur clique sur un lien, créer un lien de telle sorte que son attribut <code>href</code> soit défini sur l'id du popup et le lien a l'attribut <code>data-rel="popup"</code>. </p>
+
+<pre><code>
+&lt;a href="#popupBasic" data-rel="popup"&gt;Tooltip&lt;/a&gt;
+
+&lt;div data-role="popup" id="popupBasic"&gt;
+	Il s'agit d'un popup de base, sans options définies.
+&lt;/div&gt;
+</code></pre>
+
+		<p>Cela se traduira par ce qui suit : <a href="#popupBasic" data-rel="popup">popup</a>. Notez que vous n'avez pas besoin d'espacement sur le popup car les widgets l'adapteront proprement.</p>
+		<div data-role="popup" id="popupBasic">
+			<p>Il s'agit d'un popup de base, sans options définies.</p>
+		</div>
+		
+			<a href="#basic" data-rel="popup" data-role="button">Popup par défaut</a>
+		    <div id="basic" data-role="popup" class="ui-content">
+		      <p>Je suis un popu par défaut</p>
+		    </div>
+
+
+
+		<p>Passons maintenant à quelques exemples sympas :</p>
+		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a> <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Menu</a> <a href="#popupLogin" data-rel="popup" data-role="button" data-inline="true" data-transition="slidedown">Formulaire</a> <a href="#popupPhoto" data-rel="popup" data-role="button" data-inline="true" data-transition="flip">Photo</a> <a href="#popupDialog" data-rel="popup" data-role="button" data-inline="true" data-transition="flow">Dialogue</a> <a href="#popupAccordion" data-rel="popup" data-role="button" data-inline="true">Accordéon</a>
+
+		<div data-role="popup" id="popupInfo">
+				<div class="ui-corner-all ui-body-e" style="padding:5px 15px;">
+		          <p>Voici un <strong>petit popup</strong> utilisé comme <a href="#popupPhoto" data-rel="popup" data-transition="pop">tooltip</a>.</p>
+				</div>
+		</div>
+
+		<div data-role="popup" id="popupMenu">
+				<ul data-role="listview" data-inset="true" style="width:180px;" data-theme="b">
+					<li><a data-rel="popup" href="#popupMenuLevel1" data-transition="flip">Ajouter</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel1" data-transition="turn">Modifier</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel1" data-transition="pop">Gérer</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel1" data-transition="none">Supprimer</a></li>
+				</ul>
+		</div>
+
+		<div data-role="popup" id="popupMenuLevel1">
+				<ul data-role="listview" data-inset="true" style="width:180px;" data-theme="b">
+					<li><a data-rel="popup" href="#popupMenuLevel2" data-transition="fade">Supprimer</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel2" data-transition="slideup">Annuler</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel2" data-transition="slidedown">Splice</a></li>
+					<li><a data-rel="popup" href="#popupMenuLevel2" data-transition="flow">Reticulate</a></li>
+				</ul>
+		</div>
+
+		<div data-role="popup" id="popupMenuLevel2">
+				<ul data-role="listview" data-inset="true" style="width:180px;" data-theme="b">
+					<li><a href="index.html">Bases</a></li>
+					<li><a href="options.html">Options</a></li>
+					<li><a href="methods.html">Méthodes</a></li>
+					<li><a href="events.html">Événements</a></li>
+				</ul>
+		</div>
+
+		<div data-role="popup" id="popupLogin" data-overlay-theme="a" data-theme="a" class="ui-corner-all">
+			<form>
+				<div style="padding:10px 20px;">
+				  <h3>Inscrivez vous s'il vous plaît</h3>
+		          <label for="un" class="ui-hidden-accessible">Nom de l'utilisateur :</label>
+		          <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a" />
+
+		          <label for="pw" class="ui-hidden-accessible">Mot de passe :</label>
+		          <input type="password" name="pw" id="pass" value="" placeholder="password" data-theme="a" />
+
+		    	  <button type="submit" data-theme="b">Inscrivez vous</button>
+				</div>
+			</form>
+		</div>
+		
+		<div data-role="popup" id="popupPhoto" data-overlay-theme="a" data-corners="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-popup-btn-close">Fermer</a><img src="../../toolbars/images/photo-run.jpeg" style="margin-bottom:-4px" alt="Photo Run">
+			<!-- TODO: Figure out why there is this extra 4px of space below images-->
+		</div>
+
+		<div data-role="popup" id="popupDialog" data-overlay-theme="d" data-theme="c" style="max-width:500px;" class="ui-corner-all">
+					<div data-role="header" data-theme="a" class="ui-corner-top">
+						<h1>Supprimer la Page ?</h1>
+					</div>
+					<div data-role="content" data-theme="d" style="padding:0 15px 15px; width:300px;" class="ui-corner-bottom">
+						<p><strong>Etes-vous sûr de vouloir supprimer cette page ?</strong> Cette action ne peut pas être annulée.</p>
+						<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Annuler</a> <a href="#popupDialogConfirm" data-role="button" data-inline="true" data-rel="popup" data-transition="flow" data-theme="b">Supprimer</a>  
+					</div>
+		</div>
+		
+		<div data-role="popup" id="popupDialogConfirm" data-overlay-theme="d" data-theme="c" style="max-width:500px;" class="ui-corner-all">
+					<div data-role="header" data-theme="e" class="ui-corner-top">
+						<h1>Page supprimée</h1>
+					</div>
+					<div data-role="content" data-theme="d" style="padding:0 15px 15px; width:300px;" class="ui-corner-bottom">
+						<p><strong>Page supprimée avec succès.</strong> J'espère que vous êtes heureux parce qu'elle est partie depuis longtemps maintenant.</p> 
+						<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="b" data-transition="flow">OK</a>  
+					</div>
+		</div>
+
+		<div data-role="popup" id="popupAccordion" data-overlay-theme="a" data-theme="c" style="width:300px;">
+			<div data-role="collapsible-set" data-theme="e" data-content-theme="c" style="margin:0;">
+				<div data-role="collapsible">
+					<h3>Charles Eames</h3>
+					<p>Design is a plan for arranging elements in such a way as best to accomplish a particular purpose.</p>
+				</div>
+				<div data-role="collapsible">
+					<h3>Frank Chimero</h3>
+					<p>People ignore design that ignores people.</p>
+				</div>
+				<div data-role="collapsible">
+					<h3>Joe Sparano</h3>
+					<p>Good design is obvious. Great design is transparent.</p>
+				</div>
+				<div data-role="collapsible">
+					<h3>Jeffrey Zeldman</h3>
+					<p>Content precedes design. Design in the absence of content is not design, itâ€™s decoration.</p>
+				</div>
+				<div data-role="collapsible">
+					<h3>Steve Jobs</h3>
+					<p>Design is the fundamental soul of a human-made creation that ends up expressing itself in successive outer layers of the product or service.</p>
+				</div>
+			</div>
+		</div>
+
+              <p>Les fenêtres des popup peuvent avoir diverses transitions :</p>
+              <a href="#transitionExample" data-transition="none" data-role="button" data-inline="true" data-rel="popup">Pas de transition</a> <a href="#transitionExample" data-transition="pop" data-role="button" data-inline="true" data-rel="popup">Pop</a> <a href="#transitionExample" data-transition="slideup" data-role="button" data-inline="true" data-rel="popup">Slide up</a> <a href="#transitionExample" data-transition="slidedown" data-role="button" data-inline="true" data-rel="popup">Slide down</a>
+              <div id="transitionExample" data-role="popup" data-transition="flip">
+                <p>Ceci est un texte pour l'exemple de transition</p>
+              </div>
+							<p>
+							Vous pouvez ajouter un attribut <code>data-transition</code> au popup pour lui attribuer une autre transition que celle par défaut <code>$.mobile.defaultDialogTransition</code>. Cette affectation peut alors être remplacée par un attribut <code>data-transition</code> spécifié sur le lien qui ouvre le popup. Les exemples de transition ont le code suivant :
+							</p>
+							<pre><code>
+&lt;a href="#transitionExample" <strong>data-transition="none"</strong> data-role="button" data-inline="true" data-rel="popup"&gt;Pas de transition&lt;/a&gt;
+&lt;a href="#transitionExample" <strong>data-transition="pop"</strong> data-role="button" data-inline="true" data-rel="popup"&gt;Pop&lt;/a&gt;
+&lt;a href="#transitionExample" <strong>data-transition="slideup"</strong> data-role="button" data-inline="true" data-rel="popup"&gt;Slide up&lt;/a&gt;
+&lt;a href="#transitionExample" <strong>data-transition="slidedown"</strong> data-role="button" data-inline="true" data-rel="popup"&gt;Slide down&lt;/a&gt;
+&lt;div id="transitionExample" data-role="popup" <strong>data-transition="flip"</strong>&gt;
+  &lt;p&gt;Ceci est un texte pour l'exemple de transition&lt;/p&gt;
+&lt;/div&gt;
+							</code></pre>
+							<p>
+								Lorsque vous lancez le popup depuis l'un des boutons, la <code>data-transition</code> donnée pour ce bouton sera utilisée. Toutefois, si vous lancez le popup par d'autres moyens, tels que, par exemple, via <code>$("#transitionExample").popup("open")</code>, la <code>data-transition</code> donnée pour le popup sera utilisée (la transition flip).
+							</p>
+
+		<h2>Appel du plugin popup</h2>
+
+<p>Ce plugin sera auto-initialiser sur n'importe quelle page qui contient un div avec l'attribut <code>data-role="popup"</code>. Cependant, si nécessaire, vous pouvez appeler directement le plugin <code>popup</code> sur n'importe quel sélecteur, comme n'importe quel plugin jQuery :</p>
+<pre><code>
+$('#myPopupDiv').popup();
+</code></pre>
+
+		<h2>Thématisation du popup</h2>
+<p>Le plugin <code>popup</code> fournit 2 options de thème : <code>data-theme</code> et <code>data-overlay-theme</code>. L'option <code>data-theme</code> fait référence au thème de la popup, alors que <code>data-overlay-theme</code> se réfère au thème du fond de la popup, qui couvre toute la fenêtre derrière la popup.</p>
+<p><code>data-theme</code> héritera de la page et aura toujours une valeur valide lorsque le popu s'ouvrira, à moins que vous spécifiez explicitement <code>data-theme="none"</code>, dans ce cas, la popup n'aura pas du tout de thème.</p>
+<p>Le <code>data-overlay-theme</code>  ne sera jamais défini et le popup de fond, bien qu'il soit toujours présent lorsque la popup s'affiche, sera complètement transparent, à moins explicitement de le définir en utilisant par exemple <code>data-overlay-theme="a"</code>. Dans ce cas, l'arrière-plan sera fade in, cachant partiellement le reste de la fenêtre, pour attirer l'attention sur la popup Voici un exemple d'une popup thématisé :</p>
+
+<pre><code>
+&lt;a href="#both" data-rel="popup" data-role="button"&gt;Thème + recouvrement définis&lt;/a&gt;
+&lt;div id="both" data-role="popup" <strong>data-overlay-theme="a" data-theme="e"</strong> class="ui-content"&gt;
+  &lt;p&gt;J'ai &lt;code&gt;data-overlay-theme="a"&lt;/code&gt; et &lt;code&gt;data-theme="e"&lt;/code&gt;&lt;/p&gt;
+&lt;/div&gt;
+</code></pre>
+
+<a href="#theme" data-rel="popup" data-role="button">Thème défini à A</a>
+<div id="theme" data-role="popup" data-theme="a" class="ui-content">
+  <p>J'ai <code>data-theme="a"</code> de défini</p>
+</div>
+
+<a href="#overlay" data-rel="popup" data-role="button">Recouvrement défini à A</a>
+<div id="overlay" data-role="popup" data-overlay-theme="a" class="ui-content">
+  <p>J'ai <code>data-overlay-theme="a"</code> de défini</p>
+</div>
+
+<a href="#both" data-rel="popup" data-role="button">Thème + recouvrement définis</a>
+<div id="both" data-role="popup" data-overlay-theme="a" data-theme="e" class="ui-content">
+  <p>J'ai <code>data-overlay-theme="a"</code> et <code>data-theme="e"</code></p>
+</div>
+
+	</div><!--/content-primary -->
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>Aussi dans cette rubrique</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
+								<li><a href="../page-anatomy.html">Anatomie de la page</a></li>
+								<li><a href="../page-template.html" data-ajax="false">Modèle de page unique</a></li>
+								<li><a href="../multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
+								<li><a href="../page-titles.html">Titres des pages</a></li>
+								<li><a href="../page-links.html">Liaison de pages</a></li>
+								<li><a href="../page-transitions.html" data-ajax="false">Transitions de page</a></li>
+								<li><a href="../loader.html">Widget de chargement de page</a></li>
+								<li><a href="../page-dialogs.html">Boîtes de dialogue</a></li>
+								<li data-theme="a"><a href="index.html">Popups</a></li>
+								<li><a href="../page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
+								<li><a href="../page-navmodel.html">Ajax, hashes &amp; historique</a></li>
+								<li><a href="../page-dynamic.html">Injection dynamique des pages</a></li>
+								<li><a href="../page-scripting.html">Écriture des scripts des pages</a></li>
+								<li><a href="../phonegap.html">Application PhoneGap</a></li>
+								<li><a href="../touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
+								<li><a href="../pages-themes.html">Thématisation des pages</a></li>
+
+							</ul>
+					</div>
+				</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2011-12 The jQuery Foundation</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

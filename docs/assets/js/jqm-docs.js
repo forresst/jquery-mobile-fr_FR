@@ -31,7 +31,7 @@ $(function(){
 
 
 // Affiche la version de jQM
-$(function() {
+$(document).bind( 'pageinit', function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
@@ -80,7 +80,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
       });
 
       message
-        .append( "<h3>Remarques : Il est possible que la navigation ne fonctionne pas si la documentation est visualisée localement</h3>" )
+        .append( "<h3>Remarque : Il est possible que la navigation ne fonctionne pas si la documentation est visualisée localement</h3>" )
         .append( "<p>La navigation axée AJAX qui est utilisée dans la documentation de jQuery Mobile peut avoir besoin d'être visualisée sur un serveur web pour fonctionner dans certains navigateurs. Si vous voyez un message d'erreur lorsque vous cliquez sur un lien, essayez un autre navigateur ou <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>consultez l'aide</a>.</p>" );
 
       $( document ).bind( "pagecreate", function( event ) {

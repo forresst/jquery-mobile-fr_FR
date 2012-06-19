@@ -7,7 +7,6 @@
 	<title>Docs jQuery Mobile - Interrupteur</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/assets/js/jqm-docs.js"></script>
 	<script src="../../../js/jquery.mobile.js"></script>
@@ -39,11 +38,11 @@
 			
 			<p>Pour créer un interrupteur, commencer avec un <code>select</code> avec deux options. La première option sera stylisé comme un interrupteur à l'état "marche" et le second sera stylisé comme un interrupteur à l'état "arrêt" de ce fait, écrivez vos options en conséquence. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux interrupteurs.</p>
 				
-			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
+			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'<code>id</code> de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
 				
 <pre><code>	
-&lt;label for="flip-a"&gt;Select slider:&lt;/label&gt;
-&lt;select name="slider" id="flip-a" data-role="slider"&gt;
+&lt;label for="flip-1"&gt;Interrupteur :&lt;/label&gt;
+&lt;select name="flip-1" id="flip-1" data-role="slider"&gt;
 	&lt;option value="off"&gt;Arrêt&lt;/option&gt;
 	&lt;option value="on"&gt;Marche&lt;/option&gt;
 &lt;/select&gt; 
@@ -51,8 +50,8 @@
 
 			<p>Ceci va produire un interrupteur. Les styles par défaut définissent la largeur de l'interrupteur à 100% du conteneur parent et empile les labels sur une ligne distincte.</p>
 
-			<label for="flip-a">Interrupteur :</label>
-			<select name="slider" id="flip-a" data-role="slider">
+			<label for="flip-1">Interrupteur :</label>
+			<select name="flip-1" id="flip-1" data-role="slider">
 				<option value="off">Arrêt</option>
 				<option value="on">Marche</option>
 			</select> 
@@ -63,7 +62,7 @@
 <pre><code>
 &lt;div class="containing-element"&gt;
 	&lt;label for="flip-min"&gt;Interrupteur :&lt;/label&gt;
-	&lt;select name="slider" id="flip-min" data-role="slider"&gt;
+	&lt;select name="flip-min" id="flip-min" data-role="slider"&gt;
 		&lt;option value="off"&gt;Interrupteur Off&lt;/option&gt;
 		&lt;option value="on"&gt;Interrupteur On&lt;/option&gt;
 	&lt;/select&gt;
@@ -78,7 +77,7 @@
 			
 			<div class="containing-element">
 				<label for="flip-min">Interrupteur :</label>
-				<select name="slider" id="flip-min" data-role="slider">
+				<select name="flip-min" id="flip-min" data-role="slider">
 					<option value="off">Interrupteur Off</option>
 					<option value="on">Interrupteur On</option>
 				</select> 
@@ -91,16 +90,16 @@
 			<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
 
 <pre><code>	
-&lt;label for="flip-a"&gt;Sélectionnez le curseur :&lt;/label&gt;
-&lt;select name="slider" id="flip-a" data-role="slider" <strong>data-mini="true"</strong>&gt;
+&lt;label for="flip-mini"&gt;Interrupteur :&lt;/label&gt;
+&lt;select name="flip-mini" id="flip-mini" data-role="slider" <strong>data-mini="true"</strong>&gt;
 	&lt;option value="off"&gt;Arrêt&lt;/option&gt;
 	&lt;option value="on"&gt;Marche&lt;/option&gt;
 &lt;/select&gt;
 </code></pre>
 			
 			<p>Ceci va produire un interrupteur pas aussi grand que la version standard et disposant d'une taille inférieure.</p>
-			<label for="flip-min">Interrupteur :</label>
-			<select name="slider" id="flip-min" data-role="slider" data-mini="true">
+			<label for="flip-mini">Interrupteur :</label>
+			<select name="flip-mini" id="flip-mini" data-role="slider" data-mini="true">
 				<option value="off">Arrêt</option>
 				<option value="on">Marche</option>
 			</select>
@@ -111,8 +110,8 @@
 
 <pre><code>	
 <strong>&lt;div data-role="fieldcontain"&gt;
-</strong>&lt;label for="flip-b"&gt;Flip switch :&lt;/label&gt;
-	&lt;select name="slider" id="flip-b" data-role="slider"&gt;
+</strong>&lt;label for="flip-2"&gt;Interrupteur :&lt;/label&gt;
+	&lt;select name="flip-2" id="flip-2" data-role="slider"&gt;
 		&lt;option value="nope"&gt;Non&lt;/option&gt;
 		&lt;option value="yep"&gt;Oui&lt;/option&gt;
 	&lt;/select&gt; 
@@ -120,8 +119,8 @@
 </strong></code></pre>	
 		<p>L'interrupteur s'affiche désormais comme ceci :</p>
 		<div data-role="fieldcontain">
-			<label for="flip-b">Interrupteur :</label>
-			<select name="slider" id="flip-b" data-role="slider">
+			<label for="flip-2">Interrupteur :</label>
+			<select name="flip-2" id="flip-2" data-role="slider">
 				<option value="nope">Non</option>
 				<option value="yep">Oui</option>
 			</select> 
@@ -130,34 +129,56 @@
 				
 		<h2>Thématisation de l'interrupteur</h2>	
 		
-		<p>Comme tous les éléments de formulaire, ce widget héritera automatiquement du thème du conteneur parent. Pour choisir un nuancier de couleur de thème spécifique, spécifiez l'attribut <code>data-theme</code> sur le select et spécifiez une lettre de nuancier.</p>	
+		<p>Comme tous les éléments de formulaire, ce widget héritera automatiquement du thème du conteneur parent. Pour choisir un nuancier de couleur de thème spécifique, spécifiez l'attribut <code>data-theme</code> sur le <code>select</code> et spécifiez une lettre de nuancier.</p>	
 		
 <pre><code>	
 &lt;div data-role="fieldcontain"&gt;
-	&lt;label for="flip-c"&gt;Flip switch:&lt;/label&gt;
-	&lt;select name="slider" id="flip-c" data-role="slider" data-theme="a"&gt;
+	&lt;label for="flip-3"&gt;Interrupteur :&lt;/label&gt;
+	&lt;select name="flip-3" id="flip-3" data-role="slider" data-theme="a"&gt;
 		&lt;option value="no"&gt;Non&lt;/option&gt;
 		&lt;option value="yes"&gt;Oui&lt;/option&gt;
 	&lt;/select&gt; 
 &lt;/div&gt;
 </code></pre>	
-				<p>Il en résulte un interrupteur avec les couleurs du nuancier A pour le curseur. Notez que le statut à gauche "Marche" obtient la couleur du statut actif.</p>
+				<p>Il en résulte un interrupteur avec les couleurs du nuancier "a" pour le curseur. Notez que le statut à gauche "Marche" obtient la couleur du statut actif.</p>
 				<div data-role="fieldcontain">
-					<label for="flip-c">Interrupteur :</label>
-					<select name="slider" id="flip-c" data-role="slider" data-theme="a">
+					<label for="flip-3">Interrupteur :</label>
+					<select name="flip-3" id="flip-3" data-role="slider" data-theme="a">
 						<option value="hate">Je déteste</option>
 						<option value="love">J'aime</option>
 					</select> 
 				</div>
 				
-				<p>Voici une variante avec le nuancier E :</p>
+				<p>Voici une variante avec le nuancier "e" :</p>
 				<div data-role="fieldcontain">
-					<label for="flip-d">Interrupteur :</label>
-					<select name="slider" id="flip-d" data-role="slider" data-theme="e">
+					<label for="flip-4">Interrupteur :</label>
+					<select name="flip-4" id="flip-4" data-role="slider" data-theme="e">
 						<option value="no">Non</option>
 						<option value="yes">Oui</option>
 					</select> 
 				</div>
+		
+		<p>Il est également possible de thématiser la piste de l'interrupteur en ajoutant l'attribut <code>data-track-theme</code> et en spécifiant la lettre du nuancier choisi sur le <code>select</code>.</p>
+<p>Voici un exemple d'un interrupteur avec le nuancier "a" appliqué à la piste et le nuancier "c" appliqué à la poignée :</p>		
+
+<pre><code>	
+&lt;div data-role="fieldcontain"&gt;
+        &lt;label for="flip-5"&gt;Interrupteur :&lt;/label&gt;
+        &lt;select name="flip-5" id="flip-5" data-role="slider" data-theme="c" data-track-theme="a"&gt;
+                &lt;option value="no"&gt;Non&lt;/option&gt;
+                &lt;option value="yes"&gt;Oui&lt;/option&gt;
+        &lt;/select&gt;
+&lt;/div&gt;
+</code></pre>
+
+<div data-role="fieldcontain">
+    <label for="flip-5">Interrupteur :</label>
+    <select name="flip-5" id="flip-5" data-role="slider" data-theme="c" data-track-theme="a">
+        <option value="no">Non</option>
+        <option value="yes">Oui</option>
+    </select>
+</div>
+		
 		
 		<h2>Appel du plugin interrupteur</h2>
 

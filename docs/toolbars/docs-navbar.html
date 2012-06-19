@@ -27,12 +27,25 @@
 	<h2>Barre de navigation simple</h2>
 	
 	<p>jQuery Mobile a un widget de barre de navigation très simple qui est utile pour fournir un maximum de 5 boutons avec des icônes en option dans une barre, généralement au sein d'une entête ou d'un pied de page. Il y a également une variante, une <a href="footer-persist-a.html">barre de navigation persistante</a> qui fonctionne davantage comme une barre d'onglets qui reste fixe pendant que vous naviguez à travers les pages.</p>
-	<p>Une barre de navigation est codée comme une liste non ordonnée de liens enveloppée dans un élément de conteneur qui contient l'attribut <code> data-role="navbar"</code>. Pour définir l'un des liens à l'état actif (sélectionné) , ajoutez <code>class="ui-btn-active"</code> à l'ancrage. Dans cet exemple, nous avons une barre de navigation à deux boutons avec l'élément "Un" défini à actif :</p>
+	<p>Une barre de navigation est codée comme une liste non ordonnée de liens enveloppée dans un élément de conteneur qui contient l'attribut <code> data-role="navbar"</code>. C'est un exemple avec une barre de navigation avec deux boutons :</p>
 	
 <pre><code>
 <strong>&lt;div data-role="navbar"&gt;</strong>
 	&lt;ul&gt;
-		&lt;li&gt;&lt;a href="a.html" class="ui-btn-active"&gt;Un&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="a.html"&gt;Un&lt;/a&gt;&lt;/li&gt;
+		&lt;li&gt;&lt;a href="b.html"&gt;Deux&lt;/a&gt;&lt;/li&gt;
+	&lt;/ul&gt;
+<strong>&lt;/div&gt;&lt;!-- /navbar --&gt;</strong>
+</code></pre>
+
+	<p>Quand un lien dans la barre de bavigation est cliqué, il porte le statut actif (selected). La classe <code>ui-btn-active</code> est d'abord supprimée de toutes les ancres dans la barre de navigation avant d'être ajouté au lien activé. Si c'est un lien vers une autre page, la classe sera à nouveau supprimée après que la transition soit terminée.</p>
+	
+	<p>Pour qu'un élément soit au statut actif avant l'initialisation de la barre de navigation, ajoutez <code>class="ui-btn-active"</code> à l'ancre correspondant dans votre balisage. Additionnellement, vous pouvez ajouter une classe <code>ui-state-persist</code> de façon que le framework restaure l'état actif à chaque fois que la page sera affichée. L'exemple ci-dessous montre une barre de navigation avec l'élément "Un" définie à actif :</p>
+
+<pre><code>
+<strong>&lt;div data-role="navbar"&gt;</strong>
+	&lt;ul&gt;
+		&lt;li&gt;&lt;a href="a.html" class="ui-btn-active ui-state-persist"&gt;Un&lt;/a&gt;&lt;/li&gt;
 		&lt;li&gt;&lt;a href="b.html"&gt;Deux&lt;/a&gt;&lt;/li&gt;
 	&lt;/ul&gt;
 <strong>&lt;/div&gt;&lt;!-- /navbar --&gt;</strong>
@@ -241,11 +254,11 @@
 
 	<h2>Thématisation des barres de navigations</h2>
 	
-	<p>Les barres de navigation héritent du nuancier de thème de leur conteneur parent, tout comme les boutons. Si une la barre de navigation est placée dans l'entête ou le pied de page de la barre d'outils, elle héritera du nuancier (A) de la barre d'outils par défaut pour les barres, sauf si vous définissez ceci dans le balisage. </p>
+	<p>Les barres de navigation héritent du nuancier de thème de leur conteneur parent, tout comme les boutons. Si une la barre de navigation est placée dans l'entête ou le pied de page de la barre d'outils, elle héritera du nuancier "a" de la barre d'outils par défaut pour les barres, sauf si vous définissez ceci dans le balisage. </p>
 	<p>Voici quelques exemples de barres de navigation dans différents nuancier de conteneur qui automatiquement héritent de la lettre du nuancier de leurs parents. Notez que dans ces exemples, au lieu d'utiliser un attribut <code>data-theme</code>, nous ajoutons manuellement les classes de nuancier pour appliquer le nuancier du corps (<code>ui-body-a</code>) et la classe pour ajouter l'espacement standard du corps (ui-body), mais l'héritage fonctionne de la même manière :</p>
 
 	<div class="ui-body-a ui-body">
-		<h3>Nuancier A</h3>
+		<h3>Nuancier "a"</h3>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" data-icon="grid">A</a></li>
@@ -258,7 +271,7 @@
 	</div><!-- /container -->
 	
 	<div class="ui-body-d ui-body">
-		<h3>Nuancier B</h3>
+		<h3>Nuancier "b"</h3>
 		<div data-role="navbar">
 			<ul>
 				<li><a href="#" data-icon="grid">A</a></li>

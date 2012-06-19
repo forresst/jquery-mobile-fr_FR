@@ -7,7 +7,6 @@
 	<title>jQuery Docs Mobile - Zone de saisie</title> 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/assets/js/jqm-docs.js"></script>
 	<script src="../../../js/jquery.mobile.js"></script>
@@ -39,7 +38,7 @@
 			<p>Les champs de texte et les zones de textes sont codés avec les éléments HTML standard, puis renforcée par jQuery Mobile pour les rendre plus attractifs et utilisable sur un appareil mobile. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter à des saisies de texte.</p>
 			
 			<h2>Textes de saisie</h2>
-			<p>Pour collecter du texte alphanumérique standard, utilisez un <code>input</code> avec un attribut <code>type="text"</code>. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
+			<p>Pour collecter du texte alphanumérique standard, utilisez un <code>input</code> avec un attribut <code>type="text"</code>. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'<code>id</code> de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
 
 <pre><code>	
     &lt;label for="basic"&gt;Saisie de texte :&lt;/label&gt;
@@ -156,7 +155,7 @@
 			
 			<h2>Zones de saisie</h2>
 			<p>Pour les entrées de texte multi-ligne, utiliser un élément <code>textarea</code>. The framework will auto-grow the height of the textarea to avoid the need for an internal scrollbar. </p>
-			<p>Réglez l'attribut <code>for</code> du <code>label</code> pour correspondre à l'ID du <code>textarea</code> ainsi ils sont sémantiquement liés et enveloppez les dans un <code>div</code> avec l'attribut <code> data-role="fieldcontain"</code> pour les grouper.</p>
+			<p>Réglez l'attribut <code>for</code> du <code>label</code> pour correspondre à l'<code>id</code> du <code>textarea</code> ainsi ils sont sémantiquement liés et enveloppez les dans un <code>div</code> avec l'attribut <code> data-role="fieldcontain"</code> pour les grouper.</p>
 
 <pre><code>	
 <strong>&lt;label for="textarea-a"&gt;Zone de saisie:&lt;/label&gt;

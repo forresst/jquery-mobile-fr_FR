@@ -49,7 +49,7 @@
 
 			<p><strong>Note de style sur les listes non-intégrées</strong> : Pour tout le standard, les listes non-intégrées ont une marge de -15px pour contrer le 15px d'espacement dans la zone de contenu afin que les listes soient remplies jusqu'au bord de l'écran. Si vous ajoutez d'autres widgets au dessus ou en dessous d'une liste, la marge négative peut faire que ces éléments se chevauchent, ainsi vous aurez besoin d'ajouter un espacement supplémentaire dans votre CSS personnalisé.</p>
 			<h2>Listes imbriquées</h2>
-			<p>En intégrant des <code>ul</code> ou <code>ol</code> enfant à l'intérieur des éléments de liste, vous pouvez créer des listes imbriquées. Lorsqu'un élément de liste contenant une liste d'enfants est cliqué, le framework va générer une nouvelle ui-page peuplée avec le titre de l'entête parent et la liste des éléments enfants. Ces listes dynamiques imbriquées sont stylisées avec le nuancier "b" du thème (bleu dans le thème par défaut) pour indiquer que vous êtes dans un niveau secondaire de navigation. Les listes peuvent être imbriquées sur plusieurs niveaux de profondeur et tous les pages et les liens seront gérées automatiquement par le framework.</p>
+			<p>En intégrant des <code>ul</code> ou <code>ol</code> enfant à l'intérieur des éléments de liste, vous pouvez créer des listes imbriquées. Lorsqu'un élément de liste contenant une liste d'enfants est cliqué, le framework va générer une nouvelle page peuplée avec le titre de l'entête parent et la liste des éléments enfants. Ces listes dynamiques imbriquées sont stylisées avec le nuancier "b" du thème (bleu dans le thème par défaut) pour indiquer que vous êtes dans un niveau secondaire de navigation. Les listes peuvent être imbriquées sur plusieurs niveaux de profondeur et tous les pages et les liens seront gérées automatiquement par le framework. Notez que la page de chaque liste imbriquée est créé lorsque la page parent se charge et pour chaque page imbriquée les événements de page seront déclenchés.</p>
 			<p>Pour <a href="../lists/lists-themes.html">définir la couleur du nuancier</a> d'une liste enfant, mettez l'attribut <code>data-theme</code> à l'intérieur de chaque liste.</p>
 			<a href="lists-nested.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste imbriquée</a>
 
@@ -64,14 +64,14 @@
 			<a href="lists-readonly-inset.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste en lecture seule</a>
 
 			<h2>Listes avec bouton séparé</h2>
-			<p>Dans les cas où il y a plus d'une action possible par élément de la liste, un bouton séparé peut être utilisé pour offrir deux éléments indépendamment cliquable - l'élément de liste et une petite icône de flèche à l'extrême droite. Pour faire un élément séparé de la liste, il suffit d'ajouter un second lien à l'intérieur du <code>li</code> et le framework va ajouter une ligne de séparation verticale et styliser le lien comme une flèche d'icône seule et définir l'attribut <code>title</code> du lien vers le texte du lien pour l'accessibilité. </p>
-			<p>Vous pouvez définir l'icône pour l'icône séparé à droite en spécifiant un attribut <code>data-split-icon</code> avec le <a href="../buttons/buttons-icons.html">nom de l'icône</a> que vous voulez. La couleur du nuancier du thème du bouton séparé peut être réglé en spécifiant une lettre de nuancier dans l'attribut <code>data-split-theme</code>.</p>
+			<p>Dans les cas où il y a plus d'une action possible par élément de la liste, un bouton séparé peut être utilisé pour offrir deux éléments indépendamment cliquable - l'élément de liste et une petite icône de flèche à l'extrême droite. Pour faire un élément séparé de la liste, il suffit d'ajouter un second lien à l'intérieur du <code>li</code> et le framework va ajouter une ligne de séparation verticale et styliser le lien comme une flèche d'icône seule et définir l'attribut <code>title</code> du lien vers le texte du lien pour l'accessibilité.</p>
+			<p>Vous pouvez définir l'icône pour l'icône séparé à droite en spécifiant un attribut <code>data-split-icon</code> avec le <a href="../buttons/buttons-icons.html">nom de l'icône</a> que vous voulez. La couleur du nuancier du thème du bouton séparé est par défaut à "b", mais il peut être réglé en spécifiant une lettre de nuancier dans l'attribut <code>data-split-theme</code>.</p>
 
 			<a href="lists-split.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de liste séparée</a>
 
 
 			<h2>Séparateurs de liste</h2>
-			<p>Les éléments de la liste peuvent être transformés en séparateur pour organiser et regrouper les éléments de la liste. Ceci est fait en ajoutant le <code> data-role="list-divider"</code> à tout élément de la liste. Ces éléments sont stylisés par défaut avec le nuancier "b" de la barre (bleue dans le thème par défaut) mais vous pouvez spécifier un thème pour les séparateurs en ajoutant l'attribut <code>data-dividertheme</code> à l'élément de la liste (<code>ul</code> ou <code>ol</code>l) et en spécifiant une lettre de nuancier.</p>
+			<p>Les éléments de la liste peuvent être transformés en séparateur pour organiser et regrouper les éléments de la liste. Ceci est fait en ajoutant le <code> data-role="list-divider"</code> à tout élément de la liste. Ces éléments sont stylisés par défaut avec le nuancier "b" de la barre (bleue dans le thème par défaut) mais vous pouvez spécifier un thème pour les séparateurs en ajoutant l'attribut <code>data-divider-theme</code> à l'élément de la liste (<code>ul</code> ou <code>ol</code>l) et en spécifiant une lettre de nuancier.</p>
 
 			<a href="lists-divider.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de séparateur de liste</a>
 
@@ -106,14 +106,14 @@ $("#mylistview").listview({
 
 			<a href="lists-search.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de filtre de recherche</a>
 
-      <p>Si vous voulez changer la manière dont les éléments de la liste sont filtrés, à savoir une recherche floue ou correspondant au début de la chaîne, vous pouvez configurer la fonction de rappel utilisée en interne par la définition <code>$.mobile.listview.prototype.options.filterCallback</code> durant le <code>mobileinit</code> ou après que le widget soit créé avec<code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Toute fonction définie pour la fonction de rappel fournira deux arguments. Tout d'abord, le texte de l'élément de la liste actuelle puis la valeur recherchée. Une valeur exacte aboutira à un élément de liste caché. La fonction de rappel par défaut qui filtre les entrées sans le <code>searchValue</code> , fait cela comme une sous-chaîne qui est décrite ci-dessous :
+      <p>Si vous voulez changer la manière dont les éléments de la liste sont filtrés, à savoir une recherche floue ou correspondant au début de la chaîne, vous pouvez configurer la fonction de rappel utilisée en interne par la définition <code>$.mobile.listview.prototype.options.filterCallback</code> durant le <code>mobileinit</code> ou après que le widget soit créé avec<code>$("#mylist").listview('option', 'filterCallback', yourFilterFunction)</code>. Toute fonction définie pour la fonction de rappel fournira trois arguments. Tout d'abord, le texte de l'élément de la liste actuelle et le deuxième la valeur recherchée et le troisième l'élément de la liste filtrée. Une valeur exacte aboutira à un élément de liste caché. La fonction de rappel par défaut qui filtre les entrées sans le <code>searchValue</code> , fait cela comme une sous-chaîne qui est décrite ci-dessous :
       </p>
 
-<pre><code>function( text, searchValue ){
-  return text.toLowerCase().indexOf( searchValue ) === -1;
+<pre><code>function( text, searchValue, item ){
+  return text.toString().toLowerCase().indexOf( searchValue ) === -1;
 };</code></pre>
 
-			<p>Pour filtrer les éléments de la liste par des valeurs autres que le texte, ajoutez un attribut <code>data-filtertext</code> à l'élément de la liste. La valeur de cet attribut sera passée comme premier argument de la fonction <code>filterCallback</code> à la place du texte.</p>
+			<p>Pour filtrer les éléments de la liste par des valeurs autres que le texte, ajoutez un attribut <code>data-filtertext</code> à l'élément de la liste. La valeur de cet attribut sera passée comme premier argument de la fonction <code>filterCallback</code> à la place du texte. Alternativement, vous pouvez utiliser un attribut de votre choix tel que défini sur l'élément de la liste elle-même.</p>
 
 			<a href="lists-search-filtertext.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple de filtre des données masquées</a>
 
@@ -155,7 +155,7 @@ $("#mylistview").listview({
 
 						<h3>Aussi dans cette rubrique</h3>
 
-						<ul data-role="listview" data-theme="c" data-dividertheme="d">
+						<ul data-role="listview" data-theme="c" data-divider-theme="d">
 
 							<li data-role="list-divider">Apparence d'une liste</li>
 							<li data-theme="a"><a href="docs-lists.html">Listes de bases &amp; API</a></li>

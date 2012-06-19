@@ -7,7 +7,6 @@
 	<title>Docs jQuery Mobile - Sélection</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
-	<script src="../../../experiments/themeswitcher/jquery.mobile.themeswitcher.js"></script>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/assets/js/jqm-docs.js"></script>
 	<script src="../../../js/jquery.mobile.js"></script>
@@ -40,7 +39,7 @@
 			
 			<p>Par défaut, le framework s'appuie sur les options du menu natif de l'OS pour l'utiliser avec le bouton personnalisé. Lorsque le bouton est cliqué, le menu natif de l'OS va s'ouvrir. Quand une valeur est sélectionnée et que le menu se ferme, le texte du bouton personnalisé est mis à jour pour correspondre à la valeur sélectionnée. Veuillez noter que le framework offre aussi la possibilité d'avoir des menus de sélection personnalisés (non natif), voir les détails au bas de cette page et dans la page <a href="custom.html">menu de sélection personnalisé</a>.</p>
 
-			<p>Pour ajouter un menu de sélection sur votre page, commencez avec un élément standard <code>select</code> peuplé avec un ensemble d'élément <code>option</code>. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID du <code>select</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.  </p>
+			<p>Pour ajouter un menu de sélection sur votre page, commencez avec un élément standard <code>select</code> peuplé avec un ensemble d'élément <code>option</code>. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'<code>id</code> du <code>select</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
 			
 			<p>Le framework trouvera tous les éléments <code>select</code> et les améliorera automatiquement dans des menus de sélection, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique d'un select, ajouter l'attribut <code>data-role="none"</code> au <code>select</code>.</p>
 			
@@ -201,7 +200,7 @@
 
 <h2>Zones de sélection regroupées verticalement</h2>
 
-<p>Pour créer un ensemble groupé de zones de sélection, ajoutez d'abord <code>select</code> et un <code>label</code> correspondant. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'ID du <code>select</code> ainsi ils sont sémantiquement liés.</p>
+<p>Pour créer un ensemble groupé de zones de sélection, ajoutez d'abord <code>select</code> et un <code>label</code> correspondant. Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'<code>id</code> du <code>select</code> ainsi ils sont sémantiquement liés.</p>
 
 <p>Parce que l'élément <code>label</code> sera associé à chaque zonde de sélection, nous recommandons l'enveloppement des sélections dans un élément <code>fieldset</code> qui a une <code>legend</code> qui agit comme un label combiné pour les saisies groupées.</p>
 

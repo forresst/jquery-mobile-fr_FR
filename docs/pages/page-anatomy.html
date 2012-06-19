@@ -30,8 +30,8 @@
 
 			<h2>La structure d'une page mobile</h2> 
 
-			<p>Un site jQuery Mobile doit commencer par un 'doctype' HTML5 pour profiter pleinement de toutes les fonctionnalités du framework. (Les anciens appareils possédant des navigateurs qui ne comprennent pas le HTML5 vont ignorer le 'doctype' et divers attributs personnalisés.) </p>
-			<p>Dans le 'head', les références pour jQuery, jQuery Mobile et le CSS du thème mobile sont tous nécessaires pour démarrer les choses. jQuery Mobile 1.1 fonctionne avec les versions 1.6.4 et 1.7.1 de jQuery. Nous recommandons un lien vers les fichiers hébergés sur le CDN de jQuery pour de meilleures performances : </p>
+			<p>Un site jQuery Mobile doit commencer par un "doctype" HTML5 pour profiter pleinement de toutes les fonctionnalités du framework. (Les anciens appareils possédant des navigateurs qui ne comprennent pas le HTML5 vont ignorer le 'doctype' et divers attributs personnalisés.) </p>
+			<p>Dans le "head", les références pour jQuery, jQuery Mobile et le CSS du thème mobile sont tous nécessaires pour démarrer les choses. jQuery Mobile 1.1 fonctionne avec les versions 1.6.4 et 1.7.1 de jQuery. Nous recommandons un lien vers les fichiers hébergés sur le CDN de jQuery pour de meilleures performances : </p>
 
 <pre><code>
 <strong>&lt;!DOCTYPE html&gt; </strong>
@@ -123,9 +123,9 @@
 
 		<h2>La structure du modèle multi-page</h2> 
 		
-			<p>Un unique document HTML peut contenir plusieurs 'pages' qui sont chargées ensemble par l'empilage de divs avec le <code> data-role</code> <code>"page"</code>. Chaque bloc de 'page' a besoin d'un ID unique (<code>id="foo"</code>) qui sera utilisé pour relier en interne les 'pages' entre elles (<code>href="# foo"</code>). Quand un lien est cliqué, le framework va chercher une "page" interne avec l'ID et la fait apparaitre via une transition.</p> 
+			<p>Un unique document HTML peut contenir plusieurs "pages" qui sont chargées ensemble par l'empilage de divs avec le <code> data-role</code> de <code>"page"</code>. Chaque bloc de "page" a besoin d'un ID unique (<code>id="foo"</code>) qui sera utilisé pour relier en interne les "pages" entre elles (<code>href="# foo"</code>). Quand un lien est cliqué, le framework va chercher une "page" interne avec l'ID et la fait apparaitre via une transition.</p> 
 						
-			<p>Voici un exemple de deux "pages" du site construites avec deux divs jQuery Mobile navigables en liant un ID placé sur l'enveloppe de chaque page. Notez que les ID sur les conteneurs de page sont uniquement nécessaires pour supporter les liens internes des pages, et ils sont facultatifs si chaque page est un document HTML distinct. Voici à quoi correspond  deux pages à l'intérieur de l'élément  <code>body</code>.</p> 
+			<p>Voici un exemple de deux "pages" du site construites avec deux divs jQuery Mobile navigables en liant un ID placé sur l'enveloppe de chaque page. Notez que les ID sur les conteneurs de page sont uniquement nécessaires pour supporter les liens internes des pages, et ils sont facultatifs si chaque page est un document HTML distinct. Voici à quoi correspond  deux pages à l'intérieur de l'élément  <code>body</code>.</p>  
 
 <pre><code>
 &lt;body&gt; 
@@ -171,16 +171,19 @@
 
 		<p> </p>
 		
-		<p>MERCI DE NOTER : Puisque nous utilisons le hash pour suivre l'historique de navigation pour toutes les 'pages' Ajax, il n'est pas possible actuellement de faire un lien vers une ancre (<code>index.html#foo</code>) sur une page en jQuery Mobile. Car le framework va chercher une 'page' avec un <code>ID</code> <code>#foo</code> au lieu d'utiliser le comportement natif qui consiste à se déplacer vers le contenu de cet <code>ID</code>.</p>
+		<p>MERCI DE NOTER : Puisque nous utilisons le hash pour suivre l'historique de navigation pour toutes les "pages" Ajax, il n'est pas possible actuellement de faire un lien vers une ancre (<code>index.html#foo</code>) sur une page en jQuery Mobile. Car le framework va chercher une "page" avec un <code>ID</code> <code>#foo</code> au lieu d'utiliser le comportement natif qui consiste à se déplacer vers le contenu de cet <code>ID</code>.</p>
+		
+		<p>L'attribut  <code>id</code> de tous vos éléments doivent être non seulement unique sur une page donnée, mais aussi unique à travers les pages d'un site. C'est parce que le modèle de navigation d'une seule page de jQuery Mobile permet à de nombreuses "pages" différentes d'être présentes dans le DOM au même moment. Cette disposition s'applique également lorsque vous utilisez un modèle multi-page, puisque tous les "pages" sur le modèle sont chargés en une seule fois.</p>
 		
 		
 <h2>C'est des conventions, ce n'est pas des obligations</h2>
 
 <p>Bien que la structure de la page décrite au-dessus est une méthode recommandée pour la construction avec jQuery Mobile d'une application web standard, le framework est très flexible avec la structure du document. Les éléments data-role : page, header, content et footer sont facultatifs et ils sont surtout utiles pour fournir un formatage et une structure de base. L'enveloppement utilisé pour la page est obligatoire pour que l'auto-initialisation fonctionne, mais cela est désormais facultatif pour les documents de page unique donc il n'y a pas l'obligation de tout baliser. Pour une page web avec une mise en page personnalisée, l'ensemble de ces éléments structuraux peuvent être omis, la navigation Ajax et tous les widgets fonctionneront exactement comme ils le font dans la structure passe-partout. En arrière plan, le framework va injecter l'enveloppement de la page si elle n'est pas incluse dans le balisage, car c'est nécessaire pour gérer les pages, mais le balisage de départ peut maintenant être extrêmement simple. </p>
 
-<p>Notez que dans une configuration multi-page, vous êtes tenus d'avoir l'enveloppement de page dans votre balisage afin de regrouper le contenu dans plusieurs pages.</p>
+<p><strong>Notez</strong> que dans une configuration multi-page, vous êtes tenus d'avoir l'enveloppement de page dans votre balisage afin de regrouper le contenu dans plusieurs pages.</p>
 
-		
+<p><strong>Autre Note :</strong> Si votre body contient aucun divs <code>data-role="page"</code>, jQuery Mobile enveloppe entièrement le contenu du body à l'intérieur d'un div de page comme expliqué au dessus. jQuery Mobile utilise la méthode de jQuery <code>wrapAll()</code> pour faire ceci qui cherche des balises de script à l'intérieur du contenu enveloppé et charge chaque source de script via XHR. Si les scripts sont présents dans le corps, le navigateur termine en les chargeant deux fois. Nous recommandons donc vivement que les documents jQuery Mobile avec des scripts dans leur body contiennent aussi un <code>div</code> avec <code>data-role="page"</code>.
+</p>
 
 
 				</div><!--/content-primary -->		
@@ -200,7 +203,9 @@
 								<li><a href="page-titles.html">Titres des pages</a></li>
 								<li><a href="page-links.html">Liaison de pages</a></li>
 								<li><a href="page-transitions.html">Transitions de page</a></li>
+								<li><a href="loader.html">Widget de chargement de page</a></li>
 								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>

@@ -73,6 +73,18 @@
 			<code>super.setIntegerProperty("loadUrlTimeoutValue", 60000);</code>
 
 
+			<h2>Construction d'applications UIWebView avec jQuery Mobile</h2>
+
+			<p>Il est important de noter lors de la création d'une personnalisation, non phonegap, le contrôle de <code>UIWebView</code> pour une application iOS, vous devez utiliser la méthode <code>loadRequest</code> de préférence à <code>loadData</code> pour supporter le bouton retour. Le bout de code suivant est un exemple de chargement de  <code>default.html</code> dans votre contrôleur de vue.</p>
+
+<pre><code>- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    NSString *fullURL = [[NSBundle mainBundle] pathForResource:@"dialog" ofType:@"html"];
+    NSURL *url = [NSURL fileURLWithPath:fullURL];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:requestObj];
+}</code></pre>
 
       </div><!--/content-primary -->
 		
@@ -91,7 +103,9 @@
 								<li><a href="page-titles.html">Titres des pages</a></li>
 								<li><a href="page-links.html">Liaison de pages</a></li>
 								<li><a href="page-transitions.html">Transitions de page</a></li>
+								<li><a href="loader.html">Widget de chargement de page</a></li>
 								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>

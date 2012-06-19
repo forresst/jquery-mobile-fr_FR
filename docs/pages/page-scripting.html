@@ -44,7 +44,7 @@
 			<p>L'événement  <code>pageinit</code> est déclenché sur une page où il est initialisé, juste après que l'initialisation se produise. La plupart des widgets officiels de jQuery Mobile s'auto-initialisent en se basant sur cet événement, et vous pouvez définir votre code pour faire la même chose.</p>
 <pre><code>
 $( document ).delegate("#aboutPage", "pageinit", function() {
-  alert('Une page avec un ID "aboutPage" vient juste d'être créée par jQuery Mobile !');
+  alert('Une page avec un id "aboutPage" vient juste d'être créée par jQuery Mobile !');
 });
 </code></pre>
 
@@ -112,9 +112,9 @@ $.mobile.silentScroll(300);
 
 
 			<h2>Passage de paramètres entre les pages</h2>
-			<p>jQuery Mobile ne supporte pas le parametre query  passant vers des pages internes/embarquées. Par exemple, si le framework voit un lien vers "#somePage?someId=1", il interpréter cela comme "#somePage" et accède au div de la page interne avec l'ID<code>somePage</code> et applique un data-url <code>#somePage?someId=1</code> à ce conteneur page. Les appels ultérieurs à d'autres paramètres tels que "#somePage?someId=2" trouveront les mêmes div parce que jQuery Mobile se réfère à des data-url sur le div qui est seulement défini une fois et restera à <code>#somePage?someId=1</code>.</p>
+			<p>jQuery Mobile ne supporte pas le parametre query  passant vers des pages internes/embarquées. Par exemple, si le framework voit un lien vers <code>"#somePage?someId=1"</code>, il interpréte cela comme <code>"#somePage"</code> et accède au div de la page interne avec l'<code>id</code> <code>"somePage"</code> et applique un <code>data-url</code> de <code>"#somePage?someId=1"</code> à ce conteneur page. Les appels ultérieurs à d'autres paramètres tels que <code>"#somePage?someId=2"</code> trouveront les mêmes div parce que jQuery Mobile se réfère à des <code>data-url</code> sur le <code>div</code>  qui est seulement défini une fois et restera à <code>"#somePage?someId=1"</code>.</p>
 
-			<p>Il ya deux plugins que vous pouvez ajouter à votre projet si des paramètres de query sont nécessaires entre les pages. Il en existe un léger <a href="https://github.com/jblas/jquery-mobile-plugins/tree/master/page-params" rel="external">page params plugin</a> et un plus complet <a href="https://github.com/azicchetti/jquerymobile-router" rel="external">jQuery Mobile router plugin</a> pour utiliser backbone.js ou spine.js.</p>
+			<p>Il y a deux plugins que vous pouvez ajouter à votre projet si des paramètres de query sont nécessaires entre les pages. Il en existe un léger <a href="https://github.com/jblas/jquery-mobile-plugins/tree/master/page-params" rel="external">page params plugin</a> et un plus complet <a href="https://github.com/azicchetti/jquerymobile-router" rel="external">jQuery Mobile router plugin</a> pour utiliser backbone.js ou spine.js.</p>
 
 
 
@@ -135,7 +135,9 @@ $.mobile.silentScroll(300);
 								<li><a href="page-titles.html">Titres des pages</a></li>
 								<li><a href="page-links.html">Liaison de pages</a></li>
 								<li><a href="page-transitions.html">Transitions de page</a></li>
+								<li><a href="loader.html">Widget de chargement de page</a></li>
 								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>

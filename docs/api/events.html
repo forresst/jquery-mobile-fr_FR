@@ -41,21 +41,22 @@
 		<dl>
 			<dt><code>tap</code></dt>
 			<dd><p>Se déclenche après un un événement tactile rapide, complet.</p>
-			  <ul>
-			  	<li><code>tapholdThreshold</code> (par défaut : 750ms) Cette valeur détermine combien de temps l'utilisateur doit maintenir avant que l'événement taphold soit déclenché sur l'élément cible.</li>
-			  </ul>
-      </dd>
+			</dd>
 
 			<dt><code>taphold</code></dt>
-			<dd>Se déclenche après un appui long (près d'une seconde).</dd>
+			<dd><p>Se déclenche après un événement tactile complet.</p>
+			<ul>
+				<li><code>$.event.special.tap.tapholdThreshold</code> (par défaut : 750ms) Cette valeur détermine combien de temps l'utilisateur doit maintenir avant que l'événement taphold soit déclenché sur l'élément cible.</li>
+			</ul>
+			</dd>
 
 			<dt><code>swipe</code></dt>
-			<dd><p>Se déclenche lors d'un glissé horizontal de 30px ou plus (et de moins de 20px verticalement) se produisant dans la seconde, mais ces paramètres peuvent être configurés :</p>
+			<dd><p>Se déclenche lors d'un glissé horizontal de 30px ou plus (et de moins de 75px verticalement) se produisant dans la seconde, mais ces paramètres peuvent être configurés :</p>
 			  <ul>
-			  	<li><code>scrollSupressionThreshold</code> (par défaut : 10px) Un déplacement horizontal plus important supprime le scrolling</li>
-			  	<li><code>durationThreshold</code> (par défaut : 1000ms) Si cela dépasse la durée, ce n'est pas considérer comme un swipe</li>
-			  	<li><code>horizontalDistanceThreshold</code> (par défaut : 30px) Un déplacement horizontal doit être plus grand que cette valeur.</li>
-			  	<li><code>verticalDistanceThreshold</code> (par défaut : 75px) Un déplacement vertical doit être moins grand que cette valeur.</li>
+			  	<li><code>$.event.special.swipe.scrollSupressionThreshold</code> (par défaut : 10px) Un déplacement horizontal plus important supprime le scrolling</li>
+			  	<li><code>$.event.special.swipe.durationThreshold</code> (par défaut : 1000ms) Si cela dépasse la durée, ce n'est pas considérer comme un swipe</li>
+			  	<li><code>$.event.special.swipe.horizontalDistanceThreshold</code> (par défaut : 30px) Un déplacement horizontal doit être plus grand que cette valeur.</li>
+			  	<li><code>$.event.special.swipe.verticalDistanceThreshold</code> (par défaut : 75px) Un déplacement vertical doit être moins grand que cette valeur.</li>
 			  	</ul>
 			</dd>
 
@@ -71,6 +72,9 @@
 			<dl>
 				<dt><code>vmouseover</code></dt>
 				<dd>Événement normalisé pour la manipulation des événements touch ou <code>mouseover</code>.</dd>
+
+				<dt><code>vmouseout</code></dt>
+				<dd>Événement normalisé pour la manipulation des événements touch ou <code>mouseout</code>.</dd>
 
 				<dt><code>vmousedown</code></dt>
 				<dd>Événement normalisé pour la manipulation des événements touchstart ou <code>mousedown</code>.</dd>
@@ -99,10 +103,18 @@
 				<p>Les applications peuvent appeler  <code>preventDefault()</code> sur un événement <code>vclick</code> pour annuler le comportement click par défaut d'un élément. Sur les périphériques basé sur la souris, l'appel de <code>preventDefault()</code> sur un événement <code>vclick</code> équivaut à appeler <code>preventDefault()</code> sur l'événement réel <code>click</code> pendant la phase d'événement bubble. Sur les périphériques basés sur le tactile, c'est un peu plus compliqué, car l'événement actuel <code>click</code> est envoyé environ 300 ms après l'événement <code>vclick</code> soit envoyé. Pour les appareils tactiles, l'appel de <code>preventDefault()</code> sur un événement <code>vclick</code> déclenche un code dans le plugin vmouse qui tente d'attraper le prochain événement <code>click</code> qui sera envoyé par le navigateur, durant la phase de capture de l'événement, et d'appeler <code>preventDefault()</code> et <code>stopPropagation()</code>. Comme mentionné dans l'avertissement ci-dessus, il est parfois difficile de faire correspondre un événement tactile avec ses correspondants de souris car les cibles peuvent varier. Pour cette raison, le plugin vmouse peut aussi revenir pour tenter d'identifier un événement de <code>click</code> correspondant à des coordonnées. Il y a encore des cas lorsqu'il y a deux cibles, l'identification des coordonnées échoue, ce qui entraine que l'événement <code>click</code> soit envoyé, et soit cela déclenche l'action par défaut de l'élément, soit dans le cas où le contenu a été déplacé ou remplacé, cela déclenche un click sur un élément différent. Si cela se produit de façon régulière pour un élément/contrôle, nous vous suggérons d'utiliser <code>click</code> pour déclencher votre action.</p>
 			</div>
 
+			<dd><p>Les événements de souris virtuel peuvent être aussi configurés :</p>
+			  <ul>
+			  	<li><code>$.vmouse.moveDistanceThreshold</code> (par défaut : 10px) Un déplacement plus important, c'est un événement de scroll. L'événement vmousecancel est appelé et l'événement TouchMove est annulé.</li>
+			  	<li><code>$.vmouse.clickDistanceThreshold</code> (par défaut : 10px) Si l'événement vclick était déjà récupéré et il se trouve dans un bloc de liste, alors les vclicks inférieure à cette distance sont ignorés.</li>
+			  	<li><code>$.vmouse.resetTimerDuration</code> (par défaul : 1500ms) Si le temps est supérieur à cette valeur, alors ce n'est pas un événement tactile. Les événements Scroll, TouchMove et TouchEnd utilisent ceci. La liste de bloc est effacée.</li>
+			  	</ul>
+			</dd>
+
 		<h2>Événement de changement d'orientation</h2>
 		<dl>
 			<dt><code>orientationchange</code></dt>
-			<dd>Se déclenche lors d'un changement d'orientation du périphérique (en le tournant verticalement ou horizontalement). Lorsque cet événement est lié, votre fonction de rappel peut exploiter un second argument, qui contient une propriété <code>orientation</code> égale à "portrait" ou "landscape". Notez que nous avons actuellement lier l'événement resize quand <code>orientationchange</code> n'est pas supporté nativement ou lorsque <code>$.mobile.orientationChangeEnabled</code> est défini à false.</dd>
+			<dd>Se déclenche lors d'un changement d'orientation du périphérique (en le tournant verticalement ou horizontalement). Lorsque cet événement est lié, votre fonction de rappel a un argument : l'objet de l'événement. L'objet de l'événement contient une propriété <code>orientation</code> égale soit à "portrait" ou "landscape". Notez que nous avons actuellement lier l'événement resize quand <code>orientationchange</code> n'est pas supporté nativement ou lorsque <code>$.mobile.orientationChangeEnabled</code> est défini à false.</dd>
 			<div class="ui-body ui-body-e">
 				<h4>Timing de orientationchange</h4>
 
@@ -505,7 +517,14 @@ $( '#foo' ).hide().trigger( 'updatelayout' );
         </dl>
 
 		<h2>Evénements d'animation</h2>
-		<p>jQuery Mobile propose le plugin <code>animationComplete</code>, que vous pouvez utiliser après l'ajout ou la suppression d'une classe qui applique une transition CSS.</p>
+		<p>jQuery Mobile propose le plugin <code>animationComplete</code>, que vous pouvez utiliser après l'ajout ou la suppression d'une classe qui applique une transition CSS. Il peut être utilisé avec les événements de transition de page. Par exemple :</p>
+<pre><code>
+$(document).bind("pagehide", function(event, ui) {
+  $(ui.nextPage).animationComplete(function() {
+    alert('Animation complète');
+  });
+});
+</pre></code>
 
     </div><!--/content-secondary -->
 
