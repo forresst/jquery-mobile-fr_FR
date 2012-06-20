@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 40d7bad2b9bc5e55010378a89ab1574ef910531c <> Date: Tue Jun 19 09:44:47 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 933e4d913573c6a9b9cfdc44a743608d23e351c5 <> Date: Wed Jun 20 12:29:33 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -26,9 +26,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-mobile, .ui-mobile .ui-page { min-height: 300px; }
 }
 .ui-loading .ui-loader { display: block; }
-.ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; box-shadow: 0 1px 1px -1px #fff; left: 50%; border:0; }
+.ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; left: 50%; border:0; }
 .ui-loader-default { background: none; opacity: .18; width: 46px; height: 46px; margin-left: -23px; margin-top: -23px; }
-.ui-loader-verbose { width: 200px; opacity: .88; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
+.ui-loader-verbose { width: 200px; opacity: .88; box-shadow: 0 1px 1px -1px #fff; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
 .ui-loader-default h1 { font-size: 0; width: 0; height: 0; overflow: hidden; }
 .ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
 .ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 44px; height: 44px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
@@ -774,7 +774,8 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-controlgroup-vertical .ui-controlgroup-last { border-bottom-width: 1px; }
 .ui-controlgroup-controls label.ui-select { position: absolute; left: -9999px; }
 .ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
-.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { width: 18px; height: 20px; padding: .6em 20px .6em 20px }
+.ui-controlgroup .ui-btn-icon-notext .ui-btn-inner { height: 20px; padding: .6em 20px .6em 20px }
+.ui-controlgroup-horizontal .ui-btn-icon-notext .ui-btn-inner { width: 18px; }
 .ui-controlgroup.ui-mini .ui-btn-icon-notext .ui-btn-inner { height: 16px; padding: .55em 11px .5em 11px; }
 .ui-controlgroup .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; right: 50%; margin: -9px -9px 0 0; }
 .ui-controlgroup-horizontal .ui-controlgroup-controls:before,
@@ -841,6 +842,7 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	height: 100%;
 	position: absolute;
 	opacity: 0;
+	filter: Alpha(Opacity=50);
 	border: 0px;
 	z-index: 1099;
 }

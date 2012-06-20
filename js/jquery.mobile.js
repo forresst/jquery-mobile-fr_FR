@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 40d7bad2b9bc5e55010378a89ab1574ef910531c <> Date: Tue Jun 19 09:44:47 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 933e4d913573c6a9b9cfdc44a743608d23e351c5 <> Date: Wed Jun 20 12:29:33 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -4592,7 +4592,7 @@ $.fn.buttonMarkup = function( options ) {
 
 		$.each( o, mapToDataAttr );
 
-		if ( el.jqmData( "rel" ) === "popup" && e.hasAttribute( "href" ) ) {
+		if ( el.jqmData( "rel" ) === "popup" && el.attr( "href" ) ) {
 			e.setAttribute( "aria-haspopup", true );
 			e.setAttribute( "aria-owns", e.getAttribute( "href" ) );
 		}
@@ -6088,6 +6088,17 @@ $( document ).bind( "pagecreate create", function( e ){
 
 		_setOverlayTheme: function( value ) {
 			this._realSetTheme( this._ui.screen, value );
+
+			if ( $.mobile.browser.ie ) {
+				if ( this._ui.screen.css( "background-color" ) === "transparent" &&
+					this._ui.screen.css( "background-image" ) === "none" &&
+					this._ui.screen.css( "background" ) === undefined ) {
+					this._ui.screen.css( {
+						"background-color": "black",
+						"filter": "Alpha(Opacity=0)"
+					});
+				}
+			}
 		},
 
 		_setShadow: function( value ) {
@@ -6126,52 +6137,45 @@ $( document ).bind( "pagecreate create", function( e ){
 			}
 		},
 
+		// Try and center the overlay over the given coordinates
 		_placementCoords: function( x, y ) {
-			// Try and center the overlay over the given coordinates
-			var ret,
-				menuHeight = this._ui.container.outerHeight( true ),
-				menuWidth = this._ui.container.outerWidth( true ),
-				scrollTop = $( window ).scrollTop(),
-				screenHeight = $( window ).height(),
-				screenWidth = $( window ).width(),
-				halfheight = menuHeight / 2,
-				maxwidth = screenWidth - 20,
-				roomtop = y - scrollTop,
-				roombot = scrollTop + screenHeight - y,
-				newtop, newleft;
+			function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
+				var ret = desired;
 
-			this._ui.container.css( "max-width", maxwidth );
-
-			menuWidth = this._ui.container.outerWidth( true );
-			menuHeight = this._ui.container.outerHeight( true );
-
-			if ( roomtop > menuHeight / 2 && roombot > menuHeight / 2 ) {
-				newtop = y - halfheight;
-			}
-			else {
-				// 30px tolerance off the edges
-				newtop = roomtop > roombot ? scrollTop + screenHeight - menuHeight - 30 : scrollTop + 30;
-			}
-
-			// If the menuwidth is greater or equal to the max-width, center it on screen
-			if ( menuWidth >= maxwidth ) {
-				newleft = ( screenWidth - menuWidth ) / 2;
-			}
-			else {
-				//otherwise insure a >= 30px offset from the left
-				newleft = x - menuWidth / 2;
-
-				// 10px tolerance off the edges
-				if ( newleft < 10 ) {
-					newleft = 10;
+				if ( winSize < segSize ) {
+					// Center segment if it's bigger than the window
+					ret = offset + ( winSize - segSize ) / 2;
 				}
-				else
-				if ( ( newleft + menuWidth ) > screenWidth ) {
-					newleft = screenWidth - menuWidth - 10;
+				else {
+					// Otherwise center it at the desired coordinate while keeping it completely inside the window
+					ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
 				}
+
+				return ret;
 			}
 
-			return { x: newleft, y: newtop };
+			// Tolerances off the window edges
+			var tol = { l: 10, t: 30, r: 10, b: 30 },
+			// rectangle within which the popup must fit
+				rc = {
+					l: tol.l,
+					t: $( window ).scrollTop() + tol.t,
+					cx: $( window ).width() - tol.l - tol.r,
+					cy: $( window ).height() - tol.t - tol.b
+				},
+				menuSize;
+
+			// Clamp the width of the menu before grabbing its size
+			this._ui.container.css( "max-width", rc.cx );
+			menuSize = {
+				cx: this._ui.container.outerWidth( true ),
+				cy: this._ui.container.outerHeight( true )
+			};
+
+			return {
+				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, x ),
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y )
+			};
 		},
 
 		_immediate: function() {
