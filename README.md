@@ -1,3 +1,5 @@
+# jQuery Mobile
+
 ATTENTION : NOTE DU TRADUCTEUR !!!
 ==================================
 ATTENTION : Ce dépôt est une copie du dépôt officiel sur github du
@@ -19,122 +21,158 @@ Si vous pensez que vous avez trouvé une erreur de syntaxe ou de traduction, s'i
 
 Tout ce qui se trouve ci-dessous est une traduction en français du README du dépôt original.
 
-Framework jQuery Mobile
-=======================
-[Site Officiel: http://jquerymobile.com](http://jquerymobile.com)
+# jQuery Mobile
 
-[Demos et Documentation](http://jquerymobile.com/test/)
+Ceci est le dépôt principal pour le projet jQuery Mobile. Depuis le [site officiel](http://jquerymobile.com):
 
-Comment construire vos propres fichiers JS et CSS pour jQuery Mobile CSS and JS files
-=====================================================================================
-Clonez ce dépôt et contruisez les fichiers js et css (vous aurez besoin que Git et Make soient installés) :
+> Un système d'interface utilisateur unifié basé sur HTML5 qui fonctionne parfaitement sur toutes les plateformes des appareils mobiles les plus populaires et qui est construit sur les fondations solides de jQuery et jQuery UI. Axée sur un code léger, construit sur l'amélioration progressive avec une conception flexible et facilement personnalisable.
 
-    git clone git://github.com/jquery/jquery-mobile.git
-    cd jquery-mobile
-    make
+Vous pouvez trouver plus d'informations sur la façon dont la bibliothèque fonctionne et ce qu'elle est capable de faire par la lecture de la [documentation](http://mobile.jquery-fr.com/).
 
-Une version complète et une version minifiée du JavaScript de jQuery Mobile et des fichiers CSS seront créés dans un dossier nommé
-"compiled". Il y a aussi maintenant une structure seulement pour les fichiers css ainsi vous pouvez ajouter vos propres thèmes.
+## Problèmes
 
-Alternativement, si vous avez installé node.js vous pouvez exécuter
+Lorsqu'un [problème est sousmis sur github](https://github.com/jquery/jquery-mobile/issues/new) merci d'inclure ce qui suit :
+
+1. Description du problème
+2. Exemple de page utilisant notre [modèle jsbin](http://jsbin.com/awoluv/edit#html) qui utilisent la dernière version
+3. Les étapes pour le reproduire
+4. Le résultat attendu
+5. Le résultat actuel
+6. Navigateurs/plateformes testés
+
+En outre, dans l'intérêt de créer des problèmes plus lisibles, merci d'inclure des extraits de code à l'intérieur d'une triple boîte backtick appropriée pour l'extrait de code JavaScript/HTML/CSS sur lequel vous souhaitez discuter. Plus d'informations sont disponibles sur la [page d'introduction](http://github.github.com/github-flavored-markdown/) pour "github flavored markdown" (regardez Syntax Highlighting).
+
+## Pull Requests
+
+Lorsque vous soumettez un  pull request de révision, il y a quelques étapes importantes que vous pouvez prendre en compte afin de s'assurer qu'il soit examiné rapidement et d'augmenter les chances qu'il soit "merged" (dans l'ordre d'importance décroissant) :
+
+1. Incluez les tests (Voir [Test](#tests))
+2. Suivez le [guide jQuery Core style](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
+3. Limitez la portée à un(e) problème/fonctionnalité
+4. Les commits doivent ciblés moins de 10 à 20 lignes
+5. Évitez de fusionner des commits (Voir le chapitre de Pro Git's [sur le rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) ci-dessous)
+
+Pris dans leur ensemble, cela simplifie l'examen du contributeur de votre pull request.
+
+## Construction/Personnalisation
+
+Actuellement, la bibliothèque est livrée sur le CDN jQuery en un fichier JavaScript monolithique unique qui dépend de jQuery (non inclus) et d'un fichier CSS. Pour les utilisateurs, nous supportons les objectifs suivants de construction :
+
+* `js` - résoudre les dépendances, construire, compacter et minifier les JavaScript utilisés pour jQuery Mobile
+* `css` - résoudre les dépendances, construire, compacter et minifier tous les css, seulement le css de structure, et seulement le css de theme
+* `docs` - construire les js et css, et faire les docs prêtes à une utilisation statique
+* `zip` - packager tous les JavaScript et tous les css dans un zip
+
+### Requis
+
+Les `js` et `css` construits, requièrent [node.js](http://nodejs.org/) et le package NPM. Pour les autres constructions, `docs` et `zip`, bash est aussi requis. Pour plus d'informations sur l'installation de node, veuillez regarder la [documentation](http://nodejs.org/#download). Car bash est généralement installé par défaut sur le shell dans de nombreux environnements compatibles POSIX (OSX, Linux, BSD, etc).
+
+### Commandes
+
+Avec node installé, vous pouvez lancer les `js` et `css` en éxécutant simplement ce qui suit à partir de la racine du projet :
 
     npm install
-    node node_modules/.bin/grunt <js|css|docs|zip|clean|init>
+    node node_modules/.bin/grunt js # ou css
 
-Comment construire une version autonome de Docs/Demos
-=====================================================
-Une fois que vous avez votre propre dépôt cloné sur votre ordinateur :
+Notez que si vous avez la version appropriée de [grunt](https://github.com/cowboy/grunt) installé globalement, dans notre outil de construction, vous pouvez substituer `grunt` chaque fois que vous voyez `node node_modules/.bin/grunt`. Pour le reste de la construction de la documentation, nous préférons `grunt`.
 
-    make docs
+Si vous voulez utiliser `docs` et `zip`, vous aurez besoin de bash et ils peuvent être exécutés par le texte suivant
 
-Les docs seront construits et disponibles dans le dossier compiled/demos. Vous pouvez déplacer ce dossier sur votre serveur web ou
-un autre emplacement. Il n'a pas de dépendances avec autre chose à part un serveur web HTML de base.
+   grunt docs # ou `grunt zip`
 
+### JavaScript
 
+Depuis la version 1.1, la librairie utilise la gestion des dépendances dans la construction de JavaScript en fournissant des [modules AMD](https://github.com/amdjs/amdjs-api/wiki/AMD) qui peuvent être ajoutés ou supprimés à partir du module du méta noyau mobile `js/jquery.mobile.js`.
 
-Soumettre des bugs
-==================
-Si vous pensez que vous avez trouvé un bug, s'il vous plaît reportez le en suivant ces instructions :
+Par exemple, si un utilisateur a voulu exclure des widgets de formulaire pour réduire le poids de leur jQuery Mobile, ils faudra d'abord les supprimer à partir du module meta :
 
-1. Visitez le [Issue tracker : https://github.com/jquery/jquery-mobile/issues](https://github.com/jquery/jquery-mobile/issues)
-2. Créez un ticket expliquant le problème et le résultat attendu (Note du traducteur : La communauté jQuery Mobile parle en anglais, donc évitez le français)
-    - N'oubliez pas d'inclure toute information pertinente pour reproduire le problème
-    - Inclure des informations telles que :
-        * Navigateur/appareil (avec le numéro de version)
-        * La version du code jQuery Mobile que vous exécutez
-        * Si vous utilisez une version de git, incluez la date et/ou le numéro de hash
-    - Assurez-vous que le bug existe toujours sur http://jquerymobile.com/test/ car il est peut être déjà corrigé
-    - Vous pouvez utiliser les fichiers JS et CSS hébergés sur CDN pour les tester dans votre propre code en utilisant :
-        * [JS](http://code.jquery.com/mobile/latest/jquery.mobile.min.js)
-        * [CSS](http://code.jquery.com/mobile/latest/jquery.mobile.min.css)
-    - Inclure un lien vers le code du bug en action. Vous pouvez utiliser un de ces services pour héberger votre code
-        * [jsbin](http://jsbin.com)
-        * [jsfiddle](http://jsfiddle.net)
-3. Soumettez le problème.
+```diff
+diff --git a/js/jquery.mobile.js b/js/jquery.mobile.js
+index 6200fe6..3a4625c 100644
+--- a/js/jquery.mobile.js
++++ b/js/jquery.mobile.js
+@@ -19,12 +19,6 @@ define([
+        './jquery.mobile.listview.filter',
+        './jquery.mobile.listview.autodividers',
+        './jquery.mobile.nojs',
+-       './jquery.mobile.forms.checkboxradio',
+-       './jquery.mobile.forms.button',
+-       './jquery.mobile.forms.slider',
+-       './jquery.mobile.forms.textinput',
+-       './jquery.mobile.forms.select.custom',
+-       './jquery.mobile.forms.select',
+        './jquery.mobile.buttonMarkup',
+        './jquery.mobile.controlGroup',
+        './jquery.mobile.links',
+```
 
-Recommandé: [modèle de ticket JS Bin avec les instructions](http://jsbin.com/omacox/edit)
+Et puis exécutez la compilation :
 
-Les problèmes concernant le Theme Roller de jQuery Mobile peuvent être sousmis au [dépôt Theme Roller : https://github.com/jquery/web-jquery-mobile-theme-roller](https://github.com/jquery/web-jquery-mobile-theme-roller)
+    grunt js
 
-Soumettre des correctifs
-========================
-Pour contribuer au code et corriger des bugs de jQuery Mobile : faites un fork de ce projet sur Github, apporter les modifications au code dans votre fork,
-puis envoyer un "pull request" pour aviser l'équipe de la mise à jour qui est prête à être examinée pour l'intégrer au code.
+### CSS
 
-Des instructions détaillées peuvent être trouvées dans [jQuery Mobile Patching](https://gist.github.com/1294035)
+Pour créer un nouveau thème :
 
-Exécuter localement les démos & les docs jQuery Mobile
-======================================================
-Pour prévisualiser localement, vous aurez besoin de cloner localement ce dépôt et de faire pointer votre serveur web Apache & PHP à
-la racine du répertoire (un serveur web est requis, car PHP et .htaccess sont utilisés pour combiner des fichiers de développement).
+1. Copiez le répertoire `default` depuis CSS/Themes par un nouveau répertoire nommé avec votre nouveau thème (par exemple, `my-theme`).
+2. Ajoutez les personnalisations au fichier `jquery.mobile.theme.css`.
+3. Depuis la racine du projet, exécutez la commande `grunt` suivante :
 
-Si vous n'avez pas actuellement de serveur web fonctionnant localement, il y a quelques options.
+        THEME=my-theme grunt css
 
-Si vous êtes sur un Mac, vous pouvez essayer en mettant jQuery Mobile dans votre dossier des sites et activer le partage Internet via "Préférences 
-Système". De là, vous trouverez une URL où vous pourrez parcourir les dossiers dans votre répertoire de sites à partir d'un navigateur.
+4. Le résultat sera disponible dans `$PROJECT_ROOT/compiled`
 
-Un autre moyen rapide est de télécharger et installer MAMP pour Mac OSX. Une fois installé, ouvrez juste MAMP,
-cliquez sur Préférences, allez dans l'onglet Apache et sélectionnez votre dossier local jQuery Mobile comme racine. Ensuite, vous pouvez
-ouvrir un navigateur à l'adresse http://localhost:8888 pour prévisualiser le code.
+Encore une fois, cela suppose que les fichiers css du thème soient disponibles dans le répertoire `css/themes/$THEME/` relatif à la racine du projet, `css/themes/my-theme/` dans l'exemple.
 
-Une autre alternative est XAMPP (Mac, Windows). Vous devez effectivement modifier le fichier httpd.conf d'Apache pour pointer vers votre caisse :
-[Instructions](http://www.apachefriends.org/en/xampp.html)
+## Développement
 
-Vous avez besoin que les modules Apache suivants soient chargés :
+La racine du dépôt est aussi la racine de la documentation qui contient une suite de tests. La documentation sert aussi de banc d'essai pour des corrections de bugs et de fonctionnalités. Vous aurez besoin de configurer un serveur et pour obtenir la suite des tests avant que vous puissiez contribuer pour des patches.
+
+### Serveur
+
+La plupart de la documentation et des pages de test reposent sur PHP 5+, donc Apache et PHP sont nécessaires pour le développement. Vous pouvez les installer en utilisant les méthodes suivantes :
+
+* En un clic - [MAMP](http://www.mamp.info/en/downloads/index.html) pour OSX, [XAMP](http://www.apachefriends.org/en/xampp.html) pour OSX/Windows
+* Serveur web existant - par exemple, le répertoire `~/Sites` sur OSX.
+* Machine virtuel - Si [Vagrant](http://vagrantup.com) est installé vous pouvez ajouter [cette remote/branch](https://github.com/johnbender/jquery-mobile/tree/vagrant) et `vagrant up`
+
+En ajoutant Apache, les modules suivants sont requis :
 
 * Rewrite (mod\_rewrite.so)
 * Expire (mod\_expires.so)
 * Header (mod\_headers.so)
 
-Sinon, avec l'ajout du chargement asynchrone, vous pouvez utiliser le simple serveur HTTP Python à partir de la racine du projet :
+Une fois que vous avez la configuration de votre serveur web, vous pouvez le faire pointer vers le répertoire du projet.
 
-    $ python -m SimpleHTTPServer 8000
+### Tests
 
-Et dans votre navigateur visitez [localhost:8000](http://localhost:8000/tests/unit/core/). REMARQUE : Les docs ne se chargeront pas car ils sont tributaires de l'include "/js/" qui exige php. Pour d'autres travaux de développement tels que les tests unitaires et les tests des pages personnalisées en utilisant
+L'automatisation des tests constitue l'épine dorsale des activités de l'assurance qualité du projet jQuery Mobile. En tant que contributeur d'un patch, vous serez appelé à exécuter la suite de tests pour le code qui affecte votre patch. Notre serveur d'intégration continue portera sur le reste de la suite de test.
 
-    <script data-main="js/jquery.mobile.docs" src="external/requirejs/require.js"></script>
+Il y a deux manières principales pour exécuter la suite de tests. Tout d'abord, vous pouvez exécuter les tests individuellement en dirigeant votre navigateur vers les différentes pages de test associées à l'endroit dans lequel vous travaillez. Par exemple, pour exécuter les tests de `js/jquery.mobile.forms.slider.js` naviguer vers `$WEB_SERVER/tests/unit/slider/`. Pour savoir quelles pages de test sont disponibles, vous pouvez les lister avec :
 
-cela vous permettra de charger des modules de manière asynchrone, sans php. S'il vous plaît noter que l'exemple ci-dessus suppose qu'il est inclus dans une page à la racine du répertoire où le serveur HTTP a été exécuté.
+    grunt config:test:pages
 
-AMD Support in Development
-==========================
+_NOTE_ Consultez les [exigences de construction](#requirements) pour les  informations d'installation de node/grunt.
 
-Veuillez garder à l'esprit que le chargement asynchrone n'est pas supporté pour la production et est principalement utilisé pour le processus de construction du projet. Par conséquent les développeurs doivent s'attendre à un flash initial du contenu non stylisé, qui ne se produira pas si la bibliothèque est compilée.
+Deuxièmement, vous pouvez exécuter les tests en utilisant [PhantomJS](http://phantomjs.org/) navigateur Webkit sans tête qui doit être [installé](http://code.google.com/p/phantomjs/wiki/Installation). Une fois que `phantomjs` est dans votre `PATH`  ce qui suit va exécuter la série de tests :
 
-Si vous trouvez des bugs de dépendance lorsque vous utilisez le support de chargement asynchrone pour le développement veuillez le préciser dans le suivi des problèmes github.
+    JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
-Construction avec un thème personnalisé
-=======================================
-Pour utiliser un thème personnalisé dans votre propre construction, vous aurez besoin d'avoir Make installé. Vous pouvez trouver des thèmes dans le dossier CSS/Themes.
-Pour créer un nouveau thème :
+Vous pouvez limiter l'exécution à une page de test ou à un ensemble de pages de test en utilisant la variable d'environnement `TEST_PATH`. Par exemple :
 
-1. Copiez le répertoire `Default` depuis CSS/Themes vers un nouveau dossier au même endroit. Le nom du dossier sera le nom
- du thème. Pour les tests faits localement, assurez-vous que le fichier index.php est également copié.
-2. Modifiez le fichier `jquery.mobile.theme.css` de sorte qu'il contienne vos polices et couleurs personnalisées.
-3. Une fois que vous avez fini d'éditer et enregistrer vos fichiers, ouvrez un terminal.
-4. Accédez à la racine du dossier jQuery-Mobile.
-5. Exécutez la commande suivante pour construire jQuery Mobile. (THEME est le nom du répertoire pour votre thème de l'étape 1.) :
+    TEST_PATH=slider JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
-    make THEME=VotreNomDeTheme
+exécutera seulement les tests où les chemins contiennent `slider`, par exemple `tests/unit/slider/`. *NOTEZ* Que les tests de phantom exigent actuellement que le serveur Web soit en cours d'exécution pour accéder et exécuter les tests correctement en raison de la dépendance de PHP pour beaucoup d'entre eux. En plus, la suite de test est exécutée sur de nombreuses versions de jQuery en utilisant la variable d'environnement `JQUERY`. Par exemple, si vous voulez lancer la suite de tests à la fois sur les versions 1.6.4 et 1.7.1 actuellement prises en charge, la commande prendrait la forme suivante :
 
-6. Les fichiers compilés seront situés dans le dossier "compiled" à la racine de jQuery-Mobile.
+    JQUERY=1.6.4,1.7.1 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
+
+### Rebasing
+
+Souvent, lorsque l'on travaille sur une fonctionnalité ou la correction d'un bug d'une d'une branch, il est utile de faire un pull dans la dernière branche mère. Si vous faites cela _avant_ de soumettre un pull request, il est préférable d'utiliser rebase de git pour appliquer vos commits sur la dernière branche mère. Par exemple, en travaillant sur la branche `new-feature` où `upstream` est distant de `git://github.com/jquery/jquery-mobile.git`:
+
+    git checkout new-feature
+    git fetch upstream
+    git rebase upstream/master
+    ## ... ici vous pouvez avoir à résoudre certains conflits ... ##
+
+Vous pouvez maintenant pousser vers votre fork et soumettre le pull request. Gardez à l'esprit que c'est seulement une bonne idée de faire cela si vous _n'avez_ jamais sousmis un pull request, sauf si vous voulez en créer un nouveau parce que votre origine (votre fork) signale une divergence. Encore une fois, veuillez vous référer vers le [chapitre](http://git-scm.com/book/ch3-6.html) dans Pro Git sur le rebasing si vous débuter avec cette fonction.
