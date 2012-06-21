@@ -5,7 +5,7 @@
 //>>css.structure: ../css/structure/jquery.mobile.dialog.css
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 
-define( [ "../jquery", "../jquery.mobile.widget" ], function( $ ) {
+define( [ "jquery", "../jquery.mobile.widget" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, window, undefined ) {
 
@@ -69,7 +69,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		})
 		.bind( "pagehide", function( e, ui ) {
 			self._isClosed = false;
-			$( this ).find( "." + $.mobile.activeBtnClass ).removeClass( $.mobile.activeBtnClass );
+			$( this ).find( "." + $.mobile.activeBtnClass ).not( ".ui-slider-bg" ).removeClass( $.mobile.activeBtnClass );
 		})
 		// Override the theme set by the page plugin on pageshow
 		.bind( "pagebeforeshow", function(){

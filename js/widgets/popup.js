@@ -4,10 +4,10 @@
 //>>css.theme: ../css/themes/default/jquery.mobile.theme.css
 //>>css.structure: ../css/structure/jquery.mobile.popup.css,../css/structure/jquery.mobile.transition.css,../css/structure/jquery.mobile.transition.fade.css
 
-define( [ "../jquery",
+define( [ "jquery",
 	"../jquery.mobile.widget",
 	"../jquery.mobile.navigation",
-	"depend!../jquery.hashchange[../jquery]" ], function( $ ) {
+	"depend!../jquery.hashchange[jquery]" ], function( $ ) {
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
@@ -57,7 +57,24 @@ define( [ "../jquery",
 				_fallbackTransition: "",
 				_currentTransition: false,
 				_prereqs: null,
-				_isOpen: false
+				_isOpen: false,
+				_globalHandlers: [
+					{
+						src: $( window ),
+						handler: {
+							resize: function( e ) {
+								if ( self._isOpen ) {
+									self._resizeScreen();
+								}
+							},
+							keyup: function( e ) {
+								if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
+									eatEventAndClose( e );
+								}
+							}
+						}
+					}
+				]
 			});
 
 			$.each( this.options, function( key, value ) {
@@ -69,17 +86,9 @@ define( [ "../jquery",
 
 			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
 
-			$( window )
-				.bind( "resize", function( e ) {
-					if ( self._isOpen ) {
-						self._resizeScreen();
-					}
-				})
-				.bind( "keyup", function( e ) {
-					if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-						eatEventAndClose( e );
-					}
-				});
+			$.each( this._globalHandlers, function( idx, value ) {
+				value.src.bind( value.handler );
+			});
 		},
 
 		_resizeScreen: function() {
@@ -121,14 +130,11 @@ define( [ "../jquery",
 			this._realSetTheme( this._ui.screen, value );
 
 			if ( $.mobile.browser.ie ) {
-				if ( this._ui.screen.css( "background-color" ) === "transparent" &&
-					this._ui.screen.css( "background-image" ) === "none" &&
-					this._ui.screen.css( "background" ) === undefined ) {
-					this._ui.screen.css( {
-						"background-color": "black",
-						"filter": "Alpha(Opacity=0)"
-					});
-				}
+				this._ui.screen.toggleClass(
+					"ui-popup-screen-background-hack",
+					( this._ui.screen.css( "background-color" ) === "transparent" &&
+						this._ui.screen.css( "background-image" ) === "none" &&
+						this._ui.screen.css( "background" ) === undefined ) );
 			}
 		},
 
@@ -358,6 +364,12 @@ define( [ "../jquery",
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
+
+			$.each( this._globalHandlers, function( idx, oneSrc ) {
+				$.each( oneSrc.handler, function( eventType, handler ) {
+					oneSrc.src.unbind( eventType, handler );
+				});
+			});
 		},
 
 		open: function( x, y, transition ) {
