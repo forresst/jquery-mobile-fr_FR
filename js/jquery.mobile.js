@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 933e4d913573c6a9b9cfdc44a743608d23e351c5 <> Date: Wed Jun 20 12:29:33 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: 0528642413b53bd25d1705f0c6560210b952de12 <> Date: Wed Jun 20 23:56:16 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -982,11 +982,12 @@ $.widget( "mobile.widget", {
 		// NOTE that the $.mobile.loading* settings and params past the first are deprecated
 		// TODO sweet jesus we need to break some of this out
 		show: function( theme, msgText, textonly ) {
+			var textVisible, message, $header, loadSettings;
+
 			this.resetHtml();
 
-			var loadSettings;
-
-			// support for object literal params
+			// use the prototype options so that people can set them globally at
+			// mobile init. Consistency, it's what's for dinner
 			if( $.type(theme) === "object" ){
 				loadSettings = $.extend({}, this.options, theme);
 
@@ -994,27 +995,36 @@ $.widget( "mobile.widget", {
 				theme = loadSettings.theme || $.mobile.loadingMessageTheme;
 			} else {
 				loadSettings = this.options;
+
+				// here we prefer the them value passed as a string argument, then
+				// we prefer the global option because we can't use undefined default
+				// prototype options, then the prototype option
 				theme = theme || $.mobile.loadingMessageTheme || loadSettings.theme;
 			}
 
+			// set the message text, prefer the param, then the settings object
+			// then loading message
+			message = msgText || $.mobile.loadingMessage || loadSettings.text;
+
+			// prepare the dom
 			$html.addClass( "ui-loading" );
 
 			if ( $.mobile.loadingMessage !== false || loadSettings.html ) {
-				// text visibility from argument takes priority
-				var textVisible, message, $header;
-
-				// boolean values require a bit more work :P
-				// support object properties and old settings
+				// boolean values require a bit more work :P, supports object properties
+				// and old settings
 				if( $.mobile.loadingMessageTextVisible !== undefined ) {
 					textVisible = $.mobile.loadingMessageTextVisible;
 				} else {
 					textVisible = loadSettings.textVisible;
 				}
 
+				// add the proper css given the options (theme, text, etc)
+				// Force text visibility if the second argument was supplied, or
+				// if the text was explicitly set in the object args
 				this.element.attr("class", loaderClass +
-													" ui-corner-all ui-body-" + theme +
-													" ui-loader-" + ( textVisible ? "verbose" : "default" ) +
-													( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
+					" ui-corner-all ui-body-" + theme +
+					" ui-loader-" + ( textVisible || msgText || theme.text ? "verbose" : "default" ) +
+					( loadSettings.textonly || textonly ? " ui-loader-textonly" : "" ) );
 
 				// TODO verify that jquery.fn.html is ok to use in both cases here
 				//      this might be overly defensive in preventing unknowing xss
@@ -1023,15 +1033,16 @@ $.widget( "mobile.widget", {
 				if( loadSettings.html ) {
 					this.element.html( loadSettings.html );
 				} else {
-					// prefer the param, then the settings object then loading message
-					message = msgText || $.mobile.loadingMessage || loadSettings.text;
-					this.element.find( "h1" )
-						.text( message );
+					this.element.find( "h1" ).text( message );
 				}
 
+				// attach the loader to the DOM
 				this.element.appendTo( $.mobile.pageContainer );
 
+				// check that the loader is visible
 				this.checkLoaderPosition();
+
+				// on scroll check the loader position
 				$window.bind( "scroll", $.proxy(this.checkLoaderPosition, this));
 			}
 		},
@@ -1934,6 +1945,225 @@ if ( eventCaptureSupported ) {
 
 }( jQuery, this ));
 
+
+(function( $, undefined ) {
+
+var $window = $( window ),
+	$html = $( "html" );
+
+/* $.mobile.media method: pass a CSS media type or query and get a bool return
+	note: this feature relies on actual media query support for media queries, though types will work most anywhere
+	examples:
+		$.mobile.media('screen') // tests for screen media type
+		$.mobile.media('screen and (min-width: 480px)') // tests for screen media type with window width > 480px
+		$.mobile.media('@media screen and (-webkit-min-device-pixel-ratio: 2)') // tests for webkit 2x pixel ratio (iPhone 4)
+*/
+$.mobile.media = (function() {
+	// TODO: use window.matchMedia once at least one UA implements it
+	var cache = {},
+		testDiv = $( "<div id='jquery-mediatest'></div>" ),
+		fakeBody = $( "<body>" ).append( testDiv );
+
+	return function( query ) {
+		if ( !( query in cache ) ) {
+			var styleBlock = document.createElement( "style" ),
+				cssrule = "@media " + query + " { #jquery-mediatest { position:absolute; } }";
+
+			//must set type for IE!
+			styleBlock.type = "text/css";
+
+			if ( styleBlock.styleSheet  ){
+				styleBlock.styleSheet.cssText = cssrule;
+			} else {
+				styleBlock.appendChild( document.createTextNode(cssrule) );
+			}
+
+			$html.prepend( fakeBody ).prepend( styleBlock );
+			cache[ query ] = testDiv.css( "position" ) === "absolute";
+			fakeBody.add( styleBlock ).remove();
+		}
+		return cache[ query ];
+	};
+})();
+
+})(jQuery);
+
+(function( $, undefined ) {
+
+var fakeBody = $( "<body>" ).prependTo( "html" ),
+	fbCSS = fakeBody[ 0 ].style,
+	vendors = [ "Webkit", "Moz", "O" ],
+	webos = "palmGetResource" in window, //only used to rule out scrollTop
+	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
+	bb = window.blackberry; //only used to rule out box shadow, as it's filled opaque on BB
+
+// thx Modernizr
+function propExists( prop ) {
+	var uc_prop = prop.charAt( 0 ).toUpperCase() + prop.substr( 1 ),
+		props = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " );
+
+	for ( var v in props ){
+		if ( fbCSS[ props[ v ] ] !== undefined ) {
+			return true;
+		}
+	}
+}
+
+function validStyle( prop, value, check_vend ) {
+	var div = document.createElement('div'),
+		uc = function( txt ) {
+			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 );
+		},
+		vend_pref = function( vend ) {
+			return  "-" + vend.charAt( 0 ).toLowerCase() + vend.substr( 1 ) + "-";
+		},
+		check_style = function( vend ) {
+			var vend_prop = vend_pref( vend ) + prop + ": " + value + ";",
+				uc_vend = uc( vend ),
+				propStyle = uc_vend + uc( prop );
+
+			div.setAttribute( "style", vend_prop );
+
+			if( !!div.style[ propStyle ] ) {
+				ret = true;
+			}
+		},
+		check_vends = check_vend ? [ check_vend ] : vendors,
+		ret;
+
+	for( var i = 0; i < check_vends.length; i++ ) {
+		check_style( check_vends[i] );
+	}
+	return !!ret;
+}
+
+// Thanks to Modernizr src for this test idea. `perspective` check is limited to Moz to prevent a false positive for 3D transforms on Android.
+function transform3dTest() {
+	var prop = "transform-3d";
+	return validStyle( 'perspective', '10px', 'moz' ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
+}
+
+// Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
+function baseTagTest() {
+	var fauxBase = location.protocol + "//" + location.host + location.pathname + "ui-dir/",
+		base = $( "head base" ),
+		fauxEle = null,
+		href = "",
+		link, rebase;
+
+	if ( !base.length ) {
+		base = fauxEle = $( "<base>", { "href": fauxBase }).appendTo( "head" );
+	} else {
+		href = base.attr( "href" );
+	}
+
+	link = $( "<a href='testurl' />" ).prependTo( fakeBody );
+	rebase = link[ 0 ].href;
+	base[ 0 ].href = href || location.pathname;
+
+	if ( fauxEle ) {
+		fauxEle.remove();
+	}
+	return rebase.indexOf( fauxBase ) === 0;
+}
+
+// Thanks Modernizr
+function cssPointerEventsTest() {
+	var element = document.createElement('x'),
+		documentElement = document.documentElement,
+		getComputedStyle = window.getComputedStyle,
+		supports;
+
+	if( !( 'pointerEvents' in element.style ) ){
+		return false;
+	}
+
+	element.style.pointerEvents = 'auto';
+	element.style.pointerEvents = 'x';
+    documentElement.appendChild(element);
+	supports = getComputedStyle &&
+    getComputedStyle( element, '' ).pointerEvents === 'auto';
+	documentElement.removeChild( element );
+    return !!supports;
+}
+
+
+// non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
+// allows for inclusion of IE 6+, including Windows Mobile 7
+$.extend( $.mobile, { browser: {} } );
+$.mobile.browser.ie = (function() {
+	var v = 3,
+		div = document.createElement( "div" ),
+		a = div.all || [];
+
+	do {
+		div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->";
+	} while( a[0] );
+
+	return v > 4 ? v : !v;
+})();
+
+
+$.extend( $.support, {
+	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ),
+	pushState: "pushState" in history && "replaceState" in history,
+	mediaquery: $.mobile.media( "only all" ),
+	cssPseudoElement: !!propExists( "content" ),
+	touchOverflow: !!propExists( "overflowScrolling" ),
+	cssTransform3d: transform3dTest(),
+	boxShadow: !!propExists( "boxShadow" ) && !bb,
+	scrollTop: ( "pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[ 0 ] ) && !webos && !operamini,
+	dynamicBaseTag: baseTagTest(),
+	cssPointerEvents: cssPointerEventsTest()
+});
+
+fakeBody.remove();
+
+
+// $.mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
+// or that generally work better browsing in regular http for full page refreshes (Opera Mini)
+// Note: This detection below is used as a last resort.
+// We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
+var nokiaLTE7_3 = (function(){
+
+	var ua = window.navigator.userAgent;
+
+	//The following is an attempt to match Nokia browsers that are running Symbian/s60, with webkit, version 7.3 or older
+	return ua.indexOf( "Nokia" ) > -1 &&
+			( ua.indexOf( "Symbian/3" ) > -1 || ua.indexOf( "Series60/5" ) > -1 ) &&
+			ua.indexOf( "AppleWebKit" ) > -1 &&
+			ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );
+})();
+
+// Support conditions that must be met in order to proceed
+// default enhanced qualifications are media query support OR IE 7+
+$.mobile.gradeA = function(){
+	return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
+};
+
+$.mobile.ajaxBlacklist =
+			// BlackBerry browsers, pre-webkit
+			window.blackberry && !window.WebKitPoint ||
+			// Opera Mini
+			operamini ||
+			// Symbian webkits pre 7.3
+			nokiaLTE7_3;
+
+// Lastly, this workaround is the only way we've found so far to get pre 7.3 Symbian webkit devices
+// to render the stylesheets when they're referenced before this script, as we'd recommend doing.
+// This simply reappends the CSS in place, which for some reason makes it apply
+if ( nokiaLTE7_3 ) {
+	$(function() {
+		$( "head link[rel='stylesheet']" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
+	});
+}
+
+// For ruling out shadows via css
+if ( !$.support.boxShadow ) {
+	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
+}
+
+})( jQuery );
 
 (function( $, undefined ) {
 
@@ -4356,7 +4586,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 		})
 		.bind( "pagehide", function( e, ui ) {
 			self._isClosed = false;
-			$( this ).find( "." + $.mobile.activeBtnClass ).removeClass( $.mobile.activeBtnClass );
+			$( this ).find( "." + $.mobile.activeBtnClass ).not( ".ui-slider-bg" ).removeClass( $.mobile.activeBtnClass );
 		})
 		// Override the theme set by the page plugin on pageshow
 		.bind( "pagebeforeshow", function(){
@@ -6026,7 +6256,24 @@ $( document ).bind( "pagecreate create", function( e ){
 				_fallbackTransition: "",
 				_currentTransition: false,
 				_prereqs: null,
-				_isOpen: false
+				_isOpen: false,
+				_globalHandlers: [
+					{
+						src: $( window ),
+						handler: {
+							resize: function( e ) {
+								if ( self._isOpen ) {
+									self._resizeScreen();
+								}
+							},
+							keyup: function( e ) {
+								if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
+									eatEventAndClose( e );
+								}
+							}
+						}
+					}
+				]
 			});
 
 			$.each( this.options, function( key, value ) {
@@ -6038,17 +6285,9 @@ $( document ).bind( "pagecreate create", function( e ){
 
 			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
 
-			$( window )
-				.bind( "resize", function( e ) {
-					if ( self._isOpen ) {
-						self._resizeScreen();
-					}
-				})
-				.bind( "keyup", function( e ) {
-					if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-						eatEventAndClose( e );
-					}
-				});
+			$.each( this._globalHandlers, function( idx, value ) {
+				value.src.bind( value.handler );
+			});
 		},
 
 		_resizeScreen: function() {
@@ -6090,14 +6329,11 @@ $( document ).bind( "pagecreate create", function( e ){
 			this._realSetTheme( this._ui.screen, value );
 
 			if ( $.mobile.browser.ie ) {
-				if ( this._ui.screen.css( "background-color" ) === "transparent" &&
-					this._ui.screen.css( "background-image" ) === "none" &&
-					this._ui.screen.css( "background" ) === undefined ) {
-					this._ui.screen.css( {
-						"background-color": "black",
-						"filter": "Alpha(Opacity=0)"
-					});
-				}
+				this._ui.screen.toggleClass(
+					"ui-popup-screen-background-hack",
+					( this._ui.screen.css( "background-color" ) === "transparent" &&
+						this._ui.screen.css( "background-image" ) === "none" &&
+						this._ui.screen.css( "background" ) === undefined ) );
 			}
 		},
 
@@ -6327,6 +6563,12 @@ $( document ).bind( "pagecreate create", function( e ){
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
+
+			$.each( this._globalHandlers, function( idx, oneSrc ) {
+				$.each( oneSrc.handler, function( eventType, handler ) {
+					oneSrc.src.unbind( eventType, handler );
+				});
+			});
 		},
 
 		open: function( x, y, transition ) {
@@ -7731,8 +7973,13 @@ $( document ).bind( "pagecreate create", function( e ){
 							self.select.trigger( "change" );
 						}
 
-						//hide custom select for single selects only
-						if ( !self.isMultiple ) {
+						// hide custom select for single selects only - otherwise focus clicked item
+						// We need to grab the clicked item the hard way, because the list may have been rebuilt
+						if ( self.isMultiple ) {
+							self.list.find( "li:not(.ui-li-divider)" ).eq( newIndex )
+								.addClass( "ui-btn-down-" + widget.options.theme ).find( "a" ).first().focus();
+						}
+						else {
 							self.close();
 						}
 
@@ -7929,7 +8176,11 @@ $( document ).bind( "pagecreate create", function( e ){
 				}, 300);
 
 				function focusMenuItem() {
-					self.list.find( "." + $.mobile.activeBtnClass + " a" ).focus();
+					var selector = self.list.find( "." + $.mobile.activeBtnClass + " a" );
+					if ( selector.length === 0 ) {
+						selector = self.list.find( "li.ui-btn:not(:jqmData(placeholder='true')) a" );
+					}
+					selector.first().focus();
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
@@ -7994,9 +8245,10 @@ $( document ).bind( "pagecreate create", function( e ){
 					dataIconAttr = dataPrefix + 'icon',
 					dataRoleAttr = dataPrefix + 'role',
 					fragment = document.createDocumentFragment(),
+					isPlaceholderItem = false,
 					optGroup;
 
-				for (var i = 0; i < numOptions;i++){
+				for (var i = 0; i < numOptions;i++, isPlaceholderItem = false){
 					var option = $options[i],
 						$option = $(option),
 						parent = option.parentNode,
@@ -8023,6 +8275,7 @@ $( document ).bind( "pagecreate create", function( e ){
 
 					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length === 0 || $option.jqmData( "placeholder" ))) {
 						needPlaceholder = false;
+						isPlaceholderItem = true;
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
 						}
@@ -8038,6 +8291,9 @@ $( document ).bind( "pagecreate create", function( e ){
 					}
 					item.setAttribute(dataIndexAttr,i);
 					item.setAttribute(dataIconAttr,dataIcon);
+					if ( isPlaceholderItem ) {
+						item.setAttribute( dataPrefix + "placeholder", true );
+					}
 					item.className = classes.join(" ");
 					item.setAttribute('role','option');
 					anchor.setAttribute('tabindex','-1');
@@ -8389,204 +8645,6 @@ $( document ).bind( "pagecreate create", function( e ){
 
 }( jQuery, this ));
 
-(function( $, undefined ) {
-
-var $window = $( window ),
-	$html = $( "html" );
-
-/* $.mobile.media method: pass a CSS media type or query and get a bool return
-	note: this feature relies on actual media query support for media queries, though types will work most anywhere
-	examples:
-		$.mobile.media('screen') // tests for screen media type
-		$.mobile.media('screen and (min-width: 480px)') // tests for screen media type with window width > 480px
-		$.mobile.media('@media screen and (-webkit-min-device-pixel-ratio: 2)') // tests for webkit 2x pixel ratio (iPhone 4)
-*/
-$.mobile.media = (function() {
-	// TODO: use window.matchMedia once at least one UA implements it
-	var cache = {},
-		testDiv = $( "<div id='jquery-mediatest'></div>" ),
-		fakeBody = $( "<body>" ).append( testDiv );
-
-	return function( query ) {
-		if ( !( query in cache ) ) {
-			var styleBlock = document.createElement( "style" ),
-				cssrule = "@media " + query + " { #jquery-mediatest { position:absolute; } }";
-
-			//must set type for IE!
-			styleBlock.type = "text/css";
-
-			if ( styleBlock.styleSheet  ){
-				styleBlock.styleSheet.cssText = cssrule;
-			} else {
-				styleBlock.appendChild( document.createTextNode(cssrule) );
-			}
-
-			$html.prepend( fakeBody ).prepend( styleBlock );
-			cache[ query ] = testDiv.css( "position" ) === "absolute";
-			fakeBody.add( styleBlock ).remove();
-		}
-		return cache[ query ];
-	};
-})();
-
-})(jQuery);
-
-(function( $, undefined ) {
-
-var fakeBody = $( "<body>" ).prependTo( "html" ),
-	fbCSS = fakeBody[ 0 ].style,
-	vendors = [ "Webkit", "Moz", "O" ],
-	webos = "palmGetResource" in window, //only used to rule out scrollTop
-	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
-	bb = window.blackberry; //only used to rule out box shadow, as it's filled opaque on BB
-
-// thx Modernizr
-function propExists( prop ) {
-	var uc_prop = prop.charAt( 0 ).toUpperCase() + prop.substr( 1 ),
-		props = ( prop + " " + vendors.join( uc_prop + " " ) + uc_prop ).split( " " );
-
-	for ( var v in props ){
-		if ( fbCSS[ props[ v ] ] !== undefined ) {
-			return true;
-		}
-	}
-}
-
-function validStyle( prop, value, check_vend ) {
-	var div = document.createElement('div'),
-		uc = function( txt ) {
-			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 );
-		},
-		vend_pref = function( vend ) {
-			return  "-" + vend.charAt( 0 ).toLowerCase() + vend.substr( 1 ) + "-";
-		},
-		check_style = function( vend ) {
-			var vend_prop = vend_pref( vend ) + prop + ": " + value + ";",
-				uc_vend = uc( vend ),
-				propStyle = uc_vend + uc( prop );
-
-			div.setAttribute( "style", vend_prop );
-
-			if( !!div.style[ propStyle ] ) {
-				ret = true;
-			}
-		},
-		check_vends = check_vend ? [ check_vend ] : vendors,
-		ret;
-
-	for( var i = 0; i < check_vends.length; i++ ) {
-		check_style( check_vends[i] );
-	}
-	return !!ret;
-}
-
-// Thanks to Modernizr src for this test idea. `perspective` check is limited to Moz to prevent a false positive for 3D transforms on Android.
-function transform3dTest() {
-	var prop = "transform-3d";
-	return validStyle( 'perspective', '10px', 'moz' ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
-}
-
-// Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
-function baseTagTest() {
-	var fauxBase = location.protocol + "//" + location.host + location.pathname + "ui-dir/",
-		base = $( "head base" ),
-		fauxEle = null,
-		href = "",
-		link, rebase;
-
-	if ( !base.length ) {
-		base = fauxEle = $( "<base>", { "href": fauxBase }).appendTo( "head" );
-	} else {
-		href = base.attr( "href" );
-	}
-
-	link = $( "<a href='testurl' />" ).prependTo( fakeBody );
-	rebase = link[ 0 ].href;
-	base[ 0 ].href = href || location.pathname;
-
-	if ( fauxEle ) {
-		fauxEle.remove();
-	}
-	return rebase.indexOf( fauxBase ) === 0;
-}
-
-
-// non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
-// allows for inclusion of IE 6+, including Windows Mobile 7
-$.extend( $.mobile, { browser: {} } );
-$.mobile.browser.ie = (function() {
-	var v = 3,
-		div = document.createElement( "div" ),
-		a = div.all || [];
-
-	do {
-		div.innerHTML = "<!--[if gt IE " + ( ++v ) + "]><br><![endif]-->";
-	} while( a[0] );
-
-	return v > 4 ? v : !v;
-})();
-
-
-$.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ),
-	pushState: "pushState" in history && "replaceState" in history,
-	mediaquery: $.mobile.media( "only all" ),
-	cssPseudoElement: !!propExists( "content" ),
-	touchOverflow: !!propExists( "overflowScrolling" ),
-	cssTransform3d: transform3dTest(),
-	boxShadow: !!propExists( "boxShadow" ) && !bb,
-	scrollTop: ( "pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[ 0 ] ) && !webos && !operamini,
-	dynamicBaseTag: baseTagTest()
-});
-
-fakeBody.remove();
-
-
-// $.mobile.ajaxBlacklist is used to override ajaxEnabled on platforms that have known conflicts with hash history updates (BB5, Symbian)
-// or that generally work better browsing in regular http for full page refreshes (Opera Mini)
-// Note: This detection below is used as a last resort.
-// We recommend only using these detection methods when all other more reliable/forward-looking approaches are not possible
-var nokiaLTE7_3 = (function(){
-
-	var ua = window.navigator.userAgent;
-
-	//The following is an attempt to match Nokia browsers that are running Symbian/s60, with webkit, version 7.3 or older
-	return ua.indexOf( "Nokia" ) > -1 &&
-			( ua.indexOf( "Symbian/3" ) > -1 || ua.indexOf( "Series60/5" ) > -1 ) &&
-			ua.indexOf( "AppleWebKit" ) > -1 &&
-			ua.match( /(BrowserNG|NokiaBrowser)\/7\.[0-3]/ );
-})();
-
-// Support conditions that must be met in order to proceed
-// default enhanced qualifications are media query support OR IE 7+
-$.mobile.gradeA = function(){
-	return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
-};
-
-$.mobile.ajaxBlacklist =
-			// BlackBerry browsers, pre-webkit
-			window.blackberry && !window.WebKitPoint ||
-			// Opera Mini
-			operamini ||
-			// Symbian webkits pre 7.3
-			nokiaLTE7_3;
-
-// Lastly, this workaround is the only way we've found so far to get pre 7.3 Symbian webkit devices
-// to render the stylesheets when they're referenced before this script, as we'd recommend doing.
-// This simply reappends the CSS in place, which for some reason makes it apply
-if ( nokiaLTE7_3 ) {
-	$(function() {
-		$( "head link[rel='stylesheet']" ).attr( "rel", "alternate stylesheet" ).attr( "rel", "stylesheet" );
-	});
-}
-
-// For ruling out shadows via css
-if ( !$.support.boxShadow ) {
-	$( "html" ).addClass( "ui-mobile-nosupport-boxshadow" );
-}
-
-})( jQuery );
-
 ( function( $, window, undefined ) {
 	var	$html = $( "html" ),
 			$head = $( "head" ),
@@ -8707,6 +8765,19 @@ if ( !$.support.boxShadow ) {
 		// window load event
 		// hide iOS browser chrome on load
 		$window.load( $.mobile.silentScroll );
+
+		if ( !$.support.cssPointerEvents ) {
+			// IE and Opera don't support CSS pointer-events: none that we use to disable link-based buttons
+			// by adding the 'ui-disabled' class to them. Using a JavaScript workaround for those browser.
+			// https://github.com/jquery/jquery-mobile/issues/3558
+
+			$( document ).delegate( ".ui-disabled", "vclick",
+				function( e ) {
+					e.preventDefault();
+					e.stopImmediatePropagation();
+				}
+			);
+		}
 	});
 }( jQuery, this ));
 
