@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 0528642413b53bd25d1705f0c6560210b952de12 <> Date: Wed Jun 20 23:56:16 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 4ab780cdc07ee6102e0b86075d958b531e76f47b <> Date: Fri Jun 22 01:13:06 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -6096,15 +6096,15 @@ $.widget( "mobile.button", $.mobile.widget, {
 				});
 		}
 
-        $el.bind({
-            focus: function() {
-                $button.addClass( $.mobile.focusClass );
-            },
+		$el.bind({
+			focus: function() {
+				$button.addClass( $.mobile.focusClass );
+			},
 
-            blur: function() {
-                $button.removeClass( $.mobile.focusClass );
-            }
-        });
+			blur: function() {
+				$button.removeClass( $.mobile.focusClass );
+			}
+		});
 
 		this.refresh();
 	},
@@ -6210,6 +6210,20 @@ $( document ).bind( "pagecreate create", function( e ){
 
 (function( $, undefined ) {
 
+	function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
+		var ret = desired;
+
+		if ( winSize < segSize ) {
+			// Center segment if it's bigger than the window
+			ret = offset + ( winSize - segSize ) / 2;
+		} else {
+			// Otherwise center it at the desired coordinate while keeping it completely inside the window
+			ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
+		}
+
+		return ret;
+	}
+
 	$.widget( "mobile.popup", $.mobile.widget, {
 		options: {
 			theme: null,
@@ -6231,7 +6245,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					e.stopImmediatePropagation();
 					self.close();
 				},
-				thisPage = this.element.closest( ":jqmData(role='page')" ),
+				thisPage = this.element.closest( ".ui-page" ),
 				myId = this.element.attr( "id" ),
 				self = this;
 
@@ -6294,7 +6308,7 @@ $( document ).bind( "pagecreate create", function( e ){
 			this._ui.screen.height( Math.max( $( window ).height(), this._page.height() ) );
 		},
 
-		_realSetTheme: function( dst, theme ) {
+		_applyTheme: function( dst, theme ) {
 			var classes = ( dst.attr( "class" ) || "").split( " " ),
 				alreadyAdded = true,
 				currentTheme = null,
@@ -6307,8 +6321,7 @@ $( document ).bind( "pagecreate create", function( e ){
 				if ( matches && matches.length > 1 ) {
 					currentTheme = matches[ 1 ];
 					break;
-				}
-				else {
+				} else {
 					currentTheme = null;
 				}
 			}
@@ -6322,11 +6335,11 @@ $( document ).bind( "pagecreate create", function( e ){
 		},
 
 		_setTheme: function( value ) {
-			this._realSetTheme( this._ui.container, value );
+			this._applyTheme( this._ui.container, value );
 		},
 
 		_setOverlayTheme: function( value ) {
-			this._realSetTheme( this._ui.screen, value );
+			this._applyTheme( this._ui.screen, value );
 
 			if ( $.mobile.browser.ie ) {
 				this._ui.screen.toggleClass(
@@ -6367,29 +6380,13 @@ $( document ).bind( "pagecreate create", function( e ){
 				// Record the option change in the options and in the DOM data-* attributes
 				this.options[ key ] = value;
 				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
-			}
-			else {
+			} else {
 				$.mobile.widget.prototype._setOption.apply( this, arguments );
 			}
 		},
 
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( x, y ) {
-			function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
-				var ret = desired;
-
-				if ( winSize < segSize ) {
-					// Center segment if it's bigger than the window
-					ret = offset + ( winSize - segSize ) / 2;
-				}
-				else {
-					// Otherwise center it at the desired coordinate while keeping it completely inside the window
-					ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
-				}
-
-				return ret;
-			}
-
 			// Tolerances off the window edges
 			var tol = { l: 10, t: 30, r: 10, b: 30 },
 			// rectangle within which the popup must fit
@@ -6452,36 +6449,34 @@ $( document ).bind( "pagecreate create", function( e ){
 			self._prereqs = prereqs;
 		},
 
-		_animate: function( additionalCondition, transition, classToRemove, screenClassToAdd, containerClassToAdd, applyTransition, prereqs ) {
+		_animate: function( args ) {
 			var self = this;
 
-			if ( self.options.overlayTheme && additionalCondition ) {
+			if ( self.options.overlayTheme && args.additionalCondition ) {
 				self._ui.screen
-					.removeClass( classToRemove )
-					.addClass( screenClassToAdd )
+					.removeClass( args.classToRemove )
+					.addClass( args.screenClassToAdd )
 					.animationComplete( function() {
-						prereqs.screen.resolve();
+						args.prereqs.screen.resolve();
 					});
-			}
-			else {
-				prereqs.screen.resolve();
+			} else {
+				args.prereqs.screen.resolve();
 			}
 
-			if ( transition && transition !== "none" ) {
-				if ( applyTransition ) { self._applyTransition( transition ); }
+			if ( args.transition && args.transition !== "none" ) {
+				if ( args.applyTransition ) { self._applyTransition( args.transition ); }
 				self._ui.container
-					.addClass( containerClassToAdd )
-					.removeClass( classToRemove )
+					.addClass( args.containerClassToAdd )
+					.removeClass( args.classToRemove )
 					.animationComplete( function() {
-						prereqs.container.resolve();
+						args.prereqs.container.resolve();
 					});
-			}
-			else {
-				prereqs.container.resolve();
+			} else {
+				args.prereqs.container.resolve();
 			}
 		},
 
-		_realOpen: function( x, y, transition ) {
+		_open: function( x, y, transition ) {
 			var self = this,
 				coords = self._placementCoords(
 					( undefined === x ? window.innerWidth / 2 : x ),
@@ -6506,8 +6501,7 @@ $( document ).bind( "pagecreate create", function( e ){
 			if ( transition ) {
 				self._currentTransition = transition;
 				self._applyTransition( transition );
-			}
-			else {
+			} else {
 				transition = self.options.transition;
 			}
 
@@ -6525,10 +6519,18 @@ $( document ).bind( "pagecreate create", function( e ){
 					top: coords.y
 				});
 
-			self._animate( true, transition, "", "in", "in", false, self._prereqs );
+			self._animate({
+				additionalCondition: true,
+				transition: transition,
+				classToRemove: "",
+				screenClassToAdd: "in",
+				containerClassToAdd: "in",
+				applyTransition: false,
+				prereqs: self._prereqs
+			});
 		},
 
-		_realClose: function() {
+		_close: function() {
 			var self = this,
 				transition = ( self._currentTransition ? self._currentTransition : self.options.transition );
 
@@ -6554,7 +6556,15 @@ $( document ).bind( "pagecreate create", function( e ){
 					self.element.trigger( "closed" );
 				});
 
-			self._animate( self._ui.screen.hasClass( "in" ), transition, "in", "out", "reverse out", true, self._prereqs );
+			self._animate( {
+				additionalCondition: self._ui.screen.hasClass( "in" ),
+				transition: transition,
+				classToRemove: "in",
+				screenClassToAdd: "out",
+				containerClassToAdd: "reverse out",
+				applyTransition: true,
+				prereqs: self._prereqs
+			});
 		},
 
 		_destroy: function() {
@@ -6584,7 +6594,7 @@ $( document ).bind( "pagecreate create", function( e ){
 		// array of: {
 		//   open: true/false
 		//   popup: popup
-		//   args: args for _realOpen
+		//   args: args for _open
 		// }
 		_actionQueue: [],
 		_inProgress: false,
@@ -6611,8 +6621,7 @@ $( document ).bind( "pagecreate create", function( e ){
 
 				if ( typeof data.toPage === "string" ) {
 					parsedDst = data.toPage;
-				}
-				else {
+				} else {
 					parsedDst = data.toPage.jqmData( "url" );
 				}
 				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
@@ -6624,19 +6633,18 @@ $( document ).bind( "pagecreate create", function( e ){
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
 					dstTransition,
-					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
+					currentIsDialog = $.mobile.activePage.is( ".ui-dialog" ),
+					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 ) && !currentIsDialog;
 
 				if ( $.mobile.urlHistory.activeIndex === 0 ) {
 					dstTransition = $.mobile.defaultDialogTransition;
-				}
-				else {
+				} else {
 					dstTransition = activeEntry.transition;
 				}
 
 				if ( hasHash ) {
 					realInstallListener();
-				}
-				else {
+				} else {
 					$( window ).one( "hashchange.popupBinder", function() {
 						realInstallListener();
 					});
@@ -6644,11 +6652,11 @@ $( document ).bind( "pagecreate create", function( e ){
 					if ( $.mobile.urlHistory.activeIndex === 0 && dstHash === $.mobile.urlHistory.initialDst ) {
 						dstHash += $.mobile.dialogHashKey;
 					}
+					$.mobile.urlHistory.ignoreNextHashChange = currentIsDialog;
 					$.mobile.path.set( dstHash );
 					$.mobile.urlHistory.addNew( dstHash, dstTransition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
 				}
-			}
-			else {
+			} else {
 				whenHooked();
 			}
 		},
@@ -6692,8 +6700,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					self._haveNavHook = false;
 					self._myOwnHashChange = true;
 					self._navUnhook( current.abort );
-			}
-			else {
+			} else {
 				self._inProgress = false;
 			}
 
@@ -6715,12 +6722,11 @@ $( document ).bind( "pagecreate create", function( e ){
 					return;
 				}
 				signal = "opened";
-				fn = "_realOpen";
+				fn = "_open";
 				args = self._actionQueue[0].args;
-			}
-			else {
+			} else {
 				signal = "closed";
-				fn = "_realClose";
+				fn = "_close";
 				args = [];
 			}
 
@@ -6749,8 +6755,7 @@ $( document ).bind( "pagecreate create", function( e ){
 				self._inProgress = true;
 				if ( self._haveNavHook || !self._actionQueue[0].open ) {
 					self._continueWithAction();
-				}
-				else {
+				} else {
 					self._navHook( function() {
 						self._haveNavHook = true;
 						self._continueWithAction();
@@ -6772,14 +6777,12 @@ $( document ).bind( "pagecreate create", function( e ){
 					if ( cIdx !== -1 ) {
 						if ( 0 === cIdx && self._inProgress ) {
 							self._actionQueue.push( newAction );
-						}
-						else {
+						} else {
 							self._actionQueue.splice( cIdx, 1 );
 						}
 						self._runSingleAction();
 					}
-				}
-				else {
+				} else {
 					self._actionQueue.push( newAction );
 					self._runSingleAction();
 				}
@@ -6799,8 +6802,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					if ( 0 === oIdx ) {
 						self._actionQueue.splice( 1, 0, newAction );
 						self._runSingleAction();
-					}
-					else {
+					} else {
 						self._actionQueue.splice( oIdx, 1 );
 					}
 				}
@@ -6809,8 +6811,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					if ( self._actionQueue.length === 0 ) {
 						self._actionQueue.push( newAction );
 						self._runSingleAction();
-					}
-					else {
+					} else {
 						self._actionQueue.splice( ( self._inProgress ? 1 : 0 ), 0, newAction );
 						self._runSingleAction();
 					}
@@ -6826,8 +6827,7 @@ $( document ).bind( "pagecreate create", function( e ){
 			if ( this._myOwnHashChange ) {
 				this._myOwnHashChange = false;
 				this._inProgress = false;
-			}
-			else {
+			} else {
 				var dst = this._currentlyOpenPopup;
 
 				if ( this._inProgress ) {
@@ -6837,12 +6837,10 @@ $( document ).bind( "pagecreate create", function( e ){
 						if ( immediate && this._actionQueue[ 0 ].waitingForPopup ) {
 							this._actionQueue[ 0 ].popup._immediate();
 						}
-					}
-					else {
+					} else {
 						dst = null;
 					}
-				}
-				else {
+				} else {
 					this._actionQueue = [];
 				}
 
@@ -8088,18 +8086,21 @@ $( document ).bind( "pagecreate create", function( e ){
 				return options.text() !== list.text();
 			},
 
+			selected: function() {
+				return this._selectOptions().filter( ":selected:not(:jqmData(placeholder='true'))" );
+			},
+
 			refresh: function( forceRebuild , foo ){
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
-				options = this._selectOptions(),
-				selected = this.selected(),
-				// return an array of all selected index's
-				indicies = this.selectedIndices();
+				indices;
 
 				if (  forceRebuild || this._isRebuildRequired() ) {
 					self._buildList();
 				}
+
+				indicies = this.selectedIndices();
 
 				self.setButtonText();
 				self.setButtonCount();
@@ -8244,6 +8245,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					dataIndexAttr = dataPrefix + 'option-index',
 					dataIconAttr = dataPrefix + 'icon',
 					dataRoleAttr = dataPrefix + 'role',
+					dataPlaceholderAttr = dataPrefix + 'placeholder',
 					fragment = document.createDocumentFragment(),
 					isPlaceholderItem = false,
 					optGroup;
@@ -8276,6 +8278,9 @@ $( document ).bind( "pagecreate create", function( e ){
 					if (needPlaceholder && (!option.getAttribute( "value" ) || text.length === 0 || $option.jqmData( "placeholder" ))) {
 						needPlaceholder = false;
 						isPlaceholderItem = true;
+
+						// If we have identified a placeholder, mark it retroactively in the select as well
+						option.setAttribute( dataPlaceholderAttr, true );
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
 						}
@@ -8292,7 +8297,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					item.setAttribute(dataIndexAttr,i);
 					item.setAttribute(dataIconAttr,dataIcon);
 					if ( isPlaceholderItem ) {
-						item.setAttribute( dataPrefix + "placeholder", true );
+						item.setAttribute( dataPlaceholderAttr, true );
 					}
 					item.className = classes.join(" ");
 					item.setAttribute('role','option');
