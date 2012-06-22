@@ -11,6 +11,20 @@ define( [ "jquery",
 //>>excludeEnd("jqmBuildExclude");
 (function( $, undefined ) {
 
+	function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
+		var ret = desired;
+
+		if ( winSize < segSize ) {
+			// Center segment if it's bigger than the window
+			ret = offset + ( winSize - segSize ) / 2;
+		} else {
+			// Otherwise center it at the desired coordinate while keeping it completely inside the window
+			ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
+		}
+
+		return ret;
+	}
+
 	$.widget( "mobile.popup", $.mobile.widget, {
 		options: {
 			theme: null,
@@ -32,7 +46,7 @@ define( [ "jquery",
 					e.stopImmediatePropagation();
 					self.close();
 				},
-				thisPage = this.element.closest( ":jqmData(role='page')" ),
+				thisPage = this.element.closest( ".ui-page" ),
 				myId = this.element.attr( "id" ),
 				self = this;
 
@@ -95,7 +109,7 @@ define( [ "jquery",
 			this._ui.screen.height( Math.max( $( window ).height(), this._page.height() ) );
 		},
 
-		_realSetTheme: function( dst, theme ) {
+		_applyTheme: function( dst, theme ) {
 			var classes = ( dst.attr( "class" ) || "").split( " " ),
 				alreadyAdded = true,
 				currentTheme = null,
@@ -108,8 +122,7 @@ define( [ "jquery",
 				if ( matches && matches.length > 1 ) {
 					currentTheme = matches[ 1 ];
 					break;
-				}
-				else {
+				} else {
 					currentTheme = null;
 				}
 			}
@@ -123,11 +136,11 @@ define( [ "jquery",
 		},
 
 		_setTheme: function( value ) {
-			this._realSetTheme( this._ui.container, value );
+			this._applyTheme( this._ui.container, value );
 		},
 
 		_setOverlayTheme: function( value ) {
-			this._realSetTheme( this._ui.screen, value );
+			this._applyTheme( this._ui.screen, value );
 
 			if ( $.mobile.browser.ie ) {
 				this._ui.screen.toggleClass(
@@ -168,29 +181,13 @@ define( [ "jquery",
 				// Record the option change in the options and in the DOM data-* attributes
 				this.options[ key ] = value;
 				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
-			}
-			else {
+			} else {
 				$.mobile.widget.prototype._setOption.apply( this, arguments );
 			}
 		},
 
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( x, y ) {
-			function fitSegmentInsideSegment( winSize, segSize, offset, desired ) {
-				var ret = desired;
-
-				if ( winSize < segSize ) {
-					// Center segment if it's bigger than the window
-					ret = offset + ( winSize - segSize ) / 2;
-				}
-				else {
-					// Otherwise center it at the desired coordinate while keeping it completely inside the window
-					ret = Math.min( Math.max( offset, desired - segSize / 2 ), offset + winSize - segSize );
-				}
-
-				return ret;
-			}
-
 			// Tolerances off the window edges
 			var tol = { l: 10, t: 30, r: 10, b: 30 },
 			// rectangle within which the popup must fit
@@ -253,36 +250,34 @@ define( [ "jquery",
 			self._prereqs = prereqs;
 		},
 
-		_animate: function( additionalCondition, transition, classToRemove, screenClassToAdd, containerClassToAdd, applyTransition, prereqs ) {
+		_animate: function( args ) {
 			var self = this;
 
-			if ( self.options.overlayTheme && additionalCondition ) {
+			if ( self.options.overlayTheme && args.additionalCondition ) {
 				self._ui.screen
-					.removeClass( classToRemove )
-					.addClass( screenClassToAdd )
+					.removeClass( args.classToRemove )
+					.addClass( args.screenClassToAdd )
 					.animationComplete( function() {
-						prereqs.screen.resolve();
+						args.prereqs.screen.resolve();
 					});
-			}
-			else {
-				prereqs.screen.resolve();
+			} else {
+				args.prereqs.screen.resolve();
 			}
 
-			if ( transition && transition !== "none" ) {
-				if ( applyTransition ) { self._applyTransition( transition ); }
+			if ( args.transition && args.transition !== "none" ) {
+				if ( args.applyTransition ) { self._applyTransition( args.transition ); }
 				self._ui.container
-					.addClass( containerClassToAdd )
-					.removeClass( classToRemove )
+					.addClass( args.containerClassToAdd )
+					.removeClass( args.classToRemove )
 					.animationComplete( function() {
-						prereqs.container.resolve();
+						args.prereqs.container.resolve();
 					});
-			}
-			else {
-				prereqs.container.resolve();
+			} else {
+				args.prereqs.container.resolve();
 			}
 		},
 
-		_realOpen: function( x, y, transition ) {
+		_open: function( x, y, transition ) {
 			var self = this,
 				coords = self._placementCoords(
 					( undefined === x ? window.innerWidth / 2 : x ),
@@ -307,8 +302,7 @@ define( [ "jquery",
 			if ( transition ) {
 				self._currentTransition = transition;
 				self._applyTransition( transition );
-			}
-			else {
+			} else {
 				transition = self.options.transition;
 			}
 
@@ -326,10 +320,18 @@ define( [ "jquery",
 					top: coords.y
 				});
 
-			self._animate( true, transition, "", "in", "in", false, self._prereqs );
+			self._animate({
+				additionalCondition: true,
+				transition: transition,
+				classToRemove: "",
+				screenClassToAdd: "in",
+				containerClassToAdd: "in",
+				applyTransition: false,
+				prereqs: self._prereqs
+			});
 		},
 
-		_realClose: function() {
+		_close: function() {
 			var self = this,
 				transition = ( self._currentTransition ? self._currentTransition : self.options.transition );
 
@@ -355,7 +357,15 @@ define( [ "jquery",
 					self.element.trigger( "closed" );
 				});
 
-			self._animate( self._ui.screen.hasClass( "in" ), transition, "in", "out", "reverse out", true, self._prereqs );
+			self._animate( {
+				additionalCondition: self._ui.screen.hasClass( "in" ),
+				transition: transition,
+				classToRemove: "in",
+				screenClassToAdd: "out",
+				containerClassToAdd: "reverse out",
+				applyTransition: true,
+				prereqs: self._prereqs
+			});
 		},
 
 		_destroy: function() {
@@ -385,7 +395,7 @@ define( [ "jquery",
 		// array of: {
 		//   open: true/false
 		//   popup: popup
-		//   args: args for _realOpen
+		//   args: args for _open
 		// }
 		_actionQueue: [],
 		_inProgress: false,
@@ -412,8 +422,7 @@ define( [ "jquery",
 
 				if ( typeof data.toPage === "string" ) {
 					parsedDst = data.toPage;
-				}
-				else {
+				} else {
 					parsedDst = data.toPage.jqmData( "url" );
 				}
 				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
@@ -425,19 +434,18 @@ define( [ "jquery",
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
 					dstTransition,
-					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 );
+					currentIsDialog = $.mobile.activePage.is( ".ui-dialog" ),
+					hasHash = ( activeEntry.url.indexOf( $.mobile.dialogHashKey ) > -1 ) && !currentIsDialog;
 
 				if ( $.mobile.urlHistory.activeIndex === 0 ) {
 					dstTransition = $.mobile.defaultDialogTransition;
-				}
-				else {
+				} else {
 					dstTransition = activeEntry.transition;
 				}
 
 				if ( hasHash ) {
 					realInstallListener();
-				}
-				else {
+				} else {
 					$( window ).one( "hashchange.popupBinder", function() {
 						realInstallListener();
 					});
@@ -445,11 +453,11 @@ define( [ "jquery",
 					if ( $.mobile.urlHistory.activeIndex === 0 && dstHash === $.mobile.urlHistory.initialDst ) {
 						dstHash += $.mobile.dialogHashKey;
 					}
+					$.mobile.urlHistory.ignoreNextHashChange = currentIsDialog;
 					$.mobile.path.set( dstHash );
 					$.mobile.urlHistory.addNew( dstHash, dstTransition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
 				}
-			}
-			else {
+			} else {
 				whenHooked();
 			}
 		},
@@ -493,8 +501,7 @@ define( [ "jquery",
 					self._haveNavHook = false;
 					self._myOwnHashChange = true;
 					self._navUnhook( current.abort );
-			}
-			else {
+			} else {
 				self._inProgress = false;
 			}
 
@@ -516,12 +523,11 @@ define( [ "jquery",
 					return;
 				}
 				signal = "opened";
-				fn = "_realOpen";
+				fn = "_open";
 				args = self._actionQueue[0].args;
-			}
-			else {
+			} else {
 				signal = "closed";
-				fn = "_realClose";
+				fn = "_close";
 				args = [];
 			}
 
@@ -550,8 +556,7 @@ define( [ "jquery",
 				self._inProgress = true;
 				if ( self._haveNavHook || !self._actionQueue[0].open ) {
 					self._continueWithAction();
-				}
-				else {
+				} else {
 					self._navHook( function() {
 						self._haveNavHook = true;
 						self._continueWithAction();
@@ -573,14 +578,12 @@ define( [ "jquery",
 					if ( cIdx !== -1 ) {
 						if ( 0 === cIdx && self._inProgress ) {
 							self._actionQueue.push( newAction );
-						}
-						else {
+						} else {
 							self._actionQueue.splice( cIdx, 1 );
 						}
 						self._runSingleAction();
 					}
-				}
-				else {
+				} else {
 					self._actionQueue.push( newAction );
 					self._runSingleAction();
 				}
@@ -600,8 +603,7 @@ define( [ "jquery",
 					if ( 0 === oIdx ) {
 						self._actionQueue.splice( 1, 0, newAction );
 						self._runSingleAction();
-					}
-					else {
+					} else {
 						self._actionQueue.splice( oIdx, 1 );
 					}
 				}
@@ -610,8 +612,7 @@ define( [ "jquery",
 					if ( self._actionQueue.length === 0 ) {
 						self._actionQueue.push( newAction );
 						self._runSingleAction();
-					}
-					else {
+					} else {
 						self._actionQueue.splice( ( self._inProgress ? 1 : 0 ), 0, newAction );
 						self._runSingleAction();
 					}
@@ -627,8 +628,7 @@ define( [ "jquery",
 			if ( this._myOwnHashChange ) {
 				this._myOwnHashChange = false;
 				this._inProgress = false;
-			}
-			else {
+			} else {
 				var dst = this._currentlyOpenPopup;
 
 				if ( this._inProgress ) {
@@ -638,12 +638,10 @@ define( [ "jquery",
 						if ( immediate && this._actionQueue[ 0 ].waitingForPopup ) {
 							this._actionQueue[ 0 ].popup._immediate();
 						}
-					}
-					else {
+					} else {
 						dst = null;
 					}
-				}
-				else {
+				} else {
 					this._actionQueue = [];
 				}
 

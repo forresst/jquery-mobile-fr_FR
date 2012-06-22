@@ -1159,15 +1159,19 @@ a.ui-link-inherit {
 /* Focus state - set here for specificity (note: these classes are added by JavaScript)
 -----------------------------------------------------------------------------------------------------------*/
 
-.ui-btn:focus {
+.ui-btn:focus, .ui-link-inherit:focus {
 	outline: 0;
+}
+
+.ui-btn.ui-focus {
+	z-index: 1;
 }
 
 .ui-focus,
 .ui-btn:focus {
-	-moz-box-shadow: 0px 0px 12px 		#387bbe /*{global-active-background-color}*/;
-	-webkit-box-shadow: 0px 0px 12px 	#387bbe /*{global-active-background-color}*/;
-	box-shadow: 0px 0px 12px 			#387bbe /*{global-active-background-color}*/;
+	-moz-box-shadow: inset 0px 0px 3px 		#387bbe /*{global-active-background-color}*/, 0px 0px 9px 		#387bbe /*{global-active-background-color}*/;
+	-webkit-box-shadow: inset 0px 0px 3px 	#387bbe /*{global-active-background-color}*/, 0px 0px 9px 		#387bbe /*{global-active-background-color}*/;
+	box-shadow: inset 0px 0px 3px 			#387bbe /*{global-active-background-color}*/, 0px 0px 9px 		#387bbe /*{global-active-background-color}*/;
 }
 
 /* unset box shadow in browsers that don't do it right
@@ -1181,7 +1185,8 @@ a.ui-link-inherit {
 
 /* ...and bring back focus */
 .ui-mobile-nosupport-boxshadow .ui-focus,
-.ui-mobile-nosupport-boxshadow .ui-btn:focus {
+.ui-mobile-nosupport-boxshadow .ui-btn:focus,
+.ui-mobile-nosupport-boxshadow .ui-link-inherit:focus {
 	outline-width: 1px;
-	outline-style: dotted;
+	outline-style: auto;
 }
