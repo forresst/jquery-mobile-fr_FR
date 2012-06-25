@@ -42,7 +42,7 @@
 			<dt><code>overlayTheme</code> <em>string</em></dt>
 			<dd>
 				<p class="default">par défaut : null</p>
-				<p>Définit le jeu de couleurs (nuancier) pour le fond de la popu, qui recouvre entièrement la fenêtre. S'il n'est pas explicitement définie, le fond sera transparent.</p>
+				<p>Définit le jeu de couleurs (nuancier) pour le fond du popup, qui recouvre entièrement la fenêtre. S'il n'est pas explicitement définie, le fond sera transparent.</p>
 				<pre><code>$('.selector').popup(<strong>{ overlayTheme: "a" }</strong>);</code></pre>
 				 <p>Cette option est également définie comme un attribut de données : <code>data-overlay-theme="a"</code></p>
 			</dd>
@@ -50,7 +50,7 @@
 			<dt><code>theme</code> <em>string</em></dt>
 			<dd>
 				<p class="default">par défaut : null</p>
-				<p>Définit le jeu de couleurs (nuancier) pour le contenu du popup. Sauf si il est explicitement défini à <code>'none'</code>, le thème pour la popup sera défini la première fois par l'héritage du thème de la page ou en cas d'échec par la valeur <code>'c'</code> codé en dur. Si vous le définissez à 'none', la popup n'aura pas de thème du tout, et sera transparente.</p>
+				<p>Définit le jeu de couleurs (nuancier) pour le contenu du popup. Sauf si il est explicitement défini à <code>'none'</code>, le thème pour le popup sera défini la première fois par l'héritage du thème de la page ou en cas d'échec par la valeur <code>'c'</code> codé en dur. Si vous le définissez à 'none', le popup n'aura pas de thème du tout, et sera transparente.</p>
 				<pre><code>$('.selector').popup(<strong>{ theme: "a" }</strong>);</code></pre>
 				 <p>Cette option est également définie comme un attribut de données : <code>data-theme="a"</code></p>
 			</dd>
@@ -68,14 +68,14 @@
 			<dt><code>shadow</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>
-				<p>Définit s'il faut dessiner une ombre autour de la popup. Cette option est également définie comme un attribut de données : <code>data-shadow="true"</code></p>
+				<p>Définit s'il faut dessiner une ombre autour du popup. Cette option est également définie comme un attribut de données : <code>data-shadow="true"</code></p>
 				<pre><code>$('.selector').popup(<strong>{ shadow: true }</strong>);</code></pre>
 			</dd>
 
 			<dt><code>corners</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>
-				<p>Définit s'il faut dessiner une popup avec des coins arrondis. Cette option est également définie comme un attribut de données : <code>data-corners="true"</code></p>
+				<p>Définit s'il faut dessiner un popup avec des coins arrondis. Cette option est également définie comme un attribut de données : <code>data-corners="true"</code></p>
 				<pre><code>$('.selector').popup(<strong>{ corners: true }</strong>);</code></pre>
 			</dd>
 
