@@ -37,23 +37,24 @@
 
 		<p>Les cases à cocher sont utilisées pour fournir une liste d'options dont plusieurs peuvent être sélectionnés. Les cases à cocher traditionnelles de bureau ne sont pas optimisés pour la saisie tactile donc dans jQuery Mobile, nous stylisons le <code>label</code> pour les cases à cocher de sorte qu'elles soient plus grandes et cliquables visuellement. Un ensemble personnalisé d'icônes sont ajoutées au label pour fournir d'autres informations visuelles.</p>
 		
-		<p>Les contrôles du radio bouton et de la case à cocher ci-dessous utilisent le balisage standard input/label, mais sont stylisés pour être plus "tactiles". Le contrôle stylisé que vous voyez est réellement l'élément label, qui se trouve sur l'input réel, donc si les images ne se chargent pas, vous aurez encore un contrôle fonctionnel. Dans la plupart des navigateurs, en cliquant le label cela déclenche automatiquement un clic sur l'input, mais nous avons du déclencher la mise à jour manuellement pour quelques navigateurs mobiles qui ne font pas cela nativement. Sur le bureau, ces contrôles sont accessible par le clavier et le lecteur d'écran. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux cases à cocher.</p>
+		<p>Les contrôles de cases à cocher ci-dessous utilisent le balisage standard input/label, mais sont stylisés pour être plus "tactiles". Le contrôle stylisé que vous voyez est réellement l'élément label, qui se trouve sur l'input réel, donc si les images ne se chargent pas, vous aurez encore un contrôle fonctionnel. Dans la plupart des navigateurs, en cliquant le label cela déclenche automatiquement un clic sur l'input, mais nous avons du déclencher la mise à jour manuellement pour quelques navigateurs mobiles qui ne font pas cela nativement. Sur le bureau, ces contrôles sont accessible par le clavier et le lecteur d'écran. Regardez la <a href="../../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux cases à cocher.</p>
 
 		<p>Pour créer une seule case, ajoutez un  <code>input</code> avec un attribut <code>type="checkbox"</code> et un <code>label</code> correspondant. Si le <code>input</code> n'est pas enveloppé dans le <code>label</code> correspondant, veuillez définir l'attribut <code>for</code> du <code>label</code> pour correspondre à l'<code>id</code> de l'<code>input</code> ainsi ils seront sémantiquement associés.</p>
+		<p>Il ya donc deux façons de créer une case à cocher avec une étiquette, comme indiqué ci-dessous :</p>
 		
 		<pre><code>	
-&lt;label&gt;&lt;input type="checkbox" name="checkbox-1" /&gt; J'accepte &lt;/label&gt;
+&lt;label&gt;&lt;input type="checkbox" name="checkbox-0" /&gt; J'accepte &lt;/label&gt;
 			
-&lt;input type="checkbox" name="checkbox-0" id="checkbox-0" class="custom" /&gt;
-&lt;label for="checkbox-0"&gt;J'accepte&lt;/label&gt;
+&lt;input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" /&gt;
+&lt;label for="checkbox-1"&gt;J'accepte&lt;/label&gt;
 		</code></pre>
 				
 		<p>Ceci va produire deux cases à cocher de base. Les styles par défaut auront la largeur de l'élément définies à 100% du conteneur parent.</p>
 					
-		<label> <input type="checkbox" name="checkbox-1 "/> J'accepte</label>
+		<label> <input type="checkbox" name="checkbox-0 "/> J'accepte</label>
 		
-		<input type="checkbox" name="checkbox-0" id="checkbox-0" class="custom" />
-		<label for="checkbox-0">J'accepte</label>
+		<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
+		<label for="checkbox-1">J'accepte</label>
 		
 		
 		<h2>Version mini</h2>
@@ -66,7 +67,7 @@
 </code></pre>
 		
 		<p>Ceci va produire une case à cocher pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
-		<input type="checkbox" name="checkbox-0" id="checkbox-mini-0" class="custom" data-mini="true" />
+		<input type="checkbox" name="checkbox-mini-0" id="checkbox-mini-0" class="custom" data-mini="true" />
 		<label for="checkbox-mini-0">J'accepte</label>
 
 
@@ -77,8 +78,8 @@
 &lt;div data-role="fieldcontain"&gt;
     <strong>&lt;fieldset data-role="controlgroup"&gt;
 	   &lt;legend&gt;Acceptez les termes :&lt;/legend&gt;</strong>
-	   &lt;input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" /&gt;
-	   &lt;label for="checkbox-1"&gt;J'accepte&lt;/label&gt;
+	   &lt;input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom" /&gt;
+	   &lt;label for="checkbox-2"&gt;J'accepte&lt;/label&gt;
     <strong>&lt;/fieldset&gt;</strong>
 &lt;/div&gt;
 </code></pre>
@@ -86,8 +87,8 @@
 	<div data-role="fieldcontain">
 	 	<fieldset data-role="controlgroup">
 			<legend>Acceptez les termes :</legend>
-			<input type="checkbox" name="checkbox-1" id="checkbox-1" class="custom" />
-			<label for="checkbox-1">J'accepte</label>
+			<input type="checkbox" name="checkbox-2" id="checkbox-2" class="custom" />
+			<label for="checkbox-2">J'accepte</label>
 	    </fieldset>
 	</div>
 	

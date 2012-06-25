@@ -110,7 +110,7 @@
 		<dl>
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
-				<p class="default">par défaut : "button, [type='button'], [type='submit'], [type='reset'], [type='image']"</p>
+				<p class="default">Par défaut : "button, [type='button'], [type='submit'], [type='reset']"</p>
 				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les rôles de données, etc) qui seront automatiquement initialisé comme des boutons de formulaire. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../api/globalconfig.html">l'événement mobileinit</a> :</p>
 <pre><code>$( document ).bind( "mobileinit", function(){
    <strong>$.mobile.button.prototype.options.initSelector = ".myButtons";</strong>

@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 4ab780cdc07ee6102e0b86075d958b531e76f47b <> Date: Fri Jun 22 01:13:06 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: 40cf9e1b64ec269b70870c4339d174e2bb90a0e5 <> Date: Mon Jun 25 02:13:35 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2011 (c) jQuery Project
@@ -242,6 +242,12 @@
 			}
 
 			return $newSet;
+		},
+
+		getScreenHeight: function(){
+			// Native innerHeight returns more accurate value for this across platforms,
+			// jQuery version is here as a normalized fallback for platforms like Symbian
+			return window.innerHeight || $( window ).height();
 		}
 	}, $.mobile );
 
@@ -2617,7 +2623,7 @@ var createHandler = function( sequential ){
 			toScroll = active.lastScroll || $.mobile.defaultHomeScroll,
 			screenHeight = $.mobile.getScreenHeight(),
 			maxTransitionOverride = $.mobile.maxTransitionWidth !== false && $( window ).width() > $.mobile.maxTransitionWidth,
-			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none",
+			none = !$.support.cssTransitions || maxTransitionOverride || !name || name === "none" || Math.max( $( window ).scrollTop(), toScroll ) > $.mobile.getMaxScrollForTransition(),
 			toPreClass = " ui-page-pre-in",
 			toggleViewportClass = function(){
 				$.mobile.pageContainer.toggleClass( "ui-mobile-viewport-transitioning viewport-" + name );
@@ -2757,6 +2763,12 @@ $.mobile._maybeDegradeTransition = function( transition ) {
 
 		return transition;
 };
+
+$.mobile = $.extend( {}, {
+	getMaxScrollForTransition:  function() {
+		return $.mobile.getScreenHeight() * 3;
+	}
+}, $.mobile );
 
 })( jQuery, this );
 
@@ -3120,7 +3132,9 @@ $.mobile._maybeDegradeTransition = function( transition ) {
 		documentBase = $base.length ? path.parseUrl( path.makeUrlAbsolute( $base.attr( "href" ), documentUrl.href ) ) : documentUrl,
 
 		//cache the comparison once.
-		documentBaseDiffers = ( documentUrl.hrefNoHash !== documentBase.hrefNoHash );
+		documentBaseDiffers = ( documentUrl.hrefNoHash !== documentBase.hrefNoHash ),
+
+		getScreenHeight = $.mobile.getScreenHeight;
 
 		//base element management, defined depending on dynamic base tag support
 		var base = $.support.dynamicBaseTag ? {
@@ -3279,15 +3293,6 @@ $.mobile._maybeDegradeTransition = function( transition ) {
 
 		return promise;
 	}
-
-	//simply set the active page's minimum height to screen height, depending on orientation
-	function getScreenHeight(){
-		// Native innerHeight returns more accurate value for this across platforms,
-		// jQuery version is here as a normalized fallback for platforms like Symbian
-		return window.innerHeight || $( window ).height();
-	}
-
-	$.mobile.getScreenHeight = getScreenHeight;
 
 	//simply set the active page's minimum height to screen height, depending on orientation
 	function resetActivePageHeight(){
@@ -4032,7 +4037,6 @@ $.mobile._maybeDegradeTransition = function( transition ) {
 					removeActiveLinkClass( true );
 					$activeClickedLink = $( link ).closest( ".ui-btn" ).not( ".ui-disabled" );
 					$activeClickedLink.addClass( $.mobile.activeBtnClass );
-					$( "." + $.mobile.activePageClass + " .ui-btn" ).not( link ).blur();
 				}
 			}
 		});
@@ -6590,18 +6594,12 @@ $( document ).bind( "pagecreate create", function( e ){
 		}
 	});
 
+	// Popup manager, whose policy is to ignore requests for opening popups when a popup is already in
+	// the process of opening, or already open
 	$.mobile.popup.popupManager = {
-		// array of: {
-		//   open: true/false
-		//   popup: popup
-		//   args: args for _open
-		// }
-		_actionQueue: [],
-		_inProgress: false,
-		_haveNavHook: false,
 		_currentlyOpenPopup: null,
-		_myOwnHashChange: false,
-		_myUrl: "",
+		_waitingForPopup: false,
+		_abort: false,
 
 		// Call _onHashChange if the hash changes /after/ the popup is on the screen
 		// Note that placing the popup on the screen can itself cause a hashchange,
@@ -6624,6 +6622,7 @@ $( document ).bind( "pagecreate create", function( e ){
 				} else {
 					parsedDst = data.toPage.jqmData( "url" );
 				}
+				parsedDst = $.mobile.path.parseUrl( parsedDst );
 				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
 
 				if ( self._myUrl !== toUrl ) {
@@ -6675,185 +6674,54 @@ $( document ).bind( "pagecreate create", function( e ){
 			$.mobile.activePage.unbind( "pagebeforechange.popup" );
 		},
 
-		_inArray: function( action ) {
-			var self = this,
-				idx = -1;
-
-			$.each( self._actionQueue, function( arIdx, value ) {
-				if ( value.open === action.open && value.popup === action.popup ) {
-					idx = arIdx;
-					return false;
-				}
-				return true;
-			});
-
-			return idx;
-		},
-
-		_completeAction: function() {
-			var self = this,
-				current = self._actionQueue.shift();
-
-			self._currentlyOpenPopup = ( current.open ? current.popup : null );
-
-			if ( self._actionQueue.length === 0 && !current.open && self._haveNavHook ) {
-					self._haveNavHook = false;
-					self._myOwnHashChange = true;
-					self._navUnhook( current.abort );
-			} else {
-				self._inProgress = false;
-			}
-
-			if ( self._actionQueue.length > 0 ) {
-				self._runSingleAction();
-			}
-		},
-
-		_continueWithAction: function() {
-			var self = this,
-				signal, fn, args,
-				actionComplete = false;
-
-			if ( self._actionQueue[0].open ) {
-				if ( self._currentlyOpenPopup ) {
-					self._actionQueue.unshift( { open: false, popup: self._currentlyOpenPopup } );
-					self._inProgress = false;
-					self._runSingleAction();
-					return;
-				}
-				signal = "opened";
-				fn = "_open";
-				args = self._actionQueue[0].args;
-			} else {
-				signal = "closed";
-				fn = "_close";
-				args = [];
-			}
-
-			if ( self._yScroll !== undefined && self._actionQueue[0].open ) {
-				if ( self._yScroll !== $( window ).scrollTop() ) {
-					window.scrollTo( 0, self._yScroll );
-				}
-			}
-			self._yScroll = $( window ).scrollTop();
-
-			self._actionQueue[0].waitingForPopup = true;
-			self._actionQueue[0].popup.element.one( signal, function() {
-				self._completeAction();
-				actionComplete = true;
-			});
-			self._actionQueue[0].popup[fn].apply( self._actionQueue[0].popup, args );
-			if ( !actionComplete && self._actionQueue[0].abort ) {
-				self._actionQueue[0].popup._immediate();
-			}
-		},
-
-		_runSingleAction: function() {
+		push: function( popup, args ) {
 			var self = this;
 
-			if ( !self._inProgress ) {
-				self._inProgress = true;
-				if ( self._haveNavHook || !self._actionQueue[0].open ) {
-					self._continueWithAction();
-				} else {
-					self._navHook( function() {
-						self._haveNavHook = true;
-						self._continueWithAction();
+			if ( !self._currentlyOpenPopup ) {
+				self._currentlyOpenPopup = popup;
+
+				self._navHook( function() {
+					self._waitingForPopup = true;
+					self._currentlyOpenPopup.element.one( "opened", function() {
+						self._waitingForPopup = false;
 					});
-				}
-			}
-		},
-
-		push: function( popup, args ) {
-			var self = this,
-				newAction = { open: true, popup: popup, args: args },
-				idx = self._inArray( newAction );
-
-			if ( -1 === idx ) {
-				if ( self._currentlyOpenPopup === popup ) {
-					var closeAction = { open: false, popup: popup },
-						cIdx = self._inArray( closeAction );
-
-					if ( cIdx !== -1 ) {
-						if ( 0 === cIdx && self._inProgress ) {
-							self._actionQueue.push( newAction );
-						} else {
-							self._actionQueue.splice( cIdx, 1 );
-						}
-						self._runSingleAction();
+					self._currentlyOpenPopup._open.apply( self._currentlyOpenPopup, args );
+					if ( !self._waitingForPopup && self._abort ) {
+						self._currentlyOpenPopup._immediate();
 					}
-				} else {
-					self._actionQueue.push( newAction );
-					self._runSingleAction();
-				}
+				});
 			}
 		},
 
 		pop: function( popup ) {
-			var self = this,
-				newAction = { open: false, popup: popup },
-				idx = self._inArray( newAction );
+			var self = this;
 
-			if ( -1 === idx ) {
-				var openAction = { open: true, popup: popup },
-					oIdx = self._inArray( openAction );
-
-				if ( oIdx !== -1 ) {
-					if ( 0 === oIdx ) {
-						self._actionQueue.splice( 1, 0, newAction );
-						self._runSingleAction();
-					} else {
-						self._actionQueue.splice( oIdx, 1 );
-					}
-				}
-				else
-				if ( self._currentlyOpenPopup === popup ) {
-					if ( self._actionQueue.length === 0 ) {
-						self._actionQueue.push( newAction );
-						self._runSingleAction();
-					} else {
-						self._actionQueue.splice( ( self._inProgress ? 1 : 0 ), 0, newAction );
-						self._runSingleAction();
-					}
+			if ( popup === self._currentlyOpenPopup ) {
+				if ( self._waitingForPopup ) {
+					self._currentlyOpenPopup.element.one( "opened", $.proxy( self, "_navUnhook" ) );
+				} else {
+					self._navUnhook();
 				}
 			}
 		},
 
 		_onHashChange: function( immediate ) {
-			this._haveNavHook = false;
-			this._yScroll = undefined;
-			$( this ).trigger( "done" );
+			var self = this;
 
-			if ( this._myOwnHashChange ) {
-				this._myOwnHashChange = false;
-				this._inProgress = false;
-			} else {
-				var dst = this._currentlyOpenPopup;
+			self._abort = immediate;
 
-				if ( this._inProgress ) {
-					this._actionQueue = [ this._actionQueue[ 0 ] ];
-					if ( this._actionQueue[ 0 ].open ) {
-						dst = this._actionQueue[ 0 ].popup;
-						if ( immediate && this._actionQueue[ 0 ].waitingForPopup ) {
-							this._actionQueue[ 0 ].popup._immediate();
-						}
-					} else {
-						dst = null;
-					}
-				} else {
-					this._actionQueue = [];
+			if ( self._currentlyOpenPopup ) {
+				if ( immediate && self._waitingForPopup ) {
+					self._currentlyOpenPopup._immediate();
 				}
-
-				if ( dst ) {
-					this._actionQueue.push( { open: false, popup: dst } );
-				}
-			}
-
-			if ( this._actionQueue.length > 0 ) {
-				$.each( this._actionQueue, function( idx, val ) {
-					val.abort = immediate;
+				self._currentlyOpenPopup.element.one( "closed", function() {
+					self._currentlyOpenPopup = null;
+					$( self ).trigger( "done" );
 				});
-				this._runSingleAction() ;
+				self._currentlyOpenPopup._close();
+				if ( immediate && self._currentlyOpenPopup ) {
+					self._currentlyOpenPopup._immediate();
+				}
 			}
 		}
 	};
@@ -7963,7 +7831,7 @@ $( document ).bind( "pagecreate create", function( e ){
 						if ( self.isMultiple ) {
 							$( this ).find( ".ui-icon" )
 								.toggleClass( "ui-icon-checkbox-on", option.selected )
-								.toggleClass( "ui-icon-checkbox-off", !option.selected );
+								.toggleClass( "ui-icon-radio-off", !option.selected );
 						}
 
 						// trigger change if value changed
@@ -8094,7 +7962,7 @@ $( document ).bind( "pagecreate create", function( e ){
 				var self = this,
 				select = this.element,
 				isMultiple = this.isMultiple,
-				indices;
+				indicies;
 
 				if (  forceRebuild || this._isRebuildRequired() ) {
 					self._buildList();
@@ -8118,7 +7986,7 @@ $( document ).bind( "pagecreate create", function( e ){
 
 							// Multiple selects: add the "on" checkbox state to the icon
 							if ( self.isMultiple ) {
-								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
+								item.find( ".ui-icon" ).removeClass( "ui-icon-radio-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
 								if( item.is( ".ui-selectmenu-placeholder" ) ) {
 									item.next().addClass( $.mobile.activeBtnClass );
@@ -8234,7 +8102,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					needPlaceholder = true,
 					optgroups = [],
 					lis = [],
-					dataIcon = self.isMultiple ? "checkbox-off" : "false";
+					dataIcon = self.isMultiple ? "radio-off" : "false";
 
 				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
 

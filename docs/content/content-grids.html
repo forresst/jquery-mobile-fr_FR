@@ -30,15 +30,15 @@
 		<p>Le framework jQuery Mobile fournit un moyen simple de construire des colonnes basé CSS à travers une convention de classe appelée <code>ui-grid</code>. </p>
 		
 		<p>Il y a quatre mises en page de configurations prédéfinies qui peuvent être utilisés dans toutes les situations qui exigent des colonnes :</p>
-			<ul>
-				<li><strong>deux</strong>-colonnes (En utilisant la classe <code>ui-grid-a</code>)</li>
-				<li><strong>trois</strong>-colonnes (En utilisant la classe <code>ui-grid-b</code>)</li>
-				<li><strong>quatre</strong>-colonnes (En utilisant la classe <code>ui-grid-c</code>)</li>
-				<li><strong>cinq</strong>-colonnes (En utilisant la classe <code>ui-grid-d</code>)</li>
-			</ul>
-			
-			<p>Les grilles sont de largeur 100%, totalement invisible (pas de bordure ou de fond d'écran) et n'ont pas d'espacement ou de marge, donc ils ne devraient pas interférer avec les styles des éléments placés à l'intérieur. </p>
-			<p>Dans le conteneur de grille, les éléments enfants sont affectés <code>ui-block-a/b/c/d</code> d'une manière séquentielle qui fait que chaque élément de "bloc"  se positionne côte à côte, formant la grille. La classe <code>ui-bloc-a</code> efface essentiellement les positions qui vont commencer une nouvelle ligne (voir les grilles de plusieurs lignes, ci-dessous).</p>
+		<ul>
+			<li><strong>deux</strong>-colonnes (En utilisant la classe <code>ui-grid-a</code>)</li>
+			<li><strong>trois</strong>-colonnes (En utilisant la classe <code>ui-grid-b</code>)</li>
+			<li><strong>quatre</strong>-colonnes (En utilisant la classe <code>ui-grid-c</code>)</li>
+			<li><strong>cinq</strong>-colonnes (En utilisant la classe <code>ui-grid-d</code>)</li>
+		</ul>
+
+		<p>Les grilles sont de largeur 100%, totalement invisible (pas de bordure ou de fond d'écran) et n'ont pas d'espacement ou de marge, donc ils ne devraient pas interférer avec les styles des éléments placés à l'intérieur. </p>
+		<p>Dans le conteneur de grille, les éléments enfants sont affectés <code>ui-block-a/b/c/d/e</code> d'une manière séquentielle qui fait que chaque élément de "bloc"  se positionne côte à côte, formant la grille. La classe <code>ui-bloc-a</code> efface essentiellement les positions qui vont commencer une nouvelle ligne (voir les grilles de plusieurs lignes, ci-dessous).</p>
 			
 		<h2>Grilles deux colonnes</h2>
 		<p>Pour construire une mise en page à deux colonnes (50/50%), commencez avec un conteneur avec <code>class</code> de <code>ui-grid-a</code>. Et ajoutez deux conteneurs enfant à l'intérieur classé avec  <code>ui-block-a</code> pour la première colonne et <code>ui-block-b</code> pour la seconde :</p>
@@ -71,11 +71,11 @@
 </code></pre>
 	
 		<fieldset class="ui-grid-a">
-				<div class="ui-block-a"><button type="submit" data-theme="c">Annuler</button></div>
-				<div class="ui-block-b"><button type="submit" data-theme="b">Valider</button></div>	   
-	    </fieldset>
+			<div class="ui-block-a"><button type="submit" data-theme="c">Annuler</button></div>
+			<div class="ui-block-b"><button type="submit" data-theme="b">Valider</button></div>	   
+		</fieldset>
 
-	    <p>Veuillez noter que le framework ajoute la marge à gauche et à droite des boutons dans une grille. Pour un unique bouton, vous pouvez utiliser un conteneur avec la classe <code>ui-grid-solo</code> et enveloppez le bouton dans un div avec la classe <code>ui-block-a</code> Comme pour l'exemple ci-dessous. De cette façon, le bouton recevra la même marge.</p>
+		<p>Veuillez noter que le framework ajoute la marge à gauche et à droite des boutons dans une grille. Pour un unique bouton, vous pouvez utiliser un conteneur avec la classe <code>ui-grid-solo</code> et enveloppez le bouton dans un div avec la classe <code>ui-block-a</code> Comme pour l'exemple ci-dessous. De cette façon, le bouton recevra la même marge.</p>
 		 
 <pre><code>
 &lt;div class="ui-grid-a"&gt;
@@ -88,14 +88,15 @@
 </code></pre>
 
 		<div class="ui-grid-a">
-				<div class="ui-block-a"><button type="button" data-theme="c">Précédent</button></div>
-				<div class="ui-block-b"><button type="button" data-theme="c">Suivant</button></div>	   
+			<div class="ui-block-a"><button type="button" data-theme="c">Précédent</button></div>
+			<div class="ui-block-b"><button type="button" data-theme="c">Suivant</button></div>	   
 		</div>
+
 		<div class="ui-grid-solo">
-				<div class="ui-block-a"><button type="button" data-theme="b">Plus</button></div>
+			<div class="ui-block-a"><button type="button" data-theme="b">Plus</button></div>
 		</div>
 	    
-	    <p>Les classes de thème (pas les attributs data-theme) du <a href="../api/themes.html">système de thématisation</a> peuvent être ajoutées à un élément, y compris les grilles. Sur les blocs ci-dessous, nous ajoutons deux classes : <code>ui-bar</code> pour ajouter l'espacement de la barre par défaut et <code>ui-bar-e</code> pour appliquer le fond dégradé et le style de police pour le nuancier de thème "e" de la barre d'outils. A des fins d'illustration, un attribut d'alignement  <code>style="height:120px"</code> est également ajouté à chaque grille pour mettre à chacun une hauteur standard. </p>
+		<p>Les classes de thème (pas les attributs data-theme) du <a href="../api/themes.html">système de thématisation</a> peuvent être ajoutées à un élément, y compris les grilles. Sur les blocs ci-dessous, nous ajoutons deux classes : <code>ui-bar</code> pour ajouter l'espacement de la barre par défaut et <code>ui-bar-e</code> pour appliquer le fond dégradé et le style de police pour le nuancier de thème "e" de la barre d'outils. A des fins d'illustration, un attribut d'alignement  <code>style="height:120px"</code> est également ajouté à chaque grille pour mettre à chacun une hauteur standard. </p>
 			
 		<div class="ui-grid-a">
 			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">Bloc A</div></div>
@@ -124,10 +125,10 @@
 		<p>Et un exemple de grille à 3 colonnes avec des boutons à l'intérieur :</p>
 
 		<fieldset class="ui-grid-b">
-				<div class="ui-block-a"><button type="submit" data-theme="c">Hmm</button></div>
-				<div class="ui-block-b"><button type="submit" data-theme="a">Non</button></div>	 
-				<div class="ui-block-b"><button type="submit" data-theme="b">Oui</button></div>  
-	    </fieldset>
+			<div class="ui-block-a"><button type="submit" data-theme="c">Hmm</button></div>
+			<div class="ui-block-b"><button type="submit" data-theme="a">Non</button></div>	 
+			<div class="ui-block-c"><button type="submit" data-theme="b">Oui</button></div>  
+		</fieldset>
 		
 		<h2>Grille quatre colonnes</h2>
 		
@@ -141,7 +142,7 @@
 		</div><!-- /grid-c -->
 		
 		<h2>Grilles cinq colonnes</h2>
-		<p>A cinq colonnes, la grille 20/20/20/20/20% est créé en spécifiant  <code>class=ui-grid-d</code> sur le parent et l'ajout d'un quatrième bloc. Remarque : ces blocs sont également stylisés avec des classes de thème afin que la grille de mise en page soit clairement visible.</p>
+		<p>A cinq colonnes, la grille 20/20/20/20/20% est créé en spécifiant  <code>class=ui-grid-d</code> sur le parent et l'ajout d'un cinquième bloc. Remarque : ces blocs sont également stylisés avec des classes de thème afin que la grille de mise en page soit clairement visible.</p>
 			
 		<div class="ui-grid-d">
 			<div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:120px">A</div></div>
@@ -169,14 +170,16 @@
 		
 		
 		<h2>Grilles dans les barres d'outils</h2>
-		<p>Les grilles sont utiles pour créer des mises en page au sein d'une barre d'outils. Voici un pied de page avec une grille de 3 colonnes.</p><!--  NOTE: Inline styles are for demo purposes only, please use external styles -->
+		<p>Les grilles sont utiles pour créer des mises en page au sein d'une barre d'outils. Voici un pied de page avec une grille de 4 colonnes.</p><!--  NOTE: Inline styles are for demo purposes only, please use external styles -->
 		
 		<div data-role="footer" data-theme="a" class="ui-bar ui-grid-c">
-				<div class="ui-block-a"><h3 style="margin-top:10px;">Réglages</h3></div>
-				<div class="ui-block-b"><label for="value" style="margin:8px 10px 0 0; text-align:right;">Prix</label> </div>
-				<div class="ui-block-c"><input id="value" value="5,000"></div>	 
-				<div class="ui-block-d"><div style="margin:6px 0 0 10px;"><button type="submit" data-theme="b">Sauver</button></div></div>  
-	    </div><!-- /footer -->
+			<div class="ui-block-a"><h3 style="margin-top:10px;">Réglages</h3></div>
+			<div class="ui-block-b"><label for="value" style="margin:8px 10px 0 0; text-align:right;">Prix</label></div>
+			<div class="ui-block-c"><input id="value" value="5,000"></div>	 
+			<div class="ui-block-d">
+				<div style="margin:6px 0 0 10px;"><button type="submit" data-theme="b">Sauver</button></div>
+			</div>
+		</div><!-- /footer -->
 	
 	
 	</div><!--/content-primary -->		

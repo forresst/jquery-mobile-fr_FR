@@ -75,23 +75,35 @@
 
 <code>
 
-$('[type='submit']').button();
+$('[type="submit"]').button();
 
 </code>
 
 		<p>Afin de préserver des événements liés au <code>button</code> ou <code>input</code> original, le framework cache l'élément original en le rendant transparent et en le positionnant sur le balisage du nouveau bouton. Quand un utilisateur clique sur le bouton personnalisé, il clique en fait sur l'élément d'origine. Pour empêcher un bouton de formulaire d'être transformé en un bouton amélioré, ajouter l'attribut <code>data-role="none"</code> et le contrôle natif sera rendu.</p>
 
 		<p>Bouton basé sur <strong>Button</strong> :</p>
+<pre><code>	
+&lt;button&gt;Élément button&lt;/button&gt;
+</code></pre>
 		<button>Élément button</button>
-		
+	
 		<p>Bouton basé sur <strong>Input type="button"</strong> :</p>
-		<input type="button" value="buttonBtn" />
+<pre><code>	
+&lt;input type="button" value="Button" /&gt;
+</code></pre>
+		<input type="button" value="Bouton" />
 		
 		<p>Bouton basé sur <strong>Input type="submit"</strong> :</p>
-		<input type="submit" value="submitBtn" />
+<pre><code>
+&lt;input type="submit" value="Submit Button" /&gt;
+</code></pre>
+		<input type="submit" value="Bouton de soumission" />
 		
 		<p>Bouton basé sur <strong>Input type="reset"</strong> :</p>
-		<input type="reset" value="resetBtn" />
+<pre><code>
+&lt;input type="reset" value="Reset Button" /&gt;
+</code></pre>
+		<input type="reset" value="Bouton Reset" />
 		
 	</div><!--/content-primary -->		
 	
