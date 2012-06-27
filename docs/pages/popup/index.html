@@ -11,9 +11,11 @@
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
+	
+	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 </head>
-<body>
+<body onload="initialize()">
 
 	<div data-role="page" class="type-interior">
 
@@ -37,10 +39,10 @@
 			<p>Pour créer un popup, ajoutez l'attribut <code>data-role="popup"</code> au div avec le contenu du popup. Ensuite créez un lien avec <code>href</code> défini avec l'<code>id</code> du div du popup et ajoutez l'attribut <code>data-rel="popup"</code> pour appeler le framework afin d'ouvrir le popup lorsqu'il sera touché. Il s'agit d'un modèle de balisage similaire au widget de la <a href="../page-dialogs.html">boîte de dialogue</a>.</p>
 
 <pre><code>
-&lt;a href="#popupBasic" <strong>data-rel="popup"</strong>&gt;Ouvrir le Popup&lt;/a&gt;
+&lt;a href="#popupBasic" <strong>data-rel="popup"</strong>&gt;Open Popup&lt;/a&gt;
 
 &lt;div <strong>data-role="popup"</strong> id="popupBasic"&gt;
-	Il s'agit d'un popup de base, sans options définies.
+	&lt;p&gt;This is a completely basic popup, no options set.&lt;p&gt;
 &lt;/div&gt;
 </code></pre>
 
@@ -51,7 +53,7 @@
 			<p>Il s'agit d'un popup de base, sans options définies.</p>
 		</div>
 		
-		<p>Cet exemple n'est pas très beau, car un conteneur de popup par défaut n'a pas d'espacement. C'est juste un conteneur avec des coins arrondis et une ombre qui sert de contenu vierge pour vos designs (même ces fonctions peuvent être désactivées via <a href="options.html">options</a>). Ce style simple permet d'ajouter facilement des widgets comme une listview pour faire un <a href="#popupMenu" data-rel="popup">menu</a> ou une photo pour faire une <a href="#popupPhoto" data-rel="popup">lightbox</a> qui va jusqu'au bord du popup.</p>
+		<p>Le framework ajoute de petite marge pour des éléments de texte, mais, fondamentalement, c'est juste un conteneur avec des coins arrondis et une ombre qui sert d'ardoise vierge pour vos conceptions (même ces fonctions peuvent être désactivées via <a href="options.html">options</a>) . Ce style simple permet d'ajouter facilement des widgets comme une listview pour faire un <a href="#popupMenu" data-rel="popup">menu</a> ou une photo pour faire une <a href="#popupMap" data-rel="popup">lightbox</a> qui va jusqu'au bord du popup.</p>
 		
 		
 		<h2>Appel du plugin popup</h2>
@@ -82,21 +84,23 @@ $('#myPopupDiv').popup("close")
 		
 		<pre><code>
 &lt;div data-role="popup"&gt;
-	<strong>&lt;a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-popup-btn-close"&gt;Fermer&lt;/a&gt;</strong>
-	... le contenu du popup se place ici...
+	<strong>&lt;a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"&gt;Fermer&lt;/a&gt;</strong>
+	...le contenu du popup se place ici...
 &lt;/div&gt;
 		</code></pre>
 				
-		<a href="#popupVolume" data-rel="popup" data-role="button" data-inline="true">Popup avec un bouton fermer</a>
-			
-		<div data-role="popup" id="popupVolume" class="ui-content" style="min-width:280px;">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-popup-btn-close">Fermer</a>
-			<form>
-				<label for="slider-fill">Volume :</label>
-				<input type="range" name="slider-fill" id="slider-fill" step="10" value="60" min="0" max="100" data-highlight="true" />
-			</form>
+		<a href="#popupCloseRight" data-rel="popup" data-role="button" data-inline="true">Popup avec le bouton fermer à droite</a> <a href="#popupCloseLeft" data-rel="popup" data-role="button" data-inline="true">Popup avec le bouton fermer à gauche</a>
+		
+		<div data-role="popup" id="popupCloseRight">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a>
+			<p style="padding-right:10px;">J'ai un bouton fermer dans le coin supérieur droite.</p>
 		</div>
-
+		
+		<div data-role="popup" id="popupCloseLeft">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Fermer</a>
+			<p style="padding-left:10px;">J'ai un bouton fermer dans le coin supérieur gauche.</p>
+		</div>
+		
 		<h2>Ajout d'espacement</h2>
 		<p>Pour les popups avec du texte, l'espacement est nécessaire. Nous recommandons l'ajout de la classe <code>ui-content</code> au conteneur du popup qui ajoutera l'espacement standard de  15px, comme le conteneur contenant une page. Si vous avez besoin, écrivez vos propres styles pour créer un design plus personnalisé.</p>
 		
@@ -177,9 +181,9 @@ $('#myPopupDiv').popup("close")
 
 		<h2>Exemples de Popup</h2>
 		<p>Voici quelques exemples du monde réel qui combinent les différents paramètres et les styles que vous pouvez réaliser avec les popups:</p>
-		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a> <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Menu</a> <a href="#popupLogin" data-rel="popup" data-role="button" data-inline="true" data-transition="none">Formulaire</a> <a href="#popupPhoto" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Photo</a> <a href="#popupDialog" data-rel="popup" data-role="button" data-inline="true" data-transition="flow">Dialogue</a> <a href="#popupAccordion" data-rel="popup" data-role="button" data-inline="true" data-transition="flip">Accordéon</a>
+		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a> <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Menu</a> <a href="#popupLogin" data-rel="popup" data-role="button" data-inline="true" data-transition="none">Formulaire</a> <a href="#popupPhoto" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Photo</a> <a href="#popupDialog" data-rel="popup" data-role="button" data-inline="true" data-transition="flow">Dialogue</a> <a href="#popupAccordion" data-rel="popup" data-role="button" data-inline="true" data-transition="flip">Accordéon</a> <a href="#popupMap" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Carte</a> <a href="#popupVideo" data-rel="popup" data-role="button" data-inline="true" data-transition="none">Vidéo</a>
 
-		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e">
+		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
           <p>Voici un <strong>petit popup</strong> utilisé comme tooltip. Le texte sera renvoyé sur plusieurs lignes si nécessaire.</p>
 		</div>
 
@@ -200,7 +204,7 @@ $('#myPopupDiv').popup("close")
 		          <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a" />
 
 		          <label for="pw" class="ui-hidden-accessible">Mot de passe :</label>
-		          <input type="password" name="pw" id="pass" value="" placeholder="password" data-theme="a" />
+		          <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a" />
 
 		    	  <button type="submit" data-theme="b">Inscrivez vous</button>
 				</div>
@@ -208,8 +212,7 @@ $('#myPopupDiv').popup("close")
 		</div>
 		
 		<div data-role="popup" id="popupPhoto" data-overlay-theme="a" data-corners="false">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-popup-btn-close">Fermer</a><img src="../../toolbars/images/photo-run.jpeg" style="margin-bottom:-4px" alt="Photo Run">
-			<!-- TODO: Figure out why there is this extra 4px of space below images-->
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img src="../../toolbars/images/photo-run.jpeg" alt="Photo Run">
 		</div>
 
 
@@ -218,7 +221,8 @@ $('#myPopupDiv').popup("close")
 						<h1>Supprimer la Page ?</h1>
 					</div>
 					<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-						<p><strong>Etes-vous sûr de vouloir supprimer cette page ?</strong> Cette action ne peut pas être annulée.</p>
+						<h3 class="ui-title">Etes-vous sûr de vouloir supprimer cette page ?</h3>
+						<p>Cette action ne peut pas être annulée.</p>
 						<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Annuler</a> <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">Supprimer</a>  
 					</div>
 		</div>
@@ -244,6 +248,15 @@ $('#myPopupDiv').popup("close")
 				</div>
 			</div>
 		</div>
+
+		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a>
+			<div id="map_canvas"></div>
+		</div>
+				
+		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
+			<iframe src="http://player.vimeo.com/video/41135183?autoplay=1" width="497" height="298" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    </div>
 
 		<h2>Remarque : Le chainage des popups n'est pas permis</h2>
 		<p>Le framework ne prend pas en charge le chaînage des popups car il n'est pas possible d'intégrer un lien d'un popup à l'intérieur d'un autre popup. Tous les liens avec <code>data-rel="popup"</code> à l'intérieur d'un popup ne fera rien du tout.</p>
