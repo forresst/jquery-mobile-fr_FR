@@ -1,8 +1,8 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 40cf9e1b64ec269b70870c4339d174e2bb90a0e5 <> Date: Mon Jun 25 02:13:35 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 571c08e3b003ac1bbf85bf34b49b104b24dc69b5 <> Date: Wed Jun 27 01:58:52 2012 +0200
 * http://jquerymobile.com
 *
-* Copyright 2011 (c) jQuery Project
+* Copyright 2011-12 (c) The jQuery Foundation
 * Dual licensed under the MIT or GPL Version 2 licenses.
 * http://jquery.org/license
 *
@@ -2741,7 +2741,10 @@ var createHandler = function( sequential ){
 
 // generate the handlers from the above
 var sequentialHandler = createHandler(),
-	simultaneousHandler = createHandler( false );
+	simultaneousHandler = createHandler( false ),
+	defaultGetMaxScrollForTransition = function() {
+		return $.mobile.getScreenHeight() * 3;
+	};
 
 // Make our transition handler the public default.
 $.mobile.defaultTransitionHandler = sequentialHandler;
@@ -2764,12 +2767,8 @@ $.mobile._maybeDegradeTransition = function( transition ) {
 		return transition;
 };
 
-$.mobile = $.extend( {}, {
-	getMaxScrollForTransition:  function() {
-		return $.mobile.getScreenHeight() * 3;
-	}
-}, $.mobile );
-
+// Set the getMaxScrollForTransition to default if no implementation was set by user
+$.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defaultGetMaxScrollForTransition;
 })( jQuery, this );
 
 ( function( $, undefined ) {
@@ -5570,7 +5569,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					}
 
 				} else {
-					itemClass += " ui-li-static ui-body-" + itemTheme;
+					itemClass += " ui-li-static ui-btn-up-" + itemTheme;
 				}
 			}
 
@@ -6266,6 +6265,9 @@ $( document ).bind( "pagecreate create", function( e ){
 				ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
 			}
 			ui.container.append( this.element );
+			
+			// Add class to popup element 
+			this.element.addClass( "ui-popup" );
 
 			// Define instance variables
 			$.extend( this, {
@@ -6392,7 +6394,7 @@ $( document ).bind( "pagecreate create", function( e ){
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( x, y ) {
 			// Tolerances off the window edges
-			var tol = { l: 10, t: 30, r: 10, b: 30 },
+			var tol = { l: 15, t: 30, r: 15, b: 30 },
 			// rectangle within which the popup must fit
 				rc = {
 					l: tol.l,
@@ -6598,7 +6600,8 @@ $( document ).bind( "pagecreate create", function( e ){
 	// the process of opening, or already open
 	$.mobile.popup.popupManager = {
 		_currentlyOpenPopup: null,
-		_waitingForPopup: false,
+		_popupIsOpening: false,
+		_popupIsClosing: false,
 		_abort: false,
 
 		// Call _onHashChange if the hash changes /after/ the popup is on the screen
@@ -6681,12 +6684,12 @@ $( document ).bind( "pagecreate create", function( e ){
 				self._currentlyOpenPopup = popup;
 
 				self._navHook( function() {
-					self._waitingForPopup = true;
+					self._popupIsOpening = true;
 					self._currentlyOpenPopup.element.one( "opened", function() {
-						self._waitingForPopup = false;
+						self._popupIsOpening = false;
 					});
 					self._currentlyOpenPopup._open.apply( self._currentlyOpenPopup, args );
-					if ( !self._waitingForPopup && self._abort ) {
+					if ( !self._popupIsOpening && self._abort ) {
 						self._currentlyOpenPopup._immediate();
 					}
 				});
@@ -6696,8 +6699,9 @@ $( document ).bind( "pagecreate create", function( e ){
 		pop: function( popup ) {
 			var self = this;
 
-			if ( popup === self._currentlyOpenPopup ) {
-				if ( self._waitingForPopup ) {
+			if ( popup === self._currentlyOpenPopup && !self._popupIsClosing ) {
+				self._popupIsClosing = true;
+				if ( self._popupIsOpening ) {
 					self._currentlyOpenPopup.element.one( "opened", $.proxy( self, "_navUnhook" ) );
 				} else {
 					self._navUnhook();
@@ -6711,10 +6715,12 @@ $( document ).bind( "pagecreate create", function( e ){
 			self._abort = immediate;
 
 			if ( self._currentlyOpenPopup ) {
-				if ( immediate && self._waitingForPopup ) {
+				if ( immediate && self._popupIsOpening ) {
 					self._currentlyOpenPopup._immediate();
 				}
+				self._popupIsClosing = true;
 				self._currentlyOpenPopup.element.one( "closed", function() {
+					self._popupIsClosing = false;
 					self._currentlyOpenPopup = null;
 					$( self ).trigger( "done" );
 				});
@@ -7831,7 +7837,7 @@ $( document ).bind( "pagecreate create", function( e ){
 						if ( self.isMultiple ) {
 							$( this ).find( ".ui-icon" )
 								.toggleClass( "ui-icon-checkbox-on", option.selected )
-								.toggleClass( "ui-icon-radio-off", !option.selected );
+								.toggleClass( "ui-icon-checkbox-off", !option.selected );
 						}
 
 						// trigger change if value changed
@@ -7986,7 +7992,7 @@ $( document ).bind( "pagecreate create", function( e ){
 
 							// Multiple selects: add the "on" checkbox state to the icon
 							if ( self.isMultiple ) {
-								item.find( ".ui-icon" ).removeClass( "ui-icon-radio-off" ).addClass( "ui-icon-checkbox-on" );
+								item.find( ".ui-icon" ).removeClass( "ui-icon-checkbox-off" ).addClass( "ui-icon-checkbox-on" );
 							} else {
 								if( item.is( ".ui-selectmenu-placeholder" ) ) {
 									item.next().addClass( $.mobile.activeBtnClass );
@@ -8026,8 +8032,8 @@ $( document ).bind( "pagecreate create", function( e ){
 				}
 
 				var self = this,
-          $window = $( window ),
-          selfListParent = self.list.parent(),
+					$window = $( window ),
+					selfListParent = self.list.parent(),
 					menuHeight = selfListParent.outerHeight(),
 					menuWidth = selfListParent.outerWidth(),
 					activePage = $( "." + $.mobile.activePageClass ),
@@ -8049,7 +8055,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					if ( selector.length === 0 ) {
 						selector = self.list.find( "li.ui-btn:not(:jqmData(placeholder='true')) a" );
 					}
-					selector.first().focus();
+					selector.first().focus().closest( "li" ).addClass( "ui-btn-down-" + widget.options.theme );
 				}
 
 				if ( menuHeight > screenHeight - 80 || !$.support.scrollTop ) {
@@ -8102,7 +8108,7 @@ $( document ).bind( "pagecreate create", function( e ){
 					needPlaceholder = true,
 					optgroups = [],
 					lis = [],
-					dataIcon = self.isMultiple ? "radio-off" : "false";
+					dataIcon = self.isMultiple ? "checkbox-off" : "false";
 
 				self.list.empty().filter( ".ui-listview" ).listview( "destroy" );
 

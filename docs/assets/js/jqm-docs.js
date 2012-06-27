@@ -29,7 +29,6 @@ $(function(){
 	});
 });
 
-
 // Affiche la version de jQM
 $(document).bind( 'pageinit', function() {
 	var version = $.mobile.version || "dev",
@@ -38,12 +37,18 @@ $(document).bind( 'pageinit', function() {
 		str = (words[1] || "Final"),
 		html = ver;
 
-	str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+	if( str.indexOf( "rc" ) == -1 ){
+		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
+	} else {
+		str = str.toUpperCase().replace(".", "");
+	}
+
 	if ( $.mobile.version && str ) {
 		html += " <b>" + str + "</b>";
 	}
+
 	$( "p.jqm-version" ).html( html );
-})
+});
 
 // Désactiver AJAX pour la navigation des fichiers locaux
 if ( location.protocol.substr(0,4)  === 'file' ||
@@ -123,4 +128,20 @@ if ( location.protocol.substr(0,4)  === 'file' ||
        $( "div.footer-docs" ).append( infoadd );
     });
   });
+}
+
+// Example de popup Map
+function initialize() {
+	var myLatlng = new google.maps.LatLng(51.520838,-0.140261);
+	var myOptions = {
+		zoom: 15,
+		center: myLatlng,
+		mapTypeId: google.maps.MapTypeId.ROADMAP
+	}
+	var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+	var marker = new google.maps.Marker({
+		position: myLatlng, 
+		map: map,
+		title:"Where I work!"
+	});  
 }
