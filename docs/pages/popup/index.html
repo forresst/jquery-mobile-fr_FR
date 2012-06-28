@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +15,7 @@
 	<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
 
 </head>
-<body onload="initialize()">
+<body>
 
 	<div data-role="page" class="type-interior">
 
@@ -53,7 +53,7 @@
 			<p>Il s'agit d'un popup de base, sans options définies.</p>
 		</div>
 		
-		<p>Le framework ajoute de petite marge pour des éléments de texte, mais, fondamentalement, c'est juste un conteneur avec des coins arrondis et une ombre qui sert d'ardoise vierge pour vos conceptions (même ces fonctions peuvent être désactivées via <a href="options.html">options</a>) . Ce style simple permet d'ajouter facilement des widgets comme une listview pour faire un <a href="#popupMenu" data-rel="popup">menu</a> ou une photo pour faire une <a href="#popupMap" data-rel="popup">lightbox</a> qui va jusqu'au bord du popup.</p>
+		<p>Le framework ajoute de petite marge pour des éléments de texte, mais, c'est juste un conteneur avec des coins arrondis et une ombre qui sert d'ardoise vierge pour vos conceptions (même ces fonctions peuvent être désactivées via <a href="options.html">options</a>) . Ce style simple permet d'ajouter facilement des widgets comme une listview pour faire un <a href="#popupMenu" data-rel="popup">menu</a> ou une photo pour faire une <a href="#popupPhoto" data-rel="popup">lightbox</a> qui va jusqu'au bord du popup.</p>
 		
 		
 		<h2>Appel du plugin popup</h2>
@@ -249,14 +249,14 @@ $('#myPopupDiv').popup("close")
 			</div>
 		</div>
 
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
+		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="d" class="ui-content">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a>
-			<div id="map_canvas"></div>
+			<iframe src="map.html" width="480" height="320" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 				
 		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
 			<iframe src="http://player.vimeo.com/video/41135183?autoplay=1" width="497" height="298" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-    </div>
+    		</div>
 
 		<h2>Remarque : Le chainage des popups n'est pas permis</h2>
 		<p>Le framework ne prend pas en charge le chaînage des popups car il n'est pas possible d'intégrer un lien d'un popup à l'intérieur d'un autre popup. Tous les liens avec <code>data-rel="popup"</code> à l'intérieur d'un popup ne fera rien du tout.</p>

@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 571c08e3b003ac1bbf85bf34b49b104b24dc69b5 <> Date: Wed Jun 27 01:58:52 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 0e17b5d7c7b7c3beeae5cbcb563a18ed6accb4fd <> Date: Thu Jun 28 00:13:04 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2011-12 (c) The jQuery Foundation
@@ -2000,6 +2000,7 @@ var fakeBody = $( "<body>" ).prependTo( "html" ),
 	fbCSS = fakeBody[ 0 ].style,
 	vendors = [ "Webkit", "Moz", "O" ],
 	webos = "palmGetResource" in window, //only used to rule out scrollTop
+	opera = window.opera,
 	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
 	bb = window.blackberry; //only used to rule out box shadow, as it's filled opaque on BB
 
@@ -2111,7 +2112,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ),
+	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ) && !opera,
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
