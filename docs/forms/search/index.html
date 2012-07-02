@@ -53,13 +53,13 @@
 				<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms-all-mini.html">version mini</a>. </p>
 
 <pre><code>	
-&lt;label for="search-basic"&gt;Texte de recherche :&lt;/label&gt;
-&lt;input type="search" name="search" id="searc-basic" value="" <strong>data-mini="true"</strong> /&gt;
+&lt;label for="search-mini"&gt;Texte de recherche :&lt;/label&gt;
+&lt;input type="search" name="search-mini" id="search-mini" value="" <strong>data-mini="true"</strong> /&gt;
 </code></pre>
 
 				<p>Ceci va produire une entrée de recherche pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
 		         <label for="search-mini">Saisie pour recherche :</label>
-				 <input type="search" name="search" id="search-mini" value="" />
+				 <input type="search" name="search-mini" id="search-mini" value="" />
 
 				<h2>Conteneurs de champs</h2>
 				
@@ -67,22 +67,22 @@
 
 <pre><code>	
 <strong>&lt;div data-role="fieldcontain"&gt;
-</strong>    &lt;label for="search"&gt;Recherche :&lt;/label&gt;
-    &lt;input type="search" name="password" id="search" value="" /&gt;
+</strong>    &lt;label for="search-2"&gt;Recherche :&lt;/label&gt;
+    &lt;input type="search" name="search-2" id="search-2" value="" /&gt;
 <strong>&lt;/div&gt;
 </strong></code></pre>	
 			 
 			<p>La zone de recherche est maintenant affichée comme ceci :</p>
 			<div data-role="fieldcontain">
-	         <label for="search">Saisie pour recherche :</label>
-	         <input type="search" name="search2" id="search" value="" />
+	         <label for="search-2">Saisie pour recherche :</label>
+	         <input type="search" name="search-2" id="search-2" value="" />
 			</div>
 
 			<h2>Thématisation</h2>
 			<p>L'attribut <code>data-theme</code> peut être ajouter à la saisie d'une recherche pour définir un thème avec une lettre de nuancier.</p>
 			<div data-role="fieldcontain">
-	         <label for="searchA">Saisie pour recherche :</label>
-	         <input type="search" name="search3" id="searchA" value="" data-theme="a" />
+	         <label for="search-3">Saisie pour recherche :</label>
+	         <input type="search" name="search-3" id="search-3" value="" data-theme="a" />
 			</div>
 
 			<h2>Paramétrage du texte du bouton de nettoyage</h2>

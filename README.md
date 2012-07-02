@@ -50,9 +50,23 @@ Lorsque vous soumettez un  pull request de révision, il y a quelques étapes im
 2. Suivez le [guide jQuery Core style](http://docs.jquery.com/JQuery_Core_Style_Guidelines)
 3. Limitez la portée à un(e) problème/fonctionnalité
 4. Les commits doivent ciblés moins de 10 à 20 lignes
-5. Évitez de fusionner des commits (Voir le chapitre de Pro Git's [sur le rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) ci-dessous)
+5. Évitez de fusionner des commits (Voir le chapitre de Pro Git's [sur le rebasing](http://git-scm.com/book/ch3-6.html), section [Rebasing](#rebasing) ci-dessous) Ajouter le message commit approprié (voir ci-dessous)
 
 Pris dans leur ensemble, cela simplifie l'examen du contributeur de votre pull request.
+
+### Messages de Commit 
+
+Les messages de Commit doivent inclure 4 composants :
+* Le WHERE - un seul mot qui catégorise et fournit un contexte pour le commit et son message, suivi par deux-points (:). C'est typiquement le nom du plugin en cours d'élaboration, mais parfois peut-être quelque chose comme Build: ou Docs:
+* Le WHAT - un résumé suffisant de la solution ou d'une modification (par exemple: modified the foo to no longer bar), suivie d'un point (.)
+* Le WHY #Num - le numéro de ticket avec le signe # pour créer un lien (exemple: #1234), suivi par le tiret (-)
+* Le WHY Name - le nom du ticket. Notez que cette synthèse est différente de celle de la correction. Il s'agit d'une brève description du problème (par exemple: boîte de dialogue:IE6 s'est planté si foo est défini à bar)
+
+Combinés en un seul, voici un exemple complet :
+
+        "Dialog: modified the foo to no longer bar. Fixed #1234 - dialog: IE6 crashed when foo is set to bar"
+        \WHERE/:\------------- WHAT -------------/.\  WHY #Num /-\---------------- WHY Name ----------------/
+    
 
 ## Construction/Personnalisation
 

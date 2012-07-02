@@ -105,15 +105,18 @@
 		}
 	});
 
-	function popupEnhancementTests( prefix ) {
-		ok( $( "#test-popup" ).data( "popup" ),  prefix + ", popup div is associated with a popup widget" );
-		ok( $( "#test-popup" ).parent().hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
-		ok( $( "#test-popup" ).parent().parent().hasClass( "ui-page" ), prefix + ", popup div grandparent is the page" );
-		ok( $( "#test-popup" ).parent().prev().hasClass( "ui-popup-screen" ), prefix + ", popup div is preceded by its screen" );
-		ok( $( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->", prefix + ", there is a placeholder in the popup div's original location" );
+	function popupEnhancementTests( $sel, prefix ) {
+		ok( $sel.data( "popup" ),  prefix + ", popup div is associated with a popup widget" );
+		ok( $sel.hasClass( "ui-popup" ),  prefix + ", popup payload has class 'ui-popup'" );
+		ok( $sel.parent().hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
+		ok( $sel.parent().parent().hasClass( "ui-page" ), prefix + ", popup div grandparent is the page" );
+		ok( $sel.parent().prev().hasClass( "ui-popup-screen" ), prefix + ", popup div is preceded by its screen" );
 	}
 
-	test( "Popup is enhanced correctly", function() { popupEnhancementTests( "When autoenhanced" ); } );
+	test( "Popup is enhanced correctly", function() {
+		popupEnhancementTests( $( "#test-popup" ), "When autoenhanced" );
+		ok( $( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->", "When autoenhanced, there is a placeholder in the popup div's original location" );
+	});
 
 	test( "Popup rearranges DOM elements correctly when it is destroyed and again when it is re-created", function() {
 		$( "#test-popup" ).popup( "destroy" );
@@ -124,7 +127,21 @@
 
 		$( "#test-popup" ).popup();
 
-		popupEnhancementTests( "When re-created" );
+		popupEnhancementTests( $( "#test-popup" ), "When re-created" );
+		ok( $( "#page-content" ).children().first().html() === "<!-- placeholder for test-popup -->", "When re-created, there is a placeholder in the popup div's original location" );
+	});
+
+	test( "On-the-fly popup is enhanced and de-enhanced correctly", function() {
+		var $container = $( "<div></div>" ).appendTo( $( "#page-content" ) ),
+			$payload = $( "<p id='otf-popup'>This is an on-the-fly-popup</p>" ).appendTo( $container );
+
+		$payload.popup();
+
+		popupEnhancementTests( $payload, "When created on-the-fly" );
+		ok( $container.children().first().html() === "<!-- placeholder for otf-popup -->", "When created on-the-fly, there is a placeholder in the popup div's original location" );
+		$payload.popup( "destroy" );
+		ok( !$payload.attr( "class" ), "After destroying on-the-fly popup, the payload has no 'class' attribute" );
+		ok( $container.children().is( $payload ), "After destroying on-the-fly popup, its payload is returned to its original location" );
 	});
 
 	asyncTest( "Popup opens and closes", function() {
