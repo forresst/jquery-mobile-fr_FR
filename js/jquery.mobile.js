@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 0e17b5d7c7b7c3beeae5cbcb563a18ed6accb4fd <> Date: Thu Jun 28 00:13:04 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 33ddcd5960ab121f891db030d44013ce5fe6b02f <> Date: Sun Jul 1 18:58:06 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2011-12 (c) The jQuery Foundation
@@ -6575,8 +6575,10 @@ $( document ).bind( "pagecreate create", function( e ){
 		},
 
 		_destroy: function() {
-			// Put the element back to where the placeholder was
-			this.element.insertAfter( this._ui.placeholder );
+			// Put the element back to where the placeholder was and remove the "ui-popup" class
+			this.element
+				.insertAfter( this._ui.placeholder )
+				.removeClass( "ui-popup" );
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();

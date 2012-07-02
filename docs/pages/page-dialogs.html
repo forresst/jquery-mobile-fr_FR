@@ -32,63 +32,66 @@
 			&lt;a href="foo.html" data-rel="dialog"&gt;Ouvrir la boîte de dialogue&lt;/a&gt;
 			</code>
 			</p>
-			
+	
 			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Ouvrir la boîte de dialogue</a>
-			
 
-			
+
+
 			<h2>Transitions</h2>
 			<p>Par défaut, la boîte de dialogue sera ouverte avec la transition 'pop'. Comme toutes les pages, vous pouvez spécifier n'importe quelle <a href="page-transitions.html">page de transition</a> que vous voulez sur la boîte de dialogue en ajoutant l'attribut  <code>data-transition</code> au lien. Pour mieux ressembler à une boîte de dialogue, nous recommandons de spécifier une transition de "pop", "slideup" ou "flip".</p>
-			
+
 <code>
 &lt;a href="foo.html" data-rel="dialog" data-transition="pop"&gt;Ouvrir la boîte de dialogue&lt;/a&gt;
 </code>
-			
+
 			<div>
 			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">data-transition="pop"</a>
 			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">data-transition="slidedown"</a>
 			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="flip">data-transition="flip"</a>
 			</div>
-	
-	
+
+
 			<h2>Fermeture des boîtes de dialogue</h2>
 			<p>Quand un lien est cliqué dans une boîte de dialogue, le framework fermera automatiquement la boîte de dialogue et la transition vers la page demandée, comme si la boîte de dialogue était une page normale. Pour créer un bouton "Annuler" dans une boîte de dialogue, faites un lien seulement vers la page qui a déclenché la boîte de dialogue pour l'ouvrir et ajouter l'attribut <code>data-rel="back"</code> à votre lien. Ce schéma de liaison à la page précédente est également utilisable  tel quel dans des dispositifs non-JS.</p>
 			<p>Pour les liens générés par JavaScript, vous pouvez simplement définir l'attribut href à "#" et utilisez l'attribut <code>data-rel="back"</code>. Vous pouvez aussi appeler la méthode <code>close()</code> de la boîte de dialogue pour fermer par programmation les boîtes de dialogue, par exemple : <code>$('.ui-dialog').dialog('close')</code>. </p>
-			
+
 			<h3>Paramètrage du texte du bouton de fermeture</h3>
 			<p>Tout comme le plugin page, vous pouvez définir le texte du bouton de fermeture d'une boîte de dialogue grâce à l'option ou à l'attribut de données. Cette option est utilisée pour personnaliser le texte du bouton de fermeture qui est utile pour traduire ceci dans différentes langues. Ceci est affiché par défaut comme un bouton d'icône seule, de sorte que le texte n'est pas visible à l'écran, mais est lisible par les lecteurs d'écran et c'est donc une fonctionnalité d'accessibilité importante. L'option peut être configurée pour toutes les boîtes de dialogue en liant l'événement <code>mobileinit</code> et en définissant la propriété <code>$.mobile.dialog.prototype.options.closeBtnText</code> en une chaîne de votre choix, ou vous pouvez placer l'attribut de données <code>data-close-btn-text</code> pour configurer le texte de votre balisage.
 			</p>
-			
+
 			<h2>Historique &amp; comportement du bouton Retour</h2>
 			<p>Les boîtes de dialogue sont généralement utilisés pour supporter des actions au sein d'une page, le framework n'inclut pas les boîtes de dialogue dans le suivi de l'historique d'état du hash. Cela signifie que les boîtes dialogues n'apparaîtront pas dans la chronologie de votre historique de navigation lorsque le bouton Retour sera cliqué. Par exemple, si vous êtes sur une page, cliquez sur un lien pour ouvrir une boîte de dialogue, fermez la boîte de dialogue, puis naviguer vers une autre page, si vous deviez cliquer sur le bouton Précédent du navigateur, à ce stade, vous reviendrez à la première page, et non pas sur la boîte de dialogue.</p>
-			
+
+			<h2>Chainage de boite de dialogue</h2>
+			<p>Veuillez notez : Si une boîte de dialogue s'ouvre dans une autre boîte de dialogue (chainage), la fermeture du dernier avec un lien de type <code>data-rel="back"</code> naviguera toujours vers la boîte de dialogue précédente jusqu'à ce que la racine de la page de type <code>data-role="page"</code> soit atteinte. Ceci garantit une navigation cohérente entre les boîtes de dialogue.</p>
+
 			<h2>Style et Thématisation</h2>
 			<p>Les boîtes de dialogue peuvent être stylisées avec des nuanciers de thème différents, comme n'importe quelle page en ajoutant les attributs <code>data-theme</code> aux conteneurs de l'entête, du contenu et du pied de page. Voici un exemple une différente conception d'une boîte de dialogue :</p>
 				<a href="dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Un schéma de couleur alternatif</a>
-				
-			<p>Les boîtes de dialogue apparaissent en flottant au dessus d'une couche superposée. Cette superposition adopte la couleur de contenu du nuancier A par défaut, mais l'attribut <code>data-overlay-theme</code> peut être ajouté à l'enveloppe de la page pour définir la superposition avec une lettre du nuancier. Voici un exemple d'une boîte de dialogue avec la superposition définie avec le nuancier e :</p>
+
+			<p>Les boîtes de dialogue apparaissent en flottant au dessus d'une couche superposée. Cette superposition adopte la couleur de contenu du nuancier "a" par défaut, mais l'attribut <code>data-overlay-theme</code> peut être ajouté à l'enveloppe de la page pour définir la superposition avec une lettre du nuancier. Voici un exemple d'une boîte de dialogue avec la superposition définie avec le nuancier "e" :</p>
 				<a href="dialog-overlay.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Nuancier de superposition personnalisé</a>
-		
-		
+
+
 			<p>Les boîtes de dialogue peuvent être utilisées comme une feuille de contrôle pour offrir de multiples boutons si vous enlever simplement le haut de la marge de l'élément conteneur du dialogue du inner. Par exemple, si votre page de boîte de dialogue a une classe <code>my-dialog</code>, vous pouvez ajouter ce CSS pour épingler la boîte de dialogue en haut : <code>.ui-dialog.my-dialog .ui-dialog-contain { margin-top: 0 }</code>, ou vous pouvez juste appliquer le style à toutes les boîtes de dialogue avec <code>.ui-dialog .ui-dialog-contain { margin-top: 0 }</code>.</p>
 						<a href="dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">Partagez vos photos ...</a>
-			
+
 			<h2>Largeur et marges de boîte de dialogue</h2>
 			<p>Par souci de lisibilité, les boîtes de dialogue ont par défaut un <code>max-width</code> de 500 pixels (plus 15px de marge de chaque côté). Il y a aussi un <code>margin</code> pour le haut à 10% pour donner une marge aux boîtes de dialogue plus grande que les écrans, mais se replie en une petite marge sur les smartphones. Pour remplacer ces styles, ajoutez le CSS suivant qui écrase les règles de votre feuille de style et peaufine si besoin :</p>
 
-<code><pre>
+<pre><code>
 .ui-dialog .ui-header, 
 .ui-dialog .ui-content, 
 .ui-dialog .ui-footer { 
 <strong>	max-width: 500px; 
 	margin: 10% auto 15px auto; </strong>
 }
-</pre></code>
-
-			
+</code></pre>
 
 
-			
+
+
+
 	</div><!--/content-primary -->		
 
 	<div class="content-secondary">
