@@ -38,6 +38,20 @@
 			<p>Le plugin saisie de texte a les méthodes suivantes :</p>
 
 		<dl>
+			<dt><code>clearSearchButtonText</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "clear text"</p>
+				<p>Définit le texte utilisé pour le bouton qui efface le texte de la saisie de la recherche.</p>
+				<pre><code>$('.selector').textinput(<strong>{ clearSearchButtonText: "valeur personnalisée" }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>disabled</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">par défaut : false</p>
+				<p>Définit l'état par défaut de la recherche, à désactiver si la valeur est à "true".</p>		
+				<pre><code>$('.selector').textinput(<strong>{ disabled: "true" }</strong>);</code></pre>
+			</dd>
+		
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input:not([type])"</p>
@@ -57,13 +71,6 @@
 				<p class="default">par défaut : null, hérité d'un parent</p>
 				<p>Définit le jeu de couleurs (nuancier) pour toutes les instances de ce widget. Il accepte une seule lettre de A à Z qui correspond aux nuanciers inclus dans votre thème. Par défaut, il hérite de la même couleur de nuancier que le conteneur parent qui le possède s'il n'est pas explicitement défini. Cette option est également définie comme un attribut de données : <code>data-theme="a"</code></p>					
 				<pre><code>$('.selector').textinput(<strong>{ theme: "a" }</strong>);</code></pre>
-			</dd>
-			
-			<dt><code>clearSearchButtonText</code> <em>string</em></dt>
-			<dd>
-				<p class="default">Par défaut : "clear text"</p>
-				<p>Définit le texte utilisé pour le bouton qui efface le texte de la saisie de la recherche.</p>
-				<pre><code>$('.selector').textinput(<strong>{ clearSearchButtonText: "valeur personnalisée" }</strong>);</code></pre>
 			</dd>
 			
 		</dl>

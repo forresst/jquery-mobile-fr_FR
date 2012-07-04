@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 33ddcd5960ab121f891db030d44013ce5fe6b02f <> Date: Sun Jul 1 18:58:06 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 5fbf4256c2ccab90ca569ad4f26d4936d85bc67c <> Date: Wed Jul 4 00:13:08 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2011-12 (c) The jQuery Foundation
@@ -4670,7 +4670,7 @@ $( document ).bind( "pagecreate", function( e ) {
 
 			if( role === "header") {
 				// Right,left buttons
-				$headeranchors	= $this.children( "a" );
+				$headeranchors	= $this.children( "a, button" );
 				leftbtn	= $headeranchors.hasClass( "ui-btn-left" );
 				rightbtn = $headeranchors.hasClass( "ui-btn-right" );
 
@@ -6485,9 +6485,10 @@ $( document ).bind( "pagecreate create", function( e ){
 
 		_open: function( x, y, transition ) {
 			var self = this,
+				$win = $( window ),
 				coords = self._placementCoords(
-					( undefined === x ? window.innerWidth / 2 : x ),
-					( undefined === y ? window.innerHeight / 2 : y ) );
+					( undefined === x ? $win.width() / 2 + $win.scrollLeft() : x ),
+					( undefined === y ? $win.height() / 2 + $win.scrollTop() : y ) );
 
 			// Count down to triggering "opened" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -6813,7 +6814,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
 		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type])",
-		clearSearchButtonText: "clear text"
+		clearSearchButtonText: "clear text",
+		disabled: false
 	},
 
 	_create: function() {
@@ -6929,16 +6931,31 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 				$( window ).load( keyup );
 			}
 		}
+		if ( input.attr( "disabled" ) ) {
+			this.disable();
+		}
 	},
 
 	disable: function(){
-		( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).addClass( "ui-disabled" );
+		
+		if ( this.element.attr( "disabled", true ).is( "[type='search'],:jqmData(type='search')" ) ) {
+			this.element.parent().addClass( "ui-disabled" );
+		} else {
+			this.element.addClass( "ui-disabled" );
+		}
+		return this._setOption( "disabled", true );
+			
 	},
 
 	enable: function(){
-		( this.element.attr( "disabled", false).is( "[type='search'],:jqmData(type='search')" ) ?
-			this.element.parent() : this.element ).removeClass( "ui-disabled" );
+		
+		if ( this.element.attr( "disabled", false ).is( "[type='search'],:jqmData(type='search')" ) ) {
+			this.element.parent().removeClass( "ui-disabled" );
+		} else {
+			this.element.removeClass( "ui-disabled" );
+		}
+		return this._setOption( "disabled", false );
+			
 	}
 });
 
