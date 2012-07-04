@@ -38,6 +38,13 @@
 			<p>Le plugin saisie de texte a les méthodes suivantes :</p>
 
 		<dl>
+			<dt><code>disabled</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">par défaut : false</p>
+				<p>Définit l'état par défaut de la saisie du texte, à désactiver si la valeur est à "true".</p>		
+				<pre><code>$('.selector').textinput(<strong>{ disabled: "true" }</strong>);</code></pre>
+			</dd>
+			
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input:not([type])"</p>
