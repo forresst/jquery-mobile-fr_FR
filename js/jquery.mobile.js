@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 5fbf4256c2ccab90ca569ad4f26d4936d85bc67c <> Date: Wed Jul 4 00:13:08 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 9d093546b40392532986de743528dd6b5aeb5713 <> Date: Wed Jul 4 23:27:56 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2011-12 (c) The jQuery Foundation
@@ -6052,7 +6052,7 @@ $.widget( "mobile.button", $.mobile.widget, {
 		}
 
 		if(  $el.attr( "type" ) === "submit" || $el.attr( "type" ) === "reset" ) {
-			classes += "ui-submit";
+			classes ? classes += " ui-submit" :  classes = "ui-submit";
 		}
 		$( "label[for='" + $el.attr( "id" ) + "']" ).addClass( "ui-submit" );
 
