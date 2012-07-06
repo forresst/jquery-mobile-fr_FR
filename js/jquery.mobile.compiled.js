@@ -1,14 +1,3 @@
-/*
-* jQuery Mobile Framework Git Build: SHA1: 909b940c7b81fa5e5b5f94ddcb817ad137620cb7 <> Date: Fri Jul 6 01:31:22 2012 +0200
-* http://jquerymobile.com
-*
-* Copyright 2012 jQuery Foundation and other contributors
-* Dual licensed under the MIT or GPL Version 2 licenses.
-* http://jquery.org/license
-*
-*/
-
-
 (function ( root, doc, factory ) {
 	if ( typeof define === "function" && define.amd ) {
 		// AMD. Register as an anonymous module.
