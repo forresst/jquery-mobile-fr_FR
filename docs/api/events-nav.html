@@ -167,7 +167,7 @@ $(document).bind("mobileinit", function(){
 		<h4 style="margin:.5em 0">Important : Utilisez <code>pageInit()</code> à la place de <code>$(document).ready()</code></h4>
 		<p>La première chose que vous apprenez dans jQuery est d'appeler le code à l'intérieur de la fonction <code>$(document).ready()</code> où tout va exécuter dès que le DOM est chargé. Cependant, dans jQuery Mobile, Ajax est utilisé pour charger le contenu de chaque page dans le DOM où vous naviguez, et le gestionnaire DOM s'exécute que pour la première page. Pour exécuter du code à chaque fois qu'une nouvelle page est chargée et créée, vous pouvez lier l'événement  <code>pageinit</code>. Cet événement est expliqué en détail au bas de cette page.</p></div>
 
-      <p>  &nbsp;</p>
+      <p>&nbsp; </p>
 		<div class="ui-body ui-body-e">
 		<h4 style="margin:.5em 0">Important : <code>pageCreate()</code> contre <code>pageInit()</code></h4>
    <p> Avant la version bêta 2, il était recommandait de lier l'événement <code>pagecreate</code>, pour ceux qui voulaient manipuler une page améliorée par jQuery mobile et le balisage de widget.  Dans la version bêta 2, un changement interne a été faite pour dissocier chacun des widgets en liant l'événement <code>pagecreate</code> à la place des appels directs aux méthodes du widget. Par conséquence, les utilisateurs qui liaient <code>pagecreate</code> depuis <code>mobileinit</code> trouvaient la liaison d'exécution avant que le balisage ait été amélioré par tous les plugins. En accord avec le cycle de vie de production des widgets de jQuery UI, la méthode d'initialisation est appelée <strong>après</strong> la méthode de création, de sorte que l'événement <code>pageinit</code> se synchronise correctement avec la manipulation d'amélioration du DOM et/ou des objets Javascript.</p>
@@ -573,7 +573,7 @@ $( '#aboutPage' ).live( 'pageinit',function(event){
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
-		<p>© 2011-12 The jQuery Foundation</p>
+		<p>© 2012 jQuery Fondation et les autres contributeurs</p>
 </div>
 
 </div><!-- /page -->
