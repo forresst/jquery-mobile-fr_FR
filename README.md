@@ -38,9 +38,12 @@ Lorsqu'un [problème est sousmis sur github](https://github.com/jquery/jquery-mo
 3. Les étapes pour le reproduire
 4. Le résultat attendu
 5. Le résultat actuel
-6. Navigateurs/plateformes testés
+6. Version de jQuery Mobile
+7. Navigateurs/plateformes testés
 
 En outre, dans l'intérêt de créer des problèmes plus lisibles, merci d'inclure des extraits de code à l'intérieur d'une triple boîte backtick appropriée pour l'extrait de code JavaScript/HTML/CSS sur lequel vous souhaitez discuter. Plus d'informations sont disponibles sur la [page d'introduction](http://github.github.com/github-flavored-markdown/) pour "github flavored markdown" (regardez Syntax Highlighting).
+
+Avant d'ouvrir un nouveau ticket, veuillez vérifier qu'un problème similaire n'est pas déjà était signalé. Astuce : En plus de l'outil de recherche des issues, vous pouvez filtrer les problèmes par le label.
 
 ## Pull Requests
 
