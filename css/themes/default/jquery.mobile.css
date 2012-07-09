@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 8d5fb2429957c53e057445079f9cd04f5df03d53 <> Date: Sat Jul 7 12:05:44 2012 +0100
+* jQuery Mobile Framework Git Build: SHA1: 01ad182d50f3c050f1b6b4f8644434f70590d360 <> Date: Sun Jul 8 16:43:26 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -808,17 +808,14 @@ a.ui-link-inherit {
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
 .ui-disabled {
-	opacity: 							.3;
+	filter: Alpha(Opacity=30);
+	opacity: .3;
+	zoom: 1;
 }
 .ui-disabled,
 .ui-disabled a {
 	cursor: default !important;
 	pointer-events: none;
-}
-.ui-disabled .ui-btn-text {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=30)";
-	filter: alpha(opacity=30);
-	zoom: 1;
 }
 /* Icons
 -----------------------------------------------------------------------------------------------------------*/
@@ -1038,8 +1035,8 @@ a.ui-link-inherit {
 -----------------------------------------------------------------------------------------------------------*/
 .ui-overlay {
 	background: #666;
-	opacity: .5;
 	filter: Alpha(Opacity=50);
+	opacity: .5;
 	position: absolute;
 	width: 100%;
 	height: 100%;
@@ -1129,12 +1126,12 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 /* loading screen */
 .ui-loading .ui-loader { display: block; }
 .ui-loader { display: none; z-index: 9999999; position: fixed; top: 50%; left: 50%; border:0; }
-.ui-loader-default { background: none; opacity: .18; width: 46px; height: 46px; margin-left: -23px; margin-top: -23px; }
-.ui-loader-verbose { width: 200px; opacity: .88; box-shadow: 0 1px 1px -1px #fff; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
+.ui-loader-default { background: none; filter: Alpha(Opacity=18); opacity: .18; width: 46px; height: 46px; margin-left: -23px; margin-top: -23px; }
+.ui-loader-verbose { width: 200px; filter: Alpha(Opacity=88); opacity: .88; box-shadow: 0 1px 1px -1px #fff; height: auto; margin-left: -110px; margin-top: -43px; padding: 10px; }
 .ui-loader-default h1 { font-size: 0; width: 0; height: 0; overflow: hidden; }
 .ui-loader-verbose h1 { font-size: 16px; margin: 0; text-align: center; }
 .ui-loader .ui-icon { background-color: #000; display: block; margin: 0; width: 44px; height: 44px; padding: 1px; -webkit-border-radius: 36px; -moz-border-radius: 36px; border-radius: 36px; }
-.ui-loader-verbose .ui-icon { margin: 0 auto 10px; opacity: .75; }
+.ui-loader-verbose .ui-icon { margin: 0 auto 10px; filter: Alpha(Opacity=75); opacity: .75; }
 .ui-loader-textonly { padding: 15px; margin-left: -115px; }
 .ui-loader-textonly .ui-icon { display: none; }
 .ui-loader-fakefix { position: absolute; }
@@ -1753,6 +1750,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 .ui-header-fullscreen,
 .ui-footer-fullscreen {
+	filter: Alpha(Opacity=90);
 	opacity: .9;
 }
 .ui-page-header-fixed {
@@ -1874,7 +1872,10 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-mini.ui-btn-icon-bottom .ui-icon,
 .ui-mini .ui-btn-icon-bottom .ui-icon { bottom: 5px; }
 /*hiding native button,inputs */
-.ui-btn-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: none; opacity: .1; cursor: pointer; background: #fff; background: rgba(255,255,255,0); filter: Alpha(Opacity=0); font-size: 1px; border: none; text-indent: -9999px; }
+.ui-btn-hidden { position: absolute; top: 0; left: 0; width: 100%; height: 100%; -webkit-appearance: none; cursor: pointer; background: #fff; background: rgba(255,255,255,0); filter: Alpha(Opacity=0); opacity: .1; font-size: 1px; border: none; text-indent: -9999px; }
+/* Fixes IE/WP filter alpha opacity bugs */
+.ui-disabled .ui-btn-hidden { display: none; }
+.ui-disabled { z-index: 1; }
 .ui-field-contain .ui-btn.ui-submit { margin: 0; }
 label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .3em; display: block; }
 @media all and (min-width: 450px){
@@ -1978,8 +1979,8 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	height: 100%;
 	border: 0;
 	position: absolute;
-	opacity: 0;
 	filter: Alpha(Opacity=50);
+	opacity: 0;
 	z-index: 1099;
 }
 .ui-popup-screen-background-hack {
@@ -2069,10 +2070,8 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	margin-bottom: 0;
 }
 .ui-popup > img {
-	width: auto;
-	height: auto;
 	max-width: 100%;
-	max-height: 100%;
+	height: auto;
 	vertical-align: middle;
 }
 .ui-popup > iframe {
@@ -2136,12 +2135,15 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-select select { position: absolute; left: -9999px; top: -9999px; }
 .ui-select .ui-btn { overflow: hidden; opacity: 1; }
 .ui-field-contain .ui-select .ui-btn { margin: 0; }
-/* Fixes #2588 — When Windows Phone 7.5 (Mango) tries to calculate a numeric opacity for a select—including “inherit”—without explicitly specifying an opacity on the parent to give it context, a bug appears where clicking elsewhere on the page after opening the select will open the select again. */
-.ui-select .ui-btn select { cursor: pointer; -webkit-appearance: none; left: 0; top:0; width: 100%; min-height: 1.5em; min-height: 100%; height: 3em; max-height: 100%; opacity: 0; -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)"; filter: alpha(opacity=0); z-index: 2; }
+/* Fixes #2588: When Windows Phone 7.5 (Mango) tries to calculate a numeric opacity for a select (including "inherit") without explicitly specifying an opacity on the parent to give it context, a bug appears where clicking elsewhere on the page after opening the select will open the select again. */
+.ui-select .ui-btn select { cursor: pointer; -webkit-appearance: none; left: 0; top:0; width: 100%; min-height: 1.5em; min-height: 100%; height: 3em; max-height: 100%; filter: Alpha(Opacity=0); opacity: 0; z-index: 2; }
 .ui-select .ui-disabled { opacity: .3; }
-@-moz-document url-prefix() {.ui-select .ui-btn select { opacity: 0.0001; }}
-.ui-select .ui-btn.ui-select-nativeonly { border-radius: 0; }
-.ui-select .ui-btn.ui-select-nativeonly select { opacity: 1; text-indent: 0; }
+/* Display none because of issues with IE/WP's filter alpha opacity */
+.ui-select .ui-disabled select { display: none; }
+@-moz-document url-prefix() { .ui-select .ui-btn select { opacity: 0.0001; }}
+.ui-select .ui-btn.ui-select-nativeonly { border-radius: 0; border: 0; }
+.ui-select .ui-btn.ui-select-nativeonly select { opacity: 1; text-indent: 0; display: block; }
+.ui-select .ui-disabled.ui-select-nativeonly .ui-btn-inner { opacity: 0; }
 .ui-select .ui-btn-icon-right .ui-btn-inner, .ui-select .ui-li-has-count .ui-btn-inner { padding-right: 45px; }
 .ui-select .ui-mini.ui-btn-icon-right .ui-btn-inner { padding-right: 32px; }
 .ui-select .ui-btn-icon-right.ui-li-has-count .ui-btn-inner { padding-right: 80px; }

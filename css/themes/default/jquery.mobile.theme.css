@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 8d5fb2429957c53e057445079f9cd04f5df03d53 <> Date: Sat Jul 7 12:05:44 2012 +0100
+* jQuery Mobile Framework Git Build: SHA1: 01ad182d50f3c050f1b6b4f8644434f70590d360 <> Date: Sun Jul 8 16:43:26 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -884,17 +884,14 @@ a.ui-link-inherit {
 /* Interaction cues
 -----------------------------------------------------------------------------------------------------------*/
 .ui-disabled {
-	opacity: 							.3;
+	filter: Alpha(Opacity=30);
+	opacity: .3;
+	zoom: 1;
 }
 .ui-disabled,
 .ui-disabled a {
 	cursor: default !important;
 	pointer-events: none;
-}
-.ui-disabled .ui-btn-text {
-	-ms-filter:"progid:DXImageTransform.Microsoft.Alpha(opacity=30)";
-	filter: alpha(opacity=30);
-	zoom: 1;
 }
 
 /* Icons
@@ -1134,8 +1131,8 @@ a.ui-link-inherit {
 
 .ui-overlay {
 	background: #666;
-	opacity: .5;
 	filter: Alpha(Opacity=50);
+	opacity: .5;
 	position: absolute;
 	width: 100%;
 	height: 100%;
