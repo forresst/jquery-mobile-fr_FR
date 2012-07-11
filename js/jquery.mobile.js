@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: a740f2121aa154be6d776a20c50a257513cec138 <> Date: Mon Jul 9 16:00:25 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: ae533677f97f361564a2c58541a89375876bac96 <> Date: Tue Jul 10 10:50:58 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -5042,6 +5042,7 @@ var attachEvents = function() {
 $( document ).bind( "pagecreate create", function( e ) {
 
 	$( ":jqmData(role='button'), .ui-bar > a, .ui-header > a, .ui-footer > a, .ui-bar > :jqmData(role='controlgroup') > a", e.target )
+		.jqmEnhanceable()
 		.not( "button, input, .ui-btn, :jqmData(role='none'), :jqmData(role='nojs')" )
 		.buttonMarkup();
 });
@@ -6426,7 +6427,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			return {
 				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, x ),
-				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y )
+				y: Math.max( fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y ), 0 )
 			};
 		},
 
