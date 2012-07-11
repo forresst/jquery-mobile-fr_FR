@@ -95,7 +95,7 @@ Notez que si vous avez la version appropriée de [grunt](https://github.com/cowb
 
 Si vous voulez utiliser `docs` et `zip`, vous aurez besoin de bash et ils peuvent être exécutés par le texte suivant
 
-   grunt docs # ou `grunt zip`
+   `grunt docs #` ou `grunt zip`
 
 ### JavaScript
 
