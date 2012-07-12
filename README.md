@@ -45,6 +45,8 @@ En outre, dans l'intérêt de créer des problèmes plus lisibles, merci d'inclu
 
 Avant d'ouvrir un nouveau ticket, veuillez vérifier qu'un problème similaire n'est pas déjà était signalé. Astuce : En plus de l'outil de recherche des issues, vous pouvez filtrer les problèmes par le label.
 
+Le [ThemeRoller](https://github.com/jquery/web-jquery-mobile-theme-roller) de jQuery Mobile et le [téléchargement du constructeur](https://github.com/jquery/jquery-mobile-builder) ont leur propre dépôt où vous pouvez reporter les problèmes.
+
 ## Pull Requests
 
 Lorsque vous soumettez un  pull request de révision, il y a quelques étapes importantes que vous pouvez prendre en compte afin de s'assurer qu'il soit examiné rapidement et d'augmenter les chances qu'il soit "merged" (dans l'ordre d'importance décroissant) :
@@ -57,7 +59,7 @@ Lorsque vous soumettez un  pull request de révision, il y a quelques étapes im
 
 Pris dans leur ensemble, cela simplifie l'examen du contributeur de votre pull request.
 
-### Messages de Commit 
+### Messages de Commit
 
 Les messages de Commit doivent inclure 4 composants :
 * Le WHERE - un seul mot qui catégorise et fournit un contexte pour le commit et son message, suivi par deux-points (:). C'est typiquement le nom du plugin en cours d'élaboration, mais parfois peut-être quelque chose comme Build: ou Docs:
@@ -69,7 +71,7 @@ Combinés en un seul, voici un exemple complet :
 
         "Dialog: modified the foo to no longer bar. Fixed #1234 - dialog: IE6 crashed when foo is set to bar"
         \WHERE/:\------------- WHAT -------------/.\  WHY #Num /-\---------------- WHY Name ----------------/
-    
+
 
 ## Construction/Personnalisation
 
@@ -165,7 +167,7 @@ Une fois que vous avez la configuration de votre serveur web, vous pouvez le fai
 
 L'automatisation des tests constitue l'épine dorsale des activités de l'assurance qualité du projet jQuery Mobile. En tant que contributeur d'un patch, vous serez appelé à exécuter la suite de tests pour le code qui affecte votre patch. Notre serveur d'intégration continue portera sur le reste de la suite de test.
 
-Il y a deux manières principales pour exécuter la suite de tests. Tout d'abord, vous pouvez exécuter les tests individuellement en dirigeant votre navigateur vers les différentes pages de test associées à l'endroit dans lequel vous travaillez. Par exemple, pour exécuter les tests de `js/jquery.mobile.forms.slider.js` naviguer vers `$WEB_SERVER/tests/unit/slider/`. Pour savoir quelles pages de test sont disponibles, vous pouvez les lister avec :
+Il y a deux manières principales pour exécuter la suite de tests. Les deux nécessitent, avant tout, un serveur configuré comme décrit précédemment. Dont l'emplacement sera après mentionné comme `$WEB_SERVER` et devrait inclure le protocole. Tout d'abord, vous pouvez exécuter les tests individuellement en dirigeant votre navigateur vers les différentes pages de test associées à l'endroit dans lequel vous travaillez. Par exemple, pour exécuter les tests de `js/jquery.mobile.forms.slider.js` naviguer vers `$WEB_SERVER/tests/unit/slider/`. Pour savoir quelles pages de test sont disponibles, vous pouvez les lister avec :
 
     grunt config:test:pages
 
