@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: ae533677f97f361564a2c58541a89375876bac96 <> Date: Tue Jul 10 10:50:58 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: c4627d8f1ed7f86296286b0bc64c4c8feabf8543 <> Date: Thu Jul 12 00:29:53 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -4169,6 +4169,9 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
 				transition = $.mobile.urlHistory.stack.length === 0 ? "none" : undefined,
 
+				// "navigate" event fired to allow others to take advantage of the more robust hashchange handling
+				navEvent = new $.Event( "navigate" ),
+
 				// default options for the changPage calls made after examining the current state
 				// of the page and the hash
 				changePageOptions = {
@@ -4179,6 +4182,13 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 
 			if ( 0 === urlHistory.stack.length ) {
 				urlHistory.initialDst = to;
+			}
+
+			// We should probably fire the "navigate" event from those places that make calls to _handleHashChange,
+			// and have _handleHashChange hook into the "navigate" event instead of triggering it here
+			$.mobile.pageContainer.trigger( navEvent );
+			if ( navEvent.isDefaultPrevented() ) {
+				return;
 			}
 
 			//if listening is disabled (either globally or temporarily), or it's a dialog hash
@@ -6325,7 +6335,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_resizeScreen: function() {
-			this._ui.screen.height( Math.max( $( window ).height(), this._page.height() ) );
+			this._ui.screen.height( Math.max( $( window ).height(), $( document ).height() ) );
 		},
 
 		_applyTheme: function( dst, theme ) {
@@ -6416,7 +6426,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 					cx: $( window ).width() - tol.l - tol.r,
 					cy: $( window ).height() - tol.t - tol.b
 				},
-				menuSize;
+				menuSize, ret;
 
 			// Clamp the width of the menu before grabbing its size
 			this._ui.container.css( "max-width", rc.cx );
@@ -6425,10 +6435,20 @@ $( document ).bind( "pagecreate create", function( e ) {
 				cy: this._ui.container.outerHeight( true )
 			};
 
-			return {
+			// Center the menu over the desired coordinates, while not going outside
+			// the window tolerances. This will center wrt. the window if the popup is too large.
+			ret = {
 				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, x ),
-				y: Math.max( fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y ), 0 )
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y )
 			};
+
+			// Make sure the top of the menu is visible
+			ret.y = Math.max( 0, ret.y );
+			// If the height of the menu is smaller than the height of the document
+			// align the bottom with the bottom of the document
+			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $( document ).height() ) );
+
+			return ret;
 		},
 
 		_immediate: function() {
@@ -6627,7 +6647,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 		_navHook: function( whenHooked ) {
 			var self = this, dstHash;
 			function realInstallListener() {
-				$( window ).one( "hashchange.popup", function() {
+				$( window ).one( "navigate.popup", function() {
 					self._onHashChange();
 				});
 				whenHooked();
@@ -6664,7 +6684,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 				if ( hasHash ) {
 					realInstallListener();
 				} else {
-					$( window ).one( "hashchange.popupBinder", function() {
+					$( window ).one( "navigate.popupBinder", function() {
 						realInstallListener();
 					});
 					dstHash = activeEntry.url + $.mobile.dialogHashKey;
@@ -6682,7 +6702,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		_navUnhook: function( abort ) {
 			if ( abort ) {
-				$( window ).unbind( "hashchange.popupBinder hashchange.popup" );
+				$( window ).unbind( "navigate.popupBinder navigate.popup" );
 			}
 
 			if ( $.mobile.hashListeningEnabled && !abort ) {
