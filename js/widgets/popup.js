@@ -31,7 +31,8 @@ define( [ "jquery",
 			overlayTheme: null,
 			shadow: true,
 			corners: true,
-			transition: $.mobile.defaultDialogTransition,
+			transition: "none",
+			positionTo: "origin",
 			initSelector: ":jqmData(role='popup')"
 		},
 
@@ -181,16 +182,16 @@ define( [ "jquery",
 
 			if ( this[ setter ] !== undefined ) {
 				this[ setter ]( value );
+			}
+			if ( key !== "initSelector" ) {
 				// Record the option change in the options and in the DOM data-* attributes
-				this.options[ key ] = value;
-				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
-			} else {
 				$.mobile.widget.prototype._setOption.apply( this, arguments );
+				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
 			}
 		},
 
 		// Try and center the overlay over the given coordinates
-		_placementCoords: function( x, y ) {
+		_placementCoords: function( desired ) {
 			// Tolerances off the window edges
 			var tol = { l: 15, t: 30, r: 15, b: 30 },
 			// rectangle within which the popup must fit
@@ -212,8 +213,8 @@ define( [ "jquery",
 			// Center the menu over the desired coordinates, while not going outside
 			// the window tolerances. This will center wrt. the window if the popup is too large.
 			ret = {
-				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, x ),
-				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y )
+				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, desired.x ),
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, desired.y )
 			};
 
 			// Make sure the top of the menu is visible
@@ -290,14 +291,64 @@ define( [ "jquery",
 			}
 		},
 
+		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
+		// this.options.positionTo. Nevertheless, this function ensures that its return value always contains valid
+		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
+		_desiredCoords: function( desired ) {
+			var dst = null, offset, $win = $( window );
+
+			// Establish which element will serve as the reference
+			if ( this.options.positionTo && this.options.positionTo !== "origin" ) {
+				if ( this.options.positionTo === "window" ) {
+					desired = {
+						x: $win.width() / 2 + $win.scrollLeft(),
+						y: $win.height() / 2 + $win.scrollTop()
+					};
+				} else {
+					try {
+						dst = $( this.options.positionTo );
+					} catch( e ) {
+						dst = null;
+					}
+					if ( dst ) {
+						dst.filter( ":visible" );
+						if ( dst.length === 0 ) {
+							dst = null;
+						}
+					}
+				}
+			}
+
+			if ( dst ) {
+				offset = dst.offset();
+				desired = {
+					x: offset.left + dst.outerWidth() / 2,
+					y: offset.top + dst.outerHeight() / 2
+				};
+			}
+
+			if ( $.type( desired.x ) !== "number" ) {
+				desired.x = $win.width() / 2 + $win.scrollLeft();
+			}
+
+			if ( $.type( desired.y ) !== "number" ) {
+				desired.y = $win.height() / 2 + $win.scrollTop();
+			}
+
+			return desired;
+
+		},
+
 		_open: function( x, y, transition ) {
 			var self = this,
-				$win = $( window ),
-				coords = self._placementCoords(
-					( undefined === x ? $win.width() / 2 + $win.scrollLeft() : x ),
-					( undefined === y ? $win.height() / 2 + $win.scrollTop() : y ) );
+				coords;
 
-			// Count down to triggering "opened" - we have two prerequisites:
+			// Give applications a chance to modify the contents of the container before it appears
+			this.element.trigger( "popupbeforeopen" );
+
+			coords = self._placementCoords( self._desiredCoords( { x: x, y: y } ) );
+
+			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
 			// 2. The screen opacity animation completes (screen())
 			self._createPrereqs(
@@ -310,7 +361,7 @@ define( [ "jquery",
 				function() {
 					self._isOpen = true;
 					self._ui.container.attr( "tabindex", "0" ).focus();
-					self.element.trigger( "opened" );
+					self.element.trigger( "popupafteropen" );
 				});
 
 			if ( transition ) {
@@ -351,7 +402,7 @@ define( [ "jquery",
 
 			this._isOpen = false;
 
-			// Count down to triggering "closed" - we have two prerequisites:
+			// Count down to triggering "popupafterclose" - we have two prerequisites:
 			// 1. The popup window reverse animation completes (container())
 			// 2. The screen opacity animation completes (screen())
 			self._createPrereqs(
@@ -368,7 +419,7 @@ define( [ "jquery",
 				},
 				function() {
 					self._ui.container.removeAttr( "tabindex" );
-					self.element.trigger( "closed" );
+					self.element.trigger( "popupafterclose" );
 				});
 
 			self._animate( {
@@ -496,7 +547,7 @@ define( [ "jquery",
 
 				self._navHook(function() {
 					self._popupIsOpening = true;
-					self._currentlyOpenPopup.element.one( "opened", function() {
+					self._currentlyOpenPopup.element.one( "popupafteropen", function() {
 						self._popupIsOpening = false;
 					});
 					self._currentlyOpenPopup._open.apply( self._currentlyOpenPopup, args );
@@ -513,7 +564,7 @@ define( [ "jquery",
 			if ( popup === self._currentlyOpenPopup && !self._popupIsClosing ) {
 				self._popupIsClosing = true;
 				if ( self._popupIsOpening ) {
-					self._currentlyOpenPopup.element.one( "opened", $.proxy( self, "_navUnhook" ) );
+					self._currentlyOpenPopup.element.one( "popupafteropen", $.proxy( self, "_navUnhook" ) );
 				} else {
 					self._navUnhook();
 				}
@@ -530,7 +581,7 @@ define( [ "jquery",
 					self._currentlyOpenPopup._immediate();
 				}
 				self._popupIsClosing = true;
-				self._currentlyOpenPopup.element.one( "closed", function() {
+				self._currentlyOpenPopup.element.one( "popupafterclose", function() {
 					self._popupIsClosing = false;
 					self._currentlyOpenPopup = null;
 					$( self ).trigger( "done" );
@@ -551,12 +602,10 @@ define( [ "jquery",
 
 		if ( popup.data( "popup" ) ) {
 			offset = $link.offset();
-
-			popup
-				.popup( "open",
-					offset.left + $link.outerWidth() / 2,
-					offset.top + $link.outerHeight() / 2,
-					$link.jqmData( "transition" ) );
+			popup.popup( "open",
+				offset.left + $link.outerWidth() / 2,
+				offset.top + $link.outerHeight() / 2,
+				$link.jqmData( "transition" ) );
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler

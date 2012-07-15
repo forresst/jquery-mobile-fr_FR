@@ -30,7 +30,7 @@ $( document ).delegate( "ul,ol", "listviewcreate", function() {
 	}
 
 	var replaceDividers = function () {
-		list.find( 'li:jqmData(role=list-divider)' ).remove();
+		list.find( "li:jqmData(role='list-divider')" ).remove();
 
 		var lis = list.find( 'li' ),
 			lastDividerText = null, li, dividerText;

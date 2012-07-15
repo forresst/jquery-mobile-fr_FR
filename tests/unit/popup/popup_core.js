@@ -5,7 +5,7 @@
 
 	module( "jquery.mobile.popup.js" );
 
-	$.extend($.testHelper, { 
+	$.extend($.testHelper, {
 
 // detailedEventCascade: call a function and expect a series of events to be triggered (or not to be triggered), and guard
 // with a timeout against getting stood up. Record the result (timed out / was triggered) for each event, and the order
@@ -173,7 +173,7 @@
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.linkActiveTestStep1" }
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.linkActiveTestStep1" }
 			},
 
 			function( result ) {
@@ -183,7 +183,7 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.linkActiveTestStep2" }
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.linkActiveTestStep2" }
 			},
 
 			function( result ) {
@@ -202,31 +202,31 @@
 
 		$.testHelper.detailedEventCascade([
 			function() {
-				baseUrl = location.href;
+				baseUrl = decodeURIComponent( location.href );
 				activeIndex = $.mobile.urlHistory.activeIndex;
 				$( "#test-popup" ).popup( "open" );
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.hashInteractStep1" },
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.hashInteractStep1" },
 				hashchange: { src: $( window ), event: "hashchange.hashInteractStep1" }
 			},
 
 			function( result ) {
 				ok( !result.hashchange.timedOut, "Opening a popup from a non-dialogHashKey location causes a hashchange event" );
-				ok( location.href === baseUrl + ( ( baseUrl.indexOf( "#" ) > -1 ) ? "" : "#" ) + $.mobile.dialogHashKey, "location.href has been updated correctly" );
+				ok( decodeURIComponent( location.href ) === baseUrl + ( ( baseUrl.indexOf( "#" ) > -1 ) ? "" : "#" ) + $.mobile.dialogHashKey, "location.href has been updated correctly" );
 				ok( $.mobile.urlHistory.activeIndex === activeIndex + 1, "$.mobile.urlHistory has been advanced correctly" );
 				$( "#test-popup" ).popup( "close" );
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.hashInteractStep2" },
-				hashchange: { src: $( window ), event: "hashchange.hashInteractStep2" }
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.hashInteractStep2" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.hashInteractStep2" }
 			},
 
 			function( result ) {
-				ok( !result.hashchange.timedOut, "Closing a popup from a non-dialogHashKey location causes a hashchange event" );
-				ok( location.href === baseUrl, "location.href has been restored after the popup" );
+				ok( !result.navigate.timedOut, "Closing a popup from a non-dialogHashKey location causes a 'navigate' event" );
+				ok( decodeURIComponent( location.href ) === baseUrl, "location.href has been restored after the popup" );
 				ok( $.mobile.urlHistory.activeIndex === activeIndex, "$.mobile.urlHistory has been restored correctly" );
 				setTimeout( function() { start(); }, 300 );
 			}
@@ -240,13 +240,13 @@
 
 		$.testHelper.detailedEventCascade([
 			function() {
-				origUrl = location.href;
+				origUrl = decodeURIComponent( location.href );
 				origIndex = $.mobile.urlHistory.activeIndex;
 				$( "#test-popup" ).popup( "open" );
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.reuseStep1" },
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.reuseStep1" },
 				hashchange: { src: $( window ), event: "hashchange.reuseStep1" }
 			},
 
@@ -255,7 +255,7 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.reuseStep2" },
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.reuseStep2" },
 				hashchange: { src: $( window ), event: "hashchange.reuseStep2" },
 				timeout: { src: null, length: 300 }
 			},
@@ -267,30 +267,30 @@
 			{ hashchange: { src: $( window ), event: "hashchange.reuseStep3" } },
 
 			function( result ) {
-				baseUrl = location.href;
+				baseUrl = decodeURIComponent( location.href );
 				activeIndex = $.mobile.urlHistory.activeIndex;
 				$( "#test-popup" ).popup( "open" );
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.reuseStep4" },
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.reuseStep4" },
 				hashchange: { src: $( window ), event: "hashchange.reuseStep4" }
 			},
 
 			function( result ) {
 				ok( result.hashchange.timedOut, "Opening a popup from a dialogHashKey location does not cause a hashchange" );
-				ok( baseUrl === location.href, "Opening a popup from a dialogHashKey location does not cause the location to be modified" );
+				ok( baseUrl === decodeURIComponent( location.href ), "Opening a popup from a dialogHashKey location does not cause the location to be modified" );
 				ok( activeIndex === $.mobile.urlHistory.activeIndex, "Opening a popup from a dialogHashKey location does not cause $.mobile.urlHistory to move" );
 				$( "#test-popup" ).popup( "close" );
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.reuseStep5" },
-				hashchange: { src: $( window ), event: "hashchange.reuseStep5" }
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.reuseStep5" },
+				navigate: { src: $.mobile.pageContainer, event: "navigate.reuseStep5" }
 			},
 
 			function( result ) {
-				ok( !result.hashchange.timedOut, "Closing a popup from a dialogHashKey location causes a hashchange" );
+				ok( !result.navigate.timedOut, "Closing a popup from a dialogHashKey location causes a 'navigate'" );
 				setTimeout( function() { start(); }, 300 );
 			}
 		]);
@@ -300,7 +300,7 @@
 	// This should be the case if the previous test has cleaned up correctly.
 	asyncTest( "Opening another page from the popup leaves no trace of the popup in history", function() {
 		var initialActive = $.extend( {}, {}, $.mobile.urlHistory.getActive()),
-		    initialHRef = $.mobile.path.parseUrl( location.href ),
+		    initialHRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) ),
 		    initialBase = initialHRef.protocol + initialHRef.doubleSlash + initialHRef.authority + initialHRef.directory;
 
 		expect( 6 );
@@ -311,7 +311,7 @@
 			},
 
 			{
-				opened: { src: $( "#test-popup" ), event: "opened.anotherPageStep1" },
+				opened: { src: $( "#test-popup" ), event: "popupafteropen.anotherPageStep1" },
 				hashchange: { src: $( window ), event: "hashchange.anotherPageStep1" }
 			},
 
@@ -320,15 +320,15 @@
 			},
 
 			{
-				closed: { src: $( "#test-popup" ), event: "closed.anotherPageStep2" },
+				closed: { src: $( "#test-popup" ), event: "popupafterclose.anotherPageStep2" },
 				hashchange: { src: $( window ), event: "hashchange.anotherPageStep2" }
 			},
 
 			function( result ) {
-				var hRef = $.mobile.path.parseUrl( location.href );
+				var hRef = $.mobile.path.parseUrl( decodeURIComponent( location.href ) );
 				ok( !result.closed.timedOut, "Popup closed" );
 				ok( !result.hashchange.timedOut, "hashchange did occur" );
-				ok( location.href === initialBase + hRef.filename, "New location is exactly the previous location (up to and including path) and the new filename" );
+				ok( decodeURIComponent( location.href ) === initialBase + hRef.filename, "New location is exactly the previous location (up to and including path) and the new filename" );
 				window.history.back();
 			},
 
@@ -357,7 +357,7 @@
 					});
 				}
 
-				ok( location.href === initialHRef.href, "Going back once places the browser on the initial page" );
+				ok( decodeURIComponent( location.href ) === initialHRef.href, "Going back once places the browser on the initial page" );
 				ok( identical, "Going back returns $.mobile.urlHistory to its initial value" );
 				ok( $.mobile.urlHistory.activeIndex === $.mobile.urlHistory.stack.length - 3, "Going back leaves exactly two entries ahead in $.mobile.urlHistory" );
 

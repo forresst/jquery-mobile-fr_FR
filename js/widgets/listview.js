@@ -62,11 +62,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$topli,
 			$bottomli;
 
-		if ( this.options.inset ) {
-			$li = this.element.children( "li" );
-			// at create time the li are not visible yet so we need to rely on .ui-screen-hidden
-			$visibleli = create?$li.not( ".ui-screen-hidden" ):$li.filter( ":visible" );
+		$li = this.element.children( "li" );
+		// At create time and when autodividers calls refresh the li are not visible yet so we need to rely on .ui-screen-hidden
+		$visibleli = create || $li.filter( ":visible" ).length === 0 ? $li.not( ".ui-screen-hidden" ) : $li.filter( ":visible" );
 
+		// ui-li-last is used for setting border-bottom on the last li		
+		$li.filter( ".ui-li-last" ).removeClass( "ui-li-last" );
+					
+		if ( this.options.inset ) {
 			this._removeCorners( $li );
 
 			// Select the first visible li element
@@ -74,9 +77,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.addClass( "ui-corner-top" );
 
 			$topli.add( $topli.find( ".ui-btn-inner" )
-					.not( ".ui-li-link-alt span:first-child" ) )
-                                .addClass( "ui-corner-top" )
-                                .end()
+				.not( ".ui-li-link-alt span:first-child" ) )
+					.addClass( "ui-corner-top" )
+				.end()
 				.find( ".ui-li-link-alt, .ui-li-link-alt span:first-child" )
 					.addClass( "ui-corner-tr" )
 				.end()
@@ -86,7 +89,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			// Select the last visible li element
 			$bottomli = $visibleli.last()
-				.addClass( "ui-corner-bottom" );
+				.addClass( "ui-corner-bottom ui-li-last" );
 
 			$bottomli.add( $bottomli.find( ".ui-btn-inner" ) )
 				.find( ".ui-li-link-alt" )
@@ -95,6 +98,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.find( ".ui-li-thumb" )
 					.not( ".ui-li-icon" )
 					.addClass( "ui-corner-bl" );
+		} else {
+			$visibleli.last().addClass( "ui-li-last" );
 		}
 		if ( !create ) {
 			this.element.trigger( "updatelayout" );
@@ -112,8 +117,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	// the nodeName from the element every time to ensure we have
 	// a match. Note that this function lives here for now, but may
 	// be moved into $.mobile if other components need a similar method.
-	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName )
-	{
+	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName ) {
 		var dict = {};
 		dict[ lcName ] = dict[ ucName ] = true;
 		while ( ele ) {
@@ -124,8 +128,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 		return null;
 	},
-	_getChildrenByTagName: function( ele, lcName, ucName )
-	{
+	_getChildrenByTagName: function( ele, lcName, ucName ) {
 		var results = [],
 			dict = {};
 		dict[ lcName ] = dict[ ucName ] = true;
@@ -139,8 +142,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		return $( results );
 	},
 
-	_addThumbClasses: function( containers )
-	{
+	_addThumbClasses: function( containers ) {
 		var i, img, len = containers.length;
 		for ( i = 0; i < len; i++ ) {
 			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
@@ -158,17 +160,34 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var o = this.options,
 			$list = this.element,
 			self = this,
+			listIcon = $list.jqmData( "icon" ) || o.icon,
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
-			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
+			ol = !!$.nodeName( $list[ 0 ], "ol" ),
+			jsCount = !$.support.cssPseudoElement,
+			start = $list.attr( "start" ),
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon, imgParents, img, linkIcon;
+			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, imgParents, img, linkIcon;
 
-		if ( counter ) {
+		if ( ol && jsCount ) {
 			$list.find( ".ui-li-dec" ).remove();
+		}
+
+		if ( ol ) {	
+			// Check if a start attribute has been set while taking a value of 0 into account
+			if ( start || start === 0 ) {
+				if ( !jsCount ) {
+					startCount = parseFloat( start ) - 1;
+					$list.css( "counter-reset", "listnumbering " + startCount );
+				} else {
+					counter = parseFloat( start );
+				}
+			} else if ( jsCount ) {
+					counter = 1;
+			}	
 		}
 
 		if ( !o.theme ) {
@@ -210,7 +229,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
 						linkIcon = last.jqmData( "icon" );
 
-						last.appendTo(item)
+						last.appendTo( item )
 							.attr( "title", last.getEncodedText() )
 							.addClass( "ui-li-link-alt" )
 							.empty()
@@ -238,21 +257,30 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					itemClass += " ui-li-divider ui-bar-" + dividertheme;
 					item.attr( "role", "heading" );
 
-					//reset counter when a divider heading is encountered
-					if ( counter ) {
-						counter = 1;
+					if ( ol ) {	
+						//reset counter when a divider heading is encountered
+						if ( start || start === 0 ) {
+							if ( !jsCount ) {
+								newStartCount = parseFloat( start ) - 1;
+								item.css( "counter-reset", "listnumbering " + newStartCount );
+							} else {
+								counter = parseFloat( start );
+							}
+						} else if ( jsCount ) {
+								counter = 1;
+						}	
 					}
-
+				
 				} else {
 					itemClass += " ui-li-static ui-btn-up-" + itemTheme;
 				}
 			}
 
-			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
-				countParent = item.is( ".ui-li-static:first" ) ? item : item.find( ".ui-link-inherit" );
+			if ( ol && jsCount && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
+				countParent = itemClass.indexOf( "ui-li-static" ) > 0 ? item : item.find( ".ui-link-inherit" );
 
 				countParent.addClass( "ui-li-jsnumbering" )
-					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
+					.prepend( "<span class='ui-li-dec'>" + ( counter++ ) + ". </span>" );
 			}
 
 			// Instead of setting item class directly on the list item and its

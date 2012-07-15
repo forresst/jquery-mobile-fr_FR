@@ -77,14 +77,16 @@
 						<a href="dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">Partagez vos photos ...</a>
 
 			<h2>Largeur et marges de boîte de dialogue</h2>
-			<p>Par souci de lisibilité, les boîtes de dialogue ont par défaut un <code>max-width</code> de 500 pixels (plus 15px de marge de chaque côté). Il y a aussi un <code>margin</code> pour le haut à 10% pour donner une marge aux boîtes de dialogue plus grande que les écrans, mais se replie en une petite marge sur les smartphones. Pour remplacer ces styles, ajoutez le CSS suivant qui écrase les règles de votre feuille de style et peaufine si besoin :</p>
+			<p>Par souci de lisibilité, les boîtes de dialogue ont par défaut un <code>width</code> de 92.5% et un <code>max-width</code> de 500 pixels. Il y a aussi un <code>margin</code> pour le haut à 10% pour donner une marge aux boîtes de dialogue plus grande que les écrans, mais se replie en une petite marge sur les smartphones. Si une boîte de dialogue est utilisée comme une feuille de contrôle, le conteneur intérieur de la boîte de dialogue est décalée vers le <code>haut</code> avec 15px pour cacher le style avec les coins (voir ci-dessus). Pour remplacer ces styles, ajoutez le CSS suivant qui écrase les règles de votre feuille de style et peaufine si besoin :</p>
 
 <pre><code>
-.ui-dialog .ui-header, 
-.ui-dialog .ui-content, 
-.ui-dialog .ui-footer { 
-<strong>	max-width: 500px; 
-	margin: 10% auto 15px auto; </strong>
+.ui-dialog-contain {
+	<strong>width: 92.5%;</strong>
+	<strong>max-width: 500px;</strong>
+	<strong>margin: 10% auto 15px auto;</strong>
+	padding: 0;
+	position: relative;
+	<strong>top: -15px;</strong>
 }
 </code></pre>
 

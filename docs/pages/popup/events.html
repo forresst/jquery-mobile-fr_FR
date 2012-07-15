@@ -40,23 +40,34 @@
 
 	<dl>
 
-		<dt><code>opened</code> déclenché quand un popup est ouvert</dt>
+		<dt><code>popupbeforeopen</code> déclenchée après qu'un popup ait achevé les préparatifs pour l'ouverture, mais n'a pas encore été ouvert</dt>
 		<dd>
 
 			<pre><code>
 $( ".selector" ).popup({
-   opened: function(event, ui) { ... }
+   popupbeforeopen: function(event, ui) { ... }
+});
+			</code></pre>
+			<p>Cet événement est déclenché lorsque la popup a achevé les préparatifs pour apparaître sur l'écran. À ce stade, la popup n'a pas commencé les animations et il n'a pas encore calculé les coordonnées où il apparaîtra à l'écran. La gestion de cet événement donne l'occasion de modifier le contenu de la popup avant qu'elle n'apparaisse sur l'écran. Par exemple, le contenu peut être réduit ou certaines parties peuvent être masquées ou supprimées si elles sont trop larges ou trop grandes.</p>
+		</dd>
+
+		<dt><code>popupafteropen</code>déclenché lorsque la popup est complètement ouverte</dt>
+		<dd>
+
+			<pre><code>
+$( ".selector" ).popup({
+   popupafteropen: function(event, ui) { ... }
 });
 			</code></pre>
 			<p>Cet événement est déclenché après que le popup soit complètement affiché sur l'écran, ce qui signifie que toutes les animations associées soient terminées.</p>
 		</dd>
 
-		<dt><code>closed</code> déclenché quand un popup est fermé</dt>
+		<dt><code>popupafterclose</code> déclenché lorsque la popup est complètement fermée</dt>
 		<dd>
 
 			<pre><code>
 $( ".selector" ).popup({
-   closed: function(event, ui) { ... }
+   popupafterclose: function(event, ui) { ... }
 });
 			</code></pre>
 			<p>Cet événement est déclenché après que le popup soit complètement masqué de l'écran, ce qui signifie que toutes les animations associées soient terminées.</p>
