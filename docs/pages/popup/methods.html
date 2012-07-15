@@ -39,12 +39,12 @@
 			<p>Le plugin popup a les méthodes suivantes :</p>
 
 		<dl>
-			<dt><code>open(x, y)</code> affiche le popup centré aux coordonnées (x, y)</dt>
+			<dt><code>open(x, y,transition)</code> affiche le popup centré aux coordonnées (x, y) utilisant la transition spécifiée</dt>
 			<dd>
 				<pre><code>
-$('.selector').popup('open', x, y);
+$('.selector').popup('open', x, y, transition);
 				</code></pre>
-				<p>Si <code>x</code> ou <code>y</code> n'est pas renseigné, le milieu de la fenêtre sera utilisée.
+				<p>Si <code>x</code> ou <code>y</code> n'est pas renseigné, le milieu de la fenêtre sera utilisée. La transition remplace la transition stockée dans les options la popup, mais ne change pas la valeur qui y est stockée.
 			</dd>
 
 			<dt><code>close</code> ferme un popup ouvert</dt>

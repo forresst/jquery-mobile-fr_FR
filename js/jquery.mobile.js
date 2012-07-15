@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: c4627d8f1ed7f86296286b0bc64c4c8feabf8543 <> Date: Thu Jul 12 00:29:53 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: edf9c70c8daa343bdcbd50f5e5890f0abd69475c <> Date: Sun Jul 15 14:45:44 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -3090,7 +3090,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 				$.each( urlHistory.stack, function( i, historyEntry ) {
 
 					//if the url is in the stack, it's a forward or a back
-					if ( opts.currentUrl === historyEntry.url ) {
+					if ( decodeURIComponent( opts.currentUrl ) === decodeURIComponent( historyEntry.url ) ) {
 						//define back and forward by whether url is older or newer than current page
 						back = i < urlHistory.activeIndex;
 						forward = !back;
@@ -5411,11 +5411,14 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			$topli,
 			$bottomli;
 
-		if ( this.options.inset ) {
-			$li = this.element.children( "li" );
-			// at create time the li are not visible yet so we need to rely on .ui-screen-hidden
-			$visibleli = create?$li.not( ".ui-screen-hidden" ):$li.filter( ":visible" );
+		$li = this.element.children( "li" );
+		// At create time and when autodividers calls refresh the li are not visible yet so we need to rely on .ui-screen-hidden
+		$visibleli = create || $li.filter( ":visible" ).length === 0 ? $li.not( ".ui-screen-hidden" ) : $li.filter( ":visible" );
 
+		// ui-li-last is used for setting border-bottom on the last li		
+		$li.filter( ".ui-li-last" ).removeClass( "ui-li-last" );
+					
+		if ( this.options.inset ) {
 			this._removeCorners( $li );
 
 			// Select the first visible li element
@@ -5423,9 +5426,9 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.addClass( "ui-corner-top" );
 
 			$topli.add( $topli.find( ".ui-btn-inner" )
-					.not( ".ui-li-link-alt span:first-child" ) )
-                                .addClass( "ui-corner-top" )
-                                .end()
+				.not( ".ui-li-link-alt span:first-child" ) )
+					.addClass( "ui-corner-top" )
+				.end()
 				.find( ".ui-li-link-alt, .ui-li-link-alt span:first-child" )
 					.addClass( "ui-corner-tr" )
 				.end()
@@ -5435,7 +5438,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 
 			// Select the last visible li element
 			$bottomli = $visibleli.last()
-				.addClass( "ui-corner-bottom" );
+				.addClass( "ui-corner-bottom ui-li-last" );
 
 			$bottomli.add( $bottomli.find( ".ui-btn-inner" ) )
 				.find( ".ui-li-link-alt" )
@@ -5444,6 +5447,8 @@ $.widget( "mobile.listview", $.mobile.widget, {
 				.find( ".ui-li-thumb" )
 					.not( ".ui-li-icon" )
 					.addClass( "ui-corner-bl" );
+		} else {
+			$visibleli.last().addClass( "ui-li-last" );
 		}
 		if ( !create ) {
 			this.element.trigger( "updatelayout" );
@@ -5461,8 +5466,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 	// the nodeName from the element every time to ensure we have
 	// a match. Note that this function lives here for now, but may
 	// be moved into $.mobile if other components need a similar method.
-	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName )
-	{
+	_findFirstElementByTagName: function( ele, nextProp, lcName, ucName ) {
 		var dict = {};
 		dict[ lcName ] = dict[ ucName ] = true;
 		while ( ele ) {
@@ -5473,8 +5477,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		}
 		return null;
 	},
-	_getChildrenByTagName: function( ele, lcName, ucName )
-	{
+	_getChildrenByTagName: function( ele, lcName, ucName ) {
 		var results = [],
 			dict = {};
 		dict[ lcName ] = dict[ ucName ] = true;
@@ -5488,8 +5491,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		return $( results );
 	},
 
-	_addThumbClasses: function( containers )
-	{
+	_addThumbClasses: function( containers ) {
 		var i, img, len = containers.length;
 		for ( i = 0; i < len; i++ ) {
 			img = $( this._findFirstElementByTagName( containers[ i ].firstChild, "nextSibling", "img", "IMG" ) );
@@ -5507,17 +5509,34 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var o = this.options,
 			$list = this.element,
 			self = this,
+			listIcon = $list.jqmData( "icon" ) || o.icon,
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
-			counter = $.support.cssPseudoElement || !$.nodeName( $list[ 0 ], "ol" ) ? 0 : 1,
+			ol = !!$.nodeName( $list[ 0 ], "ol" ),
+			jsCount = !$.support.cssPseudoElement,
+			start = $list.attr( "start" ),
 			itemClassDict = {},
 			item, itemClass, itemTheme,
-			a, last, splittheme, countParent, icon, imgParents, img, linkIcon;
+			a, last, splittheme, counter, startCount, newStartCount, countParent, icon, imgParents, img, linkIcon;
 
-		if ( counter ) {
+		if ( ol && jsCount ) {
 			$list.find( ".ui-li-dec" ).remove();
+		}
+
+		if ( ol ) {	
+			// Check if a start attribute has been set while taking a value of 0 into account
+			if ( start || start === 0 ) {
+				if ( !jsCount ) {
+					startCount = parseFloat( start ) - 1;
+					$list.css( "counter-reset", "listnumbering " + startCount );
+				} else {
+					counter = parseFloat( start );
+				}
+			} else if ( jsCount ) {
+					counter = 1;
+			}	
 		}
 
 		if ( !o.theme ) {
@@ -5559,7 +5578,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						splittheme = listsplittheme || last.jqmData( "theme" ) || o.splitTheme;
 						linkIcon = last.jqmData( "icon" );
 
-						last.appendTo(item)
+						last.appendTo( item )
 							.attr( "title", last.getEncodedText() )
 							.addClass( "ui-li-link-alt" )
 							.empty()
@@ -5587,21 +5606,30 @@ $.widget( "mobile.listview", $.mobile.widget, {
 					itemClass += " ui-li-divider ui-bar-" + dividertheme;
 					item.attr( "role", "heading" );
 
-					//reset counter when a divider heading is encountered
-					if ( counter ) {
-						counter = 1;
+					if ( ol ) {	
+						//reset counter when a divider heading is encountered
+						if ( start || start === 0 ) {
+							if ( !jsCount ) {
+								newStartCount = parseFloat( start ) - 1;
+								item.css( "counter-reset", "listnumbering " + newStartCount );
+							} else {
+								counter = parseFloat( start );
+							}
+						} else if ( jsCount ) {
+								counter = 1;
+						}	
 					}
-
+				
 				} else {
 					itemClass += " ui-li-static ui-btn-up-" + itemTheme;
 				}
 			}
 
-			if ( counter && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
-				countParent = item.is( ".ui-li-static:first" ) ? item : item.find( ".ui-link-inherit" );
+			if ( ol && jsCount && itemClass.indexOf( "ui-li-divider" ) < 0 ) {
+				countParent = itemClass.indexOf( "ui-li-static" ) > 0 ? item : item.find( ".ui-link-inherit" );
 
 				countParent.addClass( "ui-li-jsnumbering" )
-					.prepend( "<span class='ui-li-dec'>" + (counter++) + ". </span>" );
+					.prepend( "<span class='ui-li-dec'>" + ( counter++ ) + ". </span>" );
 			}
 
 			// Instead of setting item class directly on the list item and its
@@ -5793,7 +5821,7 @@ $( document ).delegate( "ul,ol", "listviewcreate", function() {
 	}
 
 	var replaceDividers = function () {
-		list.find( 'li:jqmData(role=list-divider)' ).remove();
+		list.find( "li:jqmData(role='list-divider')" ).remove();
 
 		var lis = list.find( 'li' ),
 			lastDividerText = null, li, dividerText;
@@ -6257,7 +6285,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 			overlayTheme: null,
 			shadow: true,
 			corners: true,
-			transition: $.mobile.defaultDialogTransition,
+			transition: "none",
+			positionTo: "origin",
 			initSelector: ":jqmData(role='popup')"
 		},
 
@@ -6407,16 +6436,16 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			if ( this[ setter ] !== undefined ) {
 				this[ setter ]( value );
+			}
+			if ( key !== "initSelector" ) {
 				// Record the option change in the options and in the DOM data-* attributes
-				this.options[ key ] = value;
-				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
-			} else {
 				$.mobile.widget.prototype._setOption.apply( this, arguments );
+				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
 			}
 		},
 
 		// Try and center the overlay over the given coordinates
-		_placementCoords: function( x, y ) {
+		_placementCoords: function( desired ) {
 			// Tolerances off the window edges
 			var tol = { l: 15, t: 30, r: 15, b: 30 },
 			// rectangle within which the popup must fit
@@ -6438,8 +6467,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 			// Center the menu over the desired coordinates, while not going outside
 			// the window tolerances. This will center wrt. the window if the popup is too large.
 			ret = {
-				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, x ),
-				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, y )
+				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, desired.x ),
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, desired.y )
 			};
 
 			// Make sure the top of the menu is visible
@@ -6516,14 +6545,64 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 		},
 
+		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
+		// this.options.positionTo. Nevertheless, this function ensures that its return value always contains valid
+		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
+		_desiredCoords: function( desired ) {
+			var dst = null, offset, $win = $( window );
+
+			// Establish which element will serve as the reference
+			if ( this.options.positionTo && this.options.positionTo !== "origin" ) {
+				if ( this.options.positionTo === "window" ) {
+					desired = {
+						x: $win.width() / 2 + $win.scrollLeft(),
+						y: $win.height() / 2 + $win.scrollTop()
+					};
+				} else {
+					try {
+						dst = $( this.options.positionTo );
+					} catch( e ) {
+						dst = null;
+					}
+					if ( dst ) {
+						dst.filter( ":visible" );
+						if ( dst.length === 0 ) {
+							dst = null;
+						}
+					}
+				}
+			}
+
+			if ( dst ) {
+				offset = dst.offset();
+				desired = {
+					x: offset.left + dst.outerWidth() / 2,
+					y: offset.top + dst.outerHeight() / 2
+				};
+			}
+
+			if ( $.type( desired.x ) !== "number" ) {
+				desired.x = $win.width() / 2 + $win.scrollLeft();
+			}
+
+			if ( $.type( desired.y ) !== "number" ) {
+				desired.y = $win.height() / 2 + $win.scrollTop();
+			}
+
+			return desired;
+
+		},
+
 		_open: function( x, y, transition ) {
 			var self = this,
-				$win = $( window ),
-				coords = self._placementCoords(
-					( undefined === x ? $win.width() / 2 + $win.scrollLeft() : x ),
-					( undefined === y ? $win.height() / 2 + $win.scrollTop() : y ) );
+				coords;
 
-			// Count down to triggering "opened" - we have two prerequisites:
+			// Give applications a chance to modify the contents of the container before it appears
+			this.element.trigger( "popupbeforeopen" );
+
+			coords = self._placementCoords( self._desiredCoords( { x: x, y: y } ) );
+
+			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
 			// 2. The screen opacity animation completes (screen())
 			self._createPrereqs(
@@ -6536,7 +6615,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 				function() {
 					self._isOpen = true;
 					self._ui.container.attr( "tabindex", "0" ).focus();
-					self.element.trigger( "opened" );
+					self.element.trigger( "popupafteropen" );
 				});
 
 			if ( transition ) {
@@ -6577,7 +6656,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			this._isOpen = false;
 
-			// Count down to triggering "closed" - we have two prerequisites:
+			// Count down to triggering "popupafterclose" - we have two prerequisites:
 			// 1. The popup window reverse animation completes (container())
 			// 2. The screen opacity animation completes (screen())
 			self._createPrereqs(
@@ -6594,7 +6673,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 				},
 				function() {
 					self._ui.container.removeAttr( "tabindex" );
-					self.element.trigger( "closed" );
+					self.element.trigger( "popupafterclose" );
 				});
 
 			self._animate( {
@@ -6722,7 +6801,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 				self._navHook(function() {
 					self._popupIsOpening = true;
-					self._currentlyOpenPopup.element.one( "opened", function() {
+					self._currentlyOpenPopup.element.one( "popupafteropen", function() {
 						self._popupIsOpening = false;
 					});
 					self._currentlyOpenPopup._open.apply( self._currentlyOpenPopup, args );
@@ -6739,7 +6818,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			if ( popup === self._currentlyOpenPopup && !self._popupIsClosing ) {
 				self._popupIsClosing = true;
 				if ( self._popupIsOpening ) {
-					self._currentlyOpenPopup.element.one( "opened", $.proxy( self, "_navUnhook" ) );
+					self._currentlyOpenPopup.element.one( "popupafteropen", $.proxy( self, "_navUnhook" ) );
 				} else {
 					self._navUnhook();
 				}
@@ -6756,7 +6835,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 					self._currentlyOpenPopup._immediate();
 				}
 				self._popupIsClosing = true;
-				self._currentlyOpenPopup.element.one( "closed", function() {
+				self._currentlyOpenPopup.element.one( "popupafterclose", function() {
 					self._popupIsClosing = false;
 					self._currentlyOpenPopup = null;
 					$( self ).trigger( "done" );
@@ -6777,12 +6856,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		if ( popup.data( "popup" ) ) {
 			offset = $link.offset();
-
-			popup
-				.popup( "open",
-					offset.left + $link.outerWidth() / 2,
-					offset.top + $link.outerHeight() / 2,
-					$link.jqmData( "transition" ) );
+			popup.popup( "open",
+				offset.left + $link.outerWidth() / 2,
+				offset.top + $link.outerHeight() / 2,
+				$link.jqmData( "transition" ) );
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler
@@ -7988,7 +8065,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 				});
 
 				// Events on the popup
-				self.listbox.bind( "closed", function( event ) {
+				self.listbox.bind( "popupafterclose", function( event ) {
 					self.close();
 				});
 
@@ -8148,7 +8225,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 					self.menuType = "overlay";
 
 					self.listbox
-						.one( "opened", focusMenuItem )
+						.one( "popupafteropen", focusMenuItem )
 						.popup( "open",
 							self.button.offset().left + self.button.outerWidth() / 2,
 							self.button.offset().top + self.button.outerHeight() / 2 );

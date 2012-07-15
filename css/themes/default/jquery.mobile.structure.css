@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: c4627d8f1ed7f86296286b0bc64c4c8feabf8543 <> Date: Thu Jul 12 00:29:53 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: edf9c70c8daa343bdcbd50f5e5890f0abd69475c <> Date: Sun Jul 15 14:45:44 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -809,32 +809,34 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-dialog {
 	 background: none !important; 
 }
-.ui-dialog-contain { width: 92.5%; max-width: 500px; margin: 10% auto 15px auto; padding: 0; }
-.ui-dialog .ui-header {
-	margin-top: 15%;
-	border: none;
-	overflow: hidden;
+.ui-dialog-contain {
+	width: 92.5%;
+	max-width: 500px;
+	margin: 10% auto 15px auto;
+	padding: 0;
+	position: relative;
+	top: -15px;
 }
-.ui-dialog .ui-header, 
-.ui-dialog .ui-content, 
-.ui-dialog .ui-footer { 
+.ui-dialog-contain > .ui-header, 
+.ui-dialog-contain > .ui-content, 
+.ui-dialog-contain > .ui-footer { 
 	display: block;
 	position: relative; 
 	width: auto;
+	margin: 0;
 }
-.ui-dialog .ui-header, 
-.ui-dialog .ui-footer  { 
+.ui-dialog-contain > .ui-header {
+	border: none;
+	overflow: hidden;
 	z-index: 10; 
 	padding: 0;
 }
-.ui-dialog .ui-footer {
-	padding: 0 15px; 
-}
-.ui-dialog .ui-content { 
+.ui-dialog-contain > .ui-content { 
 	padding: 15px; 
 }
-.ui-dialog { 
-	margin-top: -15px;
+.ui-dialog-contain > .ui-footer {
+	z-index: 10; 
+	padding: 0 15px; 
 }
 .ui-popup-screen {
 	top: 0;
@@ -1022,6 +1024,7 @@ label.ui-select { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-screen-hidden, .ui-selectmenu-list .ui-li .ui-icon { display: none; }
 .ui-selectmenu-list .ui-li .ui-icon { display: block; }
 .ui-li.ui-selectmenu-placeholder { display: none; }
+.ui-selectmenu .ui-header { margin: 0; padding: 0; }
 .ui-selectmenu .ui-header .ui-title { margin: 0.6em 46px 0.8em; }
 @media all and (min-width: 450px){
 	.ui-field-contain label.ui-select { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
@@ -1056,7 +1059,8 @@ textarea.ui-mini { height: 45px; }
 	.ui-hide-label .ui-input-search { width: 100%; }
 	.ui-input-search input.ui-input-text { width: 98%;  }
 }
-.ui-listview { margin: 0; counter-reset: listnumbering; }
+.ui-listview { margin: 0; }
+ol.ui-listview, ol.ui-listview .ui-li-divider { counter-reset: listnumbering; }
 .ui-content .ui-listview { margin: -15px; }
 .ui-content .ui-listview-inset { margin: 1em 0; }
 .ui-listview, .ui-li { list-style:none; padding:0; }
@@ -1064,11 +1068,10 @@ textarea.ui-mini { height: 45px; }
 .ui-li .ui-btn-text a.ui-link-inherit { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
 .ui-li-static { background-image: none; }
 .ui-li-divider { padding: .5em 15px; font-size: 14px; font-weight: bold; }
-.ui-li-divider { counter-reset: listnumbering; }
-ol.ui-listview .ui-link-inherit:before, ol.ui-listview .ui-li-static:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal;counter-increment: listnumbering; content: counter(listnumbering) ". "; }
+ol.ui-listview .ui-link-inherit:before, ol.ui-listview .ui-li-static:before, .ui-li-dec { font-size: .8em; display: inline-block; padding-right: .3em; font-weight: normal; counter-increment: listnumbering; content: counter(listnumbering) ". "; }
 ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } 
 .ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
-.ui-li:last-child, .ui-li.ui-field-contain:last-child { border-bottom-width: 1px; }
+.ui-li-last, .ui-li.ui-field-contain.ui-li-last { border-bottom-width: 1px; }
 .ui-li>.ui-btn-inner { display: block; position: relative; padding: 0; }
 .ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li { padding: .7em 15px; display: block; }
 .ui-li-has-thumb .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-thumb  { min-height: 60px; padding-left: 100px; }
@@ -1101,7 +1104,7 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; }
 .ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px }
 .ui-listview-filter .ui-input-search { margin: 5px; width: auto; display: block; }
 .ui-listview-filter-inset { margin: -15px -5px -15px -5px; background: transparent; }
-.ui-li.ui-screen-hidden{display:none;}
+.ui-li.ui-screen-hidden{ display:none; }
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
     .ui-li .ui-btn-text { overflow:  visible; }
 }

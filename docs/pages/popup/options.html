@@ -39,22 +39,14 @@
 			<p>Le plugin popup a les options suivantes :</p>
 
 		<dl>
-			<dt><code>overlayTheme</code> <em>string</em></dt>
+			
+			<dt><code>corners</code> <em>boolean</em></dt>
 			<dd>
-				<p class="default">par défaut : null</p>
-				<p>Définit le jeu de couleurs (nuancier) pour le fond du popup, qui recouvre entièrement la fenêtre. S'il n'est pas explicitement définie, le fond sera transparent.</p>
-				<pre><code>$('.selector').popup(<strong>{ overlayTheme: "a" }</strong>);</code></pre>
-				 <p>Cette option est également définie comme un attribut de données : <code>data-overlay-theme="a"</code></p>
+				<p class="default">Par défaut : true</p>
+				<p>Définit s'il faut dessiner un popup avec des coins arrondis. Cette option est également définie comme un attribut de données : <code>data-corners="true"</code></p>
+				<pre><code>$('.selector').popup(<strong>{ corners: true }</strong>);</code></pre>
 			</dd>
-
-			<dt><code>theme</code> <em>string</em></dt>
-			<dd>
-				<p class="default">par défaut : null</p>
-				<p>Définit le jeu de couleurs (nuancier) pour le contenu du popup. Sauf si il est explicitement défini à <code>'none'</code>, le thème pour le popup sera défini la première fois par l'héritage du thème de la page ou en cas d'échec par la valeur <code>'c'</code> codé en dur. Si vous le définissez à 'none', le popup n'aura pas de thème du tout, et sera transparente.</p>
-				<pre><code>$('.selector').popup(<strong>{ theme: "a" }</strong>);</code></pre>
-				 <p>Cette option est également définie comme un attribut de données : <code>data-theme="a"</code></p>
-			</dd>
-
+			
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: ":jqmData(role='popup')"</p>
@@ -65,18 +57,46 @@
 </code></pre>
 			</dd>
 
+			<dt><code>overlayTheme</code> <em>string</em></dt>
+			<dd>
+				<p class="default">par défaut : null</p>
+				<p>Définit le jeu de couleurs (nuancier) pour le fond du popup, qui recouvre entièrement la fenêtre. S'il n'est pas explicitement définie, le fond sera transparent.</p>
+				<pre><code>$('.selector').popup(<strong>{ overlayTheme: "a" }</strong>);</code></pre>
+				 <p>Cette option est également définie comme un attribut de données : <code>data-overlay-theme="a"</code></p>
+			</dd>
+
+			<dt><code>positionTo</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "origin"</p>
+				<p>Détermine l'élément sur ​​lequel la popup sera centrée. Ce parametre peut avoir l'une des trois valeurs :</p>
+				<ol>
+					<li><code>"origin"</code>: Les coordonnées passées à la méthode <code>open</code> seront utilisées pour le positionnement de la popup. Dans le cas où une popup est ouverte à partir d'un lien, cela signifie que la popup sera centrée sur le lien.</li>
+					<li><code>"window"</code>: La popup sera affichée au centre de la fenêtre.</li>
+					<li>Un sélecteur jQuery : Le sélecteur sera utilisée pour sélectionner un élément sur ​​lequel sera centré la popup. Le résultat de la sélection sera filtrée sur les éléments qui sont visibles. Si la sélection est vide, la valeur par défaut sera utilisé pour placer la popup.</li>
+				</ol>
+				<pre><code>$('.selector').popup(<strong>{ positionTo: "window" }</strong>);</code></pre>
+			</dd>
+
 			<dt><code>shadow</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>
 				<p>Définit s'il faut dessiner une ombre autour du popup. Cette option est également définie comme un attribut de données : <code>data-shadow="true"</code></p>
 				<pre><code>$('.selector').popup(<strong>{ shadow: true }</strong>);</code></pre>
 			</dd>
-
-			<dt><code>corners</code> <em>boolean</em></dt>
+			
+			<dt><code>theme</code> <em>string</em></dt>
 			<dd>
-				<p class="default">Par défaut : true</p>
-				<p>Définit s'il faut dessiner un popup avec des coins arrondis. Cette option est également définie comme un attribut de données : <code>data-corners="true"</code></p>
-				<pre><code>$('.selector').popup(<strong>{ corners: true }</strong>);</code></pre>
+				<p class="default">par défaut : null</p>
+				<p>Définit le jeu de couleurs (nuancier) pour le contenu du popup. Sauf si il est explicitement défini à <code>'none'</code>, le thème pour le popup sera défini la première fois par l'héritage du thème de la page ou en cas d'échec par la valeur <code>'c'</code> codé en dur. Si vous le définissez à 'none', le popup n'aura pas de thème du tout, et sera transparente.</p>
+				<pre><code>$('.selector').popup(<strong>{ theme: "a" }</strong>);</code></pre>
+				 <p>Cette option est également définie comme un attribut de données : <code>data-theme="a"</code></p>
+			</dd>
+
+			<dt><code>transition</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "none"</p>
+				<p>Définit la transition par défaut pour la popup. La valeur par défaut se traduira par aucune transition.</p>
+				<p>Si la popup est ouverte à partir d'un lien et le lien a l'attribut <code>data-transition</code> de défini, la valeur qui y est spécifiée remplace la valeur de cette option au moment de l'ouverture de la popup sur le lien.</p>
 			</dd>
 
 		</dl>
