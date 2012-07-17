@@ -44,7 +44,7 @@
 			<dd>
 				<p class="default">Par défaut : true</p>
 				<p>Applique une bordure arrondi de bouton du thème au bouton de sélection si défini à true. Cette option est également définie comme un attribut de données :  <code>data-corners="false"</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ corners: "false" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ corners: false }</strong>);</code></pre>
 			</dd>			
 			<dt><code>icon</code> <em>string</em></dt>
 			<dd>
@@ -67,7 +67,7 @@
 			<dd>
 				<p class="default">Par défaut : true</p>
 				<p>Applique une ombre de thème au bouton de sélection si défini à true. Cette option est également définie comme un attribut de données : <code>data-iconshadow="false"</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ iconshadow: "false" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ iconshadow: false }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
@@ -84,25 +84,25 @@
 			<dd>
 				<p class="default">par défaut : null (false)</p>
 				<p>Si positionné à true, cela rendra le bouton sélection comme un bouton aligné pour que la largeur soit déterminée par le texte du bouton. Par défaut, c'est null (false) si le bouton de sélection est sur toute la largeur, indépendamment du contenu des commentaires. Valeurs possibles : true, false. Cette option est également définie comme un attribut de données : <code>data-inline="true"</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ inline: "true" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ inline: true }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>mini</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">par défaut : false</p>
 				<p>Définit la taille de l'élément pour qu'il soit plus compact : une <a href="../forms-all-mini.html">version mini</a>. Cette option est également définie comme un attribut de données : <code>data-mini="true"</code></p>		
-				<pre><code>$('select').selectmenu(<strong>{ mini: "true" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ mini: true }</strong>);</code></pre>
 				
 			<dt><code>nativeMenu</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>
 				<p>Lorsqu'il est réglé à true, en cliquant sur le menu de sélection personnalisé, cela ouvrira le menu de sélection natif qui est mieux pour la performance. Si c'est à false, le style du menu de sélection personnalisé sera utilisé à la place du menu natif. Cette option est également exposée comme un attribut de données : <code>data-native-menu="false"</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ nativeMenu: "false" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ nativeMenu: false }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>overlayTheme</code> <em>string</em></dt>
 			<dd>
-				<p class="default">Par défaut : a</p>
+				<p class="default">Par défaut : "a"</p>
 				<p>Définit la couleur de la couche de recouvrement pour la boîte de dialogue basée sur des menus de sélection et la bordure extérieure des petits menus personnalisés. Il accepte une seule lettre de A à Z qui correspond aux nuanciers inclus dans votre thème. Par défaut, les couleurs de blocs de contenu du nuancier "a" seront utilisés pour les superpositions. Cette option est également définie comme un attribut de données : <code>ui-body-d</code></p>
 				<pre><code>$('select').selectmenu(<strong>{ overlayTheme: "d" }</strong>);</code></pre>
 			</dd>
@@ -119,7 +119,7 @@
 			<dd>
 				<p class="default">Par défaut : true</p>
 				<p>Applique le style d'ombre portée au bouton de sélection s'il est définit à true. Cette option est également définie comme un attribut de données : <code>data-shadow="false"</code></p>
-				<pre><code>$('select').selectmenu(<strong>{ shadow: "false" }</strong>);</code></pre>
+				<pre><code>$('select').selectmenu(<strong>{ shadow: false }</strong>);</code></pre>
 			</dd>
 			
 			<dt><code>theme</code> <em>string</em></dt>

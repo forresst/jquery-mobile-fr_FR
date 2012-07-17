@@ -70,3 +70,13 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     });
   });
 }
+
+// Exemples de popup photo
+$( document ).on( "pageinit", function() {
+	$( "#popupPhotoPortrait, #popupPhotoLandscape" ).on({
+		popupbeforeopen: function( event ) {
+			var inner = $( window ).height() - 62 + "px";
+			$( ".popphoto" ).css( "max-height", inner );
+		}
+	});
+});
