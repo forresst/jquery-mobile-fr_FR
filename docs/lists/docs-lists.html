@@ -145,7 +145,11 @@ $("#mylistview").listview({
 			<p>Si vous ajoutez des éléments à une liste, vous aurez besoin d'appeler la méthode <code>refresh()</code> sur elle-même pour mettre à jour les styles et créer des listes imbriquées qui sont ajoutés. Par exemple :</p>
 			<code>$('#mylist').listview('refresh');</code>
 
-			<p>Notez que la méthode <code>refresh()</code> affecte seulement les <strong>nouveaux noeuds</strong> ajoutés à la liste. Cela pour des raisons de performance. Tous les éléments de la liste déjà améliorés seront ignorés par le processus d'actualisation. Cela signifie que si vous modifiez le contenu ou les attributs d'un élément de la liste déjà amélioré, elles ne seront pas pris en compte. Si vous voulez mettre à jour un élément de la liste, remplacez le par un nouveau balisage avant d'appeler refresh. </p>
+			<p>Notez que la méthode <code>refresh()</code> affecte seulement les <strong>nouveaux noeuds</strong> ajoutés à la liste. Cela pour des raisons de performance. Tous les éléments de la liste déjà améliorés seront ignorés par le processus d'actualisation. Cela signifie que si vous modifiez le contenu ou les attributs d'un élément de la liste déjà amélioré, elles ne seront pas pris en compte. Si vous voulez mettre à jour un élément de la liste, remplacez le par un nouveau balisage avant d'appeler refresh.</p>
+			
+			<p>Si vous voulez initialement masquer un élément de la liste, vous pouvez faire cela en ajoutant une classe <strong><code>ui-screen-hidden</code></strong> à l'élément li. En utilisant cette classe, cela assure que le style de coin soit appliqué correctement, ainsi que le border-bottom sur le dernier élément visible.
+			
+			
 
 
 			</div><!--/content-primary -->

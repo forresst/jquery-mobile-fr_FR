@@ -129,3 +129,13 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     });
   });
 }
+
+// exemple de popup de photo
+$( document ).on( "pageinit", function() {
+	$( "#popupPhotoPortrait, #popupPhotoLandscape" ).on({
+		popupbeforeopen: function( event ) {
+			var inner = $( window ).height() - 62 + "px";
+			$( ".popphoto" ).css( "max-height", inner );
+		}
+	});
+});

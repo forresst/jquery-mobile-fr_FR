@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: edf9c70c8daa343bdcbd50f5e5890f0abd69475c <> Date: Sun Jul 15 14:45:44 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: 0055e160fe9d4b4cf18d40ffd91063096be980c7 <> Date: Mon Jul 16 14:07:44 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -4139,12 +4139,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 				//this may need to be more specific as we use data-rel more
 				role = $link.attr( "data-" + $.mobile.ns + "rel" ) || undefined;
 
-			if ( role === "popup" ) {
-				$.mobile.popup.handleLink( $link );
-			}
-			else {
-				$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role } );
-			}
+			$.mobile.changePage( href, { transition: transition, reverse: reverse, role: role, link: $link } );
 			event.preventDefault();
 		});
 
@@ -5509,7 +5504,6 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		var o = this.options,
 			$list = this.element,
 			self = this,
-			listIcon = $list.jqmData( "icon" ) || o.icon,
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
@@ -6875,6 +6869,13 @@ $( document ).bind( "pagecreate create", function( e ) {
 			$link.removeClass( $.mobile.activeBtnClass );
 		}, 300 );
 	};
+
+	$( document ).bind( "pagebeforechange", function( e, data ) {
+		if ( data.options.role === "popup" ) {
+			$.mobile.popup.handleLink( data.options.link );
+			e.preventDefault();
+		}
+	});
 
 	$( document ).bind( "pagecreate create", function( e )  {
 		$.mobile.popup.prototype.enhanceWithin( e.target, true );
