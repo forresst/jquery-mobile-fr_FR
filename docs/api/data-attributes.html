@@ -331,11 +331,15 @@
 				</tr>
 				<tr>
 					<th>data-rel</th>
-					<td>back (pour reculer d'une étape dans l'historique)<br /> dialog (pour ouvrir un lien stylisé comme une boîte de dialogue, qui n'est pas tracé dans l'historique)<br /> external (pour des liens dans un autre domaine)</td>
+					<td>back (pour reculer d'une étape dans l'historique)<br /> dialog (pour ouvrir un lien stylisé comme une boîte de dialogue, qui n'est pas tracé dans l'historique)<br /> external (pour des liens dans un autre domaine) popup (pour l'ouverture d'une popup)</td>
 				</tr>
 				<tr>
 					<th>data-transition</th>
 					<td><strong>fade</strong> | flip | flow | pop | slide | slidedown | slidefade | slideup | turn | none</td>
+				</tr>
+				<tr>
+					<th>data-position-to</th>
+					<td><strong>origin</strong> (centre la popup sur le lien qui l'a ouvert)<br /> Un sélecteur jQuery (centre la popup sur l'élément spécifié)<br /> window (centre la popup dans la fenêtre)<br /> <u>Remarque :</u> l'option est uniquement disponible lorsqu'elle est utilisée avec les popups</td>
 				</tr>
 			</table>
 
@@ -476,10 +480,6 @@
 				<tr>
 					<th>data-overlay-theme</th>
 					<td>Lettre du nuancier (a-z) - par défaut null : fond transparent</td>
-				</tr>
-				<tr>
-					<th>data-position-to</th>
-					<td><strong>origin</strong> (centre la popup dessus l'élément appelant)<br /> window (centre la popup à l'intérieur de la fenêtre)<br /> selector (centre la popup dessus l'élément visible décrit)</td>
 				</tr>
 				<tr>
 					<th>data-shadow</th>

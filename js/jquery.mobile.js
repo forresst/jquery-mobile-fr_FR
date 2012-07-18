@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 0055e160fe9d4b4cf18d40ffd91063096be980c7 <> Date: Mon Jul 16 14:07:44 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 466a5823a444dca0e0bc0a525b095095aaf0df02 <> Date: Tue Jul 17 15:11:18 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -4250,7 +4250,9 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 
 		//hashchange event handler
 		$window.bind( "hashchange", function( e, triggered ) {
-			$.mobile._handleHashChange( location.hash );
+			// Firefox auto-escapes the location.hash as for v13 but
+			// leaves the href untouched
+			$.mobile._handleHashChange( path.parseUrl(location.href).hash );
 		});
 
 		//set page min-heights to be device specific
@@ -6280,7 +6282,6 @@ $( document ).bind( "pagecreate create", function( e ) {
 			shadow: true,
 			corners: true,
 			transition: "none",
-			positionTo: "origin",
 			initSelector: ":jqmData(role='popup')"
 		},
 
@@ -6540,21 +6541,25 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
-		// this.options.positionTo. Nevertheless, this function ensures that its return value always contains valid
+		// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
-		_desiredCoords: function( desired ) {
-			var dst = null, offset, $win = $( window );
+		_desiredCoords: function( desiredPosition ) {
+			var dst = null, offset, $win = $( window ),
+				desired = {
+					x: desiredPosition.x,
+					y: desiredPosition.y
+				};
 
 			// Establish which element will serve as the reference
-			if ( this.options.positionTo && this.options.positionTo !== "origin" ) {
-				if ( this.options.positionTo === "window" ) {
+			if ( desiredPosition.positionTo && desiredPosition.positionTo !== "origin" ) {
+				if ( desiredPosition.positionTo === "window" ) {
 					desired = {
 						x: $win.width() / 2 + $win.scrollLeft(),
 						y: $win.height() / 2 + $win.scrollTop()
 					};
 				} else {
 					try {
-						dst = $( this.options.positionTo );
+						dst = $( desiredPosition.positionTo );
 					} catch( e ) {
 						dst = null;
 					}
@@ -6567,6 +6572,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 				}
 			}
 
+			// If an element was found, center over it
 			if ( dst ) {
 				offset = dst.offset();
 				desired = {
@@ -6575,26 +6581,36 @@ $( document ).bind( "pagecreate create", function( e ) {
 				};
 			}
 
-			if ( $.type( desired.x ) !== "number" ) {
+			// Make sure x and y are valid numbers
+			if ( $.type( desired.x ) !== "number" || isNaN( desired.x ) ) {
 				desired.x = $win.width() / 2 + $win.scrollLeft();
 			}
-
-			if ( $.type( desired.y ) !== "number" ) {
+			if ( $.type( desired.y ) !== "number" || isNaN( desired.y ) ) {
 				desired.y = $win.height() / 2 + $win.scrollTop();
 			}
 
 			return desired;
-
 		},
 
-		_open: function( x, y, transition ) {
+		_open: function( x, y, $link ) {
 			var self = this,
+				transition = "",
+				desiredPlacement = {
+					x: x,
+					y: y,
+					positionTo: "origin"
+				},
 				coords;
+
+			if ( $link ) {
+				transition = $link.jqmData( "transition" );
+				desiredPlacement.positionTo = $link.jqmData( "position-to" );
+			}
 
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeopen" );
 
-			coords = self._placementCoords( self._desiredCoords( { x: x, y: y } ) );
+			coords = self._placementCoords( self._desiredCoords( desiredPlacement ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -6697,7 +6713,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			});
 		},
 
-		open: function( x, y, transition ) {
+		open: function( x, y, $link ) {
 			$.mobile.popup.popupManager.push( this, arguments );
 		},
 
@@ -6765,8 +6781,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 						dstHash += $.mobile.dialogHashKey;
 					}
 					$.mobile.urlHistory.ignoreNextHashChange = currentIsDialog;
-					$.mobile.path.set( dstHash );
 					$.mobile.urlHistory.addNew( dstHash, dstTransition, activeEntry.title, activeEntry.pageUrl, activeEntry.role );
+					$.mobile.path.set( dstHash );
 				}
 			} else {
 				whenHooked();
@@ -6853,7 +6869,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			popup.popup( "open",
 				offset.left + $link.outerWidth() / 2,
 				offset.top + $link.outerHeight() / 2,
-				$link.jqmData( "transition" ) );
+				$link );
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler
