@@ -65,18 +65,6 @@
 				 <p>Cette option est également définie comme un attribut de données : <code>data-overlay-theme="a"</code></p>
 			</dd>
 
-			<dt><code>positionTo</code> <em>string</em></dt>
-			<dd>
-				<p class="default">Par défaut : "origin"</p>
-				<p>Détermine l'élément sur ​​lequel la popup sera centrée. Ce parametre peut avoir l'une des trois valeurs :</p>
-				<ol>
-					<li><code>"origin"</code>: Les coordonnées passées à la méthode <code>open</code> seront utilisées pour le positionnement de la popup. Dans le cas où une popup est ouverte à partir d'un lien, cela signifie que la popup sera centrée sur le lien.</li>
-					<li><code>"window"</code>: La popup sera affichée au centre de la fenêtre.</li>
-					<li>Un sélecteur jQuery : Le sélecteur sera utilisée pour sélectionner un élément sur ​​lequel sera centré la popup. Le résultat de la sélection sera filtrée sur les éléments qui sont visibles. Si la sélection est vide, la valeur par défaut sera utilisé pour placer la popup.</li>
-				</ol>
-				<pre><code>$('.selector').popup(<strong>{ positionTo: "window" }</strong>);</code></pre>
-			</dd>
-
 			<dt><code>shadow</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>

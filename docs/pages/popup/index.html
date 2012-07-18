@@ -57,7 +57,7 @@
 		
 		<p>Ce style simple permet d'être ajouter facilement dans des widgets pour créer différentes interactions. Voici quelques exemples du monde réel qui combinent les différents paramètres et les styles que vous pouvez réaliser avec les popups:</p>
 		
-		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a> <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true">Menu</a> <a href="#popupLogin" data-rel="popup" data-role="button" data-inline="true">Formulaire</a> <a href="#popupDialog" data-rel="popup" data-role="button" data-inline="true" data-transition="pop">Dialogue</a> <a href="#popupPhotoLandscape" data-rel="popup" data-role="button" data-inline="true">Photo paysage</a> <a href="#popupPhotoPortrait" data-rel="popup" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a> <a href="#popupMap" data-rel="popup" data-role="button" data-inline="true">Carte</a> <a href="#popupVideo" data-rel="popup" data-role="button" data-inline="true">Vidéo</a>
+		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a> <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true">Menu</a> <a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Formulaire</a> <a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Dialogue</a> <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo paysage</a> <a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a> <a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Carte</a> <a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Vidéo</a>
 	
 	
 		<h2>Appel du plugin popup</h2>
@@ -127,24 +127,25 @@ $('#myPopupDiv').popup("close")
 	
 		
 		<h2>Options de positionnement</h2>
-		<p>Par défaut, les popups s'ouvrent centrées verticalement et horizontalement sur ​​la chose que vous avez cliqué (origine) ce qui est bien pour les popups utilisés sous forme d'infobulles ou de menu. Le framework applique également quelques règles de base sur la détection de collision afin d'assurer que la fenêtre contextuelle apparaisse sur l'écran, ainsi la position finale peut ne pas être toujours centrée sur l'origine.</p>
-		<p>Dans le cas d'une boîte de dialogue ou d'un l'album, le popup doit apparaître centré dans la fenêtre, il faut donc ajouter l'attribut <code>data-position-to</code> au popup et spécifier la valeur <code>window</code>. </p>
+		<p>Par défaut, les popups s'ouvrent centrées verticalement et horizontalement sur ​​la chose que vous avez cliqué (l'origine) ce qui est bien pour les popups utilisées sous forme d'infobulles ou de menu. Le framework applique également quelques règles de base sur la détection de collision afin d'assurer que la fenêtre contextuelle apparaisse sur l'écran, ainsi la position finale peut ne pas être toujours centrée sur l'origine.</p>
+		<p>Dans le cas d'une boîte de dialogue ou d'un l'album, la popup doit apparaître centrée dans la fenêtre à la place de l'origine, il faut donc ajouter l'attribut <code>data-position-to</code> au <strong>lien</strong> et spécifier la valeur &lt;c1&gt;window&lt;/c1&gt;. </p>
 				
 <pre><code>
-&lt;div data-role="popup" id="positionWindow" <strong>data-position-to="window"</strong> &gt;
+&lt;div data-role="popup" id="positionWindow"&gt;
 	&lt;p&gt;Je suis positionné par rapport à la fenêtre.&lt;/p&gt;
 &lt;/div&gt;
+&lt;a href="#positionWindow" data-rel="popup" <strong>data-position-to="window"</strong>&gt;
 </code></pre>
 
 		<p>Quelques exemples :</p>
 
-		<a href="#positionWindow" data-role="button" data-inline="true" data-rel="popup">Position sur la fenêtre</a> <a href="#positionOrigin" data-role="button" data-inline="true" data-rel="popup">Position sur l'origine</a>
+		<a href="#positionWindow" data-role="button" data-inline="true" data-rel="popup" data-position-to="window">Position sur la fenêtre</a> <a href="#positionOrigin" data-role="button" data-inline="true" data-rel="popup" data-position-to="origin">Position sur l'origine</a>
 
-		<div data-role="popup" id="positionWindow" data-position-to="window" class="ui-content" data-theme="d">
+		<div data-role="popup" id="positionWindow" class="ui-content" data-theme="d">
 			<p>e suis positionné par rapport à la fenêtre.</p>
 		</div>
 
-		<div data-role="popup" id="positionOrigin" data-position-to="origin" class="ui-content" data-theme="d">
+		<div data-role="popup" id="positionOrigin" class="ui-content" data-theme="d">
 			<p>e suis positionné par rapport à l'origine.</p>
 		</div>
 
@@ -153,13 +154,13 @@ $('#myPopupDiv').popup("close")
 		<p>Les contraintes de placement de la popup, qui peuvent ne pas centrer comme vous le souhaitez la popup, sont les suivantes :</p>
 		<ol>
 			<li>La largeur de la popup sera limitée en utilisant le CSS <code>max-width</code> sur la largeur de la fenêtre moins une tolérance de part et d'autre de 15px.</li>
-			<li>Une tolérance à partir des bords de la fenêtre (15px sur chacun des côtés et 30px sur le haut et le bas) sera observé lorsque la popup s'adapte à l'intérieur de la fenêtre. Les grandes popups peuvent déborder des bords supérieurs et inférieurs de la fenêtre. Ces parties de la popup peuvent être consultés en défilant manuellement le document.</li>
+			<li>Une tolérance à partir des bords de la fenêtre (15px sur chacun des côtés et 30px sur le haut et le bas) sera observé lorsque la popup s'adapte à l'intérieur de la fenêtre. Les grandes popups peuvent déborder des bords supérieurs et inférieurs de la fenêtre. Ces parties de la popup peuvent être consultées en défilant manuellement le document.</li>
 			<li>La coordonnée supérieure de la popup ne sera jamais négative. Cela garantit que le haut de la popup ne soit pas coupée.</li>
 			<li>Si le centrage de la popup sur un élément entraîne une augmentation de la hauteur totale du document, la popup est décalé vers le haut tout au plus jusqu'à ce que sa coordonnée supérieure soit à 0.</li>
 		</ol>
 
 		<h2>Paramétrage des transitions</h2>
-		<p>Par défaut, les popups n'ont pas de transition pour s'ouvrir aussi rapidement que possible. Pour définir la transition utilisée par le popup, ajoutez l'attribut <code>data-transition</code> au lien qui référence le popup. </p>
+		<p>Par défaut, les popups n'ont pas de transition pour s'ouvrir aussi rapidement que possible. Pour définir la transition utilisée par la popup, ajoutez l'attribut <code>data-transition</code> au lien qui référence la popup. </p>
 				
 <pre><code>
 &lt;a href="#transitionExample" <strong>data-transition="flip"</strong> data-rel="popup"&gt;
@@ -178,7 +179,7 @@ $('#myPopupDiv').popup("close")
 							
 
 							
-		<p>Lorsque vous lancez le popup depuis l'un des boutons, la <code>data-transition</code> donnée pour ce bouton sera utilisée. Toutefois, si vous lancez le popup par d'autres moyens, tels que, par exemple, via <code>$("#transitionExample").popup("open")</code>, la <code>data-transition</code> donnée pour le popup sera utilisée (la transition flip).</p>
+		<p>Lorsque vous lancez le popup depuis l'un des boutons, la <code>data-transition</code> donnée pour ce bouton sera utilisée. Toutefois, si vous lancez la popup par par programmation, comme <code>$("#transitionExample").popup("open")</code>, l'attribut <code>data-transition</code> spécifié dans la définition de la popup sera utilisé si elle est définie.</p>
 
 
 		<h2>Thématisation du popup et de son fond</h2>
@@ -224,7 +225,7 @@ $('#myPopupDiv').popup("close")
 				</ul>
 		</div>
 
-		<div data-role="popup" id="popupLogin" data-position-to="window" data-theme="a" class="ui-corner-all">
+		<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
 			<form>
 				<div style="padding:10px 20px;">
 				  <h3>Inscrivez vous s'il vous plaît</h3>
@@ -239,7 +240,7 @@ $('#myPopupDiv').popup("close")
 			</form>
 		</div>
 		
-		<div data-role="popup" id="popupDialog" data-position-to="window" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+		<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
 			<div data-role="header" data-theme="a" class="ui-corner-top">
 				<h1>Supprimer la Page ?</h1>
 			</div>
@@ -250,26 +251,26 @@ $('#myPopupDiv').popup("close")
 			</div>
 		</div>
 
-		<div data-role="popup" id="popupPhotoLandscape" data-overlay-theme="a" data-corners="false" data-position-to="window">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img class="popphoto" src="../../_assets/images/photo-landscape.jpg" width="1024" height="678" alt="Photo paysage">
+		<div data-role="popup" id="popupPhotoLandscape" data-overlay-theme="a" data-corners="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img class="popphoto" src="../../_assets/images/photo-landscape.jpg" alt="Photo paysage">
 		</div>
 		
-		<div data-role="popup" id="popupPhotoPortrait" data-overlay-theme="a" data-corners="false" data-position-to="window">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img class="popphoto" src="../../_assets/images/photo-portrait.jpg" width="678" height="1024" alt="Photo portrait">
+		<div data-role="popup" id="popupPhotoPortrait" data-overlay-theme="a" data-corners="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img class="popphoto" src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
 		</div>
 		
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="d" data-corners="false" data-position-to="window">
+		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="d" data-corners="false">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a>
 			<iframe src="map.html" width="480" height="320" frameborder="0" style="margin: -1px -1px -5px -1px;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
 		</div>
 				
-		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" data-position-to="window"  class="ui-content">
+		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
 			<iframe width="497" src="http://player.vimeo.com/video/41135183?portrait=0" height="298" frameborder="0" style="background:black;" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
     		</div>
 
 		<h2>Remarque : Le chainage des popups n'est pas permis</h2>
 		<p>Le framework ne prend pas en charge le chaînage des popups car il n'est pas possible d'intégrer un lien d'un popup à l'intérieur d'un autre popup. Tous les liens avec <code>data-rel="popup"</code> à l'intérieur d'un popup ne fera rien du tout.</p>
-		<p>Cela signifie également que des menus de sélection ne fonctionneront pas à l'intérieur des popups, car ils sont eux-mêmes implémentés en utilisant des popups. Si vous placez un menu de sélection dans un popup, il sera rendu sous la forme d'un menu natif de sélection, même si vous spécifiez <code>data-native-menu="false"</code>.</p>
+		<p>Cela signifie également que des menus de sélection ne fonctionneront pas à l'intérieur des popups, car ils sont eux-mêmes implémentés en utilisant des popups. Si vous placez un menu de sélection dans une popup, il sera rendu sous la forme d'un menu natif de sélection, même si vous spécifiez <code>data-native-menu="false"</code>.</p>
 
 	</div><!--/content-primary -->
 
