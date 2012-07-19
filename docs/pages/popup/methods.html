@@ -39,12 +39,12 @@
 			<p>Le plugin popup a les méthodes suivantes :</p>
 
 		<dl>
-			<dt><code>open(x, y,transition)</code> affiche la popup centrée aux coordonnées (x, y) utilisant la transition spécifiée</dt>
+			<dt><code>open(x, y, $link)</code>affiche la popup centrée aux coordonnées (x, y) tilisant le lien spécifié comme origine</dt>
 			<dd>
 				<pre><code>
-$('.selector').popup('open', x, y, transition);
+$('.selector').popup('open', x, y, $link);
 				</code></pre>
-				<p>Si <code>x</code> ou <code>y</code> n'est pas renseigné, le milieu de la fenêtre sera utilisée. La transition remplace la transition stockée dans les options la popup, mais ne change pas la valeur qui y est stockée.
+				<p>Si <code>x</code> ou <code>y</code> n'est pas renseigné, le milieu de la fenêtre sera utilisée. <code>$link</code> est optionnelet il spécifie le lien qui permet l'ouverture du popup. <code>$link</code> peut influencer le comportement de la popup via ses attributs <code>data-position-to</code> et <code>data-transition</code>.</p>
 			</dd>
 
 			<dt><code>close</code> ferme un popup ouvert</dt>
