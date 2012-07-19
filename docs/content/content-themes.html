@@ -25,7 +25,7 @@
 	<div data-role="content">
 			<div class="content-primary">
 		<h2>Thématisation la zone de contenu</h2>
-		<p>La zone principale de contenu d'une page (conteneur avec l'attribut <code> data-role="content"</code>) devrait être thématisé en ajoutant l'attribut <code> data-theme</code> au conteneur <code> data-role="page"</code> afin de s'assurer que les couleurs de fond soient appliquées à toute la page, quelle que soit la longueur du contenu. (Si vous ajoutez l'attribut <code> data-theme</code> au conteneur de contenu, la couleur de fond s'arrête après le contenu. Ainsi il peut y avoir un écart de couleur entre le contenu et le pied de page fixe.)</p>
+		<p>La zone principale de contenu d'une page (conteneur avec l'attribut <code> data-role="content"</code>) devrait être thématisé en ajoutant l'attribut <code> data-theme</code> au conteneur <code> data-role="page"</code> afin de s'assurer que les couleurs de fond soient appliquées à toute la page, quelle que soit la longueur du contenu. (Si vous ajoutez l'attribut <code> data-theme</code> au conteneur de contenu, la couleur de fond s'arrête après le contenu. Ainsi il peut y avoir un écart de couleur entre le contenu et la fin de la page.)</p>
 		<p>De plus, la zone de contenu du pliable peut être thématisée pour correspondre au thème de l'entête pliable en utilisant l'attribut <code>data-content-theme</code>.</p>
 
 <code>
@@ -35,7 +35,7 @@
 </code>
 
 		<h2>Thématisation des blocs pliables</h2>
-		<p>Pour définir la couleur de l'entête pliable, ajoutez l'attribut <code> data-theme</code> au conteneur pliable. L'icône et le corps ne sont pas actuellement thématisable à travers les attributs de données, mais peut l'être directement avec un style CSS personnalisé.</p>
+		<p>Pour définir la couleur de l'entête pliable, ajoutez l'attribut <code> data-theme</code> au conteneur pliable. Les icônes peuvent être définies pour les pliables avec l'attribut <code>data-collapsed-icon</code> pour l'état plié et l'attribut <code>data-expanded-icon</code> pour l'état déplié. Le contenu est thématisable à travers l'attribut <code>data-content-theme</code>.</p>
 
 <code>		
 		
@@ -108,6 +108,19 @@
 				<p>J'ai l'attribut <code> data-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
 			</div><!-- /collapsible -->
 			<div data-role="collapsible" data-theme="e" data-content-theme="e">
+				<h3>Je suis un pliable thématisé avec un contenu thématisé.</h3>
+				<p>J'ai l'attribu <code> data-content-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div>
+		</div><!-- /themed container -->
+		<p>Nuancier <strong>"b"</strong> sur contenu et pliable utilisant différents icônes</p>
+		<div class="ui-body ui-body-b">
+			<h1>Rubrique H1</h1>
+			<p>Ceci est un paragraphe qui contient<strong>strong</strong>, <em>emphasized</em> et <a href="index.html">linked</a>. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu. Voici plus de texte afin que vous puissiez voir comment fonctionne les balises HTML dans le contenu.</p>
+			<div data-role="collapsible" data-collapsed="true" data-theme="b" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
+				<h3>Je suis un pliable thématisé</h3>
+				<p>J'ai l'attribut <code> data-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
+			</div><!-- /collapsible -->
+			<div data-role="collapsible" data-theme="b" data-content-theme="b" data-collapsed-icon="arrow-d" data-expanded-icon="arrow-u">
 				<h3>Je suis un pliable thématisé avec un contenu thématisé.</h3>
 				<p>J'ai l'attribu <code> data-content-theme</code> défini manuellement sur mon conteneur pour définir la couleur afin de faire correspondre le bloc de contenu où je me trouve. </p>
 			</div>

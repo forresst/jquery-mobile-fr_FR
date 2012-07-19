@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 466a5823a444dca0e0bc0a525b095095aaf0df02 <> Date: Tue Jul 17 15:11:18 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: e87c8589441b276a3920491318f458a92c1022f9 <> Date: Wed Jul 18 23:20:37 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -940,6 +940,9 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	height: auto;
 	max-width: 100%;
 	max-height: 100%;
+	vertical-align: middle;
+}
+.ui-popup iframe {
 	vertical-align: middle;
 }
 @media all and (min-width: 450px){

@@ -35,7 +35,7 @@
 				</style>
 
 			<h2><a href="../buttons/buttons-types.html">Bouton</a></h2>
-			<p>Les liens avec le <code>data-role="button"</code>. Les boutons basés sur l'input et les éléments button sont améliorés automatiquement, donc pas besoin de <code>data-role</code></p>
+			<p>Les liens avec le <code>data-role="button"</code>. Les boutons basés sur l'input et les éléments button sont améliorés automatiquement, donc pas besoin de <code>data-role</code>.</p>
 			<table>
 				<tr>
 					<th>data-corners</th>
@@ -331,7 +331,7 @@
 				</tr>
 				<tr>
 					<th>data-rel</th>
-					<td>back (pour reculer d'une étape dans l'historique)<br /> dialog (pour ouvrir un lien stylisé comme une boîte de dialogue, qui n'est pas tracé dans l'historique)<br /> external (pour des liens dans un autre domaine) popup (pour l'ouverture d'une popup)</td>
+					<td>back (pour reculer d'une étape dans l'historique)<br /> dialog (pour ouvrir un lien stylisé comme une boîte de dialogue, qui n'est pas tracé dans l'historique)<br /> external (pour des liens dans un autre domaine)<br /> popup (pour l'ouverture d'une popup)</td>
 				</tr>
 				<tr>
 					<th>data-transition</th>
@@ -471,7 +471,7 @@
 			</table>
 
 			<h2><a href="../pages/popup/">Popup</a></h2>
-			<p>Conteneur avec <code>data-role="popup"</code> ou lié avec <code>data-rel="popup"</code> sur l'ancre.</p>
+			<p>Conteneur avec <code>data-role="popup"</code></p>
 			<table>
 				<tr>
 					<th>data-corners</th>
@@ -492,6 +492,21 @@
 				<tr>
 					<th>data-transition</th>
 					<td><strong>none</strong> - la transition a utilisée lorque la popup s'affiche/se masque</td>
+				</tr>
+			</table>
+			<p>L'ancre avec <code>data-rel="popup"</code> ouvre la popup</p>
+			<table>
+				<tr>
+					<th>data-position-to</th>
+					<td><strong>origin</strong> (centre la popup sur le lien qui l'a ouvert)<br /> Un sélecteur jQuery (centre la popup sur l'élément spécifié)<br /> window (centre la popup dans la fenêtre)</td>
+				</tr>
+				<tr>
+					<th>data-rel</th>
+					<td>popup (pour l'ouverture d'une popup)</td>
+				</tr>
+				<tr>
+					<th>data-transition</th>
+					<td><strong>fade</strong> | flip | flow | pop | slide | slidedown | slidefade | slideup | turn | none</td>
 				</tr>
 			</table>
 

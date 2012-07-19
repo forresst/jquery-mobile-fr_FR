@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 466a5823a444dca0e0bc0a525b095095aaf0df02 <> Date: Tue Jul 17 15:11:18 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: e87c8589441b276a3920491318f458a92c1022f9 <> Date: Wed Jul 18 23:20:37 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -4929,7 +4929,7 @@ $.fn.buttonMarkup = function( options ) {
 		if ( buttonIcon ) {
 			buttonIcon.className = iconClass;
 			if ( !( buttonElements && buttonElements.icon ) ) {
-				buttonIcon.appendChild( document.createTextNode( "\u00a0" ) );
+				buttonIcon.innerHTML = "&#160;";
 				buttonInner.appendChild( buttonIcon );
 			}
 		}
