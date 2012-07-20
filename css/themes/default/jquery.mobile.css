@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: e87c8589441b276a3920491318f458a92c1022f9 <> Date: Wed Jul 18 23:20:37 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 94d773e1b5f91d72210d182284e1de668978737a <> Date: Thu Jul 19 18:04:21 2012 -0400
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -1173,6 +1173,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 }
+.ui-page-pre-in {
+	opacity: 0;
+}
 .in {
 	-webkit-animation-fill-mode: both;
 	-webkit-animation-timing-function: ease-out;
@@ -1738,9 +1741,6 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	width: 100%;
 	position: fixed;
 	z-index: 1000;
-}
-.ui-page-pre-in {
-	opacity: 0;
 }
 .ui-header-fixed {
 	top: 0;

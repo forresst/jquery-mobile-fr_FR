@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: e87c8589441b276a3920491318f458a92c1022f9 <> Date: Wed Jul 18 23:20:37 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 94d773e1b5f91d72210d182284e1de668978737a <> Date: Thu Jul 19 18:04:21 2012 -0400
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -1691,7 +1691,7 @@ if ( eventCaptureSupported ) {
 
 	// also handles swipeleft, swiperight
 	$.event.special.swipe = {
-		scrollSupressionThreshold: 10, // More than this horizontal displacement, and we will suppress scrolling.
+		scrollSupressionThreshold: 30, // More than this horizontal displacement, and we will suppress scrolling.
 
 		durationThreshold: 1000, // More time than this, and it isn't a swipe.
 
@@ -6285,16 +6285,29 @@ $( document ).bind( "pagecreate create", function( e ) {
 			initSelector: ":jqmData(role='popup')"
 		},
 
+		_eatEventAndClose: function( e ) {
+			e.preventDefault();
+			e.stopImmediatePropagation();
+			this.close();
+		},
+
+		_handleWindowResize: function( e ) {
+			if ( this._isOpen ) {
+				this._resizeScreen();
+			}
+		},
+
+		_handleWindowKeyUp: function( e ) {
+			if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
+				this._eatEventAndClose( e );
+			}
+		},
+
 		_create: function() {
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen fade'></div>" ),
 					placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
 					container: $( "<div class='ui-popup-container ui-selectmenu-hidden'></div>" )
-				},
-				eatEventAndClose = function( e ) {
-					e.preventDefault();
-					e.stopImmediatePropagation();
-					self.close();
 				},
 				thisPage = this.element.closest( ".ui-page" ),
 				myId = this.element.attr( "id" ),
@@ -6329,16 +6342,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 					{
 						src: $( window ),
 						handler: {
-							resize: function( e ) {
-								if ( self._isOpen ) {
-									self._resizeScreen();
-								}
-							},
-							keyup: function( e ) {
-								if ( self._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
-									eatEventAndClose( e );
-								}
-							}
+							resize: $.proxy( this, "_handleWindowResize" ),
+							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
 					}
 				]
@@ -6351,7 +6356,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 				self._setOption( key, value, true );
 			});
 
-			ui.screen.bind( "vclick", function( e ) { eatEventAndClose( e ); });
+			ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
 
 			$.each( this._globalHandlers, function( idx, value ) {
 				value.src.bind( value.handler );
@@ -6427,7 +6432,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_setOption: function( key, value ) {
-			var setter = "_set" + key.replace( /^[a-z]/, function( c ) { return c.toUpperCase(); } );
+			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
 
 			if ( this[ setter ] !== undefined ) {
 				this[ setter ]( value );
@@ -6486,24 +6491,33 @@ $( document ).bind( "pagecreate create", function( e ) {
 		_createPrereqs: function( screenPrereq, containerPrereq, whenDone ) {
 			var self = this, prereqs;
 
+			// It is important to maintain both the local variable prereqs and self._prereqs. The local variable remains in
+			// the closure of the functions which call the callbacks passed in. The comparison between the local variable and
+			// self._prereqs is necessary, because once a function has been passed to .animationComplete() it will be called
+			// next time an animation completes, even if that's not the animation whose end the function was supposed to catch
+			// (for example, if an abort happens during the opening animation, the .animationComplete handler is not called for
+			// that animation anymore, but the handler remains attached, so it is called the next time the popup is opened
+			// - making it stale. Comparing the local variable prereqs to the widget-level variable self._prereqs ensures that
+			// callbacks triggered by a stale .animationComplete will be ignored.
+
 			prereqs = {
-				screen: $.Deferred(function( d ) {
-					d.then(function() {
-						if ( prereqs === self._prereqs ) {
-							screenPrereq();
-						}
-					});
-				}),
-				container: $.Deferred(function( d ) {
-					d.then(function() {
-						if ( prereqs === self._prereqs ) {
-							containerPrereq();
-						}
-					});
-				})
+				screen: $.Deferred(),
+				container: $.Deferred()
 			};
 
-			$.when( prereqs.screen, prereqs.container ).done(function() {
+			prereqs.screen.then( function() {
+				if ( prereqs === self._prereqs ) {
+					screenPrereq();
+				}
+			});
+
+			prereqs.container.then( function() {
+				if ( prereqs === self._prereqs ) {
+					containerPrereq();
+				}
+			});
+
+			$.when( prereqs.screen, prereqs.container ).done( function() {
 				if ( prereqs === self._prereqs ) {
 					self._prereqs = null;
 					whenDone();
@@ -6514,27 +6528,23 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_animate: function( args ) {
-			var self = this;
-
-			if ( self.options.overlayTheme && args.additionalCondition ) {
-				self._ui.screen
+			if ( this.options.overlayTheme && args.additionalCondition ) {
+				this._ui.screen
 					.removeClass( args.classToRemove )
 					.addClass( args.screenClassToAdd )
-					.animationComplete(function() {
-						args.prereqs.screen.resolve();
-					});
+					.animationComplete( $.proxy( args.prereqs.screen, "resolve" ) );
 			} else {
 				args.prereqs.screen.resolve();
 			}
 
 			if ( args.transition && args.transition !== "none" ) {
-				if ( args.applyTransition ) { self._applyTransition( args.transition ); }
-				self._ui.container
+				if ( args.applyTransition ) {
+					this._applyTransition( args.transition );
+				}
+				this._ui.container
 					.addClass( args.containerClassToAdd )
 					.removeClass( args.classToRemove )
-					.animationComplete(function() {
-						args.prereqs.container.resolve();
-					});
+					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) );
 			} else {
 				args.prereqs.container.resolve();
 			}
@@ -6581,7 +6591,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 				};
 			}
 
-			// Make sure x and y are valid numbers
+			// Make sure x and y are valid numbers - center over the window
 			if ( $.type( desired.x ) !== "number" || isNaN( desired.x ) ) {
 				desired.x = $win.width() / 2 + $win.scrollLeft();
 			}
@@ -6592,9 +6602,20 @@ $( document ).bind( "pagecreate create", function( e ) {
 			return desired;
 		},
 
+		_openPrereqContainer: function() {
+			this._applyTransition( "none" );
+			this._ui.container.removeClass( "in" );
+			this._resizeScreen();
+		},
+
+		_openPrereqsComplete: function() {
+			this._isOpen = true;
+			this._ui.container.attr( "tabindex", "0" ).focus();
+			this.element.trigger( "popupafteropen" );
+		},
+
 		_open: function( x, y, $link ) {
-			var self = this,
-				transition = "",
+			var transition = "",
 				desiredPlacement = {
 					x: x,
 					y: y,
@@ -6610,90 +6631,85 @@ $( document ).bind( "pagecreate create", function( e ) {
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeopen" );
 
-			coords = self._placementCoords( self._desiredCoords( desiredPlacement ) );
+			coords = this._placementCoords( this._desiredCoords( desiredPlacement ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
 			// 2. The screen opacity animation completes (screen())
-			self._createPrereqs(
+			this._createPrereqs(
 				$.noop,
-				function() {
-					self._applyTransition( "none" );
-					self._ui.container.removeClass( "in" );
-					self._resizeScreen();
-				},
-				function() {
-					self._isOpen = true;
-					self._ui.container.attr( "tabindex", "0" ).focus();
-					self.element.trigger( "popupafteropen" );
-				});
+				$.proxy( this, "_openPrereqContainer" ),
+				$.proxy( this, "_openPrereqsComplete" ) );
 
 			if ( transition ) {
-				self._currentTransition = transition;
-				self._applyTransition( transition );
+				this._currentTransition = transition;
+				this._applyTransition( transition );
 			} else {
-				transition = self.options.transition;
+				transition = this.options.transition;
 			}
 
-			if ( !self.options.theme ) {
-				self._setTheme( self._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( self._page, "c" ) );
+			if ( !this.options.theme ) {
+				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
 			}
 
-			self._resizeScreen();
-			self._ui.screen.removeClass( "ui-screen-hidden" );
+			this._resizeScreen();
+			this._ui.screen.removeClass( "ui-screen-hidden" );
 
-			self._ui.container
+			this._ui.container
 				.removeClass( "ui-selectmenu-hidden" )
 				.offset( {
 					left: coords.x,
 					top: coords.y
 				});
 
-			self._animate({
+			this._animate({
 				additionalCondition: true,
 				transition: transition,
 				classToRemove: "",
 				screenClassToAdd: "in",
 				containerClassToAdd: "in",
 				applyTransition: false,
-				prereqs: self._prereqs
+				prereqs: this._prereqs
 			});
 		},
 
-		_close: function() {
-			var self = this,
-				transition = ( self._currentTransition ? self._currentTransition : self.options.transition );
+		_closePrereqScreen: function() {
+			this._ui.screen
+				.removeClass( "out" )
+				.addClass( "ui-screen-hidden" );
+		},
 
+		_closePrereqContainer: function() {
+			this._ui.container
+				.removeClass( "reverse out" )
+				.addClass( "ui-selectmenu-hidden" )
+				.removeAttr( "style" );
+		},
+
+		_closePrereqsDone: function() {
+			this._ui.container.removeAttr( "tabindex" );
+			this.element.trigger( "popupafterclose" );
+		},
+
+		_close: function() {
 			this._isOpen = false;
 
 			// Count down to triggering "popupafterclose" - we have two prerequisites:
 			// 1. The popup window reverse animation completes (container())
 			// 2. The screen opacity animation completes (screen())
-			self._createPrereqs(
-				function() {
-					self._ui.screen
-						.removeClass( "out" )
-						.addClass( "ui-screen-hidden" );
-				},
-				function() {
-					self._ui.container
-						.removeClass( "reverse out" )
-						.addClass( "ui-selectmenu-hidden" )
-						.removeAttr( "style" );
-				},
-				function() {
-					self._ui.container.removeAttr( "tabindex" );
-					self.element.trigger( "popupafterclose" );
-				});
+			this._createPrereqs(
+				$.proxy( this, "_closePrereqScreen" ),
+				$.proxy( this, "_closePrereqContainer" ),
+				$.proxy( this, "_closePrereqsDone" ) );
 
-			self._animate( {
-				additionalCondition: self._ui.screen.hasClass( "in" ),
-				transition: transition,
+			this._animate( {
+				additionalCondition: this._ui.screen.hasClass( "in" ),
+				transition: ( this._currentTransition || this.options.transition ),
 				classToRemove: "in",
 				screenClassToAdd: "out",
 				containerClassToAdd: "reverse out",
 				applyTransition: true,
-				prereqs: self._prereqs
+				prereqs: this._prereqs
 			});
 		},
 
@@ -6706,6 +6722,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
 
+			// Unbind handlers that were bound to elements outside this.element (the window, in this case)
 			$.each( this._globalHandlers, function( idx, oneSrc ) {
 				$.each( oneSrc.handler, function( eventType, handler ) {
 					oneSrc.src.unbind( eventType, handler );
@@ -6730,6 +6747,22 @@ $( document ).bind( "pagecreate create", function( e ) {
 		_popupIsClosing: false,
 		_abort: false,
 
+		_handlePageBeforeChange: function( e, data ) {
+			var parsedDst, toUrl;
+
+			if ( typeof data.toPage === "string" ) {
+				parsedDst = data.toPage;
+			} else {
+				parsedDst = data.toPage.jqmData( "url" );
+			}
+			parsedDst = $.mobile.path.parseUrl( parsedDst );
+			toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
+
+			if ( this._myUrl !== toUrl ) {
+				this._onHashChange( true );
+			}
+		},
+
 		// Call _onHashChange if the hash changes /after/ the popup is on the screen
 		// Note that placing the popup on the screen can itself cause a hashchange,
 		// because the dialogHashKey may need to be added to the URL.
@@ -6743,21 +6776,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 
 			self._myUrl = $.mobile.activePage.jqmData( "url" );
-			$.mobile.pageContainer.one( "pagebeforechange.popup", function( e, data ) {
-				var parsedDst, toUrl;
-
-				if ( typeof data.toPage === "string" ) {
-					parsedDst = data.toPage;
-				} else {
-					parsedDst = data.toPage.jqmData( "url" );
-				}
-				parsedDst = $.mobile.path.parseUrl( parsedDst );
-				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
-
-				if ( self._myUrl !== toUrl ) {
-					self._onHashChange( true );
-				}
-			});
+			$.mobile.pageContainer.one( "pagebeforechange.popup", $.proxy( this, "_handlePageBeforeChange" ) );
 			if ( $.mobile.hashListeningEnabled ) {
 				var activeEntry = $.mobile.urlHistory.getActive(),
 					dstTransition,
@@ -6823,36 +6842,34 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		pop: function( popup ) {
-			var self = this;
-
-			if ( popup === self._currentlyOpenPopup && !self._popupIsClosing ) {
-				self._popupIsClosing = true;
-				if ( self._popupIsOpening ) {
-					self._currentlyOpenPopup.element.one( "popupafteropen", $.proxy( self, "_navUnhook" ) );
+			if ( popup === this._currentlyOpenPopup && !this._popupIsClosing ) {
+				this._popupIsClosing = true;
+				if ( this._popupIsOpening ) {
+					this._currentlyOpenPopup.element.one( "popupafteropen", $.proxy( this, "_navUnhook" ) );
 				} else {
-					self._navUnhook();
+					this._navUnhook();
 				}
 			}
 		},
 
+		_handlePopupAfterClose: function() {
+			this._popupIsClosing = false;
+			this._currentlyOpenPopup = null;
+			$( this ).trigger( "done" );
+		},
+
 		_onHashChange: function( immediate ) {
-			var self = this;
+			this._abort = immediate;
 
-			self._abort = immediate;
-
-			if ( self._currentlyOpenPopup ) {
-				if ( immediate && self._popupIsOpening ) {
-					self._currentlyOpenPopup._immediate();
+			if ( this._currentlyOpenPopup ) {
+				if ( immediate && this._popupIsOpening ) {
+					this._currentlyOpenPopup._immediate();
 				}
-				self._popupIsClosing = true;
-				self._currentlyOpenPopup.element.one( "popupafterclose", function() {
-					self._popupIsClosing = false;
-					self._currentlyOpenPopup = null;
-					$( self ).trigger( "done" );
-				});
-				self._currentlyOpenPopup._close();
-				if ( immediate && self._currentlyOpenPopup ) {
-					self._currentlyOpenPopup._immediate();
+				this._popupIsClosing = true;
+				this._currentlyOpenPopup.element.one( "popupafterclose", $.proxy( this, "_handlePopupAfterClose" ) );
+				this._currentlyOpenPopup._close();
+				if ( immediate && this._currentlyOpenPopup ) {
+					this._currentlyOpenPopup._immediate();
 				}
 			}
 		}
