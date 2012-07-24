@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 94d773e1b5f91d72210d182284e1de668978737a <> Date: Thu Jul 19 18:04:21 2012 -0400
+* jQuery Mobile Framework Git Build: SHA1: 81a824240c38faa28b32666f726a7fa5aa8f69d7 <> Date: Mon Jul 23 22:41:25 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -1808,7 +1808,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-btn { display: block; text-align: center; cursor:pointer; position: relative; margin: .5em 0; padding: 0; }
 .ui-mini { margin-top: .25em; margin-bottom: .25em; }
 .ui-btn-left, .ui-btn-right, .ui-input-clear, .ui-btn-inline,
-.ui-grid-a .ui-btn, .ui-grid-b .ui-btn, .ui-grid-c .ui-btn, .ui-grid-d .ui-btn, .ui-grid-e .ui-btn, .ui-grid-solo .ui-btn { margin-right: 5px; margin-left: 5px; }
+.ui-block-a > .ui-btn, .ui-block-b > .ui-btn, .ui-block-c > .ui-btn, .ui-block-d > .ui-btn, .ui-block-e > .ui-btn { margin-right: 5px; margin-left: 5px; }
 .ui-btn-inner { font-size: 16px; padding: .6em 20px; min-width: .75em; display: block; position: relative; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; zoom: 1; }
 .ui-btn input, .ui-btn button { z-index: 2; }
 .ui-btn-left, .ui-btn-right, .ui-btn-inline { display: inline-block; vertical-align: middle; }
@@ -1883,9 +1883,11 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	.ui-field-contain .ui-btn.ui-submit { width: 78%; display: inline-block; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box; }
 	.ui-hide-label .ui-btn.ui-submit { width: auto; display: block; }
 }
-.ui-collapsible { margin: .5em 0; }
-.ui-collapsible-heading { font-size: 16px; display: block; margin: 0 -8px; padding: 0; border-width: 0 0 1px 0; position: relative; }
-.ui-collapsible-heading .ui-btn { text-align: left; margin: 0; }
+.ui-collapsible-inset { margin: .5em 0; }
+.ui-collapsible-heading { font-size: 16px; display: block; margin: 0 -15px; padding: 0; position: relative; }
+.ui-collapsible-inset .ui-collapsible-heading { margin: 0; }
+.ui-collapsible-heading .ui-btn { text-align: left; margin: 0; border-left-width: 0; border-right-width: 0; }
+.ui-collapsible-inset .ui-collapsible-heading .ui-btn { border-right-width: 1px; border-left-width: 1px; }
 .ui-collapsible-heading .ui-btn-inner,
 .ui-collapsible-heading .ui-btn-icon-left .ui-btn-inner { padding-left: 40px; }
 .ui-collapsible-heading .ui-btn-icon-right .ui-btn-inner { padding-left: 12px; padding-right: 40px; }
@@ -1897,15 +1899,18 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-collapsible-heading-status { position: absolute; top: -9999px; left:0px; }
 .ui-collapsible-content {
 	display: block;
-	margin:  0 -8px;
-	padding: 10px 16px;
-	border-top:  none;      /* Overrides ui-btn-up-* */
-	background-image: none; /* Overrides ui-btn-up-* */
-	font-weight: normal;    /* Overrides ui-btn-up-* */
+	margin: 0 -15px;	
+	padding: 10px 15px;
+	border-left-width: 0;
+	border-right-width: 0;
+	border-top: none;      /* Overrides ui-body-* */
+	background-image: none; /* Overrides ui-body-* */
 }
+.ui-collapsible-inset .ui-collapsible-content { margin: 0; border-right-width: 1px; border-left-width: 1px; }
 .ui-collapsible-content-collapsed { display: none; }
 .ui-collapsible-set { margin: .5em 0; }
 .ui-collapsible-set .ui-collapsible { margin: -1px 0 0; }
+.ui-collapsible-set .ui-collapsible:first-child { margin-top: 0; }
 .ui-controlgroup, fieldset.ui-controlgroup { padding: 0; margin: .5em 0; zoom: 1; }
 .ui-controlgroup.ui-mini, fieldset.ui-controlgroup.ui-mini { margin: .25em 0; }
 .ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup { margin: 0; }
@@ -2207,7 +2212,9 @@ textarea.ui-mini { height: 45px; }
 .ui-listview { margin: 0; }
 ol.ui-listview, ol.ui-listview .ui-li-divider { counter-reset: listnumbering; }
 .ui-content .ui-listview { margin: -15px; }
+.ui-collapsible-content > .ui-listview { margin: -10px -15px; }
 .ui-content .ui-listview-inset { margin: 1em 0; }
+.ui-collapsible-content .ui-listview-inset { margin: .5em 0; }
 .ui-listview, .ui-li { list-style:none; padding:0; }
 .ui-li, .ui-li.ui-field-contain { display: block; margin:0; position: relative; overflow: visible; text-align: left; border-width: 0; border-top-width: 1px; }
 .ui-li .ui-btn-text a.ui-link-inherit { text-overflow: ellipsis; overflow: hidden; white-space: nowrap; }
@@ -2217,6 +2224,11 @@ ol.ui-listview .ui-link-inherit:before, ol.ui-listview .ui-li-static:before, .ui
 ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid chance of duplication */
 .ui-listview-inset .ui-li { border-right-width: 1px; border-left-width: 1px; }
 .ui-li-last, .ui-li.ui-field-contain.ui-li-last { border-bottom-width: 1px; }
+.ui-collapsible [class*="ui-body"] > .ui-listview:not(.ui-listview-inset) .ui-li-last { border-bottom-width: 0; }
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li:first-child { border-top-width: 0; }
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset),
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last { border-bottom-left-radius: inherit; border-bottom-right-radius: inherit; }
+.ui-collapsible-content > .ui-listview:not(.ui-listview-inset) .ui-li-last .ui-li-link-alt { border-bottom-right-radius: inherit; }
 .ui-li>.ui-btn-inner { display: block; position: relative; padding: 0; }
 .ui-li .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li { padding: .7em 15px; display: block; }
 .ui-li-has-thumb .ui-btn-inner a.ui-link-inherit, .ui-li-static.ui-li-has-thumb  { min-height: 60px; padding-left: 100px; }
@@ -2246,9 +2258,11 @@ ol.ui-listview .ui-li-jsnumbering:before { content: "" !important; } /* to avoid
 .ui-li-link-alt .ui-btn .ui-icon { right: 50%; margin-right: -9px; }
 .ui-li-link-alt .ui-btn-icon-notext .ui-btn-inner .ui-icon { position: absolute; top: 50%; margin-top: -9px; }
 .ui-listview * .ui-btn-inner > .ui-btn > .ui-btn-inner { border-top: 0px; }
-.ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px }
+.ui-listview-filter { border-width: 0; overflow: hidden; margin: -15px -15px 15px -15px; }
+.ui-collapsible-content .ui-listview-filter { margin: -10px -15px 10px -15px; border-bottom: inherit; }
+.ui-listview-filter-inset { margin: -15px -5px; background: transparent; }
+.ui-collapsible-content .ui-listview-filter-inset { margin: -5px; border-bottom-width: 0; }
 .ui-listview-filter .ui-input-search { margin: 5px; width: auto; display: block; }
-.ui-listview-filter-inset { margin: -15px -5px -15px -5px; background: transparent; }
 .ui-li.ui-screen-hidden{ display:none; }
 /* Odd iPad positioning issue. */
 @media only screen and (min-device-width: 768px) and (max-device-width: 1024px) {
@@ -2266,7 +2280,7 @@ select.ui-slider-switch { display: none; }
 div.ui-slider { position: relative; display: inline-block; overflow: visible; height: 15px; padding: 0; margin: 0 2% 0 20px; top: 4px; width: 65%; }
 div.ui-slider-mini { height: 12px; margin-left: 10px; top: 2px; }
 div.ui-slider-bg { border: none; height: 100%; padding-right: 8px; }
-.ui-controlgroup a.ui-slider-handle, a.ui-slider-handle { position: absolute; z-index: 1; top: 50%; width: 28px; height: 28px; margin-top: -15px; margin-left: -15px; outline: 0; }
+.ui-controlgroup a.ui-slider-handle, a.ui-slider-handle { position: absolute; z-index: 1; top: 50%; width: 28px; height: 28px; margin: -15px 0 0 -15px; outline: 0; }
 a.ui-slider-handle .ui-btn-inner { padding: 0; height: 100%; }
 div.ui-slider-mini a.ui-slider-handle { height: 14px; width: 14px; margin: -8px 0 0 -7px; }
 div.ui-slider-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px; padding: 0; margin: -9px 0 0 -9px; border-top: none; }
@@ -2277,7 +2291,7 @@ div.ui-slider-mini a.ui-slider-handle .ui-btn-inner { height: 30px; width: 30px;
 }	
 div.ui-slider-switch { height: 32px; margin-left: 0; width: 5.8em; }
 a.ui-slider-handle-snapping { -webkit-transition: left 70ms linear; -moz-transition: left 70ms linear; }
-div.ui-slider-switch .ui-slider-handle { margin-top: 1px; }
+div.ui-slider-switch .ui-slider-handle { margin: 1px 0 0 -15px; }
 .ui-slider-inneroffset { margin: 0 16px; position: relative; z-index: 1; }
 div.ui-slider-switch.ui-slider-mini { width: 5em; height: 29px; }
 div.ui-slider-switch.ui-slider-mini .ui-slider-inneroffset { margin: 0 15px 0 14px; }

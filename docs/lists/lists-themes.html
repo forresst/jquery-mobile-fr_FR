@@ -216,7 +216,7 @@
 			</li>
 		</ul>
 
-		<p>L'icône pour le thème de la séparation peut être défini au niveau de la liste en y ajoutant <code>data-split-icon</code> à la liste et en spécifiant une <a href="../buttons/buttons-icons.html">icône standard</a>. Cet attribut peut également être ajoutés pour séparer l'intérieur de chaque éléments de la liste en ajoutant un attribut <code> data-icon</code> à des liens spécifiques (voir le second élément de liste).</p>
+		<p>L'icône pour la séparation peut être défini au niveau de la liste en y ajoutant <code>data-split-icon</code> à la liste et en spécifiant une <a href="../buttons/buttons-icons.html">icône standard</a>. L'icône peut également être défini au séparateur individuellement en ajoutant un attribut <code>data-icon</code> à des éléments spécifiques (voir le second élément de liste).</p>
 		
 <code>
 
@@ -232,12 +232,12 @@
 			</a>
 			<a href="index.html">Purchase album</a>
 		</li>
-		<li><a href="index.html">
+		<li data-icon="alert"><a href="index.html">
 			<img src="images/album-hc.jpg" />
 			<h3>Warning</h3>
 			</a><p>Hot Chip</p>
 			</a>
-			<a href="index.html">Purchase album</a>
+			<a href="index.html" data-theme="e">Purchase album</a>
 		</li>
 	</ul>
 
@@ -316,6 +316,8 @@
 						<li><a href="lists-forms.html">Listes avec formulaires</a></li>
 						<li><a href="lists-forms-inset.html">Encart listes avec formulaires</a></li>
 
+						<li><a href="lists-collapsible.html">Listes pliables</a></li>
+						
 						<li><a href="lists-performance.html">Test de performance de liste</a></li>
 						<li data-theme="a"><a href="lists-themes.html">Liste thématisée</a></li>
 

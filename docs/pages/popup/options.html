@@ -65,6 +65,24 @@
 				 <p>Cette option est également définie comme un attribut de données : <code>data-overlay-theme="a"</code></p>
 			</dd>
 
+			<dt><code>positionTo</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "origin"</p>
+				<p>Définit l'élément relatif sur ​​lequel la popup sera centrée. Il a les valeurs suivantes :
+					<table>
+						<tr><td class="enum-value"><code>"origin"</code></td><td>
+							Lorsque la popup s'ouvre, elle se centre au dessus des coordonnées passées à l'appel <code>open()</code> (voir la page <a href="methods.html">méthodes</a>).
+						</td></tr>
+						<tr><td class="enum-value"><code>"window"</code></td><td>
+							Lorsque la popup s'ouvre, elle se centre dans la fenêtre.
+						</td></tr>
+						<tr><td class="enum-value">Sélecteur jQuery</td><td>
+							Lorsque la popup s'ouvre, elle créé un objet jQuery basé sur le sélecteur et le centre au dessus. Le sélecteur est filtré pour les éléments qui sont visibles avec  <code>":visible"</code>. Si le résultat est vide, la popup sera centrée dans la fenêtre.
+						</td></tr>
+					</table>
+				</p>
+			</dd>
+
 			<dt><code>shadow</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>
@@ -78,6 +96,20 @@
 				<p>Définit le jeu de couleurs (nuancier) pour le contenu du popup. Sauf si il est explicitement défini à <code>'none'</code>, le thème pour le popup sera défini la première fois par l'héritage du thème de la page ou en cas d'échec par la valeur <code>'c'</code> codé en dur. Si vous le définissez à 'none', le popup n'aura pas de thème du tout, et sera transparente.</p>
 				<pre><code>$('.selector').popup(<strong>{ theme: "a" }</strong>);</code></pre>
 				 <p>Cette option est également définie comme un attribut de données : <code>data-theme="a"</code></p>
+			</dd>
+
+			<dt><code>tolerance</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "15,30,15,30"</p>
+				<p>Définit la distance minimale entre le bord de la fenêtre et celui du bord de la popup. Par défaut, les valeurs ci-dessus seront utilisés respectivement sur la distance gauche, haut, droite et bas de la fenêtre.</p>
+				<p>Vous pouvez spécifier une valeur pour cette option par l'une des quatre façons suivantes :
+					<ol>
+						<li>Une chaîne vide, null ou une autre valeur fausse. Cela entraînera la popup à retourner aux valeurs par défaut ci-dessus</li>
+						<li>Un nombre seul Ce nombre sera utilisé pour les quatre bords.</li>
+						<li>Deux nombres séparés par une virgule. Le premier nombre est utilisé pour les bords gauche et droit de la fenêtre et le second nombre est utilisé pour les bords supérieur et inférieur de la fenêtre.</p>
+						</li><li>Quatre nombres séparés par des virgules. Le premier sera utilisé pour le bord gauche, le second pour le bord supérieur, le troisième pour le bord droit et le quatrième pour le bord inférieur.</p>
+					</li></ol>
+				</p>
 			</dd>
 
 			<dt><code>transition</code> <em>string</em></dt>

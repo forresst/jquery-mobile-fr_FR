@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 94d773e1b5f91d72210d182284e1de668978737a <> Date: Thu Jul 19 18:04:21 2012 -0400
+* jQuery Mobile Framework Git Build: SHA1: 81a824240c38faa28b32666f726a7fa5aa8f69d7 <> Date: Mon Jul 23 22:41:25 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -4292,7 +4292,8 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 
 		state: function() {
 			return {
-				hash: location.hash || "#" + self.initialFilePath,
+				// firefox auto decodes the url when using location.hash but not href
+				hash: $.mobile.path.parseUrl( location.href ).hash || "#" + self.initialFilePath,
 				title: document.title,
 
 				// persist across refresh
@@ -4330,7 +4331,8 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			}
 
 			var href, state,
-				hash = location.hash,
+				// firefox auto decodes the url when using location.hash but not href
+				hash = $.mobile.path.parseUrl( location.href ).hash,
 				isPath = $.mobile.path.isPath( hash ),
 				resolutionUrl = isPath ? location.href : $.mobile.getDocumentUrl();
 
@@ -5067,6 +5069,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		heading: "h1,h2,h3,h4,h5,h6,legend",
 		theme: null,
 		contentTheme: null,
+		inset: true,
 		mini: false,
 		initSelector: ":jqmData(role='collapsible')"
 	},
@@ -5110,11 +5113,22 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			if ( !o.iconPos ) {
 				o.iconPos = collapsibleSet.jqmData( "iconpos" );
 			}
-
+			// Inherit the preference for inset from collapsible-set or set the default value to ensure equalty within a set
+			if ( collapsibleSet.jqmData( "inset" ) !== undefined ) {
+				o.inset = collapsibleSet.jqmData( "inset" );
+			} else {
+				o.inset = true;
+			}
+			// Gets the preference for mini in the set
 			if ( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
 			}
 		}
+		
+		if ( !!o.inset ) {
+			collapsible.addClass( "ui-collapsible-inset" );
+		}
+		
 		collapsibleContent.addClass( ( o.contentTheme ) ? ( "ui-body-" + o.contentTheme ) : "");
 
 		collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon || "plus";
@@ -5136,9 +5150,13 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					icon: collapsedIcon,
 					mini: o.mini,
 					theme: o.theme
-				})
-			.add( ".ui-btn-inner", $el )
-				.addClass( "ui-corner-top ui-corner-bottom" );
+				});
+
+		if ( !!o.inset ) {				
+			collapsibleHeading
+				.find( "a" ).first().add( ".ui-btn-inner", $el )
+					.addClass( "ui-corner-top ui-corner-bottom" );
+		}
 
 		//events
 		collapsible
@@ -5164,7 +5182,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 					$this.toggleClass( "ui-collapsible-collapsed", isCollapse );
 					collapsibleContent.toggleClass( "ui-collapsible-content-collapsed", isCollapse ).attr( "aria-hidden", isCollapse );
 
-					if ( contentTheme && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
+					if ( contentTheme && !!o.inset && ( !collapsibleSet.length || collapsible.jqmData( "collapsible-last" ) ) ) {
 						collapsibleHeading
 							.find( "a" ).first().add( collapsibleHeading.find( ".ui-btn-inner" ) )
 							.toggleClass( "ui-corner-bottom", isCollapse );
@@ -5181,8 +5199,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			})
 			.bind( "click", function( event ) {
 
-				var type = collapsibleHeading.is( ".ui-collapsible-heading-collapsed" ) ?
-										"expand" : "collapse";
+				var type = collapsibleHeading.is( ".ui-collapsible-heading-collapsed" ) ? "expand" : "collapse";
 
 				collapsible.trigger( type );
 
@@ -5218,9 +5235,10 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 			o.contentTheme = $el.jqmData( "content-theme" );
 		}
 
-		if ( !o.corners ) {
-			o.corners = $el.jqmData( "corners" ) === undefined ? true : false;
+		if ( $el.jqmData( "inset" ) !== undefined ) {
+			o.inset = $el.jqmData( "inset" );
 		}
+		o.inset = o.inset !== undefined ? o.inset : true;
 
 		// Initialize the collapsible set if it's not already initialized
 		if ( !$el.jqmData( "collapsiblebound" ) ) {
@@ -5230,8 +5248,8 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 					var isCollapse = ( event.type === "collapse" ),
 						collapsible = $( event.target ).closest( ".ui-collapsible" ),
 						widget = collapsible.data( "collapsible" );
-					if ( collapsible.jqmData( "collapsible-last" ) ) {
-						collapsible.find( widget.options.heading ).first()
+					if ( collapsible.jqmData( "collapsible-last" ) && !!o.inset ) {
+						collapsible.find( ".ui-collapsible-heading" ).first()
 							.find( "a" ).first()
 							.toggleClass( "ui-corner-bottom", isCollapse )
 							.find( ".ui-btn-inner" )
@@ -5270,29 +5288,31 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		$.mobile.collapsible.prototype.enhance( collapsiblesInSet.not( ".ui-collapsible" ) );
 
 		// clean up borders
-		collapsiblesInSet.each(function() {
-			$( this ).jqmRemoveData( "collapsible-last" )
-				.find( $.mobile.collapsible.prototype.options.heading )
-				.find( "a" ).first()
-				.removeClass( "ui-corner-top ui-corner-bottom" )
-				.find( ".ui-btn-inner" )
-				.removeClass( "ui-corner-top ui-corner-bottom" );
-		});
+		if ( !!o.inset ) {
+			collapsiblesInSet.each(function() {
+				$( this ).jqmRemoveData( "collapsible-last" )
+					.find( ".ui-collapsible-heading" )
+					.find( "a" ).first()
+					.removeClass( "ui-corner-top ui-corner-bottom" )
+					.find( ".ui-btn-inner" )
+					.removeClass( "ui-corner-top ui-corner-bottom" );
+			});
 
-		collapsiblesInSet.first()
-			.find( "a" )
-				.first()
-				.addClass( o.corners ? "ui-corner-top" : "" )
-				.find( ".ui-btn-inner" )
-					.addClass( "ui-corner-top" );
-
-		collapsiblesInSet.last()
-			.jqmData( "collapsible-last", true )
-			.find( "a" )
-				.first()
-				.addClass( o.corners ? "ui-corner-bottom" : "" )
-				.find( ".ui-btn-inner" )
-					.addClass( "ui-corner-bottom" );
+			collapsiblesInSet.first()
+				.find( "a" )
+					.first()
+					.addClass( "ui-corner-top" )
+					.find( ".ui-btn-inner" )
+						.addClass( "ui-corner-top" );
+	
+			collapsiblesInSet.last()
+				.jqmData( "collapsible-last", true )
+				.find( "a" )
+					.first()
+					.addClass( "ui-corner-bottom" )
+					.find( ".ui-btn-inner" )
+						.addClass( "ui-corner-bottom" );
+		}
 	}
 });
 
@@ -6282,6 +6302,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 			shadow: true,
 			corners: true,
 			transition: "none",
+			positionTo: "origin",
+			tolerance: null,
 			initSelector: ":jqmData(role='popup')"
 		},
 
@@ -6291,15 +6313,16 @@ $( document ).bind( "pagecreate create", function( e ) {
 			this.close();
 		},
 
-		_handleWindowResize: function( e ) {
-			if ( this._isOpen ) {
-				this._resizeScreen();
-			}
-		},
-
 		_handleWindowKeyUp: function( e ) {
 			if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
 				this._eatEventAndClose( e );
+			}
+		},
+
+		_handleWindowOrientationChange: function( e ) {
+			if ( this._isOpen ) {
+				this.element.trigger( "popupbeforeposition" );
+				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
 			}
 		},
 
@@ -6338,11 +6361,12 @@ $( document ).bind( "pagecreate create", function( e ) {
 				_currentTransition: false,
 				_prereqs: null,
 				_isOpen: false,
+				_tolerance: null,
 				_globalHandlers: [
 					{
 						src: $( window ),
 						handler: {
-							resize: $.proxy( this, "_handleWindowResize" ),
+							orientationchange: $.proxy( this, "_handleWindowOrientationChange" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
 					}
@@ -6361,10 +6385,6 @@ $( document ).bind( "pagecreate create", function( e ) {
 			$.each( this._globalHandlers, function( idx, value ) {
 				value.src.bind( value.handler );
 			});
-		},
-
-		_resizeScreen: function() {
-			this._ui.screen.height( Math.max( $( window ).height(), $( document ).height() ) );
 		},
 
 		_applyTheme: function( dst, theme ) {
@@ -6431,6 +6451,56 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 		},
 
+		_setTolerance: function( value ) {
+			var tol = { l: 15, t: 30, r: 15, b: 30 };
+
+			if ( value ) {
+				var ar = String( value ).split( "," );
+
+				$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
+
+				switch( ar.length ) {
+					// All values are to be the same
+					case 1:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = tol.t = tol.r = tol.b = ar[ 0 ];
+						}
+						break;
+
+					// The first value denotes left/right tolerance, and the second value denotes top/bottom tolerance
+					case 2:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = tol.r = ar[ 0 ];
+						}
+						if ( !isNaN( ar[ 1 ] ) ) {
+							tol.t = tol.b = ar[ 1 ];
+						}
+						break;
+
+					// The array contains values in the order left, top, right, bottom
+					case 4:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = ar[ 0 ];
+						}
+						if ( !isNaN( ar[ 1 ] ) ) {
+							tol.t = ar[ 1 ];
+						}
+						if ( !isNaN( ar[ 2 ] ) ) {
+							tol.r = ar[ 2 ];
+						}
+						if ( !isNaN( ar[ 3 ] ) ) {
+							tol.b = ar[ 3 ];
+						}
+						break;
+
+					default:
+						break;
+				}
+			}
+
+			this._tolerance = tol;
+		},
+
 		_setOption: function( key, value ) {
 			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
 
@@ -6446,14 +6516,14 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( desired ) {
-			// Tolerances off the window edges
-			var tol = { l: 15, t: 30, r: 15, b: 30 },
 			// rectangle within which the popup must fit
+			var
+				$win = $( window ),
 				rc = {
-					l: tol.l,
-					t: $( window ).scrollTop() + tol.t,
-					cx: $( window ).width() - tol.l - tol.r,
-					cy: $( window ).height() - tol.t - tol.b
+					l: this._tolerance.l,
+					t: $win.scrollTop() + this._tolerance.t,
+					cx: $win.width() - this._tolerance.l - this._tolerance.r,
+					cy: ( window.innerHeight || $win.height() ) - this._tolerance.t - this._tolerance.b
 				},
 				menuSize, ret;
 
@@ -6477,7 +6547,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			// align the bottom with the bottom of the document
 			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $( document ).height() ) );
 
-			return ret;
+			return { left: ret.x, top: ret.y };
 		},
 
 		_immediate: function() {
@@ -6553,23 +6623,17 @@ $( document ).bind( "pagecreate create", function( e ) {
 		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
 		// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
-		_desiredCoords: function( desiredPosition ) {
-			var dst = null, offset, $win = $( window ),
-				desired = {
-					x: desiredPosition.x,
-					y: desiredPosition.y
-				};
+		_desiredCoords: function( x, y, positionTo ) {
+			var dst = null, offset, $win = $( window );
 
 			// Establish which element will serve as the reference
-			if ( desiredPosition.positionTo && desiredPosition.positionTo !== "origin" ) {
-				if ( desiredPosition.positionTo === "window" ) {
-					desired = {
-						x: $win.width() / 2 + $win.scrollLeft(),
-						y: $win.height() / 2 + $win.scrollTop()
-					};
+			if ( positionTo && positionTo !== "origin" ) {
+				if ( positionTo === "window" ) {
+					x = $win.width() / 2 + $win.scrollLeft();
+					y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
 				} else {
 					try {
-						dst = $( desiredPosition.positionTo );
+						dst = $( positionTo );
 					} catch( e ) {
 						dst = null;
 					}
@@ -6585,27 +6649,19 @@ $( document ).bind( "pagecreate create", function( e ) {
 			// If an element was found, center over it
 			if ( dst ) {
 				offset = dst.offset();
-				desired = {
-					x: offset.left + dst.outerWidth() / 2,
-					y: offset.top + dst.outerHeight() / 2
-				};
+				x = offset.left + dst.outerWidth() / 2;
+				y = offset.top + dst.outerHeight() / 2;
 			}
 
 			// Make sure x and y are valid numbers - center over the window
-			if ( $.type( desired.x ) !== "number" || isNaN( desired.x ) ) {
-				desired.x = $win.width() / 2 + $win.scrollLeft();
+			if ( $.type( x ) !== "number" || isNaN( x ) ) {
+				x = $win.width() / 2 + $win.scrollLeft();
 			}
-			if ( $.type( desired.y ) !== "number" || isNaN( desired.y ) ) {
-				desired.y = $win.height() / 2 + $win.scrollTop();
+			if ( $.type( y ) !== "number" || isNaN( y ) ) {
+				y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
 			}
 
-			return desired;
-		},
-
-		_openPrereqContainer: function() {
-			this._applyTransition( "none" );
-			this._ui.container.removeClass( "in" );
-			this._resizeScreen();
+			return { x: x, y: y };
 		},
 
 		_openPrereqsComplete: function() {
@@ -6614,31 +6670,20 @@ $( document ).bind( "pagecreate create", function( e ) {
 			this.element.trigger( "popupafteropen" );
 		},
 
-		_open: function( x, y, $link ) {
-			var transition = "",
-				desiredPlacement = {
-					x: x,
-					y: y,
-					positionTo: "origin"
-				},
-				coords;
-
-			if ( $link ) {
-				transition = $link.jqmData( "transition" );
-				desiredPlacement.positionTo = $link.jqmData( "position-to" );
-			}
+		_open: function( x, y, transition, positionTo ) {
+			var coords;
 
 			// Give applications a chance to modify the contents of the container before it appears
-			this.element.trigger( "popupbeforeopen" );
+			this.element.trigger( "popupbeforeposition" );
 
-			coords = this._placementCoords( this._desiredCoords( desiredPlacement ) );
+			coords = this._placementCoords( this._desiredCoords( x, y, positionTo || this.options.positionTo || "origin" ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
 			// 2. The screen opacity animation completes (screen())
 			this._createPrereqs(
 				$.noop,
-				$.proxy( this, "_openPrereqContainer" ),
+				$.noop,
 				$.proxy( this, "_openPrereqsComplete" ) );
 
 			if ( transition ) {
@@ -6652,15 +6697,11 @@ $( document ).bind( "pagecreate create", function( e ) {
 				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
 			}
 
-			this._resizeScreen();
 			this._ui.screen.removeClass( "ui-screen-hidden" );
 
 			this._ui.container
 				.removeClass( "ui-selectmenu-hidden" )
-				.offset( {
-					left: coords.x,
-					top: coords.y
-				});
+				.offset( coords );
 
 			this._animate({
 				additionalCondition: true,
@@ -6730,7 +6771,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			});
 		},
 
-		open: function( x, y, $link ) {
+		open: function( x, y, transition, positionTo ) {
 			$.mobile.popup.popupManager.push( this, arguments );
 		},
 
@@ -6886,7 +6927,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 			popup.popup( "open",
 				offset.left + $link.outerWidth() / 2,
 				offset.top + $link.outerHeight() / 2,
-				$link );
+				$link.jqmData( "transition" ),
+				$link.jqmData( "position-to" ) );
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler

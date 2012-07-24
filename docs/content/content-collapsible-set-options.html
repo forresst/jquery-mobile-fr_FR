@@ -79,10 +79,21 @@
 </code></pre>
 			</dd>
 
+			<dt><code>inset</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">Par défaut : true</p>
+				<p>En mettant cette option à false, les pliables auront une apparence sur toute la largeur sans coins. Si la valeur est false pour un conteneur individuel de pliable, mais que ce conteneur fait partie d'un ensemble pliable, alors la valeur est héritée de l'ensemble du parent pliable. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.collapsible.prototype.options.inset = false;</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-inset="false"</code>.</p>
+			</dd>
+			
 			<dt><code>mini</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">par défaut : false</p>
-				<p>Définit la taille de l'élément pour qu'il soit plus compact : une <a href="../forms/forms-all-mini.html">version mini</a>. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+				<p>Définit la taille des pliables pour qu'ils soient plus compacts : une <a href="../forms/forms-all-mini.html">version mini</a>. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
 <pre><code>$( document ).bind( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.mini = true;</strong>
 });
