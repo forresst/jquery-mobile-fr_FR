@@ -33,6 +33,8 @@ define( [ "jquery",
 			shadow: true,
 			corners: true,
 			transition: "none",
+			positionTo: "origin",
+			tolerance: null,
 			initSelector: ":jqmData(role='popup')"
 		},
 
@@ -42,15 +44,16 @@ define( [ "jquery",
 			this.close();
 		},
 
-		_handleWindowResize: function( e ) {
-			if ( this._isOpen ) {
-				this._resizeScreen();
-			}
-		},
-
 		_handleWindowKeyUp: function( e ) {
 			if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
 				this._eatEventAndClose( e );
+			}
+		},
+
+		_handleWindowOrientationChange: function( e ) {
+			if ( this._isOpen ) {
+				this.element.trigger( "popupbeforeposition" );
+				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
 			}
 		},
 
@@ -89,11 +92,12 @@ define( [ "jquery",
 				_currentTransition: false,
 				_prereqs: null,
 				_isOpen: false,
+				_tolerance: null,
 				_globalHandlers: [
 					{
 						src: $( window ),
 						handler: {
-							resize: $.proxy( this, "_handleWindowResize" ),
+							orientationchange: $.proxy( this, "_handleWindowOrientationChange" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
 					}
@@ -112,10 +116,6 @@ define( [ "jquery",
 			$.each( this._globalHandlers, function( idx, value ) {
 				value.src.bind( value.handler );
 			});
-		},
-
-		_resizeScreen: function() {
-			this._ui.screen.height( Math.max( $( window ).height(), $( document ).height() ) );
 		},
 
 		_applyTheme: function( dst, theme ) {
@@ -182,6 +182,56 @@ define( [ "jquery",
 			}
 		},
 
+		_setTolerance: function( value ) {
+			var tol = { l: 15, t: 30, r: 15, b: 30 };
+
+			if ( value ) {
+				var ar = String( value ).split( "," );
+
+				$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
+
+				switch( ar.length ) {
+					// All values are to be the same
+					case 1:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = tol.t = tol.r = tol.b = ar[ 0 ];
+						}
+						break;
+
+					// The first value denotes left/right tolerance, and the second value denotes top/bottom tolerance
+					case 2:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = tol.r = ar[ 0 ];
+						}
+						if ( !isNaN( ar[ 1 ] ) ) {
+							tol.t = tol.b = ar[ 1 ];
+						}
+						break;
+
+					// The array contains values in the order left, top, right, bottom
+					case 4:
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = ar[ 0 ];
+						}
+						if ( !isNaN( ar[ 1 ] ) ) {
+							tol.t = ar[ 1 ];
+						}
+						if ( !isNaN( ar[ 2 ] ) ) {
+							tol.r = ar[ 2 ];
+						}
+						if ( !isNaN( ar[ 3 ] ) ) {
+							tol.b = ar[ 3 ];
+						}
+						break;
+
+					default:
+						break;
+				}
+			}
+
+			this._tolerance = tol;
+		},
+
 		_setOption: function( key, value ) {
 			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
 
@@ -197,14 +247,14 @@ define( [ "jquery",
 
 		// Try and center the overlay over the given coordinates
 		_placementCoords: function( desired ) {
-			// Tolerances off the window edges
-			var tol = { l: 15, t: 30, r: 15, b: 30 },
 			// rectangle within which the popup must fit
+			var
+				$win = $( window ),
 				rc = {
-					l: tol.l,
-					t: $( window ).scrollTop() + tol.t,
-					cx: $( window ).width() - tol.l - tol.r,
-					cy: $( window ).height() - tol.t - tol.b
+					l: this._tolerance.l,
+					t: $win.scrollTop() + this._tolerance.t,
+					cx: $win.width() - this._tolerance.l - this._tolerance.r,
+					cy: ( window.innerHeight || $win.height() ) - this._tolerance.t - this._tolerance.b
 				},
 				menuSize, ret;
 
@@ -228,7 +278,7 @@ define( [ "jquery",
 			// align the bottom with the bottom of the document
 			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $( document ).height() ) );
 
-			return ret;
+			return { left: ret.x, top: ret.y };
 		},
 
 		_immediate: function() {
@@ -304,23 +354,17 @@ define( [ "jquery",
 		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
 		// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
-		_desiredCoords: function( desiredPosition ) {
-			var dst = null, offset, $win = $( window ),
-				desired = {
-					x: desiredPosition.x,
-					y: desiredPosition.y
-				};
+		_desiredCoords: function( x, y, positionTo ) {
+			var dst = null, offset, $win = $( window );
 
 			// Establish which element will serve as the reference
-			if ( desiredPosition.positionTo && desiredPosition.positionTo !== "origin" ) {
-				if ( desiredPosition.positionTo === "window" ) {
-					desired = {
-						x: $win.width() / 2 + $win.scrollLeft(),
-						y: $win.height() / 2 + $win.scrollTop()
-					};
+			if ( positionTo && positionTo !== "origin" ) {
+				if ( positionTo === "window" ) {
+					x = $win.width() / 2 + $win.scrollLeft();
+					y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
 				} else {
 					try {
-						dst = $( desiredPosition.positionTo );
+						dst = $( positionTo );
 					} catch( e ) {
 						dst = null;
 					}
@@ -336,27 +380,19 @@ define( [ "jquery",
 			// If an element was found, center over it
 			if ( dst ) {
 				offset = dst.offset();
-				desired = {
-					x: offset.left + dst.outerWidth() / 2,
-					y: offset.top + dst.outerHeight() / 2
-				};
+				x = offset.left + dst.outerWidth() / 2;
+				y = offset.top + dst.outerHeight() / 2;
 			}
 
 			// Make sure x and y are valid numbers - center over the window
-			if ( $.type( desired.x ) !== "number" || isNaN( desired.x ) ) {
-				desired.x = $win.width() / 2 + $win.scrollLeft();
+			if ( $.type( x ) !== "number" || isNaN( x ) ) {
+				x = $win.width() / 2 + $win.scrollLeft();
 			}
-			if ( $.type( desired.y ) !== "number" || isNaN( desired.y ) ) {
-				desired.y = $win.height() / 2 + $win.scrollTop();
+			if ( $.type( y ) !== "number" || isNaN( y ) ) {
+				y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
 			}
 
-			return desired;
-		},
-
-		_openPrereqContainer: function() {
-			this._applyTransition( "none" );
-			this._ui.container.removeClass( "in" );
-			this._resizeScreen();
+			return { x: x, y: y };
 		},
 
 		_openPrereqsComplete: function() {
@@ -365,31 +401,20 @@ define( [ "jquery",
 			this.element.trigger( "popupafteropen" );
 		},
 
-		_open: function( x, y, $link ) {
-			var transition = "",
-				desiredPlacement = {
-					x: x,
-					y: y,
-					positionTo: "origin"
-				},
-				coords;
-
-			if ( $link ) {
-				transition = $link.jqmData( "transition" );
-				desiredPlacement.positionTo = $link.jqmData( "position-to" );
-			}
+		_open: function( x, y, transition, positionTo ) {
+			var coords;
 
 			// Give applications a chance to modify the contents of the container before it appears
-			this.element.trigger( "popupbeforeopen" );
+			this.element.trigger( "popupbeforeposition" );
 
-			coords = this._placementCoords( this._desiredCoords( desiredPlacement ) );
+			coords = this._placementCoords( this._desiredCoords( x, y, positionTo || this.options.positionTo || "origin" ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
 			// 2. The screen opacity animation completes (screen())
 			this._createPrereqs(
 				$.noop,
-				$.proxy( this, "_openPrereqContainer" ),
+				$.noop,
 				$.proxy( this, "_openPrereqsComplete" ) );
 
 			if ( transition ) {
@@ -403,15 +428,11 @@ define( [ "jquery",
 				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
 			}
 
-			this._resizeScreen();
 			this._ui.screen.removeClass( "ui-screen-hidden" );
 
 			this._ui.container
 				.removeClass( "ui-selectmenu-hidden" )
-				.offset( {
-					left: coords.x,
-					top: coords.y
-				});
+				.offset( coords );
 
 			this._animate({
 				additionalCondition: true,
@@ -481,7 +502,7 @@ define( [ "jquery",
 			});
 		},
 
-		open: function( x, y, $link ) {
+		open: function( x, y, transition, positionTo ) {
 			$.mobile.popup.popupManager.push( this, arguments );
 		},
 
@@ -637,7 +658,8 @@ define( [ "jquery",
 			popup.popup( "open",
 				offset.left + $link.outerWidth() / 2,
 				offset.top + $link.outerHeight() / 2,
-				$link );
+				$link.jqmData( "transition" ),
+				$link.jqmData( "position-to" ) );
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler

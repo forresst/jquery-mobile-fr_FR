@@ -114,6 +114,10 @@
 					<td><strong>left</strong> | right | top | bottom</td>
 				</tr>
 				<tr>
+					<th>data-inset</th>
+					<td><strong>true</strong> | false</td>
+				</tr>
+				<tr>
 					<th>data-mini</th>
 					<td>true | <strong>false</strong> - version d'une taille compacte</td>
 				</tr>
@@ -141,6 +145,10 @@
 				<tr>
 					<th>data-iconpos</th>
 					<td><strong>left</strong> | right | top | bottom |  notext</td>
+				</tr>
+				<tr>
+					<th>data-inset</th>
+					<td><strong>true</strong> | false</td>
 				</tr>
 				<tr>
 					<th>data-mini</th>
@@ -339,7 +347,7 @@
 				</tr>
 				<tr>
 					<th>data-position-to</th>
-					<td><strong>origin</strong> (centre la popup sur le lien qui l'a ouvert)<br /> Un sélecteur jQuery (centre la popup sur l'élément spécifié)<br /> window (centre la popup dans la fenêtre)<br /> <u>Remarque :</u> l'option est uniquement disponible lorsqu'elle est utilisée avec les popups</td>
+					<td><strong>origin</strong> (centre la popup sur le lien qui l'a ouvert)<br /> Un sélecteur jQuery (centre la popup sur l'élément spécifié)<br /> window (centre la popup dans la fenêtre)<br /> <u>Remarque :</u> l'option est uniquement disponible lorsqu'elle est utilisée avec les popups Regardez aussi : les <a href="../pages/popup/options.html">options</a> des popups</td>
 				</tr>
 			</table>
 
@@ -492,6 +500,14 @@
 				<tr>
 					<th>data-transition</th>
 					<td><strong>none</strong> - la transition a utilisée lorque la popup s'affiche/se masque</td>
+				</tr>
+				<tr>
+					<th>data-position-to</th>
+					<td><strong>origin</strong> - l'élément relatif qui permet de positionner la popup</td>
+				</tr>
+				<tr>
+					<th>data-tolerance</th>
+					<td><strong>30,15,30,15</strong> - Combien de place à laisser aux bords de la fenêtre</td>
 				</tr>
 			</table>
 			<p>L'ancre avec <code>data-rel="popup"</code> ouvre la popup</p>

@@ -35,7 +35,7 @@
 
 			<p>Pour créer un bloc de contenu  pliable, créez un conteneur et ajouter l'attribut <code> data-role="collapsible"</code>. L'utilisation de l'attribut  <code>data-content-theme</code> vous permet de définir un thème pour le contenu du pliable. Regardez la <a href="../api/data-attributes.html">reference de data- attribute</a> pour voir tous les attributs possibles que vous pouvez ajouter aux pliables.</p>
 
-			<p>Directement à l'intérieur de ce conteneur, ajoutez un élément entête (H1-H6). Le framework stylisera l'entête pour ressembler à un bouton cliquable et ajoutera une icône "+" à gauche pour indiquer qu'il est extensible.</p>
+			<p>Directement à l'intérieur de ce conteneur, ajoutez un élément entête (H1-H6) ou un élément légende. Le framework stylisera l'entête pour ressembler à un bouton cliquable et ajoutera une icône "+" à gauche pour indiquer qu'il est extensible.</p>
 		
 			<p>Après l'entête, ajoutez n'importe quel balisage HTML que vous voulez être pliable. Le framework terminera ce balisage dans un conteneur qui sera caché/affiché lorsque l'entête sera cliqué.</p>
 			
@@ -68,7 +68,23 @@
 				<h3>Je suis l'entête</h3>
 				<p>Je suis le contenu pliable. Je suis déplier par défaut, parce que j'ai l'état "collapsed" défini à false.</p>
 			</div>
-	
+
+			<h2>Pliables Non intégrés</h2>
+			
+			<p>Par défaut les pliables ont une apparence intégré. Pour les rendre sur toute la largeur sans coins, ajoutez l'attribut <code>data-inset="false"</code> à l'élément.</p>
+
+		<code>		
+				
+		&lt;div data-role="collapsible" <strong>data-inset="false"&gt;</strong>
+		</code>
+
+		<p>Ce code créera un pliable non-intégré :</p>
+
+		<div data-role="collapsible" data-inset="false">
+			<h3>Je suis l'entête</h3>
+			<p>Je suis le contenu pliable.</p>
+		</div>
+			
 			<h2>Mini pliables</h2>
 
 			<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'élément pour créer une <a href="../forms/forms-all-mini.html">version mini</a>. </p>
@@ -82,7 +98,7 @@
 
 		<div data-role="collapsible" data-mini="true">
 			<h3>Je suis l'entête mini</h3>
-			<p>Je suis le contenu pliable. Je suis déplier par défaut, parce que j'ai l'état "collapsed" défini à false.</p>
+			<p>Je suis le contenu pliable.</p>
 		</div>
 		
 		<h2>Icônes personnalisées</h2>

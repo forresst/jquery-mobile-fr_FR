@@ -34,7 +34,7 @@ Vous pouvez trouver plus d'informations sur la façon dont la bibliothèque fonc
 Lorsqu'un [problème est sousmis sur github](https://github.com/jquery/jquery-mobile/issues/new) merci d'inclure ce qui suit :
 
 1. Description du problème
-2. Exemple de page utilisant notre [modèle jsbin](http://jsbin.com/awoluv/edit#html) qui utilisent la dernière version
+2. Exemple de page utilisant notre [modèle jsbin](http://jsbin.com/orucec/edit#html) qui utilisent la dernière version
 3. Les étapes pour le reproduire
 4. Le résultat attendu
 5. Le résultat actuel

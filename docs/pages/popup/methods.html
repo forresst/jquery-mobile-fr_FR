@@ -39,12 +39,14 @@
 			<p>Le plugin popup a les méthodes suivantes :</p>
 
 		<dl>
-			<dt><code>open(x, y, $link)</code>affiche la popup centrée aux coordonnées (x, y) tilisant le lien spécifié comme origine</dt>
+			<dt><code>open(x, y, transition, positionTo)</code> affiche la popup centrée aux coordonnées (x, y) utilisant la transition et le positionnement spécifiées</dt>
 			<dd>
 				<pre><code>
-$('.selector').popup('open', x, y, $link);
+$('.selector').popup('open', x, y, transition, positionTo);
 				</code></pre>
-				<p>Si <code>x</code> ou <code>y</code> n'est pas renseigné, le milieu de la fenêtre sera utilisée. <code>$link</code> est optionnelet il spécifie le lien qui permet l'ouverture du popup. <code>$link</code> peut influencer le comportement de la popup via ses attributs <code>data-position-to</code> et <code>data-transition</code>.</p>
+				<p>Si <code>x</code> ou <code>y</code> n'est pas renseigné et aucun sélecteur jQuery n'est donné à <code>positionTo</code>, le milieu de la fenêtre sera utilisée.</p>
+				<p><code>transition</code> peut être utilisé pour surcharger la propre option de <code>transition</code>. Cela se traduira par l'ouverture de la popup par l'intermédiaire de la transition prévue dans l'appel, mais l'option <code>transition</code> de la popup ne sera pas mise à jour.</p>
+				<p>De même, <code>data-position-to</code>  peut être utilisé pour surcharger le positionnement par défaut de la popup sans modifier l'option <code>positionTo</code> de la popup. Les valeurs disponibles pour <code>positionTo</code> sont les mêmes que celles de l'option <code>positionTo</code> de la popup (voir la page des <a href="options.html">options</a>).</p>
 			</dd>
 
 			<dt><code>close</code> ferme un popup ouvert</dt>
