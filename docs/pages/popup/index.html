@@ -57,9 +57,110 @@
 		
 		<p>Ce style simple permet d'être ajouter facilement dans des widgets pour créer différentes interactions. Voici quelques exemples du monde réel qui combinent les différents paramètres et les styles que vous pouvez réaliser avec les popups:</p>
 		
-		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a> <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true">Menu</a> <a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Formulaire</a> <a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Dialogue</a> <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo paysage</a> <a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a> <a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Carte</a> <a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Vidéo</a>
+		<a href="#popupInfo" data-rel="popup" data-role="button" data-inline="true">Tooltip</a> <a href="#popupMenu" data-rel="popup" data-role="button" data-inline="true">Menu</a> <a href="#popupNested" data-rel="popup" data-role="button" data-inline="true">Menu imbriqué</a> <a href="#popupLogin" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Formulaire</a> <a href="#popupDialog" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="pop">Boîte de dialogue</a> <a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Photo paysage</a> <a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" data-role="button" data-inline="true" data-transition="fade">Photo portrait</a> <a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Carte</a> <a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-inline="true">Vidéo</a>
 	
 	
+
+		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
+          <p>Voici un <strong>petit popup</strong> utilisé comme tooltip. Le texte sera renvoyé sur plusieurs lignes si nécessaire.</p>
+		</div>
+
+		<div data-role="popup" id="popupMenu" data-theme="a">
+				<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="b">
+					<li data-role="divider" data-theme="a">API de la popup</li>
+					<li><a href="options.html">Options</a></li>
+					<li><a href="methods.html">Méthodes</a></li>
+					<li><a href="events.html">Événements</a></li>
+				</ul>
+		</div>
+
+
+		<div data-role="popup" id="popupNested" data-theme="none">
+			<div data-role="collapsible-set" data-theme="b" data-content-theme="c" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" style="margin:0; width:250px;">
+				<div data-role="collapsible" data-inset="false">
+					<h2>Animaux de la ferme</h2>
+					<ul data-role="listview">
+						<li><a href="index.html">Poulet</a></li>
+						<li><a href="index.html">Vache</a></li>
+						<li><a href="index.html">Canard</a></li>
+						<li><a href="index.html">Mouton</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-inset="false">
+					<h2>Animaux de compagnie</h2>
+					<ul data-role="listview">
+						<li><a href="index.html">Chat</a></li>
+						<li><a href="index.html">Chien</a></li>
+						<li><a href="index.html">Iguane</a></li>
+						<li><a href="index.html">Souris</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-inset="false">
+					<h2>Créatures de l'océan</h2>
+					<ul data-role="listview">
+						<li><a href="index.html">Poisson</a></li>
+						<li><a href="index.html">Pieuvre</a></li>
+						<li><a href="index.html">Requin</a></li>
+						<li><a href="index.html">Étoile de mer</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-inset="false">
+					<h2>Animaux sauvages</h2>
+					<ul data-role="listview">
+						<li><a href="index.html">Lion</a></li>
+						<li><a href="index.html">Singe</a></li>
+						<li><a href="index.html">Tigre</a></li>
+						<li><a href="index.html">Zèbre</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+			</div><!-- /collapsible set -->
+		</div><!-- /popup -->
+		
+
+		<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
+			<form>
+				<div style="padding:10px 20px;">
+				  <h3>Inscrivez vous s'il vous plaît</h3>
+		          <label for="un" class="ui-hidden-accessible">Nom de l'utilisateur :</label>
+		          <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a" />
+
+		          <label for="pw" class="ui-hidden-accessible">Mot de passe :</label>
+		          <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a" />
+
+		    	  <button type="submit" data-theme="b">Inscrivez vous</button>
+				</div>
+			</form>
+		</div>
+		
+		<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
+			<div data-role="header" data-theme="a" class="ui-corner-top">
+				<h1>Supprimer la Page ?</h1>
+			</div>
+			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
+				<h3 class="ui-title">Etes-vous sûr de vouloir supprimer cette page ?</h3>
+				<p>Cette action ne peut pas être annulée.</p>
+				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Annuler</a> <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">Supprimer</a>  
+			</div>
+		</div>
+
+		<div data-role="popup" id="popupPhotoLandscape" data-overlay-theme="a" data-corners="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img class="popphoto" src="../../_assets/images/photo-landscape.jpg" alt="Photo paysage">
+		</div>
+		
+		<div data-role="popup" id="popupPhotoPortrait" data-overlay-theme="a" data-corners="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img class="popphoto" src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
+		</div>
+		
+		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a>
+			<iframe id="mapiframe" src="map.html" width="480" height="320" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+		</div>
+				
+		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
+			<iframe id="vidiframe" src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+    	</div>
+
+
 		<h2>Appel du plugin popup</h2>
 
 		<p>Ce plugin sera auto-initialiser sur n'importe quelle page qui contient un div avec l'attribut <code>data-role="popup"</code>. Cependant, si nécessaire, vous pouvez appeler directement le plugin <code>popup</code> sur n'importe quel sélecteur, comme n'importe quel plugin jQuery et travailler par programmation avec l'API du popup via les <a href="options.html">options</a>, les <a href="methods.html">méthodes</a> et les <a href="events.html">événements</a> :</p>
@@ -178,7 +279,7 @@ $( ".selector" ).popup( "open", x, y,
 &lt;/a&gt;
 </code></pre>
 				
-		<p>Pour des raisons de performances sur les appareils mobiles, nous vous recommandons d'utiliser des transitions simples comme pop, fade ou non pour avoir des animations de popup fluide et rapide, en particulier avec de larges ou de complexes widgets dans un popup.</p>
+		<p>Pour des raisons de performances sur les appareils mobiles, nous vous recommandons d'utiliser des transitions simples comme pop, fade ou non pour avoir des animations de popup fluide et rapide, en particulier avec de larges ou de complexes widgets dans un popup. Pour apercevoir tous les types de transition, vous devez être sur un navigateur qui supporte les transformations 3D. Par défaut, les dispositifs qui ne supportent pas la 3D (Comme Android 2.x), se replient sur "fade" pour tous les types de transition. Voir les <a href="../page-transitions.html">transitions</a> de pagepour plus d'informations sur le système de transition .</p>
 				
 		<a href="#transitionExample" data-transition="none" data-role="button" data-inline="true" data-rel="popup">Pas de transition</a> <a href="#transitionExample" data-transition="pop" data-role="button" data-inline="true" data-rel="popup">Pop</a> <a href="#transitionExample" data-transition="fade" data-role="button" data-inline="true" data-rel="popup">Fade</a> <a href="#transitionExample" data-transition="flip" data-role="button" data-inline="true" data-rel="popup">Flip</a> <a href="#transitionExample" data-transition="turn" data-role="button" data-inline="true" data-rel="popup">Turn</a> <a href="#transitionExample" data-transition="flow" data-role="button" data-inline="true" data-rel="popup">Flow</a> <a href="#transitionExample" data-transition="slide" data-role="button" data-inline="true" data-rel="popup">Slide</a> <a href="#transitionExample" data-transition="slidefade" data-role="button" data-inline="true" data-rel="popup">Slidefade</a> <a href="#transitionExample" data-transition="slideup" data-role="button" data-inline="true" data-rel="popup">Slide up</a> <a href="#transitionExample" data-transition="slidedown" data-role="button" data-inline="true" data-rel="popup">Slide down</a>
 
@@ -186,11 +287,9 @@ $( ".selector" ).popup( "open", x, y,
 		<div data-role="popup" id="transitionExample" class="ui-content" data-theme="d">
 			<p>Je suis une simple popup.</p>
 		</div>
-							
-
-							
+											
 		<p>Lorsque vous lancez le popup depuis l'un des boutons, la <code>data-transition</code> donnée pour ce bouton sera utilisée. Toutefois, si vous lancez la popup par par programmation, comme <code>$("#transitionExample").popup("open")</code>, l'attribut <code>data-transition</code> spécifié dans la définition de la popup sera utilisé si elle est définie.</p>
-
+		
 
 		<h2>Thématisation du popup et de son fond</h2>
 		
@@ -204,79 +303,21 @@ $( ".selector" ).popup( "open", x, y,
 &lt;/div&gt;
 </code></pre>
 
-<a href="#theme" data-rel="popup" data-role="button" data-inline="true">Thème défini à A</a>
-<div id="theme" data-role="popup" data-theme="a" class="ui-content">
-  <p>J'ai <code>data-theme="a"</code> de défini</p>
-</div>
-
-<a href="#overlay" data-rel="popup" data-role="button" data-inline="true">Recouvrement défini à A</a>
-<div id="overlay" data-role="popup" data-overlay-theme="a" class="ui-content">
-  <p>J'ai <code>data-overlay-theme="a"</code> de défini</p>
-</div>
-
-<a href="#both" data-rel="popup" data-role="button" data-inline="true">Thème E + fond A</a>
-<div id="both" data-role="popup" data-overlay-theme="a" data-theme="e" class="ui-content">
-  <p>J'ai <code>data-theme="e"</code> et <code>data-overlay-theme="a"</code> de définis</p>
-</div>
-
-
-
-	
-		<div data-role="popup" id="popupInfo" class="ui-content" data-theme="e" style="max-width:350px;">
-          <p>Voici un <strong>petit popup</strong> utilisé comme tooltip. Le texte sera renvoyé sur plusieurs lignes si nécessaire.</p>
+		<a href="#theme" data-rel="popup" data-role="button" data-inline="true">Thème défini à A</a>
+		<div id="theme" data-role="popup" data-theme="a" class="ui-content">
+		  <p>J'ai <code>data-theme="a"</code> de défini</p>
 		</div>
 
-		<div data-role="popup" id="popupMenu" data-theme="a">
-				<ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="b">
-					<li data-role="divider" data-theme="a">API Popover</li>
-					<li><a href="options.html">Options</a></li>
-					<li><a href="methods.html">Méthodes</a></li>
-					<li><a href="events.html">Événements</a></li>
-				</ul>
+		<a href="#overlay" data-rel="popup" data-role="button" data-inline="true">Recouvrement défini à A</a>
+		<div id="overlay" data-role="popup" data-overlay-theme="a" class="ui-content">
+		  <p>J'ai <code>data-overlay-theme="a"</code> de défini</p>
 		</div>
 
-		<div data-role="popup" id="popupLogin" data-theme="a" class="ui-corner-all">
-			<form>
-				<div style="padding:10px 20px;">
-				  <h3>Inscrivez vous s'il vous plaît</h3>
-		          <label for="un" class="ui-hidden-accessible">Nom de l'utilisateur :</label>
-		          <input type="text" name="user" id="un" value="" placeholder="username" data-theme="a" />
-
-		          <label for="pw" class="ui-hidden-accessible">Mot de passe :</label>
-		          <input type="password" name="pass" id="pw" value="" placeholder="password" data-theme="a" />
-
-		    	  <button type="submit" data-theme="b">Inscrivez vous</button>
-				</div>
-			</form>
-		</div>
-		
-		<div data-role="popup" id="popupDialog" data-overlay-theme="a" data-theme="c" style="max-width:400px;" class="ui-corner-all">
-			<div data-role="header" data-theme="a" class="ui-corner-top">
-				<h1>Supprimer la Page ?</h1>
-			</div>
-			<div data-role="content" data-theme="d" class="ui-corner-bottom ui-content">
-				<h3 class="ui-title">Etes-vous sûr de vouloir supprimer cette page ?</h3>
-				<p>Cette action ne peut pas être annulée.</p>
-				<a href="#" data-role="button" data-inline="true" data-rel="back" data-theme="c">Annuler</a> <a href="#" data-role="button" data-inline="true" data-rel="back" data-transition="flow" data-theme="b">Supprimer</a>  
-			</div>
+		<a href="#both" data-rel="popup" data-role="button" data-inline="true">Thème E + fond A</a>
+		<div id="both" data-role="popup" data-overlay-theme="a" data-theme="e" class="ui-content">
+		  <p>J'ai <code>data-theme="e"</code> et <code>data-overlay-theme="a"</code> de définis</p>
 		</div>
 
-		<div data-role="popup" id="popupPhotoLandscape" data-overlay-theme="a" data-corners="false">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img class="popphoto" src="../../_assets/images/photo-landscape.jpg" alt="Photo paysage">
-		</div>
-		
-		<div data-role="popup" id="popupPhotoPortrait" data-overlay-theme="a" data-corners="false">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img class="popphoto" src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
-		</div>
-		
-		<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false">
-			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a>
-			<iframe id="mapiframe" src="map.html" width="480" height="320" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-		</div>
-				
-		<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="c" class="ui-content">
-			<iframe id="vidiframe" src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" frameborder="0" seamless webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-    		</div>
 
 		<h2>Remarque : Le chainage des popups n'est pas permis</h2>
 		<p>Le framework ne prend pas en charge le chaînage des popups car il n'est pas possible d'intégrer un lien d'un popup à l'intérieur d'un autre popup. Tous les liens avec <code>data-rel="popup"</code> à l'intérieur d'un popup ne fera rien du tout.</p>
