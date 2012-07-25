@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 81a824240c38faa28b32666f726a7fa5aa8f69d7 <> Date: Mon Jul 23 22:41:25 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 2170b4d0dea73ded6925a537b978ca22af2d9c3e <> Date: Wed Jul 25 11:11:05 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -6295,6 +6295,17 @@ $( document ).bind( "pagecreate create", function( e ) {
 		return ret;
 	}
 
+	function windowCoords() {
+		var $win = $( window );
+
+		return {
+			x: $win.scrollLeft(),
+			y: $win.scrollTop(),
+			cx: ( window.innerWidth || $win.width() ),
+			cy: ( window.innerHeight || $win.height() )
+		};
+	}
+
 	$.widget( "mobile.popup", $.mobile.widget, {
 		options: {
 			theme: null,
@@ -6319,10 +6330,45 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 		},
 
-		_handleWindowOrientationChange: function( e ) {
-			if ( this._isOpen ) {
+		_maybeRefreshTimeout: function() {
+			var winCoords = windowCoords();
+
+			if ( this._resizeData ) {
+				if ( winCoords.x === this._resizeData.winCoords.x &&
+					winCoords.y === this._resizeData.winCoords.y &&
+					winCoords.cx === this._resizeData.winCoords.cx &&
+					winCoords.cy === this._resizeData.winCoords.cy ) {
+					// timeout not refreshed
+					return false;
+				} else {
+					// clear existing timeout - it will be refreshed below
+					clearTimeout( this._resizeData.timeoutId );
+				}
+			}
+
+			this._resizeData = {
+				timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 100 ),
+				winCoords: winCoords
+			};
+
+			return true;
+		},
+
+		_resizeTimeout: function() {
+			if ( !this._maybeRefreshTimeout() ) {
 				this.element.trigger( "popupbeforeposition" );
 				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+				this._resizeData = null;
+			}
+		},
+
+		_handleWindowResize: function( e ) {
+			var winCoords;
+			if ( this._isOpen ) {
+				this._maybeRefreshTimeout();
+				// Need to first set the offset to ( 0, 0 ) to make sure that the width value we retrieve during
+				// _placementCoords, is unaffected by possible truncation due to positive offset
+				this._ui.container.offset( { left: 0, top: 0 } );
 			}
 		},
 
@@ -6362,11 +6408,12 @@ $( document ).bind( "pagecreate create", function( e ) {
 				_prereqs: null,
 				_isOpen: false,
 				_tolerance: null,
+				_resizeData: null,
 				_globalHandlers: [
 					{
 						src: $( window ),
 						handler: {
-							orientationchange: $.proxy( this, "_handleWindowOrientationChange" ),
+							resize: $.proxy( this, "_handleWindowResize" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
 					}
@@ -6427,6 +6474,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 						this._ui.screen.css( "background-image" ) === "none" &&
 						this._ui.screen.css( "background" ) === undefined ) );
 			}
+
+			if ( this._isOpen ) {
+				this._ui.screen.addClass( "in" );
+			}
 		},
 
 		_setShadow: function( value ) {
@@ -6452,7 +6503,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_setTolerance: function( value ) {
-			var tol = { l: 15, t: 30, r: 15, b: 30 };
+			var tol = { t: 30, r: 15, b: 30, l: 15 };
 
 			if ( value ) {
 				var ar = String( value ).split( "," );
@@ -6463,25 +6514,22 @@ $( document ).bind( "pagecreate create", function( e ) {
 					// All values are to be the same
 					case 1:
 						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = tol.t = tol.r = tol.b = ar[ 0 ];
+							tol.t = tol.r = tol.b = tol.l = ar[ 0 ];
 						}
 						break;
 
-					// The first value denotes left/right tolerance, and the second value denotes top/bottom tolerance
+					// The first value denotes top/bottom tolerance, and the second value denotes left/right tolerance
 					case 2:
-						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = tol.r = ar[ 0 ];
-						}
 						if ( !isNaN( ar[ 1 ] ) ) {
 							tol.t = tol.b = ar[ 1 ];
 						}
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = tol.r = ar[ 0 ];
+						}
 						break;
 
-					// The array contains values in the order left, top, right, bottom
+					// The array contains values in the order top, right, bottom, left
 					case 4:
-						if ( !isNaN( ar[ 0 ] ) ) {
-							tol.l = ar[ 0 ];
-						}
 						if ( !isNaN( ar[ 1 ] ) ) {
 							tol.t = ar[ 1 ];
 						}
@@ -6490,6 +6538,9 @@ $( document ).bind( "pagecreate create", function( e ) {
 						}
 						if ( !isNaN( ar[ 3 ] ) ) {
 							tol.b = ar[ 3 ];
+						}
+						if ( !isNaN( ar[ 0 ] ) ) {
+							tol.l = ar[ 0 ];
 						}
 						break;
 
@@ -6518,12 +6569,12 @@ $( document ).bind( "pagecreate create", function( e ) {
 		_placementCoords: function( desired ) {
 			// rectangle within which the popup must fit
 			var
-				$win = $( window ),
+				winCoords = windowCoords(),
 				rc = {
-					l: this._tolerance.l,
-					t: $win.scrollTop() + this._tolerance.t,
-					cx: $win.width() - this._tolerance.l - this._tolerance.r,
-					cy: ( window.innerHeight || $win.height() ) - this._tolerance.t - this._tolerance.b
+					x: this._tolerance.l,
+					y: winCoords.y + this._tolerance.t,
+					cx: winCoords.cx - this._tolerance.l - this._tolerance.r,
+					cy: winCoords.cy - this._tolerance.t - this._tolerance.b
 				},
 				menuSize, ret;
 
@@ -6537,8 +6588,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 			// Center the menu over the desired coordinates, while not going outside
 			// the window tolerances. This will center wrt. the window if the popup is too large.
 			ret = {
-				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.l, desired.x ),
-				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.t, desired.y )
+				x: fitSegmentInsideSegment( rc.cx, menuSize.cx, rc.x, desired.x ),
+				y: fitSegmentInsideSegment( rc.cy, menuSize.cy, rc.y, desired.y )
 			};
 
 			// Make sure the top of the menu is visible
@@ -6624,13 +6675,13 @@ $( document ).bind( "pagecreate create", function( e ) {
 		// desiredPosition.positionTo. Nevertheless, this function ensures that its return value always contains valid
 		// x and y coordinates by specifying the center middle of the window if the coordinates are absent.
 		_desiredCoords: function( x, y, positionTo ) {
-			var dst = null, offset, $win = $( window );
+			var dst = null, offset, winCoords = windowCoords();
 
 			// Establish which element will serve as the reference
 			if ( positionTo && positionTo !== "origin" ) {
 				if ( positionTo === "window" ) {
-					x = $win.width() / 2 + $win.scrollLeft();
-					y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
+					x = winCoords.cx / 2 + winCoords.x;
+					y = winCoords.cy / 2 + winCoords.y;
 				} else {
 					try {
 						dst = $( positionTo );
@@ -6655,10 +6706,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			// Make sure x and y are valid numbers - center over the window
 			if ( $.type( x ) !== "number" || isNaN( x ) ) {
-				x = $win.width() / 2 + $win.scrollLeft();
+				x = winCoords.cx / 2 + winCoords.x;
 			}
 			if ( $.type( y ) !== "number" || isNaN( y ) ) {
-				y = ( window.innerHeight || $win.height() ) / 2 + $win.scrollTop();
+				y = winCoords.cy / 2 + winCoords.y;
 			}
 
 			return { x: x, y: y };
