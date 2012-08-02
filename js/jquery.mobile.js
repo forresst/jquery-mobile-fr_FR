@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 2170b4d0dea73ded6925a537b978ca22af2d9c3e <> Date: Wed Jul 25 11:11:05 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: 225be4aef61375345e7219fe0e27e60fd7363460 <> Date: Wed Aug 1 12:12:04 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -29,7 +29,7 @@
 	$.mobile = $.extend( {}, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.2.0-pre",
+		version: "1.2.0-alpha.1",
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -259,7 +259,14 @@
 			if ( prop ) {
 				prop = $.mobile.nsNormalize( prop );
 			}
-			result = this.data.apply( this, arguments.length < 2 ? [ prop ] : [ prop, value ] );
+
+			// undefined is permitted as an explicit input for the second param
+			// in this case it returns the value and does not set it to undefined
+			if( arguments.length < 2 || value === undefined ){
+				result = this.data( prop );
+			} else {
+				result = this.data( prop, value );
+			}
 		}
 		return result;
 	};
@@ -350,9 +357,9 @@
  */
 (function( $, undefined ) {
 
-var slice = Array.prototype.slice;
-
-var _cleanData = $.cleanData;
+var uuid = 0,
+	slice = Array.prototype.slice,
+	_cleanData = $.cleanData;
 $.cleanData = function( elems ) {
 	for ( var i = 0, elem; (elem = elems[i]) != null; i++ ) {
 		try {
@@ -414,11 +421,11 @@ $.widget = function( name, base, prototype ) {
 		if ( $.isFunction( value ) ) {
 			prototype[ prop ] = (function() {
 				var _super = function() {
-					return base.prototype[ prop ].apply( this, arguments );
-				};
-				var _superApply = function( args ) {
-					return base.prototype[ prop ].apply( this, args );
-				};
+						return base.prototype[ prop ].apply( this, arguments );
+					},
+					_superApply = function( args ) {
+						return base.prototype[ prop ].apply( this, args );
+					};
 				return function() {
 					var __super = this._super,
 						__superApply = this._superApply,
@@ -504,7 +511,8 @@ $.widget.bridge = function( name, object ) {
 
 		if ( isMethodCall ) {
 			this.each(function() {
-				var instance = $.data( this, fullName );
+				var methodValue,
+					instance = $.data( this, fullName );
 				if ( !instance ) {
 					return $.error( "cannot call methods on " + name + " prior to initialization; " +
 						"attempted to call method '" + options + "'" );
@@ -512,7 +520,7 @@ $.widget.bridge = function( name, object ) {
 				if ( !$.isFunction( instance[options] ) || options.charAt( 0 ) === "_" ) {
 					return $.error( "no such method '" + options + "' for " + name + " widget instance" );
 				}
-				var methodValue = instance[ options ].apply( instance, args );
+				methodValue = instance[ options ].apply( instance, args );
 				if ( methodValue !== instance && methodValue !== undefined ) {
 					returnValue = methodValue && methodValue.jquery ?
 						returnValue.pushStack( methodValue.get() ) :
@@ -551,6 +559,8 @@ $.Widget.prototype = {
 	_createWidget: function( options, element ) {
 		element = $( element || this.defaultElement || this )[ 0 ];
 		this.element = $( element );
+		this.uuid = uuid++;
+		this.eventNamespace = "." + this.widgetName + this.uuid;
 		this.options = $.widget.extend( {},
 			this.options,
 			this._getCreateOptions(),
@@ -565,7 +575,7 @@ $.Widget.prototype = {
 			// TODO remove dual storage
 			$.data( element, this.widgetName, this );
 			$.data( element, this.widgetFullName, this );
-			this._bind({ remove: "destroy" });
+			this._on({ remove: "destroy" });
 			this.document = $( element.style ?
 				// element within the document
 				element.ownerDocument :
@@ -586,22 +596,25 @@ $.Widget.prototype = {
 	destroy: function() {
 		this._destroy();
 		// we can probably remove the unbind calls in 2.0
-		// all event bindings should go through this._bind()
+		// all event bindings should go through this._on()
 		this.element
-			.unbind( "." + this.widgetName )
+			.unbind( this.eventNamespace )
 			// 1.9 BC for #7810
 			// TODO remove dual storage
 			.removeData( this.widgetName )
-			.removeData( this.widgetFullName );
+			.removeData( this.widgetFullName )
+			// support: jquery <1.6.3
+			// http://bugs.jquery.com/ticket/9413
+			.removeData( $.camelCase( this.widgetFullName ) );
 		this.widget()
-			.unbind( "." + this.widgetName )
+			.unbind( this.eventNamespace )
 			.removeAttr( "aria-disabled" )
 			.removeClass(
 				this.widgetFullName + "-disabled " +
 				"ui-state-disabled" );
 
 		// clean up events and states
-		this.bindings.unbind( "." + this.widgetName );
+		this.bindings.unbind( this.eventNamespace );
 		this.hoverable.removeClass( "ui-state-hover" );
 		this.focusable.removeClass( "ui-state-focus" );
 	},
@@ -680,7 +693,7 @@ $.Widget.prototype = {
 		return this._setOption( "disabled", true );
 	},
 
-	_bind: function( element, handlers ) {
+	_on: function( element, handlers ) {
 		// no element argument, shuffle and use this.element
 		if ( !handlers ) {
 			handlers = element;
@@ -708,11 +721,11 @@ $.Widget.prototype = {
 			// copy the guid so direct unbinding works
 			if ( typeof handler !== "string" ) {
 				handlerProxy.guid = handler.guid =
-					handler.guid || handlerProxy.guid || jQuery.guid++;
+					handler.guid || handlerProxy.guid || $.guid++;
 			}
 
 			var match = event.match( /^(\w+)\s*(.*)$/ ),
-				eventName = match[1] + "." + instance.widgetName,
+				eventName = match[1] + instance.eventNamespace,
 				selector = match[2];
 			if ( selector ) {
 				instance.widget().delegate( selector, eventName, handlerProxy );
@@ -720,6 +733,11 @@ $.Widget.prototype = {
 				element.bind( eventName, handlerProxy );
 			}
 		});
+	},
+
+	_off: function( element, eventName ) {
+		eventName = (eventName || "").split( " " ).join( this.eventNamespace + " " ) + this.eventNamespace;
+		element.unbind( eventName ).undelegate( eventName );
 	},
 
 	_delay: function( handler, delay ) {
@@ -733,7 +751,7 @@ $.Widget.prototype = {
 
 	_hoverable: function( element ) {
 		this.hoverable = this.hoverable.add( element );
-		this._bind( element, {
+		this._on( element, {
 			mouseenter: function( event ) {
 				$( event.currentTarget ).addClass( "ui-state-hover" );
 			},
@@ -745,7 +763,7 @@ $.Widget.prototype = {
 
 	_focusable: function( element ) {
 		this.focusable = this.focusable.add( element );
-		this._bind( element, {
+		this._on( element, {
 			focusin: function( event ) {
 				$( event.currentTarget ).addClass( "ui-state-focus" );
 			},
@@ -4241,6 +4259,14 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 				// since the hashchange could've been the result of a forward/backward navigation
 				// that crosses from an external page/dialog to an internal page/dialog.
 				to = ( typeof to === "string" && !path.isPath( to ) ) ? ( path.makeUrlAbsolute( '#' + to, documentBase ) ) : to;
+
+				// If we're about to go to an initial URL that contains a reference to a non-existent
+				// internal page, go to the first page instead. We know that the initial hash refers to a
+				// non-existent page, because the initial hash did not end up in the initial urlHistory entry
+				if ( to === path.makeUrlAbsolute( '#' + urlHistory.initialDst, documentBase ) &&
+					urlHistory.stack.length && urlHistory.stack[0].url !== urlHistory.initialDst.replace( dialogHashKey, "" ) ) {
+					to = $.mobile.firstPage;
+				}
 				$.mobile.changePage( to, changePageOptions );
 			}	else {
 				//there's no hash, go to the first page in the dom
@@ -4602,11 +4628,11 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			}
 		})
 		.bind( "pagehide", function( e, ui ) {
-			self._isClosed = false;
 			$( this ).find( "." + $.mobile.activeBtnClass ).not( ".ui-slider-bg" ).removeClass( $.mobile.activeBtnClass );
 		})
 		// Override the theme set by the page plugin on pageshow
 		.bind( "pagebeforeshow", function() {
+			self._isCloseable = true;
 			if ( self.options.overlayTheme ) {
 				self.element
 					.page( "removeContainerBackground" )
@@ -4619,12 +4645,11 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 	close: function() {
 		var dst;
 
-		if ( !this._isClosed ) {
-			this._isClosed = true;
+		if ( this._isCloseable ) {
+			this._isCloseable = false;
 			if ( $.mobile.hashListeningEnabled ) {
 				window.history.back();
-			}
-			else {
+			} else {
 				dst = $.mobile.urlHistory.getPrev().url;
 				if ( !$.mobile.path.isPath( dst ) ) {
 					dst = $.mobile.path.makeUrlAbsolute( "#" + dst );
@@ -5122,6 +5147,11 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			// Gets the preference for mini in the set
 			if ( !o.mini ) {
 				o.mini = collapsibleSet.jqmData( "mini" );
+			}
+		} else {
+			// get inherited theme if not a set and no theme has been set
+			if ( !o.theme ) {
+				o.theme = $.mobile.getInheritedTheme( $el, "c" );
 			}
 		}
 		
@@ -5884,12 +5914,12 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		var self = this,
 			input = this.element,
 			inheritAttr = function( input, dataAttr ) {
-				return input.jqmData( dataAttr ) || input.closest( "form,fieldset" ).jqmData( dataAttr );
+				return input.jqmData( dataAttr ) || input.closest( "form, fieldset" ).jqmData( dataAttr );
 			},
 			// NOTE: Windows Phone could not find the label through a selector
 			// filter works though.
 			parentLabel = $( input ).closest( "label" ),
-			label = parentLabel.length ? parentLabel : $( input ).closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ),
+			label = parentLabel.length ? parentLabel : $( input ).closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" ).find( "label" ).filter( "[for='" + input[0].id + "']" ).first(),
 			inputtype = input[0].type,
 			mini = inheritAttr( input, "mini" ),
 			checkedState = inputtype + "-on",
@@ -6347,7 +6377,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 
 			this._resizeData = {
-				timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 100 ),
+				timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 200 ),
 				winCoords: winCoords
 			};
 
@@ -6356,19 +6386,35 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		_resizeTimeout: function() {
 			if ( !this._maybeRefreshTimeout() ) {
+				// effectively rapid-open the popup while leaving the screen intact
 				this.element.trigger( "popupbeforeposition" );
-				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+				this._ui.container
+					.removeClass( "ui-selectmenu-hidden" )
+					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) )
+					.attr( "tabindex", "0" )
+					.focus();
+
 				this._resizeData = null;
+				this._orientationchangeInProgress = false;
 			}
 		},
 
 		_handleWindowResize: function( e ) {
-			var winCoords;
 			if ( this._isOpen ) {
 				this._maybeRefreshTimeout();
-				// Need to first set the offset to ( 0, 0 ) to make sure that the width value we retrieve during
-				// _placementCoords, is unaffected by possible truncation due to positive offset
-				this._ui.container.offset( { left: 0, top: 0 } );
+			}
+		},
+
+		_handleWindowOrientationchange: function( e ) {
+
+			if ( !this._orientationchangeInProgress ) {
+				// effectively rapid-close the popup while leaving the screen intact
+				this._ui.container
+					.addClass( "ui-selectmenu-hidden" )
+					.removeAttr( "style" )
+					.removeAttr( "tabindex" );
+
+				this._orientationchangeInProgress = true;
 			}
 		},
 
@@ -6392,6 +6438,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 			// Leave a placeholder where the element used to be
 			ui.placeholder.insertAfter( this.element );
 			if ( myId ) {
+				ui.screen.attr( "id", myId + "-screen" );
+				ui.container.attr( "id", myId + "-popup" );
 				ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
 			}
 			ui.container.append( this.element );
@@ -6409,10 +6457,12 @@ $( document ).bind( "pagecreate create", function( e ) {
 				_isOpen: false,
 				_tolerance: null,
 				_resizeData: null,
+				_orientationchangeInProgress: false,
 				_globalHandlers: [
 					{
 						src: $( window ),
 						handler: {
+							orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 							resize: $.proxy( this, "_handleWindowResize" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
@@ -6461,7 +6511,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_setTheme: function( value ) {
-			this._applyTheme( this._ui.container, value );
+			this._applyTheme( this.element, value );
 		},
 
 		_setOverlayTheme: function( value ) {
@@ -6481,11 +6531,11 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_setShadow: function( value ) {
-			this._ui.container.toggleClass( "ui-overlay-shadow", value );
+			this.element.toggleClass( "ui-overlay-shadow", value );
 		},
 
 		_setCorners: function( value ) {
-			this._ui.container.toggleClass( "ui-corner-all", value );
+			this.element.toggleClass( "ui-corner-all", value );
 		},
 
 		_applyTransition: function( value ) {
@@ -6594,9 +6644,15 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			// Make sure the top of the menu is visible
 			ret.y = Math.max( 0, ret.y );
+			
 			// If the height of the menu is smaller than the height of the document
 			// align the bottom with the bottom of the document
-			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $( document ).height() ) );
+			
+			// fix for $( document ).height() bug in core 1.7.2.
+			var docEl = document.documentElement, docBody = document.body,
+				docHeight = Math.max( docEl.clientHeight, docBody.scrollHeight, docBody.offsetHeight, docEl.scrollHeight, docEl.offsetHeight );
+			
+			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - docHeight ) );
 
 			return { left: ret.x, top: ret.y };
 		},
@@ -6716,18 +6772,25 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_openPrereqsComplete: function() {
+			this._ui.container.addClass( "ui-popup-active" );
 			this._isOpen = true;
 			this._ui.container.attr( "tabindex", "0" ).focus();
 			this.element.trigger( "popupafteropen" );
 		},
 
-		_open: function( x, y, transition, positionTo ) {
-			var coords;
+		_open: function( options ) {
+			var coords, transition;
+
+			// Make sure options is defined
+			options = ( options || {} );
+
+			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
+			transition = options.transition;
 
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeposition" );
 
-			coords = this._placementCoords( this._desiredCoords( x, y, positionTo || this.options.positionTo || "origin" ) );
+			coords = this._placementCoords( this._desiredCoords( options.x, options.y, options.positionTo || this.options.positionTo || "origin" ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -6784,6 +6847,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_close: function() {
+			this._ui.container.removeClass( "ui-popup-active" );
 			this._isOpen = false;
 
 			// Count down to triggering "popupafterclose" - we have two prerequisites:
@@ -6807,9 +6871,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		_destroy: function() {
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
+			this._setTheme( "none" );
 			this.element
 				.insertAfter( this._ui.placeholder )
-				.removeClass( "ui-popup" );
+				.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
@@ -6822,7 +6887,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			});
 		},
 
-		open: function( x, y, transition, positionTo ) {
+		open: function( options ) {
 			$.mobile.popup.popupManager.push( this, arguments );
 		},
 
@@ -6975,11 +7040,12 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		if ( popup.data( "popup" ) ) {
 			offset = $link.offset();
-			popup.popup( "open",
-				offset.left + $link.outerWidth() / 2,
-				offset.top + $link.outerHeight() / 2,
-				$link.jqmData( "transition" ),
-				$link.jqmData( "position-to" ) );
+			popup.popup( "open", {
+				x: offset.left + $link.outerWidth() / 2,
+				y: offset.top + $link.outerHeight() / 2,
+				transition: $link.jqmData( "transition" ),
+				positionTo: $link.jqmData( "position-to" )
+			});
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler
@@ -7057,7 +7123,8 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	_create: function() {
 
-		var input = this.element,
+		var self = this,
+			input = this.element,
 			o = this.options,
 			theme = o.theme || $.mobile.getInheritedTheme( this.element, "c" ),
 			themeclass  = " ui-body-" + theme,
@@ -7142,30 +7209,31 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		if ( input.is( "textarea" ) ) {
 			var extraLineHeight = 15,
 				keyupTimeoutBuffer = 100,
-				keyup = function() {
-					var scrollHeight = input[ 0 ].scrollHeight,
-						clientHeight = input[ 0 ].clientHeight;
-
-					if ( clientHeight < scrollHeight ) {
-						input.height(scrollHeight + extraLineHeight);
-					}
-				},
 				keyupTimeout;
+
+			this._keyup = function() {
+				var scrollHeight = input[ 0 ].scrollHeight,
+					clientHeight = input[ 0 ].clientHeight;
+
+				if ( clientHeight < scrollHeight ) {
+					input.height(scrollHeight + extraLineHeight);
+				}
+			};
 
 			input.keyup(function() {
 				clearTimeout( keyupTimeout );
-				keyupTimeout = setTimeout( keyup, keyupTimeoutBuffer );
+				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
 			});
 
 			// binding to pagechange here ensures that for pages loaded via
 			// ajax the height is recalculated without user input
-			$( document ).one( "pagechange", keyup );
+			$( document ).one( "pagechange", this._keyup );
 
 			// Issue 509: the browser is not providing scrollHeight properly until the styles load
 			if ( $.trim( input.val() ) ) {
 				// bind to the window load to make sure the height is calculated based on BOTH
 				// the DOM and CSS
-				$( window ).load( keyup );
+				$( window ).load( this._keyup );
 			}
 		}
 		if ( input.attr( "disabled" ) ) {
@@ -7173,30 +7241,32 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		}
 	},
 
-	disable: function() {
+	_destroy: function() {
+		$( window ).unbind( "load", this._keyup );
+	},
 
+	disable: function() {
 		var $el;
 		if ( this.element.attr( "disabled", true ).is( "[type='search'], :jqmData(type='search')" ) ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
-		} 
+		}
 		$el.addClass( "ui-disabled" );
 		return this._setOption( "disabled", true );
-			
 	},
 
 	enable: function() {
-
 		var $el;
+
+		// TODO using more than one line of code is acceptable ;)
 		if ( this.element.attr( "disabled", false ).is( "[type='search'], :jqmData(type='search')" ) ) {
 			$el = this.element.parent();
 		} else {
 			$el = this.element;
-		} 
+		}
 		$el.removeClass( "ui-disabled" );
 		return this._setOption( "disabled", false );
-			
 	}
 });
 
@@ -7320,6 +7390,8 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 (function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
+	widgetEventPrefix: "slide",
+
 	options: {
 		theme: null,
 		trackTheme: null,
@@ -7381,7 +7453,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			options;
 
-        domHandle.setAttribute( 'href', "#" );
+		this._type = cType;
+
+		domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
 		domSlider.className = ['ui-slider ',selectClass," ui-btn-down-",trackTheme,' ui-btn-corner-all', inlineClass, miniClass].join( "" );
 		domHandle.className = 'ui-slider-handle';
@@ -7458,9 +7532,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.refresh( val(), true );
 			});
 
-		// prevent screen drag when slider activated
-		$( document ).bind( "vmousemove", function( event ) {
-			if ( self.dragging ) {
+		this._preventDocumentDrag = function( event ) {
+			// NOTE: we don't do this in refresh because we still want to
+			//       support programmatic alteration of disabled inputs
+			if ( self.dragging && !self.options.disabled ) {
+
 				// self.mouseMoved must be updated before refresh() because it will be used in the control "change" event
 				self.mouseMoved = true;
 
@@ -7475,9 +7551,22 @@ $.widget( "mobile.slider", $.mobile.widget, {
 				self.userModified = self.beforeStart !== control[0].selectedIndex;
 				return false;
 			}
-		});
+		}
+
+		$( document ).bind( "vmousemove", this._preventDocumentDrag );
+
+		// it appears the clicking the up and down buttons in chrome on
+		// range/number inputs doesn't trigger a change until the field is
+		// blurred. Here we check thif the value has changed and refresh
+		control.bind( "vmouseup", $.proxy( self._checkedRefresh, self));
 
 		slider.bind( "vmousedown", function( event ) {
+			// NOTE: we don't do this in refresh because we still want to
+			//       support programmatic alteration of disabled inputs
+			if ( self.options.disabled ) {
+				return false;
+			}
+
 			self.dragging = true;
 			self.userModified = false;
 			self.mouseMoved = false;
@@ -7487,45 +7576,41 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			}
 
 			self.refresh( event );
+			self._trigger( "start" );
 			return false;
 		})
 		.bind( "vclick", false );
 
-		slider.add( document )
-			.bind( "vmouseup", function() {
-				if ( self.dragging ) {
+		this._sliderMouseUp = function() {
+			if ( self.dragging ) {
+				self.dragging = false;
 
-					self.dragging = false;
+				if ( cType === "select") {
+					// make the handle move with a smooth transition
+					handle.addClass( "ui-slider-handle-snapping" );
 
-					if ( cType === "select") {
-
-						// make the handle move with a smooth transition
-						handle.addClass( "ui-slider-handle-snapping" );
-
-						if ( self.mouseMoved ) {
-
-							// this is a drag, change the value only if user dragged enough
-							if ( self.userModified ) {
-								self.refresh( self.beforeStart === 0 ? 1 : 0 );
-							}
-							else {
-								self.refresh( self.beforeStart );
-							}
-
+					if ( self.mouseMoved ) {
+						// this is a drag, change the value only if user dragged enough
+						if ( self.userModified ) {
+						    self.refresh( self.beforeStart === 0 ? 1 : 0 );
 						}
 						else {
-							// this is just a click, change the value
-							self.refresh( self.beforeStart === 0 ? 1 : 0 );
+						    self.refresh( self.beforeStart );
 						}
-
 					}
-
-					self.mouseMoved = false;
-
-					return false;
+					else {
+						// this is just a click, change the value
+						self.refresh( self.beforeStart === 0 ? 1 : 0 );
+					}
 				}
-			});
 
+				self.mouseMoved = false;
+				self._trigger( "stop" );
+				return false;
+			}
+		};
+
+		slider.add( document ).bind( "vmouseup", this._sliderMouseUp );
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
@@ -7607,11 +7692,32 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.refresh( undefined, undefined, true );
 	},
 
+	_checkedRefresh: function() {
+		if( this.value != this._value() ){
+			this.refresh( this._value() );
+		}
+	},
+
+	_value: function() {
+		return  this._type === "input" ?
+			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
+	},
+
+	_destroy: function() {
+		$( document ).unbind( "vmousemove", this._preventDocumentDrag );
+		$( document ).unbind( "vmouseup", this._sliderMouseUp );
+	},
+
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
+		// NOTE: we don't return here because we want to support programmatic
+		//       alteration of the input value, which should still update the slider
 		if ( this.options.disabled || this.element.attr('disabled')) {
 			this.disable();
 		}
+
+		// set the stored value for comparison later
+		this.value = this._value();
 
 		var control = this.element, percent,
 			cType = control[0].nodeName.toLowerCase(),
@@ -8353,9 +8459,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 					self.listbox
 						.one( "popupafteropen", focusMenuItem )
-						.popup( "open",
-							self.button.offset().left + self.button.outerWidth() / 2,
-							self.button.offset().top + self.button.outerHeight() / 2 );
+						.popup( "open", {
+							x: self.button.offset().left + self.button.outerWidth() / 2,
+							y: self.button.offset().top + self.button.outerHeight() / 2
+						});
 
 					// duplicate with value set in page show for dialog sized selects
 					self.isOpen = true;
@@ -8863,6 +8970,11 @@ $( document ).bind( "pagecreate create", function( e ) {
 				$.mobile.path.isHashValid( location.hash ) &&
 				( $( location.hash + ':jqmData(role="page")' ).length ||
 					$.mobile.path.isPath( location.hash ) ) ) ) {
+
+				// Store the initial destination
+				if ( $.mobile.path.isHashValid( location.hash ) ) {
+					$.mobile.urlHistory.initialDst = $.mobile.path.parseUrl( location.href ).hash.replace( "#", "" );
+				}
 				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
 			}
 			// otherwise, trigger a hashchange to load a deeplink

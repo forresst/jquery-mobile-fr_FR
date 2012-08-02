@@ -39,11 +39,26 @@
 			<p>Le plugin popup a les méthodes suivantes :</p>
 
 		<dl>
-			<dt><code>open(x, y, transition, positionTo)</code> affiche la popup centrée aux coordonnées (x, y) utilisant la transition et le positionnement spécifiées</dt>
+			<dt><code>open( options )</code> affiche la popup en utilisant les options spécifiées</dt>
 			<dd>
 				<pre><code>
-$('.selector').popup('open', x, y, transition, positionTo);
+$('.selector').popup('open', options);
 				</code></pre>
+				<p><code>options</code> est un objet littéral qui peut avoir les propriétés suivantes :</p>
+				<table>
+					<tr><td class="enum-value"><code>x</code></td><td>
+						La coordonnées x où la popup doit être affichée.
+					</td></tr>
+					<tr><td class="enum-value"><code>y</code></td><td>
+						La coordonnées y où la popup doit être affichée.
+					</td></tr>
+					<tr><td class="enum-value"><code>transition</code></td><td>
+						La transition à utiliser pendant la séquence d'ouverture.
+					</td></tr>
+					<tr><td class="enum-value"><code>positionTo</code></td><td>
+						Le positionnement à utiliser.
+					</td></tr>
+				</table>
 				<p>Si <code>x</code> ou <code>y</code> n'est pas renseigné et aucun sélecteur jQuery n'est donné à <code>positionTo</code>, le milieu de la fenêtre sera utilisée.</p>
 				<p><code>transition</code> peut être utilisé pour surcharger la propre option de <code>transition</code>. Cela se traduira par l'ouverture de la popup par l'intermédiaire de la transition prévue dans l'appel, mais l'option <code>transition</code> de la popup ne sera pas mise à jour.</p>
 				<p>De même, <code>data-position-to</code>  peut être utilisé pour surcharger le positionnement par défaut de la popup sans modifier l'option <code>positionTo</code> de la popup. Les valeurs disponibles pour <code>positionTo</code> sont les mêmes que celles de l'option <code>positionTo</code> de la popup (voir la page des <a href="options.html">options</a>).</p>
@@ -75,6 +90,7 @@ $('.selector').popup('close');
 								<li><a href="../page-titles.html">Titres des pages</a></li>
 								<li><a href="../page-links.html">Liaison de pages</a></li>
 								<li><a href="../page-transitions.html" data-ajax="false">Transitions de page</a></li>
+								<li><a href="../loader.html">Widget de chargement de page</a></li>
 								<li><a href="../page-dialogs.html">Boîtes de dialogue</a></li>
 								<li data-theme="a"><a href="index.html">Popups</a></li>
 								<li><a href="../page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>

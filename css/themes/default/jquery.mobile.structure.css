@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 2170b4d0dea73ded6925a537b978ca22af2d9c3e <> Date: Wed Jul 25 11:11:05 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: 225be4aef61375345e7219fe0e27e60fd7363460 <> Date: Wed Aug 1 12:12:04 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -892,6 +892,10 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	position: absolute;
 	padding: 0;
 	outline: 0;
+}
+.ui-popup.ui-content,
+.ui-popup .ui-content {
+	overflow: visible;
 }
 .ui-popup > p,
 .ui-popup > h1,

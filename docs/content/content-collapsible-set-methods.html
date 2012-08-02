@@ -41,12 +41,17 @@
 			<p>Si vous manipulez un ensemble de pliable via JavaScript (par exemple vous ajoutez des conteneurs de pliable), vous devez appeler la méthode refresh sur elle même pour mettre à jour le style visuel.</p>
 
 			<pre><code>
-$('.selector').collapsibleset('refresh');
+$( ".selector" ).collapsibleset( "refresh" );
 				</code></pre>
 			</dd>
 
 		</dl>
-
+		<p>Pour déplier et plier les éléments dans un ensemble, appelez les <a href="content-collapsible-methods.html">méthodes</a> respectives sur chaque pliable individuellement. Le sélecteur pour la méthode du pliable peut inclure plusieurs élément dans un ensemble :</p>
+		
+		<dd><pre><code>
+$( "#myCollapsibleSet" ).children().trigger( "collapse" );
+		</code></pre></dd>
+				
 	</div><!--/content-primary -->		
 	
 	<div class="content-secondary">

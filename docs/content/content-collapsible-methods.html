@@ -33,7 +33,22 @@
 				<li><a href="content-collapsible-events.html" data-role="button" data-transition="fade">Événements</a></li>
 			</ul>
 
-			<p>Le plugin pliable n'a pas de méthode publique.</p>
+			<p>Le plugin pliable a les méthodes suivantes :</p>
+
+		<dl>									
+			<dt><code>collapse</code> plie un pliable</dt>
+			<dd>
+				<pre><code>
+$( ".selector" ).trigger( "collapse" );			
+				</code></pre>
+			</dd>
+			<dt><code>expand</code> étend un pliable</dt>
+			<dd>
+				<pre><code>
+$( ".selector" ).trigger( "expand" );			
+				</code></pre>
+			</dd>
+		</dl>
 	</div><!--/content-primary -->		
 	
 	<div class="content-secondary">
