@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Docs jQuery Mobile - Popup avec iframes</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
+
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
+	<script src="../../../js/"></script>
+
+	<script src="popup-examples.js"></script>
+	<link rel="stylesheet" href="popup-examples.css" />
+
+</head>
+<body>
+
+	<div data-role="page" class="type-interior">
+
+	<div data-role="header" data-theme="f">
+		<h1>Popups avec iframes</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+	</div><!-- /header -->
+
+	<div data-role="content" class="ui-body">
+		<div class="content-primary">
+			
+			<a href="index.html" data-role="button" data-transition="fade" data-icon="arrow-l" data-inline="true">Retour vers les Popups</a>
+			<h2>Travailler avec des iframes dans les popups</h2>
+			
+			<p>Vous devrez peut-être intégrer une iframe dans un popup pour utiliser un widget tiers. Ici, nous allons découvrir quelques exemples du monde réel du travail avec les iframes : les vidéos et les cartes.</p>
+
+			<h2>Exemple de vidéo</h2>
+			
+			<p>Voici un exemple d'un lecteur vidéo tiers enveloppée dans une popup :</p>
+				<a href="#popupVideo" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Lancement du lecteur vidéo</a>			
+
+				<div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="d" data-tolerance="15,15" class="ui-content">
+					<iframe src="http://player.vimeo.com/video/41135183?portrait=0" width="497" height="298" seamless></iframe>
+				</div>
+				
+			<p>Le balisage est une iframe dans un conteneur de popup. La popup aura 15 pixels d'espacement grâce à la classe <code>ui-content</code> et un bord d'un pixel car le framework ajoutera la classe <code>ui-body-d</code> à la popup.</p>
+			
+<pre><code>
+&lt;div data-role="popup" id="popupVideo" data-overlay-theme="a" data-theme="d" data-tolerance="15,15" class="ui-content"&gt;
+
+    &lt;iframe src="http://player.vimeo.com/video/41135183" width="497" height="298" seamless&gt;&lt;/iframe&gt;
+	 
+&lt;/div&gt;
+</code></pre>
+
+			<p>Lorsque vous utilisez un iframe à l'intérieur d'une popup, il est important de d'abord  <strong>définir les attributs hauteur et largeur à 0</strong>. Cela empêche de casser la page sur des plateformes comme Android 2.3. Notez que vous devez définir les attributs, parce que la largeur et la hauteur avec le CSS n'est pas suffisant. Vous pouvez laisser la largeur et la hauteur dans le balisage pour les navigateurs qui ont désactivé le JavaScript et utiliser <code>attr()</code> pour définir les valeurs à zéro dans l'événement <code>pageinit</code>.</p>
+
+			<p>Ensuite, liez l'événement  <code>popupbeforeposition</code> pour définir la taille désirée de l'iframe quand la popup est affichée ou lorsque la fenêtre est redimensionnée (changement d'orientation par exemple). Pour les exemples d'iframe sur cette page, une fonction personnalisée  <code>scale()</code> est utilisée pour réduire l'iframe pour les plus petits écrans. Développez la section ci-dessous pour afficher le code de cette fonction.</p>
+
+			<div data-role="collapsible" data-content-theme="d">
+				<h3><code>scale()</code></h3>
+				<p>La largeur et la hauteur de la fenêtre sont diminuées de 30 pour prendre en compte la tolérance de 15 pixels de chaque côté.</p>
+<pre><code>
+function scale( width, height, padding, border ) {
+    var scrWidth = $( window ).width() - 30,
+        scrHeight = $( window ).height() - 30,
+        ifrPadding = 2 * padding,
+        ifrBorder = 2 * border,
+        ifrWidth = width + ifrPadding + ifrBorder,
+        ifrHeight = height + ifrPadding + ifrBorder,
+        h, w;
+
+    if ( ifrWidth &lt; scrWidth &amp;&amp; ifrHeight &lt; scrHeight ) {
+        w = ifrWidth;
+        h = ifrHeight;
+    } else if ( ( ifrWidth / scrWidth ) &gt; ( ifrHeight / scrHeight ) ) {
+        w = scrWidth;
+        h = ( scrWidth / ifrWidth ) * ifrHeight;
+    } else {
+        h = scrHeight;
+        w = ( scrHeight / ifrHeight ) * ifrWidth;
+    }
+
+    return {
+        'width': w - ( ifrPadding + ifrBorder ),
+        'height': h - ( ifrPadding + ifrBorder )
+    };
+};
+</code></pre>
+				<p><strong>Remarque :</strong> Cette fonction ne fait pas partie du framework. Copiez le code dans votre script pour l'utiliser.</p>
+			</div>		
+			
+			<p>Lorsque la popup est fermée, la largeur et la hauteur doivent être remises à 0. Vous pouvez le faire en liant l'événement <code>popupafterclose</code>.</p>
+			
+			<p>C'est le script complet et le lien pour ouvrir la  popup de la vidéo :</p>
+			
+<pre><code>
+$( document ).on( "pageinit", function() {
+    $( "#popupVideo iframe" )
+        .attr( "width", 0 )
+        .attr( "height", 0 );
+		  
+    $( "#popupVideo" ).on({
+        popupbeforeposition: function() {
+            var size = scale( 497, 298, 15, 1 ),
+                w = size.width,
+                h = size.height;
+
+            $( "#popupVideo iframe" )
+                .attr( "width", w )
+                .attr( "height", h );
+        },
+        popupafterclose: function() {
+            $( "#popupVideo iframe" )
+                .attr( "width", 0 )
+                .attr( "height", 0 );    
+        }
+    });
+});
+</code></pre>
+			
+		
+			<h2>Exemple de carte</h2>
+			<p>Dans ce second exemple, une iframe est utilisée pour afficher l'<strong>API Google Maps</strong>. Utilisation d'un iframe empêche les problèmes avec les contrôles de la carte.</p>
+			
+			<a href="#popupMap" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Ouvrir la carte</a>
+
+			<div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15">
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a>
+				<iframe src="map.html" width="480" height="320" seamless></iframe>
+			</div>
+			
+			<p>C'est le balisage de la popup, incluant un bouton de fermeture à droite :</p>
+<pre><code>
+&lt;div data-role="popup" id="popupMap" data-overlay-theme="a" data-theme="a" data-corners="false" data-tolerance="15,15"&gt;
+
+    &lt;a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right"&gt;Close&lt;/a&gt;
+	 
+    &lt;iframe src="map.html" width="480" height="320" seamless&gt;&lt;/iframe&gt;
+	 
+&lt;/div&gt;
+</code></pre>
+
+			<p>Développez la section ci-dessous pour afficher la source de l'iframe.</p>
+
+			<div data-role="collapsible" data-content-theme="d">
+				<h3><code>map.html</code></h3>
+<pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;meta charset="utf-8"&gt;
+    &lt;title&gt;Carte&lt;/title&gt;
+    &lt;script&gt;
+        function initialize() {
+            var myLatlng = new google.maps.LatLng( 51.520838, -0.140261 );
+            var myOptions = {
+                zoom: 15,
+                center: myLatlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            var map = new google.maps.Map( document.getElementById( "map_canvas" ), myOptions );
+            var marker = new google.maps.Marker({
+                position: myLatlng, 
+                map: map,
+                title: "Université de Westminster"
+            }); 
+            google.maps.event.addListener( map, 'bounds_changed', function() {
+                map.panTo( myLatlng );
+            }); 
+        }
+    &lt;/script&gt;
+    &lt;script src="http://maps.google.com/maps/api/js?sensor=false"&gt;&lt;/script&gt;
+    &lt;style&gt;
+        html {
+            height: 100%;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+        }
+        #map_canvas { 
+            height: 100%;
+        }    
+    &lt;/style&gt;
+&lt;/head&gt;
+&lt;body onload="initialize()"&gt;
+
+    &lt;div id="map_canvas"&gt;&lt;/div&gt;
+    
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+			</div>
+				
+			<p>La configuration de la taille de l'iframe est fait exactement de la même manière que pour l'exemple de la vidéo, à une exception près. Vous devez également définir la largeur et la hauteur de la div qui contient la carte pour empêcher la page de se casser sur des plateformes comme Android 2.3. Dans cet exemple l'ID de ce div est <code>#map_canvas</code>.</p>
+			
+			<p>C'est le script complet et le lien pour ouvrir la popup de la carte :</p>
+			
+<pre><code>
+$( document ).on( "pageinit", function() {
+    $( "#popupMap iframe" )
+        .attr( "width", 0 )
+        .attr( "height", 0 );
+		  
+    $( "#popupMap iframe" ).contents().find( "#map_canvas" )
+        .css( { "width" : 0, "height" : 0 } );
+	 	     
+    $( "#popupMap" ).on({
+        popupbeforeposition: function() {
+            var size = scale( 480, 320, 0, 1 ),
+                w = size.width,
+                h = size.height;
+
+            $( "#popupMap iframe" )
+                .attr( "width", w )
+                .attr( "height", h );
+					 
+            $( "#popupMap iframe" ).contents().find( "#map_canvas" )
+                .css( { "width": w, "height" : h } );
+        },
+        popupafterclose: function() {
+            $( "#popupMap iframe" )
+                .attr( "width", 0 )
+                .attr( "height", 0 );
+					 
+            $( "#popupMap iframe" ).contents().find( "#map_canvas" )
+                .css( { "width": 0, "height" : 0 } );
+        }
+    });
+});
+</code></pre>			
+			
+			
+			
+		</div><!--/content-primary -->
+
+				<div class="content-secondary">
+
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>Aussi dans cette rubrique</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+								<li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
+								<li><a href="../page-anatomy.html">Anatomie de la page</a></li>
+								<li><a href="../page-template.html" data-ajax="false">Modèle de page unique</a></li>
+								<li><a href="../multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
+								<li><a href="../page-titles.html">Titres des pages</a></li>
+								<li><a href="../page-links.html">Liaison de pages</a></li>
+								<li><a href="../page-transitions.html" data-ajax="false">Transitions de page</a></li>
+								<li><a href="../loader.html">Widget de chargement de page</a></li>
+								<li><a href="../page-dialogs.html">Boîtes de dialogue</a></li>
+								<li data-theme="a"><a href="index.html">Popups</a></li>
+								<li><a href="../page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
+								<li><a href="../page-navmodel.html">Ajax, hashes &amp; historique</a></li>
+								<li><a href="../page-dynamic.html">Injection dynamique des pages</a></li>
+								<li><a href="../page-scripting.html">Écriture des scripts des pages</a></li>
+								<li><a href="../phonegap.html">Application PhoneGap</a></li>
+								<li><a href="../touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
+								<li><a href="../pages-themes.html">Thématisation des pages</a></li>
+
+							</ul>
+					</div>
+				</div>
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p>© 2012 jQuery Fondation et les autres contributeurs</p>
+</div>
+
+</div><!-- /page -->
+
+</body>
+</html>

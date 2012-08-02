@@ -78,7 +78,7 @@ define( [ "jquery",
 			}
 
 			this._resizeData = {
-				timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 100 ),
+				timeoutId: setTimeout( $.proxy( this, "_resizeTimeout" ), 200 ),
 				winCoords: winCoords
 			};
 
@@ -87,19 +87,35 @@ define( [ "jquery",
 
 		_resizeTimeout: function() {
 			if ( !this._maybeRefreshTimeout() ) {
+				// effectively rapid-open the popup while leaving the screen intact
 				this.element.trigger( "popupbeforeposition" );
-				this._ui.container.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+				this._ui.container
+					.removeClass( "ui-selectmenu-hidden" )
+					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) )
+					.attr( "tabindex", "0" )
+					.focus();
+
 				this._resizeData = null;
+				this._orientationchangeInProgress = false;
 			}
 		},
 
 		_handleWindowResize: function( e ) {
-			var winCoords;
 			if ( this._isOpen ) {
 				this._maybeRefreshTimeout();
-				// Need to first set the offset to ( 0, 0 ) to make sure that the width value we retrieve during
-				// _placementCoords, is unaffected by possible truncation due to positive offset
-				this._ui.container.offset( { left: 0, top: 0 } );
+			}
+		},
+
+		_handleWindowOrientationchange: function( e ) {
+
+			if ( !this._orientationchangeInProgress ) {
+				// effectively rapid-close the popup while leaving the screen intact
+				this._ui.container
+					.addClass( "ui-selectmenu-hidden" )
+					.removeAttr( "style" )
+					.removeAttr( "tabindex" );
+
+				this._orientationchangeInProgress = true;
 			}
 		},
 
@@ -123,6 +139,8 @@ define( [ "jquery",
 			// Leave a placeholder where the element used to be
 			ui.placeholder.insertAfter( this.element );
 			if ( myId ) {
+				ui.screen.attr( "id", myId + "-screen" );
+				ui.container.attr( "id", myId + "-popup" );
 				ui.placeholder.html( "<!-- placeholder for " + myId + " -->" );
 			}
 			ui.container.append( this.element );
@@ -140,10 +158,12 @@ define( [ "jquery",
 				_isOpen: false,
 				_tolerance: null,
 				_resizeData: null,
+				_orientationchangeInProgress: false,
 				_globalHandlers: [
 					{
 						src: $( window ),
 						handler: {
+							orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 							resize: $.proxy( this, "_handleWindowResize" ),
 							keyup: $.proxy( this, "_handleWindowKeyUp" )
 						}
@@ -192,7 +212,7 @@ define( [ "jquery",
 		},
 
 		_setTheme: function( value ) {
-			this._applyTheme( this._ui.container, value );
+			this._applyTheme( this.element, value );
 		},
 
 		_setOverlayTheme: function( value ) {
@@ -212,11 +232,11 @@ define( [ "jquery",
 		},
 
 		_setShadow: function( value ) {
-			this._ui.container.toggleClass( "ui-overlay-shadow", value );
+			this.element.toggleClass( "ui-overlay-shadow", value );
 		},
 
 		_setCorners: function( value ) {
-			this._ui.container.toggleClass( "ui-corner-all", value );
+			this.element.toggleClass( "ui-corner-all", value );
 		},
 
 		_applyTransition: function( value ) {
@@ -325,9 +345,15 @@ define( [ "jquery",
 
 			// Make sure the top of the menu is visible
 			ret.y = Math.max( 0, ret.y );
+			
 			// If the height of the menu is smaller than the height of the document
 			// align the bottom with the bottom of the document
-			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - $( document ).height() ) );
+			
+			// fix for $( document ).height() bug in core 1.7.2.
+			var docEl = document.documentElement, docBody = document.body,
+				docHeight = Math.max( docEl.clientHeight, docBody.scrollHeight, docBody.offsetHeight, docEl.scrollHeight, docEl.offsetHeight );
+			
+			ret.y -= Math.min( ret.y, Math.max( 0, ret.y + menuSize.cy - docHeight ) );
 
 			return { left: ret.x, top: ret.y };
 		},
@@ -447,18 +473,25 @@ define( [ "jquery",
 		},
 
 		_openPrereqsComplete: function() {
+			this._ui.container.addClass( "ui-popup-active" );
 			this._isOpen = true;
 			this._ui.container.attr( "tabindex", "0" ).focus();
 			this.element.trigger( "popupafteropen" );
 		},
 
-		_open: function( x, y, transition, positionTo ) {
-			var coords;
+		_open: function( options ) {
+			var coords, transition;
+
+			// Make sure options is defined
+			options = ( options || {} );
+
+			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
+			transition = options.transition;
 
 			// Give applications a chance to modify the contents of the container before it appears
 			this.element.trigger( "popupbeforeposition" );
 
-			coords = this._placementCoords( this._desiredCoords( x, y, positionTo || this.options.positionTo || "origin" ) );
+			coords = this._placementCoords( this._desiredCoords( options.x, options.y, options.positionTo || this.options.positionTo || "origin" ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -515,6 +548,7 @@ define( [ "jquery",
 		},
 
 		_close: function() {
+			this._ui.container.removeClass( "ui-popup-active" );
 			this._isOpen = false;
 
 			// Count down to triggering "popupafterclose" - we have two prerequisites:
@@ -538,9 +572,10 @@ define( [ "jquery",
 
 		_destroy: function() {
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
+			this._setTheme( "none" );
 			this.element
 				.insertAfter( this._ui.placeholder )
-				.removeClass( "ui-popup" );
+				.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
@@ -553,7 +588,7 @@ define( [ "jquery",
 			});
 		},
 
-		open: function( x, y, transition, positionTo ) {
+		open: function( options ) {
 			$.mobile.popup.popupManager.push( this, arguments );
 		},
 
@@ -706,11 +741,12 @@ define( [ "jquery",
 
 		if ( popup.data( "popup" ) ) {
 			offset = $link.offset();
-			popup.popup( "open",
-				offset.left + $link.outerWidth() / 2,
-				offset.top + $link.outerHeight() / 2,
-				$link.jqmData( "transition" ),
-				$link.jqmData( "position-to" ) );
+			popup.popup( "open", {
+				x: offset.left + $link.outerWidth() / 2,
+				y: offset.top + $link.outerHeight() / 2,
+				transition: $link.jqmData( "transition" ),
+				positionTo: $link.jqmData( "position-to" )
+			});
 
 			// If this link is not inside a popup, re-focus onto it after the popup(s) complete
 			// For some reason, a $.proxy( $link, "focus" ) doesn't work as the handler

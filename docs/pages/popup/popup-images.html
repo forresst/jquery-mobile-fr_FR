@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-	<head>
+<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Docs jQuery Mobile - Popup</title>
+	<title>Docs jQuery Mobile - Popup d'images</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
 	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 
@@ -12,71 +12,56 @@
 	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/"></script>
 
+	<script src="popup-examples.js"></script>
+	<link rel="stylesheet" href="popup-examples.css" />
+
 </head>
 <body>
 
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Popup</h1>
+		<h1>Popup d'images</h1>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="ui-body">
 		<div class="content-primary">
+			
+			<a href="index.html" data-role="button" data-transition="fade" data-icon="arrow-l" data-inline="true">Retour vers les Popups</a>
+			<h2>Mise à l'échelle d'images: exemples de Lightbox</h2>
+			
+			<p>Le framework de CSS contient des règles pour rendre à l'échelle les images qui sont les enfants immédiats de la popup pour s'adapter à l'écran. En raison de la position absolue du conteneur de la popup et de l'écran, la hauteur n'est pas ajustée sur la hauteur de l'écran sur tous les navigateurs. Vous pouvez empêcher le défilement vertical avec un simple script qui définit le <code>max-height</code> de l'image.</p>
+			
+			<p>Dans les deux exemples ci-dessous les divs avec <code>data-role="popup"</code> ont une classe de <code>photopopup</code>. </p>
+			
+			<a href="#popupPhotoLandscape" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true">Photo paysage</a> <a href="#popupPhotoPortrait" data-rel="popup" data-position-to="window" data-role="button" data-theme="b" data-inline="true" data-transition="fade">Photo portrait</a>
+						
+			<div data-role="popup" id="popupPhotoLandscape" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15" >
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img src="../../_assets/images/photo-landscape.jpg" alt="Photo paysage">
+			</div>
+		
+			<div data-role="popup" id="popupPhotoPortrait" class="photopopup" data-overlay-theme="a" data-corners="false" data-tolerance="30,15" >
+				<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a><img src="../../_assets/images/photo-portrait.jpg" alt="Photo portrait">
+			</div>
+			
+			<p>Le gestionnaire est lié à l'événement <code>popupbeforeposition</code> qui assure que l'image est non seulement mise à l'échelle avant qu'elle ne soit affichée, mais aussi lorsque la fenêtre est redimensionnée (changement d'orientation par exemple). Dans cet exemple de code de la hauteur est réduite de 60 pour prendre en compte une tolérance du haut et du bas de 30 pixels.</p> 
 
-		<form action="#" method="get">
-
-			<h2>Popup</h2>
-
-			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
-				<li><a href="index.html" data-role="button" data-transition="fade">Bases</a></li>
-				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
-				<li><a href="methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
-				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Événements</a></li>
-			</ul>
-
-			<p>Le plugin popup a les événements personnalisés suivants :</p>
-
-	<dl>
-
-		<dt><code>popupbeforeposition</code> déclenchée après qu'une popup ait achevé les préparatifs pour l'ouverture, mais n'a pas encore été ouvert</dt>
-		<dd>
-
-			<pre><code>
-$( ".selector" ).bind({
-   popupbeforeposition: function(event, ui) { ... }
+<pre><code>
+$( document ).on( "pageinit", function() {
+    $( ".photopopup" ).on({
+        popupbeforeposition: function() {
+            var maxHeight = $( window ).height() - 60 + "px";
+            $( ".photopopup img" ).css( "max-height", maxHeight );
+        }
+    });
 });
-			</code></pre>
-			<p>Cet événement est déclenché lorsque la popup a achevé les préparatifs pour apparaître sur l'écran. À ce stade, la popup n'a pas commencé les animations et il n'a pas encore calculé les coordonnées où il apparaîtra à l'écran. La gestion de cet événement donne l'occasion de modifier le contenu de la popup avant qu'elle n'apparaisse sur l'écran. Par exemple, le contenu peut être réduit ou certaines parties peuvent être masquées ou supprimées si elles sont trop larges ou trop grandes.</p>
-		</dd>
+			
+</code></pre>
 
-		<dt><code>popupafteropen</code>déclenché lorsque la popup est complètement ouverte</dt>
-		<dd>
-
-			<pre><code>
-$( ".selector" ).bind({
-   popupafteropen: function(event, ui) { ... }
-});
-			</code></pre>
-			<p>Cet événement est déclenché après que le popup soit complètement affiché sur l'écran, ce qui signifie que toutes les animations associées soient terminées.</p>
-		</dd>
-
-		<dt><code>popupafterclose</code> déclenché lorsque la popup est complètement fermée</dt>
-		<dd>
-
-			<pre><code>
-$( ".selector" ).bind({
-   popupafterclose: function(event, ui) { ... }
-});
-			</code></pre>
-			<p>Cet événement est déclenché après que le popup soit complètement masqué de l'écran, ce qui signifie que toutes les animations associées soient terminées.</p>
-		</dd>
-
-	</dl>
-	    
-	</form>
-	</div><!--/content-primary -->
+			
+			
+		</div><!--/content-primary -->
 
 				<div class="content-secondary">
 

@@ -13,7 +13,7 @@
 //		seq : [
 //			fn(result),
 //			{ key: {
-//					src: event source (is jQuery object), 
+//					src: event source (is jQuery object),
 //					event: event name (is string),
 //					       NB: It's a good idea to namespace your events, because the handler will be removed
 //					       based on the name you give here if a timeout occurs before the event fires.
@@ -106,11 +106,15 @@
 	});
 
 	function popupEnhancementTests( $sel, prefix ) {
+		var $container = $sel.parent(), $screen = $sel.parent().prev();
+
 		ok( $sel.data( "popup" ),  prefix + ", popup div is associated with a popup widget" );
 		ok( $sel.hasClass( "ui-popup" ),  prefix + ", popup payload has class 'ui-popup'" );
-		ok( $sel.parent().hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
-		ok( $sel.parent().parent().hasClass( "ui-page" ), prefix + ", popup div grandparent is the page" );
-		ok( $sel.parent().prev().hasClass( "ui-popup-screen" ), prefix + ", popup div is preceded by its screen" );
+		ok( $container.hasClass( "ui-popup-container" ), prefix + ", popup div parent has class ui-popup-container" );
+		ok( $container.parent().hasClass( "ui-page" ), prefix + ", popup container parent is the page" );
+		ok( $screen.hasClass( "ui-popup-screen" ), prefix + ", popup div is preceded by its screen" );
+		ok( $container.attr( "id" ) === $sel.attr( "id" ) + "-popup", prefix + ", popup container has the id of the payload + '-popup'" );
+		ok( $screen.attr( "id" ) === $sel.attr( "id" ) + "-screen", prefix + ", popup screen has the id of the payload + '-screen'" );
 	}
 
 	function tolTest( el, popup, val, expected ) {
@@ -169,20 +173,22 @@
 
 	asyncTest( "Popup opens and closes", function() {
 
-		expect( 6 );
+		expect( 8 );
 
-		$( "#test-popup" ).popup( "open", -9999, -9999 );
+		$( "#test-popup" ).popup( "open", { x: -9999, y: -9999 } );
 		setTimeout(function() {
 			var theOffset = $( "#test-popup p" ).offset();
 			ok( !$( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Open popup screen is not hidden" );
-			ok( $( "#test-popup" ).parent().attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
+			ok( $( "#test-popup" ).attr( "class" ).match( /( |^)ui-body-[a-z]( |$)/ ), "Open popup has a valid overlay theme" );
 			ok( theOffset.left >= 15 && theOffset.top >= 30, "Open popup top left coord is at least (10, 30)" );
 			$( "#test-popup" ).popup( "option", "overlayTheme", "a" );
 			ok( $( "#test-popup" ).parent().prev().hasClass( "ui-body-a in" ), "Setting an overlay theme while the popup is open causes the theme to be applied and the screen to be faded in" );
+			ok( $( "#test-popup" ).parent().hasClass( "ui-popup-active" ), "Open popup has the 'ui-popup-active' class" );
 			$( "#test-popup" ).popup( "close" );
 			setTimeout(function() {
 				ok( !$( "#test-popup" ).parent().hasClass( "in" ), "Closed popup container does not have class 'in'" );
 				ok( $( "#test-popup" ).parent().prev().hasClass( "ui-screen-hidden" ), "Closed popup screen is hidden" );
+				ok( !$( "#test-popup" ).parent().hasClass( "ui-popup-active" ), "Open popup dos not have the 'ui-popup-active' class" );
 				setTimeout( function() { start(); }, 300 );
 			}, 1000);
 		}, 1000);
