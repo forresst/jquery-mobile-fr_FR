@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 225be4aef61375345e7219fe0e27e60fd7363460 <> Date: Wed Aug 1 12:12:04 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 8c3c969a982dbf1577184546f0393c800978088c <> Date: Mon Aug 6 08:56:29 2012 -0500
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -5844,8 +5844,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 $.mobile.listview.prototype.options.autodividers = false;
 $.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
-	// look for the first anchor in the item
-	var text = elt.find( 'a' ).text() || elt.text() || null;
+	// look for the text in the given element
+	var text = elt.text() || null;
 
 	if ( !text ) {
 		return null;
@@ -6261,16 +6261,25 @@ $.fn.controlgroup = function( options ) {
 						excludeInvisible: true,
 						mini: $el.jqmData( "mini" )
 					}, options ),
-			groupheading = $el.children( "legend" ),
+			grouplegend = $el.children( "legend" ),
+			groupheading = $el.children( ".ui-controlgroup-label" ),
+			groupcontrols = $el.children( ".ui-controlgroup-controls" ),
 			flCorners = o.direction === "horizontal" ? [ "ui-corner-left", "ui-corner-right" ] : [ "ui-corner-top", "ui-corner-bottom" ],
 			type = $el.find( "input" ).first().attr( "type" );
 
+		// First unwrap the controls if the controlgroup was already enhanced
+		if ( groupcontrols.length ) {
+			groupcontrols.contents().unwrap();
+		}
 		$el.wrapInner( "<div class='ui-controlgroup-controls'></div>" );
 
-		// Replace legend with more stylable replacement div
-		if ( groupheading.length ) {
-			$( "<div role='heading' class='ui-controlgroup-label'>" + groupheading.html() + "</div>" ).insertBefore( $el.children( 0 ) );
-			groupheading.remove();
+		if ( grouplegend.length ) {
+			// Replace legend with more stylable replacement div
+			$( "<div role='heading' class='ui-controlgroup-label'>" + grouplegend.html() + "</div>" ).insertBefore( $el.children( 0 ) );
+			grouplegend.remove();
+		} else if ( groupheading.length ) {
+			// Just move the heading if the controlgroup was already enhanced
+			$el.prepend( groupheading );
 		}
 
 		$el.addClass( "ui-corner-all ui-controlgroup ui-controlgroup-" + o.direction );
@@ -6387,7 +6396,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 		_resizeTimeout: function() {
 			if ( !this._maybeRefreshTimeout() ) {
 				// effectively rapid-open the popup while leaving the screen intact
-				this.element.trigger( "popupbeforeposition" );
+				this._trigger( "beforeposition" );
 				this._ui.container
 					.removeClass( "ui-selectmenu-hidden" )
 					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) )
@@ -6775,7 +6784,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			this._ui.container.addClass( "ui-popup-active" );
 			this._isOpen = true;
 			this._ui.container.attr( "tabindex", "0" ).focus();
-			this.element.trigger( "popupafteropen" );
+			this._trigger( "afteropen" );
 		},
 
 		_open: function( options ) {
@@ -6788,7 +6797,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			transition = options.transition;
 
 			// Give applications a chance to modify the contents of the container before it appears
-			this.element.trigger( "popupbeforeposition" );
+			this._trigger( "beforeposition" );
 
 			coords = this._placementCoords( this._desiredCoords( options.x, options.y, options.positionTo || this.options.positionTo || "origin" ) );
 
@@ -6843,7 +6852,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		_closePrereqsDone: function() {
 			this._ui.container.removeAttr( "tabindex" );
-			this.element.trigger( "popupafterclose" );
+			this._trigger( "afterclose" );
 		},
 
 		_close: function() {
@@ -7283,9 +7292,11 @@ $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 $.mobile.listview.prototype.options.filterTheme = "c";
 // TODO rename callback/deprecate and default to the item itself as the first argument
-$.mobile.listview.prototype.options.filterCallback = function( text, searchValue, item ) {
-	return text.toString().toLowerCase().indexOf( searchValue ) === -1;
-};
+var defaultFilterCallback = function( text, searchValue, item ) {
+		return text.toString().toLowerCase().indexOf( searchValue ) === -1;
+	};
+
+$.mobile.listview.prototype.options.filterCallback = defaultFilterCallback;
 
 $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function() {
 
@@ -7313,13 +7324,17 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 				lastval = $this.jqmData( "lastval" ) + "",
 				childItems = false,
 				itemtext = "",
-				item;
+				item,
+				// Check if a custom filter callback applies
+				isCustomFilterCallback = listview.options.filterCallback !== defaultFilterCallback;
+
+			listview._trigger( "beforefilter", "beforefilter", { input: this } );
 
 			// Change val as lastval for next execution
 			$this.jqmData( "lastval" , val );
-			if ( val.length < lastval.length || val.indexOf( lastval ) !== 0 ) {
+			if ( isCustomFilterCallback || val.length < lastval.length || val.indexOf( lastval ) !== 0 ) {
 
-				// Removed chars or pasted something totally different, check all items
+				// Custom filter callback applies or removed chars or pasted something totally different, check all items
 				listItems = list.children();
 			} else {
 

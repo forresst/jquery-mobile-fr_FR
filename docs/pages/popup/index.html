@@ -154,7 +154,7 @@
 		<p>Ce plugin sera auto-initialiser sur n'importe quelle page qui contient un div avec l'attribut <code>data-role="popup"</code>. Cependant, si nécessaire, vous pouvez appeler directement le plugin <code>popup</code> sur n'importe quel sélecteur, comme n'importe quel plugin jQuery et travailler par programmation avec l'API du popup via les <a href="options.html">options</a>, les <a href="methods.html">méthodes</a> et les <a href="events.html">événements</a> :</p>
 		
 <pre><code>
-$('#myPopupDiv').popup();
+$( "#myPopupDiv" ).popup();
 </code></pre>
 
 		<h2>Ouverture des popups</h2>
@@ -162,14 +162,14 @@ $('#myPopupDiv').popup();
 		<p>En utilisant la configuration basée sur le balisage, lorsqu'un lien avec <code>data-rel="popup"</code> est touché, le conteneur du popup correspondant à l'id référencé dans le <code>href</code> du lien sera affiché. Pour ouvrir un popup par programmation, appelez le popup avec la méthode <code>open</code> sur le conteneur du popup :</p>
 		
 <pre><code>
-$('#myPopupDiv').popup("open")
+$( "#myPopupDiv" ).popup( "open" )
 </code></pre>
 
 		<h2>Fermeture des popups</h2>
 		<p>Les popups peuvent être fermés soit en cliquant en dehors du widget popup, soit en pressant la touche <code>Esc</code>. Les popups peuvent aussi être fermés via la méthode <code>close</code> :
 			
 <pre><code>
-$('#myPopupDiv').popup("close")
+$( "#myPopupDiv" ).popup( "close" )
 </code></pre>
 			
 			<p>Pour ajouter un bouton fermer explicite au popup, ajoutez un lien avec le rôle button dans le conteneur du popup avec un attribut <code>data-rel="back"</code> qui fermera le popup lorsqu'il sera touché. Nous avons créer des classes d'aide pour positionner les boutons dans le coin supérieur gauche (<code>ui-btn-left</code>) ou le coin supérieur droit (<code>ui-btn-right</code>) du popup, mais vous devrez peut-être modifier ou ajouter ces styles de positionnement selon votre conception. Nous recommandons de'ajouter un espacement de contenu standard pour la popup pour faire de la place pour les boutons (voir la section suivante).</p>
@@ -280,7 +280,7 @@ $( ".selector" ).popup( "open", x, y,
 			<p>Je suis une simple popup.</p>
 		</div>
 											
-		<p>Lorsque vous lancez le popup depuis l'un des boutons, la <code>data-transition</code> donnée pour ce bouton sera utilisée. Toutefois, si vous lancez la popup par par programmation, comme <code>$("#transitionExample").popup("open")</code>, l'attribut <code>data-transition</code> spécifié dans la définition de la popup sera utilisé si elle est définie.</p>
+		<p>Lorsque vous lancez le popup depuis l'un des boutons, la <code>data-transition</code> donnée pour ce bouton sera utilisée. Toutefois, si vous lancez la popup par par programmation, comme <code>$("#transitionExample").popup("open")</code>, l'attribut <code>data-transition</code> spécifié dans la définition de la popup sera utilisé si elle est présente.</p>
 		
 
 		<h2>Thématisation du popup et de son fond</h2>
@@ -321,8 +321,8 @@ $( ".selector" ).popup( "open", x, y,
 		<p>Le framework ne prend pas en charge le chaînage des popups car il n'est pas possible d'intégrer un lien d'un popup à l'intérieur d'un autre popup. Tous les liens avec <code>data-rel="popup"</code> à l'intérieur d'un popup ne fera rien du tout.</p>
 		<p>Cela signifie également que des menus de sélection ne fonctionneront pas à l'intérieur des popups, car ils sont eux-mêmes implémentés en utilisant des popups. Si vous placez un menu de sélection dans une popup, il sera rendu sous la forme d'un menu natif de sélection, même si vous spécifiez <code>data-native-menu="false"</code>.</p>
 		
-		<div align="right"><a href="popup-images.html" data-ajax="false" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="false" align="right">Exemples avancés de popup</a>
-		</div>
+		<br>
+		<a href="popup-images.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Mise à l'échelle des images</a> <a href="popup-iframes.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">iframes de carte + vidéo</a> <a href="popup-panels.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Panneaux de recouvrement</a>
 
 	</div><!--/content-primary -->
 

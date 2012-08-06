@@ -81,7 +81,7 @@
 
 			<p>Une liste peut être configurée pour générer automatiquement des séparateurs pour ces éléments. Cela est possible en ajoutant un attribut <code>data-autodividers="true"</code> à n'importe quelle liste.</p>
 
-			<p>Par défaut, le texte utilisé pour créer des séparations est la première lettre en majuscule du texte du lien de l'élément (pour les listes de liens) ou le texte de l'élément (pour les listes en lecture seule). Alternativement, si vous utilisez des éléments de liste  formatée, vous pouvez spécifier le texte diviseur en définissant l'option <code>autodividersSelector</code>  sur la liste par programmation. Par exemple, pour ajouter un sélecteur personnalisé à l'élément avec <code>id="mylistview"</code> :</p>
+			<p>Par défaut, le texte utilisé pour créer des séparations est la première lettre en majuscule du texte de l'élément. Alternativement, vous pouvez spécifier un texte de séparation en paramétrant l'option <code>autodividersSelector</code>  sur la liste par programmation. Par exemple, pour ajouter un sélecteur personnalisé à l'élément avec <code>id="mylistview"</code> :</p>
 
 <pre><code>
 $("#mylistview").listview({
@@ -97,6 +97,8 @@ $("#mylistview").listview({
 });
 </code></pre>
 
+			<p>Notez que si vous utilisez des éléments de liste formatés qui contiennent un élément flottant (par exemple <code>ui-li-aside</code>), cet élément précède ses frères et sœurs quelle que soit l'ordre dans votre balisage HTML. De ce fait, le premier caractère de l'élément flottant est utilisé comme texte de séparation. Par conséquent, il est recommandé de spécifier le texte de séparation dans ce cas.</p>
+			
 			<p>Si de nouveaux éléments sont ajoutés ou retirés de la liste, les séparateurs  <em>ne sont pas</em> automatiquement mis à jour : vous devez appeler <code>refresh()</code> sur la liste pour redessiner les séparateurs.</p>
 
 			<a href="lists-autodividers.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Exemple Autodividers</a>
