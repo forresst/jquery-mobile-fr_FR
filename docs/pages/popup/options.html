@@ -39,14 +39,21 @@
 			<p>Le plugin popup a les options suivantes :</p>
 
 		<dl>
-			
+
 			<dt><code>corners</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>
 				<p>Définit s'il faut dessiner un popup avec des coins arrondis. Cette option est également définie comme un attribut de données : <code>data-corners="true"</code></p>
 				<pre><code>$( ".selector" ).popup(<strong>{ corners: true }</strong>);</code></pre>
 			</dd>
-			
+
+			<dt><code>history</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">Par défaut : true</p>
+				<p>Définit s'il faut modifier l'url quand une popup est ouverte pour supporter le bouton retour. Cette option est également définie comme un attribut de données : <code>data-history="true"</p>
+				<pre><code>$( ".selector" ).popup(<strong>{ history: false }</strong>);</code></pre>
+			</dd>
+
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">default: ":jqmData(role='popup')"</p>
@@ -89,7 +96,7 @@
 				<p>Définit s'il faut dessiner une ombre autour du popup. Cette option est également définie comme un attribut de données : <code>data-shadow="true"</code></p>
 				<pre><code>$( ".selector" ).popup(<strong>{ shadow: true }</strong>);</code></pre>
 			</dd>
-			
+
 			<dt><code>theme</code> <em>string</em></dt>
 			<dd>
 				<p class="default">par défaut : null</p>

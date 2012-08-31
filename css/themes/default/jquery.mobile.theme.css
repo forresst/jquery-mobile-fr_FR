@@ -1,9 +1,9 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 8c3c969a982dbf1577184546f0393c800978088c <> Date: Mon Aug 6 08:56:29 2012 -0500
+* jQuery Mobile Framework Git Build: SHA1: c847a7882b3e97b95319ecae094f38f7a71eef8a <> Date: Thu Aug 30 15:54:24 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
-* Dual licensed under the MIT or GPL Version 2 licenses.
+* Released under the MIT license.
 * http://jquery.org/license
 *
 */
@@ -282,7 +282,7 @@
 	background-image:         linear-gradient( #6facd5 /*{b-bhover-background-start}*/, #4272a4 /*{b-bhover-background-end}*/);
 }
 .ui-btn-hover-b:visited,
-.ui-btn-hover-a:hover,
+.ui-btn-hover-b:hover,
 .ui-btn-hover-b a.ui-link-inherit {
 	color: 					#fff /*{b-bhover-color}*/;
 }

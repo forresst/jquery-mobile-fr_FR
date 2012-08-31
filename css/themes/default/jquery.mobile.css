@@ -1,9 +1,9 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 8c3c969a982dbf1577184546f0393c800978088c <> Date: Mon Aug 6 08:56:29 2012 -0500
+* jQuery Mobile Framework Git Build: SHA1: c847a7882b3e97b95319ecae094f38f7a71eef8a <> Date: Thu Aug 30 15:54:24 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
-* Dual licensed under the MIT or GPL Version 2 licenses.
+* Released under the MIT license.
 * http://jquery.org/license
 *
 */
@@ -258,7 +258,7 @@
 	background-image:         linear-gradient( #6facd5 /*{b-bhover-background-start}*/, #4272a4 /*{b-bhover-background-end}*/);
 }
 .ui-btn-hover-b:visited,
-.ui-btn-hover-a:hover,
+.ui-btn-hover-b:hover,
 .ui-btn-hover-b a.ui-link-inherit {
 	color: 					#fff /*{b-bhover-color}*/;
 }
@@ -1768,7 +1768,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 .ui-page-header-fullscreen .ui-fixed-hidden,
 .ui-page-footer-fullscreen .ui-fixed-hidden {
-	left: -99999em;
+	left: -9999px;
 }
 .ui-header-fixed .ui-btn,
 .ui-footer-fixed .ui-btn { 
@@ -1776,7 +1776,7 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 .ui-navbar { max-width: 100%; }
 .ui-navbar.ui-mini { margin: 0; }
-.ui-navbar ul { list-style:none; margin: 0; padding: 0; position: relative; display: block; border: 0; max-width: 100%; overflow:hidden; }
+.ui-navbar ul { list-style:none; margin: 0; padding: 0; position: relative; display: block; border: 0; max-width: 100%; overflow: visible; }
 .ui-navbar li .ui-btn { display: block; text-align: center; margin: 0 -1px 0 0; border-right-width: 0; }
 .ui-navbar li .ui-btn-icon-right .ui-icon { right: 6px; }
 /* add border if not in header/footer (full width) */
@@ -1940,9 +1940,9 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-controlgroup-horizontal .ui-btn, .ui-controlgroup-horizontal .ui-select,
 .ui-controlgroup-horizontal .ui-checkbox, .ui-controlgroup-horizontal .ui-radio { float: left; clear: none; margin: 0 -1px 0 0; }
 .ui-controlgroup-horizontal .ui-select .ui-btn,
-.ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn,
+.ui-controlgroup-horizontal .ui-checkbox .ui-btn, .ui-controlgroup-horizontal .ui-radio .ui-btn { float: none; margin: 0; }
+.ui-controlgroup-horizontal .ui-controlgroup-last, .ui-controlgroup-horizontal .ui-select:last-child,
 .ui-controlgroup-horizontal .ui-checkbox:last-child, .ui-controlgroup-horizontal .ui-radio:last-child { margin-right: 0; }
-.ui-controlgroup-horizontal .ui-controlgroup-last { margin-right: 0; }
 .ui-controlgroup .ui-checkbox label, .ui-controlgroup .ui-radio label { font-size: 16px; }
 @media all and (min-width: 450px){
 	.ui-field-contain .ui-controlgroup-label { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
@@ -1983,44 +1983,30 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	z-index: 10; 
 	padding: 0 15px; 
 }
+.ui-popup-open .ui-header-fixed,
+.ui-popup-open .ui-footer-fixed {
+	position: absolute !important; 	/* See line #553 of popup.js */
+}
 .ui-popup-screen {
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	border: 0;
+	background-image: url(data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==); /* Necessary to set some form of background to ensure element is clickable in IE6/7. While legacy IE won’t understand the data-URI’d image, it ensures no additional requests occur in all other browsers with little overhead. */
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 1px;
 	position: absolute;
-	filter: Alpha(Opacity=50);
+	filter: Alpha(Opacity=0);
 	opacity: 0;
 	z-index: 1099;
 }
-.ui-popup-screen-background-hack {
-	background-color: black;
-	filter: Alpha(Opacity=0);
-}
-@-webkit-keyframes popup-fadein {
-    from { opacity: 0; }
-    to { opacity: 0.5; }
-}
-@-moz-keyframes popup-fadein {
-    from { opacity: 0; }
-    to { opacity: 0.5; }
-}
-@-webkit-keyframes popup-fadeout {
-    from { opacity: 0.5; }
-    to { opacity: 0; }
-}
-@-moz-keyframes popup-fadeout {
-    from { opacity: 0.5; }
-    to { opacity: 0; }
-}
-.ui-popup-screen.fade.in {
+.ui-popup-screen.in {
 	opacity: 0.5;
+	filter: Alpha(Opacity=50);
 	-webkit-animation-name: popup-fadein;
 	-moz-animation-name: popup-fadein;
 }
-.ui-popup-screen.fade.out {
+.ui-popup-screen.out {
 	opacity: 0;
+	filter: Alpha(Opacity=0);
 	-webkit-animation-name: popup-fadeout;
 	-moz-animation-name: popup-fadeout;
 }
