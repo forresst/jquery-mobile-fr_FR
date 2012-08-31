@@ -82,6 +82,10 @@ Actuellement, la bibliothèque est livrée sur le CDN jQuery en un fichier JavaS
 * `docs` - construire les js et css, et faire les docs prêtes à une utilisation statique
 * `zip` - packager tous les JavaScript et tous les css dans un zip
 
+### Download Builder
+
+The easiest way to obtain a custom build is to use the [download builder](http://jquerymobile.com/download-builder/). With it, you can select the parts of the library you need and both the CSS and JavaScript dependencies will be resolved for you as a packaged/minified whole.
+
 ### Requis
 
 Les `js` et `css` construits, requièrent [node.js](http://nodejs.org/) et le package NPM. Pour les autres constructions, `docs` et `zip`, bash est aussi requis. Pour plus d'informations sur l'installation de node, veuillez regarder la [documentation](http://nodejs.org/#download). Car bash est généralement installé par défaut sur le shell dans de nombreux environnements compatibles POSIX (OSX, Linux, BSD, etc).

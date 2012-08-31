@@ -63,7 +63,7 @@
 									</li>
 								  <li><code>reverse</code> (<em>boolean</em>, par défaut : false) Décide dans quelle direction la transition se déroulera lors de l'affichage de la page. </li>
 									<li><code>role</code> (<em>string</em>, par défaut : undefined) La valeur du data-role à utiliser lors de l'affichage de la page. Par défaut, il est indéfini ce qui signifie qu'il s'appuit sur la valeur du @data-role défini sur l'élément.</li>
-									<li><code>showLoadMsg</code> (<em>boolean</em>, par défaut : true) Décide ou non d'afficher le message de chargement lors du chargement des pages externes.</li>									
+									<li><code>showLoadMsg</code> (<em>boolean</em>, par défaut : true) Décide ou non d'afficher le message de chargement lors du chargement des pages externes.</li>
 									<li><code>transition</code> (<em>string</em>, par défaut : $.mobile.defaultPageTransition) La transition à utiliser lors de l'affichage de la page. </li>
 									<li><code>type</code> (<em>string</em>, par défaut : "get") Spécifie la méthode ("get" ou "post") à utiliser lors d'une requête d'une page.
 										<ul>
@@ -156,10 +156,12 @@ $.mobile.loadPage( "searchresults.php", {
 					<dd>Voir les méthodes jQuery <a href="http://api.jquery.com/jQuery.data/">data</a> et <a href="http://api.jquery.com/jQuery.removeData/">removeData</a></dd>
 					<strong>Remarque : </strong>L'appel de jqmData() sans argument retournera <code>undefined</code>. Ce comportement est sujet à changement dans les futures versions.
 					<dt><code>·</code> Aussi :</dt>
-					<dd>Lors de la recherche d'éléments par leur  data attribute de jQuery Mobile, veuillez utiliser le sélecteur <code>:jqmData()</code>, car il intégre automatiquement les attributs de données d'espace de nommage dans la recherche quand ils sont en utilisés. Par exemple, au lieu d'appeler <code>$("div[data-role='page']")</code>, vous devez utiliser <code>$("div:jqmData(role='page')")</code>, qui en interne retrouve <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> sans vous obliger  manuellement à concaténer un espace de nommage dans votre sélecteurs.</dd>
+					<dd>
+            <p>Lors de la recherche d'éléments par leur  data attribute de jQuery Mobile, veuillez utiliser le sélecteur <code>:jqmData()</code>. Il intègre automatiquement les attributs de données d'espace de nommage dans la recherche quand ils sont en utilisés. Par exemple, au lieu d'appeler <code>$("div[data-role='page']")</code>, vous devez utiliser <code>$("div:jqmData(role='page')")</code>, qui en interne retrouve <code>$("div[data-"+ $.mobile.ns +"role='page']")</code> sans vous obliger  manuellement à concaténer un espace de nommage dans votre sélecteurs.<p>
+            <p>Une exception à cette règle est la sélection des attributs de données d'espaces de noms avec les valeurs d'URL, par exemple, le <code>:jqmData(url)</code> que jQuery Mobile utilise pour suivre d'où une page arrive. C'est parce que le sélecteur nécessite une parenthèse fermante, mais les parenthèses sont aussi des caractère d'URL valide.</p>
+          </dd>
 				</dl>
 			</dd>
-
 
 			<dt><code>$.fn.jqmEnhanceable()</code> (<em>method</em>)</dt>
 			<dd>Pour les utilisateurs souhaitant respecter les éléments parents de <code>data-enhance=false</code> au cours de l'amélioration manuel ou personnalisé le plugin de création, jQuery Mobile offre la  méthode de filtrage <code>$.fn.jqmEnhanceable</code>.</dd>

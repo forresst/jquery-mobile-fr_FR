@@ -17,7 +17,7 @@
 
 	<div data-role="page" class="type-interior">
 
-		<div data-role="header" data-theme="f">
+		<div data-role="header" data-theme="f" data-position="fixed">
 		<h1>Popup</h1>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
 	</div><!-- /header -->
@@ -34,7 +34,7 @@
 				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
 			</ul>
 
-			<p>Pour créer un popup, ajoutez l'attribut <code>data-role="popup"</code> au div avec le contenu du popup. Ensuite créez un lien avec <code>href</code> défini avec l'<code>id</code> du div du popup et ajoutez l'attribut <code>data-rel="popup"</code> pour appeler le framework afin d'ouvrir le popup lorsqu'il sera touché. Il s'agit d'un modèle de balisage similaire au widget de la <a href="../page-dialogs.html">boîte de dialogue</a>.</p>
+			<p>Pour créer un popup, ajoutez l'attribut <code>data-role="popup"</code> au div avec le contenu du popup. Ensuite créez un lien avec <code>href</code> défini avec l'<code>id</code> du div du popup et ajoutez l'attribut <code>data-rel="popup"</code> pour appeler le framework afin d'ouvrir le popup lorsqu'il sera touché. Il s'agit d'un modèle de balisage similaire au widget de la <a href="../page-dialogs.html">boîte de dialogue</a>. Un div de popup doit être imbriqué à l'intérieur de la même page que le lien.</p>
 
 <pre><code>
 &lt;a href="#popupBasic" <strong>data-rel="popup"</strong>&gt;Open Popup&lt;/a&gt;
@@ -252,15 +252,7 @@ $( "#myPopupDiv" ).popup( "close" )
 			<li>Si le centrage de la popup sur un élément entraîne une augmentation de la hauteur totale du document, la popup est décalé vers le haut tout au plus jusqu'à ce que sa coordonnée supérieure soit à 0.</li>
 		</ol>
 
-		<p>Pour utiliser par programmation la fonctionnalité du positionnement de la popup (et toutes les fonctionnalités mises à disposition en précisant les options <code>data-*</code> sur les liens), passer un objet jQuery avec les éléments de données correspondants en troisième paramètre à <code>open()</code> :</p>
-<code><pre>
-$( ".selector" ).popup( "open", x, y,
-  $( {} )
-    .jqmData( "position-to", "window" )
-    .jqmData( "transition", "slide" ) );
-</pre></code>
-
-		<p>Cela va avoir pour conséquence que la popup va s'ouvrir et se fermer avec une transition slide et se positionner au centre de la fenêtre.</p>
+		<p>Regardez <a href="methods.html">les méthodes</a> pour plus d'informations sur le pramètrage du positionnement de la popup par programmation, en incluant l'option pour spécifier les <strong>coordonnées x et y</strong>.
 
 		<h2>Paramétrage des transitions</h2>
 		<p>Par défaut, les popups n'ont pas de transition pour s'ouvrir aussi rapidement que possible. Pour définir la transition utilisée par la popup, ajoutez l'attribut <code>data-transition</code> au lien qui référence la popup. La version inversée de la transition sera utilisé lors de la fermeture de la popup.</p>

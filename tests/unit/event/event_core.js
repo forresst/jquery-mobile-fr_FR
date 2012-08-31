@@ -69,11 +69,15 @@
 		$('#qunit-fixture').touchstart();
 	});
 
-	test( "defining event functions sets the attrFn to true", function(){
-		$.each(events, function(i, name){
-			ok($.attrFn[name], "attribute function is true");
+	// jQuery < 1.8
+	if ( $.attrFn ) {
+		test( "defining event functions sets the attrFn to true", function(){
+			$.each( events, function( index, name ) {
+				ok( $.attrFn[ name ], "attribute function is true" );
+			});
 		});
-	});
+	}
+
 
 	test( "scrollstart enabled defaults to true", function(){
 		$.event.special.scrollstart.enabled = false;
@@ -128,6 +132,7 @@
 
 	var forceTouchSupport = function(){
 		document.ontouchend = function() {};
+		$.testHelper.reloadLib( "jquery.mobile.support.touch.js" );
 		$.each( components, function( index, value ) { $.testHelper.reloadLib( value ); });
 
 		//mock originalEvent information

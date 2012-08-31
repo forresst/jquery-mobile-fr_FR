@@ -49,6 +49,19 @@ define( [
 			//
 			urlParseRE: /^(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
+			// Abstraction to address xss (Issue #4787) by removing the authority in
+			// browsers that auto	decode it. All references to location.href should be
+			// replaced with a call to this method so that it can be dealt with properly here
+			getLocation: function( url ) {
+				var uri = url ? $.mobile.path.parseUrl( url ) : location;
+
+				return uri.protocol + "//" + uri.host + uri.pathname + uri.search + uri.hash;
+			},
+
+			parseLocation: function() {
+				return this.parseUrl( this.getLocation() );
+			},
+
 			//Parse a URL into a structure that allows easy access to
 			//all of the URL components by name.
 			parseUrl: function( url ) {
@@ -369,7 +382,7 @@ define( [
 		$base = $head.children( "base" ),
 
 		//tuck away the original document URL minus any fragment.
-		documentUrl = path.parseUrl( location.href ),
+		documentUrl = path.parseLocation(),
 
 		//if the document has an embedded base tag, documentBase is set to its
 		//initial value. If a base tag does not exist, then we default to the documentUrl.
@@ -663,8 +676,8 @@ define( [
 			settings.reloadPage = true;
 		}
 
-			// The absolute version of the URL minus any dialog/subpage params.
-			// In otherwords the real URL of the page to be loaded.
+		// The absolute version of the URL minus any dialog/subpage params.
+		// In otherwords the real URL of the page to be loaded.
 		var fileUrl = path.getFilePath( absUrl ),
 
 			// The version of the Url actually stored in the data-url attribute of
@@ -678,7 +691,9 @@ define( [
 		settings.pageContainer = settings.pageContainer || $.mobile.pageContainer;
 
 		// Check to see if the page already exists in the DOM.
-		page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
+		// NOTE do _not_ use the :jqmData psuedo selector because parenthesis
+		//      are a valid url char and it breaks on the first occurence
+		page = settings.pageContainer.children( "[data-" + $.mobile.ns +"url='" + dataUrl + "']" );
 
 		// If we failed to find the page, check to see if the url is a
 		// reference to an embedded page. If so, it may have been dynamically
@@ -848,7 +863,7 @@ define( [
 					// into the DOM. If the original absUrl refers to a sub-page, that is the
 					// real page we are interested in.
 					if ( absUrl.indexOf( "&" + $.mobile.subPageUrlKey ) > -1 ) {
-						page = settings.pageContainer.children( ":jqmData(url='" + dataUrl + "')" );
+						page = settings.pageContainer.children( "[data-" + $.mobile.ns +"url='" + dataUrl + "']" );
 					}
 
 					//bind pageHide to removePage after it's hidden, if the page options specify to do so
@@ -1085,7 +1100,9 @@ define( [
 				alreadyThere = true;
 			}
 
-			url = ( active.url || "" ) + dialogHashKey;
+			// Normally, we tack on a dialog hash key, but if this is the location of a stale dialog,
+			// we reuse the URL from the entry
+			url = ( active.url || "" ) + ( alreadyThere ? "" : dialogHashKey );
 
 			// tack on another dialogHashKey if this is the same as the initial hash
 			// this makes sure that a history entry is created for this dialog
@@ -1118,7 +1135,11 @@ define( [
 			( isDialog ? $.mobile.defaultDialogTransition : $.mobile.defaultPageTransition );
 
 		//add page to history stack if it's not back or forward
-		if ( !historyDir && !alreadyThere ) {
+		if ( !historyDir ) {
+			// Overwrite the current entry if it's a leftover from a dialog
+			if ( alreadyThere ) {
+				urlHistory.activeIndex = Math.max( 0, urlHistory.activeIndex - 1 );
+			}
 			urlHistory.addNew( url, settings.transition, pageTitle, pageUrl, settings.role );
 		}
 
@@ -1500,7 +1521,7 @@ define( [
 		$window.bind( "hashchange", function( e, triggered ) {
 			// Firefox auto-escapes the location.hash as for v13 but
 			// leaves the href untouched
-			$.mobile._handleHashChange( path.parseUrl(location.href).hash );
+			$.mobile._handleHashChange( path.parseLocation().hash );
 		});
 
 		//set page min-heights to be device specific
