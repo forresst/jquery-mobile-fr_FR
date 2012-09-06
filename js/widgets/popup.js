@@ -66,6 +66,16 @@ define( [ "jquery",
 			return false;
 		},
 
+		// Make sure the screen size is increased beyond the page height if the popup's causes the document to increase in height
+		_resizeScreen: function() {
+			var popupHeight = this._ui.container.outerHeight( true );
+
+			this._ui.screen.removeAttr( "style" );
+			if ( popupHeight > this._ui.screen.height() ) {
+				this._ui.screen.height( popupHeight );
+			}
+		},
+
 		_handleWindowKeyUp: function( e ) {
 			if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
 				return this._eatEventAndClose( e );
@@ -104,6 +114,7 @@ define( [ "jquery",
 					.removeClass( "ui-selectmenu-hidden" )
 					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
 
+				this._resizeScreen();
 				this._resizeData = null;
 				this._orientationchangeInProgress = false;
 			}
@@ -362,14 +373,6 @@ define( [ "jquery",
 			return { left: ret.x, top: ret.y };
 		},
 
-		_immediate: function() {
-			if ( this._prereqs ) {
-				$.each( this._prereqs, function( key, val ) {
-					val.resolve();
-				});
-			}
-		},
-
 		_createPrereqs: function( screenPrereq, containerPrereq, whenDone ) {
 			var self = this, prereqs;
 
@@ -482,15 +485,15 @@ define( [ "jquery",
 
 			self._ui.container.addClass( "ui-popup-active" );
 			self._isOpen = true;
+			self._resizeScreen();
 
 			// Android appears to trigger the animation complete before the popup
 			// is visible. Allowing the stack to unwind before applying focus prevents
 			// the "blue flash" of element focus in android 4.0
 			setTimeout(function(){
 				self._ui.container.attr( "tabindex", "0" ).focus();
+				self._trigger( "afteropen" );
 			});
-
-			self._trigger( "afteropen" );
 		},
 
 		_open: function( options ) {
@@ -506,7 +509,7 @@ define( [ "jquery",
 						chromematch = ua.indexOf( "Chrome" ) > -1;
 
 					// Platform is Android, WebKit version is greater than 534.13 ( Android 3.2.1 ) and not Chrome.
-					if( androidmatch !== null && andversion == 4.0 && wkversion && wkversion > 534.13 && !chromematch ) {
+					if( androidmatch !== null && andversion === "4.0" && wkversion && wkversion > 534.13 && !chromematch ) {
 						return true;
 					}
 					return false;
@@ -518,7 +521,7 @@ define( [ "jquery",
 			options = ( options || {} );
 
 			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
-			transition = options.transition;
+			transition = options.transition || this.options.transition;
 
 			// Give applications a chance to modify the contents of the container before it appears
 			this._trigger( "beforeposition" );
@@ -563,6 +566,8 @@ define( [ "jquery",
 				https://github.com/jquery/jquery-mobile/issues/4844
 				https://github.com/jquery/jquery-mobile/issues/4874
 				*/
+
+				// TODO sort out why this._page isn't working
 				this.element.closest( ".ui-page" ).addClass( "ui-popup-open" );
 			}
 			this._animate({
@@ -708,7 +713,7 @@ define( [ "jquery",
 
 			// if the current url has no dialog hash key proceed as normal
 			// otherwise, if the page is a dialog simply tack on the hash key
-			if ( url.indexOf( hashkey ) == -1 && !activePage.is( ".ui-dialog" ) ){
+			if ( url.indexOf( hashkey ) === -1 && !activePage.is( ".ui-dialog" ) ){
 				url = url + hashkey;
 			} else {
 				url = $.mobile.path.parseLocation().hash + hashkey;
