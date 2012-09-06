@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: c847a7882b3e97b95319ecae094f38f7a71eef8a <> Date: Thu Aug 30 15:54:24 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: a6b6cb584c062e3f325d5fc8fc3b6067ea2c314d <> Date: Thu Sep 6 10:10:39 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -865,14 +865,10 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-popup-screen.in {
 	opacity: 0.5;
 	filter: Alpha(Opacity=50);
-	-webkit-animation-name: popup-fadein;
-	-moz-animation-name: popup-fadein;
 }
 .ui-popup-screen.out {
 	opacity: 0;
 	filter: Alpha(Opacity=0);
-	-webkit-animation-name: popup-fadeout;
-	-moz-animation-name: popup-fadeout;
 }
 .ui-popup-container {
 	z-index: 1100;

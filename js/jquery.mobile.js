@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: c847a7882b3e97b95319ecae094f38f7a71eef8a <> Date: Thu Aug 30 15:54:24 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: a6b6cb584c062e3f325d5fc8fc3b6067ea2c314d <> Date: Thu Sep 6 10:10:39 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -29,7 +29,7 @@
 	$.mobile = $.extend( {}, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.2.0-pre",
+		version: "1.2.0-beta.1",
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -2848,7 +2848,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			// browsers that auto	decode it. All references to location.href should be
 			// replaced with a call to this method so that it can be dealt with properly here
 			getLocation: function( url ) {
-				var uri = url ? $.mobile.path.parseUrl( url ) : location;
+				var uri = url ? this.parseUrl( url ) : this.parseUrl( location.href );
 
 				return uri.protocol + "//" + uri.host + uri.pathname + uri.search + uri.hash;
 			},
@@ -2988,7 +2988,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			//get path from current hash, or from a file path
 			get: function( newPath ) {
 				if ( newPath === undefined ) {
-					newPath = location.hash;
+					newPath = path.parseLocation().hash;
 				}
 				return path.stripHash( newPath ).replace( /[^\/]*\.[^\/*]+$/, '' );
 			},
@@ -3522,11 +3522,6 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			}
 		}
 
-		// Reset base to the default document base.
-		if ( base ) {
-			base.reset();
-		}
-
 		// If the page we are interested in is already in the DOM,
 		// and the caller did not indicate that we should force a
 		// reload of the file, we are done. Otherwise, track the
@@ -3568,6 +3563,11 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 					// Hide loading message
 					$.mobile.hidePageLoadingMsg();
 				};
+		}
+
+		// Reset base to the default document base.
+		if ( base ) {
+			base.reset();
 		}
 
 		if ( !( $.mobile.allowCrossDomainPages || path.isSameDomain( documentUrl, absUrl ) ) ) {
@@ -6412,6 +6412,16 @@ $( document ).bind( "pagecreate create", function( e ) {
 			return false;
 		},
 
+		// Make sure the screen size is increased beyond the page height if the popup's causes the document to increase in height
+		_resizeScreen: function() {
+			var popupHeight = this._ui.container.outerHeight( true );
+
+			this._ui.screen.removeAttr( "style" );
+			if ( popupHeight > this._ui.screen.height() ) {
+				this._ui.screen.height( popupHeight );
+			}
+		},
+
 		_handleWindowKeyUp: function( e ) {
 			if ( this._isOpen && e.keyCode === $.mobile.keyCode.ESCAPE ) {
 				return this._eatEventAndClose( e );
@@ -6450,6 +6460,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 					.removeClass( "ui-selectmenu-hidden" )
 					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
 
+				this._resizeScreen();
 				this._resizeData = null;
 				this._orientationchangeInProgress = false;
 			}
@@ -6708,14 +6719,6 @@ $( document ).bind( "pagecreate create", function( e ) {
 			return { left: ret.x, top: ret.y };
 		},
 
-		_immediate: function() {
-			if ( this._prereqs ) {
-				$.each( this._prereqs, function( key, val ) {
-					val.resolve();
-				});
-			}
-		},
-
 		_createPrereqs: function( screenPrereq, containerPrereq, whenDone ) {
 			var self = this, prereqs;
 
@@ -6828,15 +6831,15 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			self._ui.container.addClass( "ui-popup-active" );
 			self._isOpen = true;
+			self._resizeScreen();
 
 			// Android appears to trigger the animation complete before the popup
 			// is visible. Allowing the stack to unwind before applying focus prevents
 			// the "blue flash" of element focus in android 4.0
 			setTimeout(function(){
 				self._ui.container.attr( "tabindex", "0" ).focus();
+				self._trigger( "afteropen" );
 			});
-
-			self._trigger( "afteropen" );
 		},
 
 		_open: function( options ) {
@@ -6852,7 +6855,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 						chromematch = ua.indexOf( "Chrome" ) > -1;
 
 					// Platform is Android, WebKit version is greater than 534.13 ( Android 3.2.1 ) and not Chrome.
-					if( androidmatch !== null && andversion == 4.0 && wkversion && wkversion > 534.13 && !chromematch ) {
+					if( androidmatch !== null && andversion === "4.0" && wkversion && wkversion > 534.13 && !chromematch ) {
 						return true;
 					}
 					return false;
@@ -6864,7 +6867,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			options = ( options || {} );
 
 			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
-			transition = options.transition;
+			transition = options.transition || this.options.transition;
 
 			// Give applications a chance to modify the contents of the container before it appears
 			this._trigger( "beforeposition" );
@@ -6909,6 +6912,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 				https://github.com/jquery/jquery-mobile/issues/4844
 				https://github.com/jquery/jquery-mobile/issues/4874
 				*/
+
+				// TODO sort out why this._page isn't working
 				this.element.closest( ".ui-page" ).addClass( "ui-popup-open" );
 			}
 			this._animate({
@@ -7054,7 +7059,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			// if the current url has no dialog hash key proceed as normal
 			// otherwise, if the page is a dialog simply tack on the hash key
-			if ( url.indexOf( hashkey ) == -1 && !activePage.is( ".ui-dialog" ) ){
+			if ( url.indexOf( hashkey ) === -1 && !activePage.is( ".ui-dialog" ) ){
 				url = url + hashkey;
 			} else {
 				url = $.mobile.path.parseLocation().hash + hashkey;
@@ -8977,7 +8982,9 @@ $( document ).bind( "pagecreate create", function( e ) {
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" );
+			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
+				hash = $.mobile.path.parseLocation().hash.replace("#", ""),
+				hashPage = document.getElementById( hash );
 
 			// if no pages are found, create one with body's inner html
 			if ( !$pages.length ) {
@@ -9016,12 +9023,12 @@ $( document ).bind( "pagecreate create", function( e ) {
 			// Remember, however, that the hash can also be a path!
 			if ( ! ( $.mobile.hashListeningEnabled &&
 				$.mobile.path.isHashValid( location.hash ) &&
-				( $( location.hash + ':jqmData(role="page")' ).length ||
-					$.mobile.path.isPath( location.hash ) ) ) ) {
+				( $( hashPage ).is( ':jqmData(role="page")' ) ||
+					$.mobile.path.isPath( hash ) ) ) ) {
 
 				// Store the initial destination
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
-					$.mobile.urlHistory.initialDst = $.mobile.path.parseLocation().hash.replace( "#", "" );
+					$.mobile.urlHistory.initialDst = hash.replace( "#", "" );
 				}
 				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
 			}
