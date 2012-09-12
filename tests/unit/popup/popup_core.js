@@ -522,7 +522,7 @@
 			},
 
 			{
-				open: { src: $popup, event: "popupafterclose.historyOffTestStep1" },
+				open: { src: $popup, event: "popupafterclose.historyOffTestStep1" }
 			},
 
 			function() {
@@ -545,16 +545,25 @@
 		]);
 	});
 
-	test( "Close links work on a history disabled popup", function() {
+	// TODO would be nice to avoid checking the internal representation
+	//      of "openness" but :visible didn't seem to be working in this case
+	//      (offscreen?)
+	asyncTest( "Close links work on a history disabled popup", function() {
 		var $popup = $( "#test-history-popup" );
 
-		expect( 2 );
+		expect( 3 );
+
+		ok( !$popup.data( "popup" )._isOpen, "popup is initially closed" );
 
 		$popup.popup( 'open' );
-		ok( $.mobile.popup.active, "popup is shown on link click" );
+		ok( $popup.data( "popup" )._isOpen, "popup is opened with open method" );
+
+		$popup.one( "popupafterclose", function() {
+			ok( !$popup.data( "popup" )._isOpen, "popup is closed on link click" );
+			start();
+		});
 
 		$popup.find( "a" ).click();
-		ok( !$.mobile.popup.active, "popup is hidden on link click" );
 	});
 
 	asyncTest( "Destroy closes the popup first", function() {

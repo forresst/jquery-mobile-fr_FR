@@ -43,7 +43,7 @@
 
 <h2>Liaison sans Ajax</h2>
 		
-		<p>Les liens qui pointent vers d'autres domaines ou qui ont les attributs <code>rel="external"</code>, <code>data-ajax="false"</code> ou <code>target</code> ne seront pas chargés avec l'Ajax. Au lieu de cela, ces liens provoqueront un rafraîchissement de la page complète sans transition animée. Les deux attributs (<code>rel="external"</code> et <code>data-ajax="false"</code>) ont le même effet, mais ils ont un sens sémantique différent : <code>rel="external"</code>  doit être utilisé lors de la liaison vers un autre site ou un autre domaine, alors que <code>data-ajax="false"</code> est utile pour tout simplement empêcher une page dans votre domaine d'être chargée via Ajax. En raison des restrictions de sécurité, le framework ouvre toujours pour les liens vers des domaines externes le comportement sans l'Ajax.</p>
+		<p>Les liens qui pointent vers d'autres domaines ou qui ont les attributs <code>rel="external"</code>, <code>data-ajax="false"</code> ou <code>target</code> ne seront pas chargés avec l'Ajax. Au lieu de cela, ces liens provoqueront un rafraîchissement de la page complète sans transition animée. Les deux attributs (<code>rel="external"</code> et <code>data-ajax="false"</code>) ont le même effet, mais ils ont un sens sémantique différent : <code>rel="external"</code>  doit être utilisé lors de la liaison vers un autre site ou un autre domaine, alors que <code>data-ajax="false"</code> est utile pour tout simplement empêcher une page dans votre domaine d'être chargée via Ajax. En raison des restrictions de sécurité, le framework choisit toujours pour les liens vers des domaines externes le comportement sans l'Ajax.</p>
 		<p>Dans la version 1.1, nous avons ajouté le support pour l'utilisation de <code>data-ajax="false"</code> sur un conteneur parent qui vous permet d'exclure un grand nombre de liens du système de navigation Ajax. Cela évite le besoin d'ajouter cet attribut pour chaque lien dans un conteneur. Pour activer cette fonctionnalité, <code>$.mobile.ignoreContentEnabled</code> doit être défini à <code>true</code>. Vérifiez <a href="../api/globalconfig.html">la configuration par défaut</a> avant de l'utiliser.</p>
 		<p>Remarque : Lors de la construction d'une application jQuery Mobile, où le système de navigation Ajax sera désactivé globalement ou fréquemment sur des liens individuels, nous vous recommandons de désactiver l'<a href="../api/globalconfig.html">option de configuration</a> globale  <code>$.mobile.pushStateEnabled</code> pour éviter les comportements de navigation incompatibles dans certains navigateurs.</p>
 		
@@ -121,7 +121,7 @@
 								<li data-theme="a"><a href="page-links.html">Liaison de pages</a></li>
 								<li><a href="page-transitions.html">Transitions de page</a></li>
 								<li><a href="loader.html">Widget de chargement de page</a></li>
-								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="dialog/index.html">Boîtes de dialogue</a></li>
 								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>

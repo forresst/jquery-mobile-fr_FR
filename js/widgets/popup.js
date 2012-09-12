@@ -319,14 +319,26 @@ define( [ "jquery",
 		},
 
 		_setOption: function( key, value ) {
-			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
+			var exclusions, setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
 
 			if ( this[ setter ] !== undefined ) {
 				this[ setter ]( value );
 			}
-			if ( key !== "initSelector" ) {
+
+			// TODO REMOVE FOR 1.2.1 by moving them out to a default options object
+			exclusions = [
+				"initSelector",
+				"closeLinkSelector",
+				"closeLinkEvents",
+				"navigateEvents",
+				"closeEvents",
+				"history",
+				"container"
+			];
+
+			$.mobile.widget.prototype._setOption.apply( this, arguments );
+			if ( exclusions.indexOf( key ) === -1 ) {
 				// Record the option change in the options and in the DOM data-* attributes
-				$.mobile.widget.prototype._setOption.apply( this, arguments );
 				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
 			}
 		},
@@ -514,8 +526,6 @@ define( [ "jquery",
 					}
 					return false;
 				}());
-			// set the global popup mutex
-			$.mobile.popup.active = this;
 
 			// Make sure options is defined
 			options = ( options || {} );
@@ -680,12 +690,13 @@ define( [ "jquery",
 				return;
 			}
 
-			// forward the options on to the visual open
-			self._open( options );
+			// set the global popup mutex
+			$.mobile.popup.active = this;
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
 			if( !opts.history ) {
+				self._open( options );
 				self._bindContainerClose();
 
 				// When histoy is disabled we have to grab the data-rel
@@ -723,6 +734,9 @@ define( [ "jquery",
 			opts.container.one( opts.navigateEvents, function( e ) {
 				e.preventDefault();
 				self._bindContainerClose();
+
+				// forward the options on to the visual open
+				self._open( options );
 			});
 
 			// Gotta love methods with 1mm args :(

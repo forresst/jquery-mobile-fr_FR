@@ -108,7 +108,7 @@ $.mobile.silentScroll(300);
 
 			<h2>Liaison aux événements de souris et tactile</h2>
 			<p>Une considération importante dans un mobile est la gestion des événements de la souris et du tactile. Ces événements diffèrent sensiblement selon les plateformes mobiles, mais le dénominateur commun est que les événements de clic fonctionneront partout, mais généralement après un retard important de 500-700 ms. Ce délai est nécessaire pour le navigateur pour attendre éventuellement que des événements de double appui, de défilement ou d'un appui long se produisent. Pour éviter ce délai, il est possible de lier des événements tacticle (ex. touchstart) mais le problème avec cette approche c'est que certaines plateformes (WP7, Blackberry) ne supportent pas le tactile. Pour aggraver ce problème, certaines plateformes vont émettre <em>à la fois</em> un événement tactiles et un événement de souris si vous liez à la fois les deux types, les événements en double seront déclenchés pour une seule interaction.</p>
-			<p>Notre solution est de créer un ensemble d'<a href="../api/events.html">événements virtuels</a> qui régularise les événements de souris et du tactile. Cela permet au développeur d'enregistrer des gestionnaires pour les événements de base de la souris, tels que mousedown, mousemove, mouseup et click. Le plugin va prendre soin d'inscrire ces gestionnaires en arrière plan afin de l'appeler le plus rapidement possible pour ce périphérique. Cela permet de conserver l'ordre de manifestation des événements dans l'environnement de la souris traditionnelle, cela aura pour conséquence l'enregistrement de plusieurs gestionnaires sur le même élément pour différents événements. Le système de souris virtuel expose les événements virtuels suivants aux méthodes liées à jQuery : <code>vmouseover</code>, <code>vmousedown</code>, <code>vmousemove</code>, <code>vmouseup</code>, <code>vclick</code> et <code>vmousecancel</code></p>
+			<p>Notre solution est de créer un ensemble d'<a href="../api/events.html">événements virtuels</a> qui régularise les événements de souris et du tactile. Cela permet au développeur d'enregistrer des gestionnaires pour les événements de base de la souris, tels que mousedown, mousemove, mouseup et click. Le plugin va prendre soin d'inscrire ces gestionnaires en arrière plan afin de l'appeler le plus rapidement possible pour ce périphérique. Cela permet de conserver l'ordre de manifestation des événements dans l'environnement de la souris traditionnelle, cela aura pour conséquence l'enregistrement de plusieurs gestionnaires sur le même élément pour différents événements. Le système de souris virtuel expose les événements virtuels suivants aux méthodes liées à jQuery : <code>vmouseover</code>, <code>vmousedown</code>, <code>vmousemove</code>, <code>vmouseup</code>, <code>vclick</code> et <code>vmousecancel</code>.</p>
 
 
 			<h2>Passage de paramètres entre les pages</h2>
@@ -136,7 +136,7 @@ $.mobile.silentScroll(300);
 								<li><a href="page-links.html">Liaison de pages</a></li>
 								<li><a href="page-transitions.html">Transitions de page</a></li>
 								<li><a href="loader.html">Widget de chargement de page</a></li>
-								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="dialog/index.html">Boîtes de dialogue</a></li>
 								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>

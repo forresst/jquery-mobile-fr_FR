@@ -50,7 +50,7 @@
 			<dt><code>history</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>
-				<p>Définit s'il faut modifier l'url quand une popup est ouverte pour supporter le bouton retour. Cette option est également définie comme un attribut de données : <code>data-history="true"</p>
+				<p>Définit s'il faut modifier l'url quand une popup est ouverte pour supporter le bouton retour. Cette option est également définie comme un attribut de données : <code>data-history="true"</code></p>
 				<pre><code>$( ".selector" ).popup(<strong>{ history: false }</strong>);</code></pre>
 			</dd>
 
@@ -88,6 +88,7 @@
 						</td></tr>
 					</table>
 				</p>
+				 <p>Cette option est également définie comme un attribut de données : <code>data-position-to="window"</code></p>
 			</dd>
 
 			<dt><code>shadow</code> <em>boolean</em></dt>
@@ -111,11 +112,11 @@
 				<p>Définit la distance minimale entre le bord de la fenêtre et celui du bord de la popup. Par défaut, les valeurs ci-dessus seront utilisés respectivement sur la distance gauche, haut, droite et bas de la fenêtre.</p>
 				<p>Vous pouvez spécifier une valeur pour cette option par l'une des quatre façons suivantes :
 					<ol>
-						<li>Une chaîne vide, null ou une autre valeur fausse. Cela entraînera la popup à retourner aux valeurs par défaut ci-dessus</li>
+						<li>Une chaîne vide, null ou une autre valeur fausse. Cela entraînera la popup à retourner aux valeurs par défaut ci-dessus.</li>
 						<li>Un nombre seul Ce nombre sera utilisé pour les quatre bords.</li>
 						<li>Deux nombres séparés par une virgule. Le premier nombre est utilisé pour les bords supérieur et inférieur de la fenêtre et le second nombre est utilisé pour les bords droit et gauche de la fenêtre.</li>
-						<li>Quatre nombres séparés par des virgules. Le premier sera utilisé pour le bord supérieur, le second pour le bord droit, le troisième pour le bord inférieur et le quatrième pour le bord gauche.</p>
-					</li></ol>
+						<li>Quatre nombres séparés par des virgules. Le premier sera utilisé pour le bord supérieur, le second pour le bord droit, le troisième pour le bord inférieur et le quatrième pour le bord gauche.</li>
+					</ol>
 				</p>
 			</dd>
 
@@ -147,7 +148,7 @@
 								<li><a href="../page-links.html">Liaison de pages</a></li>
 								<li><a href="../page-transitions.html" data-ajax="false">Transitions de page</a></li>
 								<li><a href="../loader.html">Widget de chargement de page</a></li>
-								<li><a href="../page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="../dialog/index.html">Boîtes de dialogue</a></li>
 								<li data-theme="a"><a href="index.html">Popups</a></li>
 								<li><a href="../page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="../page-navmodel.html">Ajax, hashes &amp; historique</a></li>
