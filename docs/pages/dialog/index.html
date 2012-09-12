@@ -5,12 +5,12 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>Docs jQuery Mobile - Boîtes de dialogue</title> 
-	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
-	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
 
-	<script src="../../js/jquery.js"></script>
-	<script src="../../docs/assets/js/jqm-docs.js"></script>
-	<script src="../../js/jquery.mobile.js"></script>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../../../docs/assets/js/jqm-docs.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
 
 </head> 
 <body> 
@@ -19,12 +19,22 @@
 
 		<div data-role="header" data-theme="f">
 		<h1>Boîtes de dialogue</h1>
-		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="ui-body">
-			<div class="content-primary">
-			<h2>Création des boîtes de dialogue</h2>
+		<div class="content-primary">
+			<form action="#" method="get">
+			
+            <h2>Boîte de dialogue</h2>
+            
+            <ul data-role="controlgroup" data-type="horizontal" class="localnav">
+				<li><a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Bases</a></li>
+				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
+				<li><a href="methods.html" data-role="button" data-transition="fade">Méthodes</a></li>
+				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
+			</ul>
+            
 			<p>Toute page peut être présentée comme une boîte de dialogue modale en ajoutant l'attribut <code>data-rel="dialog"</code> au lien ancre de la page. Lorsque l'attribut "dialog" est appliqué, le framework ajoute des styles pour ajouter des coins arrondis, des marges autour de la page et un fond sombre de façon que le "dialog" semblent être suspendus au-dessus de la page.</p>
 
 			<p>
@@ -33,7 +43,7 @@
 			</code>
 			</p>
 	
-			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Ouvrir la boîte de dialogue</a>
+			<a href="../dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Ouvrir la boîte de dialogue</a>
 
 
 
@@ -45,9 +55,9 @@
 </code>
 
 			<div>
-			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">data-transition="pop"</a>
-			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">data-transition="slidedown"</a>
-			<a href="dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="flip">data-transition="flip"</a>
+			<a href="../dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">data-transition="pop"</a>
+			<a href="../dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">data-transition="slidedown"</a>
+			<a href="../dialog.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="flip">data-transition="flip"</a>
 			</div>
 
 
@@ -67,14 +77,14 @@
 
 			<h2>Style et Thématisation</h2>
 			<p>Les boîtes de dialogue peuvent être stylisées avec des nuanciers de thème différents, comme n'importe quelle page en ajoutant les attributs <code>data-theme</code> aux conteneurs de l'entête, du contenu et du pied de page. Voici un exemple une différente conception d'une boîte de dialogue :</p>
-				<a href="dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Un schéma de couleur alternatif</a>
+				<a href="../dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Un schéma de couleur alternatif</a>
 
 			<p>Les boîtes de dialogue apparaissent en flottant au dessus d'une couche superposée. Cette superposition adopte la couleur de contenu du nuancier "a" par défaut, mais l'attribut <code>data-overlay-theme</code> peut être ajouté à l'enveloppe de la page pour définir la superposition avec une lettre du nuancier. Voici un exemple d'une boîte de dialogue avec la superposition définie avec le nuancier "e" :</p>
-				<a href="dialog-overlay.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Nuancier de superposition personnalisé</a>
+				<a href="../dialog-overlay.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Nuancier de superposition personnalisé</a>
 
 
 			<p>Les boîtes de dialogue peuvent être utilisées comme une feuille de contrôle pour offrir de multiples boutons si vous enlever simplement le haut de la marge de l'élément conteneur du dialogue du inner. Par exemple, si votre page de boîte de dialogue a une classe <code>my-dialog</code>, vous pouvez ajouter ce CSS pour épingler la boîte de dialogue en haut : <code>.ui-dialog.my-dialog .ui-dialog-contain { margin-top: 0 }</code>, ou vous pouvez juste appliquer le style à toutes les boîtes de dialogue avec <code>.ui-dialog .ui-dialog-contain { margin-top: 0 }</code>.</p>
-						<a href="dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">Partagez vos photos ...</a>
+						<a href="../dialog-buttons.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="slidedown">Partagez vos photos ...</a>
 
 			<h2>Largeur et marges de boîte de dialogue</h2>
 			<p>Par souci de lisibilité, les boîtes de dialogue ont par défaut un <code>width</code> de 92.5% et un <code>max-width</code> de 500 pixels. Il y a aussi un <code>margin</code> pour le haut à 10% pour donner une marge aux boîtes de dialogue plus grande que les écrans, mais se replie en une petite marge sur les smartphones. Si une boîte de dialogue est utilisée comme une feuille de contrôle, le conteneur intérieur de la boîte de dialogue est décalée vers le <code>haut</code> avec 15px pour cacher le style avec les coins (voir ci-dessus). Pour remplacer ces styles, ajoutez le CSS suivant qui écrase les règles de votre feuille de style et peaufine si besoin :</p>
@@ -94,7 +104,7 @@
 
 
 
-	</div><!--/content-primary -->		
+	</form></div><!--/content-primary -->		
 
 	<div class="content-secondary">
 
@@ -105,22 +115,22 @@
 				<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
 								<li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
-								<li><a href="page-anatomy.html">Anatomie de la page</a></li>
-								<li><a href="page-template.html" data-ajax="false">Modèle de page unique</a></li>
-								<li><a href="multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
-								<li><a href="page-titles.html">Titres des pages</a></li>
-								<li><a href="page-links.html">Liaison de pages</a></li>
-								<li><a href="page-transitions.html">Transitions de page</a></li>
-								<li><a href="loader.html">Widget de chargement de page</a></li>
-								<li data-theme="a"><a href="page-dialogs.html">Boîtes de dialogue</a></li>
-								<li><a href="popup/index.html">Popups</a></li>
-								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
-								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
-								<li><a href="page-dynamic.html">Injection dynamique des pages</a></li>
-								<li><a href="page-scripting.html">Écriture des scripts des pages</a></li>
-								<li><a href="phonegap.html">Application PhoneGap</a></li>
-								<li><a href="touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
-								<li><a href="pages-themes.html">Thématisation des pages</a></li>
+								<li><a href="../page-anatomy.html">Anatomie de la page</a></li>
+								<li><a href="../page-template.html" data-ajax="false">Modèle de page unique</a></li>
+								<li><a href="../multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
+								<li><a href="../page-titles.html">Titres des pages</a></li>
+								<li><a href="../page-links.html">Liaison de pages</a></li>
+								<li><a href="../page-transitions.html">Transitions de page</a></li>
+								<li><a href="../loader.html">Widget de chargement de page</a></li>
+								<li data-theme="a"><a href="index.html">Boîtes de dialogue</a></li>
+								<li><a href="../popup/index.html">Popups</a></li>
+								<li><a href="../page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
+								<li><a href="../page-navmodel.html">Ajax, hashes &amp; historique</a></li>
+								<li><a href="../page-dynamic.html">Injection dynamique des pages</a></li>
+								<li><a href="../page-scripting.html">Écriture des scripts des pages</a></li>
+								<li><a href="../phonegap.html">Application PhoneGap</a></li>
+								<li><a href="../touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
+								<li><a href="../pages-themes.html">Thématisation des pages</a></li>
 				</ul>
 		</div>
 	</div>		

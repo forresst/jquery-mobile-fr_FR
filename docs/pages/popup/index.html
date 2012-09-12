@@ -34,7 +34,7 @@
 				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
 			</ul>
 
-			<p>Pour créer un popup, ajoutez l'attribut <code>data-role="popup"</code> au div avec le contenu du popup. Ensuite créez un lien avec <code>href</code> défini avec l'<code>id</code> du div du popup et ajoutez l'attribut <code>data-rel="popup"</code> pour appeler le framework afin d'ouvrir le popup lorsqu'il sera touché. Il s'agit d'un modèle de balisage similaire au widget de la <a href="../page-dialogs.html">boîte de dialogue</a>. Un div de popup doit être imbriqué à l'intérieur de la même page que le lien.</p>
+			<p>Pour créer un popup, ajoutez l'attribut <code>data-role="popup"</code> au div avec le contenu du popup. Ensuite créez un lien avec <code>href</code> défini avec l'<code>id</code> du div du popup et ajoutez l'attribut <code>data-rel="popup"</code> pour appeler le framework afin d'ouvrir le popup lorsqu'il sera touché. Il s'agit d'un modèle de balisage similaire au widget de la <a href="../dialog/index.html">boîte de dialogue</a>. Un div de popup doit être imbriqué à l'intérieur de la même page que le lien.</p>
 
 <pre><code>
 &lt;a href="#popupBasic" <strong>data-rel="popup"</strong>&gt;Open Popup&lt;/a&gt;
@@ -312,9 +312,17 @@ $( "#myPopupDiv" ).popup( "close" )
 		<h2>Remarque : Le chainage des popups n'est pas permis</h2>
 		<p>Le framework ne prend pas en charge le chaînage des popups car il n'est pas possible d'intégrer un lien d'un popup à l'intérieur d'un autre popup. Tous les liens avec <code>data-rel="popup"</code> à l'intérieur d'un popup ne fera rien du tout.</p>
 		<p>Cela signifie également que des menus de sélection ne fonctionneront pas à l'intérieur des popups, car ils sont eux-mêmes implémentés en utilisant des popups. Si vous placez un menu de sélection dans une popup, il sera rendu sous la forme d'un menu natif de sélection, même si vous spécifiez <code>data-native-menu="false"</code>.</p>
-		
-		<br>
-		<a href="popup-images.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Mise à l'échelle des images</a> <a href="popup-iframes.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">iframes de carte + vidéo</a> <a href="popup-panels.html" data-ajax="false" data-role="button" data-inline="true" data-icon="arrow-r" data-iconpos="right">Panneaux de recouvrement</a>
+		<p>Une solution de contournement pour obtenir des popups enchaînées est l'utilisation d'une temporisation par exemple dans l'évènement <code>popupafterclose</code> lié à la fenêtre contextuelle invoquer. Dans l'exemple suivant, lorsque la première popup est fermée, la seconde sera ouverte  par un appel retardé à la méthode <code>open</code>.</p>
+<pre><code>
+$( document ).on( "pageinit", function() {
+    $( '.popupParent' ).on({
+        popupafterclose: function() {
+            setTimeout( function(){ $( '.popupChild' ).popup( 'open' ) }, 100 );
+        }
+    });
+});
+</code></pre>
+
 
 	</div><!--/content-primary -->
 
@@ -334,7 +342,7 @@ $( "#myPopupDiv" ).popup( "close" )
 								<li><a href="../page-links.html">Liaison de pages</a></li>
 								<li><a href="../page-transitions.html" data-ajax="false">Transitions de page</a></li>
 								<li><a href="../loader.html">Widget de chargement de page</a></li>
-								<li><a href="../page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="../dialog/index.html">Boîtes de dialogue</a></li>
 								<li data-theme="a"><a href="index.html">Popups</a></li>
 								<li><a href="../page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="../page-navmodel.html">Ajax, hashes &amp; historique</a></li>

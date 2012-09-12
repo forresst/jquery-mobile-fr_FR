@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: a6b6cb584c062e3f325d5fc8fc3b6067ea2c314d <> Date: Thu Sep 6 10:10:39 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: 22f362f36e2873a04ed96da20881d81b43dfc60a <> Date: Tue Sep 11 22:34:35 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -2031,14 +2031,6 @@ $.mobile.media = (function() {
 
 (function( $, undefined ) {
 
-var fakeBody = $( "<body>" ).prependTo( "html" ),
-	fbCSS = fakeBody[ 0 ].style,
-	vendors = [ "Webkit", "Moz", "O" ],
-	webos = "palmGetResource" in window, //only used to rule out scrollTop
-	opera = window.opera,
-	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
-	bb = window.blackberry; //only used to rule out box shadow, as it's filled opaque on BB
-
 // thx Modernizr
 function propExists( prop ) {
 	var uc_prop = prop.charAt( 0 ).toUpperCase() + prop.substr( 1 ),
@@ -2050,6 +2042,15 @@ function propExists( prop ) {
 		}
 	}
 }
+
+var fakeBody = $( "<body>" ).prependTo( "html" ),
+	fbCSS = fakeBody[ 0 ].style,
+	vendors = [ "Webkit", "Moz", "O" ],
+	webos = "palmGetResource" in window, //only used to rule out scrollTop
+	opera = window.opera,
+	operamini = window.operamini && ({}).toString.call( window.operamini ) === "[object OperaMini]",
+	bb = window.blackberry && !propExists( "-webkit-transform" ); //only used to rule out box shadow, as it's filled opaque on BB 5 and lower
+
 
 function validStyle( prop, value, check_vend ) {
 	var div = document.createElement( 'div' ),
@@ -6665,14 +6666,26 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_setOption: function( key, value ) {
-			var setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
+			var exclusions, setter = "_set" + key.charAt( 0 ).toUpperCase() + key.slice( 1 );
 
 			if ( this[ setter ] !== undefined ) {
 				this[ setter ]( value );
 			}
-			if ( key !== "initSelector" ) {
+
+			// TODO REMOVE FOR 1.2.1 by moving them out to a default options object
+			exclusions = [
+				"initSelector",
+				"closeLinkSelector",
+				"closeLinkEvents",
+				"navigateEvents",
+				"closeEvents",
+				"history",
+				"container"
+			];
+
+			$.mobile.widget.prototype._setOption.apply( this, arguments );
+			if ( exclusions.indexOf( key ) === -1 ) {
 				// Record the option change in the options and in the DOM data-* attributes
-				$.mobile.widget.prototype._setOption.apply( this, arguments );
 				this.element.attr( "data-" + ( $.mobile.ns || "" ) + ( key.replace( /([A-Z])/, "-$1" ).toLowerCase() ), value );
 			}
 		},
@@ -6860,8 +6873,6 @@ $( document ).bind( "pagecreate create", function( e ) {
 					}
 					return false;
 				}());
-			// set the global popup mutex
-			$.mobile.popup.active = this;
 
 			// Make sure options is defined
 			options = ( options || {} );
@@ -7026,12 +7037,13 @@ $( document ).bind( "pagecreate create", function( e ) {
 				return;
 			}
 
-			// forward the options on to the visual open
-			self._open( options );
+			// set the global popup mutex
+			$.mobile.popup.active = this;
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
 			if( !opts.history ) {
+				self._open( options );
 				self._bindContainerClose();
 
 				// When histoy is disabled we have to grab the data-rel
@@ -7069,6 +7081,9 @@ $( document ).bind( "pagecreate create", function( e ) {
 			opts.container.one( opts.navigateEvents, function( e ) {
 				e.preventDefault();
 				self._bindContainerClose();
+
+				// forward the options on to the visual open
+				self._open( options );
 			});
 
 			// Gotta love methods with 1mm args :(

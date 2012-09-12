@@ -35,7 +35,7 @@
 			
 			<p>Actuellement, la page que vous visualisez et celle qui vous permet de vous dirigez vers d'autres pages sont positionnées l'une à côté de l'autre dans la fenêtre, ce qui nous permet de tirer parti du défilement natif de la plupart des périphériques. L'inconvénient de cette approche est que comme les deux pages partagent le même viewport , quand une transition de page commence, nous devons d'abord défiler vers le haut du document, puis commencer l'animation afin de s'assurer que les pages soient alignées verticalement. Si vous cliquez sur le bouton Retour, nous avons besoin pour défiler vers le haut, de transition, puis restaurer la position précédente du défilement. Puisque les navigateurs mobiles sont assez lents, ces mouvements de défilement peuvent nuire au flux de l'expérience.</p>
 			
-			<p>La façon de vraiment améliorer cette situation est d'avoir deux pages dans des conteneurs séparés, chacun avec sa propre barre de défilement interne.. Ce moyen ne fait plus défiler le document ou n'a pas besoin de rétablir la position du défilement pour une douce expérience. Il a aussi un avantage de rendre fixe très facilement les barres d'outils en les plaçant simplement à l'extérieur des conteneurs avec le défilement interne.<p>
+			<p>La façon de vraiment améliorer cette situation est d'avoir deux pages dans des conteneurs séparés, chacun avec sa propre barre de défilement interne.. Ce moyen ne fait plus défiler le document ou n'a pas besoin de rétablir la position du défilement pour une expérience douce. Il a aussi un avantage de rendre fixe très facilement les barres d'outils en les plaçant simplement à l'extérieur des conteneurs avec le défilement interne.<p>
 			
 			<h2>Comment ça fonctionne</h2>
 			
@@ -60,7 +60,7 @@ $(document).bind("mobileinit", function(){
 			<ul>
 				<li>Parfois les éléments enfants des listes et des formulaires n'apparaissent pas lorsqu'ils sont incorporés dans une page avec le <code>overflow:</code> dans iOS5. C'était un phénomène assez aléatoire, mais ce n'est pas acceptable donc nous avons ajouté une propriété CSS  <code>translate-z</code> qui oblige iOS à afficher le contenu. L'inconvénient avec ce correctif est que quand une transformation est appliquée, tous les éléments sont définis à position:relative ce qui peut provoquer des problèmes dans votre mise en page.</li>
 				<li>La propriété <code>-webkit-overflow-scrolling:touch</code> semble désactiver les événements de défilement vers le haut de la page quand l'heure est exploitée dans la barre d'état.  Nous espérons qu'Apple corrigera cela parce que c'est une fonctionnalité très utile.</li>
-				<li>Lorsque les propriétés <code>overflow:</code> et <code>-webkit-overflow-scrolling:touch</code> sont définies, iOS semble ignorer certaines propriétés overflow:hidden sur le parent, qui est la page dans notre cas. Donc si vous avez une image ou un bloc de code qui est plus large que la fenêtre, le défilement horizontal sera vu. </li>
+				<li>Lorsque les propriétés <code>overflow:</code> et <code>-webkit-overflow-scrolling:touch</code> sont définies, iOS semble ignorer certaines propriétés <code>overflow:hidden</code> sur le parent, qui est la page dans notre cas. Donc si vous avez une image ou un bloc de code qui est plus large que la fenêtre, le défilement horizontal sera vu. </li>
 				<li>Lorsque cette fonction est active, nous désactivons le zoom utilisateur en manipulant les méta tag viewport parce que les barres d'outils et le contenu de la page peuvent être facilement zoomées avec une taille étrange et il est très difficile d'effectuer un zoom arrière. Même si nous croyons en la possibilité que les utilisateurs agrandissent la page, l'atténuation des problèmes de convivialité que nous avons avec les barres d'outils fixes et les conteneurs de débordement sont plus important.</li>
 				<li>La position du défilement peut être perdue lors d'un retour à une page qui a été rechargée. Si la mise en cache du DOM est activée, cela ne devrait pas être un problème.</li>
 				<li>C'est encore une fonctionnalité expérimentale, donc tous les problèmes n'ont pas été mis à jour. Utilisez avec prudence et testez à fond.</li>
@@ -104,7 +104,7 @@ $(document).bind("mobileinit", function() {
 								<li><a href="page-links.html">Liaison de pages</a></li>
 								<li><a href="page-transitions.html">Transitions de page</a></li>
 								<li><a href="loader.html">Widget de chargement de page</a></li>
-								<li><a href="page-dialogs.html">Boîtes de dialogue</a></li>
+								<li><a href="dialog/index.html">Boîtes de dialogue</a></li>
 								<li><a href="popup/index.html">Popups</a></li>
 								<li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>

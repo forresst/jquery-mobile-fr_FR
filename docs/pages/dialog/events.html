@@ -1,34 +1,33 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html>
 	<head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Docs jQuery Mobile - Popup</title>
-	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Boîtes de dialogue</title> 
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />  
 	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
 
 	<script src="../../../js/jquery.js"></script>
 	<script src="../../../docs/assets/js/jqm-docs.js"></script>
 	<script src="../../../js/jquery.mobile.js"></script>
 
-</head>
-<body>
+</head> 
+<body> 
 
 	<div data-role="page" class="type-interior">
 
 		<div data-role="header" data-theme="f">
-		<h1>Popup</h1>
+		<h1>Boîtes de dialogue</h1>
 		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
 	</div><!-- /header -->
 
 	<div data-role="content" class="ui-body">
 		<div class="content-primary">
-
-		<form action="#" method="get">
-
-			<h2>Popup</h2>
-
+			<form action="#" method="get">
+			
+            <h2>Boîte de dialogue</h2>
+            
 			<ul data-role="controlgroup" data-type="horizontal" class="localnav">
 				<li><a href="index.html" data-role="button" data-transition="fade">Bases</a></li>
 				<li><a href="options.html" data-role="button" data-transition="fade">Options</a></li>
@@ -36,55 +35,33 @@
 				<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Événements</a></li>
 			</ul>
 
-			<p>Le plugin popup a les événements personnalisés suivants :</p>
+			<p>Le plugin dialog a les événements personnalisés suivants :</p>
 
 	<dl>
 
-		<dt><code>popupbeforeposition</code> déclenchée après qu'une popup ait achevé les préparatifs pour l'ouverture, mais n'a pas encore été ouvert</dt>
+		<dt><code>create</code> déclenché quand une boîte de dialogue est créée</dt>
 		<dd>
 
 			<pre><code>
 $( ".selector" ).bind({
-   popupbeforeposition: function(event, ui) { ... }
+   create: function(event, ui) { ... }
 });
 			</code></pre>
-			<p>Cet événement est déclenché lorsque la popup a achevé les préparatifs pour apparaître sur l'écran. À ce stade, la popup n'a pas commencé les animations et il n'a pas encore calculé les coordonnées où il apparaîtra à l'écran. La gestion de cet événement donne l'occasion de modifier le contenu de la popup avant qu'elle n'apparaisse sur l'écran. Par exemple, le contenu peut être réduit ou certaines parties peuvent être masquées ou supprimées si elles sont trop larges ou trop grandes.</p>
-		</dd>
-
-		<dt><code>popupafteropen</code>déclenché lorsque la popup est complètement ouverte</dt>
-		<dd>
-
-			<pre><code>
-$( ".selector" ).bind({
-   popupafteropen: function(event, ui) { ... }
-});
-			</code></pre>
-			<p>Cet événement est déclenché après que le popup soit complètement affiché sur l'écran, ce qui signifie que toutes les animations associées soient terminées.</p>
-		</dd>
-
-		<dt><code>popupafterclose</code> déclenché lorsque la popup est complètement fermée</dt>
-		<dd>
-
-			<pre><code>
-$( ".selector" ).bind({
-   popupafterclose: function(event, ui) { ... }
-});
-			</code></pre>
-			<p>Cet événement est déclenché après que le popup soit complètement masqué de l'écran, ce qui signifie que toutes les animations associées soient terminées.</p>
+			
 		</dd>
 
 	</dl>
 	    
 	</form>
 	</div><!--/content-primary -->
+            
+    	<div class="content-secondary">
 
-				<div class="content-secondary">
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
 
-					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+				<h3>Aussi dans cette rubrique</h3>
 
-							<h3>Aussi dans cette rubrique</h3>
-
-							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
 
 								<li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
 								<li><a href="../page-anatomy.html">Anatomie de la page</a></li>
@@ -92,10 +69,10 @@ $( ".selector" ).bind({
 								<li><a href="../multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
 								<li><a href="../page-titles.html">Titres des pages</a></li>
 								<li><a href="../page-links.html">Liaison de pages</a></li>
-								<li><a href="../page-transitions.html" data-ajax="false">Transitions de page</a></li>
+								<li><a href="../page-transitions.html">Transitions de page</a></li>
 								<li><a href="../loader.html">Widget de chargement de page</a></li>
-								<li><a href="../dialog/index.html">Boîtes de dialogue</a></li>
-								<li data-theme="a"><a href="index.html">Popups</a></li>
+								<li data-theme="a"><a href="index.html">Boîtes de dialogue</a></li>
+								<li><a href="../popup/index.html">Popups</a></li>
 								<li><a href="../page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
 								<li><a href="../page-navmodel.html">Ajax, hashes &amp; historique</a></li>
 								<li><a href="../page-dynamic.html">Injection dynamique des pages</a></li>
@@ -103,10 +80,9 @@ $( ".selector" ).bind({
 								<li><a href="../phonegap.html">Application PhoneGap</a></li>
 								<li><a href="../touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
 								<li><a href="../pages-themes.html">Thématisation des pages</a></li>
-
-							</ul>
-					</div>
-				</div>
+				</ul>
+		</div>
+	</div>		
 
 </div><!-- /content -->
 
