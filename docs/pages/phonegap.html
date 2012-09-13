@@ -56,6 +56,11 @@
     $.mobile.allowCrossDomainPages = true;
 });</code></pre>
 
+			<h2>$.mobile.phonegapNavigationEnabled</h2>
+
+			<p>Sur Android, PhoneGap a un helper spécial de navigation mis en place pour contourner des problèmes avec Honeycomb, <code>navigator.app.backHistory</code> qui remplace <code>window.history.back</code>. Pour la plupart des applications jQuery Mobile ce n'est pas nécessaire d'avoir des connaissances ou de faire usage de cette helper car que l'objet historique de vanilla fonctionne très bien pour le hashchange et remplace les altérations d'état de l'historique du navigateur intégré. <b>Si et seulement si</b> votre application PhoneGap utilise un rafraîchissement de page complet (par exemple, pour la validation de formulaire) et que vous souhaitez soutenir la plateforme Android, veuillez vous assurez de mettre <code>$.mobile.phonegapNavigationEnabled = true</code> soit dans l'appel de <code>mobileinit</code> ou n'importe où avant l'interaction de l'utilisateur sur la page. Celui-ci remplace les appels à <code>window.history.back</code> par des appels à la méthode du helper de PhoneGap atténuant ainsi les problèmes de navigation de l'historique liés à l'actualisation de la page entière sur les appareils Android.</p>
+
+
 			<h2>Liste blanche de PhoneGap</h2>
 
 			<p>PhoneGap 1.0 a introduit l'idée de liste blanche de serveurs où son webview interne est autorisé pour faire des requêtes inter-domaine. Vous pouvez trouvez plus d'infos sur le <a href="http://wiki.phonegap.com/w/page/40796976/Install%20the%20latest%20%28trunk%29%20source%20of%20iOS%20PhoneGap">wiki de PhoneGap</a>.</p>

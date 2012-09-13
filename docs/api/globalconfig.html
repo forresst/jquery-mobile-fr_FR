@@ -148,6 +148,9 @@ $(document).bind("mobileinit", function(){
 	<dt><code>pageLoadErrorMessageTheme</code> <em>string</em>, par défaut : "e"</dt>
 	<dd>Définit le thème utilisé pour les boîtes de message d'erreur.</dd>
 
+	<dt><code>phonegapNavigationEnabled</code> <em>boolean</em>, par défaut : false</dt>
+	<dd>Remplacez les appels vers <code>window.history.back</code> avec le helper de navigation de PhoneGap où il est disponible. Ceci corrige des problèmes de navigation sur le rafraîchissement de la page dans les applications PhoneGap Android en utilisant jQuery Mobile.</dd>
+
 	<dt><code>pushStateEnabled</code> <em>boolean</em>, par défaut : true</dt>
 	<dd>Amélioration pour utiliser <code>history.replaceState</code> dans les navigateurs pris en charge, pour convertir les URL basées sur le hash Ajax dans le chemin du document complet. Notez que nous <a href="../pages/page-navmodel.html">recommandons</a> la désactivation de cette fonction si l'Ajax est désactivé ou si l'utilisation intensive des liens externes est utilisée.</dd>
 
