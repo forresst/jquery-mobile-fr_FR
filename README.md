@@ -27,19 +27,19 @@ Ceci est le dépôt principal pour le projet jQuery Mobile. Depuis le [site offi
 
 > Un système d'interface utilisateur unifié basé sur HTML5 qui fonctionne parfaitement sur toutes les plateformes des appareils mobiles les plus populaires et qui est construit sur les fondations solides de jQuery et jQuery UI. Axée sur un code léger, construit sur l'amélioration progressive avec une conception flexible et facilement personnalisable.
 
-jQuery Mobile 1.2 beta (1.2.0-beta.1) fonctionne avec les versions jQuery de la 1.6.4 à la 1.8.1. Vous pouvez trouver plus d'informations sur la façon dont la bibliothèque fonctionne et ce qu'elle est capable de faire par la lecture de la [documentation](http://mobile.jquery-fr.com/).
+jQuery Mobile 1.2 beta (1.2.0-rc.1) fonctionne avec les versions jQuery de la 1.6.4 à la 1.8.1. Vous pouvez trouver plus d'informations sur la façon dont la bibliothèque fonctionne et ce qu'elle est capable de faire par la lecture de la [documentation](http://mobile.jquery-fr.com/).
 
 ## Problèmes
 
 Lorsqu'un [problème est sousmis sur github](https://github.com/jquery/jquery-mobile/issues/new) merci d'inclure ce qui suit :
 
 1. Description du problème
-2. Exemple de page utilisant notre [modèle jsbin](http://jsbin.com/owipah/edit) qui utilisent la dernière version
+2. Page de test utilisant notre [modèle jsbin](http://jsbin.com/owipah/edit) qui utilisent la dernière version
 3. Les étapes pour le reproduire
 4. Le résultat attendu
 5. Le résultat actuel
-6. Version de jQuery Mobile
-7. Navigateurs/plateformes testés
+6. La version de jQuery Mobile et PhoneGap le cas échéant
+7. Appareils/Navigateurs/plateformes testés
 
 En outre, dans l'intérêt de créer des problèmes plus lisibles, merci d'inclure des extraits de code à l'intérieur d'une triple boîte backtick appropriée pour l'extrait de code JavaScript/HTML/CSS sur lequel vous souhaitez discuter. Plus d'informations sont disponibles sur la [page d'introduction](http://github.github.com/github-flavored-markdown/) pour "github flavored markdown" (regardez Syntax Highlighting).
 
