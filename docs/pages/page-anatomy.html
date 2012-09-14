@@ -31,19 +31,19 @@
 			<h2>La structure d'une page mobile</h2> 
 
 			<p>Un site jQuery Mobile doit commencer par un "doctype" HTML5 pour profiter pleinement de toutes les fonctionnalités du framework. (Les anciens appareils possédant des navigateurs qui ne comprennent pas le HTML5 vont ignorer le 'doctype' et divers attributs personnalisés.) </p>
-			<p>Dans le "head", les références pour jQuery, jQuery Mobile et le CSS du thème mobile sont tous nécessaires pour démarrer les choses. jQuery Mobile 1.2 beta (1.2.0-beta.1) fonctionne avec les versions jQuery de la 1.6.4 à la 1.8.1. Nous recommandons un lien vers les fichiers hébergés sur le CDN de jQuery pour de meilleures performances : </p>
+			<p>Dans le "head", les références pour jQuery, jQuery Mobile et le CSS du thème mobile sont tous nécessaires pour démarrer les choses. jQuery Mobile 1.2 beta (1.2.0-rc.1) fonctionne avec les versions jQuery de la 1.6.4 à la 1.8.1. Nous recommandons un lien vers les fichiers hébergés sur le CDN de jQuery pour de meilleures performances : </p>
 
 <pre><code>
 <strong>&lt;!DOCTYPE html&gt; </strong>
 &lt;html&gt; 
 &lt;head&gt; 
-	&lt;title&gt;Titre de la Page&lt;/title&gt; 
+	&lt;title&gt;Titre de la page&lt;/title&gt; 
 	
 	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt; 
 
-	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-beta.1/jquery.mobile-1.2.0-beta.1.min.css" /&gt;
+	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-rc.1/jquery.mobile-1.2.0-rc.1.min.css" /&gt;
 	&lt;script src="http://code.jquery.com/jquery-1.8.1.min.js"&gt;&lt;/script&gt;
-	&lt;script src="http://code.jquery.com/mobile/1.2.0-beta.1/jquery.mobile-1.2.0-beta.1.min.js"&gt;&lt;/script&gt;
+	&lt;script src="http://code.jquery.com/mobile/1.2.0-rc.1/jquery.mobile-1.2.0-rc.1.min.js"&gt;&lt;/script&gt;
 &lt;/head&gt; 
 
 &lt;body&gt; 
@@ -89,20 +89,20 @@
 &lt;!DOCTYPE html&gt; 
 &lt;html&gt; 
 &lt;head&gt; 
-	&lt;title&gt;Titre de la Page&lt;/title&gt; 
+	&lt;title&gt;Titre de la page&lt;/title&gt; 
 	
 	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt; 
 
-	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-beta.1/jquery.mobile-1.2.0-beta.1.min.css" /&gt;
+	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-rc.1/jquery.mobile-1.2.0-rc.1.min.css" /&gt;
 	&lt;script src="http://code.jquery.com/jquery-1.8.1.min.js"&gt;&lt;/script&gt;
-	&lt;script src="http://code.jquery.com/mobile/1.2.0-beta.1/jquery.mobile-1.2.0-beta.1.min.js"&gt;&lt;/script&gt;
+	&lt;script src="http://code.jquery.com/mobile/1.2.0-rc.1/jquery.mobile-1.2.0-rc.1.min.js"&gt;&lt;/script&gt;
 &lt;/head&gt; 
 &lt;body&gt; 
 
 &lt;div data-role="page"&gt;
 
 	&lt;div data-role="header"&gt;
-		&lt;h1&gt;Titre de la Page&lt;/h1&gt;
+		&lt;h1&gt;Titre de la page&lt;/h1&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
 	&lt;div data-role="content"&gt;	
@@ -110,7 +110,7 @@
 	&lt;/div&gt;&lt;!-- /content --&gt;
 
 	&lt;div data-role="footer"&gt;
-		&lt;h4&gt;Pied de Page&lt;/h4&gt;
+		&lt;h4&gt;Pied de page&lt;/h4&gt;
 	&lt;/div&gt;&lt;!-- /footer --&gt;
 &lt;/div&gt;&lt;!-- /page --&gt;
 
@@ -125,7 +125,7 @@
 		
 			<p>Un unique document HTML peut contenir plusieurs "pages" qui sont chargées ensemble par l'empilage de divs avec le <code> data-role</code> de <code>"page"</code>. Chaque bloc de "page" a besoin d'un ID unique (<code>id="foo"</code>) qui sera utilisé pour relier en interne les "pages" entre elles (<code>href="# foo"</code>). Quand un lien est cliqué, le framework va chercher une "page" interne avec l'ID et la fait apparaitre via une transition.</p> 
 						
-			<p>Voici un exemple de deux "pages" du site construites avec deux divs jQuery Mobile navigables en liant un ID placé sur l'enveloppe de chaque page. Notez que les ids sur les conteneurs de page sont uniquement nécessaires pour supporter les liens internes des pages, et ils sont facultatifs si chaque page est un document HTML distinct. Voici à quoi correspond  deux pages à l'intérieur de l'élément  <code>body</code>.</p>  
+			<p>Voici un exemple de deux "pages" du site construites avec deux divs jQuery Mobile navigables en liant un ID placé sur l'enveloppe de chaque page. Notez que les ID sur les conteneurs de page sont uniquement nécessaires pour supporter les liens internes des pages, et ils sont facultatifs si chaque page est un document HTML distinct. Voici à quoi correspond  deux pages à l'intérieur de l'élément  <code>body</code>.</p>  
 
 <pre><code>
 &lt;body&gt; 

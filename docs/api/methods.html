@@ -29,7 +29,7 @@
 
 
 		<dl>
-			<dt><code>$.mobile.changePage</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.changePage()</code> (<em>method</em>)</dt>
 			<dd>Changer par programmation la transition d'une page à une autre. Cette méthode est utilisée en interne pour le chargement et la transition d'une page qui survient losrqu'on clique sur un lien ou lorsqu'on soumet un formulaire, à condition que ces fonctionnalités soient activées.</dd>
 
 			<dd>
@@ -103,7 +103,7 @@ $.mobile.changePage( "../alerts/confirm.html", {
 			</dd>
 
 
-			<dt><code>$.mobile.loadPage</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.loadPage()</code> (<em>method</em>)</dt>
 			<dd>Charge une page externe, améliore son contenu et l'insére dans le DOM. Cette méthode est appelée en interne par la fonction changePage() lorsque son premier argument est une URL. Cette fonction n'affecte pas la page active en cours, cela peut être utilisé pour charger les pages en arrière plan. La fonction retourne un objet "deferred promise" qui sera résolu (resolve) après l'amélioration et l'insertion de la page dans le document.</dd>
 
 			<dd>
@@ -185,7 +185,7 @@ $.mobile.loadPage( "searchresults.php", {
 				</dl>
 			</dd>
 
-			<dt><code>$.mobile.loading</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.loading()</code> (<em>method</em>)</dt>
 			<dd>Affiche ou masque le message de chargement de page, qui est configurable via les options du prototype <code>$.mobile.loader</code> qui sont décrites dans les <a href="../pages/loader.html">docs du widget</a> ou peuvent être contrôlées via l'objet param.</dd>
 			<dd>
 				<dl>
@@ -210,7 +210,7 @@ $.mobile.loading( 'show', { theme: "b", text: "foo", textonly: true });
 
 			</dd>
 
-			<dt><code>$.mobile.showPageLoadingMsg</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.showPageLoadingMsg()</code> (<em>method</em>)</dt>
 			<dd>
         <p class="ui-bar-e"> Déprécié en 1.2 - utilisez <code>$.mobile.loading( 'show' )</code> à la place, voir les exemples ci-dessus</p>
         Voir le message de chargement de page, qui est configurable via $.mobile.loadingMessage.</dd>
@@ -239,7 +239,7 @@ $.mobile.showPageLoadingMsg("b", "C'est seulement un test", true);
 
 
 
-			<dt><code>$.mobile.hidePageLoadingMsg</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.hidePageLoadingMsg()</code> (<em>method</em>)</dt>
 			<dd>
         <p class="ui-bar-e"> Déprécié en 1.2 - utilisez <code>$.mobile.loading( 'hide' )</code> à la place, voir les exemples ci-dessus</p>
         Masque le message de chargement de page, qui est configurable via $.mobile.loadingMessage.
@@ -255,7 +255,7 @@ $.mobile.hidePageLoadingMsg();
 
 			</dd>
 
-			<dt><code>$.mobile.fixedToolbars.show</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.fixedToolbars.show()</code> (<em>method</em>)</dt>
 			<dd>
 			<p class="ui-bar-e"> Déprécié en  1.1 <code> </code></p> 
 			Méthode utile pour afficher l'entête et/ou le bas de page fixes de la page active en cours au sein de la fenêtre. Notez que les entêtes/pieds de page fixes ne sont jamais vraiment caché. Le basculement de l'état afficher/masquer de la barre d'outils est vraiment basculer s'ils sont  oui ou non alignés dans le contenu de la page, ou affichés dans la fenêtre comme s'ils étaient fixes.</dd>
@@ -278,7 +278,7 @@ $.mobile.fixedToolbars.show(true);
 
 			</dd>
 
-			<dt><code>$.mobile.fixedToolbars.hide</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.fixedToolbars.hide()</code> (<em>method</em>)</dt>
 			<dd><p class="ui-bar-e"> Déprécié en  1.1 <code> </code></p> 
 			Méthode utile pour masquer l'entête et/ou le bas de la page fixes de la page en cours active.</dd>
 			<dd>
@@ -300,7 +300,7 @@ $.mobile.fixedToolbars.hide(true);
 
 			</dd>
 
-			<dt><code>$.mobile.path.parseUrl</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.parseUrl()</code> (<em>method</em>)</dt>
 			<dd>Une méthode utile pour analyser une URL et ses variantes relatives à un objet qui rend l'accès à des composants de l'URL facilement. Lors de l'analyse des variantes relatives, l'objet résultant contiendra les valeurs vide pour les composants manquants (comme le protocole, l'hôte, etc...). Aussi, lors de l'analyse des URL qui n'ont pas authority, tels que : urls, la propriété pathname de l'objet contiendra les données après les deux points du protocol/scheme.</dd>
 
 			<dd>
@@ -384,7 +384,7 @@ var obj = $.mobile.path.parseUrl("http://jblas:password@mycompany.com:8080/mail/
 			</dd>
 
 
-			<dt><code>$.mobile.path.makePathAbsolute</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.makePathAbsolute()</code> (<em>method</em>)</dt>
 			<dd>Méthode utilisée pour convertir le chemin relatif  d'un fichier ou d'un répertoire en absolu.</dd>
 			<dd>
 				<dl>
@@ -411,7 +411,7 @@ var absPath = $.mobile.path.makePathAbsolute("../../foo/file.html", "/a/b/c/bar.
 			</dd>
 
 
-			<dt><code>$.mobile.path.makeUrlAbsolute</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.makeUrlAbsolute()</code> (<em>method</em>)</dt>
 			<dd>Méthode utilisée pour convertir une URL relative en une URL absolue.</dd>
 			<dd>
 
@@ -449,7 +449,7 @@ var absUrl = $.mobile.path.makeUrlAbsolute("#bar", "http://foo.com/a/b/c/test.ht
 			</dd>
 
 
-			<dt><code>$.mobile.path.isSameDomain</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.isSameDomain()</code> (<em>method</em>)</dt>
 			<dd>Méthode utilisé pour comparer le domain de 2 URLs.</dd>
 			<dd>
 
@@ -484,7 +484,7 @@ var same = $.mobile.path.isSameDomain("http://foo.com/a/file.html", "http://bar.
 			</dd>
 
 
-			<dt><code>$.mobile.path.isRelativeUrl</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.isRelativeUrl()</code> (<em>method</em>)</dt>
 			<dd>Méthode utilisée pour déterminer si une URL est une variante relative.</dd>
 			<dd>
 
@@ -525,7 +525,7 @@ var isRel = $.mobile.path.isRelativeUrl("#foo");
 			</dd>
 
 
-			<dt><code>$.mobile.path.isAbsoluteUrl</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.isAbsoluteUrl()</code> (<em>method</em>)</dt>
 			<dd>Méthode utiliser pour déterminer si une URL est absolue.</dd>
 			<dd>
 
@@ -565,7 +565,7 @@ var isAbs = $.mobile.path.isAbsoluteUrl("#foo");
 
 			</dd>
 
-			<dt><code>$.mobile.path.get</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.path.get()</code> (<em>method</em>)</dt>
 			<dd>Méthode utilisé pour déterminer la portion du répertoire d'une URL. Si l'URL n'a pas de slash, le dernier composant de l'URL est considéré comme un fichier.</dd>
 			<dd>
 
@@ -619,7 +619,7 @@ var dirName = $.mobile.path.isAbsoluteUrl("#foo");
 
 
 
-			<dt><code>$.mobile.silentScroll</code> (<em>method</em>)</dt>
+			<dt><code>$.mobile.silentScroll()</code> (<em>method</em>)</dt>
 			<dd>Faites défiler jusqu'à une position particulière Y, sans déclencher l'écouteurs d'événement de scroll.</dd>
 			<dd>
 				<dl>
