@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 7b0589947c368ffd1f77c5de57de5b651c9bf5a7 <> Date: Fri Sep 14 00:54:28 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: e8f74795c5f6eb8c2503649af8e6163b1545eb27 <> Date: Sat Sep 15 14:12:35 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -29,7 +29,7 @@
 	$.mobile = $.extend( {}, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.2.0-beta.1",
+		version: "1.2.0-rc.1",
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -2134,6 +2134,10 @@ function cssPointerEventsTest() {
 	return !!supports;
 }
 
+function boundingRect() {
+	var div = document.createElement( "div" );
+	return typeof div.getBoundingClientRect !== "undefined";
+}
 
 // non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
 // allows for inclusion of IE 6+, including Windows Mobile 7
@@ -2161,7 +2165,8 @@ $.extend( $.support, {
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
 	scrollTop: ( "pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[ 0 ] ) && !webos && !operamini,
 	dynamicBaseTag: baseTagTest(),
-	cssPointerEvents: cssPointerEventsTest()
+	cssPointerEvents: cssPointerEventsTest(),
+	boundingRect: boundingRect()
 });
 
 fakeBody.remove();
@@ -2184,8 +2189,9 @@ var nokiaLTE7_3 = (function() {
 
 // Support conditions that must be met in order to proceed
 // default enhanced qualifications are media query support OR IE 7+
+
 $.mobile.gradeA = function() {
-	return $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7;
+	return ( $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
 };
 
 $.mobile.ajaxBlacklist =
