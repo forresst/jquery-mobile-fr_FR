@@ -56,7 +56,22 @@ $( ".selector" ).slider({
 			</code></pre>
 		</dd>
 		
+		<dt><code>slidestart</code> déclenché quand il y a une interaction initiale avec le curseur. Inclure les drags et taps.</dt>
+		<dd>
 
+			<pre><code>
+$( ".selector" ).on( 'slidestart', function( event ) { ... });
+			</code></pre>
+		</dd>
+
+		<dt><code>slidestop</code> déclenché à la fin d'une interaction avec le curseur. Inclure les drags et taps.</dt>
+		<dd>
+
+			<pre><code>
+$( ".selector" ).on( 'slidestop', function( event ) { ... });
+			</code></pre>
+		</dd>
+        
 	</dl>
 	    
 	</form>
