@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: e8f74795c5f6eb8c2503649af8e6163b1545eb27 <> Date: Sat Sep 15 14:12:35 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 34f46f1fc64689df1ebbe65510d3ead4717affd7 <> Date: Tue Sep 18 00:05:46 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -1776,7 +1776,9 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 }
 .ui-navbar { max-width: 100%; }
 .ui-navbar.ui-mini { margin: 0; }
-.ui-navbar ul { list-style:none; margin: 0; padding: 0; position: relative; display: block; border: 0; max-width: 100%; overflow: visible; }
+.ui-navbar ul:before, .ui-navbar ul:after { content: " "; display: table; }
+.ui-navbar ul:after { clear: both; }
+.ui-navbar ul { list-style:none; margin: 0; padding: 0; position: relative; display: block; border: 0; max-width: 100%; overflow: visible; zoom: 1; }
 .ui-navbar li .ui-btn { display: block; text-align: center; margin: 0 -1px 0 0; border-right-width: 0; }
 .ui-navbar li .ui-btn-icon-right .ui-icon { right: 6px; }
 /* add border if not in header/footer (full width) */
@@ -1988,7 +1990,7 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	position: absolute !important; 	/* See line #553 of popup.js */
 }
 .ui-popup-screen {
-	background-image: url(data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==); /* Necessary to set some form of background to ensure element is clickable in IE6/7. While legacy IE won’t understand the data-URI’d image, it ensures no additional requests occur in all other browsers with little overhead. */
+	background-image: url(data:image/gif;base64,R0lGODlhAQABAID/AMDAwAAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==); /* Necessary to set some form of background to ensure element is clickable in IE6/7. While legacy IE won't understand the data-URI'd image, it ensures no additional requests occur in all other browsers with little overhead. */
 	top: 0px;
 	left: 0px;
 	right: 0px;
