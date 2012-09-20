@@ -62,7 +62,8 @@
 
 
 			<h2>Fermeture des boîtes de dialogue</h2>
-			<p>Quand un lien est cliqué dans une boîte de dialogue, le framework fermera automatiquement la boîte de dialogue et la transition vers la page demandée, comme si la boîte de dialogue était une page normale. Pour créer un bouton "Annuler" dans une boîte de dialogue, faites un lien seulement vers la page qui a déclenché la boîte de dialogue pour l'ouvrir et ajouter l'attribut <code>data-rel="back"</code> à votre lien. Ce schéma de liaison à la page précédente est également utilisable  tel quel dans des dispositifs non-JS.</p>
+			<p>Quand un lien est cliqué dans une boîte de dialogue, le framework fermera automatiquement la boîte de dialogue et la transition vers la page demandée, comme si la boîte de dialogue était une page normale. Néanmoins, les boîtes de dialogue peuvent également être enchaînées, comme expliqué ci-dessous dans <strong>"Chainage des boîtes de dialogue"</strong>. De façon similaire, un lien qui ouvre une fenêtre laissera également la boîte de dialogue en place.</p>
+			<p>Pour créer un bouton "Annuler" dans une boîte de dialogue, faites un lien seulement vers la page qui a déclenché la boîte de dialogue pour l'ouvrir et ajouter l'attribut <code>data-rel="back"</code> à votre lien. Ce schéma de liaison à la page précédente est également utilisable  tel quel dans des dispositifs non-JS.</p>
 			<p>Pour les liens générés par JavaScript, vous pouvez simplement définir l'attribut href à "#" et utilisez l'attribut <code>data-rel="back"</code>. Vous pouvez aussi appeler la méthode <code>close()</code> de la boîte de dialogue pour fermer par programmation les boîtes de dialogue, par exemple : <code>$('.ui-dialog').dialog('close')</code>. </p>
 
 			<h3>Paramètrage du texte du bouton de fermeture</h3>

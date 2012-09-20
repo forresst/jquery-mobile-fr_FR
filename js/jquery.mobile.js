@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 34f46f1fc64689df1ebbe65510d3ead4717affd7 <> Date: Tue Sep 18 00:05:46 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: d6dfa4c2ab425414daa27abc2f5e774f4704bf78 <> Date: Thu Sep 20 06:35:54 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -9085,7 +9085,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 			if ( ! ( $.mobile.hashListeningEnabled &&
 				$.mobile.path.isHashValid( location.hash ) &&
 				( $( hashPage ).is( ':jqmData(role="page")' ) ||
-					$.mobile.path.isPath( hash ) ) ) ) {
+					$.mobile.path.isPath( hash ) ||
+					hash === $.mobile.dialogHashKey ) ) ) {
 
 				// Store the initial destination
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
