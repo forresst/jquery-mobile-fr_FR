@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: d6dfa4c2ab425414daa27abc2f5e774f4704bf78 <> Date: Thu Sep 20 06:35:54 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: aa39ca323fbfe1daa20f4700fda9dc2701d1a0ee <> Date: Sun Sep 23 19:38:22 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -29,7 +29,7 @@
 	$.mobile = $.extend( {}, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.2.0-rc.1",
+		version: "1.2.0-rc.2",
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -6527,7 +6527,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			// We need to adjust the history option to be false if there's no AJAX nav.
 			// We can't do it in the option declarations because those are run before
 			// it is determined whether there shall be AJAX nav.
-			this.options.history = this.options.history && $.mobile.ajaxEnabled; 
+			this.options.history = this.options.history && $.mobile.ajaxEnabled && $.mobile.hashListeningEnabled;
 
 			if ( thisPage.length === 0 ) {
 				thisPage = $( "body" );
@@ -7076,7 +7076,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
-			if( !( opts.history && $.mobile.hashListeningEnabled ) ) {
+			if( !( opts.history ) ) {
 				self._open( options );
 				self._bindContainerClose();
 
@@ -8125,7 +8125,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			}
 		}).bind( "mouseup", function() {
 			if ( self.options.preventFocusZoom ) {
-				$.mobile.zoom.enable( true );
+				setTimeout(function() {
+					$.mobile.zoom.enable( true );
+				}, 0);
 			}
 		});
 	},
