@@ -27,7 +27,7 @@ Ceci est le dépôt principal pour le projet jQuery Mobile. Depuis le [site offi
 
 > Un système d'interface utilisateur unifié basé sur HTML5 qui fonctionne parfaitement sur toutes les plateformes des appareils mobiles les plus populaires et qui est construit sur les fondations solides de jQuery et jQuery UI. Axée sur un code léger, construit sur l'amélioration progressive avec une conception flexible et facilement personnalisable.
 
-jQuery Mobile 1.2 RC1 (1.2.0-rc.1) fonctionne avec les versions jQuery de la 1.6.4 à la 1.8.1. Vous pouvez trouver plus d'informations sur la façon dont la bibliothèque fonctionne et ce qu'elle est capable de faire par la lecture de la [documentation](http://mobile.jquery-fr.com/).
+jQuery Mobile 1.2 RC2 (1.2.0-rc.2) fonctionne avec les versions jQuery de la 1.6.4 à la 1.8.1. Vous pouvez trouver plus d'informations sur la façon dont la bibliothèque fonctionne et ce qu'elle est capable de faire par la lecture de la [documentation](http://mobile.jquery-fr.com/).
 
 ## Problèmes & Pull Requests
 
