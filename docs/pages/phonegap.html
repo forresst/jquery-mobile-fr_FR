@@ -26,7 +26,7 @@
 		<div class="content-primary">
 
 
-			<h2>Construction d'applications PhoneGap avec jQuery Mobile</h2>
+			<h2>Construction d'applications PhoneGap (Cordova) avec jQuery Mobile</h2>
 
 			<p><a href="http://phonegap.com/" rel="external">PhoneGap</a> est une plateforme d'application HTML5 qui permet aux développeurs de concevoir des applications natives avec les technologies web et d'obtenir un accès aux API et aux app stores. Les applications sont construites comme des pages HTML normales et envellopées pour fonctionner comme une application native ou dans un UIWebView ou WebView (un navigateur sans chrome, dénommé ci-après comme un WebView). Depuis PhoneGap est souvent utilisé en conjonction avec jQuery Mobile, nous avons voulu offrir quelques conseils et recommandations pour vous aider à démarrer. </p>
 
@@ -67,21 +67,22 @@
 
 			<p>Cependant, toutes les plateformes ne prennent pas en charge cette fonctionnalité de liste blanche donc veuillez consulter pour plus de détails la documentation PhoneGap. Les anciennes versions de PhoneGap par défaut avant la 1.0 permettaient les requêtes inter-domaine à un serveur.</p>
 
-			<h2>Toujours des problèmes ?</h2>
+			<h2>Plus de trucs et astuces</h2>
 
 			<p>Voici quelques conseils supplémentaires qui ne sont pas spécifiquement liés à PhoneGap, mais qui sont bonnes à savoir :</p>
 
 			<p><strong>Nous recommandons de désactiver la <a href="../api/globalconfig.html">fonctionnalité  pushState</a> pour les applications installées </strong> parce qu'il y a des cas où l'avantage de cette fonction peut provoquer un comportement inattendu de navigation et puisque les URL ne sont pas visibles dans un webview, c'est pas la peine garder ceci actif dans ces situations. </p>
 
 			<p><strong>Android applique un timeout lors du chargement des URL dans un webview</strong> qui peut être trop court pour vos besoins. Vous pouvez modifier ce délai en éditant une classe Java générée par le plugin Eclipse pour Android :</p>
-
 			<code>super.setIntegerProperty("loadUrlTimeoutValue", 60000);</code>
 
-			<p><strong>Evitez les underscores dans les fichiers et les répertoires</strong> car Phonegap risque de ne pas charger les fichiers contenus dans Android. C'est un <a href="http://code.google.com/p/android/issues/detail?id=5343" data-ajax="false">problème</a>.</p>
+			<p><strong>Evitez les underscores dans les fichiers et les répertoires</strong> car Phonegap risque de ne pas charger les fichiers contenus dans Android. C'est un <a href="http://code.google.com/p/android/issues/detail?id=5343" data-ajax="false">problème</a> connu.</p>
+			
+			<p><strong>Essayez <code>animation-fill-mode</code> pour réduire les transitions clignotantes</strong> mais méfiez vous car nous avons découvert que certains appareils, comme le Nexus 7, exécutent très lentement les animations lorsque cette propriété CSS est en cours. Nous vous recommandons de cibler soigneusement et de tester à fond pour s'assurer que cela n'a pas d'impact sur la flexibilité. Pour voir comment ajouter ceci à votre CSS, voir <a href="https://github.com/jquery/jquery-mobile/commit/fbbcf9e16ed2978547f1460c66f533157714371d" data-ajax="false">ce commit</a>.</p>
 			
 			<h2>Construction d'applications UIWebView avec jQuery Mobile</h2>
 
-			<p>Il est important de noter lors de la création d'une personnalisation, non phonegap, le contrôle de <code>UIWebView</code> pour une application iOS, vous devez utiliser la méthode <code>loadRequest</code> de préférence à <code>loadData</code> pour supporter le bouton retour. Le bout de code suivant est un exemple de chargement de  <code>default.html</code> dans votre contrôleur de vue.</p>
+			<p>Il est important de noter lors de la création d'une personnalisation, non-Phonegap, le contrôle de <code>UIWebView</code> pour une application iOS, vous devez utiliser la méthode <code>loadRequest</code> de préférence à <code>loadData</code> pour supporter le bouton retour. Le bout de code suivant est un exemple de chargement de  <code>default.html</code> dans votre contrôleur de vue.</p>
 
 <pre><code>- (void)viewDidLoad
 {
@@ -126,7 +127,8 @@
 			</div><!-- /content -->
 
 			<div data-role="footer" class="footer-docs" data-theme="c">
-					<p>© 2012 jQuery Fondation et les autres contributeurs</p>
+					<p class="jqm-version"></p>
+				<p>© 2012 jQuery Fondation et les autres contributeurs</p>
 			</div>
 
 			</div><!-- /page -->

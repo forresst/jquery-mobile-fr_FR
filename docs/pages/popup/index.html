@@ -166,7 +166,7 @@ $( "#myPopupDiv" ).popup( "open" )
 </code></pre>
 
 		<h2>Fermeture des popups</h2>
-		<p>Les popups peuvent être fermés soit en cliquant en dehors du widget popup, soit en pressant la touche <code>Esc</code>. Les popups peuvent aussi être fermés via la méthode <code>close</code> :
+		<p>Les popups peuvent être fermés soit en cliquant en dehors du widget popup, soit en pressant la touche <code>Esc</code>. Les popups peuvent aussi être fermés via la méthode <code>close</code> :</p>
 			
 <pre><code>
 $( "#myPopupDiv" ).popup( "close" )
@@ -218,7 +218,7 @@ $( "#myPopupDiv" ).popup( "close" )
 		<h2>Options de positionnement</h2>
 		<p>Par défaut, les popups s'ouvrent centrées verticalement et horizontalement sur ​​la chose que vous avez cliqué (l'origine) ce qui est bien pour les popups utilisées sous forme d'infobulles ou de menu. Le framework applique également quelques règles de base sur la détection de collision afin d'assurer que la fenêtre contextuelle apparaisse sur l'écran, ainsi la position finale peut ne pas être toujours centrée sur l'origine.</p>
 		<p>Dans le cas d'une boîte de dialogue ou d'un l'album, la popup doit apparaître centrée dans la fenêtre à la place de l'origine, il faut donc ajouter l'attribut <code>data-position-to</code> au <strong>lien</strong> et spécifier la valeur <code>window</code>. </p>	
-		<p>Il est aussi possible de spécifier n'importe quel sélecteur valide comme valeur de <code>position-to</code> en plus de <code>origin</code> et <code>window</code>. Par exemple, vous pouvez définir <code>data-position-to="#monElement"</code> pour avoir une popup qui apparaisse sur l'élement avec l'id <code>monElement</code>.	
+		<p>Il est aussi possible de spécifier n'importe quel sélecteur valide comme valeur de <code>position-to</code> en plus de <code>origin</code> et <code>window</code>. Par exemple, vous pouvez définir <code>data-position-to="#monElement"</code> pour avoir une popup qui apparaisse sur l'élement avec l'id <code>monElement</code>.</p>	
 <pre id="codeSample"><code>
 &lt;a href="#positionWindow" data-rel="popup" <strong>data-position-to="window"</strong>&gt;
 
@@ -254,7 +254,7 @@ $( "#myPopupDiv" ).popup( "close" )
         
         <p>Notez également qu'une popup est actuellement toujours placée au centre de la fenêtre après un changement d'orientation ou d'un événement de redimensionnement de la fenêtre.</p>
 
-		<p>Regardez <a href="methods.html">les méthodes</a> pour plus d'informations sur le pramètrage du positionnement de la popup par programmation, en incluant l'option pour spécifier les <strong>coordonnées x et y</strong>.
+		<p>Regardez <a href="methods.html">les méthodes</a> pour plus d'informations sur le pramètrage du positionnement de la popup par programmation, en incluant l'option pour spécifier les <strong>coordonnées x et y</strong>.</p>
 
 		<h2>Paramétrage des transitions</h2>
 		<p>Par défaut, les popups n'ont pas de transition pour s'ouvrir aussi rapidement que possible. Pour définir la transition utilisée par la popup, ajoutez l'attribut <code>data-transition</code> au lien qui référence la popup. La version inversée de la transition sera utilisé lors de la fermeture de la popup.</p>
@@ -361,6 +361,7 @@ $( document ).on( "pageinit", function() {
 </div><!-- /content -->
 
 <div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
 		<p>© 2012 jQuery Fondation et les autres contributeurs</p>
 </div>
 

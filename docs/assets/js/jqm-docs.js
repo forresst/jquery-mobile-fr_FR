@@ -35,7 +35,8 @@ $(document).bind( 'pageinit', function() {
 		words = version.split( "-" ),
 		ver = words[0],
 		str = (words[1] || "Final"),
-		html = ver;
+		html = ver,
+		foothtml = "Version " + ver;
 
 	if( str.indexOf( "rc" ) == -1 ){
 		str = str.charAt( 0 ).toUpperCase() + str.slice( 1 );
@@ -45,9 +46,11 @@ $(document).bind( 'pageinit', function() {
 
 	if ( $.mobile.version && str ) {
 		html += " <b>" + str + "</b>";
+		foothtml += " " + str;
 	}
 
-	$( "p.jqm-version" ).html( html );
+	$( ".type-home .ui-content p.jqm-version" ).html( html );
+	$( ".footer-docs p.jqm-version" ).html( foothtml );
 });
 
 // Désactiver AJAX pour la navigation des fichiers locaux
