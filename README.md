@@ -27,11 +27,12 @@ Ceci est le dépôt principal pour le projet jQuery Mobile. Depuis le [site offi
 
 > Un système d'interface utilisateur unifié basé sur HTML5 qui fonctionne parfaitement sur toutes les plateformes des appareils mobiles les plus populaires et qui est construit sur les fondations solides de jQuery et jQuery UI. Axée sur un code léger, construit sur l'amélioration progressive avec une conception flexible et facilement personnalisable.
 
-jQuery Mobile 1.2 RC2 (1.2.0-rc.2) fonctionne avec les versions jQuery de la 1.6.4 à la 1.8.1. Vous pouvez trouver plus d'informations sur la façon dont la bibliothèque fonctionne et ce qu'elle est capable de faire par la lecture de la [documentation](http://mobile.jquery-fr.com/).
+jQuery Mobile 1.2 RC2 (1.2.0-rc.2) fonctionne avec les versions jQuery de la 1.6.4 à la 1.8.2. Vous pouvez trouver plus d'informations sur la façon dont la bibliothèque fonctionne et ce qu'elle est capable de faire par la lecture de la [documentation](http://mobile.jquery-fr.com/).
 
-## Problèmes & Pull Requests
+## Contribuez
 
-Veuillez lire le [Guide de contribution](https://github.com/jquery/jquery-mobile/blob/master/CONTRIBUTING.md) avant de soumettre des problèmes ou de faire un pull requests.
+Vous pouvez contribuer au projet en signalant les problèmes, en suggérant de nouvelles fonctionnalités ou en soumettant des pull requests.
+Veuillez lire notre [Guide de contribution](https://github.com/jquery/jquery-mobile/blob/master/CONTRIBUTING.md) avant de soumettre.
 
 
 ## Construction/Personnalisation
@@ -146,9 +147,9 @@ Vous pouvez limiter l'exécution à une page de test ou à un ensemble de pages 
 
     TEST_PATH=slider JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
-exécutera seulement les tests où les chemins contiennent `slider`, par exemple `tests/unit/slider/`. *NOTEZ* Que les tests de phantom exigent actuellement que le serveur Web soit en cours d'exécution pour accéder et exécuter les tests correctement en raison de la dépendance de PHP pour beaucoup d'entre eux. En plus, la suite de test est exécutée sur de nombreuses versions de jQuery en utilisant la variable d'environnement `JQUERY`. Par exemple, si vous voulez lancer la suite de tests à la fois sur les versions 1.6.4 et 1.7.1 actuellement prises en charge, la commande prendrait la forme suivante :
+exécutera seulement les tests où les chemins contiennent `slider`, par exemple `tests/unit/slider/`. *NOTEZ* Que les tests de phantom exigent actuellement que le serveur Web soit en cours d'exécution pour accéder et exécuter les tests correctement en raison de la dépendance de PHP pour beaucoup d'entre eux. En plus, la suite de test est exécutée sur de nombreuses versions de jQuery en utilisant la variable d'environnement `JQUERY`. Par exemple, si vous voulez lancer la suite de tests à la fois sur les versions 1.7.2 et 1.8.2 actuellement prises en charge, la commande prendrait la forme suivante :
 
-    JQUERY=1.6.4,1.7.1 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
+    JQUERY=1.7.2,1.8.2 JUNIT_OUTPUT=build/test-results/ ROOT_DOMAIN=$WEB_SERVER grunt test
 
 ### Rebasing
 
