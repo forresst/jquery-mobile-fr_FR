@@ -204,86 +204,86 @@
 
 <p>Parce que l'élément <code>label</code> sera associé à chaque zonde de sélection, nous recommandons l'enveloppement des sélections dans un élément <code>fieldset</code> qui a une <code>legend</code> qui agit comme un label combiné pour les saisies groupées.</p>
 
-<p>Enfin, on a besoin d'envelopper le <code>fieldset</code> dans un <code>div</code> avec l'attribut  <code> data-role="controlgroup"</code>, de sorte qu'il puisse être stylisé comme un groupe.</p>
+<p>Enfin, on a besoin d'ajouter l'attribut <code>data-role="controlgroup"</code> au <code>fieldset</code>, de sorte qu'il puisse être stylisé comme un groupe.</p>
 			
 <pre><code>	
 &lt;div data-role="fieldcontain"&gt;
-&lt;fieldset data-role="controlgroup"&gt;
-	&lt;legend&gt;Date de naissance :&lt;/legend&gt;
-
-    &lt;label for="select-choice-month"&gt;Month&lt;/label&gt;
-&lt;select name="select-choice-month" id="select-choice-month"&gt;
-	&lt;option&gt;Mois&lt;/option&gt;
-	&lt;option value="jan"&gt;Janvier&lt;/option&gt;
-	&lt;!-- etc. --&gt;
-&lt;/select&gt;
-
-	&lt;label for="select-choice-day"&gt;Day&lt;/label&gt;
-&lt;select name="select-choice-day" id="select-choice-day"&gt;
-	&lt;option&gt;Jour&lt;/option&gt;
-	&lt;option value="1"&gt;1&lt;/option&gt;
-	&lt;!-- etc. --&gt;
-&lt;/select&gt;
-
-&lt;label for="select-choice-year"&gt;Year&lt;/label&gt;
-&lt;select name="select-choice-year" id="select-choice-year"&gt;
-	&lt;option&gt;Année&lt;/option&gt;
-	&lt;option value="2011"&gt;2011&lt;/option&gt;
-	&lt;!-- etc. --&gt;
-&lt;/select&gt;
-&lt;/fieldset&gt;
+    &lt;fieldset data-role="controlgroup"&gt;
+        &lt;legend&gt;Date de naissance :&lt;/legend&gt;
+    
+        &lt;label for="select-choice-month"&gt;Mois&lt;/label&gt;
+        &lt;select name="select-choice-month" id="select-choice-month"&gt;
+            &lt;option&gt;Mois&lt;/option&gt;
+            &lt;option value="jan"&gt;Janvier&lt;/option&gt;
+            &lt;!-- etc. --&gt;
+        &lt;/select&gt;
+    
+        &lt;label for="select-choice-day"&gt;Jour&lt;/label&gt;
+        &lt;select name="select-choice-day" id="select-choice-day"&gt;
+            &lt;option&gt;Jour&lt;/option&gt;
+            &lt;option value="1"&gt;1&lt;/option&gt;
+            &lt;!-- etc. --&gt;
+        &lt;/select&gt;
+    
+        &lt;label for="select-choice-year"&gt;Année&lt;/label&gt;
+        &lt;select name="select-choice-year" id="select-choice-year"&gt;
+            &lt;option&gt;Année&lt;/option&gt;
+            &lt;option value="2011"&gt;2011&lt;/option&gt;
+            &lt;!-- etc. --&gt;
+        &lt;/select&gt;
+        
+    &lt;/fieldset&gt;
 &lt;/div&gt;
 </code></pre>
 
 	<div data-role="fieldcontain">
-	<fieldset data-role="controlgroup">
-		<legend>Date de naissance :</legend>
-		
-		<label for="select-choice-month">Mois</label>
-		<select name="select-choice-month" id="select-choice-month">
-			<option>Mois</option>
-			<option value="jan">Janvier</option>
-			<option value="dec">Décembre</option>
-			<option value="feb">Février</option>
-			<option value="mar">Mars</option>
-			<option value="apr">Avril</option>
-			<option value="may">Mai</option>
-			<option value="jun">Juin</option>
-			<option value="jul">Juillet</option>
-			<option value="aug">Août</option>
-			<option value="sep">Septembre</option>
-			<option value="oct">Octobre</option>
-			<option value="nov">Novembre</option>
-			<option value="dec">Décembre</option>
-		</select>
-
-		<label for="select-choice-day">Jour</label>
-		<select name="select-choice-day" id="select-choice-day">
-			<option>Jour</option>
-			<option value="1">1</option>
-			<option value="2">2</option>
-			<option value="3">3</option>
-			<option value="4">4</option>
-			<option value="5">5</option>
-			<option value="6">6</option>
-			<option value="7">7</option>
-		</select>
-
-		<label for="select-choice-year">Année</label>
-		<select name="select-choice-year" id="select-choice-year">
-			<option>Année</option>
-			<option value="2011">2011</option>
-			<option value="2010">2010</option>
-			<option value="2009">2009</option>
-			<option value="2008">2008</option>
-			<option value="2007">2007</option>
-			<option value="2006">2006</option>
-			<option value="2005">2005</option>
-			<option value="2004">2004</option>
-		</select>
-	</fieldset>
-
-</div>
+        <fieldset data-role="controlgroup">
+            <legend>Date de naissance :</legend>
+            
+            <label for="select-choice-month">Mois</label>
+            <select name="select-choice-month" id="select-choice-month">
+                <option>Mois</option>
+                <option value="jan">Janvier</option>
+                <option value="dec">Décembre</option>
+                <option value="feb">Février</option>
+                <option value="mar">Mars</option>
+                <option value="apr">Avril</option>
+                <option value="may">Mai</option>
+                <option value="jun">Juin</option>
+                <option value="jul">Juillet</option>
+                <option value="aug">Août</option>
+                <option value="sep">Septembre</option>
+                <option value="oct">Octobre</option>
+                <option value="nov">Novembre</option>
+                <option value="dec">Décembre</option>
+            </select>
+    
+            <label for="select-choice-day">Jour</label>
+            <select name="select-choice-day" id="select-choice-day">
+                <option>Jour</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+            </select>
+    
+            <label for="select-choice-year">Année</label>
+            <select name="select-choice-year" id="select-choice-year">
+                <option>Année</option>
+                <option value="2011">2011</option>
+                <option value="2010">2010</option>
+                <option value="2009">2009</option>
+                <option value="2008">2008</option>
+                <option value="2007">2007</option>
+                <option value="2006">2006</option>
+                <option value="2005">2005</option>
+                <option value="2004">2004</option>
+            </select>
+        </fieldset>
+	</div>
 
 <h2>Zones de sélection regroupées horizontalement</h2>
 <p>Les saisies avec sélection peuvent également être utilisées pour des ensembles groupés avec plus d'une sélection associée. Pour faire un ensemble de bouton horizontal, ajoutez <code> data-type="horizontal"</code> au fieldset. Notez que les boutons qui déclenchent les sélections seront redimensionner en fonction de la valeur de l'option actuellement sélectionnée. Notez que pour les navigateurs sans support pour <code>display: inline-block;</code> regroupera les sélections à la verticale, comme ci-dessus.</p>

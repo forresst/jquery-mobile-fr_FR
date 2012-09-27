@@ -83,7 +83,27 @@
 
 	<p>Alors que le label ne sera plus visible, il sera disponible pour les technologies d'assistance comme les lecteurs d'écran.</p>
 
+	<p>Comme les radio boutons et les cases à cocher utilisent le <code>label</code> pour afficher le texte du bouton, vous ne pouvez pas utiliser  <code>ui-hidden-accessible</code> dans ce cas. Cependant, la classe <code>ui-hide-label</code> peut être utilisée pour masquer l'élément légende :</p>
+    
+<pre><code>	
+&lt;div data-role="fieldcontain" class="ui-hide-label"&gt;
+    <strong>&lt;fieldset data-role="controlgroup"&gt;
+	   &lt;legend&gt;Acceptez les termes :&lt;/legend&gt;</strong>
+	   &lt;input type="checkbox" name="checkbox-2a" id="checkbox-2a" class="custom" /&gt;
+	   &lt;label for="checkbox-2a"&gt;J'accepte&lt;/label&gt;
+    <strong>&lt;/fieldset&gt;</strong>
+&lt;/div&gt;
+</code></pre>
 
+	<div data-role="fieldcontain" class="ui-hide-label">
+	 	<fieldset data-role="controlgroup">
+			<legend>Acceptez les termes :</legend>
+			<input type="checkbox" name="checkbox-2a" id="checkbox-2a" class="custom" />
+			<label for="checkbox-2a">J'accepte</label>
+	    </fieldset>
+	</div>
+
+    
 	<h2>Désactivation des éléments de formulaire</h2>
 	<p>Tous les widgets jQuery Mobile peuvent être désactivés dans le balisage en ajoutant l'attribut standard <code>disabled</code> à l'élément, comme vous le feriez avec des contrôles natifs. Chaque widget de formulaire a ainsi les méthodes standard <code>disable</code> et <code>enable</code> qui sont documentées avec chaque widget de formulaire. Voici quelques exemples de widgets désactivés : </p>
 

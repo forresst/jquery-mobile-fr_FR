@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
-	<title>Framework jQuery Mobile - Conteneurs statique, États</title> 
+	<title>Framework jQuery Mobile - Thèmes</title> 
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" /> 
 	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
@@ -44,7 +44,13 @@
 
 		<h2>Correspondance de nuancier de thème par défaut pour les composants</h2>
 
-		<p>Si aucune lettre de nuancier de thème est défini pour tous les composants, le framework utilise le nuancier "a" pour les entêtes et les pieds de page et le "c" pour le contenu de la page pour optimiser le contraste entre les deux. Tous les éléments héritent du nuancier de thème de leur conteneur parent. Une exception à cette règle est le séparateur de liste dans les listes qui est toujours par défaut à "b" (bleu dans le thème par défaut). Notez qu'il y a aussi le nuancier nommé "active" (bleu vif dans le thème par défaut) qui est utilisé pour indiquer un élément sélectionné actif. Voir <strong>l'état global "actif"</strong> plus loin dans cette page pour plus d'informations sur le nuancier <strong>active</strong>.</p>
+		<p>Si aucune lettre de nuancier de thème est défini pour tous, le framework utilise le nuancier "a"  (noir dans le thème par défaut)  pour les entêtes et les pieds de page et le "c" (gris clair dans le thème par défaut) pour le contenu de la page pour optimiser le contraste entre les deux.</p>
+        
+        <p>Tous les éléments dans les conteneurs héritent du nuancier de leur parent. Les exceptions à cette règle sont les séparateurs de liste dans les listes, l'entête de la liste des pages imbriquées, et le bouton dans les listes séparées avec un bouton. Pour ces derniers, c'est par défaut à "b" (en bleu sur le thème par défaut). Les bulles de compteur sont par défaut à "c" (argent dans le thème par défaut).
+        
+        <p>Notez qu'il y a aussi le nuancier nommé "active" (bleu vif dans le thème par défaut) qui est utilisé pour indiquer un élément sélectionné actif. Voir <strong>l'état global "actif"</strong> plus loin dans cette page pour plus d'informations sur le nuancier <strong>active</strong>.</p>
+        
+        <p>La boîte de dialogue de chargement des pages et le message d'erreur n'héritons pas du nuancier du thème. Le chargement de la boîte de dialogue a par défaut le nuancier "a" (noir dans le thème par défaut) et le message d'erreur à le nuancier "e" (en jaune sur le thème par défaut) Vous pouvez configurer les paramètres par défaut globalement. Voir <a href="globalconfig.html">configuration par défaut</a>.
 
 		<h2>Thèmes &amp; nuanciers</h2>
 		
@@ -68,7 +74,7 @@
 			<div class="ui-bar ui-bar-e">Barre E - <a href="#" data-role="none" class="ui-link">Link</a></div>
 		</div><!-- end swatch-bars -->
 		
-		<p>Par défaut, le cadre assigne le nuancier "a" à toutes les en-têtes et pieds de page, parce que ce sont généralement de haute priorité de donnée visuelle dans une application. Pour définir la couleur d'une barre d'une couleur différente du nuancier, ajoutez simplement l'attribut <code>data-theme</code> à votre entête ou un pied de page et spécifiez une lettre de nuancier différent ('b' ou 'd', par exemple) et la couleur du nuancier du thème indiqué sera appliquée. En savoir plus sur la <a href="../toolbars/bars-themes.html">barre d'outil de thématisation</a>.</p>
+		<p>Par défaut, le cadre assigne le nuancier "a" à toutes les en-têtes et pieds de page, parce que ce sont généralement de haute priorité de donnée visuelle dans une application. Pour définir la couleur d'une barre d'une couleur différente du nuancier, ajoutez simplement l'attribut <code>data-theme</code> à votre entête ou un pied de page et spécifiez une lettre de nuancier différent ("b" ou "d", par exemple) et la couleur du nuancier du thème indiqué sera appliquée. En savoir plus sur la <a href="../toolbars/bars-themes.html">barre d'outil de thématisation</a>.</p>
 		
 		
 		
