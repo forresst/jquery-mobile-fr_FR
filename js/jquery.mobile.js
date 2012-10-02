@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 2ad84dffc043b95f43c154cb018310d7c9ae49c0 <> Date: Wed Sep 26 23:30:19 2012 +0200
+* jQuery Mobile Framework Git Build: SHA1: 00d82c0f0ca1c76b52909ccf5e2be76355fc2d59 <> Date: Tue Oct 2 21:27:32 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -29,7 +29,7 @@
 	$.mobile = $.extend( {}, {
 
 		// Version of the jQuery Mobile Framework
-		version: "1.2.0-rc.2",
+		version: "1.2.0",
 
 		// Namespace used framework-wide for data-attrs. Default is no namespace
 		ns: "",
@@ -7117,13 +7117,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 				return;
 			}
 
-			// if the current url has no dialog hash key proceed as normal
-			// otherwise, if the page is a dialog simply tack on the hash key
-			if ( url.indexOf( hashkey ) === -1 && !currentIsDialog ){
-				url = url + hashkey;
-			} else {
-				url = $.mobile.path.parseLocation().hash + hashkey;
-			}
+			url = url + hashkey;
 
 			// Tack on an extra hashkey if this is the first page and we've just reconstructed the initial hash
 			if ( urlHistory.activeIndex === 0 && url === urlHistory.initialDst ) {
