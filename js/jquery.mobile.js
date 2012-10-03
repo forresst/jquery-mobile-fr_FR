@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 00d82c0f0ca1c76b52909ccf5e2be76355fc2d59 <> Date: Tue Oct 2 21:27:32 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: ff74d34375fe2c1ab249a0bc8f1f2687adb774e6 <> Date: Tue Oct 2 12:41:03 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -4056,7 +4056,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 	//The following event bindings should be bound after mobileinit has been triggered
 	//the following deferred is resolved in the init file
 	$.mobile.navreadyDeferred = $.Deferred();
-	$.mobile.navreadyDeferred.done(function() {
+	$.mobile._registerInternalEvents = function() {
 		//bind to form submit events, handle with Ajax
 		$( document ).delegate( "form", "submit", function( event ) {
 			var $this = $( this );
@@ -4358,7 +4358,8 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 		$( document ).bind( "pageshow", resetActivePageHeight );
 		$( window ).bind( "throttledresize", resetActivePageHeight );
 
-	});//navreadyDeferred done callback
+	};//navreadyDeferred done callback
+	$.mobile.navreadyDeferred.done( function() { $.mobile._registerInternalEvents(); } );
 
 })( jQuery );
 
