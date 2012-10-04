@@ -188,17 +188,7 @@ define( [ "jquery",
 				_isOpen: false,
 				_tolerance: null,
 				_resizeData: null,
-				_orientationchangeInProgress: false,
-				_globalHandlers: [
-					{
-						src: $( window ),
-						handler: {
-							orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
-							resize: $.proxy( this, "_handleWindowResize" ),
-							keyup: $.proxy( this, "_handleWindowKeyUp" )
-						}
-					}
-				]
+				_orientationchangeInProgress: false
 			});
 
 			$.each( this.options, function( key, value ) {
@@ -210,8 +200,10 @@ define( [ "jquery",
 
 			ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
 
-			$.each( this._globalHandlers, function( idx, value ) {
-				value.src.bind( value.handler );
+			this._on( $( window ), {
+				orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
+				resize: $.proxy( this, "_handleWindowResize" ),
+				keyup: $.proxy( this, "_handleWindowKeyUp" )
 			});
 		},
 
@@ -499,20 +491,20 @@ define( [ "jquery",
 			return { x: x, y: y };
 		},
 
-		_openPrereqsComplete: function() {
-			var self = this;
+		_completeOpen: function() {
+			this._ui.container.attr( "tabindex", "0" ).focus();
+			this._trigger( "afteropen" );
+		},
 
-			self._ui.container.addClass( "ui-popup-active" );
-			self._isOpen = true;
-			self._resizeScreen();
+		_openPrereqsComplete: function() {
+			this._ui.container.addClass( "ui-popup-active" );
+			this._isOpen = true;
+			this._resizeScreen();
 
 			// Android appears to trigger the animation complete before the popup
 			// is visible. Allowing the stack to unwind before applying focus prevents
 			// the "blue flash" of element focus in android 4.0
-			setTimeout(function(){
-				self._ui.container.attr( "tabindex", "0" ).focus();
-				self._trigger( "afteropen" );
-			});
+			setTimeout( $.proxy( this, "_completeOpen" ) );
 		},
 
 		_open: function( options ) {
@@ -612,21 +604,21 @@ define( [ "jquery",
 		},
 
 		_closePrereqsDone: function() {
-			var self = this, opts = self.options;
+			var opts = this.options;
 
-			self._ui.container.removeAttr( "tabindex" );
+			this._ui.container.removeAttr( "tabindex" );
 
 			// remove nav bindings if they are still present
 			opts.container.unbind( opts.closeEvents );
 
 			// unbind click handlers added when history is disabled
-			self.element.undelegate( opts.closeLinkSelector, opts.closeLinkEvents );
+			this.element.undelegate( opts.closeLinkSelector, opts.closeLinkEvents );
 
 			// remove the global mutex for popups
 			$.mobile.popup.active = undefined;
 
 			// alert users that the popup is closed
-			self._trigger( "afterclose" );
+			this._trigger( "afterclose" );
 		},
 
 		_close: function() {
@@ -655,36 +647,25 @@ define( [ "jquery",
 		},
 
 		_destroy: function() {
-			var self = this;
-
 			// hide and remove bindings
-			self._close();
+			this._close();
 
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
-			self._setTheme( "none" );
-			self.element
-				.insertAfter( self._ui.placeholder )
+			this._setTheme( "none" );
+			this.element
+				.insertAfter( this._ui.placeholder )
 				.removeClass( "ui-popup ui-overlay-shadow ui-corner-all" );
-			self._ui.screen.remove();
-			self._ui.container.remove();
-			self._ui.placeholder.remove();
-
-			// Unbind handlers that were bound to elements outside self.element (the window, in self case)
-			$.each( self._globalHandlers, function( idx, oneSrc ) {
-				$.each( oneSrc.handler, function( eventType, handler ) {
-					oneSrc.src.unbind( eventType, handler );
-				});
-			});
+			this._ui.screen.remove();
+			this._ui.container.remove();
+			this._ui.placeholder.remove();
 		},
 
 		// any navigation event after a popup is opened should close the popup
 		// NOTE the pagebeforechange is bound to catch navigation events that don't
 		//      alter the url (eg, dialogs from popups)
 		_bindContainerClose: function() {
-			var self = this;
-
-			self.options.container
-				.one( self.options.closeEvents, $.proxy( self._close, self ));
+			this.options.container
+				.one( this.options.closeEvents, $.proxy( this._close, this ));
 		},
 
 		// TODO no clear deliniation of what should be here and
