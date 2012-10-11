@@ -52,6 +52,7 @@ define( [ "jquery",
 			closeLinkEvents: "click.popup",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
+			dismissable: true,
 
 			// NOTE Windows Phone 7 has a scroll position caching issue that
 			//      requires us to disable popup history management by default
@@ -64,7 +65,9 @@ define( [ "jquery",
 		_eatEventAndClose: function( e ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
-			this.close();
+			if ( this.options.dismissable ) {
+				this.close();
+			}
 			return false;
 		},
 
@@ -140,6 +143,18 @@ define( [ "jquery",
 			}
 		},
 
+		// When the popup is open, attempting to focus on an element that is not a child of the popup will redirect focus to the popup
+		_handleDocumentFocusIn: function( e ) {
+			if ( this._isOpen &&
+				e.target !== this._ui.container[ 0 ] &&
+				0 === $( e.target ).parents().filter( this._ui.container[ 0 ] ).length ) {
+				this._ui.container.focus();
+				e.preventDefault();
+				e.stopImmediatePropagation();
+				return false;
+			}
+		},
+
 		_create: function() {
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
@@ -204,6 +219,9 @@ define( [ "jquery",
 				orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 				resize: $.proxy( this, "_handleWindowResize" ),
 				keyup: $.proxy( this, "_handleWindowKeyUp" )
+			});
+			this._on( $( document ), {
+				focusin: $.proxy( this, "_handleDocumentFocusIn" )
 			});
 		},
 
@@ -646,10 +664,7 @@ define( [ "jquery",
 			});
 		},
 
-		_destroy: function() {
-			// hide and remove bindings
-			this._close();
-
+		_unenhance: function() {
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
 			this._setTheme( "none" );
 			this.element
@@ -658,6 +673,15 @@ define( [ "jquery",
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
+		},
+
+		_destroy: function() {
+			if ( $.mobile.popup.active === this ) {
+				this.element.one( "popupafterclose", $.proxy( this, "_unenhance" ) );
+				this.close();
+			} else {
+				this._unenhance();
+			}
 		},
 
 		// any navigation event after a popup is opened should close the popup
