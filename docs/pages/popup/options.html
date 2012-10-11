@@ -47,6 +47,14 @@
 				<pre><code>$( ".selector" ).popup(<strong>{ corners: false }</strong>);</code></pre>
 			</dd>
 
+			<dt><code>dismissable</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">Par défaut : true</p>
+				<p>Définit si en cliquant en dehors de la popup ou en pressant la touche Echap, la popup ouverte se fermera. Cette option est également définie comme un attribut de données :  <code>data-dismissable="false"</code></p>
+				<p><em>Remarque :</em> Lorsque le support de l'historique fonctionne, en appuyant sur le bouton "Retour" du navigateur, cela délaisse la popup, même si cette option est définie sur false.
+				<pre><code>$( ".selector" ).popup(<strong>{ dismissable: false }</strong>);</code></pre>
+			</dd>
+
 			<dt><code>history</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>

@@ -114,6 +114,17 @@
 				<p>Cette option est également définie comme un attribut de données :  <code>data-header-theme="a"</code>.</p>
 			</dd>
 
+			<dt><code>icon</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "arrow-r"</p>
+				<p>Applique une icône de l'<a href="../buttons/buttons-icons.html">ensemble d'icônes</a>à tous les <a href="lists-ul.html">boutons de liste</a>. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).bind( "mobileinit", function(){
+    <strong>$.mobile.listview.prototype.options.icon = "star";</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données :  <code>data-icon="star"</code>.</p>
+			</dd>
+
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">Par défaut: ":jqmData(role='listview')"</p>

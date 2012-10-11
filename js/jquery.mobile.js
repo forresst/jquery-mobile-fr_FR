@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 86de757a4b4a4fd97cbfd6effecfdf059fd07fe3 <> Date: Wed Oct 3 23:41:01 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: 39aea2b93315ff668b0aea428b08b4d3d31b66cc <> Date: Tue Oct 9 23:28:02 2012 +0300
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -997,7 +997,7 @@ $.widget( "mobile.widget", {
 				this.fakeFixLoader();
 				$window
 					.unbind( "scroll", this.checkLoaderPosition )
-					.bind( "scroll", this.fakeFixLoader );
+					.bind( "scroll", $.proxy( this.fakeFixLoader, this ) );
 			}
 		},
 
@@ -1082,8 +1082,8 @@ $.widget( "mobile.widget", {
 				this.element.removeClass( "ui-loader-fakefix" );
 			}
 
-			$( window ).unbind( "scroll", $.proxy( this.fakeFixLoader, this) );
-			$( window ).unbind( "scroll", $.proxy( this.checkLoaderPosition, this ) );
+			$( window ).unbind( "scroll", this.fakeFixLoader );
+			$( window ).unbind( "scroll", this.checkLoaderPosition );
 		}
 	});
 
@@ -5492,6 +5492,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 		countTheme: "c",
 		headerTheme: "b",
 		dividerTheme: "b",
+		icon: "arrow-r",
 		splitIcon: "arrow-r",
 		splitTheme: "b",
 		inset: false,
@@ -5634,6 +5635,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 			dividertheme = $list.jqmData( "dividertheme" ) || o.dividerTheme,
 			listsplittheme = $list.jqmData( "splittheme" ),
 			listspliticon = $list.jqmData( "spliticon" ),
+			listicon = $list.jqmData( "icon" ),
 			li = this._getChildrenByTagName( $list[ 0 ], "li", "LI" ),
 			ol = !!$.nodeName( $list[ 0 ], "ol" ),
 			jsCount = !$.support.cssPseudoElement,
@@ -5682,7 +5684,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						shadow: false,
 						corners: false,
 						iconpos: "right",
-						icon: a.length > 1 || icon === false ? false : icon || "arrow-r",
+						icon: a.length > 1 || icon === false ? false : icon || listicon || o.icon,
 						theme: itemTheme
 					});
 
@@ -6434,6 +6436,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			closeLinkEvents: "click.popup",
 			navigateEvents: "navigate.popup",
 			closeEvents: "navigate.popup pagebeforechange.popup",
+			dismissable: true,
 
 			// NOTE Windows Phone 7 has a scroll position caching issue that
 			//      requires us to disable popup history management by default
@@ -6446,7 +6449,9 @@ $( document ).bind( "pagecreate create", function( e ) {
 		_eatEventAndClose: function( e ) {
 			e.preventDefault();
 			e.stopImmediatePropagation();
-			this.close();
+			if ( this.options.dismissable ) {
+				this.close();
+			}
 			return false;
 		},
 
@@ -6522,6 +6527,18 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 		},
 
+		// When the popup is open, attempting to focus on an element that is not a child of the popup will redirect focus to the popup
+		_handleDocumentFocusIn: function( e ) {
+			if ( this._isOpen &&
+				e.target !== this._ui.container[ 0 ] &&
+				0 === $( e.target ).parents().filter( this._ui.container[ 0 ] ).length ) {
+				this._ui.container.focus();
+				e.preventDefault();
+				e.stopImmediatePropagation();
+				return false;
+			}
+		},
+
 		_create: function() {
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
@@ -6586,6 +6603,9 @@ $( document ).bind( "pagecreate create", function( e ) {
 				orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 				resize: $.proxy( this, "_handleWindowResize" ),
 				keyup: $.proxy( this, "_handleWindowKeyUp" )
+			});
+			this._on( $( document ), {
+				focusin: $.proxy( this, "_handleDocumentFocusIn" )
 			});
 		},
 
@@ -7028,10 +7048,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			});
 		},
 
-		_destroy: function() {
-			// hide and remove bindings
-			this._close();
-
+		_unenhance: function() {
 			// Put the element back to where the placeholder was and remove the "ui-popup" class
 			this._setTheme( "none" );
 			this.element
@@ -7040,6 +7057,15 @@ $( document ).bind( "pagecreate create", function( e ) {
 			this._ui.screen.remove();
 			this._ui.container.remove();
 			this._ui.placeholder.remove();
+		},
+
+		_destroy: function() {
+			if ( $.mobile.popup.active === this ) {
+				this.element.one( "popupafterclose", $.proxy( this, "_unenhance" ) );
+				this.close();
+			} else {
+				this._unenhance();
+			}
 		},
 
 		// any navigation event after a popup is opened should close the popup
