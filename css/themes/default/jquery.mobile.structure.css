@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 39aea2b93315ff668b0aea428b08b4d3d31b66cc <> Date: Tue Oct 9 23:28:02 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: b7935991bce8606fac9ebe813c099cc28039be42 <> Date: Wed Oct 17 11:12:44 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -40,17 +40,24 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 .ui-bar, .ui-body { position: relative; padding: .4em 15px; overflow: hidden; display: block; clear:both; }
 .ui-bar { font-size: 16px; margin: 0; }
 .ui-bar h1, .ui-bar h2, .ui-bar h3, .ui-bar h4, .ui-bar h5, .ui-bar h6 { margin: 0; padding: 0; font-size: 16px; display: inline-block; }
-.ui-header, .ui-footer { position: relative; border-left-width: 0; border-right-width: 0; zoom: 1; }
+.ui-header, .ui-footer { position: relative; zoom: 1; }
+.ui-mobile .ui-header, .ui-mobile .ui-footer { border-left-width: 0; border-right-width: 0; }
 .ui-header .ui-btn-left,
 .ui-header .ui-btn-right,
 .ui-footer .ui-btn-left,
-.ui-footer .ui-btn-right { position: absolute; top: 3px; }
+.ui-footer .ui-btn-right,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-left,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-right { position: absolute; top: 3px; }
+.ui-header-fixed .ui-btn-left,
+.ui-header-fixed .ui-btn-right { top: 4px;}
 .ui-header .ui-btn-left,
 .ui-footer .ui-btn-left { left: 5px; }
 .ui-header .ui-btn-right,
 .ui-footer .ui-btn-right { right: 5px; }
 .ui-footer .ui-btn-icon-notext,
-.ui-header .ui-btn-icon-notext { top: 6px; }
+.ui-header .ui-btn-icon-notext,
+.ui-header-fixed.ui-fixed-hidden .ui-btn-icon-notext { top: 6px; }
+.ui-header-fixed .ui-btn-icon-notext { top: 7px;}
 .ui-header .ui-title, .ui-footer .ui-title { min-height: 1.1em; text-align: center; font-size: 16px; display: block; margin: .6em 30% .8em; padding: 0; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; outline: 0 !important; }
 .ui-footer .ui-title { margin: .6em 15px .8em; }
 .ui-content { border-width: 0; overflow: visible; overflow-x: hidden; padding: 15px; }
@@ -608,10 +615,20 @@ div.ui-mobile-viewport { overflow-x: hidden; }
 	z-index: 1000;
 }
 .ui-header-fixed {
+	top: -1px;
+	padding-top: 1px;
+}
+.ui-header-fixed.ui-fixed-hidden {
 	top: 0;
+	padding-top: 0;
 }
 .ui-footer-fixed {
+	bottom: -1px;
+	padding-bottom: 1px;
+}
+.ui-footer-fixed.ui-fixed-hidden {
 	bottom: 0;
+	padding-bottom: 0;
 }
 .ui-header-fullscreen,
 .ui-footer-fullscreen {
@@ -1029,8 +1046,8 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	.ui-field-contain, .ui-mobile fieldset.ui-field-contain { border-width: 0; padding: 0; margin: 1em 0; }
 }
 .ui-select { display: block; position: relative; }
-.ui-select select { position: absolute; left: -9999px; top: -9999px; }
-.ui-select .ui-btn { overflow: hidden; opacity: 1; }
+.ui-select select { position: absolute; left: -9999px; }
+.ui-select .ui-btn { opacity: 1; }
 .ui-field-contain .ui-select .ui-btn { margin: 0; }
 .ui-select .ui-btn select { cursor: pointer; -webkit-appearance: none; left: 0; top:0; width: 100%; min-height: 1.5em; min-height: 100%; height: 3em; max-height: 100%; filter: Alpha(Opacity=0); opacity: 0; z-index: 2; }
 .ui-select .ui-disabled { opacity: .3; }
@@ -1083,6 +1100,8 @@ textarea.ui-input-text { height: 50px; -webkit-transition: height 200ms linear; 
 .ui-input-search .ui-input-clear-hidden { display: none; }
 input.ui-mini, .ui-mini input, textarea.ui-mini { font-size: 14px; }
 textarea.ui-mini { height: 45px; }
+input:-moz-placeholder { color: #aaa; }
+input[type=number]::-webkit-outer-spin-button { margin: 0; }
 @media all and (min-width: 450px){
 	.ui-field-contain label.ui-input-text  { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0 }
 	.ui-field-contain input.ui-input-text, 

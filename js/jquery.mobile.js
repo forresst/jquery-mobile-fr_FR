@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 39aea2b93315ff668b0aea428b08b4d3d31b66cc <> Date: Tue Oct 9 23:28:02 2012 +0300
+* jQuery Mobile Framework Git Build: SHA1: b7935991bce8606fac9ebe813c099cc28039be42 <> Date: Wed Oct 17 11:12:44 2012 -0700
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -2560,7 +2560,7 @@ $.widget( "mobile.page", $.mobile.widget, {
     // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
     // vvvvvvvvvvvvvvvvvvv REMOVE IF NOT SUPPORTING IE6/7/8 vvvvvvvvvvvvvvvvvvv
     // vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv
-    $.browser.msie && !supports_onhashchange && (function() {
+    window.attachEvent && !window.addEventListener && !supports_onhashchange && (function() {
       // Not only do IE6/7 need the "magical" Iframe treatment, but so does IE8
       // when running in "IE7 compatibility" mode.
       
@@ -2994,8 +2994,11 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 				var u = path.parseUrl( absUrl );
 				if ( path.isEmbeddedPage( u ) ) {
 					// For embedded pages, remove the dialog hash key as in getFilePath(),
-					// otherwise the Data Url won't match the id of the embedded Page.
-					return u.hash.split( dialogHashKey )[0].replace( /^#/, "" );
+					// and remove otherwise the Data Url won't match the id of the embedded Page.
+					return u.hash
+						.split( dialogHashKey )[0]
+						.replace( /^#/, "" )
+						.replace( /\?.*$/, "" );
 				} else if ( path.isSameDomain( u, documentBase ) ) {
 					return u.hrefNoHash.replace( documentBase.domain, "" ).split( dialogHashKey )[0];
 				}
@@ -3036,6 +3039,10 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			//just return the url without an initial #
 			stripHash: function( url ) {
 				return url.replace( /^#/, "" );
+			},
+
+			stripQueryParams: function( url ) {
+				return url.replace( /\?.*$/, "" );
 			},
 
 			//remove the preceding hash, any query params, and dialog notations
@@ -3814,6 +3821,12 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 		// to the promise object it returns so we know when
 		// it is done loading or if an error ocurred.
 		if ( typeof toPage === "string" ) {
+			// preserve the original target as the dataUrl value will be simplified
+			// eg, removing ui-state, and removing query params from the hash
+			// this is so that users who want to use query params have access to them
+			// in the event bindings for the page life cycle See issue #5085
+			settings.target = toPage;
+
 			$.mobile.loadPage( toPage, settings )
 				.done(function( url, options, newPage, dupCachedPage ) {
 					isPageTransitioning = false;
@@ -5209,8 +5222,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				o.expandedIcon = collapsibleSet.jqmData( "expanded-icon" );
 			}
 			// Gets the preference icon position in the set
-			if ( !o.iconPos ) {
-				o.iconPos = collapsibleSet.jqmData( "iconpos" );
+			if ( !o.iconpos ) {
+				o.iconpos = collapsibleSet.jqmData( "iconpos" );
 			}
 			// Inherit the preference for inset from collapsible-set or set the default value to ensure equalty within a set
 			if ( collapsibleSet.jqmData( "inset" ) !== undefined ) {
@@ -5250,7 +5263,7 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.buttonMarkup({
 					shadow: false,
 					corners: false,
-					iconpos: $el.jqmData( "iconpos" ) || o.iconPos || "left",
+					iconpos: $el.jqmData( "iconpos" ) || o.iconpos || "left",
 					icon: collapsedIcon,
 					mini: o.mini,
 					theme: o.theme
@@ -5702,7 +5715,7 @@ $.widget( "mobile.listview", $.mobile.widget, {
 						linkIcon = last.jqmData( "icon" );
 
 						last.appendTo( item )
-							.attr( "title", last.getEncodedText() )
+							.attr( "title", $.trim(last.getEncodedText()) )
 							.addClass( "ui-li-link-alt" )
 							.empty()
 							.buttonMarkup({
@@ -6845,6 +6858,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 					.addClass( args.containerClassToAdd )
 					.removeClass( args.classToRemove );
 			} else {
+				this._ui.container.removeClass( args.classToRemove );
 				args.prereqs.container.resolve();
 			}
 		},
@@ -7023,7 +7037,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			this._trigger( "afterclose" );
 		},
 
-		_close: function() {
+		_close: function( immediate ) {
 			this._ui.container.removeClass( "ui-popup-active" );
 			this._page.removeClass( "ui-popup-open" );
 
@@ -7039,7 +7053,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			this._animate( {
 				additionalCondition: this._ui.screen.hasClass( "in" ),
-				transition: ( this._currentTransition || this.options.transition ),
+				transition: ( immediate ? "none" : ( this._currentTransition || this.options.transition ) ),
 				classToRemove: "in",
 				screenClassToAdd: "out",
 				containerClassToAdd: "reverse out",
@@ -7068,12 +7082,40 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 		},
 
+		_closePopup: function( e, data ) {
+			var parsedDst, toUrl;
+
+			if ( e.type === "pagebeforechange" && data ) {
+				// Determine whether we need to rapid-close the popup, or whether we can
+				// take the time to run the closing transition
+				if ( typeof data.toPage === "string" ) {
+					parsedDst = data.toPage;
+				} else {
+					parsedDst = data.toPage.jqmData( "url" );
+				}
+				parsedDst = $.mobile.path.parseUrl( parsedDst );
+				toUrl = parsedDst.pathname + parsedDst.search + parsedDst.hash;
+
+				if ( this._myUrl !== toUrl ) {
+					// Going to a different page - close immediately
+					this.options.container.unbind( this.options.closeEvents );
+					this._close( true );
+				} else {
+					this._close();
+				}
+
+				return;
+			}
+
+			this._close();
+		},
+
 		// any navigation event after a popup is opened should close the popup
 		// NOTE the pagebeforechange is bound to catch navigation events that don't
 		//      alter the url (eg, dialogs from popups)
 		_bindContainerClose: function() {
 			this.options.container
-				.one( this.options.closeEvents, $.proxy( this._close, this ));
+				.one( this.options.closeEvents, $.proxy( this, "_closePopup" ) );
 		},
 
 		// TODO no clear deliniation of what should be here and
@@ -7115,7 +7157,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			hashkey = $.mobile.dialogHashKey;
 			activePage = $.mobile.activePage;
 			currentIsDialog = activePage.is( ".ui-dialog" );
-			url = $.mobile.urlHistory.getActive().url;
+			this._myUrl = url = $.mobile.urlHistory.getActive().url;
 			hasHash = ( url.indexOf( hashkey ) > -1 ) && !currentIsDialog;
 			urlHistory = $.mobile.urlHistory;
 
@@ -7185,6 +7227,11 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		//remove after delay
 		setTimeout( function() {
+			// Check if we are in a listview
+			var $parent = $link.parent().parent();
+			if ($parent.hasClass("ui-li")) {
+				$link = $parent.parent();
+			}
 			$link.removeClass( $.mobile.activeBtnClass );
 		}, 300 );
 	};
@@ -7244,7 +7291,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 		theme: null,
 		// This option defaults to true on iOS devices.
 		preventFocusZoom: /iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1,
-		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type])",
+		initSelector: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='time'], input[type='date'], input[type='month'], input[type='week'], input[type='datetime'], input[type='datetime-local'], input[type='color'], input:not([type]), input[type='file']",
 		clearSearchButtonText: "clear text",
 		disabled: false
 	},
@@ -7406,6 +7453,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 $.mobile.listview.prototype.options.filter = false;
 $.mobile.listview.prototype.options.filterPlaceholder = "Filter items...";
 $.mobile.listview.prototype.options.filterTheme = "c";
+$.mobile.listview.prototype.options.filterReveal = false;
 // TODO rename callback/deprecate and default to the item itself as the first argument
 var defaultFilterCallback = function( text, searchValue, item ) {
 		return text.toString().toLowerCase().indexOf( searchValue ) === -1;
@@ -7420,6 +7468,10 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 
 	if ( !listview.options.filter ) {
 		return;
+	}
+
+	if ( listview.options.filterReveal ) {
+		list.children().addClass( "ui-screen-hidden" );
 	}
 
 	var wrapper = $( "<form>", {
@@ -7455,6 +7507,10 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 
 				// Only chars added, not removed, only use visible subset
 				listItems = list.children( ":not(.ui-screen-hidden)" );
+
+				if ( !listItems.length && listview.options.filterReveal ) {
+					listItems = list.children( ".ui-screen-hidden" );
+				}
 			}
 
 			if ( val ) {
@@ -7498,7 +7554,7 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 			} else {
 
 				//filtervalue is empty => show all
-				listItems.toggleClass( "ui-screen-hidden", false );
+				listItems.toggleClass( "ui-screen-hidden", !!listview.options.filterReveal );
 			}
 			listview._refreshCorners();
 		})
@@ -7545,7 +7601,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			cType = control[ 0 ].nodeName.toLowerCase(),
 
-			selectClass = ( cType === "select" ) ? "ui-slider-switch" : "",
+			isSelect = this.isToggleSwitch = cType === "select",
+
+			selectClass = ( this.isToggleSwitch ) ? "ui-slider-switch" : "",
 
 			controlID = control.attr( "id" ),
 
@@ -7555,13 +7613,9 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			label = $label.attr( "id", labelID ),
 
-			val = function() {
-				return  cType === "input"  ? parseFloat( control.val() ) : control[0].selectedIndex;
-			},
+			min = !this.isToggleSwitch ? parseFloat( control.attr( "min" ) ) : 0,
 
-			min =  cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
-
-			max =  cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
+			max =  !this.isToggleSwitch ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length-1,
 
 			step = window.parseFloat( control.attr( "step" ) || 1 ),
 
@@ -7569,21 +7623,18 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 			miniClass = ( this.options.mini || control.jqmData( "mini" ) ) ? " ui-slider-mini" : "",
 
-
 			domHandle = document.createElement( 'a' ),
 			handle = $( domHandle ),
 			domSlider = document.createElement( 'div' ),
 			slider = $( domSlider ),
 
-			valuebg = control.jqmData( "highlight" ) && cType !== "select" ? (function() {
+			valuebg = control.jqmData( "highlight" ) && !this.isToggleSwitch ? (function() {
 				var bg = document.createElement('div');
 				bg.className = 'ui-slider-bg ' + $.mobile.activeBtnClass + ' ui-btn-corner-all';
 				return $( bg ).prependTo( slider );
 			})() : false,
 
 			options;
-
-		this._type = cType;
 
 		domHandle.setAttribute( 'href', "#" );
 		domSlider.setAttribute('role','application');
@@ -7596,15 +7647,19 @@ $.widget( "mobile.slider", $.mobile.widget, {
 					"role": "slider",
 					"aria-valuemin": min,
 					"aria-valuemax": max,
-					"aria-valuenow": val(),
-					"aria-valuetext": val(),
-					"title": val(),
+					"aria-valuenow": this._value(),
+					"aria-valuetext": this._value(),
+					"title": this._value(),
 					"aria-labelledby": labelID
 				});
 
 		$.extend( this, {
 			slider: slider,
 			handle: handle,
+			type: cType,
+			step: step,
+			max: max,
+			min: min,
 			valuebg: valuebg,
 			dragging: false,
 			beforeStart: null,
@@ -7612,7 +7667,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			mouseMoved: false
 		});
 
-		if ( cType === "select" ) {
+		if ( this.isToggleSwitch ) {
 			var wrapper = document.createElement('div');
 			wrapper.className = 'ui-slider-inneroffset';
 
@@ -7648,103 +7703,27 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		label.addClass( "ui-slider" );
 
 		// monitor the input for updated values
-		control.addClass( cType === "input" ? "ui-slider-input" : "ui-slider-switch" )
-			.change(function() {
-				// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
-				if ( !self.mouseMoved ) {
-					self.refresh( val(), true );
-				}
-			})
-			.keyup(function() { // necessary?
-				self.refresh( val(), true, true );
-			})
-			.blur(function() {
-				self.refresh( val(), true );
-			});
+		control.addClass( this.isToggleSwitch ? "ui-slider-switch" : "ui-slider-input" );
 
-		this._preventDocumentDrag = function( event ) {
-			// NOTE: we don't do this in refresh because we still want to
-			//       support programmatic alteration of disabled inputs
-			if ( self.dragging && !self.options.disabled ) {
+		this._on( control, {
+			"change": "_controlChange",
+			"keyup": "_controlKeyup",
+			"blur": "_controlBlur",
+			"vmouseup": "_controlVMouseUp"
+		});
 
-				// self.mouseMoved must be updated before refresh() because it will be used in the control "change" event
-				self.mouseMoved = true;
+		slider.bind( "vmousedown", $.proxy(this._sliderVMouseDown, this))
+			.bind( "vclick", false );
 
-				if ( cType === "select" ) {
-					// make the handle move in sync with the mouse
-					handle.removeClass( "ui-slider-handle-snapping" );
-				}
+		// We have to instantiate a new function object for the unbind to work properly
+		// since the method itself is defined in the prototype (causing it to unbind everything)
+		this._on( document, { "vmousemove": "_preventDocumentDrag" });
+		this._on( slider.add( document ), { "vmouseup": "_sliderVMouseUp" });
 
-				self.refresh( event );
-
-				// only after refresh() you can calculate self.userModified
-				self.userModified = self.beforeStart !== control[0].selectedIndex;
-				return false;
-			}
-		}
-
-		this._on( $( document ), { "vmousemove": this._preventDocumentDrag });
-
-		// it appears the clicking the up and down buttons in chrome on
-		// range/number inputs doesn't trigger a change until the field is
-		// blurred. Here we check thif the value has changed and refresh
-		control.bind( "vmouseup", $.proxy( self._checkedRefresh, self));
-
-		slider.bind( "vmousedown", function( event ) {
-			// NOTE: we don't do this in refresh because we still want to
-			//       support programmatic alteration of disabled inputs
-			if ( self.options.disabled ) {
-				return false;
-			}
-
-			self.dragging = true;
-			self.userModified = false;
-			self.mouseMoved = false;
-
-			if ( cType === "select" ) {
-				self.beforeStart = control[0].selectedIndex;
-			}
-
-			self.refresh( event );
-			self._trigger( "start" );
-			return false;
-		})
-		.bind( "vclick", false );
-
-		this._sliderMouseUp = function() {
-			if ( self.dragging ) {
-				self.dragging = false;
-
-				if ( cType === "select") {
-					// make the handle move with a smooth transition
-					handle.addClass( "ui-slider-handle-snapping" );
-
-					if ( self.mouseMoved ) {
-						// this is a drag, change the value only if user dragged enough
-						if ( self.userModified ) {
-						    self.refresh( self.beforeStart === 0 ? 1 : 0 );
-						}
-						else {
-						    self.refresh( self.beforeStart );
-						}
-					}
-					else {
-						// this is just a click, change the value
-						self.refresh( self.beforeStart === 0 ? 1 : 0 );
-					}
-				}
-
-				self.mouseMoved = false;
-				self._trigger( "stop" );
-				return false;
-			}
-		};
-
-		this._on( slider.add( document ), { "vmouseup": this._sliderMouseUp });
 		slider.insertAfter( control );
 
 		// Only add focus class to toggle switch, sliders get it automatically from ui-btn
-		if ( cType === 'select' ) {
+		if ( this.isToggleSwitch ) {
 			this.handle.bind({
 				focus: function() {
 					slider.addClass( $.mobile.focusClass );
@@ -7756,71 +7735,167 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			});
 		}
 
-		this.handle.bind({
-			// NOTE force focus on handle
-			vmousedown: function() {
-				$( this ).focus();
-			},
+		// bind the handle event callbacks and set the context to the widget instance
+		this._on( this.handle, {
+			"vmousedown": "_handleVMouseDown",
+			"keydown": "_handleKeydown",
+			"keyup": "_handleKeyup"
+		});
 
-			vclick: false,
-
-			keydown: function( event ) {
-				var index = val();
-
-				if ( self.options.disabled ) {
-					return;
-				}
-
-				// In all cases prevent the default and mark the handle as active
-				switch ( event.keyCode ) {
-					case $.mobile.keyCode.HOME:
-					case $.mobile.keyCode.END:
-					case $.mobile.keyCode.PAGE_UP:
-					case $.mobile.keyCode.PAGE_DOWN:
-					case $.mobile.keyCode.UP:
-					case $.mobile.keyCode.RIGHT:
-					case $.mobile.keyCode.DOWN:
-					case $.mobile.keyCode.LEFT:
-						event.preventDefault();
-
-						if ( !self._keySliding ) {
-							self._keySliding = true;
-							$( this ).addClass( "ui-state-active" );
-						}
-						break;
-				}
-
-				// move the slider according to the keypress
-				switch ( event.keyCode ) {
-					case $.mobile.keyCode.HOME:
-						self.refresh( min );
-						break;
-					case $.mobile.keyCode.END:
-						self.refresh( max );
-						break;
-					case $.mobile.keyCode.PAGE_UP:
-					case $.mobile.keyCode.UP:
-					case $.mobile.keyCode.RIGHT:
-						self.refresh( index + step );
-						break;
-					case $.mobile.keyCode.PAGE_DOWN:
-					case $.mobile.keyCode.DOWN:
-					case $.mobile.keyCode.LEFT:
-						self.refresh( index - step );
-						break;
-				}
-			}, // remove active mark
-
-			keyup: function( event ) {
-				if ( self._keySliding ) {
-					self._keySliding = false;
-					$( this ).removeClass( "ui-state-active" );
-				}
-			}
-			});
+		this.handle.bind( "vclick", false );
 
 		this.refresh( undefined, undefined, true );
 	},
+
+	_controlChange: function( event ) {
+		// if the user dragged the handle, the "change" event was triggered from inside refresh(); don't call refresh() again
+		if ( !this.mouseMoved ) {
+			this.refresh( this._value(), true );
+		}
+	},
+
+	_controlKeyup: function( event ) { // necessary?
+		this.refresh( this._value(), true, true );
+	},
+
+	_controlBlur: function( event ) {
+		this.refresh( this._value(), true );
+	},
+
+	// it appears the clicking the up and down buttons in chrome on
+	// range/number inputs doesn't trigger a change until the field is
+	// blurred. Here we check thif the value has changed and refresh
+	_controlVMouseUp: function( event ) {
+		this._checkedRefresh();
+	},
+
+	// NOTE force focus on handle
+	_handleVMouseDown: function( event ) {
+		this.handle.focus();
+	},
+
+	_handleKeydown: function( event ) {
+		var index = this._value();
+
+		if ( this.options.disabled ) {
+			return;
+		}
+
+		// In all cases prevent the default and mark the handle as active
+		switch ( event.keyCode ) {
+		 case $.mobile.keyCode.HOME:
+		 case $.mobile.keyCode.END:
+		 case $.mobile.keyCode.PAGE_UP:
+		 case $.mobile.keyCode.PAGE_DOWN:
+		 case $.mobile.keyCode.UP:
+		 case $.mobile.keyCode.RIGHT:
+		 case $.mobile.keyCode.DOWN:
+		 case $.mobile.keyCode.LEFT:
+			event.preventDefault();
+
+			if ( !this._keySliding ) {
+				this._keySliding = true;
+				this.handle.addClass( "ui-state-active" );
+			}
+
+			break;
+		}
+
+		// move the slider according to the keypress
+		switch ( event.keyCode ) {
+		 case $.mobile.keyCode.HOME:
+			this.refresh( this.min );
+			break;
+		 case $.mobile.keyCode.END:
+			this.refresh( this.max );
+			break;
+		 case $.mobile.keyCode.PAGE_UP:
+		 case $.mobile.keyCode.UP:
+		 case $.mobile.keyCode.RIGHT:
+			this.refresh( index + this.step );
+			break;
+		 case $.mobile.keyCode.PAGE_DOWN:
+		 case $.mobile.keyCode.DOWN:
+		 case $.mobile.keyCode.LEFT:
+			this.refresh( index - this.step );
+			break;
+		}
+	}, // remove active mark
+
+	_handleKeyup: function( event ) {
+		if ( this._keySliding ) {
+			this._keySliding = false;
+			this.handle.removeClass( "ui-state-active" );
+		}
+	},
+
+	_sliderVMouseDown: function( event ) {
+		// NOTE: we don't do this in refresh because we still want to
+		//       support programmatic alteration of disabled inputs
+		if ( this.options.disabled ) {
+			return false;
+		}
+
+		this.dragging = true;
+		this.userModified = false;
+		this.mouseMoved = false;
+
+		if ( this.isToggleSwitch ) {
+			this.beforeStart = this.element[0].selectedIndex;
+		}
+
+		this.refresh( event );
+ 		this._trigger( "start" );
+		return false;
+	},
+
+	_sliderVMouseUp: function() {
+		if ( this.dragging ) {
+			this.dragging = false;
+
+			if ( this.isToggleSwitch ) {
+				// make the handle move with a smooth transition
+				this.handle.addClass( "ui-slider-handle-snapping" );
+
+				if ( this.mouseMoved ) {
+					// this is a drag, change the value only if user dragged enough
+					if ( this.userModified ) {
+						this.refresh( this.beforeStart === 0 ? 1 : 0 );
+					} else {
+						this.refresh( this.beforeStart );
+					}
+				} else {
+					// this is just a click, change the value
+					this.refresh( this.beforeStart === 0 ? 1 : 0 );
+				}
+			}
+
+			this.mouseMoved = false;
+			this._trigger( "stop" );
+			return false;
+		}
+	},
+
+	_preventDocumentDrag: function( event ) {
+			// NOTE: we don't do this in refresh because we still want to
+			//       support programmatic alteration of disabled inputs
+			if ( this.dragging && !this.options.disabled ) {
+
+				// this.mouseMoved must be updated before refresh() because it will be used in the control "change" event
+				this.mouseMoved = true;
+
+				if ( this.isToggleSwitch ) {
+					// make the handle move in sync with the mouse
+					this.handle.removeClass( "ui-slider-handle-snapping" );
+				}
+
+				this.refresh( event );
+
+				// only after refresh() you can calculate this.userModified
+				this.userModified = this.beforeStart !== this.element[0].selectedIndex;
+				return false;
+			}
+		},
 
 	_checkedRefresh: function() {
 		if( this.value != this._value() ){
@@ -7829,8 +7904,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 	},
 
 	_value: function() {
-		return  this._type === "input" ?
-			parseFloat( this.element.val() ) : this.element[0].selectedIndex;
+		return  this.isToggleSwitch ? this.element[0].selectedIndex : parseFloat( this.element.val() ) ;
 	},
 
 	refresh: function( val, isfromControl, preventInputUpdate ) {
@@ -7845,24 +7919,29 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		this.value = this._value();
 
 		var control = this.element, percent,
-			cType = control[0].nodeName.toLowerCase(),
-			min = cType === "input" ? parseFloat( control.attr( "min" ) ) : 0,
-			max = cType === "input" ? parseFloat( control.attr( "max" ) ) : control.find( "option" ).length - 1,
-			step = ( cType === "input" && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
+			isInput = !this.isToggleSwitch,
+			optionElements = isInput ? [] : control.find( "option" ),
+			min =  isInput ? parseFloat( control.attr( "min" ) ) : 0,
+			max = isInput ? parseFloat( control.attr( "max" ) ) : optionElements.length - 1,
+			step = ( isInput && parseFloat( control.attr( "step" ) ) > 0 ) ? parseFloat( control.attr( "step" ) ) : 1;
 
 		if ( typeof val === "object" ) {
-			var data = val,
+			var left, width, data = val,
 				// a slight tolerance helped get to the ends of the slider
 				tol = 8;
+
+			left = this.slider.offset().left;
+			width = this.slider.width();
+
 			if ( !this.dragging ||
-					data.pageX < this.slider.offset().left - tol ||
-					data.pageX > this.slider.offset().left + this.slider.width() + tol ) {
+					data.pageX < left - tol ||
+					data.pageX > left + width + tol ) {
 				return;
 			}
-			percent = Math.round( ( ( data.pageX - this.slider.offset().left ) / this.slider.width() ) * 100 );
+			percent = Math.round( ( ( data.pageX - left ) / width ) * 100 );
 		} else {
 			if ( val == null ) {
-				val = cType === "input" ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
+				val = isInput ? parseFloat( control.val() || 0 ) : control[0].selectedIndex;
 			}
 			percent = ( parseFloat( val ) - min ) / ( max - min ) * 100;
 		}
@@ -7901,11 +7980,12 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		}
 
 		this.handle.css( "left", percent + "%" );
-		this.handle.attr( {
-				"aria-valuenow": cType === "input" ? newval : control.find( "option" ).eq( newval ).attr( "value" ),
-				"aria-valuetext": cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText(),
-				title: cType === "input" ? newval : control.find( "option" ).eq( newval ).getEncodedText()
-			});
+
+		this.handle[0].setAttribute( "aria-valuenow", isInput ? newval : optionElements.eq( newval ).attr( "value" ) );
+
+		this.handle[0].setAttribute( "aria-valuetext", isInput ? newval : optionElements.eq( newval ).getEncodedText() );
+
+		this.handle[0].setAttribute( "title", isInput ? newval : optionElements.eq( newval ).getEncodedText() );
 
 		if ( this.valuebg ) {
 			this.valuebg.css( "width", percent + "%" );
@@ -7927,7 +8007,7 @@ $.widget( "mobile.slider", $.mobile.widget, {
 			var valueChanged = false;
 
 			// update control"s value
-			if ( cType === "input" ) {
+			if ( isInput ) {
 				valueChanged = control.val() !== newval;
 				control.val( newval );
 			} else {
@@ -7974,6 +8054,7 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		shadow: true,
 		iconshadow: true,
 		overlayTheme: "a",
+		dividerTheme: "b",
 		hidePlaceholderMenuItems: true,
 		closeText: "Close",
 		nativeMenu: true,
@@ -8240,7 +8321,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 				"id": menuId,
 				"role": "listbox",
 				"aria-labelledby": buttonId
-			}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme ).appendTo( listbox ),
+				}).attr( "data-" + $.mobile.ns + "theme", widget.options.theme )
+					.attr( "data-" + $.mobile.ns + "divider-theme", widget.options.dividerTheme )
+					.appendTo( listbox ),
+
 
 			header = $( "<div>", {
 				"class": "ui-header ui-bar-" + widget.options.theme
@@ -8864,7 +8948,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 								nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
 
 								ui.nextPage.one( "pageshow", function() {
-									nextFooter.add( nextHeader ).appendTo( this );
+									nextHeader.prependTo( this );
+									nextFooter.appendTo( this );
 								});
 							}
 					}
@@ -8876,13 +8961,14 @@ $( document ).bind( "pagecreate create", function( e ) {
 		// This will set the content element's top or bottom padding equal to the toolbar's height
 		updatePagePadding: function( tbPage ) {
 			var $el = this.element,
-				header = $el.is( ".ui-header" );
+				header = $el.is( ".ui-header" ),
+				pos = parseFloat( $el.css( header ? "top" : "bottom" ) );
 
 			// This behavior only applies to "fixed", not "fullscreen"
 			if ( this.options.fullscreen ) { return; }
 
 			tbPage = tbPage || $el.closest( ".ui-page" );
-			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
+			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() + pos );
 		},
 
 		_useTransition: function( notransition ) {
@@ -8910,7 +8996,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 			if ( this._useTransition( notransition ) ) {
 				$el
 					.removeClass( "out " + hideClass )
-					.addClass( "in" );
+					.addClass( "in" )
+					.animationComplete(function () {
+						$el.removeClass('in');
+					});
 			}
 			else {
 				$el.removeClass( hideClass );
@@ -9054,8 +9143,9 @@ $( document ).bind( "pagecreate create", function( e ) {
 		// find and enhance the pages in the dom and transition to the first page.
 		initializePage: function() {
 			// find present pages
-			var $pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
-				hash = $.mobile.path.parseLocation().hash.replace("#", ""),
+			var path = $.mobile.path,
+				$pages = $( ":jqmData(role='page'), :jqmData(role='dialog')" ),
+				hash = path.stripHash( path.stripQueryParams(path.parseLocation().hash) ),
 				hashPage = document.getElementById( hash );
 
 			// if no pages are found, create one with body's inner html
@@ -9103,10 +9193,15 @@ $( document ).bind( "pagecreate create", function( e ) {
 				if ( $.mobile.path.isHashValid( location.hash ) ) {
 					$.mobile.urlHistory.initialDst = hash.replace( "#", "" );
 				}
-				$.mobile.changePage( $.mobile.firstPage, { transition: "none", reverse: true, changeHash: false, fromHashChange: true } );
-			}
-			// otherwise, trigger a hashchange to load a deeplink
-			else {
+
+				$.mobile.changePage( $.mobile.firstPage, {
+					transition: "none",
+					reverse: true,
+					changeHash: false,
+					fromHashChange: true
+				});
+			} else {
+				// otherwise, trigger a hashchange to load a deeplink
 				$window.trigger( "hashchange", [ true ] );
 			}
 		}

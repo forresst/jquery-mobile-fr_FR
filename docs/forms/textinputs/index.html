@@ -84,7 +84,7 @@
 			<h2>Plus de types de saisie de texte</h2>
 			<p>Dans jQuery Mobile, vous pouvez utiliser les types existants et nouveaux de saisie tels que <code>password</code>, <code>email</code>, <code>tel</code>, <code>number</code>, et bien d'autres Certaines valeurs de type sont rendus différemment selon les navigateurs. Par exemple, Chrome rend l'input <code>range</code> comme un curseur. jQuery Mobile standardise l'apparence de <code>range</code> et <code>search</code> dynamiquement en changeant leur type en <code>text</code>. Vous pouvez configurer les types d'entrée qui sont dégradés en <code>text</code> avec les options du plugin <code>page</code>.</p>
 			
-			<p>Un avantage majeur de l'utilisation de ces types d'entrée plus spécifique si cela sur des appareils mobiles, claviers spécialisés que la vitesse de saisie de données sont offerts à la place du clavier de texte standard. Essayez les inputs suivants sur un appareil mobile pour voir, dans quel cas ils affichent les claviers personnalisés sur différentes plateformes.</p>
+			<p>Un avantage majeur de l'utilisation de ces types d'entrée plus spécifique sur des appareils mobiles, c'est l'affichage de claviers spécialisés permettant d'augmenter la vitesse de saisie à la place du clavier de texte standard. La prise en charge de chaque type d'entrée varie considérablement selon les plateformes, mais en général, les plateformes reviennent vers une saisie de texte de base si elles ne le comprennent pas.</p>
 			
 			<div data-role="fieldcontain">
 	         <label for="password">Mot de passe :</label>
@@ -151,6 +151,15 @@
 	         <input type="color" name="color" id="color" value="" />
 			</div>
 			
+
+			
+			<h2>Saisie de fichier</h2>
+			<p>Les saisies de fichiers ont des options de style limité sur la plupart des plates-formes en raison de problèmes de sécurité. Depuis la version 1.3, nous appliquerons automatiquement thématisation standard pour la saisie de fichier. Lors des tests, nous avons constaté que même si le bouton pour sélectionner un fichier ne peut pas être stylisé, l'entrée qui entoure le bouton semble prendre les couleurs du thème, les coins et les dimensions dans la plupart des navigateurs modernes.</p>
+			
+			<div data-role="fieldcontain">
+	         <label for="file">Fichier :</label>
+	         <input type="file" name="file" id="file" value="" />
+			</div>
 			
 			
 			<h2>Zones de saisie</h2>
