@@ -60,8 +60,6 @@
 
 	asyncTest( "external page is removed from the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
-
 			function(){
 				$.mobile.changePage( "external.html" );
 			},
@@ -91,7 +89,6 @@
 		$( document ).bind( "pageremove", removeCallback );
 
 		$.testHelper.pageSequence([
-			navigateTestRoot,
 
 			function(){
 				$.mobile.changePage( "external.html" );
@@ -132,7 +129,6 @@
 
 	asyncTest( "external page is cached in the DOM after pagehide", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
 
 			function(){
 				$.mobile.changePage( "cached-external.html" );
@@ -154,7 +150,6 @@
 
 	asyncTest( "external page is cached in the DOM after pagehide when option is set globally", function(){
 		$.testHelper.pageSequence([
-			navigateTestRoot,
 
 			function(){
 				$.mobile.page.prototype.options.domCache = true;
@@ -1294,6 +1289,20 @@
 
 			function() {
 				equal( $.trim($.mobile.activePage.text()), "Parens!", "the page loaded" );
+				start();
+			}
+		]);
+	});
+
+	asyncTest( "loading an embeded page with query params works", function() {
+		$.testHelper.pageSequence([
+			function() {
+				$.mobile.changePage( "#bar?baz=bak", { dataUrl: false } );
+			},
+
+			function() {
+				ok( location.hash.indexOf( "bar?baz=bak" ) >= -1, "the hash is targeted at the page to be loaded" );
+				ok( $.mobile.activePage.attr( "id" ), "bar", "the correct page is loaded" );
 				start();
 			}
 		]);

@@ -55,7 +55,7 @@
 			}
 		},
 
-		pushStateRedirect: function( filename ) {
+		redirect: function( filename, paramPairs ) {
 			var search, pairs = [];
 
 			search = location.search.replace( "?", "");
@@ -64,11 +64,15 @@
 				pairs = search.split( "&" );
 			}
 
-			pairs.push( "push-state=false" );
+			pairs = pairs.concat( paramPairs ? paramPairs : [] );
 
 			location.href = location.href.toString()
-				 .replace(/\/[^\/]*\?|\/[^\/]*$/, "/" + filename )
-				 .replace( search, "") + "?" + pairs.join( "&" );
+				.replace(/\/[^\/]*\?|\/[^\/]*$/, "/" + filename )
+				.replace( search, "") + (pairs.length ? "?" + pairs.join( "&" ) : "");
+		},
+
+		pushStateRedirect: function( filename ) {
+			this.redirect( filename, ["push-state=false"] );
 		},
 
 		reloads: {},
@@ -218,9 +222,17 @@
 //			fn(result),
 //			{ key: {
 //					src: event source (is jQuery object or function returning jQuery object),
-//					event: event name (is string),
-//					       NB: It's a good idea to namespace your events, because the handler will be removed
-//					       based on the name you give here if a timeout occurs before the event fires.
+//					     (NB: You should use a function returning a jQuery object as the value for this parameter
+//					      if there is a chance that at the time of construction of the jQuery object (that is, when
+//					      the call to detailedEventCascade is made) the elements selected by the jQuery object are
+//					      not yet present in the DOM - such as, for instance, when the elements are part of a page
+//					      that gets AJAXed in subsequently, such as during a function that's part of the sequence of
+//					      functions passed to detailedEventCascade.)
+//					length: the number of milliseconds for the timeout - only used if src is not set,
+//					event: event name (is string), only used if src is set,
+//					       (NB: It's a good idea to namespace your events, because the handler will be removed
+//					        based on the name you give here if a timeout occurs before the event fires.)
+//
 //					userData1: value,
 //					...
 //					userDatan: value
@@ -244,11 +256,11 @@
 		detailedEventCascade: function( seq, result ) {
 			// grab one step from the sequence
 			var fn = seq.shift(),
-			    events = seq.shift(),
-			    self = this,
-			    derefSrc = function( src ) {
-						return ( $.isFunction( src ) ? src() : src );
-					};
+				events = seq.shift(),
+				self = this,
+				derefSrc = function( src ) {
+					return ( $.isFunction( src ) ? src() : src );
+				};
 
 			// we're done
 			if ( fn === undefined ) {
@@ -260,33 +272,34 @@
 				var newResult = {},
 					nEventsDone = 0,
 					nEvents = 0,
+					recordResult = function( key, event, result ) {
+						// Record the result
+						newResult[ key ] = $.extend( {}, event, result );
+						// Increment the number of received responses
+						nEventsDone++;
+						if ( nEventsDone === nEvents ) {
+							// clear the timeout and move on to the next step when all events have been received
+							if ( warnTimer ) {
+								clearTimeout( warnTimer );
+							}
+							setTimeout( function() {
+								self.detailedEventCascade( seq, newResult );
+							}, 0);
+						}
+					},
 					// set a failsafe timer in case one of the events never happens
 					warnTimer = setTimeout( function() {
+						warnTimer = 0;
 						$.each( events, function( key, event ) {
-							if ( newResult[ key ] === undefined ) {
+							// Timeouts are left out of this, because they will complete for
+							// sure, calling recordResult when they do
+							if ( newResult[ key ] === undefined && event.src ) {
 								// clean up the unused handler
 								derefSrc( event.src ).unbind( event.event );
-								newResult[ key ] = $.extend( {}, event, { timedOut: true } );
+								recordResult( key, event, { timedOut: true } );
 							}
 						});
-
-						// Move on to the next step
-						self.detailedEventCascade( seq, newResult );
 					}, 20000);
-
-				function recordResult( key, event, result ) {
-					// Record the result
-					newResult[ key ] = $.extend( {}, event, result );
-					// Increment the number of received responses
-					nEventsDone++;
-					if ( nEventsDone === nEvents ) {
-						// clear the timeout and move on to the next step when all events have been received
-						clearTimeout( warnTimer );
-						setTimeout( function() {
-							self.detailedEventCascade( seq, newResult );
-						}, 0);
-					}
-				}
 
 				$.each( events, function( key, event ) {
 					// Count the events so that we may know how many responses to expect
@@ -365,19 +378,24 @@
 
 				stop();
 
-				timeout = setTimeout( start, 2000);
+				timeout = setTimeout( function() {
+					start();
+					throw "navigation reset timed out";
+				}, 5000);
 
 				$(document).one( "pagechange", function() {
 					clearTimeout( timeout );
 					start();
 				});
 
-				location.hash = hash ? "#" + hash : "";
+
+				hash = location.hash.replace( "#", "" ) !== url ? url : "";
+				location.hash = hash;
 			};
 
 			// force the page reset for hash based tests
 			if ( location.hash && !$.support.pushState ) {
-				pageReset();
+				pageReset( url );
 			}
 
 			// force the page reset for all pushstate tests

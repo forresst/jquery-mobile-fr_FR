@@ -157,7 +157,8 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 								nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
 
 								ui.nextPage.one( "pageshow", function() {
-									nextFooter.add( nextHeader ).appendTo( this );
+									nextHeader.prependTo( this );
+									nextFooter.appendTo( this );
 								});
 							}
 					}
@@ -169,13 +170,14 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 		// This will set the content element's top or bottom padding equal to the toolbar's height
 		updatePagePadding: function( tbPage ) {
 			var $el = this.element,
-				header = $el.is( ".ui-header" );
+				header = $el.is( ".ui-header" ),
+				pos = parseFloat( $el.css( header ? "top" : "bottom" ) );
 
 			// This behavior only applies to "fixed", not "fullscreen"
 			if ( this.options.fullscreen ) { return; }
 
 			tbPage = tbPage || $el.closest( ".ui-page" );
-			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() );
+			$( tbPage ).css( "padding-" + ( header ? "top" : "bottom" ), $el.outerHeight() + pos );
 		},
 
 		_useTransition: function( notransition ) {
@@ -203,7 +205,10 @@ define( [ "jquery", "../jquery.mobile.widget", "../jquery.mobile.core", "../jque
 			if ( this._useTransition( notransition ) ) {
 				$el
 					.removeClass( "out " + hideClass )
-					.addClass( "in" );
+					.addClass( "in" )
+					.animationComplete(function () {
+						$el.removeClass('in');
+					});
 			}
 			else {
 				$el.removeClass( hideClass );
