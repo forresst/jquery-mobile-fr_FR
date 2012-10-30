@@ -1,0 +1,84 @@
+<!doctype html>
+<html class="no-js ui-mobile-rendering" lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+      <title>Backbone.js, Require.js, et jQuery Mobile</title>
+      <meta name="description" content="">
+
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+      <script src="js/libs/require.js" data-main="js/mobile"></script>
+</head>
+<body>
+
+<div id="categories" data-role="page" data-title="Categories">
+  
+      <div data-role="header">
+            <h1>Catégories</h1>
+      </div><!-- /header -->
+  
+      <div data-role="content">
+            <h2>Sélectionnez une catégorie ci-dessous :</h2>
+            <ul data-role="listview" data-inset="true">
+                  <li><a href="#category?animals" class="animals">Animaux</a></li>
+                  <li><a href="#category?colors" class="colors">Couleurs</a></li>
+                  <li><a href="#category?vehicles" class="vehicles">Véhicules</a></li>
+            </ul>
+      </div><!-- /content -->
+
+</div>
+
+<div id="animals" data-role="page" data-title="Animals">
+
+      <div data-role="header">
+	    <h1>Animaux</h1>
+      </div><!-- /header -->
+  
+      <div data-role="content">
+            <ul data-role="listview" data-inset="true">
+            </ul>
+      </div><!-- /content -->
+</div>
+
+<div id="colors" data-role="page" data-title="Colors">
+
+      <div data-role="header">
+	    <h1>Couleurs</h1>
+      </div><!-- /header -->
+
+      <div data-role="content">
+            <ul data-role="listview" data-inset="true">
+            </ul>
+      </div><!-- /content -->
+
+</div>
+
+<div id="vehicles" data-role="page" data-title="Vehicles">
+
+      <div data-role="header">
+	    <h1>Véhicules</h1>
+      </div><!-- /header -->
+  
+      <div data-role="content">
+            <ul data-role="listview" data-inset="true">
+            </ul>
+      </div><!-- /content -->
+
+</div><!-- Underscore Template that is used to display all of the Category Models -->
+
+
+<script id="categoryItems" type="text/template">
+
+      <% _.each( collection.toJSON(), function( category, id ) { %>
+
+            <li class="ui-li ui-li-static ui-btn-up-c ui-corner-top">
+                  <%= category.type %>
+            </script></li>
+
+      <% }); %>
+
+</script>
+
+</body>
+</html>

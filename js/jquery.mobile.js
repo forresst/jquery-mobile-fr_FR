@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: b7935991bce8606fac9ebe813c099cc28039be42 <> Date: Wed Oct 17 11:12:44 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 7273a5ea967ac8df12c9e12556e101f173ae2122 <> Date: Mon Oct 29 13:03:33 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -133,6 +133,9 @@
 			UP: 38,
 			WINDOWS: 91 // COMMAND
 		},
+
+		// Place to store various widget extensions
+		behaviors: {},
 
 		// Scroll page vertically: scroll to 0 to hide iOS address bar, or pass a Y value
 		silentScroll: function( ypos ) {
@@ -2853,7 +2856,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			//    [16]: ?msg=1234&type=unread
 			//    [17]: #msg-content
 			//
-			urlParseRE: /^(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
+			urlParseRE: /^\s*(((([^:\/#\?]+:)?(?:(\/\/)((?:(([^:@\/#\?]+)(?:\:([^:@\/#\?]+))?)@)?(([^:\/#\?\]\[]+|\[[^\/\]@#?]+\])(?:\:([0-9]+))?))?)?)?((\/?(?:[^\/\?#]+\/+)*)([^\?#]*)))?(\?[^#]+)?)(#.*)?/,
 
 			// Abstraction to address xss (Issue #4787) by removing the authority in
 			// browsers that auto	decode it. All references to location.href should be
@@ -4923,6 +4926,20 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 (function( $, undefined ) {
 
+$.mobile.behaviors.formReset = {
+	_handleFormReset: function() {
+		this._on( this.element.closest( "form" ), {
+			reset: function() {
+				this._delay( "_reset" );
+			}
+		});
+	}
+};
+
+})( jQuery );
+
+(function( $, undefined ) {
+
 $.fn.buttonMarkup = function( options ) {
 	var $workingSet = this,
 		mapToDataAttr = function( key, value ) {
@@ -5935,7 +5952,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 $.mobile.listview.prototype.options.autodividers = false;
 $.mobile.listview.prototype.options.autodividersSelector = function( elt ) {
 	// look for the text in the given element
-	var text = elt.text() || null;
+	var text = $.trim( elt.text() ) || null;
 
 	if ( !text ) {
 		return null;
@@ -6120,6 +6137,9 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				}
 			});
 
+		if ( this._handleFormReset ) {
+			this._handleFormReset();
+		}
 		this.refresh();
 	},
 
@@ -6152,6 +6172,10 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		.checkboxradio( "refresh" );
 	},
 
+	_reset: function() {
+		this.refresh();
+	},
+
 	refresh: function() {
 		var input = this.element[0],
 			label = this.label,
@@ -6180,6 +6204,8 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 		this.element.prop( "disabled", false ).parent().removeClass( "ui-disabled" );
 	}
 });
+
+$.widget( "mobile.checkboxradio", $.mobile.checkboxradio, $.mobile.behaviors.formReset );
 
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
@@ -6484,7 +6510,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 		},
 
-		_maybeRefreshTimeout: function() {
+		_expectResizeEvent: function() {
 			var winCoords = windowCoords();
 
 			if ( this._resizeData ) {
@@ -6509,14 +6535,21 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_resizeTimeout: function() {
-			if ( !this._maybeRefreshTimeout() ) {
-				// effectively rapid-open the popup while leaving the screen intact
-				this._trigger( "beforeposition" );
-				this._ui.container
-					.removeClass( "ui-selectmenu-hidden" )
-					.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+			if ( this._isOpen ) {
+				if ( !this._expectResizeEvent() ) {
+					if ( this._ui.container.hasClass( "ui-popup-hidden" ) ) {
+						// effectively rapid-open the popup while leaving the screen intact
+						this._trigger( "beforeposition" );
+						this._ui.container
+							.removeClass( "ui-popup-hidden" )
+							.offset( this._placementCoords( this._desiredCoords( undefined, undefined, "window" ) ) );
+					}
 
-				this._resizeScreen();
+					this._resizeScreen();
+					this._resizeData = null;
+					this._orientationchangeInProgress = false;
+				}
+			} else {
 				this._resizeData = null;
 				this._orientationchangeInProgress = false;
 			}
@@ -6524,18 +6557,19 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		_handleWindowResize: function( e ) {
 			if ( this._isOpen ) {
-				this._maybeRefreshTimeout();
+				if ( ( this._expectResizeEvent() || this._orientationchangeInProgress ) &&
+					!this._ui.container.hasClass( "ui-popup-hidden" ) ) {
+					// effectively rapid-close the popup while leaving the screen intact
+					this._ui.container
+						.addClass( "ui-popup-hidden" )
+						.removeAttr( "style" );
+				}
 			}
 		},
 
 		_handleWindowOrientationchange: function( e ) {
-
-			if ( !this._orientationchangeInProgress ) {
-				// effectively rapid-close the popup while leaving the screen intact
-				this._ui.container
-					.addClass( "ui-selectmenu-hidden" )
-					.removeAttr( "style" );
-
+			if ( !this._orientationchangeInProgress && this._isOpen ) {
+				this._expectResizeEvent();
 				this._orientationchangeInProgress = true;
 			}
 		},
@@ -6556,7 +6590,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			var ui = {
 					screen: $( "<div class='ui-screen-hidden ui-popup-screen'></div>" ),
 					placeholder: $( "<div style='display: none;'><!-- placeholder --></div>" ),
-					container: $( "<div class='ui-popup-container ui-selectmenu-hidden'></div>" )
+					container: $( "<div class='ui-popup-container ui-popup-hidden'></div>" )
 				},
 				thisPage = this.element.closest( ".ui-page" ),
 				myId = this.element.attr( "id" ),
@@ -6672,6 +6706,9 @@ $( document ).bind( "pagecreate create", function( e ) {
 			this._ui.container.removeClass( this._fallbackTransition );
 			if ( value && value !== "none" ) {
 				this._fallbackTransition = $.mobile._maybeDegradeTransition( value );
+				if ( this._fallbackTransition === "none" ) {
+					this._fallbackTransition = "";
+				}
 				this._ui.container.addClass( this._fallbackTransition );
 			}
 		},
@@ -6840,7 +6877,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		_animate: function( args ) {
 			// NOTE before removing the default animation of the screen
-			//      this had an animate callback that would relove the deferred
+			//      this had an animate callback that would resolve the deferred
 			//      now the deferred is resolved immediately
 			// TODO remove the dependency on the screen deferred
 			this._ui.screen
@@ -6853,14 +6890,16 @@ $( document ).bind( "pagecreate create", function( e ) {
 				if ( args.applyTransition ) {
 					this._applyTransition( args.transition );
 				}
-				this._ui.container
-					.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
-					.addClass( args.containerClassToAdd )
-					.removeClass( args.classToRemove );
-			} else {
-				this._ui.container.removeClass( args.classToRemove );
-				args.prereqs.container.resolve();
+				if ( this._fallbackTransition ) {
+					this._ui.container
+						.animationComplete( $.proxy( args.prereqs.container, "resolve" ) )
+						.addClass( args.containerClassToAdd )
+						.removeClass( args.classToRemove );
+					return;
+				}
 			}
+			this._ui.container.removeClass( args.classToRemove );
+			args.prereqs.container.resolve();
 		},
 
 		// The desired coordinates passed in will be returned untouched if no reference element can be identified via
@@ -6909,6 +6948,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 		_completeOpen: function() {
 			this._ui.container.attr( "tabindex", "0" ).focus();
+			this._expectResizeEvent();
 			this._trigger( "afteropen" );
 		},
 
@@ -6975,7 +7015,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			this._ui.screen.removeClass( "ui-screen-hidden" );
 
 			this._ui.container
-				.removeClass( "ui-selectmenu-hidden" )
+				.removeClass( "ui-popup-hidden" )
 				.offset( coords );
 
 			if ( this.options.overlayTheme && androidBlacklist ) {
@@ -7015,7 +7055,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 		_closePrereqContainer: function() {
 			this._ui.container
 				.removeClass( "reverse out" )
-				.addClass( "ui-selectmenu-hidden" )
+				.addClass( "ui-popup-hidden" )
 				.removeAttr( "style" );
 		},
 
@@ -7576,8 +7616,6 @@ $( document ).delegate( ":jqmData(role='listview')", "listviewcreate", function(
 (function( $, undefined ) {
 
 $.widget( "mobile.slider", $.mobile.widget, {
-	widgetEventPrefix: "slide",
-
 	options: {
 		theme: null,
 		trackTheme: null,
@@ -7744,6 +7782,10 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 		this.handle.bind( "vclick", false );
 
+		if ( this._handleFormReset ) {
+			this._handleFormReset();
+		}
+
 		this.refresh( undefined, undefined, true );
 	},
 
@@ -7907,6 +7949,11 @@ $.widget( "mobile.slider", $.mobile.widget, {
 		return  this.isToggleSwitch ? this.element[0].selectedIndex : parseFloat( this.element.val() ) ;
 	},
 
+
+	_reset: function() {
+		this.refresh( undefined, false, true );
+	},
+
 	refresh: function( val, isfromControl, preventInputUpdate ) {
 
 		// NOTE: we don't return here because we want to support programmatic
@@ -8034,6 +8081,13 @@ $.widget( "mobile.slider", $.mobile.widget, {
 
 });
 
+$.widget( "mobile.slider", $.mobile.slider, $.mobile.behaviors.formReset );
+
+// FIXME: Move the declaration of widgetEventPrefix back to the top of the
+// initial declaration of the slider widget once we start using a version of
+// the widget factory that includes a fix for http://bugs.jqueryui.com/ticket/8724
+$.widget( "mobile.slider", $.mobile.slider, { widgetEventPrefix: "slide" } );
+
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.slider.prototype.enhanceWithin( e.target, true );
@@ -8110,6 +8164,14 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 	},
 
+	_destroy: function() {
+		var wrapper = this.element.parents( ".ui-select" );
+		if ( wrapper.length > 0 ) {
+			this.element.insertAfter( wrapper );
+			wrapper.remove();
+		}
+	},
+
 	_create: function() {
 		this._preExtension();
 
@@ -8175,6 +8237,9 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 			self.refresh();
 		});
 
+		if ( this._handleFormReset ) {
+			this._handleFormReset();
+		}
 		this.build();
 	},
 
@@ -8265,6 +8330,10 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 		}
 	},
 
+	_reset: function() {
+		this.refresh();
+	},
+
 	refresh: function() {
 		this.setButtonText();
 		this.setButtonCount();
@@ -8286,6 +8355,8 @@ $.widget( "mobile.selectmenu", $.mobile.widget, {
 	}
 });
 
+$.widget( "mobile.selectmenu", $.mobile.selectmenu, $.mobile.behaviors.formReset );
+
 //auto self-init widgets
 $( document ).bind( "pagecreate create", function( e ) {
 	$.mobile.selectmenu.prototype.enhanceWithin( e.target, true );
@@ -8300,6 +8371,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 	var extendSelect = function( widget ) {
 
 		var select = widget.select,
+			origDestroy = widget._destroy,
 			selectID  = widget.selectID,
 			label = widget.label,
 			thisPage = widget.select.closest( ".ui-page" ),
@@ -8314,7 +8386,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 				"<div data-" + $.mobile.ns + "role='content'></div>"+
 				"</div>" ),
 
-			listbox =  $( "<div>", { "class": "ui-selectmenu" } ).insertAfter( widget.select ).popup( { theme: "a" } ),
+			listbox =  $( "<div>", { "class": "ui-selectmenu" } ).insertAfter( widget.select ).popup( { theme: widget.options.overlayTheme } ),
 
 			list = $( "<ul>", {
 				"class": "ui-selectmenu-list",
@@ -8372,6 +8444,17 @@ $( document ).bind( "pagecreate create", function( e ) {
 				// Create list from select, update state
 				self.refresh();
 
+				if ( self._origTabIndex === undefined ) {
+					self._origTabIndex = self.select.attr( "tabindex" );
+					// Map undefined to false, because self._origTabIndex === undefined
+					// indicates that we have not yet checked whether the select has
+					// originally had a tabindex attribute, whereas false indicates that
+					// we have checked the select for such an attribute, and have found
+					// none present.
+					if ( self._origTabIndex === undefined ) {
+						self._origTabIndex = false;
+					}
+				}
 				self.select.attr( "tabindex", "-1" ).focus(function() {
 					$( this ).blur();
 					self.button.focus();
@@ -8654,10 +8737,14 @@ $( document ).bind( "pagecreate create", function( e ) {
 						});
 					}
 
-					self.menuPage.one( "pageshow", function() {
-						focusMenuItem();
-						self.isOpen = true;
-					});
+					self.menuPage
+						.one( "pageshow", function() {
+							focusMenuItem();
+							self.isOpen = true;
+						})
+						.one( "pagehide", function() {
+							self.isOpen = false;
+						});
 
 					self.menuType = "page";
 					self.menuPageContent.append( self.list );
@@ -8732,7 +8819,12 @@ $( document ).bind( "pagecreate create", function( e ) {
 						needPlaceholder = false;
 						isPlaceholderItem = true;
 
-						// If we have identified a placeholder, mark it retroactively in the select as well
+						// If we have identified a placeholder, record the fact that it was
+						// us who have added the placeholder to the option and mark it
+						// retroactively in the select as well
+						if ( !option.hasAttribute( dataPlaceholderAttr ) ) {
+							this._removePlaceholderAttr = true;
+						}
 						option.setAttribute( dataPlaceholderAttr, true );
 						if ( o.hidePlaceholderMenuItems ) {
 							classes.push( "ui-selectmenu-placeholder" );
@@ -8783,6 +8875,30 @@ $( document ).bind( "pagecreate create", function( e ) {
 					// TODO value is undefined at creation
 					"aria-owns": this.menuId
 				});
+			},
+
+			_destroy: function() {
+				this.close();
+
+				// Restore the tabindex attribute to its original value
+				if ( this._origTabIndex !== undefined ) {
+					if ( this._origTabIndex !== false ) {
+						this.select.attr( "tabindex", this._origTabIndex );
+					} else {
+						this.select.removeAttr( "tabindex" );
+					}
+				}
+
+				// Remove the placeholder attribute if we were the ones to add it
+				if ( this._removePlaceholderAttr ) {
+					this._selectOptions().removeAttr( "data-" + $.mobile.ns + "placeholder" );
+				}
+
+				// Remove the popup
+				this.listbox.remove();
+
+				// Chain up
+				origDestroy.apply( this, arguments );
 			}
 		});
 	};

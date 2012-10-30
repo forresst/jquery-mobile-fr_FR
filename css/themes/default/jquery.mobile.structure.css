@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: b7935991bce8606fac9ebe813c099cc28039be42 <> Date: Wed Oct 17 11:12:44 2012 -0700
+* jQuery Mobile Framework Git Build: SHA1: 7273a5ea967ac8df12c9e12556e101f173ae2122 <> Date: Mon Oct 29 13:03:33 2012 +0200
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -1018,6 +1018,7 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 	-webkit-border-radius: inherit;
 	border-radius:         inherit;
 }
+.ui-popup-hidden { top: -99999px; left: -9999px; }
 .ui-checkbox, .ui-radio { position: relative; clear: both; margin: 0; z-index: 1; }
 .ui-checkbox .ui-btn, .ui-radio .ui-btn { margin-top: .5em; margin-bottom: .5em; text-align: left; z-index: 2; }
 .ui-checkbox .ui-btn.ui-mini, .ui-radio .ui-btn.ui-mini { margin: .25em 0; }
@@ -1071,11 +1072,11 @@ label.ui-select { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-selectmenu { padding: 6px; min-width: 160px; }
 .ui-selectmenu .ui-listview { margin: 0; }
 .ui-selectmenu .ui-btn.ui-li-divider { cursor: default; }
-.ui-selectmenu-hidden { top: -99999px; left: -9999px; }
 .ui-screen-hidden, .ui-selectmenu-list .ui-li .ui-icon { display: none; }
 .ui-selectmenu-list .ui-li .ui-icon { display: block; }
 .ui-li.ui-selectmenu-placeholder { display: none; }
 .ui-selectmenu .ui-header { margin: 0; padding: 0; }
+.ui-selectmenu.ui-popup .ui-header { -webkit-border-top-left-radius: 0; border-top-left-radius: 0; -webkit-border-top-right-radius: 0; border-top-right-radius: 0; }
 .ui-selectmenu .ui-header .ui-title { margin: 0.6em 46px 0.8em; }
 @media all and (min-width: 450px){
 	.ui-field-contain label.ui-select { vertical-align: top; display: inline-block; width: 20%; margin: 0 2% 0 0; }
