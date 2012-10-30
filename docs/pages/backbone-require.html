@@ -1,0 +1,178 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Docs jQuery Mobile - Applications Backbone.js et Require.js</title>
+  <link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
+  <link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+  <script src="../../js/jquery.js"></script>
+  <script src="../../docs/_assets/js/jqm-docs.js"></script>
+  <script src="../../js/"></script>
+
+</head>
+<body>
+
+  <div data-role="page" class="type-interior">
+
+    <div data-role="header" data-theme="f">
+    <h1>Applications Backbone.js et Require.js</h1>
+    <a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+  </div><!-- /header -->
+
+  <div data-role="content">
+    <div class="content-primary">
+      <h2>jQuery Mobile, Backbone.js et Require.js</h2>
+      <p>jQuery Mobile fournit une  <strong>interface utilisateur basé sur HTML5 pour toutes les plateformes des appareils mobiles les plus populaires</strong>, mais il n'a aucune influence sur la façon dont vous organiser et structurer le JavaScript de votre application. Beaucoup d'utilisateurs de jQuery Mobile se tournent vers d'autres bibliothèques populaires tierces, comme des frameworks MV* et des outils de gestion dépendants, pour aider à structurer leur code.
+      </p>
+      <p><strong>Backbone.js</strong> et <strong>Require.js</strong> sont deux bibliothèques tierces très populaires qui sont utilisées avec jQuery Mobile pour fournir une couche de technologie riche en JavaScript pour les développeurs.
+      </p>
+      <p><strong>Backbone.js</strong> est un bon framework JavaScript MV* côté client qui fournit une structure pour les applications JavaScript en fournissant Vue, Modèle, Collection, Routeur et des objets de classe Événements.
+      </p>
+      <p><strong>Require.js</strong> propose quelques objectifs différents de ceux Backbone.js. Require.js est un chargeur de script AMD (Asynchronous Module Definition) qui charge votre Javascript en asynchrone pour améliorer les performances de chargement des pages, tout en manageant la dépendance de script et vous permettant d'organiser votre JavaScript dans des modules (fichiers).
+      </p>
+      <p>Bien qu'il existe un grand intérêt d'utiliser ensemble jQuery Mobile, Backbone.js et Require.js, il y a une forte barrière en entrée. Beaucoup d'utilisateurs confondent la façon d'utiliser l'objet de classe Router de Backbone.js avec le système de routage de jQuery Mobile. <br /><br /> La technique utilisée dans <a href="Backbone-Require/index.html" rel="external">cet échantillon de travail</a> est loin d'être la seule technique disponible, mais c'est l'une l'un des plus élégantes. Le router de Backbone.js est utilisé exclusivement pour gérer tous les événements de hashchange et la méthode <code>$.mobile.changePage()</code> de  jQuery Mobile est utilisée pour changer par programmation la page. <br /><br /> Voici deux propriétés internes de jQuery Mobile qui sont désactivées pour permettre que cela se produise :
+
+      <ul>
+        <li><code>$.mobile.linkBindingEnabled</code>
+          <ul>
+            <li>jQuery Mobile liera automatiquement les clics sur les balises d'ancrage dans votre document. Le paramétrage de cette option à false empêchera  tous les ancrages à l'ajout en gérant le clic de l'état du bouton actif et de lien alternatif flouté. Cela ne devrait être utilisé que lorsque l'on tente de déléguer la gestion du clic à une autre bibliothèque ou un code personnalisé.</li>
+            </ul>
+        </li>
+        <li><code>$.mobile.hashListeningEnabled</code>
+          <ul>
+            <li>jQuery Mobile écoutera et gérera automatiquement les changements vers location.hash. La désactivation empêchera jQuery Mobile de manipuler les changements de hash, ce qui vous permet de le gérer vous-même, ou d'utiliser de simples liens dans un document qui défilent vers un ID particulier.</li>
+            </ul>
+        </li>
+      </ul>
+      </p>
+      <p>Pour illustrer la manière dont les propriétés internes ci-dessus de jQuery Mobile sont désactivées, examinons le code de <a href="Backbone-Require/index.html" rel="external">notre échantillon de travail</a>.</p>
+
+      <p>A l'intérieur de la section <em>head</em> de notre page <strong>index.html</strong>, nous avons d'abord inclus la bibliothèque JavaScript Require.js et défini l'attribut <strong>data-main</strong> dans notre balise de script du fichier JavaScript où nous voulons Require.js pour l'inclure sur la première page (ce fichier contiendra toutes nos configurations Require.js). Dans cet exemple, nous appelons Require.js pour regarder à l'intérieur du répertoire js et charger <strong>mobile.js</strong>.
+      </p>
+
+      <code>
+        
+        &lt;head&gt;
+          &lt;script src="js/libs/require.js" data-main="js/mobile"&gt;&lt;/script&gt;
+        &lt;/head&gt;
+      
+      </code>
+      <p>Si nous regardons à l'intérieur de <strong>mobile.js</strong>, nous trouverons que les attributs jQuery Mobile <code>$.mobile.linkBindingEnabled</code> et <code>$.mobile.hashListeningEnabled</code> définis à false.
+      </p>
+      <pre>
+      <code>
+      // Définit la configuration de require.js pour votre application.
+      require.config( {
+  
+        // 3rd party script alias names (Easier to type "jquery" than "libs/jquery-1.8.2.min")
+        paths: {
+
+            // Libraries principales
+            "jquery": "libs/jquery",
+            "jquerymobile": "libs/jquerymobile",
+            "underscore": "libs/lodash",
+            "backbone": "libs/backbone"
+
+        },
+
+        // Définit la configuration des scripts tiers pour vos scripts tiers qui ne sont pas compatible AMD
+        shim: {
+
+            "backbone": {
+                  "deps": [ "underscore", "jquery" ],
+                  "exports": "Backbone"  //attaches "Backbone" to the window object
+            }
+
+        } // end Shim Configuration
+
+      } );
+
+      // Inclus les dépendances de fichier
+      require([ "jquery","backbone","routers/mobileRouter","jquerymobile" ], function( $, Backbone, Mobile ) {
+
+        //Empêche toute manipulation de clic sur les ancres
+        $.mobile.linkBindingEnabled = false;
+
+        // La désactivation de ceci, empêchera jQuery Mobile de traiter des changements de hash
+        $.mobile.hashListeningEnabled = false;
+
+        // Instancie un nouveau Routeur Mobile de Backbone.js
+        this.router = new Mobile();
+
+      } );
+</code>
+</pre>
+<p>Ensuite, à l'intérieur de l'objet de classe du Routeur de Backbone.js, nous pouvons répondre aux événements haschange et appeler manuellement la méthode jQuery Mobile <code>changePage()</code>. Voici un petit extrait de <strong>mobileRouter.js</strong>.</p>
+<pre>
+<code>
+        // Backbone.js Routes
+        routes: {
+
+            // Quand il n'y a pas de hash sur l'url, la méthode home est appelée
+            "": "home",
+
+            // Quand #category? est sur l'url, la méthode category est appelée
+            "category?:type": "category"
+
+        },
+
+        // Méthode home
+        home: function() {
+
+            // Change par programmation vers la page categories
+            $.mobile.changePage( "#categories" , { reverse: false, changeHash: false } );
+
+        }
+</code>
+</pre>
+<p>
+L'<a href="Backbone-Require/index.html" rel="external">échantillon de travail</a> illustre comment rendre une ListView de jQuery Mobile remplie avec des données JSON dynamiques de manière asynchrone. N'hésitez pas à regarder plus en détail dans le code source pour voir comment Require.js et Backbone.js sont utilisés.
+</p>
+      </div><!--/content-primary -->
+    
+
+        <div class="content-secondary">
+
+          <div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+              <h3>Aussi dans cette rubrique</h3>
+
+              <ul data-role="listview" data-theme="c" data-dividertheme="d">
+
+                <li data-role="list-divider">Pages &amp; Boîtes de dialogue</li>
+                <li><a href="page-anatomy.html">Anatomie de la page</a></li>
+                <li><a href="page-template.html" data-ajax="false">Modèle de page unique</a></li>
+                <li><a href="multipage-template.html" data-ajax="false">Modèle Multi-page</a></li>
+                <li><a href="page-titles.html">Titres des pages</a></li>
+                <li><a href="page-links.html">Liaison de pages</a></li>
+                <li><a href="page-transitions.html">Transitions de page</a></li>
+                <li><a href="loader.html">Widget de chargement de page</a></li>
+                <li><a href="dialog/index.html">Boîtes de dialogue</a></li>
+                <li><a href="popup/index.html">Popups</a></li>
+                <li><a href="page-cache.html">Le préchargement &amp; la mise en cache des pages</a></li>
+                <li><a href="page-navmodel.html">Ajax, hashes &amp; historique</a></li>
+                <li><a href="page-dynamic.html">Injection dynamique des pages</a></li>
+                <li><a href="page-scripting.html">Écriture des scripts des pages</a></li>
+                <li data-theme="a"><a href="backbone-require.html">Applications Backbone.js et Require.js</a></li>
+                <li><a href="phonegap.html">Application PhoneGap</a></li>
+                <li><a href="touchoverflow.html">Fonctionnalité de touchOverflow</a></li>
+                <li><a href="pages-themes.html">Thématisation des pages</a></li>
+              </ul>
+          </div>
+        </div>
+
+      </div><!-- /content -->
+
+      <div data-role="footer" class="footer-docs" data-theme="c">
+          <p class="jqm-version"></p>
+        <p>© 2012 jQuery Fondation et autres contributeurs</p>
+      </div>
+
+      </div><!-- /page -->
+
+      </body>
+      </html>
