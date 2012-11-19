@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Controlgroups - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../assets/js/jqm-demos.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Controlgroups</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+
+		<h2>Controlgroup vertical</h2>
+			
+			<div data-demo-html="true">	
+				<div data-role="controlgroup">
+					<a href="#" data-role="button">Pas d'icône</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="left">Gauche</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="right">Droite</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="top">Haut</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icône seule</a>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h3>Taille mini</h3>
+				
+			<div data-demo-html="true">
+				<div data-role="controlgroup" data-mini="true">
+					<a href="#" data-role="button" data-mini="true">Pas d'icône</a> <a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="left">Gauche</a> <a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="right">Droite</a> <a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="top">Haut</a> <a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="bottom">Bas</a> <a href="#" data-role="button" data-icon="delete" data-mini="true" data-iconpos="notext">Icône seule</a>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h2>Controlgroup horizontal</h2>
+
+			<div data-demo-html="true">
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#" data-role="button">Pas d'icône</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="left">Gauche</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="right">Droite</a>
+				</div>
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="top">Haut</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="top">Haut</a>
+				</div>
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bas</a>
+				</div>
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icône seule</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icône seule</a>
+				</div>
+				<form>
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<button data-icon="home">Accueil</button> <button data-icon="search" data-iconpos="notext">Recherche</button>
+						<label for="select-more-1a" class="ui-hidden-accessible">Plus</label>
+						<select name="select-more-1a" id="select-more-1a">
+							<option value="">Sélection …</option>
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+					</fieldset>
+				</form>
+			</div><!--/demo-html -->
+
+			<h3>Taille mini</h3>
+
+			<div data-demo-html="true">
+				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+					<a href="#" data-role="button">Pas d'icône</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="left">Gauche</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="right">Droite</a>
+				</div>
+				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="top">Haut</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="top">Haut</a>
+				</div>
+				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="bottom">Bas</a>
+				</div>
+				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+					<a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icône seule</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext">Icône seule</a>
+				</div>
+				<form>
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+						<button data-icon="home">Accueil</button> <button data-icon="search" data-iconpos="notext">Recherche</button>
+						<label for="select-more-2a" class="ui-hidden-accessible">Plus</label>
+						<select name="select-more-2a" id="select-more-2a">
+							<option value="">Sélection …</option>
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+					</fieldset>
+				</form>
+			</div><!--/demo-html -->
+
+			<form>
+			
+				<h2>Radio bouton</h2>
+				
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup">
+						<legend>Vertical :</legend>
+						<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2a" value="on" checked="checked">
+						<label for="radio-choice-v-2a">Un</label>
+						<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2b" value="off">
+						<label for="radio-choice-v-2b">Deux</label>
+						<input type="radio" name="radio-choice-v-2" id="radio-choice-v-2c" value="other">
+						<label for="radio-choice-v-2c">Trois</label>
+					</fieldset>
+				</div><!--/demo-html -->
+			  
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup" data-mini="true">
+						<legend>Vertical, taille mini :</legend>
+						<input type="radio" name="radio-choice-v-6" id="radio-choice-v-6a" value="on" checked="checked">
+						<label for="radio-choice-v-6a">Un</label>
+						<input type="radio" name="radio-choice-v-6" id="radio-choice-v-6b" value="off">
+						<label for="radio-choice-v-6b">Deux</label>
+						<input type="radio" name="radio-choice-v-6" id="radio-choice-v-6c" value="other">
+						<label for="radio-choice-v-6c">Trois</label>
+					</fieldset>
+				</div><!--/demo-html -->
+			
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<legend>Horizontal :</legend>
+						<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2a" value="on" checked="checked">
+						<label for="radio-choice-h-2a">Un</label>
+						<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2b" value="off">
+						<label for="radio-choice-h-2b">Deux</label>
+						<input type="radio" name="radio-choice-h-2" id="radio-choice-h-2c" value="other">
+						<label for="radio-choice-h-2c">Trois</label>
+					</fieldset>
+				</div><!--/demo-html -->
+				
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+						<legend>Horizontal, taille mini :</legend>
+						<input type="radio" name="radio-choice-h-6" id="radio-choice-h-6a" value="on" checked="checked">
+						<label for="radio-choice-h-6a">Un</label>
+						<input type="radio" name="radio-choice-h-6" id="radio-choice-h-6b" value="off">
+						<label for="radio-choice-h-6b">Deux</label>
+						<input type="radio" name="radio-choice-h-6" id="radio-choice-h-6c" value="other">
+						<label for="radio-choice-h-6c">Trois</label>
+					</fieldset>
+				</div><!--/demo-html -->
+				
+				<h2>Case à cocher</h2>
+	
+				<div data-demo-html="true">				   
+					<fieldset data-role="controlgroup">
+						<legend>Vertical :</legend>
+						<input type="checkbox" name="checkbox-v-2a" id="checkbox-v-2a">
+						<label for="checkbox-v-2a">Un</label>
+						<input type="checkbox" name="checkbox-v-2b" id="checkbox-v-2b">
+						<label for="checkbox-v-2b">Deux</label>
+						<input type="checkbox" name="checkbox-v-2c" id="checkbox-v-2c">
+						<label for="checkbox-v-2c">Trois</label>
+					</fieldset>
+				</div><!--/demo-html -->
+				
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup" data-mini="true">
+						<legend>Vertical, taille mini :</legend>
+						<input type="checkbox" name="checkbox-v-6a" id="checkbox-v-6a">
+						<label for="checkbox-v-6a">Un</label>
+						<input type="checkbox" name="checkbox-v-6b" id="checkbox-v-6b">
+						<label for="checkbox-v-6b">Deux</label>
+						<input type="checkbox" name="checkbox-v-6c" id="checkbox-v-6c">
+						<label for="checkbox-v-6c">Trois</label>
+					</fieldset>
+				</div><!--/demo-html -->
+			
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<legend>Horizontal :</legend>
+						<input type="checkbox" name="checkbox-h-2a" id="checkbox-h-2a">
+						<label for="checkbox-h-2a">Un</label>
+						<input type="checkbox" name="checkbox-h-2b" id="checkbox-h-2b">
+						<label for="checkbox-h-2b">Deux</label>
+						<input type="checkbox" name="checkbox-h-2c" id="checkbox-h-2c">
+						<label for="checkbox-h-2c">Trois</label>
+					</fieldset>
+				</div><!--/demo-html -->
+				
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+						<legend>Horizontal, taille mini :</legend>
+						<input type="checkbox" name="checkbox-h-6a" id="checkbox-h-6a">
+						<label for="checkbox-h-6a">Un</label>
+						<input type="checkbox" name="checkbox-h-6b" id="checkbox-h-6b">
+						<label for="checkbox-h-6b">Deux</label>
+						<input type="checkbox" name="checkbox-h-6c" id="checkbox-h-6c">
+						<label for="checkbox-h-6c">Trois</label>
+					</fieldset>
+				</div><!--/demo-html -->
+	
+				<h2>Sélections</h2>
+	
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup">
+						<legend>Vertical :</legend>
+						<label for="select-v-2a">Sélection A</label>
+						<select name="select-v-2a" id="select-v-2a">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+						<label for="select-v-2b">Sélection B</label>
+						<select name="select-v-2b" id="select-v-2b">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+						<label for="select-v-2c">Sélection C</label>
+						<select name="select-v-2c" id="select-v-2c">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+					</fieldset>
+				</div><!--/demo-html -->
+				
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup" data-mini="true">
+						<legend>Vertical, taille mini :</legend>
+						<label for="select-v-6a">Sélection A</label>
+						<select name="select-v-6a" id="select-v-6a">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+						<label for="select-v-6b">Sélection B</label>
+						<select name="select-v-6b" id="select-v-6b">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+						<label for="select-v-6c">Sélection C</label>
+						<select name="select-v-6c" id="select-v-6c">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+					</fieldset>
+				</div><!--/demo-html -->
+				
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup" data-type="horizontal">
+						<legend>Horizontal :</legend>
+						<label for="select-h-2a">Sélection A</label>
+						<select name="select-h-2a" id="select-h-2a">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+						<label for="select-h-2b">Sélection B</label>
+						<select name="select-h-2b" id="select-h-2b">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+						<label for="select-h-2c">Sélection C</label>
+						<select name="select-h-2c" id="select-h-2c">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+					</fieldset>
+				</div><!--/demo-html -->
+				
+				<div data-demo-html="true">					
+					<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+						<legend>Horizontal, taille mini :</legend>
+						<label for="select-h-6a">Sélection A</label>
+						<select name="select-h-6a" id="select-h-6a">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+						<label for="select-h-6b">Sélection B</label>
+						<select name="select-h-6b" id="select-h-6b">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+						<label for="select-h-6c">Sélection C</label>
+						<select name="select-h-6c" id="select-h-6c">
+							<option value="#">Un</option>
+							<option value="#">Deux</option>
+							<option value="#">Trois</option>
+						</select>
+					</fieldset>
+				</div><!--/demo-html -->
+			</form>
+			
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

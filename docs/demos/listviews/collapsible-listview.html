@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Liste pliable - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../assets/js/jqm-demos.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+	<style>
+		#demo-borders .ui-collapsible .ui-collapsible-heading .ui-btn { border-top-width: 1px !important; }
+	</style>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Liste pliable</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+		
+			<h2>Pliable intégré, individuel</h2>
+			
+			<div data-demo-html="true">
+				<div data-role="collapsible" data-theme="b" data-content-theme="c">
+					<h2>Choisissez un modèle de voiture...</h2>
+					<ul data-role="listview">
+						<li><a href="#">Acura</a></li>
+						<li><a href="#">Audi</a></li>
+						<li><a href="#">BMW</a></li>
+						<li><a href="#">Cadillac</a></li>
+						<li><a href="#">Chrysler</a></li>
+						<li><a href="#">Dodge</a></li>
+						<li><a href="#">Ferrari</a></li>
+						<li><a href="#">Ford</a></li>
+						<li><a href="#">GMC</a></li>
+						<li><a href="#">Honda</a></li>
+						<li><a href="#">Hyundai</a></li>
+						<li><a href="#">Infiniti</a></li>
+						<li><a href="#">Jeep</a></li>
+						<li><a href="#">Kia</a></li>
+						<li><a href="#">Lexus</a></li>
+						<li><a href="#">Mini</a></li>
+						<li><a href="#">Nissan</a></li>
+						<li><a href="#">Porsche</a></li>
+						<li><a href="#">Subaru</a></li>
+						<li><a href="#">Toyota</a></li>
+						<li><a href="#">Volkswagon</a></li>
+						<li><a href="#">Volvo</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+			</div><!--/demo-html -->
+			
+			<h2>Ensemble de pliable, intégré</h2>
+			
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+					<div data-role="collapsible">
+						<h2>Liste filtrées</h2>
+						<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d">
+							<li><a href="#">Adam Kinkaid</a></li>
+							<li><a href="#">Alex Wickerham</a></li>
+							<li><a href="#">Avery Johnson</a></li>
+							<li><a href="#">Bob Cabot</a></li>
+							<li><a href="#">Caleb Booth</a></li>
+						</ul>
+					</div><!-- /collapsible -->
+					<div data-role="collapsible">
+						<h2>Texte formaté</h2>
+						<ul data-role="listview" data-theme="d" data-divider-theme="d">
+							<li data-role="list-divider">Vendredi 8 octobre 2010 <span class="ui-li-count">2</span></li>
+							<li><a href="#">
+								<h3>Stephen Weber</h3>
+								</a><p><strong>Vous avez été invité à la réunion Filament Group à Boston, MA</strong></p>
+								<p>Hé Stephen, si vous êtes disponible demain à 10 heures, nous avons une réunion avec l'équipe jQuery.</p>
+								<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+							</a></li>
+							<li><a href="#">
+								<h3>Equipe jQuery</h3>
+								</a><p><strong>Planning de la conférence de Boston</strong></p>
+								<p>Pour préparation de la prochaine conférence à Boston, nous avons besoin de commencer à rassembler une liste de sponsors et conférenciers.</p>
+								<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+							</a></li>
+						</ul>
+					</div><!-- /collapsible -->
+					<div data-role="collapsible">
+						<h2>Miniatures et bouton séparé</h2>
+						<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+							<li><a href="#">
+								<img src="../assets/img/album-bb.jpg" />
+								<h3>Broken Bells</h3>
+								</a><p>Broken Bells</p>
+								</a><a href="#">Purchase album
+							
+							</a></li>
+							<li><a href="#">
+								<img src="../assets/img/album-hc.jpg" />
+								<h3>Warning</h3>
+								</a><p>Hot Chip</p>
+								</a><a href="#">Purchase album
+							
+							</a></li>
+							<li><a href="#">
+								<img src="../assets/img/album-p.jpg" />
+								<h3>Wolfgang Amadeus Phoenix</h3>
+								</a><p>Phoenix</p>
+								</a><a href="#">Purchase album
+							
+							</a></li>	
+						</ul>
+					</div><!-- /collapsible -->
+				</div><!-- /collapsible-set -->
+			</div><!--/demo-html -->
+
+			<h2>Ensemble de pliable, non-intégré</h2>
+			
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="b" data-content-theme="d" data-inset="false">
+					<div data-role="collapsible">
+						<h2>Boîte d'email</h2>
+						<ul data-role="listview">
+							<li><a href="#">Boîte de réception <span class="ui-li-count">12</span></a></li>
+							<li><a href="#">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+							<li><a href="#">Brouillons <span class="ui-li-count">4</span></a></li>
+							<li><a href="#">Envoyé <span class="ui-li-count">328</span></a></li>
+							<li><a href="#">Corbeille <span class="ui-li-count">62</span></a></li>
+						</ul>
+					</div><!-- /collapsible -->
+					<div data-role="collapsible">
+						<h2>Calendrier</h2>
+						<ul data-role="listview" data-theme="d" data-divider-theme="d">
+							<li data-role="list-divider">Vendredi 8 octobre 2010 <span class="ui-li-count">2</span></li>
+							<li><a href="#">
+								<h3>Stephen Weber</h3>
+								</a><p><strong>Vous avez été invité à la réunion Filament Group à Boston, MA</strong></p>
+								<p>Hé Stephen, si vous êtes disponible demain à 10 heures, nous avons une réunion avec l'équipe jQuery.</p>
+								<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+							</a></li>
+							<li><a href="#">
+								<h3>Equipe jQuery</h3>
+								</a><p><strong>Planning de la conférence de Boston</strong></p>
+								<p>Pour préparation de la prochaine conférence à Boston, nous avons besoin de commencer à rassembler une liste de sponsors et conférenciers.</p>
+								<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+							</a></li>
+							<li data-role="list-divider">Jeudi 7 Octobre 2010 <span class="ui-li-count">1</span></li>
+							<li><a href="#">
+								<h3>Avery Walker</h3>
+								</a><p><strong>Re: Ce soir dîner</strong></p>
+								<p>Bien sûr, planifions la réunion à Cuisine Highland à 8:00 ce soir. Ne peux pas attendre ! </p>
+								<p class="ui-li-aside"><strong>4:48</strong>PM</p>
+							</a></li>
+							<li data-role="list-divider">Mercredi 6 Octobre 2010 <span class="ui-li-count">3</span></li>
+							<li><a href="#">
+								<h3>Amazon.com</h3>
+								</a><p><strong>4 Livres pour enfants pour le prix de 3</strong></p>
+								<p>Comme celui qui a acheté des livres pour enfants à partir de notre boutique 4-pour-3, vous pouvez être intéressé par ces livres présentés.</p>
+								<p class="ui-li-aside"><strong>12:47</strong>PM</p>
+							</a></li>
+						</ul>
+					</div><!-- /collapsible -->
+					<div data-role="collapsible">
+						<h2>Contacts</h2>
+						<ul data-role="listview" data-autodividers="true" data-theme="d" data-divider-theme="d">
+							<li><a href="#">Adam Kinkaid</a></li>
+							<li><a href="#">Alex Wickerham</a></li>
+							<li><a href="#">Avery Johnson</a></li>
+							<li><a href="#">Bob Cabot</a></li>
+							<li><a href="#">Caleb Booth</a></li>
+							<li><a href="#">Christopher Adams</a></li>
+							<li><a href="#">Culver James</a></li>	
+						</ul>
+					</div><!-- /collapsible -->
+				</div><!-- /collapsible-set -->
+			</div><!--/demo-html -->
+
+			<h2>Pliables individuels, non-intégrés</h2>
+			
+			<p>Ceci est un exemple d'une série de pliables individuels qui sont sur toute la largeur (non intégré) avec des listes à l'intérieur. Plusieurs pliables peuvent être ouverts en même temps, puisque chacun sont des pliables individuels. Ici, chaque pliable a aussi une icône personnalisée.</p>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+					<h2>Animaux de compagnie</h2>
+					<ul data-role="listview">
+						<li><a href="#">Canaris</a></li>
+						<li><a href="#">Chat</a></li>
+						<li><a href="#">Chien</a></li>
+						<li><a href="#">Gerbille</a></li>
+						<li><a href="#">Iguane</a></li>
+						<li><a href="#">Souris</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+					<h2>Animaux de la ferme</h2>
+					<ul data-role="listview">
+						<li><a href="#">Poulet</a></li>
+						<li><a href="#">Vache</a></li>
+						<li><a href="#">Canard</a></li>
+						<li><a href="#">Cheval</a></li>
+						<li><a href="#">Cochon</a></li>
+						<li><a href="#">Mouton</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+				<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+					<h2>Animaux sauvages</h2>
+					<ul data-role="listview">
+						<li><a href="#">Oryctérope du Cap</a></li>
+						<li><a href="#">Alligator</a></li>
+						<li><a href="#">Fourmi</a></li>
+						<li><a href="#">Ours</a></li>
+						<li><a href="#">Castor</a></li>
+						<li><a href="#">Puma</a></li>
+						<li><a href="#">Dingo</a></li>
+					</ul>
+				</div><!-- /collapsible -->
+			</div><!--/demo-html -->
+
+			<p>Pour éviter des "doubles" bords, le framework supprime la bordure supérieure des pliables qui sont immédiatement précédés par un autre pliable. Ici, nous montrons comment faire cela avec du CSS personnalisé.</p>
+			
+			<div data-demo-html="true" data-demo-css="true">
+				<div id="demo-borders">
+					<div data-role="collapsible" data-theme="b" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+						<h2>Animaux de compagnie</h2>
+						<ul data-role="listview">
+							<li><a href="#">Canaris</a></li>
+							<li><a href="#">Chat</a></li>
+							<li><a href="#">Chien</a></li>
+							<li><a href="#">Gerbille</a></li>
+							<li><a href="#">Iguane</a></li>
+							<li><a href="#">Souris</a></li>
+						</ul>
+					</div><!-- /collapsible -->
+					<div data-role="collapsible" data-theme="e" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d" data-inset="false">
+						<h2>Animaux de la ferme</h2>
+						<ul data-role="listview">
+							<li><a href="#">Poulet</a></li>
+							<li><a href="#">Vache</a></li>
+							<li><a href="#">Canard</a></li>
+							<li><a href="#">Cheval</a></li>
+							<li><a href="#">Cochon</a></li>
+							<li><a href="#">Mouton</a></li>
+						</ul>
+					</div><!-- /collapsible -->
+				</div>
+			</div><!--/demo-html -->
+						
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

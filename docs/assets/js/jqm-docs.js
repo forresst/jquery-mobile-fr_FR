@@ -29,7 +29,7 @@ $(function(){
 	});
 });
 
-// affiche la version de jQM
+// Affiche la version de jQM
 $(document).bind( 'pageinit', function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
@@ -132,3 +132,25 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     });
   });
 }
+
+// Mesure le temps à partir de pageLoad jusqu'à pageshow pour la page lists-performance.html
+// NB: lists-performance.html devrait se charger sans transition pour éviter d'avoir
+// la durée de la transition incluse dans la mesure
+$( document ).bind( "pageload", function( e, data ) {
+	var ar = data.dataUrl.split( "/" ), then;
+
+	// Si nous chargeons "lists-performance.html ..."
+	if ( ar.length && ar[ ar.length - 1 ] === "lists-performance.html" ) {
+		// ... sauver l'horodatage de l'événement, et se connecter au pagebeforeshow de la page
+		then = new Date();
+		data.page.one( "pageshow", function( e, pbsData ) {
+			// ... puis comparer le temps de pagebeforeshow à celui de pageLoad
+			var now = new Date(),
+				header = data.page.find( ".ui-header h1:first" );
+			// ... et ajouter/remplacer le span dans le header avec le resultat
+			header
+				.remove( "span:jqmData(role='perfData')" )
+				.append( "<span style='font-size: 8px;' data-" + $.mobile.ns + "role='perfData'> (" + ( now.getTime() - then.getTime() ) + " ms)</span>" );
+		});
+	}
+});

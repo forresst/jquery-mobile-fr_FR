@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Boutons dans les grilles - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../assets/js/jqm-demos.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+	<style>
+		.mygrid > div {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Boutons dans les grilles</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+		
+			<h2>Grille D</h2>
+
+			<div data-demo-html="true">				
+				<div class="ui-grid-d">
+					<div class="ui-block-a"><button data-icon="home" data-iconpos="notext">Bouton</button></div>
+					<div class="ui-block-b"><button data-icon="arrow-l" data-iconpos="notext">Bouton</button></div>
+					<div class="ui-block-c"><button data-icon="grid" data-iconpos="notext">Bouton</button></div>
+					<div class="ui-block-d"><button data-icon="arrow-r" data-iconpos="notext">Bouton</button></div>
+					<div class="ui-block-e"><button data-icon="gear" data-iconpos="notext">Bouton</button></div>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h2>Grille C</h2>
+			
+			<h3>Aligné, centré</h3>
+			
+			<div data-demo-html="true" data-demo-css="true">				
+				<div class="ui-grid-c mygrid">
+					<div class="ui-block-a"><button data-icon="home" data-iconpos="notext" data-inline="true">Bouton</button></div>
+					<div class="ui-block-b"><button data-icon="arrow-l" data-iconpos="notext" data-inline="true">Bouton</button></div>
+					<div class="ui-block-d"><button data-icon="arrow-r" data-iconpos="notext" data-inline="true">Bouton</button></div>
+					<div class="ui-block-e"><button data-icon="gear" data-iconpos="notext" data-inline="true">Bouton</button></div>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h2>Grille B</h2>
+			
+			<h3>Taille mini</h3>
+			
+			<div data-demo-html="true">				
+				<div class="ui-grid-b">
+					<div class="ui-block-a"><a href="#" data-role="button" data-mini="true">Ancre</a></div>
+					<div class="ui-block-b"><button data-mini="true">Bouton</button></div>
+					<div class="ui-block-c"><input type="button" data-mini="true" value="Saisie"></div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h2>Grille A</h2>
+
+			<div data-demo-html="true">				
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<label for="grid-select-1" class="ui-hidden-accessible">Grille sélection 1</label>
+						<select id="grid-select-1" name="grid-select-1">
+							<option>Sélection</option>
+							<option value="1">Première Option</option>
+							<option value="2">Deuxième Option</option>
+							<option value="3">Troisième Option</option>
+							<option value="4">Quatrième Option</option>
+						</select>
+					</div>
+					<div class="ui-block-b"><a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Bouton</a></div>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h3>Taille mini</h3>
+
+			<div data-demo-html="true">				
+				<div class="ui-grid-a">
+					<div class="ui-block-a">
+						<label for="grid-select-2" class="ui-hidden-accessible">Grille sélection 2</label>
+						<select id="grid-select-2" name="grid-select-2" multiple="multiple" data-native-menu="false" data-mini="true">
+							<option>Sélection mini</option>
+							<option value="1">Première Option</option>
+							<option value="2">Deuxième Option</option>
+							<option value="3">Troisième Option</option>
+							<option value="4">Quatrième Option</option>
+						</select>
+					</div>
+					<div class="ui-block-b"><a href="#" data-role="button" data-mini="true" data-icon="arrow-r" data-iconpos="right">Bouton mini</a></div>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h3>Sans ui-block</h3>
+
+			<div data-demo-html="true">				
+				<div class="ui-grid-a">
+					<label for="grid-select-3" class="ui-hidden-accessible">Grille sélection 3</label>
+					<select id="grid-select-3" name="grid-select-3" multiple="multiple" data-native-menu="false">
+						<option>Sélection</option>
+						<option value="1">Première Option</option>
+						<option value="2">Deuxième Option</option>
+						<option value="3">Troisième Option</option>
+						<option value="4">Quatrième Option</option>
+					</select>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h2>Grille Solo</h2> 
+			
+			<div data-demo-html="true">	
+				<div class="ui-grid-solo">
+					<div class="ui-block-a">
+						<a href="#" data-role="button">Bouton</a>
+					</div>
+					<div class="ui-block-a">
+				   		<a href="#" data-role="button" data-mini="true">Bouton, taille mini</a>
+					</div>
+				</div>	
+			</div><!--/demo-html -->
+			
+			<h3>Sans ui-block</h3>
+
+			<div data-demo-html="true">	
+				<div class="ui-grid-solo">
+					<a href="#" data-role="button">Bouton</a> <a href="#" data-role="button" data-mini="true">Bouton, taille mini</a>
+				</div>	
+			</div><!--/demo-html -->
+			
+			<h2>Alignement</h2>
+			
+			<div data-demo-html="true">
+				<div class="ui-grid-b">
+					<div class="ui-block-a"><a href="#" data-role="button">Grille B</a></div>
+					<div class="ui-block-b"><a href="#" data-role="button">Grille B</a></div>
+					<div class="ui-block-c"><a href="#" data-role="button">Grille B</a></div>
+				</div>
+				<div class="ui-grid-a">
+					<div class="ui-block-a"><a href="#" data-role="button">Grille A</a></div>
+					<div class="ui-block-b"><a href="#" data-role="button">Grille A</a></div>
+				</div>
+				<div class="ui-grid-solo">
+					<a href="#" data-role="button">Grille Solo</a>
+				</div>			
+				<a href="#" data-role="button">Sans grille</a>
+			</div><!--/demo-html --> 
+							
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

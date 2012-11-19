@@ -1,0 +1,201 @@
+<!DOCTYPE html> 
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1"> 
+	<title>Docs jQuery Mobile - Grilles de contenu</title> 
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
+
+	<script src="../../js/jquery.js"></script>
+	<script src="../../docs/assets/js/jqm-docs.js"></script>
+	<script src="../../js/jquery.mobile.js"></script>
+
+</head> 
+<body> 
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Grilles RWD</h1>
+		<a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+		
+		<h2>Grille Responsive</h2>
+		<p>Lors de l'utilisation des <a href="content-grids.html">grilles de mise en page</a> pour construire des mises en page de plusieur niveau, il peut être judicieux d'appliquer les principes  du responsive web design (RWD) pour s'assurer que la mise en page s'adapte à plusieurs écrans.</p>
+		<p>La façon la plus simple du comportement responsive, c'est d'échanger une disposition empilée sur des écrans étroits comme un smartphone vers des mises en page multi-colonnes sur des écrans plus larges. Cela peut être fait en visant des styles pour des largeurs d'écran spécifiques à l'aide de CSS media queries.</p>
+		
+		<h2>Création de grilles responsive</h2>
+		<p>Par défaut, les classes de la grille se traduiront par une mise en page à plusieurs colonnes dans toutes les largeurs d'écran. Les styles pour rendre les grilles responsive sont ajoutés par l'application d'un media query avec des règles pour basculer d'une présentation empilé vers une largeur d'écran spécifique.</p>
+		
+		<p>Normalement, nous recommandons de commencer avec l'approche mobile-en-premier avec des media queries : à partir des styles qui s'appliquent aux plus petites tailles d'écran avec le style du widget de base, puis des points d'arrêt progressif de mise en page jusqu'à des écrans plus grands en utilisant les médias queries <code>min-width</code>.
+</p>
+		<p>Toutefois, dans le cas des grilles, nous pouvons utiliser un media query <code>max-width</code> pour appliquer seulement les styles de grille empilés <em>sous</em> un point d'arrêt de largeur. Cela nous permet de tirer parti de tous les styles de grille par défaut, mais il suffit de les ajuster à des largeurs étroites.</p>
+		
+
+		<p>Sans les styles personnalisés, notre grille sera une mise en page sur 3 colonnes dans toutes les largeurs d'écran :</p>
+		<div class="ui-grid-b">
+			<div class="ui-block-a"><div class="ui-body ui-body-d">Bloc A</div></div>
+			<div class="ui-block-b"><div class="ui-body ui-body-d">Bloc B</div></div>
+			<div class="ui-block-c"><div class="ui-body ui-body-d">Bloc C</div></div>
+		</div><!-- /grid-b -->
+		
+		<p>Dans nos styles personnalisés, nous voulons que cette grille s'empile sur des largeurs étroites, puis bascule vers une mise en page standard de 3 colonnes. Sur un écran très large, nous voulons que la première colonne prenne 50% de la largeur, comme ceci :</p>
+
+		<div class="ui-grid-b my-breakpoint">
+			<div class="ui-block-a"><div class="ui-body ui-body-d">Bloc A</div></div>
+			<div class="ui-block-b"><div class="ui-body ui-body-d">Bloc B</div></div>
+			<div class="ui-block-c"><div class="ui-body ui-body-d">Bloc C</div></div>
+		</div><!-- /grid-b -->
+		
+		<p>Pour rendre cela responsive, commencez en ajoutant la classe <code>my-breakpoint</code> au conteneur de la grille qui référence le point d'arrêt personnalisé dans votre feuille de style personnalisée :</p>
+
+<pre><code>
+&lt;div class="ui-grid-b <strong>my-breakpoint</strong>"&gt;
+	&lt;div class="ui-block-a"&gt;Bloc A&lt;/div&gt;
+	&lt;div class="ui-block-b"&gt;Bloc B&lt;/div&gt;
+	&lt;div class="ui-block-c"&gt;Bloc C&lt;/div&gt;
+&lt;/div&gt;&lt;!-- /grid-b --&gt;
+</code></pre>
+	
+	<h3>Ajout du point d'arrêt pour des largeurs étroites</h3>
+	
+	<p>Cette classe est utilisée sur le périmètre des styles dans la media query personnalisée afin qu'elle ne s'applique que lorsque cette classe est ajouté au conteneur de grille. Le media query enveloppe les styles conditionnels que nous voulons seulement appliquée en dessous de 50em. </p>
+	<p>Dans vos média queries, utilisez les unités em au lieu de pixels afin de s'assurer que la media query prenne en compte la taille de police, en plus de la largeur de l'écran. Pour calculer une largeur d'écran en ems, divisez la largeur voulue en pixels par 16, ce qui correspond à la taille de la police par défaut du body.</p>
+	
+<pre><code>
+<strong>@media all and (max-width: 50em) {</strong>
+	.my-breakpoint .ui-block-a, 
+	.my-breakpoint .ui-block-b, 
+	.my-breakpoint .ui-block-c,
+	.my-breakpoint .ui-block-d,
+	.my-breakpoint .ui-block-e { 
+		width: 100%; 
+		float:none; 
+	}
+<strong>}</strong>
+</code></pre>
+
+	<p>Dans cette media query, nous avons mis la largeur à 100% et nier la propriété float pour faire des blocs de grille empilés pour des largeurs d'écran en dessous de 50em. Ces règles sont appliquées à chaque <a href="content-grids.html"> type de grille</a> en empilant des sélecteurs pour toutes les classes de la grille sur les styles de <code>ui-block-a</code> à <code>ui-block-e</code>.</p>
+	
+	<style>
+	@media all and (max-width: 50em) {
+		.my-breakpoint .ui-block-a, 
+		.my-breakpoint .ui-block-b, 
+		.my-breakpoint .ui-block-c,
+		.my-breakpoint .ui-block-d,
+		.my-breakpoint .ui-block-e { 
+			width: 100%; 
+			float:none; 
+		}
+	}
+	
+	@media all and (min-width: 75em) {
+		.my-breakpoint.ui-grid-b .ui-block-a { width: 49.95%; }
+		.my-breakpoint.ui-grid-b .ui-block-b, 
+		.my-breakpoint.ui-grid-b .ui-block-c { width: 24.925%; }
+		}
+	}
+	</style>
+	
+	<p>C'est tout ce qu'il faut pour rendre les grilles responsives et il est facile d'ajouter des règles de style supplémentaires à chaque point d'arrêt pour les changer encore plus. Nous vous encourageons à créer autant de points d'arrêt personnalisées que vous le souhaitez en fonction des besoins de votre contenu et de la mise en page.</p>
+	
+	<h3>Ajout d'un point d'arrêt d'écran pour ajuster les ratios</h3>
+
+	<p>En s'appuyant sur l'exemple ci-dessus, nous pouvons ajouter un point d'arrêt supplémentaire pour changer les largeurs afin de rendre la largeur de la première colonne à 50% et les deux autres à 25% en dessous de 75em (1 200 pixels) en ajoutant un media query supplémentaire <code>min-width</code> pour modifier les largeurs dans notre style personnalisé :</p>
+	
+	<pre><code>
+<strong>@media all and (min-width: 75em) {</strong>
+	.my-breakpoint.ui-grid-b .ui-block-a { width: 49.95%; }
+	.my-breakpoint.ui-grid-b .ui-block-b, 
+	.my-breakpoint.ui-grid-b .ui-block-c { width: 24.925%; }
+	.my-breakpoint.ui-grid-b .ui-block-a { clear: left; }
+	}
+<strong>}
+</strong>	</code></pre>
+	<p>Notez la largeur légèrement plus étroite définie pour contourner les problèmes d'arrondi sur toutes les plateformes. </p>
+	
+	
+	<h2>L'application d'un point d'arrêt prédéfini</h2>
+	<p>Même si nous vous encourageons, vivement, à écrire vous-même des points d'arrêt personnalisés, le framework inclut un seul point d'arrêt pré-configuré qui cible le style empilé pour les petits téléphones et bascule vers la présentation multi-colonnes sur les grands téléphones, tablettes et appareils de bureau. </p>
+	<p>Pour utiliser ce point d'arrêt prédéfini, ajoutez la classe <code>ui-responsive</code> au conteneur de grille pour appliquer la présentation empilée <em>en dessous</em> de 560px (35em). Si ce point d'arrêt ne fonctionne pas pour votre contenu, nous vous encourageons à écrire un point d'arrêt personnalisé tel que décrit ci-dessus.</p>
+
+			<pre><code>&lt;div class="ui-grid-b <strong>ui-responsive</strong>"&gt;</code></pre>
+	
+			<p>Ce sont des grilles standards qui sont responsive via la classe <code>ui-responsive</code> sur le conteneur de grille :</p>
+
+
+			<h3>Grille A (50/50)</h3>
+
+			<div class="ui-grid-a ui-responsive">
+				<div class="ui-block-a"><div class="ui-body ui-body-d">Bloc A</div></div>
+				<div class="ui-block-b"><div class="ui-body ui-body-d">Bloc B</div></div>
+			</div><!-- /grid-a -->
+
+
+			<h3>Grille B (33/33/33)</h3>
+
+			<div class="ui-grid-b ui-responsive">
+				<div class="ui-block-a"><div class="ui-body ui-body-d">Bloc A</div></div>
+				<div class="ui-block-b"><div class="ui-body ui-body-d">Bloc B</div></div>
+				<div class="ui-block-c"><div class="ui-body ui-body-d">Bloc C</div></div>
+			</div><!-- /grid-b -->
+
+
+			<h3>Grille C (25/25/25/25)</h3>
+
+			<div class="ui-grid-c ui-responsive">
+				<div class="ui-block-a"><div class="ui-body ui-body-d">A</div></div>
+				<div class="ui-block-b"><div class="ui-body ui-body-d">B</div></div>
+				<div class="ui-block-c"><div class="ui-body ui-body-d">C</div></div>
+				<div class="ui-block-d"><div class="ui-body ui-body-d">D</div></div>
+			</div><!-- /grid-c -->		
+
+
+			<h3>Grille D (20/20/20/20/20)</h3>
+
+			<div class="ui-grid-d ui-responsive">
+				<div class="ui-block-a"><div class="ui-body ui-body-d">A</div></div>
+				<div class="ui-block-b"><div class="ui-body ui-body-d">B</div></div>
+				<div class="ui-block-c"><div class="ui-body ui-body-d">C</div></div>
+				<div class="ui-block-d"><div class="ui-body ui-body-d">D</div></div>
+				<div class="ui-block-e"><div class="ui-body ui-body-d">E</div></div>
+			</div><!-- /grid-d -->
+	
+	</div><!--/content-primary -->		
+	
+	<div class="content-secondary">
+		
+		<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+			
+				<h3>Aussi dans cette rubrique</h3>
+				
+				<ul data-role="listview" data-theme="c" data-dividertheme="d">
+				
+						<li data-role="list-divider">Formatage de contenu</li>
+						<li><a href="content-html.html">Styles HTML de base</a></li>
+						<li><a href="content-grids.html">Grille de mise en page (colonnes)</a></li>
+						<li data-theme="a"><a href="content-grids-responsive.html">Grille Responsive</a></li>
+						<li><a href="content-collapsible.html">Blocs de contenu pliable</a></li>
+						<li><a href="content-collapsible-set.html">Ensembles pliable (accordéons)</a></li>
+						<li><a href="content-themes.html">Thématisation du contenu</a></li>
+	
+				</ul>
+		</div>
+	</div>		
+
+</div><!-- /content -->
+
+<div data-role="footer" class="footer-docs" data-theme="c">
+		<p class="jqm-version"></p>
+		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+</div>
+	
+</div><!-- /page -->
+
+</body>
+</html>

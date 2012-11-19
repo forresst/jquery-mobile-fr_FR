@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Listes - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../assets/js/jqm-demos.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Listes</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+		
+			<h2>Liste non-intégré</h2>
+
+			<h3>Lecture seule</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview">
+					<li>Acura</li>
+					<li>Audi <span class="ui-li-count">3</span></li>
+					<li>BMW <span class="ui-li-count">2</span></li>
+					<li>Cadillac</li>
+					<li>Ferrari <span class="ui-li-count">1</span></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Lecture seule, triée</h3>
+
+			<div data-demo-html="true">
+				<ol data-role="listview">
+					<li>Acura</li>
+					<li>Audi</li>
+					<li>BMW</li>
+					<li>Cadillac</li>
+					<li>Ferrari</li>
+				</ol>
+			</div><!--/demo-html -->
+
+			<h3>Liée</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview">
+					<li><a href="#">Acura</a></li>
+					<li><a href="#">Audi</a></li>
+					<li><a href="#">BMW</a></li>
+					<li><a href="#">Cadillac</a></li>
+					<li><a href="#">Ferrari</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Liée, triée</h3>
+
+			<div data-demo-html="true">
+				<ol data-role="listview">
+					<li><a href="#">The Godfather</a></li>
+					<li><a href="#">Inception</a></li>
+					<li><a href="#">The Good, the Bad and the Ugly  </a></li>
+					<li><a href="#">Pulp Fiction</a></li>
+					<li><a href="#">Schindler's List</a></li>
+				</ol>
+			</div><!--/demo-html -->
+
+			<h3>Bulles avec compteur</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-count-theme="e">
+					<li><a href="#">Boîte de réception <span class="ui-li-count">12</span></a></li>
+					<li><a href="#">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+					<li><a href="#">Brouillons <span class="ui-li-count">4</span></a></li>
+					<li><a href="#">Envoyé <span class="ui-li-count">328</span></a></li>
+					<li><a href="#">Corbeille <span class="ui-li-count">62</span></a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Séparateur, bulles de compteur, boutons séparés</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-divider-theme="d" data-split-theme="e" data-split-icon="grid">
+					<li data-role="list-divider">Mail</li>
+					<li><a href="#">Boîte de réception <span class="ui-li-count">12</span></a><a href="#">Clic moi</a></li>
+					<li><a href="#">Boite d'envoi <span class="ui-li-count">0</span></a><a href="#">Clic moi</a></li>
+					<li><a href="#">Brouillons <span class="ui-li-count">4</span></a><a href="#">Clic moi</a></li>
+					<li><a href="#">Envoyés <span class="ui-li-count">328</span></a><a href="#">Clic moi</a></li>
+					<li><a href="#">Poubelle <span class="ui-li-count">62</span></a><a href="#">Clic moi</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Imbriquée</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-header-theme="e">
+					<li>Animaux
+						<ul>
+							<li>Animaux de compagnie
+								<ul>
+									<li><a href="index.html">Canaris</a></li>
+									<li><a href="index.html">Chat</a></li>
+									<li><a href="index.html">Chien</a></li>
+								</ul>
+							</li>
+							<li>Animaux de la ferme
+								<ul>
+									<li><a href="index.html">Poulet</a></li>
+									<li><a href="index.html">Vache</a></li>
+									<li><a href="index.html">Mouton</a></li>
+								</ul>
+							</li>
+							<li>Animaux sauvages
+								<ul>
+									<li><a href="index.html">Alligator</a></li>
+									<li><a href="index.html">Ours</a></li>
+									<li><a href="index.html">Zèbre</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>Couleurs
+						<ul>
+							<li><a href="index.html">Bleu</a></li>
+							<li><a href="index.html">Vert</a></li>
+							<li><a href="index.html">Rouge</a></li>
+						</ul>
+					</li>
+					<li>Véhicules
+						<ul>
+							<li>Voitures
+								<ul>
+									<li><a href="index.html">Audi</a></li>
+									<li><a href="index.html">BMW</a></li>
+									<li><a href="index.html">Volkswagon</a></li>
+								</ul>
+							</li>
+							<li>Avions
+								<ul>
+									<li><a href="index.html">Boeing</a></li>
+									<li><a href="index.html">Embraer</a></li>
+									<li><a href="index.html">Airbus</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Contenu divisé, formaté</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview">
+					<li data-role="list-divider">Vendredi 8 octobre 2010 <span class="ui-li-count">2</span></li>
+					<li><a href="index.html">
+						<h3>Stephen Weber</h3>
+						</a><p><strong>Vous avez été invité à la réunion Filament Group à Boston, MA</strong></p>
+						<p>Hé Stephen, si vous êtes disponible demain à 10 heures, nous avons une réunion avec l'équipe jQuery.</p>
+						<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+					</a></li>
+					<li><a href="index.html">
+						<h3>Equipe jQuery</h3>
+						</a><p><strong>Planning de la conférence de Boston</strong></p>
+						<p>Pour préparation de la prochaine conférence à Boston, nous avons besoin de commencer à rassembler une liste de sponsors et conférenciers.</p>
+						<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+					</a></li>
+					<li data-role="list-divider">Jeudi 7 Octobre 2010 <span class="ui-li-count">1</span></li>
+					<li><a href="index.html">
+						<h3>Avery Walker</h3>
+						</a><p><strong>Re: Ce soir dîner</strong></p>
+						<p>Bien sûr, planifions la réunion à Cuisine Highland à 8:00 ce soir. Ne peux pas attendre ! </p>
+						<p class="ui-li-aside"><strong>4:48</strong>PM</p>
+					</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Icône, bulles de compteur</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview">
+					<li><a href="#"><img src="../assets/img/gf.png" alt="France" class="ui-li-icon ui-corner-none">France <span class="ui-li-count">4</span></a></li>
+					<li><a href="#"><img src="../assets/img/de.png" alt="Allemagne" class="ui-li-icon">Allemagne <span class="ui-li-count">4</span></a></li>
+					<li><a href="#"><img src="../assets/img/gb.png" alt="Grande Bretagne" class="ui-li-icon">Grande Bretagne <span class="ui-li-count">0</span></a></li>
+					<li><a href="#"><img src="../assets/img/fi.png" alt="Finlande" class="ui-li-icon">Finlande <span class="ui-li-count">12</span></a></li>
+					<li><a href="#"><img src="../assets/img/us.png" alt="États-Unis" class="ui-li-icon ui-corner-none">États-Unis <span class="ui-li-count">62</span></a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Miniature, boutons séparés</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview">
+					<li><a href="#">
+						<img src="../assets/img/album-bb.jpg" />
+						<h3>Broken Bells</h3>
+						</a><p>Broken Bells</p></a>
+						<a href="#">Purchase album</a>
+					</li>
+					<li><a href="#">
+						<img src="../assets/img/album-hc.jpg" />
+						<h3>Warning</h3>
+						</a><p>Hot Chip</p></a>
+						<a href="#">Purchase album</a>
+					</li>
+					<li><a href="#">
+						<img src="../assets/img/album-p.jpg" />
+						<h3>Wolfgang Amadeus Phoenix</h3>
+						</a><p>Phoenix</p></a>
+						<a href="#">Purchase album</a>
+					</li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h2>Listes intégrées</h2>
+
+			<h3>Lecture seule</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true">
+					<li>Acura</li>
+					<li>Audi <span class="ui-li-count">3</span></li>
+					<li>BMW <span class="ui-li-count">2</span></li>
+					<li>Cadillac</li>
+					<li>Ferrari <span class="ui-li-count">1</span></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Lecture seule, triée</h3>
+
+			<div data-demo-html="true">
+				<ol data-role="listview" data-inset="true">
+					<li>Acura</li>
+					<li>Audi</li>
+					<li>BMW</li>
+					<li>Cadillac</li>
+					<li>Ferrari</li>
+				</ol>
+			</div><!--/demo-html -->
+
+			<h3>Liée</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true">
+					<li><a href="#">Acura</a></li>
+					<li><a href="#">Audi</a></li>
+					<li><a href="#">BMW</a></li>
+					<li><a href="#">Cadillac</a></li>
+					<li><a href="#">Ferrari</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Liée, triée</h3>
+
+			<div data-demo-html="true">
+				<ol data-role="listview" data-inset="true">
+					<li><a href="#">The Godfather</a></li>
+					<li><a href="#">Inception</a></li>
+					<li><a href="#">The Good, the Bad and the Ugly  </a></li>
+					<li><a href="#">Pulp Fiction</a></li>
+					<li><a href="#">Schindler's List</a></li>
+				</ol>
+			</div><!--/demo-html -->
+			
+			<h3>Bulles avec compteur</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true" data-count-theme="e">
+					<li><a href="#">Boîte de réception <span class="ui-li-count">12</span></a></li>
+					<li><a href="#">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+					<li><a href="#">Brouillons <span class="ui-li-count">4</span></a></li>
+					<li><a href="#">Envoyé <span class="ui-li-count">328</span></a></li>
+					<li><a href="#">Corbeille <span class="ui-li-count">62</span></a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Séparateur, bulles de compteur, boutons séparés</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true" data-divider-theme="d" data-split-theme="e" data-split-icon="grid">
+					<li data-role="list-divider">Mail</li>
+					<li><a href="#">Boîte de réception <span class="ui-li-count">12</span></a><a href="#">Clic moi</a></li>
+					<li><a href="#">Boite d'envoi <span class="ui-li-count">0</span></a><a href="#">Clic moi</a></li>
+					<li><a href="#">Brouillons <span class="ui-li-count">4</span></a><a href="#">Clic moi</a></li>
+					<li><a href="#">Envoyés <span class="ui-li-count">328</span></a><a href="#">Clic moi</a></li>
+					<li><a href="#">Poubelle <span class="ui-li-count">62</span></a><a href="#">Clic moi</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Imbriquée</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true" data-header-theme="e">
+					<li>Animaux
+						<ul>
+							<li>Animaux de compagnie
+								<ul>
+									<li><a href="index.html">Canaris</a></li>
+									<li><a href="index.html">Chat</a></li>
+									<li><a href="index.html">Chien</a></li>
+								</ul>
+							</li>
+							<li>Animaux de la ferme
+								<ul>
+									<li><a href="index.html">Poulet</a></li>
+									<li><a href="index.html">Vache</a></li>
+									<li><a href="index.html">Mouton</a></li>
+								</ul>
+							</li>
+							<li>Animaux sauvages
+								<ul>
+									<li><a href="index.html">Alligator</a></li>
+									<li><a href="index.html">Ours</a></li>
+									<li><a href="index.html">Zèbre</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>Couleurs
+						<ul>
+							<li><a href="index.html">Bleu</a></li>
+							<li><a href="index.html">Vert</a></li>
+							<li><a href="index.html">Rouge</a></li>
+						</ul>
+					</li>
+					<li>Véhicules
+						<ul>
+							<li>Voitures
+								<ul>
+									<li><a href="index.html">Audi</a></li>
+									<li><a href="index.html">BMW</a></li>
+									<li><a href="index.html">Volkswagon</a></li>
+								</ul>
+							</li>
+							<li>Avions
+								<ul>
+									<li><a href="index.html">Boeing</a></li>
+									<li><a href="index.html">Embraer</a></li>
+									<li><a href="index.html">Airbus</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Contenu divisé, formaté</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true">
+					<li data-role="list-divider">Vendredi 8 octobre 2010 <span class="ui-li-count">2</span></li>
+					<li><a href="index.html">
+						<h3>Stephen Weber</h3>
+						</a><p><strong>Vous avez été invité à la réunion Filament Group à Boston, MA</strong></p>
+						<p>Hé Stephen, si vous êtes disponible demain à 10 heures, nous avons une réunion avec l'équipe jQuery.</p>
+						<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+					</a></li>
+					<li><a href="index.html">
+						<h3>Equipe jQuery</h3>
+						</a><p><strong>Planning de la conférence de Boston</strong></p>
+						<p>Pour préparation de la prochaine conférence à Boston, nous avons besoin de commencer à rassembler une liste de sponsors et conférenciers.</p>
+						<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+					</a></li>
+					<li data-role="list-divider">Jeudi 7 Octobre 2010 <span class="ui-li-count">1</span></li>
+					<li><a href="index.html">
+						<h3>Avery Walker</h3>
+						</a><p><strong>Re: Ce soir dîner</strong></p>
+						<p>Bien sûr, planifions la réunion à Cuisine Highland à 8:00 ce soir. Ne peux pas attendre ! </p>
+						<p class="ui-li-aside"><strong>4:48</strong>PM</p>
+					</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Icône, bulles de compteur</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true">
+					<li><a href="#"><img src="../assets/img/gf.png" alt="France" class="ui-li-icon ui-corner-none">France <span class="ui-li-count">4</span></a></li>
+					<li><a href="#"><img src="../assets/img/de.png" alt="Allemagne" class="ui-li-icon">Allemagne <span class="ui-li-count">4</span></a></li>
+					<li><a href="#"><img src="../assets/img/gb.png" alt="Grande Bretagne" class="ui-li-icon">Grande Bretagne <span class="ui-li-count">0</span></a></li>
+					<li><a href="#"><img src="../assets/img/fi.png" alt="Finlande" class="ui-li-icon">Finlande <span class="ui-li-count">12</span></a></li>
+					<li><a href="#"><img src="../assets/img/us.png" alt="États-Unis" class="ui-li-icon ui-corner-none">États-Unis <span class="ui-li-count">62</span></a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h3>Miniature, boutons séparés</h3>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true">
+					<li><a href="#">
+						<img src="../assets/img/album-bb.jpg" />
+						<h3>Broken Bells</h3>
+						</a><p>Broken Bells</p></a>
+						<a href="#">Purchase album</a>
+					</li>
+					<li><a href="#">
+						<img src="../assets/img/album-hc.jpg" />
+						<h3>Warning</h3>
+						</a><p>Hot Chip</p></a>
+						<a href="#">Purchase album</a>
+					</li>
+					<li><a href="#">
+						<img src="../assets/img/album-p.jpg" />
+						<h3>Wolfgang Amadeus Phoenix</h3>
+						</a><p>Phoenix</p></a>
+						<a href="#">Purchase album</a>
+					</li>
+				</ul>
+			</div><!--/demo-html -->
+
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

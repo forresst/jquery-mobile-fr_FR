@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sélections - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../assets/js/jqm-demos.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Sélections</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+		
+			<h2>Sélection Native &amp; Personnalisée</h2>
+			
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-" class="select">Sélection Native :</label>
+                    <select name="select-" id="select-" data-native-menu="false">
+                        <option value="standard">Lent : 7 jours</option>
+                        <option value="rush">Rapide : 3 jours</option>
+                        <option value="express">Express : Le lendemain</option>
+                        <option value="overnight">De nuit</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-custom-a" class="select">Sélection personnalisée :</label>
+                    <select name="select-custom-a" id="select-custom-a" data-native-menu="false">
+                        <option value="standard">Lent : 7 jours</option>
+                        <option value="rush">Rapide : 3 jours</option>
+                        <option value="express">Express : Le lendemain</option>
+                        <option value="overnight">De nuit</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-custom-a1" class="select">Sélection personnalisée, 1 sélectionné :</label>
+                    <select name="select-custom-a1" id="select-custom-a1" data-native-menu="false">
+                        <option value="standard">Lent : 7 jours</option>
+                        <option value="rush">Rapide : 3 jours</option>
+                        <option value="express" selected="selected">Express : Le lendemain</option>
+                        <option value="overnight">De nuit</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-custom-a2" class="select">Sélection personnalisée, 1 désactivé :</label>
+                    <select name="select-custom-a2" id="select-custom-a2" data-native-menu="false">
+                        <option value="standard">Lent : 7 jours</option>
+                        <option value="rush">Rapide : 3 jours</option>
+                        <option value="express" disabled="disabled">Express : Le lendemain</option>
+                        <option value="overnight">De nuit</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-3" class="select">Sélection personnalisé, longue :</label>
+                    <select name="select-3" id="select-3" data-native-menu="false">
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-4-a" class="select">Sélection personnalisée, data-placeholder:</label>
+                    <select name="select-4-a" id="select-4-a" data-native-menu="false">
+                        <option value="choose-one" data-placeholder="true">Choisissez en un...</option>
+                        <option value="standard">Lent : 7 jours</option>
+                        <option value="rush">Rapide : 3 jours</option>
+                        <option value="express">Express : Le lendemain</option>
+                        <option value="overnight">De nuit</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-4-b" class="select">Sélection personnalisée, option sans value :</label>
+                    <select name="select-4-b" id="select-4-b" data-native-menu="false">
+                        <option>Choisissez en un...</option>
+                        <option value="standard">Lent : 7 jours</option>
+                        <option value="rush">Rapide : 3 jours</option>
+                        <option value="express">Express : Le lendemain</option>
+                        <option value="overnight">De nuit</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-5" class="select">Sélection personnalisée, option sans value et contenu :</label>
+                    <select name="select-5" id="select-5" data-native-menu="false">
+                        <option></option>
+                        <option value="standard">Lent : 7 jours</option>
+                        <option value="rush">Rapide : 3 jours</option>
+                        <option value="express">Express : Le lendemain</option>
+                        <option value="overnight">De nuit</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-multiple-a6" class="select">Sélection multiple personnalisée :</label>
+                    <select name="select-multiple-a6" id="select-multiple-a6" multiple="multiple" data-native-menu="false">
+                        <option>Choisissez les options</option>
+                        <option value="standard">Lent : 7 jours</option>
+                        <option value="rush">Rapide : 3 jours</option>
+                        <option value="express">Express : Le lendemain</option>
+                        <option value="overnight">De nuit</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-multiple-a7" class="select">Sélection multiple personnalisé, longue :</label>
+                    <select name="select-multiple-a7" id="select-multiple-a7" multiple="multiple" data-native-menu="false">
+                        <option>Choisissez les options</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-optgroup-a8" class="select">Sélection native, optgroup :</label>
+                    <select name="select-optgroup-a8" id="select-optgroup-a8">
+                        <option>Choisissez la méthode d'expédition</option>
+                        <optgroup label="USPS">
+                            <option value="standard" selected>Lent : 7 jours</option>
+                            <option value="rush">Rapide : 3 jours</option>
+                            <option value="express">Express : Le lendemain</option>
+                            <option value="overnight">De nuit</option>
+                        </optgroup>
+                        <optgroup label="FedEx">
+                            <option value="firstOvernight">D'abord la Nuit</option>
+                            <option value="expressSaver">Sauveur express</option>
+                            <option value="ground">Sur le terrain</option>
+                        </optgroup>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-optgroup-a9" class="select">Sélection personnalisée, optgroup :</label>
+                    <select name="select-optgroup-a9" id="select-optgroup-a9" data-native-menu="false">
+                        <option>Choisissez la méthode d'expédition</option>
+                        <optgroup label="USPS">
+                            <option value="standard" selected>Lent : 7 jours</option>
+                            <option value="rush">Rapide : 3 jours</option>
+                            <option value="express">Express : Le lendemain</option>
+                            <option value="overnight">De nuit</option>
+                        </optgroup>
+                        <optgroup label="FedEx">
+                            <option value="firstOvernight">D'abord la Nuit</option>
+                            <option value="expressSaver">Sauveur express</option>
+                            <option value="ground">Sur le terrain</option>
+                        </optgroup>
+                    </select>
+                </div>
+			</div><!--/demo-html -->
+					
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>
