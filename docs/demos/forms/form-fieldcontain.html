@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Les conteneurs de champs de Formulaire - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jqm-demos.js"></script>
+	<script src="../../../js/"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Les conteneurs de champs de Formulaire</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+		
+			<h2>Conteneurs de champs</h2>
+
+			<form action="#" method="get">
+				
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<label for="search-1">Saisie pour recherche :</label>
+						<input type="search" name="search-1" id="search-1" value="">
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<label for="select-multiple-1">Sélection :</label>
+						<select multiple="multiple" data-native-menu="false" name="select-multiple-1" id="select-multiple-1">
+							<option value="">Choix :</option>
+							<option value="small">Un</option>
+							<option value="medium">Deux</option>
+							<option value="large">Trois</option>
+						</select>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">  
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+							<legend>Controlgroup Vertical, boutons :</legend>
+							<button data-icon="home" data-iconpos="right">Un</button> <input type="button" data-icon="back" data-iconpos="right" value="Deux"> <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Trois</a>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">  
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<legend>Controlgroup Horizontal, boutons :</legend>
+							<button data-icon="home" data-iconpos="right">Un</button> <input type="button" data-icon="back" data-iconpos="right" value="Deux"> <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Trois</a>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">  
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+							<legend>Controlgroup Vertical, sélection :</legend>
+							<label for="select-v-1a">Sélection A</label>
+							<select name="select-v-1a" id="select-v-1a">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+							<label for="select-v-1b">Sélection B</label>
+							<select name="select-v-1b" id="select-v-1b">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+							<label for="select-v-1c">Sélection C</label>
+							<select name="select-v-1c" id="select-v-1c">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<legend>Controlgroup Horizontal, sélection :</legend>
+							<label for="select-h-1a">Sélection A</label>
+							<select name="select-h-1a" id="select-h-1a">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+							<label for="select-h-1b">Sélection B</label>
+							<select name="select-h-1b" id="select-h-1b">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+							<label for="select-h-1c">Sélection C</label>
+							<select name="select-h-1c" id="select-h-1c">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<legend>Controlgroup Horizontal, mixé :</legend>
+							<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Lien</a> <button data-icon="grid" data-iconpos="notext">Bouton</button>
+							<label for="select-v-1e">Sélection</label>
+							<select name="select-v-1e" id="select-v-1e">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<label for="slider-1">Curseur :</label>
+						<input type="range" name="slider-1" id="slider-1" value="50" min="0" max="100" data-highlight="true">
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<label for="flip-1">Interrupteur :</label>
+						<select name="flip-1" id="flip-1" data-role="slider">
+							<option value="off">Arrêt</option>
+							<option value="on">Marche</option>
+						</select>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+							<legend>Case à cocher seule :</legend>
+							<label for="checkbox-1">J'accepte</label>
+							<input type="checkbox" name="checkbox-1" id="checkbox-1">
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">	
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+							<legend>Controlgroup Vertical, cases à cocher :</legend>
+							<input type="checkbox" name="checkbox-v-1a" id="checkbox-v-1a">
+							<label for="checkbox-v-1a">Un</label>
+							<input type="checkbox" name="checkbox-v-1b" id="checkbox-v-1b">
+							<label for="checkbox-v-1b">Deux</label>
+							<input type="checkbox" name="checkbox-v-1c" id="checkbox-v-1c">
+							<label for="checkbox-v-1c">Trois</label>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup">
+							<legend>Controlgroup Vertical, radio boutons :</legend>
+							<input type="radio" name="radio-choice-v-1" id="radio-choice-v-1a" value="on" checked="checked">
+							<label for="radio-choice-v-1a">Un</label>
+							<input type="radio" name="radio-choice-v-1" id="radio-choice-v-1b" value="off">
+							<label for="radio-choice-v-1b">Deux</label>
+							<input type="radio" name="radio-choice-v-1" id="radio-choice-v-1c" value="other">
+							<label for="radio-choice-v-1c">Trois</label>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<legend>Controlgroup Horizontal, cases à cocher :</legend>
+							<input type="checkbox" name="checkbox-h-1a" id="checkbox-h-1a">
+							<label for="checkbox-h-1a">Un</label>
+							<input type="checkbox" name="checkbox-h-1b" id="checkbox-h-1b">
+							<label for="checkbox-h-1b">Deux</label>
+							<input type="checkbox" name="checkbox-h-1c" id="checkbox-h-1c">
+							<label for="checkbox-h-1c">Trois</label>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal">
+							<legend>Controlgroup Horizontal, radio boutons :</legend>
+							<input type="radio" name="radio-choice-h-1" id="radio-choice-h-1a" value="on" checked="checked">
+							<label for="radio-choice-h-1a">Un</label>
+							<input type="radio" name="radio-choice-h-1" id="radio-choice-h-1b" value="off">
+							<label for="radio-choice-h-1b">Deux</label>
+							<input type="radio" name="radio-choice-h-1" id="radio-choice-h-1c" value="other">
+							<label for="radio-choice-h-1c">Trois</label>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<label for="textinput-1">Saisie de texte :</label>
+						<input type="text" name="textinput-1" id="textinput-1" placeholder="Text input" value="">
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<label for="textarea-1">Zone de texte :</label>
+						<textarea cols="40" rows="8" name="textarea-1" id="textarea-1">Zone de texte</textarea>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<label for="submit-1">Envoyer :</label>
+						<button type="submit" id="submit-1">Valider</button>
+					</div>
+				</div><!--/demo-html -->
+
+			</form>
+	
+			<h3>Taille mini</h3>
+			
+			<form action="#" method="get">
+			
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<label for="search-5">Saisie pour recherche :</label>
+						<input type="search" name="search-5" id="search-5" value="" data-mini="true">
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<label for="select-multiple-5">Sélection :</label>
+						<select multiple="multiple" data-native-menu="false" name="select-multiple-5" id="select-multiple-5" data-mini="true">
+							<option value="">Choix :</option>
+							<option value="small">Un</option>
+							<option value="medium">Deux</option>
+							<option value="large">Trois</option>
+						</select>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-mini="true">
+							<legend>Controlgroup Vertical, boutons :</legend>
+							<button data-icon="home" data-iconpos="right">Un</button> <input type="button" data-icon="back" data-iconpos="right" value="Deux"> <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Trois</a>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+							<legend>Controlgroup Horizontal, boutons :</legend>
+							<button data-icon="home" data-iconpos="right">Un</button> <input type="button" data-icon="back" data-iconpos="right" value="Deux"> <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Trois</a>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-mini="true">
+							<legend>Controlgroup Vertical, sélection :</legend>
+							<label for="select-v-5a">Sélection A</label>
+							<select name="select-v-5a" id="select-v-5a">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+							<label for="select-v-5b">Sélection B</label>
+							<select name="select-v-5b" id="select-v-5b">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+							<label for="select-v-5c">Sélection C</label>
+							<select name="select-v-5c" id="select-v-5c">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+							<legend>Controlgroup Horizontal, sélection :</legend>
+							<label for="select-h-5a">Sélection A</label>
+							<select name="select-h-5a" id="select-h-5a">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+							<label for="select-h-5b">Sélection B</label>
+							<select name="select-h-5b" id="select-h-5b">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+							<label for="select-h-5c">Sélection C</label>
+							<select name="select-h-5c" id="select-h-5c">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+							<legend>Controlgroup Horizontal, mixé :</legend>
+							<a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Lien</a> <button data-icon="grid" data-iconpos="notext">Bouton</button>
+							<label for="select-v-5e">Sélection</label>
+							<select name="select-v-5e" id="select-v-5e">
+								<option value="#">Un</option>
+								<option value="#">Deux</option>
+								<option value="#">Trois</option>
+							</select>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<label for="slider-5">Curseur :</label>
+						<input type="range" name="slider-5" id="slider-5" value="50" min="0" max="100" data-highlight="true" data-mini="true">
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<label for="flip-5">Interrupteur :</label>
+						<select name="flip-5" id="flip-5" data-role="slider" data-mini="true">
+							<option value="off">Arrêt</option>
+							<option value="on">Marche</option>
+						</select>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-mini="true">
+							<legend>Case à cocher seule :</legend>
+							<label for="checkbox-5">J'accepte</label>
+							<input type="checkbox" name="checkbox-5" id="checkbox-5">
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-mini="true">
+							<legend>Controlgroup Vertical, cases à cocher :</legend>
+							<input type="checkbox" name="checkbox-v-5a" id="checkbox-v-5a">
+							<label for="checkbox-v-5a">Un</label>
+							<input type="checkbox" name="checkbox-v-5b" id="checkbox-v-5b">
+							<label for="checkbox-v-5b">Deux</label>
+							<input type="checkbox" name="checkbox-v-5c" id="checkbox-v-5c">
+							<label for="checkbox-v-5c">Trois</label>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-mini="true">
+							<legend>Controlgroup Vertical, radio boutons :</legend>
+							<input type="radio" name="radio-choice-v-5" id="radio-choice-v-5a" value="on" checked="checked">
+							<label for="radio-choice-v-5a">Un</label>
+							<input type="radio" name="radio-choice-v-5" id="radio-choice-v-5b" value="off">
+							<label for="radio-choice-v-5b">Deux</label>
+							<input type="radio" name="radio-choice-v-5" id="radio-choice-v-5c" value="other">
+							<label for="radio-choice-v-5c">Trois</label>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+							<legend>Controlgroup Horizontal, cases à cocher :</legend>
+							<input type="checkbox" name="checkbox-h-5a" id="checkbox-h-5a">
+							<label for="checkbox-h-5a">Un</label>
+							<input type="checkbox" name="checkbox-h-5b" id="checkbox-h-5b">
+							<label for="checkbox-h-5b">Deux</label>
+							<input type="checkbox" name="checkbox-h-5c" id="checkbox-h-5c">
+							<label for="checkbox-h-5c">Trois</label>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+							<legend>Controlgroup Horizontal, radio boutons :</legend>
+							<input type="radio" name="radio-choice-h-5" id="radio-choice-h-5a" value="on" checked="checked">
+							<label for="radio-choice-h-5a">Un</label>
+							<input type="radio" name="radio-choice-h-5" id="radio-choice-h-5b" value="off">
+							<label for="radio-choice-h-5b">Deux</label>
+							<input type="radio" name="radio-choice-h-5" id="radio-choice-h-5c" value="other">
+							<label for="radio-choice-h-5c">Trois</label>
+						</fieldset>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<label for="textinput-5">Saisie de texte :</label>
+						<input type="text" name="textinput-5" id="textinput-5" placeholder="Text input" value="" data-mini="true">
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<label for="textarea-5">Zone de texte :</label>
+						<textarea cols="40" rows="8" name="textarea-5" id="textarea-5" data-mini="true">Zone de texte</textarea>
+					</div>
+				</div><!--/demo-html -->
+
+				<div data-demo-html="true">					
+					<div data-role="fieldcontain">
+						<label for="submit-5">Envoyer :</label>
+						<button type="submit" id="submit-5" data-mini="true">Valider</button>
+					</div>
+				</div><!--/demo-html -->
+
+			</form>
+		
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>
