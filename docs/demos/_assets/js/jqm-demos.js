@@ -1,4 +1,4 @@
-// display the version of jQM
+// Affiche la version de jQM
 $(document).bind( "pageinit", function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
@@ -31,10 +31,10 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     });
   };
 
-  // Fix the links for the initial page
+  // corriger les liens de la page initiale
   $(fixLinks);
 
-  // Fix the links for subsequent ajax page loads
+  // corriger les liens pour les chargements ultérieures de page AJAX
   $(document).bind( 'pagecreate', fixLinks );
 
   // Vérifie pour voir si AJAX peut être utilisé. Cela fait une requête rapide ajax et bloque la page jusqu'à ce soit fait
@@ -64,7 +64,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
   });
 }
 
-// View demo source code
+// Aperçu du code source demo
 $.fn.viewSourceCode = function(){
 	var demoId = 0;
 	
@@ -124,13 +124,13 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function(){
 });
 
 $( document ).on( "pageinit", function(){
-	// reposition when switching between html / js / css
+	// reposition lorqu'on bascule entre html / js / css
 	$( ".jqm-demo .ui-collapsible-heading" ).on( "click", function(){
 		if ( !$( this ).is( ".ui-collapsible-heading-collapsed" ) ) {
 			$( this ).parents( ".jqm-demo" ).trigger( "resize" );
 		}
 	});
-	// keep line numbers and code lines in sync
+	// garder les numéros de lignes et les lignes de code en phase
 	$( ".jqm-demo" ).on( "popupbeforeposition", function(){
 		$(".code", this ).find( ".line" ).css( "height", "auto" );
 		$(".gutter", this ).find( ".line" ).each( function(){

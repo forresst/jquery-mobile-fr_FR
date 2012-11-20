@@ -74,21 +74,21 @@ if ( location.protocol.substr(0,4)  === 'file' ||
   });
 }
 
-// Measure the time from pageload until pageshow for page lists-performance.html
-// NB: lists-performance.html should load without a transition to avoid having
-// the transition's duration included in the measurement
+// Mesure le temps à partir de pageLoad jusqu'à pageshow pour la page lists-performance.html
+// NB: lists-performance.html devrait se charger sans transition pour éviter d'avoir
+// la durée de la transition incluse dans la mesure
 $( document ).bind( "pageload", function( e, data ) {
 	var ar = data.dataUrl.split( "/" ), then;
 
-	// If we're loading "lists-performance.html ..."
+	// Si nous chargeons "lists-performance.html ..."
 	if ( ar.length && ar[ ar.length - 1 ] === "lists-performance.html" ) {
-		// ... save the event's timestamp, and connect to the page's pagebeforeshow
+		// ... sauver l'horodatage de l'événement, et se connecter au pagebeforeshow de la page
 		then = new Date();
 		data.page.one( "pageshow", function( e, pbsData ) {
-			// ... then compare the time at pagebeforeshow to the one at pageload
+			// ... puis comparer le temps de pagebeforeshow à celui de pageLoad
 			var now = new Date(),
 				header = data.page.find( ".ui-header h1:first" );
-			// ... and add/replace a span in the header with the result
+			// ... et ajouter/remplacer le span dans le header avec le resultat
 			header
 				.remove( "span:jqmData(role='perfData')" )
 				.append( "<span style='font-size: 8px;' data-" + $.mobile.ns + "role='perfData'> (" + ( now.getTime() - then.getTime() ) + " ms)</span>" );
