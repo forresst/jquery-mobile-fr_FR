@@ -178,13 +178,13 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function(){
 });
 
 $( document ).on( "pageinit", function(){
-	// reposition when switching between html / js / css
+	// reposition lorqu'on bascule entre html / js / css
 	$( ".jqm-demo .ui-collapsible-heading" ).on( "click", function(){
 		if ( !$( this ).is( ".ui-collapsible-heading-collapsed" ) ) {
 			$( this ).parents( ".jqm-demo" ).trigger( "resize" );
 		}
 	});
-	// keep line numbers and code lines in sync
+	// garder les numéros de lignes et les lignes de code en phase
 	$( ".jqm-demo" ).on( "popupbeforeposition", function(){
 		$(".code", this ).find( ".line" ).css( "height", "auto" );
 		$(".gutter", this ).find( ".line" ).each( function(){
