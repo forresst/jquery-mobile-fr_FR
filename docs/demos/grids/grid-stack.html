@@ -4,12 +4,28 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Listes - Démos jQuery Mobile</title>
+	<title>Grille responsive personnalisée - Démos jQuery Mobile</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../assets/css/jqm-demos.css">
 	<script src="../../../js/jquery.js"></script>
 	<script src="../assets/js/jqm-demos.js"></script>
-	<script src="../../../js/jquery.mobile.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script><!-- We're using a style block to make it easy to view the custom styles --><!-- In production, these should be added to an custom.css file loaded in the head -->
+	
+	
+	
+	<style>
+	/* stack all grids below 40em (640px) */
+	@media all and (max-width: 35em) {
+		.my-breakpoint .ui-block-a, 
+		.my-breakpoint .ui-block-b, 
+		.my-breakpoint .ui-block-c,
+		.my-breakpoint .ui-block-d,
+		.my-breakpoint .ui-block-e { 
+			width: 100%; 
+			float:none; 
+		}
+	}
+	</style>
 </head>
 <body>
 <div data-role="page">
@@ -25,74 +41,36 @@
 		
 			<h2>Grille Responsive</h2>
 
-			<style>
-		
-		.rwd-stack div {
-            text-align:center;
-            min-height:40px;
-            border-color:#eee
-		}
-		
-		/* Stack all blocks to start */
-		.rwd-stack .ui-block-a, 
-		.rwd-stack .ui-block-b, 
-		.rwd-stack .ui-block-c,
-		.rwd-stack .ui-block-d,
-		.rwd-stack .ui-block-e { 
-			width: 100%; 
-			float:none; 
-		}
-		
-		/* Float and set widths above 576px (36em * 16px) */
-		@media all and (min-width: 36em){
-			/* Float all blocks */
-			.rwd-stack .ui-block-a, 
-			.rwd-stack .ui-block-b, 
-			.rwd-stack .ui-block-c,
-			.rwd-stack .ui-block-d,
-			.rwd-stack .ui-block-e { 
-				float:left; 
-			}
-			/* Set widths for 2-up grids */
-			.rwd-stack.ui-grid-a .ui-block-a, 
-			.rwd-stack.ui-grid-a .ui-block-b { 
-				width: 49.95%; 
-			}
-			/* Set widths for 3-up grids */
-			.rwd-stack.ui-grid-b .ui-block-a, 
-			.rwd-stack.ui-grid-b .ui-block-b, 
-			.rwd-stack.ui-grid-b .ui-block-c { 
-				width: 33.25%; 
-			}
-			/* Set widths for 4-up grids */
-			.rwd-stack.ui-grid-c .ui-block-a, 
-			.rwd-stack.ui-grid-c .ui-block-b, 
-			.rwd-stack.ui-grid-c .ui-block-c,
-			.rwd-stack.ui-grid-c .ui-block-d { 
-				width: 24.925%;
-			}
-			/* Set widths for 4-up grids */
-			.rwd-stack.ui-grid-d .ui-block-a, 
-			.rwd-stack.ui-grid-d .ui-block-b, 
-			.rwd-stack.ui-grid-d .ui-block-c,
-			.rwd-stack.ui-grid-d .ui-block-d,
-			.rwd-stack.ui-grid-d .ui-block-e { 
-				width: 19.925%;
-			}
-		}
-		</style>
-		
-		<p>C'est facile de prendre les grilles standard et les rendre responsive. Dans cet exemple, tous les blocs de grille sont empilés sur des largeurs étroites comme un smartphone. Au dessus de 36em (576 pixels) de largeur, les grilles côte à côte sont créées en positionnant les blocs et en paramétrant le pourcentage pour les largeurs.</p>
-		
-		
+			<p>C'est facile de prendre les grilles standard et les rendre responsive. Dans cet exemple, nous voulons que tous les blocs de la grille s'empilent sur des largeurs étroites. Au dessus de 40em (640 pixels) de large, nous voulons retrouver les styles des grilles multi-colonnes.</p>
+			
+			<p>Nous recommandons normalement l'écriture de point d'arrêt utilisant <code>min-width</code>. Chaque points d'arrêt permettent de modifier  progressivement la mise en page, du plus petit au plus large des écrans. </p>
+			
+			<p>Cependant, dans cette situation, puisque nous voulons juste remplacer les positions et les largeurs des grilles standard <em>sous</em> un point d'arrêt unique, il est plus simple d'ajouter un point d'arrêt <code>max-width</code> qui n'appliquera le style empilé qu'en dessous d'une certaine largeur. Cela nous permet de profiter de tous les styles de grille par défaut au dessus de la largeur du point d'arrêt.</p>
+			
+			<p>Pour faire que tout cela fonctionne, ajoutez une classe (<code>my-breakpoint</code>) au conteneur de la grille pour porter les styles empilés pour chaque classe de bloc à l'intérieur du point d'arrêt de la media query. Les styles au sein du point d'arrêt afin que tous les de blocs s'empilent de façon vraiment concise :</p>
+			
+<pre><code>
+/* Empile toutes les grilles en dessous de 40em (640px) */
+<strong>@media all and (max-width: 35em) {
+</strong>	.my-breakpoint .ui-block-a, 
+	.my-breakpoint .ui-block-b, 
+	.my-breakpoint .ui-block-c,
+	.my-breakpoint .ui-block-d,
+	.my-breakpoint .ui-block-e { 
+		width: 100%; 
+		float:none; 
+	}
+<strong>}</strong>
+</code></pre>
 
-		<h2>Démo de grille Responsive</h2>
-
-		<p>Chacune de ces grilles s'affiche comme un ensemble de blocs empilés sur des largeurs étroites.</p>
+		<p>C'est tout le code nécessaire à l'écriture d'un point d'arrêt personnalisé pour faire que tous les différents types de grilles soient responsive. A partir de cette base, vous pouvez plus personnaliser l'apparence ou même ajouter des points d'arrêt supplémentaires.</p><!-- view source utilty wrapper -->
 		
+		
+		<div data-demo-html="true" data-demo-css="true">
+			
 		<h3>Grille A (50/50)</h3>
 		
-		<div class="ui-grid-a rwd-stack">
+		<div class="ui-grid-a my-breakpoint">
 			<div class="ui-block-a"><div class="ui-body ui-body-d">Bloc A</div></div>
 			<div class="ui-block-b"><div class="ui-body ui-body-d">Bloc B</div></div>
 		</div><!-- /grid-a -->
@@ -100,7 +78,7 @@
 		
 		<h3>Grille B (33/33/33)</h3>
 
-		<div class="ui-grid-b rwd-stack">
+		<div class="ui-grid-b my-breakpoint">
 			<div class="ui-block-a"><div class="ui-body ui-body-d">Bloc A</div></div>
 			<div class="ui-block-b"><div class="ui-body ui-body-d">Bloc B</div></div>
 			<div class="ui-block-c"><div class="ui-body ui-body-d">Bloc C</div></div>
@@ -109,7 +87,7 @@
 		
 		<h3>Grille C (25/25/25/25)</h3>
 	
-		<div class="ui-grid-c rwd-stack">
+		<div class="ui-grid-c my-breakpoint">
 			<div class="ui-block-a"><div class="ui-body ui-body-d">A</div></div>
 			<div class="ui-block-b"><div class="ui-body ui-body-d">B</div></div>
 			<div class="ui-block-c"><div class="ui-body ui-body-d">C</div></div>
@@ -119,7 +97,7 @@
 		
 		<h3>Grille D (20/20/20/20/20)</h3>
 	
-		<div class="ui-grid-d rwd-stack">
+		<div class="ui-grid-d my-breakpoint">
 			<div class="ui-block-a"><div class="ui-body ui-body-d">A</div></div>
 			<div class="ui-block-b"><div class="ui-body ui-body-d">B</div></div>
 			<div class="ui-block-c"><div class="ui-body ui-body-d">C</div></div>
@@ -127,60 +105,10 @@
 			<div class="ui-block-e"><div class="ui-body ui-body-d">E</div></div>
 		</div><!-- /grid-d -->
 
-      	
-      
-      <h2>Exemple de styles</h2>
-      <p>Voici les styles dont vous avez besoin pour empiler toutes les grilles. Tous fonctionnent en ajoutant <code>rwd-stack</code> à chaque conteneur de grille.</p>
-		
-<pre><code>
-/* Empile tous les blocs au départ */
-.rwd-stack .ui-block-a, 
-.rwd-stack .ui-block-b, 
-.rwd-stack .ui-block-c,
-.rwd-stack .ui-block-d,
-.rwd-stack .ui-block-e { 
-	width: 100%; 
-	float:none; 
-}
 
-/* Positionne et définit des largeurs au dessus de 576px (36em * 16px) */
-@media all and (min-width: 36em){
-	/* Positionne tous les blocs */
-	.rwd-stack .ui-block-a, 
-	.rwd-stack .ui-block-b, 
-	.rwd-stack .ui-block-c,
-	.rwd-stack .ui-block-d,
-	.rwd-stack .ui-block-e { 
-		float:left; 
-	}
-	/* Définit des largeurs jusqu'à 2 grilles */
-	.rwd-stack.ui-grid-a .ui-block-a, 
-	.rwd-stack.ui-grid-a .ui-block-b { 
-		width: 49.95%; 
-	}
-	/* Définit des largeurs jusqu'à 3 grilles */
-	.rwd-stack.ui-grid-b .ui-block-a, 
-	.rwd-stack.ui-grid-b .ui-block-b, 
-	.rwd-stack.ui-grid-b .ui-block-c { 
-		width: 33.25%; 
-	}
-	/* Définit des largeurs jusqu'à 4 grilles */
-	.rwd-stack.ui-grid-c .ui-block-a, 
-	.rwd-stack.ui-grid-c .ui-block-b, 
-	.rwd-stack.ui-grid-c .ui-block-c,
-	.rwd-stack.ui-grid-c .ui-block-d { 
-		width: 24.925%;
-	}
-	/* Définit des largeurs jusqu'à 5 grilles */
-	.rwd-stack.ui-grid-d .ui-block-a, 
-	.rwd-stack.ui-grid-d .ui-block-b, 
-	.rwd-stack.ui-grid-d .ui-block-c,
-	.rwd-stack.ui-grid-d .ui-block-d,
-	.rwd-stack.ui-grid-d .ui-block-e { 
-		width: 19.925%;
-	}
-}
-</code></pre>
+      	</div><!-- /data-demo -->
+      
+      
 	
 
 		</div><!--/content-primary -->
