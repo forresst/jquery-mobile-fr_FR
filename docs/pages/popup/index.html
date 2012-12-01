@@ -166,7 +166,7 @@ $( "#myPopupDiv" ).popup( "open" )
 </code></pre>
 
 		<h2>Fermeture des popups</h2>
-		<p>¨Par défaut, les popups peuvent être fermés soit en cliquant en dehors du widget popup, soit en pressant la touche <code>Echap</code>. Pour éviter cela, l'attribut <code>data-dismissable="false"</code> peut être ajouté à la popup. Les popups peuvent aussi être fermés via la méthode <code>close</code> :</p>
+		<p>¨Par défaut, les popups peuvent être fermés soit en cliquant en dehors du widget popup, soit en pressant la touche <code>Echap</code>. Pour éviter cela, l'attribut <code>data-dismissible="false"</code> peut être ajouté à la popup. Les popups peuvent aussi être fermés via la méthode <code>close</code> :</p>
 			
 <pre><code>
 $( "#myPopupDiv" ).popup( "close" )
@@ -182,7 +182,7 @@ $( "#myPopupDiv" ).popup( "close" )
 &lt;/div&gt;
 		</code></pre>
 				
-		<a href="#popupCloseRight" data-rel="popup" data-role="button" data-inline="true">Popup avec le bouton fermer à droite</a> <a href="#popupCloseLeft" data-rel="popup" data-role="button" data-inline="true">Popup avec le bouton fermer à gauche</a><a href="#popupUndismissable" data-rel="popup" data-role="button" data-inline="true">Popup "Undismissable"</a>
+		<a href="#popupCloseRight" data-rel="popup" data-role="button" data-inline="true">Popup avec le bouton fermer à droite</a> <a href="#popupCloseLeft" data-rel="popup" data-role="button" data-inline="true">Popup avec le bouton fermer à gauche</a><a href="#popupUndismissible" data-rel="popup" data-role="button" data-inline="true">Popup "Undismissible"</a>
 		
 		<div data-role="popup" id="popupCloseRight" class="ui-content" style="max-width:280px">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a>
@@ -194,9 +194,9 @@ $( "#myPopupDiv" ).popup( "close" )
 			<p>J'ai un bouton fermer dans le coin supérieur gauche avec un simple balisage HTML.</p>
 		</div>
 		
-		<div data-role="popup" id="popupUndismissable" class="ui-content" style="max-width:280px" data-dismissable="false">
+		<div data-role="popup" id="popupUndismissible" class="ui-content" style="max-width:280px" data-dismissible="false">
 			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-left">Fermer</a>
-			<p>J'ai l'attribut  <code>data-dismissable</code> définit à <code>false</code>. Je ne suis pas refermable en cliquant en dehors de moi.</p>
+			<p>J'ai l'attribut  <code>data-dismissible</code> définit à <code>false</code>. Je ne suis pas refermable en cliquant en dehors de moi.</p>
 		</div>
 
 		<h2>Ajout d'espacement</h2>

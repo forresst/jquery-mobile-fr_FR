@@ -1,0 +1,290 @@
+<!DOCTYPE html> 
+<html>
+   <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1"> 
+   <title>Docs jQuery Mobile Docs - Table Responsive</title> 
+   <link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />  
+   <link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
+
+   <script src="../../js/jquery.js"></script>
+   <script src="../../docs/_assets/js/jqm-docs.js"></script>
+   <script src="../../js/"></script>
+
+</head> 
+<body> 
+
+   <div data-role="page">
+
+      <div data-role="header" data-theme="f">
+      <h1>Table : Column Toggle</h1>
+      <a href="../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+   </div><!-- /header -->
+
+   <div data-role="content">
+        <h2>Mode de table Column toggle</h2>
+
+         <p>Ce mode de table masque automatiquement les colonnes de moindre importance sur des largeurs très étroites et fait apparaitre un bouton pour ouvrir un menu qui permet à l'utilisateur de choisir quelles colonnes il veut voir. Dans ce mode, l'auteur tente de définir les colonnes qui sont les plus importantes à montrer selon différentes largeurs en attribuant une priorité à chaque colonne.</p>
+      
+        <p>Un utilisateur peut choisir de cocher le nombre de colonnes qu'il veut en appuyant sur le bouton "Columns..." pour ouvrir la  popup de sélection de colonne. La popup contient une liste des colonnes générée dynamiquement basée sur le balisage de la table, ces colonnes peuvent être cochées et décochées pour ajuster celles qui sont visibles. </p>
+  
+    
+         <table data-role="table" id="table-column-toggle" data-mode="columntoggle" class="ui-responsive table-stroke">
+              <thead>
+                <tr>
+                  <th data-priority="2">Rang</th>
+                  <th>Titre</th>
+                  <th data-priority="3">Année</th>
+                  <th data-priority="1"><abbr title="Classement de Rotten Tomato">Classement</abbr></th>
+                  <th data-priority="5">Commentaires</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th>1</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+                  <td>1941</td>
+                  <td>100%</td>
+                  <td>74</td>
+                </tr>
+                <tr>
+                  <th>2</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+                  <td>1942</td>
+                  <td>97%</td>
+                  <td>64</td>
+                </tr>
+                <tr>
+                  <th>3</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
+                  <td>1972</td>
+                  <td>97%</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <th>4</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
+                  <td>1939</td>
+                  <td>96%</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <th>5</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external">Lawrence of Arabia</a></td>
+                  <td>1962</td>
+                  <td>94%</td>
+                  <td>87</td>
+                </tr>
+                <tr>
+                  <th>6</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td>
+                  <td>1964</td>
+                  <td>92%</td>
+                  <td>74</td>
+                </tr>
+                <tr>
+                  <th>7</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
+                  <td>1967</td>
+                  <td>91%</td>
+                  <td>122</td>
+                </tr>
+                <tr>
+                  <th>8</th>
+                  <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external">The Wizard of Oz</a></td>
+                  <td>1939</td>
+                  <td>90%</td>
+                  <td>72</td>
+                </tr>
+                <tr>
+                  <th>9</th>
+                  <td><a href="http://en.wikipedia.org/wiki/Singin%27_in_the_Rain" data-rel="external">Singin' in the Rain</a></td>
+                  <td>1952</td>
+                  <td>89%</td>
+                  <td>85</td>
+                </tr>
+                <tr>
+                  <th>10</th>
+                  <td class="title"><a href="http://en.wikipedia.org/wiki/Inception" data-rel="external">Inception</a></td>
+                  <td>2010</td>
+                  <td>84%</td>
+                  <td>78</td>
+                </tr>
+              </tbody>
+            </table>
+
+    
+
+
+      <h3>Application du mode de sélecteur de colonne dans une table</h3>
+
+      <p>Le mode de sélecteur de colonne nécessite un élément <code>table</code> avec deux attributs : <code>data-role="table"</code> et <code>data-mode="columntoggle"</code>. Un attribut <code>ID</code> est aussi nécessaire sur la table pour l'associer avec la popup de sélecteur de colonne.</p>
+
+      <pre><code>&lt;table <strong>data-role="table" data-mode="columntoggle" id="my-table"</strong>&gt;</code></pre>
+            
+      
+      
+      <h3>Comment fonctionne le mode column toggle</h3>
+      <p>Le plugin automatise quelques points clés : il injecte le bouton sélecteur de colonne et génère la popup avec une liste de colonnes cochables qui peuvent être cachées ou montrées par l'utilisateur. La liste des colonnes dans menu de sélection est remplie en analysant les valeurs (ou <code>abbr title</code>) des éléments de la première rangée d'entête (<code>TH</code>). Seuls les entêtes qui ont un attribut <code>data-priority</code> sont inclus dans le sélecteur de colonne, les entêtes sans cet attribut ne seront pas disponible dans le sélecteur, cela permet aux développeurs d'identifier les colonnes critiques qui ne doivent pas être cachées. Si des colonnes sont masquées via des media queries responsive, ceux-ci seront décochées dans le sélecteur pour refléter la visibilité des colonnes.</p>
+
+      <p>Le comportement automatique pour cacher des colonnes est accompli par les CSS media queries qui masquent ou affichent des colonnes basées sur des niveaux de priorité selon les largeurs de l'écran. Étant donné que chaque site aura différent contenu et différentes configurations de colonnes, nous fournissons un bloc  simple media query que vous pouvez copier, coller et personnaliser pour chaque projet. Ceci est expliqué en détail ci-dessous.</p>
+
+       <p>Les priorités affectées aux entêtes et les media queries utilisées pour masquer des colonnes agissent de façon sensé pour montrer les colonnes les plus importantes qui s'adapteront sur l'appareil. Le menu sélecteur de colonne donne aux utilisateurs la possibilité de remplacer ces valeurs par défaut et choisir les colonnes qu'ils veulent voir. Ces préférences utilisateur sont prioritaire sur la priorité des mappages si une colonne est cochée manuellement, elle restera visible dans toutes les largeurs écran jusqu'à ce que la page soit actualisée. </p>
+      
+      <p>En raison de la flexibilité du plugin fourni, il est possible pour les utilisateurs d'introduire le défilement horizontal si les données de chaque colonne sont longues ou si plusieurs colonnes sont sélectionnées pour être montré sur un écran plus petit. </p>
+
+      <h3>Paramétrage de la priorité de colonne</h3>
+
+      <p>Le table fonctionne en cachant et en montrant les colonnes en fonction de deux entrées : par la largeur d'écran disponible ou par l'utilisateur cochant ou décochant les colonnes à afficher dans une popup de sélection de colonne. Ajoutez les attributs <code>data-priority</code> à chaque entête de colonnes que vous voulez afficher et déterminez la priorité (1 = la plus élevée, 6 = la plus faible). Toute entête de la table qui a une priorité sera disponible dans le menu du sélecteur de colonne. </p>
+      <p>Pour rendre une colonne <em>persistante</em>, il n'est donc pas possible de la cacher, omettez l'attribut <code>data-priority</code>. Cela rendra la colonne visible sur toutes les largeurs et elle ne sera pas disponible dans le menu de sélection de colonne.</p>
+
+<pre><code>&lt;th&gt;Je suis critique et je ne peux pas être enlever.&lt;/th&gt;
+&lt;th <strong>data-priority="1"</strong>&gt;Je suis très importante&lt;/th&gt;
+&lt;th <strong>data-priority="3"</strong>&gt;Je suis un peu importante&lt;/th&gt;
+&lt;th <strong>data-priority="5"</strong>&gt;Je suis moins importante&lt;/th&gt;
+</code></pre>
+
+    
+    <p>En coulisse, le plugin va appliquer des classes à chaque cellule qui assigne la priorité définie dans les attributs de donnée sur l'entête. Par exemple, si l'entête de table a l'attribut <code>data-priority="3"</code>, chaque cellule dans la colonne aura la classe <code>ui-table-priority-<strong>3</strong></code> une fois améliorée. Ces classes sont ensuite utilisés dans les media queries pour masquer et afficher des colonnes en fonction de la largeur de l'écran (voir ci-dessous).</p>
+  
+<pre><code>&lt;td <strong>class="ui-table-priority-3"</strong>&gt;97%&lt;/td&gt;
+</code></pre>
+  
+    <p>Vous pouvez utiliser n'importe quelle convention de nommage pour les priorités et affectez autant de niveaux (ou moins) de priorité pour les colonnes. Le plugin génère simplement des noms de classe basés sur les valeurs dans les attributs <code>data-priority</code> de sorte que même si nous avons par défaut l'utilisation d'un système numérique de 1 à 6, une convention de nommage est possible. </p>
+    <p>Par exemple, si la priorité <code>data-priority="critical"</code> est ajoutée à l'entête, la classe <code>ui-table-priority-critial</code> sera appliquée à chaque cellule dans la colonne. Si une priorité est affectée, la colonne sera mise à disposition pour le basculement dans le menu des colonnes et ajoutera les classes à chaque cellule, le reste du style et de la media query seront écrits par vos soins dans votre feuille de style personnalisée. </p> 
+      
+
+   
+    <h3>Création de table responsive</h3>
+    
+    <p>Les styles pour toutes les colonnes prioritaires (1-6) débutent avec <code>display:none</code> dans la structure de la feuille de style puisque nous adoptons d'abord une approche mobile avec nos styles. Cela signifie que seules les colonnes qui doivent être persistantes sont visibles dans les styles pour commencer.</p>
+        
+    <p>Le framework n'inclut pas automatiquement les media queries pour afficher progressivement les colonnes sur des plus grandes largeurs. Nous faisons cela, car il est plus facile pour les développeurs de personnaliser les largeurs de media query pour chaque niveau de priorité.</p>
+    
+    <p>Les media queries ajoutent le comportement responsive afin d'afficher et de masquer des colonnes par ordre de priorité. Chaque media query est écrit en utilisant les largeurs<code>min-width</code> de sorte qu'ils se construisent au dessus des autres. Les largeurs sont mises en ems afin qu'ils répondent aux changements de taille de police. Pour transcrire une largeur en pixel en em, divisez la largeur par 16 (pixels) - c'est aussi simple que ça.</p>
+    
+    <p>A l'intérieur de chaque media query, nous surchargeons l'ensemble des propriétés de style <code>display:none</code> sur toutes les colonnes prioritaires dans les styles de base <code>display:table-cell</code> afin qu'elles redeviennent visibles et apparaissent dans la table.</p>
+    
+    <p>Pour personnaliser les points d'arrêt, copiez le bloc de style suivant dans vos styles personnalisés et ajustez la valeur <code>min-width</code> du media query pour chaque niveau de priorité pour spécifier où les différentes colonnes prioritaires doivent apparaître.</p>
+    
+    <p>Dans l'exemple de styles ci-dessous, pour la classe <code> my-custom-class</code> dans la table, les colonnes de la priorité 1 seront affichés en premier, dans le cas d'une largeur inférieure à <code>20em</code> (320px), puis celles de priorité 2 pour une largeur inférieure à <code>30em</code> (480px) et ainsi de suite jusqu'à la priorité 6. N'hésitez pas à changer ces points d'arrêt dans votre feuille de style et choisissez le nombre de niveaux de priorité que vous souhaitez utiliser.</p>
+
+
+<pre><code>
+<strong>/* Affiche priorité 1 à partir de 320px (20em x 16px) */</strong> 
+@media screen and (min-width: 20em) {
+   .my-custom-class th.ui-table-priority-1,
+   .my-custom-class td.ui-table-priority-1 {
+     display: table-cell;
+   }
+}
+<strong>/* Affiche priorité 2 à partir de 480px (30em x 16px) */</strong> 
+@media screen and (min-width: 30em) {
+   .my-custom-class  th.ui-table-priority-2,
+   .my-custom-class td.ui-table-priority-2 {
+     display: table-cell;
+   }
+}
+...d'autres points d'arrêts...
+</code></pre>
+<p>En raison de la spécificité de CSS, vous aurez également besoin d'inclure les définitions des classes pour les états cachés et visibles <em>après</em> les points d'arrêt personnalisées dans votre feuille de style personnalisée pour être sûr de les inclure :</p>
+<pre><code>
+/* manuellement caché */ 
+.my-custom-class th.ui-table-cell-hidden,
+.my-custom-class td.ui-table-cell-hidden {
+  display: none;
+}
+
+/* manuellement affiché */
+.my-custom-class th.ui-table-cell-visible,
+.my-custom-class td.ui-table-cell-visible {
+   display: table-cell;
+}
+</code></pre>
+      <h3>L'application d'un point d'arrêt prédéfini</h3>
+      <p>Même si nous vous encourageons, vivement, à écrire vous-même des points d'arrêt personnalisés, le framework inclut un ensemble de point d'arrêt pré-configuré pour les 6 niveaux de priorité que vous pouvez utiliser s'ils fonctionnent bien pour votre contenu. </p>
+      <p>Ces points d'arrêt peuvent être appliqués en ajoutant <code>class="ui-responsive"</code> à l'élément table. Voici un exemple d'une table avec cette classe ajoutée :</p>
+
+      <pre><code>&lt;table data-role="table" <strong>class="ui-responsive"</strong> data-mode="columntoggle" id="my-table"&gt;</code></pre>
+
+      <p>Les six classes des points d'arrêt prédéfinis incluse dans la feuille de style  utilisent des tranches régulières de 10em (160 pixels). Voici un résumé des points d'arrêt assignées à chacune des priorités dans les styles prédéfinis : </p>
+      <dl>
+        <dt><code>data-priority="1"</code></dt><dd> Affiche la colonne à partir de 320px (20em) </dd>
+        <dt><code>data-priority="2"</code></dt><dd> Affiche la colonne à partir de 480px (30em) </dd>
+        <dt><code>data-priority="3"</code></dt><dd> Affiche la colonne à partir de 640px (40em) </dd>
+        <dt><code>data-priority="4"</code></dt><dd> Affiche la colonne à partir de 800px (50em) </dd>
+        <dt><code>data-priority="5"</code></dt><dd> Affiche la colonne à partir de 960px (60em) </dd>
+        <dt><code>data-priority="6"</code></dt><dd> Affiche la colonne à partir de 1,120px (70em) </dd>
+      </dl>
+
+      <p>Si ces points d'arrêt prédéfinis ne fonctionnent pas pour votre contenu et votre mise en page, nous vous recommandons de créer des points d'arrêt sur ​​mesure pour affiner les styles. </p>
+
+
+      <h3>Travailler avec les classes du menu de sélection des colonnes</h3>
+
+      <p>Lorsque le menu de sélection de colonne s'ouvre, les cases à cocher des colonnes seront cochées ou décochées selon la visibilité de chaque colonne en fonction des media queries, afin qu'elles reflètent exactement ce qui est affiché. Ces media queries pour masquer ou afficher les colonnes agissent en tant que paramètres par défaut pour que les colonnes puissent être présentées en fonction du besoin du développeur pour l'importance des colonnes et les valeurs des données. Le menu de sélection permet à l'utilisateur d'avoir le contrôle de la présentation de cette table pour l'emporter sur l'affichage par défaut.</p>
+      <p>Si une colonne décochée est cochée par l'utilisateur, il peut maintenant prendre le contrôle de la colonne. Jusqu'à ce que la page soit actualisée, la visibilité de cette colonne sera désormais toujours visible, même si l'écran est redimensionné. Dans les coulisses, une classe <code>ui-table-cell-visible</code> est ajoutée à toutes les cellules dans cette colonne afin de s'assurer que cela remplace la visibilité indiquée par les media queries.</p>
+      <p>La même idée s'applique lorsqu'une colonne est décochée: à partir de là, la colonne ne sera pas visible sur n'importe quelle largeur, car la classe <code>ui-table-cell-hidden</code> est ajoutée à chacune des cellules de cette colonne.</p>
+
+      <h3>Styliser le bouton et la popup de sélection de colonne</h3>
+      
+      <p>La popup de sélection de colonne s'ouvre via un bouton qui est généré par le framework. Le texte du bouton est par défaut "Columns..." mais il peut être défini en ajoutant en ajoutant l'attribut <code>data-column-btn-text</code> à la table à la chaîne de texte que vous voulez dans le bouton. Le bouton héritera du thème de la zone de contenu, comme tous les boutons, mais le thème peut être réglé manuellement en ajoutant l'attribut  <code>data-column-btn-theme</code>  avec une lettre du nuancier dans votre thème.</p>
+      
+      <p>Ce bouton est directement injecté <em>avant</em> l'élément table et a des styles de base aligné à droite, mais vous pouvez personnaliser l'apparence de ce bouton. Pour styliser tous ces boutons à travers votre site, recherchez la classe structurelle <code>ui-table-columntoggle-btn</code> sur ce lien. </p>
+      <p>Par contre, pour cibler les styles sur un bouton spécifique, utilisez l'unique valeur <code>href</code> qui est générée pour cibler un bouton de sélection de colonne spécifique. Par exemple, une table avec un <code>ID</code> à <code>movie-table</code> générera une popup avec un <code>ID</code> à <code>movie-table-popup</code>, donc le sélecteur CSS <code>a[href="#movie-table-popup"]</code> ciblera seulement le bouton de la popup pour cette table spécifique.</p>
+      
+      <p>Le thème pour la popup de sélection de colonne peut être défini par l'ajout de l'attribut <code>data-column-popup-theme</code> à la table et en spécifiant une lettre nuancier dans votre thème. Pour les styles personnalisés ou des scripts, toutes les popups de sélection de colonne peuvent être ciblées en utilisant la classe structurelle <code>ui-table-columntoggle-popup</code> ajoutée à ces popups. Pour personnaliser une seule popup, utiliser l'<code>ID</code> généré basé sur l'<code>ID</code> de la table qui est ajouté à chaque popup spécifique (tel que <code>#movie-table-popup</code>) pour cibler une popup spécifique.</p>
+
+      <h3>Travailler avec des entêtes de colonnes groupées</h3>
+      <p>Il est assez courant de devoir regrouper logiquement plusieurs colonnes sous une même entête de groupe pour les données financières ou scientifiques. Le framework peut supporter la version la plus simple de ceci, en acceptant deux rangées d'entêtes de table (<code>TH</code>), avec la première rangée contenant un simple attribut <code>colspan</code> pour grouper les colonnes en-dessous. Dans cette configuration, le framework analysera seulement la première rangée pour la priorité et l'exposition de ces groupes pour les choix dans la popup de sélection de colonne. Dans cette configuration, la deuxième entête ne sera pas exposé comme des colonnes qui peuvent être cachés ou montrés indépendamment des groupes dans le sélecteur. </p>
+      
+
+        <h2>Options</h2>
+        <p>La table columntoggle possède plusieurs options :</p>
+
+        <dl>
+        <dt><code>columnBtnTheme</code> par défaut : null</dt><dd>Définit le thème pour le bouton de sélection de colonne. Définissez-le avec n'importe quelle lettre de nuancier valide dans votre thème. Disponible sous l'attribut <code>data-column-btn-theme</code>.</dd>
+        <dt><code>columnBtnText</code> par défaut : "Columns..."</dt><dd>Définit le texte pour le bouton de sélection de colonne. Disponible sous l'attribut <code>data-column-btn-text</code>.</dd>
+        <dt><code>columnPopupTheme</code> par défaut : null</dt><dd>Définit le thème pour les cases à cocher du sélecteur de colonne. Définissez-le avec n'importe quelle lettre de nuancier valide dans votre thème. Disponible sous l'attribut <code>data-popup-theme</code>.</dd>
+        </dl>
+
+        <p>Le mode columntoggle a aussi une option, <code>classes</code>, qui n'est configurable que via JavaScript car il attend une valeur littérale d'objet. L'option <code>classes</code> a deux propriétés qui définissent les noms de classes structurelles que le plugin utilise :</h3>
+
+          <dl>
+        <dt><code>classes.columnToggleTable</code> par défaut : "ui-table-columntoggle"</dt>Classe assignée à la table.        
+        <dt><code>classes.columnBtn</code> par défaut : "ui-table-columntoggle-btn"</dt><dd>Classe assignée au bouton de sélecteur de colonne.</dd>
+        <dt><code>classes.popup</code> par défaut : "ui-table-columntoggle-popup"</dt><dd>Classe assignée à la popup de sélection de colonne.</dd>
+
+        <dt><code>classes.priorityPrefix</code> par défaut : "ui-table-priority-"</dt>Préfixe de classe ajoutée à chaque cellule dans une colonne. Cette chaîne est ajoutée à la valeur de priorité mise sur les entêtes.
+      </dl>
+
+
+        <h2>Méthodes</h2>
+        <p>La table columntoggle a une méthode : 
+      <dl>
+        <dt><code>refresh</code></dt><dd>Met à jour les labels dans les cellules.<pre><code>$( myTable ).table( "refresh" );</code></pre></dd>
+      </dl>
+
+      <h2>Événements</h2>
+      <p>Puisque ce plugin est écrit comme une extension du <a href="index.html">plugin table</a>, il se lie à l'événement <code>tablecreate</code>  mais n'émet pas d'autres événements.</p>
+
+
+      
+         </div><!-- /content -->
+
+         <div data-role="footer" class="footer-docs" data-theme="c">
+               <p class="jqm-version"></p>
+            <p>© 2012 jQuery Fondation et autres contributeurs</p>
+         </div>
+
+         </div><!-- /page -->
+
+</body>
+</html>
+
+
+
+
+
+

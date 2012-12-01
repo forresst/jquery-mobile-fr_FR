@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Grille responsive personnalisée - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jqm-demos.js"></script>
+	<script src="../../../js/"></script><!-- We're using a style block to make it easy to view the custom styles --><!-- In production, these should be added to an custom.css file loaded in the head -->
+	
+	
+	
+	<style>
+	/* Basic styles */
+	.rwd-example div {
+        text-align:left;
+        border-color:#ddd;
+		margin-bottom:1em;
+	}
+      .rwd-example p {
+        color:#777;
+        line-height:140%
+	}
+
+	/* Stack all blocks to start */
+	.rwd-example .ui-block-a, 
+	.rwd-example .ui-block-b, 
+	.rwd-example .ui-block-c { 
+		width: 100%; 
+		float:none; 
+	}
+
+    /* 1st breakpoint - Float B and C, leave A full width on top */ 
+	@media all and (min-width: 34em){
+        .rwd-example div {
+           min-height:12em;
+        }
+		.rwd-example .ui-block-b, 
+		.rwd-example .ui-block-c { 
+		  float:left; 
+          width: 49.95%; 
+		}
+        .rwd-example .ui-block-b p, 
+		.rwd-example .ui-block-c p { 
+          font-size:.8em;
+
+		}
+	}
+
+    /* 2nd breakpoint - Float all, 50/25/25 */ 
+	@media all and (min-width: 46em){
+
+        .rwd-example div {
+           min-height:17em;
+        }
+        .rwd-example .ui-block-a, 
+		.rwd-example .ui-block-c { 
+		  float:left; 
+          width: 49.95%; 
+		}
+		.rwd-example .ui-block-b, 
+		.rwd-example .ui-block-c { 
+		  float:left; 
+          width: 24.925%; 
+		}
+	}
+
+    /* 3rd breakpoint - Bump up font size at very wide screens */ 
+	@media all and (min-width: 66em){
+
+        .rwd-example {
+          font-size:125%;
+        }
+        .rwd-example .ui-block-a, 
+		.rwd-example .ui-block-c { 
+		  float:left; 
+          width: 49.95%; 
+		}
+		.rwd-example .ui-block-b, 
+		.rwd-example .ui-block-c { 
+		  float:left; 
+          width: 24.925%; 
+		}
+	}
+	</style>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Grilles</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+		
+			<h2>Grille responsive personnalisée</h2>
+
+			<p>Il est facile d'étendre les styles de grille basique dans une mise en page responsive personnalisée en utilisant les CSS media queries pour ajuster la mise en page et la conception à travers différents points d'arrêt de largeur d'écran.	</p>
+			<p>Cet exemple est typique d'un bloc de nouvelles fonctionnalités qui change sa disposition selon les largeurs d'écran et montre comment changer les ratios de la grille et la disposition générale avec un simple CSS. Cela commence comme un simple ensemble d'articles empilés sur les téléphones, qui va vers une mise en page dont l'article principal est sur toute la largeur et les histoires secondaires empilée sur une mise en page en 50/50. Sur des plus grandes largeurs, ces articles secondaires se positionnent à côté de l'article principal dans une mise en page 50/25/25. Lorsque l'écran est très large, la taille de la police augmente pour garder des longueurs de ligne courte.</p>
+			<p>Utilisez le bouton "voir la source" ci-dessous pour ragarder comment les media queries travaillent pour chacun de ces points d'arrêt.</p><!-- view source utilty wrapper -->
+
+			
+			<div data-demo-html="true" data-demo-css="true">
+				
+				<div class="rwd-example"><!-- Lead story block -->
+				
+					
+					<div class="ui-block-a">
+		              <div class="ui-body ui-body-d">
+		                <h2>Calendrier d'Apple : Événement de l'iPad Mini le 23 Octobre</h2>
+		                <p>L'un des secrets  en technologie le moins bien gardé a été confirmé : Apple tiendra un événement le 23 octobre à San Jose, en Californie, au cours duquel la société a largement prévu de dévoiler une version plus petite et moins cher de son populaire iPad.</p>
+		              </div>
+		            </div><!-- secondary story block #1 -->
+	
+					
+					<div class="ui-block-b">
+		              <div class="ui-body ui-body-d">
+		                <h4>La tablette Surface de Microsoft sera en vente pour 499 $</h4>
+		                <p>L'image de la tablette Surface de Microsoft est brusquement apparue. Mardi matin, ce géant de Redmond a rempli les blancs sur les prix de la nouvelle tablette, la disponibilité et les spécifications.</p>
+		              </div>
+		             </div><!-- secondary story block #2 -->
+	
+					
+					<div class="ui-block-c">
+		              <div class="ui-body ui-body-d">
+		                <h4>AOL dévoile Alto, un service de messagerie qui permet de synchroniser 5 comptes</h4>
+		                <p>AOL, qui luttent pour se débarrasser de son image désuète, a réimaginé l'une des parties les plus visibles du vieillissement de sa plateforme : son service de messagerie. </p>
+		              </div>
+		             </div>
+
+				</div><!-- /rwd-example -->
+			
+			</div><!-- /data-demo -->
+	
+
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

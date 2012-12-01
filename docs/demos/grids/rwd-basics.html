@@ -4,7 +4,7 @@
     <meta http-equiv="content-type" content="text/html; charset=UTF-8">
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>Listes - Démos jQuery Mobile</title>
+	<title>RWD Basiques - Démos jQuery Mobile</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
 	<script src="../../../js/jquery.js"></script>
@@ -23,25 +23,91 @@
 	
 		<div class="content-primary">
 
-      	<h2>Responsive Web Design (RWD) Basiques</h2>
-		<p>La création de mise en page responsive est facile, mais il y a quelques trucs à garder à l'esprit.</p>
+      	<h2>Introduction au Responsive Web Design</h2>
+      	<p>Le Responsive web design (RWD) est une approche de conception et de technique qui vise à adapter la mise en page et l'interaction d'un site ou d'une application, pour avoir un fonctionnement optimal dans un large éventail de résolutions d'appareils, de densité d'écran et de modes d'interaction avec la même base de code.</p>
+      	<p>RWD comporte trois éléments clés :<p>
+      	<ul>
+      		<li><strong>Les media queries CSS</strong>, utilisés pour cibler les styles aux caractéristiques spécifiques des appareils tels que le point d'arrêt de largeur d'écran ou la résolution.</li>
+      		<li><strong>Une grille fluide</strong>, qui spécifie les éléments et les widgets en unités flexibles dans le but de fluidifier le remplissage de leurs conteneurs.</li>
+      		<li><strong>Des images et des médias flexibles</strong>, sont également dimensionnés en unités relatives de sorte qu'ils se redimensionnent pour s'adapter à l'intérieur de leurs conteneurs.</li>
+      	</ul>
+
+      	<p>En créant tous les éléments de l'écran pour qu'ils soient fluides et flexibles, cela permet aux media queries de se concentrer principalement sur le contrôle des règles de présentation pour les conteneurs, les modules à l'intérieur se redimensionnent tout simplement en fonction de leurs conteneurs.</p>
+
+      	<p>Un simple exemple responsive peut être de deux conteneurs empilés, chacun avec un contenu ou des widgets flexibles à l'intérieur. Sur des plus grandes largeurs, les media queries sont utilisés pour positionner les deux conteneurs afin de créer une mise en page sur deux colonnes, pour mieux tirer parti de la plus grande largeur d'écran. </p>
+
+      	<p>Puisque le contenu à l'intérieur de chaque conteneur est conçu pour s'adapter à son parent, les media queries peuvent se concentrer uniquement sur les règles pour faire des colonnes empilées ou positionnées, et de remplacer ou d'ajouter des styles uniquement nécessaires aux grandes largeurs.</p>
+
+		<h2>Amélioration responsive et progressive</h2>
+
+      	<p>En plus de ces trois principes fondamentaux RWD, nous préconisons les pratiques d'amélioration progressive qui commence toujours avec du HTML sémantique qui fonctionne sur n'importe quel appareil, puis discrètement d'ajouter des mises en page avancée de CSS et de JS uniquement pour les navigateurs capables. Ceci fournit une base solide pour les optimisations au niveau de l'appareil que RWD fournit et c'est ainsi que la bibliothèque jQuery Mobile est construite.</p>
+
+		<h2>Responsive et responsable</h2>
+
+      	<p>Lorsque vous travaillez avec RWD, il est très important de tenir compte de la performance pour s'assurer que vous n'êtes pas simplement en train de prendre un site lourd de bureau et de le rétrécir pour des écrans mobiles. Nous vous recommandons de suivre une approche "mobile d'abord" pour maintenir le développement axé sur la réduction de bande passante, sur les requêtes du serveur et sur l'optimisation de l'ordre du source.</p>
+
+      	<p>Lors de la construction d'une page, commencez par créer le code HTML le plus léger et le plus sémantique possible. Pensez à la façon dont l'ordre de la source du balisage travaillera si vous n'aviez pas de CSS ou JS. N'incluez pas le code qui est seulement nécessaire pour les grandes fenêtres et qui est caché dans les petites, au lieu de cela utilisez AJAX pour charger conditionnellement ces ressources lorsque les écrans plus grands sont détectés par JS. </p>
+
+      	<p>Lors de l'écriture de CSS pour un site ou une application responsive, il est généralement plus efficace d'écrire toute la typographie et les éléments de style de base en dehors d'une media query pour former les styles pour les petits appareils, comme les téléphones. Il s'agit d'une bonne approche parce que la majorité de ces styles de base sont généralement aussi utilisé sur des grandes largeurs, mais dans une mise en page différente et il exploite la puissance des CSS en cascade. Mettez en place des points d'arrêt en utilisant plusieurs media queries <code>min-width</code>  à la mise en page en ajoutant des règles de style qui s'appliqueront qu'au-dessus d'une certaine largeur de l'écran.</p>
+
+      	<p>Pour les images dans vos pages, nous vous recommandons de commencer  dans le balisage avec des images dimensionnées pour les écrans mobiles. Cela n'a aucun sens de se servir d'une photo 1000 pixels de large sur un smartphone avec une résolution max de 480 pixels parce que c'est un gaspillage de bande passante et de mémoire. Au lieu de cela, incluez une image ciblée pour une taille mobile. Ajoutez une règle de style <code>width: 100%;</code> pour rendre à l'échelle les images sur la page ou sur le conteneur, mais pas plus parce que cela aurait l'air flou. </p>
+
+      	<p>Pour les écrans plus larges ou avec une haute résolution, il existe un large éventail de services et de techniques basées sur du JS à condition de charger une image de qualité supérieure. Le prochaine élément <code>picture</code> répondra à la nécessité de gérer des sources d'image multiple nativement dans le HTML et mais il peut être utilisé aujourd'hui avec un script polyfill.</p>
+
+      	<p>Il faut toujours chercher des moyens de limiter le nombre de requêtes du serveur sur une page en concaténant les fichiers dans une seule requête et toujours utiliser la minification et la compression (gzip). </p>
+
+		
+		<h2>Fonctionnement responsive dans jQuery Mobile</h2>
+
+		<p>jQuery Mobile a toujours été conçu pour fonctionner dans un contexte responsive, nos documents et formulaires ont quelques éléments responsive dès le début. Tous les widgets sont construits pour être 100% flexible en largeur afin de s'adapter facilement dans n'importe quel système de disposition responsive que vous choisissez de construire. </p>
+
+		<p>Voici une liste de conseils RWD à garder à l'esprit :</p>
+		
 		<ul>
 			<li><strong>Créez une feuille de style de substitution de style et incluez la après la feuille de style du framework jQuery Mobile.</strong> Cela stockera vos styles personnalisés et ajustera  par défaut les widgets et les media queries.</li>
-			<li><strong>Commencez par écrire les styles que vous voulez voir sur les écrans les plus étroits (par exemple "mobile first").</strong> Ceux-ci devraient être en dehors d'un media query. Par exemple, nous commencerons avec chacun de nos conteneurs de grille définis avec 100% de largeur et non positionné, donc ils commencent à s'empiler sur la largeur du smartphone.</li>
+			<li><strong>Commencez par écrire les styles que vous voulez voir sur les écrans les plus étroits (par exemple "mobile first").</strong> Ceux-ci devraient être en dehors d'un media query. Cette approche de mobile en premier est efficace parce que vous pouvez fixer la typographie de base, les couleurs et les styles pour mobile en sachant que ceux-ci tendent à être également utilisé pour des points d'arrêt plus larges.</li>
 			<li><strong>Choisissez les breakpoints en fonction de votre contenu, et non d'un appareil spécifique.</strong> Comme il existe des appareils de toutes les largeurs possibles, il est plus intelligent de choisir des breakpoints en fonction de l'apparence de votre <em>contenu</em> dans la conception de votre système. Comme vous redimensionnez la fenêtre pour des grandes largeurs, déterminer où votre contenu doit être positionné pour qu'il puisse s'adapter afin de bénéficier d'une plus grande largeur.</li>
-			<li><strong>Écrivez des media queries utilisant ems et min-widths</strong> Écrivez un bloc media query qui utilise ems à la place de pixels pour s'assurer que la mise en page s'adapte aux changements de taille de police. Pour calculer la largeur, il suffit de diviser le point d'arrêt cible (320px) avec 16px (la taille de la police par défaut) pour obtenir la largeur basé en em (20em). 
-<pre><code>@media all and (min-width: 36em){
-	/* Styles qui s'appliquent au-dessus de 576px */
-}
-</code></pre>
-			</li>
-			<li><strong> Créer des breakpoints supplémentaires au dessus de l'autre pour des largeurs de plus en plus larges</strong> Cela signifie que le prochain breakpoint peut ajouter des styles supplémentaires qui sont créés sur les styles de base et sur ceux du premier breakpoint.</li>
+			<li><strong>Écrivez les largeurs des media queries en ems, pas en pixels.</strong> Cela garantit que la mise en page s'adaptera aux changements de taille de police sur des écrans plus larges. Pour calculer la largeur, divisez le point d'arrêt voulu (320px) avec 16px (la taille de la police par défaut) pour obtenir la largeur basé en em (20em). </li>
+			<li><strong>Utilisez les points d'arrêts <code>min-width</code> qui sont construit au dessus des styles de mobile.</strong> Le premier point d'arrêt applique des ajustements de mise en page au dessus des styles standard du mobile afin qu'il puisse être assez léger. D'autres points d'arrêt <code>min-width</code> peuvent être ajoutés pour des écrans encore plus larges dont chacun s'appuie sur ​​les styles de point d'arrêt précédent.</li>
+			<li><strong>Pour remplacer seulement les styles du framework pour des écrans plus petits, utilisez un point d'arrêt <code>max-width</code> à la place.</strong> Cela vous permet de limiter vos remplacements de style qui s'appliquent seulement à une certain largeur inférieure d'écran. Au-dessus de cette largeur, tous les styles normal s'appliqueront ainsi cela est utiles pour certains types de remplacement.</li>
 		</ul>
       
-	
+		<h2>Rassemblement</h2>
+		<p>Voici un simple squelette d'une feuille de style "mobile en premier" qui commence avec les styles du mobile, puis construit une disposition responsive en ajoutant deux points d'arrêt :</p>
+<pre><code>
+<strong>/* Début des styles de base en dehors d'une media query qui s'appliquent aux mobiles et plus */
+/* Typographie général et éléments de design, conteneurs empilés */
+</strong>body { font-family: Helvetica, san-serif; }
+H1 { color: green; }
+a:link { color:purple; }
 
+/* Empiler les deux contenus de conteneurs */
+.main,
+.sidebar { display:block; width:100%; }
+
+
+<strong>/* Premier point d'arrêt à 576px */	
+/* Hérite des styles mobile, mais le positionnement des conteneurs se fait en colonne */	
+</strong>@media all and (min-width: 36em){
+	.main { float: left; width:60%; }
+	.sidebar { float: left; width:40%; }
+}
+
+
+<strong>/* Secondpoint d'arrêt à 800px */	
+/* Ajuste les proportions des colonnes, modifie la base H1 */	
+</strong>@media all and (min-width: 50em){
+	.main { width:70%; }
+	.sidebar { width:30%; }
+
+	/* Vous pouvez aussi modifier n'importe quel style dans le point d'arrêt */
+	H1 { color: blue; font-size:1.2em }
+}
+
+</code></pre>
+		
 		</div><!--/content-primary -->
-	
+
 	</div><!-- /content -->
 	
 	<div class="jqm-footer">
