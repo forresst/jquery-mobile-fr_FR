@@ -28,12 +28,12 @@
 		<p>jQuery Mobile propose plusieurs événements personnalisé qui s'appuient sur ​​des événements natifs pour créer des hooks utiles pour le développement. Notez que ces événements emploient divers événements tactiles, de la souris et de la fenêtre, selon l'existence de l'événement, vous pouvez les lier pour une utilisation dans des environnements de bureau et portatifs. Vous pouvez lier ces événements comme vous le feriez avec les autres événements jQuery en utilisant <code>live()</code> ou <code>bind()</code>.</p>
 
 			<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important : Utilisez <code>$(document).bind('pageinit')</code> à la place de <code>$(document).ready()</code></h4>
+		<h4 style="margin:.5em 0">Important : Utilisez <code>$(document).on('pageinit')</code> à la place de <code>$(document).ready()</code></h4>
 		<p>La première chose que vous apprenez dans jQuery est d'appeler le code à l'intérieur de la fonction <code>$(document).ready()</code> où tout va exécuter dès que le DOM est chargé. Cependant, dans jQuery Mobile, Ajax est utilisé pour charger le contenu de chaque page dans le DOM où vous naviguez, et le gestionnaire DOM s'exécute que pour la première page. Pour exécuter du code à chaque fois qu'une nouvelle page est chargée et créée, vous pouvez lier l'événement  <code>pageinit</code>. Cet événement est expliqué en détail au bas de cette page.</p></div>
 
       <p>&nbsp; </p>
 		<div class="ui-body ui-body-e">
-		<h4 style="margin:.5em 0">Important : <code>$(document).bind('pagecreate')</code> contre <code>$(document).bind('pageinit')</code></h4>
+		<h4 style="margin:.5em 0">Important : <code>$(document).on('pagecreate')</code> contre <code>$(document).on('pageinit')</code></h4>
    <p> Avant la version bêta 2, il était recommandait de lier l'événement <code>pagecreate</code>, pour ceux qui voulaient manipuler les pages améliorées par jQuery mobile et le balisage de widget.  Dans la version bêta 2, un changement interne a été faite pour dissocier chacun des widgets en liant l'événement <code>pagecreate</code> à la place des appels directs aux méthodes du widget. Par conséquence, les utilisateurs qui liaient <code>pagecreate</code> dans<code>mobileinit</code> trouvaient la liaison d'exécution avant que le balisage ait été amélioré par tous les plugins. En accord avec le cycle de vie de production des widgets de jQuery UI, la méthode d'initialisation est appelée <strong>après</strong> la méthode de création, de sorte que l'événement <code>pageinit</code> se synchronise correctement avec la manipulation d'amélioration du DOM et/ou des objets Javascript. En bref, si vous utilisiez précédemment <code>pagecreate</code> pour manipuler le balisage amélioré avant que la page ait été montré, il est très probable que vous  devrez migrer vers 'pageinit'.
 		</p></div>
 
@@ -162,7 +162,7 @@
             	  <ul>
             	    <li>Les fonctions de rappel qui appellent preventDefault() sur l'événement, *DOIVENT* appeler resolve() ou reject() sur cet objet afin que les requête changePage() reprennent le traitement. Les observateurs d'objet deferred attendent les objets deferred pour être resolved  comme ceci :</p>
                     <pre><code>
-$( document ).bind( "pagebeforeload", function( event, data ){
+$( document ).on( "pagebeforeload", function( event, data ){
 
 	// Permet d'informer le framework que nous allons gérer le chargement.
 
@@ -179,7 +179,7 @@ $( document ).bind( "pagebeforeload", function( event, data ){
 });</code></pre>
                     <p>ou rejected comme ceci :
                     <pre><code>
-$( document ).bind( "pagebeforeload", function( event, data ){
+$( document ).on( "pagebeforeload", function( event, data ){
 
 	// Permet d'informer le framework que nous allons gérer le chargement.
 
@@ -271,7 +271,7 @@ $( document ).bind( "pagebeforeload", function( event, data ){
             	  <ul>
             	    <li>Les fonctions de rappel qui appellent preventDefault() sur l'événement, *DOIVENT* appeler resolve() ou reject() sur cet objet afin que les requête changePage() reprennent le traitement. Les observateurs d'objet deferred attendent les objets deferred pour être resolved  comme ceci :</p>
                     <pre><code>
-$( document ).bind( "pageloadfailed", function( event, data ){
+$( document ).on( "pageloadfailed", function( event, data ){
 
 	// Permet d'informer le framework que nous allons gérer les choses.
 
@@ -288,7 +288,7 @@ $( document ).bind( "pageloadfailed", function( event, data ){
 });</code></pre>
                     <p>ou rejected comme ceci :
                     <pre><code>
-$( document ).bind( "pageloadfailed", function( event, data ){
+$( document ).on( "pageloadfailed", function( event, data ){
 
 	// Permet d'informer le framework que nous allons gérer les choses.
 
@@ -519,7 +519,7 @@ $( '#foo' ).hide().trigger( 'updatelayout' );
 		<h2>Evénements d'animation</h2>
 		<p>jQuery Mobile propose le plugin <code>animationComplete</code>, que vous pouvez utiliser après l'ajout ou la suppression d'une classe qui applique une transition CSS. Il peut être utilisé avec les événements de transition de page. Par exemple :</p>
 <pre><code>
-$(document).bind("pagehide", function(event, ui) {
+$(document).on("pagehide", function(event, ui) {
   $(ui.nextPage).animationComplete(function() {
     alert('Animation complète');
   });

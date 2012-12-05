@@ -40,7 +40,7 @@
 			<dd>
 				<p class="default">Par défaut : true</p>
 				<p>Lorsque c'est à false, le conteneur est élargi initialement avec un moins comme icône dans l'entête. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.collapsed = false;</strong>
 });
 </code></pre>
@@ -51,7 +51,7 @@
 			<dd>
 				<p class="default">Par défault : " click to collapse contents"</p>
 				<p>Ce texte est utilisé pour fournir des commentaires sonores pour les utilisateurs avec un logiciel de lecteur d'écran. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.collapseCueText = " collapse with a click";</strong>
 });
 </code></pre>
@@ -61,7 +61,7 @@
 			<dd>
 				<p class="default">Par défaut : "plus"</p>
 				<p>Définit l'icône pour le conteneur de l'entête des pliables dans l'état plié. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.collapsedIcon = "arrow-r";</strong>
 });
 </code></pre>
@@ -72,18 +72,29 @@
 			<dd>
 				<p class="default">par défaut : null, hérité d'un parent</p>
 				<p>Définit le jeu de couleurs (nuancier) spécifiquement pour le bloc de contenu du pliable. Il accepte une seule lettre de a à z qui correspond aux nuanciers inclus dans votre thème. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.contentTheme = "a";</strong>
 });
 </code></pre>
 				<p>Cette option est également définie comme un attribut de données : <code>data-content-theme="a"</code>.</p>
 			</dd>
 
+			<dt><code>corners</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">Par défaut : true</p>
+				<p>Applique border-radius au thème si défini à true. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).on( "mobileinit", function(){
+    <strong>$.mobile.collapsible.prototype.options.corners = false;</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-corners="false"</code>.</p>
+			</dd>
+
 			<dt><code>expandCueText</code> <em>string</em></dt>
 			<dd>
 				<p class="default">Par défaut : " click to expand contents"</p>
 				<p>Ce texte est utilisé pour fournir des commentaires sonores pour les utilisateurs avec un logiciel de lecteur d'écran. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.expandCueText = " expand with a click";</strong>
 });
 </code></pre>
@@ -93,7 +104,7 @@
 			<dd>
 				<p class="default">par défaut : "minus"</p>
 				<p>Définit l'icône pour le conteneur de l'entête des pliables dans l'état déplié. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.expandedIcon = "arrow-d";</strong>
 });
 </code></pre>
@@ -104,7 +115,7 @@
 			<dd>
 				<p class="default">Par défaut : "h1,h2,h3,h4,h5,h6,legend"</p>
 				<p>Dans le conteneur du pliable, le premier élément enfant immédiat qui correspond à ce sélecteur sera utilisé comme l'entête pour le pliable. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.heading = ".mycollapsibleheading";</strong>
 });
 </code></pre>
@@ -114,7 +125,7 @@
 			<dd>
 				<p class="default">par défaut : "left"</p>
 				<p>Positions de l'icône dans l'entête du pliable. Les valeurs possibles : left, right, top, bottom, none, notext.</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.iconpos = "right";</strong>
 });
 </code></pre>
@@ -124,7 +135,7 @@
 			<dd>
 				<p class="default">default: "d"</p>
 				<p>Sets the color scheme (swatch) for the collapsible header icon. It accepts a single letter from a-z that maps to one of the swatches included in your theme. To set the value for all instances of this widget, bind this option to the <a href="../../api/globalconfig.html">mobileinit event</a>:</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.iconTheme = "a";</strong>
 });
 </code></pre>
@@ -138,7 +149,7 @@
 			<dd>
 				<p class="default">Par défaut : ":jqmData(role='collapsible')"</p>
 				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les rôles de données, etc) qui seront automatiquement initialisé comme des pliables. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.initSelector = ".mycollapsible";</strong>
 });
 </code></pre>
@@ -148,7 +159,7 @@
 			<dd>
 				<p class="default">Par défaut : true</p>
 				<p>En mettant cette option à false, l'élément aura une apparence sur toute la largeur sans coins. Si la valeur est false pour un conteneur individuel de pliable, mais que ce conteneur fait partie d'un ensemble pliable, alors la valeur est héritée de l'ensemble du parent pliable. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.inset = false;</strong>
 });
 </code></pre>
@@ -159,7 +170,7 @@
 			<dd>
 				<p class="default">par défaut : false</p>
 				<p>Définit la taille de l'élément pour qu'il soit plus compact : une <a href="../forms/forms-all-mini.html">version mini</a>. Si la valeur est false pour un conteneur individuel de pliable, mais que ce conteneur fait partie d'un ensemble pliable, alors la valeur est héritée de l'ensemble du parent pliable. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.mini = true;</strong>
 });
 </code></pre>
@@ -170,7 +181,7 @@
 			<dd>
 				<p class="default">par défaut : null, hérité d'un parent</p>
 				<p>Définit le jeu de couleurs (nuancier) pour le pliable. Il accepte une seule lettre de a à z qui correspond aux nuanciers inclus dans votre thème. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.theme = "a";</strong>
 });
 </code></pre>

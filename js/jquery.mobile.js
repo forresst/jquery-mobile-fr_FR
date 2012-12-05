@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: c924ed46cad6091c809cb7fef66eb447d319dbcb <> Date: Sat Dec 1 11:53:51 2012 +0100
+* jQuery Mobile Framework Git Build: SHA1: bf6e73c72126a6f58ef147456f4295bfce4aefa5 <> Date: Wed Dec 5 01:14:09 2012 +0100
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -5341,6 +5341,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 		collapseCueText: " click to collapse contents",
 		collapsed: true,
 		heading: "h1,h2,h3,h4,h5,h6,legend",
+		collapsedIcon: "plus",
+		expandedIcon: "minus",
+		iconpos: "left",
 		theme: null,
 		contentTheme: null,
 		inset: true,
@@ -5354,8 +5357,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			o = this.options,
 			collapsible = $el.addClass( "ui-collapsible" ),
 			collapsibleHeading = $el.children( o.heading ).first(),
-			collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon,
-			expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon,
 			collapsibleContent = collapsible.wrapInner( "<div class='ui-collapsible-content'></div>" ).children( ".ui-collapsible-content" ),
 			collapsibleSet = $el.closest( ":jqmData(role='collapsible-set')" ).addClass( "ui-collapsible-set" ),
 			collapsibleClasses = "";
@@ -5377,18 +5378,15 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				o.contentTheme = collapsibleSet.jqmData( "content-theme" );
 			}
 
-			// Get the preference for collapsed icon in the set
-			if ( !o.collapsedIcon ) {
-				o.collapsedIcon = collapsibleSet.jqmData( "collapsed-icon" );
-			}
-			// Get the preference for expanded icon in the set
-			if ( !o.expandedIcon ) {
-				o.expandedIcon = collapsibleSet.jqmData( "expanded-icon" );
-			}
-			// Gets the preference icon position in the set
-			if ( !o.iconpos ) {
-				o.iconpos = collapsibleSet.jqmData( "iconpos" );
-			}
+			// Get the preference for collapsed icon in the set, but override with data- attribute on the individual collapsible
+			o.collapsedIcon = $el.jqmData( "collapsed-icon" ) || collapsibleSet.jqmData( "collapsed-icon" ) || o.collapsedIcon;
+
+			// Get the preference for expanded icon in the set, but override with data- attribute on the individual collapsible
+			o.expandedIcon = $el.jqmData( "expanded-icon" ) || collapsibleSet.jqmData( "expanded-icon" ) || o.expandedIcon;
+
+			// Gets the preference icon position in the set, but override with data- attribute on the individual collapsible
+			o.iconpos = $el.jqmData( "iconpos" ) || collapsibleSet.jqmData( "iconpos" ) || o.iconpos;
+
 			// Inherit the preference for inset from collapsible-set or set the default value to ensure equalty within a set
 			if ( collapsibleSet.jqmData( "inset" ) !== undefined ) {
 				o.inset = collapsibleSet.jqmData( "inset" );
@@ -5422,9 +5420,6 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 			collapsible.addClass( collapsibleClasses );
 		}
 		
-		collapsedIcon = $el.jqmData( "collapsed-icon" ) || o.collapsedIcon || "plus";
-		expandedIcon = $el.jqmData( "expanded-icon" ) || o.expandedIcon || "minus";
-
 		collapsibleHeading
 			//drop heading in before content
 			.insertBefore( collapsibleContent )
@@ -5437,8 +5432,8 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 				.buttonMarkup({
 					shadow: false,
 					corners: false,
-					iconpos: $el.jqmData( "iconpos" ) || o.iconpos || "left",
-					icon: collapsedIcon,
+					iconpos: o.iconpos,
+					icon: o.collapsedIcon,
 					mini: o.mini,
 					theme: o.theme
 				});
@@ -5458,9 +5453,9 @@ $.widget( "mobile.collapsible", $.mobile.widget, {
 							.text( isCollapse ? o.expandCueText : o.collapseCueText )
 						.end()
 						.find( ".ui-icon" )
-							.toggleClass( "ui-icon-" + expandedIcon, !isCollapse )
+							.toggleClass( "ui-icon-" + o.expandedIcon, !isCollapse )
 							// logic or cause same icon for expanded/collapsed state would remove the ui-icon-class
-							.toggleClass( "ui-icon-" + collapsedIcon, ( isCollapse || expandedIcon === collapsedIcon ) )
+							.toggleClass( "ui-icon-" + o.collapsedIcon, ( isCollapse || o.expandedIcon === o.collapsedIcon ) )
 						.end()
 						.find( "a" ).first().removeClass( $.mobile.activeBtnClass );
 
@@ -5513,7 +5508,11 @@ $.widget( "mobile.collapsibleset", $.mobile.widget, {
 		if ( !o.contentTheme ) {
 			o.contentTheme = $el.jqmData( "content-theme" );
 		}
-
+		// Inherit the corner styling from collapsible-set
+		if ( !o.corners ) {
+			o.corners = $el.jqmData( "corners" );
+		}
+		
 		if ( $el.jqmData( "inset" ) !== undefined ) {
 			o.inset = $el.jqmData( "inset" );
 		}
@@ -6836,7 +6835,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 		_setTolerance: function( value ) {
 			var tol = { t: 30, r: 15, b: 30, l: 15 };
 
-			if ( value ) {
+			if ( value !== undefined ) {
 				var ar = String( value ).split( "," );
 
 				$.each( ar, function( idx, val ) { ar[ idx ] = parseInt( val, 10 ); } );
@@ -7070,7 +7069,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_open: function( options ) {
-			var coords, transition,
+			var coords,
+				o = $.extend( {}, this.options, options ),
 				androidBlacklist = ( function() {
 					var w = window,
 						ua = navigator.userAgent,
@@ -7088,16 +7088,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 					return false;
 				}());
 
-			// Make sure options is defined
-			options = ( options || {} );
-
-			// Copy out the transition, because we may be overwriting it later and we don't want to pass that change back to the caller
-			transition = options.transition || this.options.transition;
-
 			// Give applications a chance to modify the contents of the container before it appears
 			this._trigger( "beforeposition" );
 
-			coords = this._placementCoords( this._desiredCoords( options.x, options.y, options.positionTo || this.options.positionTo || "origin" ) );
+			coords = this._placementCoords( this._desiredCoords( o.x, o.y, o.positionTo ) );
 
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
@@ -7107,12 +7101,8 @@ $( document ).bind( "pagecreate create", function( e ) {
 				$.noop,
 				$.proxy( this, "_openPrereqsComplete" ) );
 
-			if ( transition ) {
-				this._currentTransition = transition;
-				this._applyTransition( transition );
-			} else {
-				transition = this.options.transition;
-			}
+			this._currentTransition = o.transition;
+			this._applyTransition( o.transition );
 
 			if ( !this.options.theme ) {
 				this._setTheme( this._page.jqmData( "theme" ) || $.mobile.getInheritedTheme( this._page, "c" ) );
@@ -7143,7 +7133,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 			}
 			this._animate({
 				additionalCondition: true,
-				transition: transition,
+				transition: o.transition,
 				classToRemove: "",
 				screenClassToAdd: "in",
 				containerClassToAdd: "in",
@@ -7193,7 +7183,7 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 			this._animate( {
 				additionalCondition: this._ui.screen.hasClass( "in" ),
-				transition: ( immediate ? "none" : ( this._currentTransition || this.options.transition ) ),
+				transition: ( immediate ? "none" : ( this._currentTransition ) ),
 				classToRemove: "in",
 				screenClassToAdd: "out",
 				containerClassToAdd: "reverse out",
@@ -7744,7 +7734,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			toggleClear();
 
-			input.bind( "paste cut keyup focus change blur", toggleClear );
+			input.bind( "paste cut keyup input focus change blur", toggleClear );
 		}
 		else if ( !inputNeedsWrap && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
@@ -7775,11 +7765,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					clientHeight = input[ 0 ].clientHeight;
 
 				if ( clientHeight < scrollHeight ) {
-					input.height(scrollHeight + extraLineHeight);
+					input.height( scrollHeight + extraLineHeight );
 				}
 			};
 
-			input.keyup(function() {
+			input.on( "keyup change input paste", function() {
 				clearTimeout( keyupTimeout );
 				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
 			});
@@ -7872,7 +7862,7 @@ $( document ).delegate( "ul, ol", "listviewcreate", function() {
 		})
 		.attr( "data-" + $.mobile.ns + "type", "search" )
 		.jqmData( "lastval", "" )
-		.bind( "keyup change", function() {
+		.bind( "keyup change input", function() {
 
 			var $this = $( this ),
 				val = this.value.toLowerCase(),

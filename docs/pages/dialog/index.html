@@ -35,7 +35,7 @@
 				<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
 			</ul>
             
-			<p>Toute page peut être présentée comme une boîte de dialogue modale en ajoutant l'attribut <code>data-rel="dialog"</code> au lien ancre de la page. Lorsque l'attribut "dialog" est appliqué, le framework ajoute des styles pour ajouter des coins arrondis, des marges autour de la page et un fond sombre de façon que le "dialog" semblent être suspendus au-dessus de la page. Si la boîte de dialogue a une entête, le framework va également ajouter un bouton de fermeture sur le côté gauche de l'entête.</p>
+			<p>Toute page peut être présentée comme une boîte de dialogue modale en ajoutant l'attribut <code>data-rel="dialog"</code> au lien ancre de la page. Lorsque l'attribut "dialog" est appliqué, le framework ajoute des styles pour ajouter des coins arrondis, des marges autour de la page et un fond sombre de façon que le "dialog" semblent être suspendus au-dessus de la page. Par défaut le framework va également ajouter un bouton de fermeture si la boîte de dialogue a une entête.</p>
 
 			<p>
 			<code>
@@ -63,6 +63,10 @@
 
 			<h2>Fermeture des boîtes de dialogue</h2>
 			<p>Quand un lien est cliqué dans une boîte de dialogue, le framework fermera automatiquement la boîte de dialogue et la transition vers la page demandée, comme si la boîte de dialogue était une page normale. Néanmoins, les boîtes de dialogue peuvent également être enchaînées, comme expliqué ci-dessous dans <strong>"Chainage des boîtes de dialogue"</strong>. De façon similaire, un lien qui ouvre une fenêtre laissera également la boîte de dialogue en place.</p>
+
+            <p>Si la boîte de dialogue a une entête, le framework va ajouter un bouton de fermeture sur le côté gauche de l'entête. Vous pouvez changer la position en ajoutant <code>data-close-btn="right"</code> au conteneur de la boîte de dialogue. Si vous ne voulez pas de bouton de fermeture dans l'entête ou vous voulez ajoutez un bouton de fermeture personnalisé, vous pouvez utiliser <code>data-close-btn="none"</code>.</p>
+			<a href="../dialog-rightclosebtn.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Bouton de fermeture à droite</a> <a href="../dialog-noclosebtn.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Pas de bouton de fermeture</a>
+             
 			<p>Pour créer un bouton "Annuler" dans une boîte de dialogue, faites un lien seulement vers la page qui a déclenché la boîte de dialogue pour l'ouvrir et ajouter l'attribut <code>data-rel="back"</code> à votre lien. Ce schéma de liaison à la page précédente est également utilisable  tel quel dans des dispositifs non-JS.</p>
 			<p>Pour les liens générés par JavaScript, vous pouvez simplement définir l'attribut href à "#" et utilisez l'attribut <code>data-rel="back"</code>. Vous pouvez aussi appeler la méthode <code>close()</code> de la boîte de dialogue pour fermer par programmation les boîtes de dialogue, par exemple : <code>$('.ui-dialog').dialog('close')</code>. </p>
 
@@ -79,6 +83,9 @@
 			<h2>Style et Thématisation</h2>
 			<p>Les boîtes de dialogue peuvent être stylisées avec des nuanciers de thème différents, comme n'importe quelle page en ajoutant les attributs <code>data-theme</code> aux conteneurs de l'entête, du contenu et du pied de page. Voici un exemple une différente conception d'une boîte de dialogue :</p>
 				<a href="../dialog-alt.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Un schéma de couleur alternatif</a>
+
+			<p>Par défaut les boîtes de dialogue ont des coins arrondis. L'option <code>corners</code> peux être définis à <code>false</code> en ajoutant <code>data-corners="false"</code>  au conteneur de la boîte de dialogue :</p>
+				<a href="../dialog-corners.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Pas de coins arrondis</a>
 
 			<p>Les boîtes de dialogue apparaissent en flottant au dessus d'une couche superposée. Cette superposition adopte la couleur de contenu du nuancier "a" par défaut, mais l'attribut <code>data-overlay-theme</code> peut être ajouté à l'enveloppe de la page pour définir la superposition avec une lettre du nuancier. Voici un exemple d'une boîte de dialogue avec la superposition définie avec le nuancier "e" :</p>
 				<a href="../dialog-overlay.html" data-role="button" data-inline="true" data-rel="dialog" data-transition="pop">Nuancier de superposition personnalisé</a>

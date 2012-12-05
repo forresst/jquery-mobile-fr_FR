@@ -40,6 +40,15 @@
 
 		<dl>
 
+			<dt><code>closeBtn</code> <em>string</em></dt>
+			<dd>
+				<p class="default">par défaut : "left"</p>
+				<p>Définit la position du bouton de fermeture de la boîte de dialogue dans l'entête (left ou right) ou évite que le framework ajoute un bouton de fermeture (none).</p>
+				<p>Cette option est également définie comme un attribut de données : <code>data-close-btn</code>.</p>
+                
+				<pre><code>$( ".selector" ).dialog(<strong>{ closeBtn: "none" }</strong>);</code></pre>
+			</dd>
+
 			<dt><code>closeBtnText</code> <em>string</em></dt>
 			<dd>
 				<p class="default">Par défaut : "Close"</p>
@@ -49,11 +58,20 @@
 				<pre><code>$( ".selector" ).dialog(<strong>{ closeBtnText: "Fermer" }</strong>);</code></pre>
 			</dd>
 
+			<dt><code>corners</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">Par défaut : true</p>
+				<p>Définit s'il faut dessiner la boite de dialogue avec des coins arrondis.</p>
+				<p>Cette option est également définie comme un attribut de données : <code>data-corners="false"</code>.</p>
+                
+				<pre><code>$( ".selector" ).dialog(<strong>{ corners: false }</strong>);</code></pre>
+			</dd>
+            
 			<dt><code>initSelector</code> <em>CSS selector string</em></dt>
 			<dd>
 				<p class="default">Par défaut : ":jqmData(role='dialog')"</p>
 				<p>This is used to define the selectors (element types, data roles, etc.) that will automatically be initialized as dialogs. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
    <strong>$.mobile.dialog.prototype.options.initSelector = ".mydialog";</strong>
 });
 </code></pre>

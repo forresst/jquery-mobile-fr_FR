@@ -127,9 +127,9 @@ var categoryData = {
 <pre>
 <code>
 / / Ecoute toute tentative de faire appel à changePage ().
-$(document).bind( "pagebeforechange", function( e, data ) {
+$(document).on( "pagebeforechange", function( e, data ) {
 
-	// Nous voulons seulement gérer les appels changePage() où l'appelant nous
+	// ous voulons seulement gérer les appels changePage() où l'appelant nous
 	// demande de charger une page par URL.
 	if ( typeof data.toPage === "string" ) {
 

@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: c924ed46cad6091c809cb7fef66eb447d319dbcb <> Date: Sat Dec 1 11:53:51 2012 +0100
+* jQuery Mobile Framework Git Build: SHA1: bf6e73c72126a6f58ef147456f4295bfce4aefa5 <> Date: Wed Dec 5 01:14:09 2012 +0100
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -1815,7 +1815,7 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-collapsible-inset .ui-collapsible-heading .ui-btn { border-right-width: 1px; border-left-width: 1px; }
 .ui-collapsible-collapsed + .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn { border-top-width: 0; }
 .ui-collapsible-set .ui-collapsible:not(.ui-collapsible-inset) .ui-collapsible-heading .ui-btn { border-top-width: 1px; }
-.ui-collapsible-heading .ui-btn-inner,
+.ui-collapsible-heading .ui-btn-inner { padding-left: 12px; }
 .ui-collapsible-heading .ui-btn-icon-left .ui-btn-inner { padding-left: 40px; }
 .ui-collapsible-heading .ui-btn-icon-right .ui-btn-inner { padding-left: 12px; padding-right: 40px; }
 .ui-collapsible-heading .ui-btn-icon-top .ui-btn-inner,

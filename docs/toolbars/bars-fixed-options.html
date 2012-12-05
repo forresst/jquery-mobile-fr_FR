@@ -117,7 +117,7 @@ $.mobile.fixedToolbars
 				<p class="default">Par défaut : une fonction qui retourne une valeur booléenne</p>
 				<p>Le support du CSS <code>position: fixed</code> est très difficile à tester. En fait, au moment de la version 1.1, il n'y avait aucun moyen connu de façon raisonnable pour tester le support de fixed dans certains navigateurs populaires. Cette option est une fonction qui tente de se retirer sur certaines plateformes populaires qui sont connues pour être gênantes avec <code>position: fixed</code> . Souvent, ces plateformes supportent partiellement <code>position: fixed</code>, ce qui peut être pire que de ne pas le supporter du tout. Si cette option primordiale fait partie de votre propre liste noire, il vous suffit de fournir une fonction qui renvoie un résultat vrai ou faux lorsqu'elle est appelée lors de l'initialisation. Vous devez la mettre dans mobileinit, de sorte qu'elle s'applique lorsque le plugin est initialement créé.</p>			
 				<pre><code>
-$( document ).bind("mobileinit", function(){
+$( document ).on("mobileinit", function(){
   $.mobile.fixedtoolbar.prototype.options.supportBlacklist = function(){
     var result;
     // logique pour déterminer si le résultat doit être vrai ou faux
@@ -131,7 +131,7 @@ $( document ).bind("mobileinit", function(){
 			<dd>
 				<p class="default">Par défaut : ":jqmData(position='fixed')"</p>
 				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les data roles, etc) qui seront automatiquement initialisés comme des barres d'outils fixes. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../api/globalconfig.html">l'événement mobileinit</a> :</p>
-				<pre><code>$( document ).bind( "mobileinit", function(){
+				<pre><code>$( document ).on( "mobileinit", function(){
 	<strong>$.mobile.fixedtoolbar.prototype.options.initSelector = ".myselector";</strong>
 });
 </code></pre>

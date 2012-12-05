@@ -23,7 +23,7 @@
 
 
 // Affiche la version de jQM
-$(document).bind( "pageinit", function() {
+$(document).on( "pageinit", function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
 		ver = words[0],
@@ -59,7 +59,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
   $(fixLinks);
 
   // corriger les liens pour les chargements ultérieures de page AJAX
-  $(document).bind( 'pagecreate', fixLinks );
+  $(document).on( 'pagecreate', fixLinks );
 
   // Vérifie pour voir si AJAX peut être utilisé. Cela fait une requête rapide ajax et bloque la page jusqu'à ce soit fait
   $.ajax({
@@ -68,7 +68,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
     isLocal: true
   }).error(function() {
     // Ajax ne fonctionne pas donc on le désactive
-    $( document ).bind( "mobileinit", function() {
+    $( document ).on( "mobileinit", function() {
       $.mobile.ajaxEnabled = false;
 
       var message = $( '<div>' , {
@@ -81,13 +81,13 @@ if ( location.protocol.substr(0,4)  === 'file' ||
         .append( "<h3>Remarque : Il est possible que la navigation ne fonctionne pas si la documentation est visualisée localement</h3>" )
         .append( "<p>La navigation axée AJAX qui est utilisée dans la documentation de jQuery Mobile peut avoir besoin d'être visualisée sur un serveur web pour fonctionner dans certains navigateurs. Si vous voyez un message d'erreur lorsque vous cliquez sur un lien, essayez un autre navigateur ou <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help'>consultez l'aide</a>.</p>" );
 
-      $( document ).bind( "pagecreate", function( event ) {
+      $( document ).on( "pagecreate", function( event ) {
         $( event.target ).append( message );
       });
     });
   });
 } else {
-  $( document ).bind( "mobileinit", function() {
+  $( document ).on( "mobileinit", function() {
 
     var entete = $( '<div>' , {
           'class': "ui-bar ui-bar-a"

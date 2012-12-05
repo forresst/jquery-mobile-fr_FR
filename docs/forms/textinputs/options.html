@@ -49,7 +49,7 @@
 			<dd>
 				<p class="default">default: "input[type='text'], input[type='search'], :jqmData(type='search'), input[type='number'], :jqmData(type='number'), input[type='password'], input[type='email'], input[type='url'], input[type='tel'], textarea, input[type='file'], input:not([type])"</p>
 				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les rôles de données, etc) qui seront automatiquement initialisé comme des zones de saisie. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
    <strong>$.mobile.textinput.prototype.options.initSelector = ".myInputs";</strong>
 });
 </code></pre>

@@ -56,7 +56,7 @@
 			<dd>
 				<p class="default">default: "input[type='range'], :jqmData(type='range'), :jqmData(role='slider')"</p>
 				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les rôles de données, etc) qui seront automatiquement initialisés comme des curseurs. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
    <strong>$.mobile.slider.prototype.options.initSelector = ".myslider";</strong>
 });
 </code></pre>

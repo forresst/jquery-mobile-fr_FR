@@ -47,12 +47,12 @@
 				<pre><code>$( ".selector" ).popup(<strong>{ corners: false }</strong>);</code></pre>
 			</dd>
 
-			<dt><code>dismissable</code> <em>boolean</em></dt>
+			<dt><code>dismissible</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">Par défaut : true</p>
-				<p>Définit si en cliquant en dehors de la popup ou en pressant la touche Echap, la popup ouverte se fermera. Cette option est également définie comme un attribut de données :  <code>data-dismissable="false"</code></p>
+				<p>Définit si en cliquant en dehors de la popup ou en pressant la touche Echap, la popup ouverte se fermera. Cette option est également définie comme un attribut de données : <code>data-dismissible="false"</code></p>
 				<p><em>Remarque :</em> Lorsque le support de l'historique fonctionne, en appuyant sur le bouton "Retour" du navigateur, cela délaisse la popup, même si cette option est définie sur false.
-				<pre><code>$( ".selector" ).popup(<strong>{ dismissable: false }</strong>);</code></pre>
+				<pre><code>$( ".selector" ).popup(<strong>{ dismissible: false }</strong>);</code></pre>
 			</dd>
 
 			<dt><code>history</code> <em>boolean</em></dt>
@@ -66,7 +66,7 @@
 			<dd>
 				<p class="default">default: ":jqmData(role='popup')"</p>
 				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les rôles de données, etc) qui seront automatiquement initialisé comme des popups. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
    <strong>$.mobile.popup.prototype.options.initSelector = ".mypopup";</strong>
 });
 </code></pre>
