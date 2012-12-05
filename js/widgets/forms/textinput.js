@@ -90,7 +90,7 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 			toggleClear();
 
-			input.bind( "paste cut keyup focus change blur", toggleClear );
+			input.bind( "paste cut keyup input focus change blur", toggleClear );
 		}
 		else if ( !inputNeedsWrap && !isSearch ) {
 			input.addClass( "ui-corner-all ui-shadow-inset" + themeclass + miniclass );
@@ -121,11 +121,11 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 					clientHeight = input[ 0 ].clientHeight;
 
 				if ( clientHeight < scrollHeight ) {
-					input.height(scrollHeight + extraLineHeight);
+					input.height( scrollHeight + extraLineHeight );
 				}
 			};
 
-			input.keyup(function() {
+			input.on( "keyup change input paste", function() {
 				clearTimeout( keyupTimeout );
 				keyupTimeout = setTimeout( self._keyup, keyupTimeoutBuffer );
 			});

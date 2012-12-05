@@ -40,18 +40,29 @@
 			<dd>
 				<p class="default">Par défaut : "plus"</p>
 				<p>Définit l'icône pour les conteneurs des entêtes des pliables dans l'état plié. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.collapsedIcon = "arrow-r";</strong>
 });
 </code></pre>
 				<p>Cette option est également définie comme un attribut de données : <code>data-collapsed-icon="arrow-r"</code>.</p>
 			</dd>
 
+			<dt><code>corners</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">Par défaut : true</p>
+				<p>Applique border-radius de thème au premier et dernier pliable si défini à true. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
+<pre><code>$( document ).on( "mobileinit", function(){
+    <strong>$.mobile.collapsible.prototype.options.corners = false;</strong>
+});
+</code></pre>
+				<p>Cette option est également définie comme un attribut de données : <code>data-corners="false"</code>.</p>
+			</dd>
+
 			<dt><code>expandedIcon</code> <em>string</em></dt>
 			<dd>
 				<p class="default">par défaut : "minus"</p>
 				<p>Définit l'icône pour les conteneurs des entêtes des pliables dans l'état déplié. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.expandedIcon = "arrow-d";</strong>
 });
 </code></pre>
@@ -62,7 +73,7 @@
 			<dd>
 				<p class="default">par défaut : "left"</p>
 				<p>Positions des icônes dans les entêtes du pliable. Les valeurs possibles : left, right, top, bottom, none, notext.</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.iconpos = "right";</strong>
 });
 </code></pre>
@@ -73,7 +84,7 @@
 			<dd>
 				<p class="default">default: ":jqmData(role='collapsible-set')"</p>
 				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les data roles, etc) qui seront automatiquement initialisés comme des ensembles de pliable. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.initSelector = ".mycollapsibleset";</strong>
 });
 </code></pre>
@@ -83,7 +94,7 @@
 			<dd>
 				<p class="default">Par défaut : true</p>
 				<p>En mettant cette option à false, les pliables auront une apparence sur toute la largeur sans coins. Si la valeur est false pour un conteneur individuel de pliable, mais que ce conteneur fait partie d'un ensemble pliable, alors la valeur est héritée de l'ensemble du parent pliable. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsible.prototype.options.inset = false;</strong>
 });
 </code></pre>
@@ -94,7 +105,7 @@
 			<dd>
 				<p class="default">par défaut : false</p>
 				<p>Définit la taille des pliables pour qu'ils soient plus compacts : une <a href="../forms/forms-all-mini.html">version mini</a>. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.mini = true;</strong>
 });
 </code></pre>
@@ -104,7 +115,7 @@
 			<dd>
 				<p class="default">par défaut : null, hérité d'un parent</p>
 				<p>Définit le jeu de couleurs (nuancier) pour l'ensemble de pliable. Il accepte une seule lettre de a à z qui correspond aux nuanciers inclus dans votre thème. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-<pre><code>$( document ).bind( "mobileinit", function(){
+<pre><code>$( document ).on( "mobileinit", function(){
     <strong>$.mobile.collapsibleset.prototype.options.theme = "a";</strong>
 });
 </code></pre>

@@ -44,7 +44,7 @@
 			<p>Une fonctionnalité appelée <code>touchOverflowEnabled</code> est conçue pour tirer parti de la vague à venir des navigateurs qui supportent le défilement qui déborde en CSS. Notez que cette fonctionnalité est désactivée par défaut pour nous donner plus de temps pour tester et déboguer cela pour de meilleures performances, mais nous espérons l'activer par défaut, à un moment ultérieur. Voici comment activer cette <a href="../api/globalconfig.html">option globale</a> :</p>
 			
 <pre><code>&lt;script&gt;
-$(document).bind("mobileinit", function(){
+$(document).on("mobileinit", function(){
 <strong>  $.mobile.touchOverflowEnabled = true;
 </strong>});
 &lt;/script&gt;</code></pre>
@@ -79,7 +79,7 @@ $(document).bind("mobileinit", function(){
 			<p>Généralement touchOverflow est activée uniquement sur les périphériques qui supportent le défilement tactile des zones de débordement, pas les navigateurs de bureau. Cela peut rendre difficile le débogage des problèmes avec la fonctionnalité touchOverflow. Pour activer touchOverflow sur tous les navigateurs, utilisez le code suivant :
 
 <pre><code>&lt;script&gt;
-$(document).bind("mobileinit", function() {
+$(document).on("mobileinit", function() {
   <strong>$.support.touchOverflow = true;</strong>
   $.mobile.touchOverflowEnabled = true;
 });

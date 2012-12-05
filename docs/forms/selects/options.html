@@ -50,7 +50,7 @@
 			<dd>
 				<p class="default">Par défaut : "b"</p>
 				<p>Définit le jeu de couleurs (nuancier) pour les séparateurs dans les popups avec des menus de sélection lorsque vous utilisez le support de <code>optgroup</code>. Il accepte une seule lettre de A à Z qui correspond aux nuanciers inclus dans votre thème. Pour définir la valeur pour toutes les instances de ce widget, liez cette option à l'<a href="../../api/globalconfig.html">événement mobileinit</a> :</p>
-				<pre><code>$( document ).bind( "mobileinit", function(){
+				<pre><code>$( document ).on( "mobileinit", function(){
 	<strong>$.mobile.listview.prototype.options.dividerTheme = "a";</strong>
 });
 </code></pre>
@@ -85,7 +85,7 @@
 			<dd>
 				<p class="default">par défaut : "select:not(:jqmData(role='slider'))"</p>
 				<p>Ceci est utilisé pour définir les sélecteurs (types d'éléments, les data roles, etc) qui sera automatiquement initialisé comme les menus de sélection. Pour changer les éléments qui sont initialisés, liez cette option à <a href="../../api/globalconfig.html">l'événement mobileinit</a> :</p>
-				<pre><code>$( document ).bind( "mobileinit", function(){
+				<pre><code>$( document ).on( "mobileinit", function(){
 	<strong>$.mobile.selectmenu.prototype.options.initSelector = ".myselect";</strong>
 });
 </code></pre>

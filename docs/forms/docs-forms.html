@@ -241,7 +241,7 @@ myswitch.slider("refresh");
 
 	<p>Si vous voulez éviter l'auto-initialisation sans ajouter des attributs à votre balisage, vous pouvez personnaliser le sélecteur qui est utilisé pour empêcher l'auto-initialisation en configurant l'option <code>keepNative</code> du plugin (qui est par défaut à  <code>[data-role="none"]</code>). Soyez sûr de configurer cette option à l'intérieur d'un gestionnaire d'évènement lié à l'événement <code>mobileinit</code>, afin qu'il s'applique à la première page ainsi qu'aux pages suivantes qui seront chargées.</p>
 		<pre><code>
-$(document).bind('mobileinit',function(){
+$(document).on('mobileinit',function(){
 	<strong>$.mobile.page.prototype.options.keepNative = "select, input.foo, textarea.bar";</strong>
 });
 		</code></pre>
