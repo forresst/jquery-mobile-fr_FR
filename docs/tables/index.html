@@ -15,7 +15,7 @@
 </head> 
 <body> 
 
-   <div data-role="page">
+   <div data-role="page" class="type-interior">
 
       <div data-role="header" data-theme="f">
       <h1>Tables RWD</h1>
@@ -23,23 +23,23 @@
    </div><!-- /header -->
 
    <div data-role="content">
-        <h2>Tables Responsives</h2>
+		<div class="content-primary">
+			<h2>Tables Responsives</h2>
+				<p>Un des plus grands défis de conception dans le responsive web design (RWD) est de présenter des données tabulaires. Les grandes tables avec beaucoup de colonnes ne tiennent pas sur des écrans plus petits et il n'y a pas un moyen simple de reformater le contenu de la table, pour une présentation acceptable, avec du CSS et des media queries. Pour ce faire, le framework propose deux options différentes pour la présentation des tables responsives Chacun a des avantages et des compromis, le bon choix dépendra des données présentées.</p>
 
-        <p>Un des plus grands défis de conception dans le responsive web design (RWD) est de présenter des données tabulaires. Les grandes tables avec beaucoup de colonnes ne tiennent pas sur des écrans plus petits et il n'y a pas un moyen simple de reformater le contenu de la table, pour une présentation acceptable, avec du CSS et des media queries. Pour ce faire, le framework propose deux options différentes pour la présentation des tables responsives Chacun a des avantages et des compromis, le bon choix dépendra des données présentées.</p>
-		
-		<p>Le <a href="table-reflow.html">mode Reflow</a> - Re-formate les colonnes de la table avec des largeurs étroites car chaque ligne de données est présenté comme un bloc formaté de paires label/données. Cette fonction est idéale pour les tables avec des informations sur les produits ou les contacts où le formatage des données complexes et longues n'a pas besoin de comparaison entre les lignes de données.</p>
-		
-		<p>Le <a href="table-column-toggle.html">mode Column toggle</a> - De manière sélective, cache les colonnes par défaut les plus étroites, mais offre également un menu pour permettre aux utilisateurs de contrôler manuellement les colonnes qu'ils veulent voir. Ce mode est préférable pour les tableaux de données financières qui ont des valeurs compactes et la nécessité de maintenir des comparaisons entre les colonnes et les lignes de données. Il peut également être utilisé pour construire des choses comme des tableaux de comparaison de produits.</p>
+				<p>Le <a href="table-reflow.html">mode Reflow</a> - Re-formate les colonnes de la table avec des largeurs étroites car chaque ligne de données est présenté comme un bloc formaté de paires label/données. Cette fonction est idéale pour les tables avec des informations sur les produits ou les contacts où le formatage des données complexes et longues n'a pas besoin de comparaison entre les lignes de données.</p>
+
+				<p>Le <a href="table-column-toggle.html">mode Column toggle</a> - De manière sélective, cache les colonnes par défaut les plus étroites, mais offre également un menu pour permettre aux utilisateurs de contrôler manuellement les colonnes qu'ils veulent voir. Ce mode est préférable pour les tableaux de données financières qui ont des valeurs compactes et la nécessité de maintenir des comparaisons entre les colonnes et les lignes de données. Il peut également être utilisé pour construire des choses comme des tableaux de comparaison de produits.</p>
 
 
-		<p>La fonctionnalité responsive table est construite avec un plugin table (<code>table.js</code>) qui initialise lorsque l'attribut <code>data-role="table"</code> est ajouté au balisage. Ce plugin est très léger et ajoute la classe <code>ui-table</code>, analyse les entêtes de table et génère des informations sur les colonnes de données et déclenche l'événement <code>tablecreate</code>. Les deux modes, <a href="table-reflow.html">reflow</a> et <a href="table-column-toggle.html">column toggle</a>, sont écrites comme des extensions au widget table qui agrafe via l'événement <code>create</code> des comportements supplémentaires qui rendent les tables responsives. Reflow est le mode par défaut, ainsi si l'extension est présente, elle sera automatiquement appliquée si l'attribut <code>data-role="table"</code> est sur ​​la table.</p>
-		<p>Si un seul mode est utilisé sur un projet, l'outil de construction de téléchargement peut être utilisé pour inclure que le plugin table et une seule extension afin de gagner du poids sur le code.</p>
-			
+				<p>La fonctionnalité responsive table est construite avec un plugin table (<code>table.js</code>) qui initialise lorsque l'attribut <code>data-role="table"</code> est ajouté au balisage. Ce plugin est très léger et ajoute la classe <code>ui-table</code>, analyse les entêtes de table et génère des informations sur les colonnes de données et déclenche l'événement <code>tablecreate</code>. Les deux modes, <a href="table-reflow.html">reflow</a> et <a href="table-column-toggle.html">column toggle</a>, sont écrites comme des extensions au widget table qui agrafe via l'événement <code>create</code> des comportements supplémentaires qui rendent les tables responsives. Reflow est le mode par défaut, ainsi si l'extension est présente, elle sera automatiquement appliquée si l'attribut <code>data-role="table"</code> est sur ​​la table.</p>
+				<p>Si un seul mode est utilisé sur un projet, l'outil de construction de téléchargement peut être utilisé pour inclure que le plugin table et une seule extension afin de gagner du poids sur le code.</p>
 
-		
-		<h2>Directives générales de balisage des tables</h2>
-	    
-		<p>Voici le balisage de base pour la table que vous devez utiliser pour les deux modes :</p>
+
+
+			<h2>Directives générales de balisage des tables</h2>
+
+				<p>Voici le balisage de base pour la table que vous devez utiliser pour les deux modes :</p>
 <pre><code>&lt;table <strong>data-role="table" id="my-table" data-mode="reflow"</strong>&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -112,7 +112,22 @@
 </code></pre>
 
      	<p>Ce style de rayures alternées standard peut être aussi appliqué en ajoutant la <code>classe</code> <code>table-stripe</code> à l'élément <code>table</code>. Si vous préférez un style de contour personnalisé, utilisez l'exemple ci-dessus comme point de départ. Notez que l'ajout des styles qui définissent une couleur pour le contour l'emporte sur une classe de thème afin de ne pas les utiliser ensemble.</p>
+		</div>
+		
+		<div class="content-secondary">
 
+					<div data-role="collapsible" data-collapsed="true" data-theme="b" data-content-theme="d">
+
+							<h3>Dans cette section</h3>
+
+							<ul data-role="listview" data-theme="c" data-dividertheme="d">
+								<li data-role="list-divider">Tables</li>
+								<li><a href="table-reflow.html">Mode Reflow</a></li>
+								<li><a href="table-column-toggle.html">Mode Column toggle</a></li>
+							</ul>
+					</div>
+				</div>
+				
          </div><!-- /content -->
 
          <div data-role="footer" class="footer-docs" data-theme="c">

@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: bf6e73c72126a6f58ef147456f4295bfce4aefa5 <> Date: Wed Dec 5 01:14:09 2012 +0100
+* jQuery Mobile Framework Git Build: SHA1: 731afeb1edb9f45a8c6f82fda847cb763cbbbaae <> Date: Sun Dec 9 22:32:18 2012 +0000
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -1753,33 +1753,49 @@ if ( eventCaptureSupported ) {
 
 		verticalDistanceThreshold: 75,  // Swipe vertical displacement must be less than this.
 
+		start: function( event ) {
+			var data = event.originalEvent.touches ?
+					event.originalEvent.touches[ 0 ] : event;
+			return {
+						time: ( new Date() ).getTime(),
+						coords: [ data.pageX, data.pageY ],
+						origin: $( event.target )
+					};
+		},
+
+		stop: function( event ) {
+			var data = event.originalEvent.touches ?
+					event.originalEvent.touches[ 0 ] : event;
+			return {
+						time: ( new Date() ).getTime(),
+						coords: [ data.pageX, data.pageY ]
+					};
+		},
+
+		handleSwipe: function( start, stop ) {
+			if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
+				Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
+				Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
+
+				start.origin.trigger( "swipe" )
+					.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
+			}
+		},
+
 		setup: function() {
 			var thisObject = this,
 				$this = $( thisObject );
 
 			$this.bind( touchStartEvent, function( event ) {
-				var data = event.originalEvent.touches ?
-						event.originalEvent.touches[ 0 ] : event,
-					start = {
-						time: ( new Date() ).getTime(),
-						coords: [ data.pageX, data.pageY ],
-						origin: $( event.target )
-					},
+				var start = $.event.special.swipe.start( event ),
 					stop;
 
 				function moveHandler( event ) {
-
 					if ( !start ) {
 						return;
 					}
 
-					var data = event.originalEvent.touches ?
-						event.originalEvent.touches[ 0 ] : event;
-
-					stop = {
-						time: ( new Date() ).getTime(),
-						coords: [ data.pageX, data.pageY ]
-					};
+					stop = $.event.special.swipe.stop( event );
 
 					// prevent scrolling
 					if ( Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.scrollSupressionThreshold ) {
@@ -1788,17 +1804,11 @@ if ( eventCaptureSupported ) {
 				}
 
 				$this.bind( touchMoveEvent, moveHandler )
-					.one( touchStopEvent, function( event ) {
+					.one( touchStopEvent, function() {
 						$this.unbind( touchMoveEvent, moveHandler );
 
 						if ( start && stop ) {
-							if ( stop.time - start.time < $.event.special.swipe.durationThreshold &&
-								Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) > $.event.special.swipe.horizontalDistanceThreshold &&
-								Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) < $.event.special.swipe.verticalDistanceThreshold ) {
-
-								start.origin.trigger( "swipe" )
-									.trigger( start.coords[0] > stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
-							}
+							$.event.special.swipe.handleSwipe( start, stop );
 						}
 						start = stop = undefined;
 					});
@@ -2081,12 +2091,16 @@ function validStyle( prop, value, check_vend ) {
 			return txt.charAt( 0 ).toUpperCase() + txt.substr( 1 );
 		},
 		vend_pref = function( vend ) {
-			return  "-" + vend.charAt( 0 ).toLowerCase() + vend.substr( 1 ) + "-";
+			if( vend === "" ) {
+				return "";
+			} else {
+				return  "-" + vend.charAt( 0 ).toLowerCase() + vend.substr( 1 ) + "-";
+			}
 		},
 		check_style = function( vend ) {
 			var vend_prop = vend_pref( vend ) + prop + ": " + value + ";",
 				uc_vend = uc( vend ),
-				propStyle = uc_vend + uc( prop );
+				propStyle = uc_vend + ( uc_vend === "" ? prop : uc( prop ) );
 
 			div.setAttribute( "style", vend_prop );
 
@@ -2094,7 +2108,7 @@ function validStyle( prop, value, check_vend ) {
 				ret = true;
 			}
 		},
-		check_vends = check_vend ? [ check_vend ] : vendors,
+		check_vends = check_vend ? check_vend : vendors,
 		ret;
 
 	for( var i = 0; i < check_vends.length; i++ ) {
@@ -2103,10 +2117,10 @@ function validStyle( prop, value, check_vend ) {
 	return !!ret;
 }
 
-// Thanks to Modernizr src for this test idea. `perspective` check is limited to Moz to prevent a false positive for 3D transforms on Android.
+// Thanks to Modernizr src for this test idea. `perspective` check is limited to Moz/unprefixed to prevent a false positive for 3D transforms on Android.
 function transform3dTest() {
 	var prop = "transform-3d";
-	return validStyle( 'perspective', '10px', 'moz' ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
+	return validStyle( 'perspective', '10px', ['moz', ''] ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
 }
 
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
@@ -2175,7 +2189,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear' ) && !opera,
+	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear', [ "Webkit", "Moz", "O", "" ] ) && !opera,
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
@@ -6157,6 +6171,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 				self._getInputSet().not( input ).prop( "checked", false );
 
 				self._updateAll();
+				return false;
 			}
 		});
 
@@ -7792,7 +7807,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	disable: function() {
 		var $el,
-				parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( this.element.is( "[type='search'], :jqmData(type='search')" ) || ( this.element.is( "[type='text'],textarea" ) && !!this.options.clearBtn ) );
+			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
+			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
+			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
+			
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {
@@ -7804,9 +7822,10 @@ $.widget( "mobile.textinput", $.mobile.widget, {
 
 	enable: function() {
 		var $el,
-				parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( this.element.is( "[type='search'], :jqmData(type='search')" ) || ( this.element.is( "[type='text'],textarea" ) && !!this.options.clearBtn ) );
+			isSearch = this.element.is( "[type='search'], :jqmData(type='search')" ),
+			inputNeedsWrap = this.element.is( "input" ) && !this.element.is( ":jqmData(type='range')" ),
+			parentNeedsDisabled = this.element.attr( "disabled", true )	&& ( inputNeedsWrap || isSearch );
 
-		// TODO using more than one line of code is acceptable ;)
 		if ( parentNeedsDisabled ) {
 			$el = this.element.parent();
 		} else {
