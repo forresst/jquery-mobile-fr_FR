@@ -15,14 +15,20 @@
 	</script>
 	<script src="../../../js/"></script>
 	<script>
-		// Script here
+		// JavaScript here
+	</script>
+	<script id="myScript">
+		// myScript
 	</script>
 	<style>
 		/* Custom styles here */
 	</style>
+	<style id="myStyle">
+		/* myStyle */
+	</style>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="myMarkup">
 
 	<div data-role="header" data-theme="f">
 		<h1>Titre de Démo</h1>
@@ -33,24 +39,25 @@
 	
 		<div class="content-primary">
 		
-			<h2>Entête</h2>
+			<h2>Comment fonctionne "voir le code source"</h2>
 			
-			<h3>Sous-Entête</h3>
-
-			<div data-demo-html="true" data-demo-js="true" data-demo-css="true"><!-- data-demo-html="true" to include the markup in this div in the source code view --><!-- data-demo-js="true" to include scripts from the head in the source code view --><!-- data-demo-css="true" to include style from the head in the source code view -->
-				
-				
-				   
+			<div data-demo-html="true" data-demo-js="true" data-demo-css="true" data-demo-php="file-name">
+            	<p>C'est un div avec ...</p>
+				<p>data-demo-html="true" pour inclure le balisage dans ce div dans la vue du code source</p>
+				<p>data-demo-js="true" pour inclure tous les scripts depuis l'entête dans la vue du code source</p>
+				<p>data-demo-css="true" pour inclure tous les styles depuis l'entête dans la vue du code source</p>
+                <p>data-demo-php="fileName" pour inclure le script PHP depuis file-name.php dans la vue du code source</p> 
 			</div><!--/demo-html -->
 
-			<h3>Sous-Entête</h3>
+			<h3>Spécifiez quel balisage, quel script ou quel style pour afficher</h3>
 
-			<div data-demo-html="true" data-demo-js="true" data-demo-css="true"><!-- data-demo-html="true" to include the markup in this div in the source code view --><!-- data-demo-js="true" to include scripts from the head in the source code view --><!-- data-demo-css="true" to include style from the head in the source code view -->
-				
-				
-				   
+			<div data-demo-html="#myMarkup" data-demo-js="#myScript" data-demo-css="#myStyle">
+				<p>C'est un div avec ...</p>
+				<p>data-demo-html="#myMarkup" pour inclure un balisage spécifique dans la vue du code source</p>
+				<p>data-demo-js="#myScript" pour inclure un script spécifique depuis l'entête dans la vue du code source</p>
+				<p>data-demo-css="#myStyle" pour inclure un style spécifique depuis l'entête dans la vue du code source</p>   
 			</div><!--/demo-html -->
-					
+            					
 		</div><!--/content-primary -->
 	
 	</div><!-- /content -->
