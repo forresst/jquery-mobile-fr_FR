@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 731afeb1edb9f45a8c6f82fda847cb763cbbbaae <> Date: Sun Dec 9 22:32:18 2012 +0000
+* jQuery Mobile Framework Git Build: SHA1: f07107827fed2c939eba2783fceaa2f85aeee359 <> Date: Tue Dec 11 12:39:22 2012 -0500
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -2189,7 +2189,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear', [ "Webkit", "Moz", "O", "" ] ) && !opera,
+	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear', [ "Webkit", "Moz", "" ] ) && $.mobile.browser.ie !== 9 && !opera,
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
@@ -9584,15 +9584,19 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 (function( $, window ) {
 
+	$.mobile.iosorientationfixEnabled = true;
+
 	// This fix addresses an iOS bug, so return early if the UA claims it's something else.
-	if ( !(/iPhone|iPad|iPod/.test( navigator.platform ) && navigator.userAgent.indexOf( "AppleWebKit" ) > -1 ) ) {
+	var ua = navigator.userAgent;
+	if( !( /iPhone|iPad|iPod/.test( navigator.platform ) && /OS [1-5]_[0-9_]* like Mac OS X/i.test( ua ) && ua.indexOf( "AppleWebKit" ) > -1 ) ){
+		$.mobile.iosorientationfixEnabled = false;
 		return;
 	}
 
-  var zoom = $.mobile.zoom,
+	var zoom = $.mobile.zoom,
 		evt, x, y, z, aig;
 
-  function checkTilt( e ) {
+	function checkTilt( e ) {
 		evt = e.originalEvent;
 		aig = evt.accelerationIncludingGravity;
 
@@ -9601,18 +9605,22 @@ $( document ).bind( "pagecreate create", function( e ) {
 		z = Math.abs( aig.z );
 
 		// If portrait orientation and in one of the danger zones
-    if ( !window.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ) {
-			if ( zoom.enabled ) {
-				zoom.disable();
-			}
-    }	else if ( !zoom.enabled ) {
-			zoom.enable();
-    }
-  }
+		if ( !window.orientation && ( x > 7 || ( ( z > 6 && y < 8 || z < 8 && y > 6 ) && x > 5 ) ) ) {
+				if ( zoom.enabled ) {
+					zoom.disable();
+				}
+		}	else if ( !zoom.enabled ) {
+				zoom.enable();
+		}
+	}
 
-  $( window )
-		.bind( "orientationchange.iosorientationfix", zoom.enable )
-		.bind( "devicemotion.iosorientationfix", checkTilt );
+	$( document ).on( "mobileinit", function(){
+		if( $.mobile.iosorientationfixEnabled ){
+			$( window )
+				.bind( "orientationchange.iosorientationfix", zoom.enable )
+				.bind( "devicemotion.iosorientationfix", checkTilt );
+		}
+	});
 
 }( jQuery, this ));
 
