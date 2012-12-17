@@ -40,13 +40,13 @@
 
 		<h2>Amélioration responsive et progressive</h2>
 
-      	<p>En plus de ces trois principes fondamentaux RWD, nous préconisons les pratiques d'amélioration progressive qui commence toujours avec du HTML sémantique qui fonctionne sur n'importe quel appareil, puis discrètement d'ajouter des mises en page avancée de CSS et de JS uniquement pour les navigateurs capables. Ceci fournit une base solide pour les optimisations au niveau de l'appareil que RWD fournit et c'est ainsi que la bibliothèque jQuery Mobile est construite.</p>
+      	<p>En plus de ces trois principes fondamentaux RWD, nous préconisons les pratiques d'amélioration progressive. Cela commence toujours avec du HTML sémantique qui fonctionne sur n'importe quel appareil, puis discrètement nous ajoutons des mises en page avancée de CSS et de JS uniquement pour les navigateurs capables. Ceci fournit une base solide pour les optimisations au niveau de l'appareil que RWD fournit et c'est ainsi que la bibliothèque jQuery Mobile est construite.</p>
 
 		<h2>Responsive et responsable</h2>
 
       	<p>Lorsque vous travaillez avec RWD, il est très important de tenir compte de la performance pour s'assurer que vous n'êtes pas simplement en train de prendre un site lourd de bureau et de le rétrécir pour des écrans mobiles. Nous vous recommandons de suivre une approche "mobile d'abord" pour maintenir le développement axé sur la réduction de bande passante, sur les requêtes du serveur et sur l'optimisation de l'ordre du source.</p>
 
-      	<p>Lors de la construction d'une page, commencez par créer le code HTML le plus léger et le plus sémantique possible. Pensez à la façon dont l'ordre de la source du balisage travaillera si vous n'aviez pas de CSS ou JS. N'incluez pas le code qui est seulement nécessaire pour les grandes fenêtres et qui est caché dans les petites, au lieu de cela utilisez AJAX pour charger conditionnellement ces ressources lorsque les écrans plus grands sont détectés par JS. </p>
+      	<p>Lors de la construction d'une page, commencez par créer le code HTML le plus léger et le plus sémantique possible. Pensez à la façon dont l'ordre de la source du balisage travaillera si vous n'aviez pas de CSS ou JS. N'incluez pas le code qui est seulement nécessaire pour les grandes fenêtres et qui est caché dans les petites. Au lieu de cela, utilisez AJAX pour charger conditionnellement ces ressources lorsque les écrans plus grands sont détectés par JS.</p>
 
       	<p>Lors de l'écriture de CSS pour un site ou une application responsive, il est généralement plus efficace d'écrire toute la typographie et les éléments de style de base en dehors d'une media query pour former les styles pour les petits appareils, comme les téléphones. Il s'agit d'une bonne approche parce que la majorité de ces styles de base sont généralement aussi utilisé sur des grandes largeurs, mais dans une mise en page différente et il exploite la puissance des CSS en cascade. Mettez en place des points d'arrêt en utilisant plusieurs media queries <code>min-width</code>  à la mise en page en ajoutant des règles de style qui s'appliqueront qu'au-dessus d'une certaine largeur de l'écran.</p>
 

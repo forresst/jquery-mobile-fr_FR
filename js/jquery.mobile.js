@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: f07107827fed2c939eba2783fceaa2f85aeee359 <> Date: Tue Dec 11 12:39:22 2012 -0500
+* jQuery Mobile Framework Git Build: SHA1: 0e140f9cfbfd909b3e367b63be97440002943e00 <> Date: Sun Dec 16 21:35:42 2012 +0100
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -3970,7 +3970,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 			// However, if a dialog is already displayed at this point, and we're
 			// about to display another dialog, then we must add another hash and
 			// history entry on top so that one may navigate back to the original dialog
-			if ( active.url && active.url.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" ) ) {
+			if ( urlHistory.activeIndex > 0 && active.url && active.url.indexOf( dialogHashKey ) > -1 && !$.mobile.activePage.is( ".ui-dialog" ) ) {
 				settings.changeHash = false;
 				alreadyThere = true;
 			}
@@ -4222,7 +4222,7 @@ $.mobile.getMaxScrollForTransition = $.mobile.getMaxScrollForTransition || defau
 				$btn = $btn.closest( ".ui-btn" );
 			}
 
-			if ( $btn.length > 0 && !( $btn.hasClass( $.mobile.activeBtnClass ) || $btn.hasClass( "ui-disabled" ) ) ) {
+			if ( $btn.length > 0 && !$btn.hasClass( "ui-disabled" ) ) {
 				removeActiveLinkClass( true );
 				$activeClickedLink = $btn;
 				$activeClickedLink.addClass( $.mobile.activeBtnClass );
@@ -4813,7 +4813,7 @@ $.widget( "mobile.dialog", $.mobile.widget, {
 			// Sanitize value
 			location = ( value === "left" ? "left" : "right" );
 			btn = $( "<a href='#' class='ui-btn-" + location + "' data-" + $.mobile.ns + "icon='delete' data-" + $.mobile.ns + "iconpos='notext'>"+ this.options.closeBtnText + "</a>" );
-			this.element.children().find( ":jqmData(role='header')" ).prepend( btn );
+			this.element.children().find( ":jqmData(role='header')" ).first().prepend( btn );
 			if ( this._createComplete && $.fn.buttonMarkup ) {
 				btn.buttonMarkup();
 			}
@@ -6224,7 +6224,7 @@ $.widget( "mobile.checkboxradio", $.mobile.widget, {
 			return this.element;
 		}
 
-		return this.element.closest( "form, fieldset, :jqmData(role='page'), :jqmData(role='dialog')" )
+		return this.element.closest( "form, :jqmData(role='page'), :jqmData(role='dialog')" )
 			.find( "input[name='" + this.element[0].name + "'][type='" + this.inputtype + "']" );
 	},
 
@@ -7235,16 +7235,10 @@ $( document ).bind( "pagecreate create", function( e ) {
 		},
 
 		_closePopup: function( e, data ) {
-			var parsedDst, toUrl, o = this.options;
+			var parsedDst, toUrl, o = this.options, close = { method: "_close" };
 
 			// restore location on screen
 			window.scrollTo( 0, this._scrollTop );
-
-			// remove nav bindings
-			o.container.unbind( o.closeEvents );
-
-			// unbind click handlers added when history is disabled
-			this.element.undelegate( o.closeLinkSelector, o.closeLinkEvents );
 
 			if ( e && e.type === "pagebeforechange" && data ) {
 				// Determine whether we need to rapid-close the popup, or whether we can
@@ -7259,16 +7253,20 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 				if ( this._myUrl !== toUrl ) {
 					// Going to a different page - close immediately
-					this._close( true );
+					close.arg = true;
 				} else {
-					this.close();
+					close.method = "close";
 					e.preventDefault();
 				}
-
-				return;
 			}
 
-			this._close();
+			if ( close.method === "_close" ) {
+				// remove nav bindings
+				o.container.unbind( o.closeEvents );
+				// unbind click handlers added when history is disabled
+				this.element.undelegate( o.closeLinkSelector, o.closeLinkEvents );
+			}
+			this[ close.method ]( close.arg );
 		},
 
 		// any navigation event after a popup is opened should close the popup
@@ -9435,12 +9433,9 @@ $( document ).bind( "pagecreate create", function( e ) {
 
 					nextFooter.add( nextHeader ).appendTo( $.mobile.pageContainer );
 
-					this._on( ui.nextPage, {
-						pageshow: function() {
-							nextHeader.prependTo( ui.nextPage );
-							nextFooter.appendTo( ui.nextPage );
-							this._off( ui.nextPage, "pageshow" );
-						}
+					ui.nextPage.one( "pageshow", function() {
+						nextHeader.prependTo( this );
+						nextFooter.appendTo( this );
 					});
 				}
 			}
@@ -9581,6 +9576,101 @@ $( document ).bind( "pagecreate create", function( e ) {
 		});
 
 })( jQuery );
+
+(function( $, undefined ) {
+	$.widget( "mobile.fixedtoolbar", $.mobile.fixedtoolbar, {
+
+			_create: function() {
+				this._super();
+				this._workarounds();
+			},
+
+			//check the browser and version and run needed workarounds
+			_workarounds: function() {
+				var ua = navigator.userAgent,
+				platform = navigator.platform,
+				// Rendering engine is Webkit, and capture major version
+				wkmatch = ua.match( /AppleWebKit\/([0-9]+)/ ),
+				wkversion = !!wkmatch && wkmatch[ 1 ],
+				os = null,
+				self = this;
+				//set the os we are working in if it dosent match one with workarounds return
+				if( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ){
+					os = "ios";
+				} else if( ua.indexOf( "Android" ) > -1 ){
+					os = "android";
+				} else {
+					return;
+				}
+				//check os version if it dosent match one with workarounds return
+				if( os === "ios" && wkversion && wkversion > 533 && wkversion < 536 ) {
+					//iOS 5 run all workarounds for iOS 5
+					self._bindScrollWorkaround();
+				} else if( os === "android" && wkversion && wkversion < 534 ) {
+					//Android 2.3 run all Android 2.3 workaround
+					self._bindScrollWorkaround();
+					self._bindListThumbWorkaround();
+				} else {
+					return;
+				}
+			},
+
+			//Utility class for checking header and footer positions relative to viewport
+			_viewportOffset: function() {
+				var $el = this.element,
+					header = $el.is( ".ui-header" ),
+					offset = Math.abs($el.offset().top - $( window ).scrollTop());
+				if( !header ) {
+					offset = Math.round(offset - $( window ).height() + $el.outerHeight())-60;
+				}
+				return offset;
+			},
+
+			//bind events for _triggerRedraw() function 
+			_bindScrollWorkaround: function() {
+				var self = this;
+				//bind to scrollstop and check if the toolbars are correctly positioned
+				this._on( $( window ), { scrollstop: function() {
+					var viewportOffset = self._viewportOffset();
+					//check if the header is visible and if its in the right place
+					if( viewportOffset > 2 && self._visible) {
+						self._triggerRedraw();
+					}
+				}});
+			},
+
+			//this addresses issue #4250 Persistent footer instability in v1.1 with long select lists in Android 2.3.3
+			//and issue #3748 Android 2.x: Page transitions broken when fixed toolbars used
+			//the absolutely positioned thumbnail in a list view causes problems with fixed position buttons above in a nav bar
+			//setting the li's to -webkit-transform:translate3d(0,0,0); solves this problem to avoide potential issues in other
+			//platforms we scope this with the class ui-android-2x-fix
+			_bindListThumbWorkaround: function() {
+				this.element.closest(".ui-page").addClass( "ui-android-2x-fixed" );
+			},
+			//this addresses issues #4337 Fixed header problem after scrolling content on iOS and Android
+			//and device bugs project issue #1 Form elements can lose click hit area in position: fixed containers.
+			//this also addresses not on fixed toolbars page in docs
+			//adding 1px of padding to the bottom then removing it causes a "redraw"
+			//which positions the toolbars correctly (they will always be visually correct) 
+			_triggerRedraw: function() {
+				var paddingBottom = parseFloat( $( ".ui-page-active" ).css( "padding-bottom" ) );
+				//trigger page redraw to fix incorrectly positioned fixed elements
+				$( ".ui-page-active" ).css( "padding-bottom", ( paddingBottom + 1 ) +"px" );
+				//if the padding is reset with out a timeout the reposition will not occure.
+				//this is independant of JQM the browser seems to need the time to react.
+				setTimeout( function() {
+					$( ".ui-page-active" ).css( "padding-bottom", paddingBottom + "px" );
+				}, 0 );
+			},
+
+			destroy: function() {
+				this._super();
+				//Remove the class we added to the page previously in android 2.x 
+				this.element.closest(".ui-page-active").removeClass( "ui-android-2x-fix" );
+			}
+	});
+
+	})( jQuery );
 
 (function( $, window ) {
 
