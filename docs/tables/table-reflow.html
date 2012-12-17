@@ -140,7 +140,7 @@
 		<p>Un élément est ajouté avant le texte de chaque cellule avec une <code>classe</code> de <code>ui-table-cell-label</code> :</p>
 		<pre><code>&lt;td&gt;<strong>&lt;b class="ui-table-cell-label"&gt;</strong>Année<strong>&lt;/b&gt;</strong>1941&lt;/td&gt;</code></pre>
 		
-		<p>Avec notre approche de mobile en premier, les styles de base pour une table reflow empile chaque ligne et chaque cellule présente dans le format de style label/données. Ceci est fait en cachant les lignes d'entête de la table et mettant chaque cellule de table <code>display:block</code> si elles sont empilées. L'élément label injecté dans chaque cellule est stylisé <code>display:inline-block</code> avec la règle <code>min-width:30%</code> pour placer les étiquettes sur la même ligne que le contenu à une largeur uniforme pour former une présentation à 2 colonnes.
+		<p>Avec notre approche de mobile en premier, les styles de base pour une table reflow empile chaque ligne et chaque cellule présente dans le format de style label/données. Ceci est fait en cachant les lignes d'entête de la table et mettant chaque cellule de table <code>display:block</code> si elles sont empilées. L'élément label injecté dans chaque cellule est stylisé <code>display:inline-block</code> avec la règle <code>min-width:30%</code> pour placer les étiquettes sur la même ligne que le contenu à une largeur uniforme pour former une présentation à 2 colonnes.</p>
 
 		<h3>Création de table responsive</h3>
 		
@@ -175,7 +175,7 @@
 
 		<h3>Choisir un point d'arrêt</h3>
 		<p>L'objectif est de déterminer la largeur minimale à laquelle l' <em>ensemble de la table</em> s'adapte confortablement à l'intérieur de l'écran. Trouvez cette largeur en remplissant un tableau avec des données réalistes, puis réglez la fenêtre du navigateur jusqu'à ce que la table corresponde complètement et ait un peu d'espace supplémentaire pour tenir compte des différents rendus des appareils. C'est à cet endroit qu'il faut définir le point d'arrêt qui permute entre l'empilement et le mode de présentation en tableau. </p>
-		<p>Le point d'arrêt de largeur dépend fortement du nombre de colonnes dans la table et le contenu de chaque cellule. Sur certains sites, cela peut être très bas comme 30em (480px) et sur d'autres, cela peut être très large comme 100em (1600 px). Il n'existe aucun moyen pour le framework de décider d'un "point d'arrêt standard" qui fonctionnera pour tout le monde - c'est pourquoi il n'y a pas un point d'arrêt intégré dans la table par défaut.<p>
+		<p>Le point d'arrêt de largeur dépend fortement du nombre de colonnes dans la table et le contenu de chaque cellule. Sur certains sites, cela peut être très bas comme 30em (480px) et sur d'autres, cela peut être très large comme 100em (1600 px). Il n'existe aucun moyen pour le framework de décider d'un "point d'arrêt standard" qui fonctionnera pour tout le monde - c'est pourquoi il n'y a pas un point d'arrêt intégré dans la table par défaut.</p>
 		<p>Nous recommandons l'écriture des largeurs des media queries en <code>em</code> ainsi ils répondent aux changements de taille de police. Pour convertir une largeur en pixel vers du <code>em</code>, divisez la largeur voulue par 16 (pixels). Utilisez cette valeur pour la valeur <code>min-width</code> dans le media query.</p>
 
 		<h3>L'application d'un point d'arrêt prédéfini</h3>
@@ -199,7 +199,7 @@
 
 							<ul data-role="listview" data-theme="c" data-dividertheme="d">
 								<li data-role="list-divider">Tables</li>
-								<li><a href="table-reflow.html">Mode Reflow</a></li>
+								<li data-theme="a"><a href="table-reflow.html">Mode Reflow</a></li>
 								<li><a href="table-column-toggle.html">Mode Column toggle</a></li>
 							</ul>
 					</div>

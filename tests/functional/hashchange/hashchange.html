@@ -16,6 +16,9 @@
 		if ( !!~location.search.indexOf( "push-state" ) ) {
 			$.mobile.pushStateEnabled = false;
 		}
+		if ( !!~location.search.indexOf( "popup-history" ) ) {
+			$.mobile.popup.prototype.options.history = false;
+		}
 	});
 })( jQuery );
 	</script>
@@ -44,8 +47,7 @@
 		<a data-role="button" href="#page2">A page: internal page</a>
 		<div id="popup" data-role="popup">
 			<p>Popup on first page</p>
-			<a href="hashchange1.html">Another page</a><br></br>
-			<a data-role="button" href="dialog.html" data-rel="dialog">A dialog</a>
+			<a href="hashchange.html">Une page</a><br/> <a href="hashchange1.html">Une autre page</a><br></br> <a data-role="button" href="dialog.html" data-rel="dialog">Une boîte de dialogue</a>
 		</div>
 		<a data-role="button" href="#popup" data-rel="popup">Popup 1</a>
 		<a data-role="button" href="dialog.html" data-rel="dialog">A dialog</a>
