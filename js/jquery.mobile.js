@@ -4,8 +4,12 @@
 define([
 	'require',
 	'./widgets/loader',
+	'./events/navigate',
+	'./navigation/path',
+	'./navigation/history',
+	'./navigation/navigator',
+	'./navigation/method',
 	'./jquery.mobile.navigation',
-	'./jquery.mobile.navigation.pushstate',
 	'./jquery.mobile.transitions',
 	'./jquery.mobile.degradeInputs',
 	'./widgets/dialog',
