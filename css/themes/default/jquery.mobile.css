@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: 0e140f9cfbfd909b3e367b63be97440002943e00 <> Date: Sun Dec 16 21:35:42 2012 +0100
+* jQuery Mobile Framework Git Build: SHA1: 3325c16cdc8364e2e5d6578ed9738ba3cc4c5efa <> Date: Wed Dec 19 13:55:59 2012 -0800
 * http://jquerymobile.com
 *
 * Copyright 2012 jQuery Foundation and other contributors
@@ -2088,7 +2088,8 @@ label.ui-submit { font-size: 16px; line-height: 1.4; font-weight: normal; margin
 .ui-field-contain .ui-controlgroup, .ui-field-contain fieldset.ui-controlgroup { margin: 0; }
 .ui-bar .ui-controlgroup { margin: 0 5px; }
 .ui-controlgroup-label { font-size: 16px; line-height: 1.4; font-weight: normal; margin: 0 0 .4em; }
-.ui-controlgroup-controls label.ui-select { position: absolute; left: -9999px; }
+.ui-controlgroup-controls label.ui-select,
+.ui-controlgroup-controls label.ui-submit { position: absolute; left: -9999px; }
 .ui-controlgroup li { list-style: none; }
 .ui-controlgroup .ui-btn { margin: 0; }
 .ui-controlgroup .ui-btn-icon-notext { width: auto; height: auto; top: auto; }
