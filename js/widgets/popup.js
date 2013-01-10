@@ -40,7 +40,7 @@ define( [
 	}
 
 	function windowCoords() {
-		var $win = $( window );
+		var $win = $.mobile.window;
 
 		return {
 			x: $win.scrollLeft(),
@@ -71,7 +71,7 @@ define( [
 			//      https://github.com/jquery/jquery-mobile/issues/4784
 			//
 			// NOTE this option is modified in _create!
-			history: !$.mobile.browser.ie
+			history: !$.mobile.browser.oldIE
 		},
 
 		_eatEventAndClose: function( e ) {
@@ -235,12 +235,12 @@ define( [
 
 			ui.screen.bind( "vclick", $.proxy( this, "_eatEventAndClose" ) );
 
-			this._on( $( window ), {
+			this._on( $.mobile.window, {
 				orientationchange: $.proxy( this, "_handleWindowOrientationchange" ),
 				resize: $.proxy( this, "_handleWindowResize" ),
 				keyup: $.proxy( this, "_handleWindowKeyUp" )
 			});
-			this._on( $( document ), {
+			this._on( $.mobile.document, {
 				focusin: $.proxy( this, "_handleDocumentFocusIn" )
 			});
 		},
@@ -416,7 +416,7 @@ define( [
 			// If the height of the menu is smaller than the height of the document
 			// align the bottom with the bottom of the document
 
-			// fix for $( document ).height() bug in core 1.7.2.
+			// fix for $.mobile.document.height() bug in core 1.7.2.
 			var docEl = document.documentElement, docBody = document.body,
 				docHeight = Math.max( docEl.clientHeight, docBody.scrollHeight, docBody.offsetHeight, docEl.scrollHeight, docEl.offsetHeight );
 
@@ -536,10 +536,16 @@ define( [
 			return { x: x, y: y };
 		},
 
+		_reposition: function( o ) {
+			// We only care about position-related parameters for repositioning
+			o = { x: o.x, y: o.y, positionTo: o.positionTo };
+			this._trigger( "beforeposition", o );
+			this._ui.container.offset( this._placementCoords( this._desiredCoords( o ) ) );
+		},
+
 		reposition: function( o ) {
 			if ( this._isOpen ) {
-				this._trigger( "beforeposition" );
-				this._ui.container.offset( this._placementCoords( this._desiredCoords( o ) ) );
+				this._reposition( o );
 			}
 		},
 
@@ -553,8 +559,7 @@ define( [
 		},
 
 		_open: function( options ) {
-			var coords,
-				o = $.extend( {}, this.options, options ),
+			var o = $.extend( {}, this.options, options ),
 				// TODO move blacklist to private method
 				androidBlacklist = ( function() {
 					var w = window,
@@ -573,11 +578,6 @@ define( [
 					return false;
 				}());
 
-			// Give applications a chance to modify the contents of the container before it appears
-			this._trigger( "beforeposition" );
-
-			coords = this._placementCoords( this._desiredCoords( o ) );
-
 			// Count down to triggering "popupafteropen" - we have two prerequisites:
 			// 1. The popup window animation completes (container())
 			// 2. The screen opacity animation completes (screen())
@@ -594,10 +594,10 @@ define( [
 			}
 
 			this._ui.screen.removeClass( "ui-screen-hidden" );
+			this._ui.container.removeClass( "ui-popup-hidden" );
 
-			this._ui.container
-				.removeClass( "ui-popup-hidden" )
-				.offset( coords );
+			// Give applications a chance to modify the contents of the container before it appears
+			this._reposition( o );
 
 			if ( this.options.overlayTheme && androidBlacklist ) {
 				/* TODO:
@@ -757,7 +757,7 @@ define( [
 
 			// set the global popup mutex
 			$.mobile.popup.active = this;
-			this._scrollTop = $( window ).scrollTop();
+			this._scrollTop = $.mobile.window.scrollTop();
 
 			// if history alteration is disabled close on navigate events
 			// and leave the url as is
@@ -825,7 +825,7 @@ define( [
 				return;
 			}
 
-			this._scrollTop = $( window ).scrollTop();
+			this._scrollTop = $.mobile.window.scrollTop();
 
 			if( this.options.history && this.urlAltered ) {
 				$.mobile.back();
@@ -869,14 +869,14 @@ define( [
 	};
 
 	// TODO move inside _create
-	$( document ).bind( "pagebeforechange", function( e, data ) {
+	$.mobile.document.bind( "pagebeforechange", function( e, data ) {
 		if ( data.options.role === "popup" ) {
 			$.mobile.popup.handleLink( data.options.link );
 			e.preventDefault();
 		}
 	});
 
-	$( document ).bind( "pagecreate create", function( e )  {
+	$.mobile.document.bind( "pagecreate create", function( e )  {
 		$.mobile.popup.prototype.enhanceWithin( e.target, true );
 	});
 

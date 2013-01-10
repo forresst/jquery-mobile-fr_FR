@@ -20,7 +20,7 @@ define( [
 (function( $, undefined ) {
 
 	//define vars for interal use
-	var $window = $( window ),
+	var $window = $.mobile.window,
 		$html = $( 'html' ),
 		$head = $( 'head' ),
 
@@ -843,9 +843,6 @@ define( [
 
 		// Set the location hash.
 		if ( settings.changeHash !== false && url ) {
-			//disable hash listening temporarily
-			$.navigate.navigator.ignoreNextHashChange = true;
-
 			// rebuilding the hash here since we loose it earlier on
 			// TODO preserve the originally passed in path
 			if( !path.isPath( url ) && url.indexOf( "#" ) < 0 ) {
@@ -998,7 +995,7 @@ define( [
 		};
 
 		//bind to form submit events, handle with Ajax
-		$( document ).delegate( "form", "submit", function( event ) {
+		$.mobile.document.delegate( "form", "submit", function( event ) {
 			var formData = getAjaxFormData( $( this ) );
 
 			if ( formData ) {
@@ -1008,7 +1005,7 @@ define( [
 		});
 
 		//add active state on vclick
-		$( document ).bind( "vclick", function( event ) {
+		$.mobile.document.bind( "vclick", function( event ) {
 			var $btn, btnEls, target = event.target, needClosest = false;
 			// if this isn't a left click we don't care. Its important to note
 			// that when the virtual event is generated it will create the which attr
@@ -1071,7 +1068,7 @@ define( [
 		});
 
 		// click routing - direct to HTTP or Ajax, accordingly
-		$( document ).bind( "click", function( event ) {
+		$.mobile.document.bind( "click", function( event ) {
 			if ( !$.mobile.linkBindingEnabled ) {
 				return;
 			}
@@ -1169,7 +1166,7 @@ define( [
 		});
 
 		//prefetch pages when anchors with data-prefetch are encountered
-		$( document ).delegate( ".ui-page", "pageshow.prefetch", function() {
+		$.mobile.document.delegate( ".ui-page", "pageshow.prefetch", function() {
 			var urls = [];
 			$( this ).find( "a:jqmData(prefetch)" ).each(function() {
 				var $link = $( this ),
@@ -1184,7 +1181,6 @@ define( [
 		});
 
 		$.mobile._handleHashChange = function( url, data ) {
-
 			//find first page via hash
 			var to = path.stripHash(url),
 				//transition is false if it's the first page, undefined otherwise (and may be overridden by default)
@@ -1276,8 +1272,8 @@ define( [
 		});
 
 		//set page min-heights to be device specific
-		$( document ).bind( "pageshow", resetActivePageHeight );
-		$( window ).bind( "throttledresize", resetActivePageHeight );
+		$.mobile.document.bind( "pageshow", resetActivePageHeight );
+		$.mobile.window.bind( "throttledresize", resetActivePageHeight );
 
 	};//navreadyDeferred done callback
 

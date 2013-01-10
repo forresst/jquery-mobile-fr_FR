@@ -59,10 +59,31 @@ function validStyle( prop, value, check_vend ) {
 	return !!ret;
 }
 
-// Thanks to Modernizr src for this test idea. `perspective` check is limited to Moz/unprefixed to prevent a false positive for 3D transforms on Android.
 function transform3dTest() {
-	var prop = "transform-3d";
-	return validStyle( 'perspective', '10px', ['moz', ''] ) || $.mobile.media( "(-" + vendors.join( "-" + prop + "),(-" ) + "-" + prop + "),(" + prop + ")" );
+	var mqProp = "transform-3d",
+		// Because the `translate3d` test below throws false positives in Android:
+		ret = $.mobile.media( "(-" + vendors.join( "-" + mqProp + "),(-" ) + "-" + mqProp + "),(" + mqProp + ")" );
+
+	if( ret ) {
+		return !!ret;
+	}
+
+	var el = document.createElement( "div" ),
+		transforms = {
+			// Weâ€™re omitting Opera for the time being; MS uses unprefixed.
+			'MozTransform':'-moz-transform',
+			'transform':'transform'
+		};
+
+	fakeBody.append( el );
+
+	for ( var t in transforms ) {
+		if( el.style[ t ] !== undefined ){
+			el.style[ t ] = 'translate3d( 100px, 1px, 1px )';
+			ret = window.getComputedStyle( el ).getPropertyValue( transforms[ t ] );
+		}
+	}
+	return ( !!ret && ret !== "none" );
 }
 
 // Test for dynamic-updating base tag support ( allows us to avoid href,src attr rewriting )
@@ -117,7 +138,7 @@ function boundingRect() {
 // non-UA-based IE version check by James Padolsey, modified by jdalton - from http://gist.github.com/527683
 // allows for inclusion of IE 6+, including Windows Mobile 7
 $.extend( $.mobile, { browser: {} } );
-$.mobile.browser.ie = (function() {
+$.mobile.browser.oldIE = (function() {
 	var v = 3,
 		div = document.createElement( "div" ),
 		a = div.all || [];
@@ -131,7 +152,7 @@ $.mobile.browser.ie = (function() {
 
 
 $.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear', [ "Webkit", "Moz", "" ] ) && $.mobile.browser.ie !== 9 && !opera,
+	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear', [ "Webkit", "Moz", "" ] ) && !$.mobile.browser.oldIE && !opera,
 	pushState: "pushState" in history && "replaceState" in history,
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
@@ -166,7 +187,7 @@ var nokiaLTE7_3 = (function() {
 // default enhanced qualifications are media query support OR IE 7+
 
 $.mobile.gradeA = function() {
-	return ( $.support.mediaquery || $.mobile.browser.ie && $.mobile.browser.ie >= 7 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
+	return ( $.support.mediaquery || $.mobile.browser.oldIE && $.mobile.browser.oldIE >= 7 ) && ( $.support.boundingRect || $.fn.jquery.match(/1\.[0-7+]\.[0-9+]?/) !== null );
 };
 
 $.mobile.ajaxBlacklist =
