@@ -6,10 +6,10 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Docs jQuery Mobile - Panneau coulissant</title>
 		<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
-		<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
+		<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 		<script src="../../js/jquery.js"></script>
-		<script src="../../docs/assets/js/jqm-docs.js"></script>
+		<script src="../../docs/_assets/js/jqm-docs.js"></script>
 		<script src="../../js/jquery.mobile.js"></script>
 	</head>
 	<body>
@@ -31,10 +31,21 @@
 					<li><a href="events.html" data-role="button" data-transition="fade" class="ui-btn-active">Événements</a></li>
 				</ul>
 		
-
 				<dl>
+					<dt><code>beforeclose</code> Type : panelbeforeclose</dt>
+					<dd>Déclenchée au début du processus de fermeture d'un panneau.</dd>
+                    
+					<dt><code>beforeopen</code> Type : panelbeforeopen</dt>
+					<dd>Déclenchée au début du processus d'ouverture d'un panneau.</dd>
+                    
 					<dt><code>create</code> Type : panelcreate</dt>
 					<dd>Déclenché lorsque le panneau est créé.</dd>
+                    
+					<dt><code>close</code> Type : panelclose</dt>
+					<dd>Déclenché lorsque le processus de fermeture d'un panneau est terminé. Toutefois, l'animation slide pourrait encore fonctionner.</dd>
+                    
+					<dt><code>open</code> Type : panelopen</dt>
+					<dd>Déclenché lorsque le processus d'ouverture d'un panneau est terminé. Toutefois, l'animation slide pourrait encore fonctionner.</dd>
 				</dl>
 			</div><!-- /content -->
 

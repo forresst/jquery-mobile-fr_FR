@@ -6,10 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Docs jQuery Mobile - Référence de l'attribut de données</title>
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../../js/jquery.js"></script>
-	<script src="../../docs/assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/jquery.mobile.js"></script>
 
 </head>
@@ -199,7 +199,7 @@
 				</tr>
 				<tr>
 					<th>data-close-btn-text</th>
-					<td>string - Texte pour le bouton de fermeture, pour la boîte de dialogue seulement</td>
+					<td>string - Texte pour le bouton de fermeture, pour la boîte de dialogue seulement. Par défaut : <strong>"close"</strong></td>
 				</tr>
 				<tr>
 					<th>data-corners</th>
@@ -506,7 +506,7 @@
 					<td><strong>true</strong> | false</td>
 				</tr>
 				<tr>
-					<th>data-dismissable</th>
+					<th>data-dismissible</th>
 					<td><strong>true</strong> | false - Si la valeur est à false, ceci empêche la fermeture de la popup en cliquant en dehors de la popup ou en appuyant sur la touche Echap</td>
 				</tr>
 
@@ -635,6 +635,14 @@
 			<h2><a href="../forms/textinputs/">Saisie de texte &amp; zone de texte</a></h2>
 			<p>Les éléments Input avec <code>type="text|number|search|etc."</code> ou <code>textarea</code> sont améliorés automatiquement, donc pas besoin de <code>data-role</code></p>
 			<table>
+				<tr>
+					<th>data-clear-btn</th>
+					<td>true | <strong>false</strong> - Ajoute un bouton d'effacement</td>
+				</tr>
+				<tr>
+					<th>data-clear-btn-text</th>
+					<td>string - Texte pour le bouton de fermeture. Par défaut : "clear text"</td>
+				</tr>
 				<tr>
 					<th>data-mini</th>
 					<td>true | <strong>false</strong> - version d'une taille compacte</td>

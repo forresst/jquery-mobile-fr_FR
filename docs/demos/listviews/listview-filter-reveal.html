@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Filtre de liste &amp; Auto-séparateurs - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jquery.mobile.demos.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header" data-theme="f">
+		<h1>Filtre de liste</h1>
+		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content">
+	
+		<div class="content-primary">
+		
+			<h2>Autocomplete local avec un filtre de liste</h2>
+			<p>La fonction de filtre permet de construire facilement une simple saisie semi-automatique avec des données locales. Lorsqu'une liste filtrable a  <code>data-filter-reveal="true"</code>, il masquera automatiquement tous les éléments de la liste lorsque le champ de recherche est vide. L'attribut <code>data-filter-placeholder</code> peut être ajouté pour spécifier le texte du placeholder pour le filtre.</p>
+			<p>Les filtres de liste avec plus de 100 à 200 éléments peuvent être lents sur un appareil mobile, donc nous vous recommandons d'utiliser cette fonction pour les situations d'auto-complétion avec un nombre relativement faible d'éléments. Si vous avez besoin d'une recherche dans une liste contenant plus de valeurs, nous fournissons un moyen de créer un filtre avec une  <a href="listview-filter-autocomplete.html" data-ajax="false">source de données distante </a>.</p>
+
+			<h3>Filtre</h3>
+			
+			<div data-demo-html="true">
+				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
+					<li><a href="index.html">Acura</a></li>
+					<li><a href="index.html">Audi</a></li>
+					<li><a href="index.html">BMW</a></li>
+					<li><a href="index.html">Cadillac</a></li>
+					<li><a href="index.html">Chrysler</a></li>
+					<li><a href="index.html">Dodge</a></li>
+					<li><a href="index.html">Ferrari</a></li>
+					<li><a href="index.html">Ford</a></li>
+					<li><a href="index.html">GMC</a></li>
+					<li><a href="index.html">Honda</a></li>
+					<li><a href="index.html">Hyundai</a></li>
+					<li><a href="index.html">Infiniti</a></li>
+					<li><a href="index.html">Jeep</a></li>
+					<li><a href="index.html">Kia</a></li>
+					<li><a href="index.html">Lexus</a></li>
+					<li><a href="index.html">Mini</a></li>
+					<li><a href="index.html">Nissan</a></li>
+					<li><a href="index.html">Porsche</a></li>
+					<li><a href="index.html">Subaru</a></li>
+					<li><a href="index.html">Toyota</a></li>
+					<li><a href="index.html">Volkswagon</a></li>
+					<li><a href="index.html">Volvo</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			
+
+			<h3>Filtre, intégré</h3>
+			
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search cars...">
+					<li><a href="index.html">Acura</a></li>
+					<li><a href="index.html">Audi</a></li>
+					<li><a href="index.html">BMW</a></li>
+					<li><a href="index.html">Cadillac</a></li>
+					<li><a href="index.html">Chrysler</a></li>
+					<li><a href="index.html">Dodge</a></li>
+					<li><a href="index.html">Ferrari</a></li>
+					<li><a href="index.html">Ford</a></li>
+					<li><a href="index.html">GMC</a></li>
+					<li><a href="index.html">Honda</a></li>
+					<li><a href="index.html">Hyundai</a></li>
+					<li><a href="index.html">Infiniti</a></li>
+					<li><a href="index.html">Jeep</a></li>
+					<li><a href="index.html">Kia</a></li>
+					<li><a href="index.html">Lexus</a></li>
+					<li><a href="index.html">Mini</a></li>
+					<li><a href="index.html">Nissan</a></li>
+					<li><a href="index.html">Porsche</a></li>
+					<li><a href="index.html">Subaru</a></li>
+					<li><a href="index.html">Toyota</a></li>
+					<li><a href="index.html">Volkswagon</a></li>
+					<li><a href="index.html">Volvo</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+		</div><!--/content-primary -->
+	
+	</div><!-- /content -->
+	
+	<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+	</div><!-- /jqm-footer -->
+	
+</div><!-- /page -->
+</body>
+</html>

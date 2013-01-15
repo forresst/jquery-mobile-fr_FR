@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Docs jQuery Mobile - Options de saisie de texte</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 	<script src="../../../js/jquery.js"></script>
-	<script src="../../../docs/assets/js/jqm-docs.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/jquery.mobile.js"></script>
 
 </head>
@@ -38,6 +38,20 @@
 			<p>Le plugin saisie de texte a les méthodes suivantes :</p>
 
 		<dl>
+			<dt><code>clearBtn</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">par défaut : false</p>
+				<p>Ajoute un bouton d'effacement au saisie (pas disponible pour les zones de texte). Cette option est également définie comme un attribut de données : <code>data-clear-btn="true"</code></p>		
+				<pre><code>$('.selector').textinput(<strong>{ clearBtn: true }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>clearBtnText</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "clear text"</p>
+				<p>La description du texte pour le bouton facultatif d'effacement, utile pour les technologies d'assistance comme les lecteurs d'écran. Cette option est également définie comme un attribut de données : <code>data-clear-btn-text="Clear input"</code></p>		
+				<pre><code>$('.selector').textinput(<strong>{ clearBtnText: "Clear value" }</strong>);</code></pre>
+			</dd>
+			
 			<dt><code>disabled</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">par défaut : false</p>

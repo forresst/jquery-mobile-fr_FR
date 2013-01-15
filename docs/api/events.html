@@ -6,10 +6,10 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Docs jQuery Mobile - Événements</title>
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="../assets/css/jqm-docs.css"/>
+	<link rel="stylesheet" href="../_assets/css/jqm-docs.css"/>
 
 	<script src="../../js/jquery.js"></script>
-	<script src="../../docs/assets/js/jqm-docs.js"></script>
+	<script src="../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../js/jquery.mobile.js"></script>
 
 </head>
@@ -58,6 +58,50 @@
 			  	<li><code>$.event.special.swipe.horizontalDistanceThreshold</code> (par défaut : 30px) Un déplacement horizontal doit être plus grand que cette valeur.</li>
 			  	<li><code>$.event.special.swipe.verticalDistanceThreshold</code> (par défaut : 75px) Un déplacement vertical doit être moins grand que cette valeur.</li>
 			  	</ul>
+			  	<p>L'événement swipe peut aussi être étendu pour ajouter votre propre logique ou fonctionnalité. Les méthodes suivantes peuvent être étendues :</p>
+			  	<ul>
+			  		<li>$.event.special.swipe.start Par défaut :
+			  			<pre><code>
+function( event ) {
+	var data = event.originalEvent.touches ?
+			event.originalEvent.touches[ 0 ] : event;
+	return {
+			time: ( new Date() ).getTime(),
+			coords: [ data.pageX, data.pageY ],
+			origin: $( event.target )
+		};
+}
+			  			</pre></code>
+			  			<p>Cette méthode reçoit un événement touchstart et retourne un objet de donnée sur la localisation de départ.</p>
+			  		</li>
+			  		<li>$.event.special.swipe.stop Par défaut :
+			  			<pre><code>
+function( event ) {
+	var data = event.originalEvent.touches ?
+			event.originalEvent.touches[ 0 ] : event;
+	return {
+			time: ( new Date() ).getTime(),
+			coords: [ data.pageX, data.pageY ]
+		};
+}
+			  			</pre></code>
+			  			<p>Cette méthode reçoit un événement touchend et retourne un objet de donnée sur la localisation d'arrivée.</p>
+			  		</li>
+			  		<li>$.event.special.swipe.handleSwipe Par défaut :
+			  			<pre><code>
+function( start, stop ) {
+	if ( stop.time - start.time &lt; $.event.special.swipe.durationThreshold &amp;&amp;
+		Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) &gt; $.event.special.swipe.horizontalDistanceThreshold &amp;&amp;
+		Math.abs( start.coords[ 1 ] - stop.coords[ 1 ] ) &lt; $.event.special.swipe.verticalDistanceThreshold ) {
+
+		start.origin.trigger( "swipe" )
+			.trigger( start.coords[0] &gt; stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
+	}
+}
+			  			</pre></code>
+			  			<p>Cette méthode reçoit les objets start et stop et gère la logique et le déclenchement pour les événements swipe.</p>
+			  		</li>
+			  	</ul>
 			</dd>
 
 			<dt><code>swipeleft</code></dt>
@@ -65,6 +109,9 @@
 
 			<dt><code>swiperight</code></dt>
 			<dd>Se déclenche lors d'un événement "glisser" s'est produit en direction de la droite.</dd>
+			<div class="ui-body ui-body-e">
+				<h4 style="margin:.5em 0">Important: le glissement vers la gauche ou vers la droite tout en faisant défiler, déclenchera un événement swipe sur iOS</h4>
+		   <p>Sur iOS aucune distance verticale se déroule dans les événements tactiles pendant le défilement. Cela signifie que le verticalDistanceThreshold spécifié pour l'événement swipe est ignoré. Le seul moyen que nous avons trouvé pour contourner cela est de calculer scrollTop sur chaque touchstart / touchend qui est très coûteux. C'est pour cette raison que nous avons étendu cet événement swipe de sorte que vous puissiez ajouter cela seulement si la performance est acceptable pour votre usage.</p></div>
 			</dl>
 
 			<h2>Événements virtuels de souris</h2>

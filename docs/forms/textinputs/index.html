@@ -6,9 +6,9 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1"> 
 	<title>jQuery Docs Mobile - Zone de saisie</title> 
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="../../assets/css/jqm-docs.css"/>
+	<link rel="stylesheet" href="../../_assets/css/jqm-docs.css"/>
 	<script src="../../../js/jquery.js"></script>
-	<script src="../../../docs/assets/js/jqm-docs.js"></script>
+	<script src="../../../docs/_assets/js/jqm-docs.js"></script>
 	<script src="../../../js/jquery.mobile.js"></script>
 
 </head> 
@@ -63,6 +63,21 @@
 	         <label for="mini">Saisie de texte :</label>
 	         <input type="text" name="name" id="mini" value="" data-mini="true" />
 
+
+
+			<h2>Option du bouton d'effacement</h2>
+
+			<p>Pour ajouter un bouton d'effacement à n'importe quelle saisie (comme une zone de recherche), ajoutez l'attribut <code>data-clear-btn="true"</code>. Le texte du bouton d'effacement peut être personnalisé via l'attribut <code>data-clear-btn-text="clear input"</code>. Les boutons de recherche ont le bouton d'effacement par défaut, mais cela peut être contrôlé par cette option. Notez que cette option est disponible pour tous les types d'entrée ci-dessous à l'exception des <code>zones de texte</code>.</p>
+
+		<pre><code>	
+&lt;label for="clear-demo"&gt;Saisie :&lt;/label&gt;
+&lt;input type="text" name="clear" id="clear-demo" value="" <strong>data-clear-btn="true"</strong> /&gt;
+		</code></pre>
+
+					<p>Ceci va produire une saisie pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
+			         <label for="clear-demo">Saisie de texte :</label>
+			         <input type="text" name="clear-demo" id="clear-demo" value="" data-clear-btn="true" />
+			
 			<h2>Conteneurs de champs</h2>
 
 			<p>Optionnellement, enveloppez-les dans un conteneur avec l'attribut <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long.</p>
@@ -86,69 +101,71 @@
 			
 			<p>Un avantage majeur de l'utilisation de ces types d'entrée plus spécifique sur des appareils mobiles, c'est l'affichage de claviers spécialisés permettant d'augmenter la vitesse de saisie à la place du clavier de texte standard. La prise en charge de chaque type d'entrée varie considérablement selon les plateformes, mais en général, les plateformes reviennent vers une saisie de texte de base si elles ne le comprennent pas.</p>
 			
+			<p>Chacune de ces saisies a le bouton d'effacement facultatif, mais les navigateurs ne peuvent pas afficher les boutons dans certains types.</p>
+			
 			<div data-role="fieldcontain">
 	         <label for="password">Mot de passe :</label>
-	         <input type="password" name="password" id="password" value="" />
+	         <input type="password" name="password" id="password" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="number">Nombre :</label>
-	         <input type="number" name="number" id="number" value="" />
+	         <input type="number" name="number" id="number" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="number-pattern">Nombre + modèle :</label>
-	         <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="" placeholder="Pattern attribute [0-9]* for a numeric keypad" />
+	         <input type="number" name="number" pattern="[0-9]*" id="number-pattern" value="" data-clear-btn="true" placeholder="Pattern attribute [0-9]* for a numeric keypad" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="email">Email :</label>
-	         <input type="email" name="email" id="email" value="" />
+	         <input type="email" name="email" id="email" data-clear-btn="true" value="" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="url">Url :</label>
-	         <input type="url" name="url" id="url" value="" />
+	         <input type="url" name="url" id="url" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="tel">Tel :</label>
-	         <input type="tel" name="tel" id="tel" value="" />
+	         <input type="tel" name="tel" id="tel" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="time">Time:</label>
-	         <input type="time" name="time" id="time" value="" />
+	         <input type="time" name="time" id="time" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="date">Date :</label>
-	         <input type="date" name="date" id="date" value="" />
+	         <input type="date" name="date" id="date" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="month">Mois :</label>
-	         <input type="month" name="month" id="month" value="" />
+	         <input type="month" name="month" id="month" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="week">Semaine :</label>
-	         <input type="week" name="week" id="week" value="" />
+	         <input type="week" name="week" id="week" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="datetime">Date et heure :</label>
-	         <input type="datetime" name="datetime" id="datetime" value="" />
+	         <input type="datetime" name="datetime" id="datetime" data-clear-btn="true" value="" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="datetime-l">Date et heure locale :</label>
-	         <input type="datetime-local" name="datetime-l" id="datetime-l" value="" />
+	         <input type="datetime-local" name="datetime-l" id="datetime-l" value="" data-clear-btn="true" />
 			</div>
 			
 			<div data-role="fieldcontain">
 	         <label for="color">Couleur :</label>
-	         <input type="color" name="color" id="color" value="" />
+	         <input type="color" name="color" id="color" value="" data-clear-btn="true" />
 			</div>
 			
 
@@ -158,7 +175,7 @@
 			
 			<div data-role="fieldcontain">
 	         <label for="file">Fichier :</label>
-	         <input type="file" name="file" id="file" value="" />
+	         <input type="file" name="file" id="file" value="" data-clear-btn="true" />
 			</div>
 			
 			
