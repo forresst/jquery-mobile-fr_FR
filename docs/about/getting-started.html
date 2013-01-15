@@ -34,25 +34,25 @@
 		
 		<h2>Créer un modèle de page de base</h2>	
 		<p>Ouvrez votre éditeur de texte favori et collez ce qui suit dans le <a href="../pages/page-anatomy.html" title="Anatomie de la page">modèle de page</a>, sauvez et ouvrez le dans un navigateur. Vous êtes maintenant un développeur mobile !</p>
-		<p>Voici ce qu'il y a dans le modèle. Dans le <code>head</code>, une balise meta : <code>viewport</code>, définit la largeur de l'écran à celle de la largeur en pixel de l'appareil, de plus des références à jQuery, à jQuery Mobile, à la feuille de style du thème du mobile depuis le CDN, et tous les styles et les scripts. jQuery Mobile 1.2 (1.2.0) fonctionne avec les versions jQuery de la 1.7.0 à la 1.8.2.</p>
+		<p>Voici ce qu'il y a dans le modèle. Dans le <code>head</code>, une balise meta : <code>viewport</code>, définit la largeur de l'écran à celle de la largeur en pixel de l'appareil, de plus des références à jQuery, à jQuery Mobile, à la feuille de style du thème du mobile depuis le CDN, et tous les styles et les scripts. jQuery Mobile 1.3 beta (1.3.0-beta.1) fonctionne avec les versions jQuery de la 1.7.0 à la 1.8.3.</p>
 		<p>Dans le <code>body</code>, un div avec un <code>data-role</code> à <code>page</code> est l'enveloppe utilisée pour délimiter une page, la barre d'entête (<code>data-role="header"</code>) et la région du contenu (<code>data-role="content"</code>) sont ajoutés à l'intérieur pour créer une page de base (ceux-ci sont tous les deux facultatifs). Ces attributs <code>data-</code> sont des attributs HTML5 qui sont utilisés à travers jQuery Mobile pour transformer un balisage de base en un widget amélioré et stylisé.</p> 
 
 <pre><code>
 &lt;!DOCTYPE html&gt; 
 &lt;html&gt; 
 &lt;head&gt; 
-	&lt;title&gt;Ma Page&lt;/title&gt; 
+	&lt;title&gt;My Page&lt;/title&gt; 
 	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt; 
-	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" /&gt;
-	&lt;script src="http://code.jquery.com/jquery-1.8.2.min.js"&gt;&lt;/script&gt;
-	&lt;script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"&gt;&lt;/script&gt;
+	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.min.css" /&gt;
+	&lt;script src="http://code.jquery.com/jquery-1.8.3.min.js"&gt;&lt;/script&gt;
+	&lt;script src="http://code.jquery.com/mobile/1.3.0-beta.1/jquery.mobile-1.3.0-beta.1.min.js"&gt;&lt;/script&gt;
 &lt;/head&gt; 
 &lt;body&gt; 
 
 &lt;div <strong>data-role="page"</strong>&gt;
 
 	&lt;div <strong>data-role="header"</strong>&gt;
-		&lt;h1&gt;Mon Titre&lt;/h1&gt;
+		&lt;h1&gt;Mon titre&lt;/h1&gt;
 	&lt;/div&gt;&lt;!-- /header --&gt;
 
 	&lt;div <strong>data-role="content"</strong>&gt;	

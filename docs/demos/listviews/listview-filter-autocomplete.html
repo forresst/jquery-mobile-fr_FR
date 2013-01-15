@@ -59,11 +59,17 @@
 
 		<div class="content-primary">
         
-        	<h2>Villes du globe</h2>
+  			<h2>Autocomplete distant avec un filtre de liste</h2>
+
+			<p>Pour utiliser le filtre de liste comme une saisie semi-automatique qui exploite des données distantes, vous pouvez utiliser l'événement<code>listviewbeforefilter</code> pour remplir dynamiquement un liste lorsque l'utilisateur fait une recherche. Ceci est utile lorsque vous avez beaucoup de données comme les villes, les codes postaux ou des produits qui ne peuvent pas être chargés localement à l'avance. Utilisez le bouton voir la source pour voir le code JavaScript qui alimente cette démo.</p>
+			<p>Si vous avez une petite liste d'éléments, vous pouvez utiliser l'<a href="listview-filter-reveal.html">option filter reveal</a> pour faire une saisie semi-automatique des données de la liste locales.</p>
+			
+        	
 
 			<div data-demo-html="true" data-demo-js="true" data-demo-css="true">
-            	<p>Après vous ayez saisi au moins trois caractères, la fonction d'auto-complétion affiche toutes les correspondances possibles.</p> 
-				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-theme="d"></ul>
+				<h3>Villes du globe</h3>
+            	<p>Après avoir entré <strong>au moins trois caractères</strong>la fonction de saisie semi-automatique affiche toutes les correspondances possibles.</p> 
+				<ul id="autocomplete" data-role="listview" data-inset="true" data-filter="true" data-filter-placeholder="Find a city..." data-filter-theme="d"></ul>
 			</div><!--/demo-html -->
 
 

@@ -38,6 +38,20 @@
 			<p>Le plugin saisie de texte a les méthodes suivantes :</p>
 
 		<dl>
+			<dt><code>clearBtn</code> <em>boolean</em></dt>
+			<dd>
+				<p class="default">par défaut : false</p>
+				<p>Ajoute un bouton d'effacement au saisie (pas disponible pour les zones de texte). Cette option est également définie comme un attribut de données : <code>data-clear-btn="true"</code></p>		
+				<pre><code>$('.selector').textinput(<strong>{ clearBtn: true }</strong>);</code></pre>
+			</dd>
+			
+			<dt><code>clearBtnText</code> <em>string</em></dt>
+			<dd>
+				<p class="default">Par défaut : "clear text"</p>
+				<p>La description du texte pour le bouton facultatif d'effacement, utile pour les technologies d'assistance comme les lecteurs d'écran. Cette option est également définie comme un attribut de données : <code>data-clear-btn-text="Clear input"</code></p>		
+				<pre><code>$('.selector').textinput(<strong>{ clearBtnText: "Clear value" }</strong>);</code></pre>
+			</dd>
+			
 			<dt><code>disabled</code> <em>boolean</em></dt>
 			<dd>
 				<p class="default">par défaut : false</p>

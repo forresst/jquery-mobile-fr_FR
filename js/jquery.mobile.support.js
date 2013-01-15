@@ -150,16 +150,61 @@ $.mobile.browser.oldIE = (function() {
 	return v > 4 ? v : !v;
 })();
 
+function fixedPosition() {
+	var w = window,
+		ua = navigator.userAgent,
+		platform = navigator.platform,
+		// Rendering engine is Webkit, and capture major version
+		wkmatch = ua.match( /AppleWebKit\/([0-9]+)/ ),
+		wkversion = !!wkmatch && wkmatch[ 1 ],
+		ffmatch = ua.match( /Fennec\/([0-9]+)/ ),
+		ffversion = !!ffmatch && ffmatch[ 1 ],
+		operammobilematch = ua.match( /Opera Mobi\/([0-9]+)/ ),
+		omversion = !!operammobilematch && operammobilematch[ 1 ];
+
+	if(
+		// iOS 4.3 and older : Platform is iPhone/Pad/Touch and Webkit version is less than 534 (ios5)
+		( ( platform.indexOf( "iPhone" ) > -1 || platform.indexOf( "iPad" ) > -1  || platform.indexOf( "iPod" ) > -1 ) && wkversion && wkversion < 534 ) ||
+		// Opera Mini
+		( w.operamini && ({}).toString.call( w.operamini ) === "[object OperaMini]" ) ||
+		( operammobilematch && omversion < 7458 )	||
+		//Android lte 2.1: Platform is Android and Webkit version is less than 533 (Android 2.2)
+		( ua.indexOf( "Android" ) > -1 && wkversion && wkversion < 533 ) ||
+		// Firefox Mobile before 6.0 -
+		( ffversion && ffversion < 6 ) ||
+		// WebOS less than 3
+		( "palmGetResource" in window && wkversion && wkversion < 534 )	||
+		// MeeGo
+		( ua.indexOf( "MeeGo" ) > -1 && ua.indexOf( "NokiaBrowser/8.5.0" ) > -1 ) ) {
+		return false;
+	}
+
+	return true;
+}
 
 $.extend( $.support, {
-	cssTransitions: "WebKitTransitionEvent" in window || validStyle( 'transition', 'height 100ms linear', [ "Webkit", "Moz", "" ] ) && !$.mobile.browser.oldIE && !opera,
-	pushState: "pushState" in history && "replaceState" in history,
+	cssTransitions: "WebKitTransitionEvent" in window ||
+		validStyle( 'transition', 'height 100ms linear', [ "Webkit", "Moz", "" ] ) &&
+		!$.mobile.browser.oldIE && !opera,
+
+	// Note, Chrome for iOS has an extremely quirky implementation of popstate.
+	// We've chosen to take the shortest path to a bug fix here for issue #5426
+	// See the following link for information about the regex chosen
+	// https://developers.google.com/chrome/mobile/docs/user-agent#chrome_for_ios_user-agent
+	pushState: "pushState" in history &&
+		"replaceState" in history &&
+		( window.navigator.userAgent.search(/CriOS/) === -1 ),
+
 	mediaquery: $.mobile.media( "only all" ),
 	cssPseudoElement: !!propExists( "content" ),
 	touchOverflow: !!propExists( "overflowScrolling" ),
 	cssTransform3d: transform3dTest(),
 	boxShadow: !!propExists( "boxShadow" ) && !bb,
-	scrollTop: ( "pageXOffset" in window || "scrollTop" in document.documentElement || "scrollTop" in fakeBody[ 0 ] ) && !webos && !operamini,
+	fixedPosition: fixedPosition(),
+	scrollTop: ("pageXOffset" in window ||
+		"scrollTop" in document.documentElement ||
+		"scrollTop" in fakeBody[ 0 ]) && !webos && !operamini,
+
 	dynamicBaseTag: baseTagTest(),
 	cssPointerEvents: cssPointerEventsTest(),
 	boundingRect: boundingRect()

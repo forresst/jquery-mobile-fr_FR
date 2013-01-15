@@ -30,8 +30,6 @@
 					<li><a href="events.html" data-role="button" data-transition="fade">Événements</a></li>
 				</ul>
 				
-				
-
 				<dl>
 
 					<dt><code>animate</code> par défaut : true</dt>
@@ -49,12 +47,11 @@
 					<dt><code>position</code> par défaut : "left"</dt>
 					<dd>Le côté de l'écran, où le panneau apparaît. Les valeurs peuvent être "left" ou "right. Également disponible via l'attribut   <code>data-position</code>  sur le lien qui ouvre le panneau.</dd>
 					
-					<dt><code>positionFixed</code> par défaut : "true"</dt>
-					<dd>Définit si le panneau a une position fixe, ainsi les contenus sont visibles, même si la page défile vers le bas. Cela permet également de faire défiler la page tandis que le panneau reste fixe. Si elle est définie sur true, le positionnement fixe est appliquée uniquement si un test de fonctionnalité passe et retournera vers un positionnement statique de sorte que le panneau défile avec le document. Nous vous recommandons de désactiver cette fonction lorsque les panneaux sont utilisés dans des applications Android pour des raisons de mauvaises performances et des problèmes d'affichage. Également disponible via l'attribut <code>data-position-fixed</code> sur le panneau.</dd>
+					<dt><code>positionFixed</code> par défaut : "false"</dt>
+					<dd>Définit si le panneau a une position fixe, ainsi les contenus sont visibles, même si la page défile vers le bas. Cela permet également de faire défiler la page tandis que le panneau reste fixe. Nous vous recommandons de ne pas activer cette fonction lorsque les panneaux sont utilisés dans des applications Android pour des raisons de mauvaises performances et des problèmes d'affichage. Également disponible via l'attribut <code>data-position-fixed</code> sur le panneau.</dd>
 					<dt><code>swipeClose</code> par défaut : "true"</dt>
 					<dd>Définit si le panneau peut être fermé en en basculant à gauche ou à droite au dessus du panneau. Également disponible via l'attribut <code>data-swipe-close</code> sur le panneau.</dd>
 					
-
 					<dt><code>theme</code> par défaut : null</dt>
 					<dd>Nuancier du thème pour le panneau. Peut être une lettre de nuancier valable dans votre thème (a-z). Également disponible via l'attribut <code>data-theme</code> sur le conteneur du panneau.</dd>
 
@@ -63,11 +60,9 @@
 				<h3>L'option Classes</h3>
 				<p>L'option <code>classes</code> définit les noms de classes structurelles que le plugin utilise. Ce n'est que configurable via JavaScript car il attend une valeur littérale d'objet.</p>
 
-			
-
-			
 				
 				<dl>
+                
 					<dt><code>classes.panel</code> par défaut : "ui-panel"</dt>
 					<dd>Classe ajoutée au panneau.</dd>
 
@@ -77,8 +72,11 @@
 					<dt><code>classes.panelClosed</code> par défaut : "ui-panel-closed"</dt>
 					<dd>Classe ajoutée au panneau lors de la fermeture.</dd>
 					
-					<dt><code>classes.panelUnfixed</code> par défaut : "ui-panel-unfixed"</dt>
-					<dd>Classe ajoutée au panneau lorsque le positionnement fixe n'est pas appliqué.</dd>
+					<dt><code>classes.panelFixed</code> par défaut : "ui-panel-fixed"</dt>
+					<dd>Classe ajoutée au panneau lorsque le positionnement fixe est appliqué.</dd>
+					
+					<dt><code>classes.panelInner</code> par défaul : "ui-panel-inner"</dt>
+					<dd>Classe ajoutée au div qui enveloppe les contenus du panneau.</dd>
 					
 					<dt><code>classes.modal</code> par défaut : "ui-panel-dismiss"</dt>
 					<dd>Classe ajoutée à la superposition sur la page pour rejeter le panneau lorsqu'il est masqué.</dd>
@@ -86,29 +84,32 @@
 					<dt><code>classes.modalOpen</code> par défaut : "ui-panel-dismiss-open"</dt>
 					<dd>Classe ajoutée à la couche invisible sur la page lorsque le panneau est ouvert. Utilisé pour rejeter (dismiss) le panneau.</dd>
 
-					<dt><code>classes.openComplete</code> par défaut : "ui-panel-open-complete"</dt>
-					<dd>Classe ajoutée au panneau lorsque l'animation du panneau est terminé.</dd>
-
-					<dt><code>classes.contentWrap</code> par défaut : "ui-panel-content-wrap"</dt>
-					<dd>Classe ajoutée au conteneur injecté autour du contenu de la page (header, content, footer), nécessaire pour le positionnement du panneau.</dd>
-
-					<dt><code>classes.contentWrapOpen</code> par défaut : "ui-panel-content-wrap-open"</dt>
-					<dd>Classe ajoutée au conteneur injecté autour du contenu de la page (header, content, footer) lorsque le panneau s'ouvre. Utilisées pour cibler accélération matérielle uniquement pendant les transitions.</dd>
-
-					<dt><code>classes.wrapOpenComplete</code> par défaut : "ui-panel-content-wrap-open-complete"</dt>
-					<dd>Classe ajoutée au conteneur du contenu de la page lorsque l'animation d'ouverture est terminée.</dd>
-					
-					<dt><code>classes.wrapOpenClosed</code> par défaut : "ui-panel-content-wrap-closed"</dt>
-					<dd>Classe ajoutée au conteneur du contenu de la page lorsque l'animation de fermeture est terminée.</dd>
-
-					<dt><code>classes.pageBlock</code> par défaut : "ui-panel-page-block"</dt>
-					<dd>Classe ajoutée au conteneur de la page pour supprimer le défilement horizontal.</dd>
-					
 					<dt><code>classes.pagePanel</code> par défaut : "ui-page-panel"</dt>
 					<dd>Classe ajoutée au conteneur de la page lorsque le widget panneau est présent.</dd>
+
+					<dt><code>classes.pagePanelOpen</code> par défaut : "ui-page-panel-open"</dt>
+					<dd>Classe ajoutée à la page lorsqu'un panneau est ouvert.</dd>
+
+					<dt><code>classes.contentWrap</code> par défaut : "ui-panel-content-wrap"</dt>
+					<dd>Classe ajoutée au conteneur injecté autour du contenu de la page (header, content, footer), nécessaire pour la transition du contenu de page. Les barres d'outils fixes ne sont pas enveloppées.</dd>
+
+					<dt><code>classes.contentWrapOpen</code> par défaut : "ui-panel-content-wrap-open"</dt>
+					<dd>Classe ajoutée aux contenus de la page enveloppé lorsque le panneau est ouvert.</dd>
+
+					<dt><code>classes.contentWrapClosed</code> par défaut : "ui-panel-content-wrap-closed"</dt>
+					<dd>Classe ajoutée au conteneur du contenu de la page lorsque l'animation de fermeture est terminée.</dd>
+
+                    <dt><code>classes.contentFixedToolbar</code> par défaut : "ui-panel-fixed-toolbar-wrap"</dt>
+					<dd>Classe ajoutée à l'entête et au pied de page fixe, nécessaire pour assurer la transition des barres d'outils fixes.</dd>
+
+					<dt><code>classes.contentFixedToolbarOpen</code> par défaut : "ui-panel-content-fixed-toolbar-open"</dt>
+					<dd>Classe ajoutée aux barres d'outils fixes lorsque le panneau est ouvert.</dd>
+
+					<dt><code>classes.contentFixedToolbarClosed</code> par défaut : "ui-panel-content-fixed-toolbar-closed"</dt>
+					<dd>Classe ajoutée aux barres d'outils fixes après que l'animation de fermeture est terminée.</dd>
 					
-					<dt><code>classes.cssTransform3d</code> par défaut : "ui-panel-3dtransforms"</dt>
-					<dd>Classe ajoutée au conteneur de page lorsque le test de fonctionnalité de transformation 3D est vrai.</dd>
+					<dt><code>classes.animate</code> par défaut : "ui-panel-animate"</dt>
+					<dd>Classe ajoutée au panneau, au contenu de page enveloppé et aux barres d'outils fixes lorsque l'option <code>animate</code> est <code>true</code> et que le test de fonctionnalité de transformation 3D retourne <code>true</code>.</dd>
 				</dl>
 
 
