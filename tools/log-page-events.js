@@ -2,7 +2,7 @@
  * jQuery Mobile v@VERSION
  * http://jquerymobile.com/
  *
- * Copyright 2012 jQuery Foundation and other contributors
+ * Copyright 2010, 2013 jQuery Fondation et autres contributeurs
  * Dual licensed under the MIT or GPL Version 2 licenses.
  * http://jquery.org/license
  */

@@ -58,10 +58,10 @@
 			  	<li><code>$.event.special.swipe.horizontalDistanceThreshold</code> (par défaut : 30px) Un déplacement horizontal doit être plus grand que cette valeur.</li>
 			  	<li><code>$.event.special.swipe.verticalDistanceThreshold</code> (par défaut : 75px) Un déplacement vertical doit être moins grand que cette valeur.</li>
 			  	</ul>
-			  	<p>L'événement swipe peut aussi être étendu pour ajouter votre propre logique ou fonctionnalité. Les méthodes suivantes peuvent être étendues :</p>
-			  	<ul>
-			  		<li>$.event.special.swipe.start Par défaut :
-			  			<pre><code>
+			  <p>L'événement swipe peut aussi être étendu pour ajouter votre propre logique ou fonctionnalité. Les méthodes suivantes peuvent être étendues :</p>
+			  <ul>
+			  	<li><code>$.event.special.swipe.start</code> Par défaut :
+			  	<pre><code>
 function( event ) {
 	var data = event.originalEvent.touches ?
 			event.originalEvent.touches[ 0 ] : event;
@@ -71,11 +71,11 @@ function( event ) {
 			origin: $( event.target )
 		};
 }
-			  			</pre></code>
-			  			<p>Cette méthode reçoit un événement touchstart et retourne un objet de donnée sur la localisation de départ.</p>
-			  		</li>
-			  		<li>$.event.special.swipe.stop Par défaut :
-			  			<pre><code>
+			  	</code></pre>
+			  	<p>Cette méthode reçoit un événement touchstart et retourne un objet de donnée sur la localisation de départ.</p>
+			  	</li>
+			  	<li><code>$.event.special.swipe.stop</code> Par défaut :
+			  	<pre><code>
 function( event ) {
 	var data = event.originalEvent.touches ?
 			event.originalEvent.touches[ 0 ] : event;
@@ -84,11 +84,11 @@ function( event ) {
 			coords: [ data.pageX, data.pageY ]
 		};
 }
-			  			</pre></code>
-			  			<p>Cette méthode reçoit un événement touchend et retourne un objet de donnée sur la localisation d'arrivée.</p>
-			  		</li>
-			  		<li>$.event.special.swipe.handleSwipe Par défaut :
-			  			<pre><code>
+			  	</code></pre>
+			  	<p>Cette méthode reçoit un événement touchend et retourne un objet de donnée sur la localisation d'arrivée.</p>
+			  	</li>
+			  	<li><code>$.event.special.swipe.handleSwipe</code> Par défaut :
+			  	<pre><code>
 function( start, stop ) {
 	if ( stop.time - start.time &lt; $.event.special.swipe.durationThreshold &amp;&amp;
 		Math.abs( start.coords[ 0 ] - stop.coords[ 0 ] ) &gt; $.event.special.swipe.horizontalDistanceThreshold &amp;&amp;
@@ -98,10 +98,10 @@ function( start, stop ) {
 			.trigger( start.coords[0] &gt; stop.coords[ 0 ] ? "swipeleft" : "swiperight" );
 	}
 }
-			  			</pre></code>
-			  			<p>Cette méthode reçoit les objets start et stop et gère la logique et le déclenchement pour les événements swipe.</p>
-			  		</li>
-			  	</ul>
+			  	</code></pre>
+			  	<p>Cette méthode reçoit les objets start et stop et gère la logique et le déclenchement pour les événements swipe.</p>
+			  	</li>
+			  </ul>
 			</dd>
 
 			<dt><code>swipeleft</code></dt>
@@ -598,7 +598,7 @@ $(document).on("pagehide", function(event, ui) {
 
 <div data-role="footer" class="footer-docs" data-theme="c">
 		<p class="jqm-version"></p>
-		<p>© 2012 jQuery Fondation et autres contributeurs</p>
+		<p>Copyright 2013 The jQuery Foundation</p>
 </div>
 
 </div><!-- /page -->
