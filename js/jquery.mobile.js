@@ -1,8 +1,8 @@
 /*
-* jQuery Mobile Framework Git Build: SHA1: e424a132ef9e9167c5993111088cc45b848d4f55 <> Date: Tue Jan 15 08:14:53 2013 +0100
+* jQuery Mobile Git Build: SHA1: 5ab0e2991a265d9114c1d3bcb3eab480b587e3ca <> Date: Tue Jan 15 20:39:28 2013 +0000
 * http://jquerymobile.com
 *
-* Copyright 2012 jQuery Foundation and other contributors
+* Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors
 * Released under the MIT license.
 * http://jquery.org/license
 *
@@ -362,7 +362,7 @@
  * jQuery UI Widget v1.10.0pre - 2012-11-13 (ff055a0c353c3c8ce6e5bfa07ad7cb03e8885bc5)
  * http://jqueryui.com
  *
- * Copyright 2012 jQuery Foundation and other contributors
+ * Copyright 2010, 2013 jQuery Fondation et autres contributeurs
  * Released under the MIT license.
  * http://jquery.org/license
  *
@@ -1526,6 +1526,7 @@ if ( !$.support.boxShadow ) {
 
 
 
+(function( $, undefined ) {
 		var path, documentBase, $base, dialogHashKey = "&ui-state=dialog";
 
 		$.mobile.path = path = {
@@ -1867,10 +1868,11 @@ if ( !$.support.boxShadow ) {
 		path.getDocumentBase = function( asParsedObject ) {
 			return asParsedObject ? $.extend( {}, path.documentBase ) : path.documentBase.href;
 		};
+})( jQuery );
 
 
 
-(function( $ ) {
+(function( $, undefined ) {
 	var path = $.mobile.path;
 
 	$.mobile.History = function( stack, index ) {
@@ -1989,6 +1991,7 @@ if ( !$.support.boxShadow ) {
 		}
 	});
 })( jQuery );
+
 
 (function( $, undefined ) {
 	var path = $.mobile.path;
@@ -2180,8 +2183,10 @@ if ( !$.support.boxShadow ) {
 			// matches an existing history entry
 			// TODO it might be better to only add to the history stack
 			//      when the hash is adjacent to the active history entry
-			if( !event.originalEvent.state ) {
-				hash = path.parseLocation().hash;
+			hash = path.parseLocation().hash;
+			if( !event.originalEvent.state && hash ) {
+				// squash the hash that's been assigned on the URL with replaceState
+				// also grab the resulting state object for storage
 				state = this.squash( hash );
 
 				// record the new hash as an additional history entry
