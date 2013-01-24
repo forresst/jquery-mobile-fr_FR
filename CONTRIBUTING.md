@@ -26,7 +26,7 @@ Il est IMPORTANT de toujours fournir une page de test lorsque vous soumettez un 
 
 * Quoi ? - Proposer une page de test aussi simple que possible. Incluez seulement le balisage/code qui est nécessaire pour reproduire le problème.
 
-* Comment ? - Utiliser notre [modèle JS Bin](http://jsbin.com/amozef/1/edit) qui utilise le code le plus récent sur la branche "master". Lorsque vous commencez à éditer le JS Bin, l'url se mettra à jour et contiendra un nouveau numéro de version. Tant que vous maintenez le JS Bin ouvert dans votre navigateur, l'url ne change pas. Copiez l'URL dans votre rapport de problème lorsque vous avez terminé l'édition. Si votre test nécessite plusieurs pages "simples" de jQuery Mobile, ouvrez le JS BIN sur plusieurs onglets de votre navigateur et chacun d'eux recevra une url unique. Liez cette url sans "/edit" à la fin de vos autre page(s).  
+* Comment ? - Utiliser notre [modèle JS Bin](http://jsbin.com/onibuc/1/edit) qui utilise le code le plus récent sur la branche "master". Lorsque vous commencez à éditer le JS Bin, l'url se mettra à jour et contiendra un nouveau numéro de version. Tant que vous maintenez le JS Bin ouvert dans votre navigateur, l'url ne change pas. Copiez l'URL dans votre rapport de problème lorsque vous avez terminé l'édition. Si votre test nécessite plusieurs pages "simples" de jQuery Mobile, ouvrez le JS BIN sur plusieurs onglets de votre navigateur et chacun d'eux recevra une url unique. Liez cette url sans "/edit" à la fin de vos autre page(s).  
   * Vous remarquerez, si le problème a déjà été corrigé
   * Elle nous permet de modifier votre code si nécessaire
   * La page de test ne va pas disparaître ou changer pendant que nous étudions la question

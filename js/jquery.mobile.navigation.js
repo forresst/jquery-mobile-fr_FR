@@ -285,15 +285,17 @@ define( [
 	}
 
 	//simply set the active page's minimum height to screen height, depending on orientation
-	function resetActivePageHeight() {
+	$.mobile.resetActivePageHeight = function resetActivePageHeight( height ) {
 		var aPage = $( "." + $.mobile.activePageClass ),
 			aPagePadT = parseFloat( aPage.css( "padding-top" ) ),
 			aPagePadB = parseFloat( aPage.css( "padding-bottom" ) ),
 			aPageBorderT = parseFloat( aPage.css( "border-top-width" ) ),
 			aPageBorderB = parseFloat( aPage.css( "border-bottom-width" ) );
 
-		aPage.css( "min-height", getScreenHeight() - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
-	}
+		height = ( typeof height === "number" )? height : getScreenHeight();
+		
+		aPage.css( "min-height", height - aPagePadT - aPagePadB - aPageBorderT - aPageBorderB );
+	};
 
 	//shared page enhancements
 	function enhancePage( $page, role ) {
@@ -882,7 +884,9 @@ define( [
 		}
 
 		// Set the location hash.
-		if ( settings.changeHash !== false && url ) {
+		if ( url && !settings.fromHashChange ) {
+			var params;
+
 			// rebuilding the hash here since we loose it earlier on
 			// TODO preserve the originally passed in path
 			if( !path.isPath( url ) && url.indexOf( "#" ) < 0 ) {
@@ -890,12 +894,18 @@ define( [
 			}
 
 			// TODO the property names here are just silly
-			$.mobile.navigate( url, {
+			params = {
 				transition: settings.transition,
 				title: pageTitle,
 				pageUrl: pageUrl,
 				role: settings.role
-			}, true);
+			};
+
+			if ( settings.changeHash !== false && $.mobile.hashListeningEnabled ) {
+				$.mobile.navigate( url, params, true);
+			} else if ( toPage[ 0 ] !== $.mobile.firstPage[ 0 ] ) {
+				$.mobile.navigate.history.add( url, params );
+			}
 		}
 
 		//set page title
@@ -1109,7 +1119,7 @@ define( [
 
 		// click routing - direct to HTTP or Ajax, accordingly
 		$.mobile.document.bind( "click", function( event ) {
-			if ( !$.mobile.linkBindingEnabled ) {
+			if ( !$.mobile.linkBindingEnabled || event.isDefaultPrevented() ) {
 				return;
 			}
 
@@ -1312,8 +1322,8 @@ define( [
 		});
 
 		//set page min-heights to be device specific
-		$.mobile.document.bind( "pageshow", resetActivePageHeight );
-		$.mobile.window.bind( "throttledresize", resetActivePageHeight );
+		$.mobile.document.bind( "pageshow", $.mobile.resetActivePageHeight );
+		$.mobile.window.bind( "throttledresize", $.mobile.resetActivePageHeight );
 
 	};//navreadyDeferred done callback
 

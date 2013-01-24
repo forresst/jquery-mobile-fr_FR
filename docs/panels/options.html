@@ -38,7 +38,7 @@
 					<dt><code>dismissible</code> par défaut : true</dt>
 					<dd>Définit si le panneau peut être fermé en cliquant sur ​​l'extérieur sur la page. Également disponible via l'attribut <code>data-dismissible</code> sur le lien qui ouvre le panneau.</dd>
 
-					<dt><code>display</code> par défaut : "overlay"</dt>
+					<dt><code>display</code> par défaut : "reveal"</dt>
 					<dd>La relation entre le panneau et le contenu de la page. Peut être soit poussé sur la page ("reveal"), soit rétrécir le contenu pour s'adapter au contenu du panneau sous forme de colonne ("push"), ou soit superposer le contenu ("overlay"). Également disponible via l'attribut  <code>data-display</code>  sur le lien qui ouvre le panneau.</dd>
 
 					<dt><code>initSelector</code> par défaut : ":jqmData(role='panel')"</dt>
@@ -47,10 +47,11 @@
 					<dt><code>position</code> par défaut : "left"</dt>
 					<dd>Le côté de l'écran, où le panneau apparaît. Les valeurs peuvent être "left" ou "right. Également disponible via l'attribut   <code>data-position</code>  sur le lien qui ouvre le panneau.</dd>
 					
-					<dt><code>positionFixed</code> par défaut : "false"</dt>
+					<dt><code>positionFixed</code> default: false</dt>
 					<dd>Définit si le panneau a une position fixe, ainsi les contenus sont visibles, même si la page défile vers le bas. Cela permet également de faire défiler la page tandis que le panneau reste fixe. Nous vous recommandons de ne pas activer cette fonction lorsque les panneaux sont utilisés dans des applications Android pour des raisons de mauvaises performances et des problèmes d'affichage. Également disponible via l'attribut <code>data-position-fixed</code> sur le panneau.</dd>
+                    
 					<dt><code>swipeClose</code> par défaut : "true"</dt>
-					<dd>Définit si le panneau peut être fermé en en basculant à gauche ou à droite au dessus du panneau. Également disponible via l'attribut <code>data-swipe-close</code> sur le panneau.</dd>
+					<dd>Définit si le panneau peut être fermé en glissant au dessus du panneau, ou si  <code>dismissible=true</code>, sur le contenu de la page et de la barre d'outils . Également disponible via l'attribut <code>data-swipe-close</code> sur le panneau.</dd>
 					
 					<dt><code>theme</code> par défaut : null</dt>
 					<dd>Nuancier du thème pour le panneau. Peut être une lettre de nuancier valable dans votre thème (a-z). Également disponible via l'attribut <code>data-theme</code> sur le conteneur du panneau.</dd>
@@ -60,9 +61,7 @@
 				<h3>L'option Classes</h3>
 				<p>L'option <code>classes</code> définit les noms de classes structurelles que le plugin utilise. Ce n'est que configurable via JavaScript car il attend une valeur littérale d'objet.</p>
 
-				
 				<dl>
-                
 					<dt><code>classes.panel</code> par défaut : "ui-panel"</dt>
 					<dd>Classe ajoutée au panneau.</dd>
 

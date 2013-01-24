@@ -7,6 +7,7 @@
 	<title>Titre de Démo - Démos jQuery Mobile</title>
 	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
 	<script src="../../../js/jquery.js"></script>
 	<script src="../_assets/js/"></script>
 	<script>
@@ -31,42 +32,44 @@
 <div data-role="page" id="myMarkup">
 
 	<div data-role="header" data-theme="f">
-		<h1>Titre de Démo</h1>
+		<h1>jQuery Mobile</h1>
 		<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
 	</div><!-- /header -->
 	
 	<div data-role="content">
 	
-        <div class="content-primary">
+        <h2>Comment fonctionne "voir le code source"</h2>
         
-            <h2>Comment fonctionne "voir le code source"</h2>
-            
-            <div data-demo-html="true" data-demo-js="true" data-demo-css="true">
-                <p>C'est un div avec ...</p>
-                <p>data-demo-html="true" pour inclure le balisage dans ce div dans la vue du code source.</p>
-                <p>data-demo-js="true" pour inclure tous les scripts depuis l'entête dans la vue du code source.</p>
-                <p>data-demo-css="true" pour inclure tous les styles depuis l'entête dans la vue du code source.</p>
-            </div><!--/demo-html -->
-            
-            <h3>Spécifiez quel balisage, quel script ou quel style pour afficher</h3>
-            
-            <div data-demo-html="#myMarkup" data-demo-js="#myScript" data-demo-css="#myStyle" data-demo-php="source.php">
-                <p>C'est un div avec ...</p>
-                <p>data-demo-html="#myMarkup" pour inclure un balisage spécifique dans la vue du code source.</p>
-                <p>data-demo-js="#myScript" pour inclure un script spécifique depuis l'entête dans la vue du code source.</p>
-                <p>data-demo-css="#myStyle" pour inclure un style spécifique depuis l'entête dans la vue du code source.</p>
-                <p>data-demo-php="source.php" pour inclure le script PHP depuis source.php, qui est la version en texte brut du fichier file-name.php, dans la vue du code source (voir les fichiers dans ce dossier).</p> 
-            </div><!--/demo-html -->
+        <div data-demo-html="true" data-demo-js="true" data-demo-css="true">
+            <p>C'est un div avec ...</p>
+            <p>data-demo-html="true" pour inclure le balisage dans ce div dans la vue du code source.</p>
+            <p>data-demo-js="true" pour inclure tous les scripts depuis l'entête dans la vue du code source.</p>
+            <p>data-demo-css="true" pour inclure tous les styles depuis l'entête dans la vue du code source.</p>
+        </div><!--/demo-html -->
+        
+        <h3>Spécifiez quel balisage, quel script ou quel style pour afficher</h3>
+        
+        <div data-demo-html="#myMarkup" data-demo-js="#myScript" data-demo-css="#myStyle" data-demo-php="source.php">
+            <p>C'est un div avec ...</p>
+            <p>data-demo-html="#myMarkup" pour inclure un balisage spécifique dans la vue du code source.</p>
+            <p>data-demo-js="#myScript" pour inclure un script spécifique depuis l'entête dans la vue du code source.</p>
+            <p>data-demo-css="#myStyle" pour inclure un style spécifique depuis l'entête dans la vue du code source.</p>
+            <p>data-demo-php="source.php" pour inclure le script PHP depuis source.php, qui est la version en texte brut du fichier file-name.php, dans la vue du code source (voir les fichiers dans ce dossier).</p> 
+        </div><!--/demo-html -->
                 
-        </div><!--/content-primary -->
-	
 	</div><!-- /content -->
 	
-	<div class="jqm-footer">
+	<div data-role="footer" data-theme="c" class="jqm-footer">
 		<p class="jqm-version"></p>
 		<p>Copyright 2013 The jQuery Foundation</p>
 	</div><!-- /jqm-footer -->
-	
+
+
+
+<?php include( '../nav.html' ); ?>
+
+
+
 </div><!-- /page -->
 </body>
 </html>
