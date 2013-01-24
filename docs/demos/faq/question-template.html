@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Boutons - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jquery.mobile.demos.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+</head>
+<body>
+<div data-role="page" class="demos">
+
+	<div data-role="header" data-theme="f">
+		<h1>jQuery Mobile</h1>
+		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content" data-theme="c">
+			
+			<h2 class="faq-breakcrumb">Question :</h2>			
+			<h1 class="faq-question">Pourquoi mes styles CSS ne s'appliquent pas correctement à un widget ? </h1>
+
+		
+		
+			
+			<h2>Réponse :</h2>
+			<p class="demo-intro">C'est probablement parce que l'élément que vous voyez dans le balisage (bouton, élément de formulaire, etc) n'est pas le même après les améliorations qui ont été appliquées. En vue de styliser les éléments et d'ajouter le comportement, jQuery Mobile modifie le balisage d'origine avec des classes supplémentaires et des éléments qui pourraient avoir une incidence sur vos sélecteurs CSS. Utilisez un inspecteur Web pour afficher le balisage après amélioration pour trouver les sélecteurs qui doivent être utiliser.</p>
+			
+			<p>Regardons un exemple pour illustrer les améliorations. Voici le balisage de départ pour un bouton :</p>	
+			<pre><code>
+<strong>// Bouton avant amélioration
+</strong>&lt;button&gt;Un élément bouton&lt;/button&gt;				
+			</code></pre>
+			
+			<p>Après l'amélioration, le balisage du bouton a été modifiée par le framework pour ajouter des classes et envelopper le contenu pour styliser :</p>	
+			<pre><code>
+<strong>// Bouton après amélioration
+</strong>&lt;div data-corners="true" data-shadow="true" data-iconshadow="true" data-wrapperels="span" data-icon="null" data-iconpos="null" data-theme="c" class="ui-btn ui-shadow ui-btn-corner-all ui-btn-up-c" aria-disabled="false"&gt;
+	&lt;span class="ui-btn-inner ui-btn-corner-all"&gt;
+		&lt;span class="ui-btn-text"&gt;Un élément bouton&lt;/span&gt;
+	&lt;/span&gt;
+	&lt;button class="ui-btn-hidden" aria-disabled="false"&gt;Un élément bouton&lt;/button&gt;
+&lt;/div&gt;					
+			</code></pre>
+
+			<p>Comme vous pouvez le voir dans l'extrait de code ci-dessus le balisage a considérablement changé après l'amélioration. Le bouton d'origine que vous avez ajouté a été enveloppé dans un div et plusieurs spans ont été ajoutés. Le bouton d'origine que vous avez ajouté est désormais également masqué. Pour modifier le style visuel du bouton, vous devez cibler le nouveau balisage amélioré, pas le bouton que vous avez ajouté.</p>
+			
+			<a href="index.html" class="demo-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">Toutes les Questions &amp; Réponses</a>
+			
+	
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="c" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /jqm-footer -->
+	
+
+	
+<?php include( '../nav.html' ); ?>
+	
+
+	
+</div><!-- /page -->
+</body>
+</html>

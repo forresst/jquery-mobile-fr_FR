@@ -1,5 +1,5 @@
 /*
-* jQuery Mobile Git Build: SHA1: 5ab0e2991a265d9114c1d3bcb3eab480b587e3ca <> Date: Tue Jan 15 20:39:28 2013 +0000
+* jQuery Mobile Git Build: SHA1: 640c71d49d5833fe025e561ea36717ac6bc57097 <> Date: Thu Jan 24 00:07:10 2013 +0200
 * http://jquerymobile.com
 *
 * Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors
@@ -844,7 +844,6 @@ a.ui-link-inherit {
 	background: 						rgba(0,0,0,.4) /*{global-icon-disc}*/;
 	background-image: url(images/icons-18-white.png) /*{global-icon-set}*/;
 	background-repeat: no-repeat;
-	-moz-border-radius: 				9px;
 	-webkit-border-radius: 				9px;
 	border-radius: 						9px;
 }
@@ -971,7 +970,6 @@ a.ui-link-inherit {
 /* checks,radios */
 .ui-checkbox .ui-icon,
 .ui-selectmenu-list .ui-icon {
-	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
 }

@@ -7,81 +7,69 @@
 	<title>Démos jQuery Mobile</title>
 	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.css">
 	<link rel="stylesheet" href="_assets/css/jqm-demos.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	
 	<script src="../../js/jquery.js"></script>
 	<script src="_assets/js/jquery.mobile.demos.js"></script>
 	<script src="../../js/jquery.mobile.js"></script>
 </head>
 <body>
-<div data-role="page" class="jqm-demos-home">
+<div data-role="page" class="jqm-demos-home demos">
 
-	<div class="jqm-header">
-		<h1 id="jqm-logo"><img src="_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></h1>
-		<h2>Démos</h2>
+	<div data-role="header" data-theme="f">
 		<p class="jqm-version"></p>
+	</div><!-- /header -->
+	
+	<div class="jqm-header">
+		
+		
 	</div><!-- /jqm-header -->
 
 	<div data-role="content">
+		
+		<h1 id="jqm-logo"><img src="_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></h1>
+		<p class="home-intro">Bienvenue. Il s'agit du re-design du site jQuery démos mobile (en cours).</p>
 
-		<div class="content-primary">
+		<ul data-role="listview" data-inset="true" data-theme="d" data-filter-placeholder="Search..." class="demo-nav wrap-text">
+            <li><a href="guides.html"><h2>Guides</h2></a><p>Articles et  tutoriels utiles pour vous permettre de travailler rapidement.</p></a></li>
+            <li><a href="demos.html"><h2>Démos</h2></a><p>Des exemples pour personnaliser et étendre jQuery Mobile.</p></a></li>
+            <li><a href="faq/"><h2>Questions &amp; Réponses</h2></a><p>Questions et problèmes courants : expliqués.</p></a></li>
+		</ul>
+		
+		<h2 class="home-widget">Vitrine de widget</h2>
+		<ul data-role="listview" data-inset="true" data-filter="true" data-theme="d" data-filter-placeholder="Search..." class="demo-nav wrap-text">
+            <li><a href="accordion/">Accordéon</a></li>
+            <li><a href="ajax-nav/">Navigation AJAX</a></li>
+            <li><a href="autocomplete/">Autocomplete</a></li>
+            <li><a href="buttons/">Bouton</a></li>
+            <li><a href="checkbox/">Cases à cocher</a></li>
+            <li><a href="collapsible/">Pliable</a></li>
+            <li><a href="controlgroup/">Controlgroup</a></li>
+            <li><a href="dialog/">Boîte de dialogue</a></li>
+            <li><a href="flip-switch/">Interrupteur</a></li>
+            <li><a href="footer/">Barre d'outils de pied de page</a></li>
+            <li><a href="forms/">Éléments de formulaire</a></li>
+            <li><a href="grid/">Grille</a></li>
+            <li><a href="header/">Barre d'outils d'entête</a></li>
+            <li><a href="icon/">Icône</a></li>
+            <li><a href="listviews/">Liste</a></li>
+            <li><a href="link/">Lien</a></li>
+            <li><a href="loader/">Chargeur</a></li>
+            <li><a href="navbar/">Barre de navigation</a></li>
+            <li><a href="page/">Page</a></li>
+            <li><a href="panel/">Panneau <span class="ui-li-count">Nouveau</span></a></li>
+            <li><a href="popup/">Popup</a></li>
+            <li><a href="radiobutton/">Radiobutton</a></li>
+            <li><a href="search/">Saisie d'une recherche</a></li>
+            <li><a href="select/">Sélection</a></li>
+            <li><a href="slider/">Curseur seule</a></li>
+            <li><a href="rangeslider/">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+            <li><a href="table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+            <li><a href="table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+            <li><a href="text-inputs/">Textes de saisie &amp; zone de saisie</a></li>
+            <li><a href="transitions/">Transitions</a></li>
+        </ul>
 
-			<ul data-role="listview" data-inset="true">
-				<li data-role="list-divider">Formulaires</li>
-				<li><a href="forms/index.html" data-ajax="false">Référence de Formulaire</a></li>
-				<li><a href="forms/form.html" data-ajax="false">Formulaire</a></li>
-				<li><a href="forms/form-fieldcontain.html" data-ajax="false">Les conteneurs de champs de Formulaire</a></li>
-				<li><a href="forms/form-label-hidden.html" data-ajax="false">Label/legend de Formulaire ui-hidden-accessible</a></li>
-				<li><a href="forms/form-hide-label.html" data-ajax="false">Les conteneurs de champs de Formulaire ui-hide-label</a></li>
-				<li><a href="forms/form-disabled.html" data-ajax="false">Formulaire désactivé</a></li>
-				<li data-role="list-divider">Boutons</li>
-				<li><a href="buttons/buttons.html" data-ajax="false">Boutons</a></li>
-				<li><a href="buttons/buttons-grids.html" data-ajax="false">Boutons dans les grilles</a></li>
-				<li data-role="list-divider">Controlgroups</li>
-				<li><a href="controlgroups/controlgroups.html" data-ajax="false">Controlgroups</a></li>
-			  	<li data-role="list-divider">Cases à cocher &amp; Radio boutons</li>
-				<li><a href="checkboxradio/checkboxradio.html" data-ajax="false">Cases à cocher &amp; Radio boutons</a></li>
-			  	<li data-role="list-divider">Sélections</li>
-				<li><a href="selects/selects.html" data-ajax="false">Sélections natives</a></li>
-				<li><a href="selects/custom-selects.html" data-ajax="false">Sélections personnalisées</a></li>
-				<li data-role="list-divider">Curseurs</li>
-				<li><a href="sliders/slider.html" data-ajax="false">Curseur et Interrupteur</a></li>
-				<li><a href="sliders/rangeslider.html" data-ajax="false">Curseur avec une plage</a></li>
-			  	<li data-role="list-divider">Saisie de texte</li>
-				<li><a href="textinput/textinput.html" data-ajax="false">Saisie de texte</a></li>
-				<li data-role="list-divider">Pliables</li>
-				<li><a href="collapsibles/collapsible.html" data-ajax="false">Pliable</a></li>
-				<li><a href="collapsibles/collapsible-set.html" data-ajax="false">Ensemble de pliable</a></li>
-				<li data-role="list-divider">Listes</li>
-				<li><a href="listviews/listview.html" data-ajax="false">Listes</a></li>
-				<li><a href="listviews/listview-filter-autodividers.html" data-ajax="false">Auto-séparateurs de liste</a></li>
-                <li><a href="listviews/listview-filter-reveal.html" data-ajax="false">Liste Autocomplete depuis une source locale</a></li>
-				<li><a href="listviews/listview-filter-autocomplete.html" data-ajax="false">Liste Autocomplete depuis une source distante</a></li>
-				<li><a href="listviews/listview-forms.html" data-ajax="false">Formulaires dans les listes</a></li>
-				<li><a href="listviews/collapsible-listview.html" data-ajax="false">Listes pliables</a></li>
-				<li data-role="list-divider">Grilles</li>
-				<li><a href="grids/rwd-basics.html" data-ajax="false">Responsive Web Design (RWD) Basiques</a></li>
-				<li><a href="grids/grid-stack.html" data-ajax="false">Grille Responsive, échelonner pour le mobile</a></li>
-				<li><a href="grids/grid-custom.html" data-ajax="false">Grille responsive personnalisée</a></li>
-				<li data-role="list-divider">Panneaux</li>
-				<li><a href="panels/panel-nav-form.html" data-ajax="false">Panneau avec navigation et formulaire</a></li>
-				<li><a href="panels/panel-nav-form-fixed.html" data-ajax="false">Panneau avec barre d'outils fixe et panneaux</a></li>
-				<li data-role="list-divider">Popups</li>
-				<li><a href="popups/dynamic-popup.html" data-ajax="false">Popup dynamique</a></li>
-				<li data-role="list-divider">Tables Responsives</li>
-				<li><a href="tables/reflow-basic.html" data-ajax="false">Reflow : Basique</a></li>
-				<li><a href="tables/movie-list.html" data-ajax="false">Reflow : Film</a></li>
-				<li><a href="tables/financial-grouped-reflow.html" data-ajax="false">Reflow : Financier avec entête groupée</a></li>
-				<li><a href="tables/column-basic.html" data-ajax="false">Column toggle : Basique</a></li>
-				<li><a href="tables/movie-list-toggle-options.html" data-ajax="false">Column toggle : Films</a></li>
-				<li><a href="tables/phone-compare.html" data-ajax="false">Column toggle : Comparaison de téléphone</a></li>
-				<li><a href="tables/financial-grouped-columns.html" data-ajax="false">Column toggle : Financier avec entête groupée</a></li>
-				<li data-role="list-divider">Navigation</li>
-				<li><a href="redirect/index.html" data-ajax="false">Redirection avec support côté serveur</a></li>
-				<li data-role="list-divider">Événements</li>
-				<li><a href="swipe/swipe-page.html" data-ajax="false">Page swipe</a></li>
-				<li><a href="swipe/swipe-list.html" data-ajax="false">Liste swipe</a></li>
-			</ul>
-
-		</div><!--/content-primary -->
 
 	</div><!-- /content -->
 	

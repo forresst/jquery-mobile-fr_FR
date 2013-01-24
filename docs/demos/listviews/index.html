@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Liste - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jquery.mobile.demos.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+</head>
+<body>
+<div data-role="page" class="demos">
+
+	<div data-role="header" data-theme="f">
+		<h1>jQuery Mobile</h1>
+		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content" data-theme="c">
+	
+			
+			<h1><a href="http://api.jquerymobile.com/listview/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="api-link">API</a> de la liste</h1>
+
+		
+			<p class="demo-intro">Une vue de liste est codée comme une simple liste non ordonnée (ul) ou ordonnée (ol) avec l'attribut <code>data-role="listview"</code> et dispose d'un large éventail de fonctionnalités.</p>
+			
+			
+			<h2>Lecture seule, non triée</h2>
+			<p>Une vue de liste est une simple liste non ordonnée contenant des éléments de liste liés avec l'attribut <code> data-role="listview"</code>.</p>
+			<div data-demo-html="true">
+				<ul data-role="listview">
+					<li>Acura</li>
+					<li>Audi</li>
+					<li>BMW</li>
+					<li>Cadillac</li>
+					<li>Ferrari</li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h2>Lecture seule, triée</h2>
+			<p>Les listes peuvent également être créées à partir des listes ordonnées (<code>(ol)</code>) ce qui est utile lorsque les éléments représentés sont dans une séquence tel que les résultats de recherche ou une file d'attente de cinéma.</p>
+			<div data-demo-html="true">
+				<ol data-role="listview">
+					<li>Acura</li>
+					<li>Audi</li>
+					<li>BMW</li>
+					<li>Cadillac</li>
+					<li>Ferrari</li>
+				</ol>
+			</div><!--/demo-html -->
+
+			<h2>Liée</h2>
+			<p>L'enveloppement du contenu de chaque élément de la liste est cliquable, une flèche vers la droite l'indique clairement.
+			<div data-demo-html="true">
+				<ul data-role="listview">
+					<li><a href="#">Acura</a></li>
+					<li><a href="#">Audi</a></li>
+					<li><a href="#">BMW</a></li>
+					<li><a href="#">Cadillac</a></li>
+					<li><a href="#">Ferrari</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h2>Intégrée</h2>
+			<p>En ajoutant l'attribut <code> data-inset="true"</code> à la liste (ul ou ol), cela applique l'apparence intégrée qui est utile pour mélanger une liste avec d'autres contenus sur une page.</p>
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true">
+					<li><a href="#">Acura</a></li>
+					<li><a href="#">Audi</a></li>
+					<li><a href="#">BMW</a></li>
+					<li><a href="#">Cadillac</a></li>
+					<li><a href="#">Ferrari</a></li>
+				</ul>
+			</div><!--/demo-html -->
+			
+			<h2>Filtre</h2>
+			<p>Pour faire une liste filtrable, ajoutez simplement l'attribut <code>data-filter="true"</code> à la liste. Le framework ajoutera ensuite une boîte de recherche au dessus de la liste et ajoutera le comportement de filtre aux éléments de la liste qui ne contiennent pas la chaîne de recherche saisie par l'utilisateur. Le texte par défaut du placeholder est "Filter items...". Pour configurer le texte du placeholder dans une saisie de recherche, utilisez l'attribut <code>data-filter-placeholder</code>. Par défaut la boîte de recherche va hériter du thème de son parent. Le thème de la boîte de recherche peut être configurée en utilisant le l'attribut de donnée <code>data-filter-theme</code> sur votre liste.</p>
+			<div data-demo-html="true">
+				<ul data-role="listview" data-filter="true" data-filter-placeholder="Search fruits..." data-inset="true">
+					<li><a href="#">Pomme</a></li>
+					<li><a href="#">Banane</a></li>
+					<li><a href="#">Cerise</a></li>
+					<li><a href="#">Cranberry</a></li>
+					<li><a href="#">Raisin</a></li>
+					<li><a href="#">Orange</a></li>
+				</ul>
+			</div><!--/demo-html -->
+			
+			
+			<h2>Filtre</h2>
+			<p>La fonction de filtre permet de construire facilement une simple saisie semi-automatique avec des données locales. Lorsqu'une liste filtrable a  <code>data-filter-reveal="true"</code>, il masquera automatiquement tous les éléments de la liste lorsque le champ de recherche est vide. L'attribut <code>data-filter-placeholder</code> peut être ajouté pour spécifier le texte du placeholder pour le filtre. Si vous avez besoin d'une recherche dans une liste contenant plus de valeurs, nous fournissons un moyen de créer un filtre avec une  <a href="listview-filter-autocomplete.html" data-ajax="false">source de données distante</a>.</p>
+			<div data-demo-html="true">
+				<ul data-role="listview" data-filter="true" data-filter-reveal="true" data-filter-placeholder="Search fruits..." data-inset="true">
+					<li><a href="#">Pomme</a></li>
+					<li><a href="#">Banane</a></li>
+					<li><a href="#">Cerise</a></li>
+					<li><a href="#">Cranberry</a></li>
+					<li><a href="#">Raisin</a></li>
+					<li><a href="#">Orange</a></li>
+				</ul>
+			</div><!--/demo-html -->
+			
+			<h2>Séparateurs de liste</h2>
+			<p>Les éléments de la liste peuvent être transformés en séparateur pour organiser et regrouper les éléments de la liste. Ceci est fait en ajoutant le <code> data-role="list-divider"</code> à tout élément de la liste. Ces éléments sont stylisés par défaut avec le nuancier "b" de la barre (bleue dans le thème par défaut) mais vous pouvez spécifier un thème pour les séparateurs en ajoutant l'attribut <code>data-divider-theme</code> à l'élément de la liste (<code>ul</code> ou <code>ol</code>l) et en spécifiant une lettre de nuancier. Vous pouvez remplacer le divider-theme par un diviseur spécifique en ajoutant l'attribut <code>data-theme</code> à l'élément de la liste.</p>
+			
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true" data-divider-theme="d">
+					<li data-role="list-divider">Mail</li>
+					<li><a href="#">Boîte de réception</a></li>
+					<li><a href="#">Boite d'envoi</a></li>
+					<li data-role="list-divider">Contacts</li>
+					<li><a href="#">Amis</a></li>
+					<li><a href="#">Travail</a></li>
+				</ul>
+			</div><!--/demo-html -->
+			
+			<h2>Autodividers</h2>
+			<p><p>Une liste peut être configurée pour générer automatiquement des séparateurs pour ces éléments en ajoutant l'attribut <code>data-autodividers="true"</code> à n'importe quelle liste. Par défaut, le texte utilisé pour créer des séparations est la première lettre en majuscule du texte de l'élément. Alternativement, vous pouvez spécifier un texte de séparation en paramétrant l'option <code>autodividersSelector</code>  sur la liste par programmation. Cette fonction est conçue pour fonctionner de manière transparente avec le filtre.</p>
+			<div data-demo-html="true">
+				<ul data-role="listview" data-autodividers="true"  data-filter="true" data-inset="true">
+					<li><a href="index.html">Adam Kinkaid</a></li>
+					<li><a href="index.html">Alex Wickerham</a></li>
+					<li><a href="index.html">Avery Johnson</a></li>
+					<li><a href="index.html">Bob Cabot</a></li>
+					<li><a href="index.html">Caleb Booth</a></li>
+					<li><a href="index.html">Christopher Adams</a></li>
+					<li><a href="index.html">Culver James</a></li>
+				</ul>
+			</div><!--/demo-html -->
+			
+			
+			
+			<h2>Bulles avec compteur</h2>
+			<p>Pour ajouter un indicateur de comptage à la droite de l'élément de la liste, enveloppez le nombre dans un élément avec une classe de <code>ui-li-count</code>. Le thème des <strong>bulles de compteur</strong> peut être définit par l'ajout du <code>data-count-theme</code> à la liste et une lettre précisant le nuancier. </p>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-count-theme="c" data-inset="true">
+					<li><a href="#">Boîte de réception <span class="ui-li-count">12</span></a></li>
+					<li><a href="#">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+					<li><a href="#">Brouillons <span class="ui-li-count">4</span></a></li>
+					<li><a href="#">Envoyé <span class="ui-li-count">328</span></a></li>
+					<li><a href="#">Corbeille <span class="ui-li-count">62</span></a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h2>Icônes</h2>
+			<p>Pour utiliser les icônes standard 16x16 pixel dans les éléments d'une liste, ajoutez la classe de <code>ui-li-icon</code> à l'élément image.</p>
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true">
+					<li><a href="#"><img src="../_assets/img/gf.png" alt="France" class="ui-li-icon ui-corner-none">France</a></li>
+					<li><a href="#"><img src="../_assets/img/de.png" alt="Allemagne" class="ui-li-icon">Allemagne</a></li>
+					<li><a href="#"><img src="../_assets/img/gb.png" alt="Grande Bretagne" class="ui-li-icon">Grande Bretagne</a></li>
+					<li><a href="#"><img src="../_assets/img/fi.png" alt="Finlande" class="ui-li-icon">Finlande</a></li>
+					<li><a href="#"><img src="../_assets/img/us.png" alt="États-Unis" class="ui-li-icon ui-corner-none">États-Unis</a></li>
+				</ul>
+			</div><!--/demo-html -->
+
+			<h2>Miniatures</h2>
+			<p>Pour ajouter des miniatures à la gauche d'un élément de la liste, il suffit d'ajouter une image à l'intérieur d'un élément de liste comme le premier élément enfant. Le framework redimensionne l'image à 80 pixels de chaque côté.</p>
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true">
+					<li><a href="#">
+						<img src="../_assets/img/album-bb.jpg" />
+						<h2>Broken Bells</h2>
+						</a><p>Broken Bells</p></a>
+					</li>
+					<li><a href="#">
+						<img src="../_assets/img/album-hc.jpg" />
+						<h2>Warning</h2>
+						</a><p>Hot Chip</p></a>
+					</li>
+					<li><a href="#">
+						<img src="../_assets/img/album-p.jpg" />
+						<h2>Wolfgang Amadeus Phoenix</h2>
+						</a><p>Phoenix</p></a>
+					</li>
+				</ul>
+			</div><!--/demo-html -->
+			
+			<h2>Boutons séparés</h2>
+			<p>Pour faire une séparation dans un élément de la liste, il suffit d'ajouter un deuxième lien à l'intérieur du <code>li</code>. Pour ajuster l'icône du bouton séparé, ajouter l'attribut <code>data-split-icon</code> à la liste. Ajoutez l'attribut <code>data-icon</code> individuellement aux éléments de la liste pour plus de contrôle. La couleur du nuancier du thème du bouton séparé est par défaut à "b" (bleu dans le thème par défaut), mais il peut être modifié en spécifiant une lettre de nuancier avec l'attribut <code>data-split-theme</code> au niveau de la liste ou individuellement au niveau du lien pour les séparateurs avec l'attribut <code>data-theme</code> .</p>
+			<div data-demo-html="true">
+				<ul data-role="listview" data-split-icon="gear" data-split-theme="d" data-inset="true">
+					<li><a href="#">
+						<img src="../_assets/img/album-bb.jpg" />
+						<h2>Broken Bells</h2>
+						</a><p>Broken Bells</p></a>
+						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</li>
+					<li><a href="#">
+						<img src="../_assets/img/album-hc.jpg" />
+						<h2>Warning</h2>
+						</a><p>Hot Chip</p></a>
+						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</li>
+					<li><a href="#">
+						<img src="../_assets/img/album-p.jpg" />
+						<h2>Wolfgang Amadeus Phoenix</h2>
+						</a><p>Phoenix</p></a>
+						<a href="#purchase" data-rel="popup" data-position-to="window" data-transition="pop">Purchase album</a>
+					</li>
+				</ul>
+
+				<div data-role="popup" id="purchase" data-theme="d" data-overlay-theme="b" class="ui-content" style="max-width:340px;">
+					<h3>Acheter l'album ?</h3>
+					<p>Le téléchargement va commencer immédiatement sur votre appareil mobile après votre achat.</p>
+					<a href="index.html" data-role="button" data-rel="back" data-theme="b" data-icon="check" data-inline="true" data-mini="true">Acheter : $10.99</a> <a href="index.html" data-role="button" data-rel="back" data-inline="true" data-mini="true">Annuler</a>	
+				</div>
+			</div><!--/demo-html -->
+			
+			
+			
+			<h2>Contenu formaté</h2>
+			
+			<p>Pour ajouter la hiérarchie du texte, utiliser des titres pour augmenter la police et utilisez les paragraphes pour réduire la police. Des informations supplémentaires peuvent être ajoutées à la droite de chaque élément de la liste en enveloppant le contenu dans un élément avec une classe de <code>ui-li-aside</code>.</p>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-inset="true">
+					<li data-role="list-divider">Vendredi 8 octobre 2010 <span class="ui-li-count">2</span></li>
+					<li><a href="index.html">
+						<h2>Stephen Weber</h2>
+						</a><p><strong>Vous avez été invité à la réunion Filament Group à Boston, MA</strong></p>
+						<p>Hé Stephen, si vous êtes disponible demain à 10 heures, nous avons une réunion avec l'équipe jQuery.</p>
+						<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+					</a></li>
+					<li><a href="index.html">
+						<h2>Equipe jQuery</h2>
+						</a><p><strong>Planning de la conférence de Boston</strong></p>
+						<p>Pour préparation de la prochaine conférence à Boston, nous avons besoin de commencer à rassembler une liste de sponsors et conférenciers.</p>
+						<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+					</a></li>
+					<li data-role="list-divider">Jeudi 7 Octobre 2010 <span class="ui-li-count">1</span></li>
+					<li><a href="index.html">
+						<h2>Avery Walker</h2>
+						</a><p><strong>Re: Ce soir dîner</strong></p>
+						<p>Bien sûr, planifions la réunion à Cuisine Highland à 8:00 ce soir. Ne peux pas attendre ! </p>
+						<p class="ui-li-aside"><strong>4:48</strong>PM</p>
+					</a></li>
+				</ul>
+			</div><!--/demo-html -->
+			
+			
+			<h2>Formulaires</h2>
+			
+			<p>Tout élément de formulaire peut être placé à l'intérieur d'une pour une présentation groupée.</p>
+
+			<div data-demo-html="true">
+				<form>
+					<ul data-role="listview" data-inset="true">
+                        <li data-role="fieldcontain">
+                            <label for="name2">Saisie de texte :</label>
+                            <input type="text" name="name2" id="name2" value="" data-clear-btn="true">
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="textarea2">Zone de texte :</label>
+                        <textarea cols="40" rows="8" name="textarea2" id="textarea2"></textarea>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="flip2">Interrupteur :</label>
+                            <select name="flip2" id="flip2" data-role="slider">
+                                <option value="off">Arrêt</option>
+                                <option value="on">Marche</option>
+                            </select>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="slider2">Curseur :</label>
+                            <input type="range" name="slider2" id="slider2" value="0" min="0" max="100" data-highlight="true">
+                        </li>
+                        <li data-role="fieldcontain">
+                            <fieldset data-role="controlgroup">
+                                <legend>Choisissez les collations que vous souhaitez :</legend>
+                                <input type="checkbox" name="checkbox-1b" id="checkbox-1b" class="custom">
+                                <label for="checkbox-1b">Cheetos</label>
+                                <input type="checkbox" name="checkbox-2b" id="checkbox-2b" class="custom">
+                                <label for="checkbox-2b">Doritos</label>
+                            </fieldset>
+                        </li>
+                      
+                        <li data-role="fieldcontain">
+                             <fieldset data-role="controlgroup">
+                                <legend>Choisir un animal :</legend>
+                                    <input type="radio" name="radio-choice-1b" id="radio-choice-1b" value="choice-1" checked="checked">
+                                    <label for="radio-choice-1b">Chat</label>
+                                    <input type="radio" name="radio-choice-1b" id="radio-choice-2b" value="choice-2">
+                                    <label for="radio-choice-2b">Chien</label>
+                                    <input type="radio" name="radio-choice-1b" id="radio-choice-3b" value="choice-3">
+                                    <label for="radio-choice-3b">Hamster</label>
+                            </fieldset>
+                        </li>
+                        <li data-role="fieldcontain">
+                            <label for="select-choice-1" class="select">Choisissez la méthode d'expédition :</label>
+                            <select name="select-choice-1" id="select-choice-1">
+                                <option value="standard">Lent : 7 jours</option>
+                                <option value="rush">Rapide : 3 jours</option>
+                                <option value="express">Express : Le lendemain</option>
+                                <option value="overnight">De nuit</option>
+                            </select>
+                        </li>
+                        <li class="ui-body ui-body-b">
+                            <fieldset class="ui-grid-a">
+                                    <div class="ui-block-a"><button type="submit" data-theme="d">Annuler</button></div>
+                                    <div class="ui-block-b"><button type="submit" data-theme="a">Valider</button></div>
+                            </fieldset>
+                        </li>
+					</ul>
+				</form>
+			</div><!--/demo-html -->
+
+
+			<h2>Liste pliable</h2>
+
+			<p>C'est un exemple de liste enveloppé dans un conteneur avec <code>data-role="collapsible"</code>.</p>
+			
+			<div data-demo-html="true">
+				<div data-role="collapsible" data-theme="b" data-content-theme="c">
+					<h2>Choisissez un modèle de voiture...</h2>
+					<ul data-role="listview" data-filter="true">
+						<li><a href="index.html">Acura</a></li>
+						<li><a href="index.html">Audi</a></li>
+						<li><a href="index.html">BMW</a></li>
+						<li><a href="index.html">Cadillac</a></li>
+						<li><a href="index.html">Chrysler</a></li>
+						<li><a href="index.html">Dodge</a></li>
+						<li><a href="index.html">Ferrari</a></li>
+						<li><a href="index.html">Ford</a></li>
+						<li><a href="index.html">GMC</a></li>
+						<li><a href="index.html">Honda</a></li>
+					</ul>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h2>Pliable groupé avec des listes</h2>
+
+			<p>Vous pouvez aussi utiliser des listes à l'intérieur d'un <a href="../content/content-collapsible-set.html">ensemble de pliable</a> (accordéon) pour visuellement regrouper la liste et faire en sorte que seulement un seul élément  à la fois puisse être ouvert.</p>		
+				
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="b" data-content-theme="d">
+					<div data-role="collapsible">
+						<h2>Liste filtrées</h2>
+						<ul data-role="listview" data-filter="true" data-filter-theme="c" data-divider-theme="d">
+							<li><a href="index.html">Adam Kinkaid</a></li>
+							<li><a href="index.html">Alex Wickerham</a></li>
+							<li><a href="index.html">Avery Johnson</a></li>
+							<li><a href="index.html">Bob Cabot</a></li>
+							<li><a href="index.html">Caleb Booth</a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+						<h2>Texte formaté</h2>
+						<ul data-role="listview" data-theme="d" data-divider-theme="d">
+							<li data-role="list-divider">Vendredi 8 octobre 2010 <span class="ui-li-count">2</span></li>
+							<li><a href="index.html">
+								<h3>Stephen Weber</h3>
+								</a><p><strong>Vous avez été invité à la réunion Filament Group à Boston, MA</strong></p>
+								<p>Hé Stephen, si vous êtes disponible demain à 10 heures, nous avons une réunion avec l'équipe jQuery.</p>
+								<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+							</a></li>
+							<li><a href="index.html">
+								<h3>Equipe jQuery</h3>
+								</a><p><strong>Planning de la conférence de Boston</strong></p>
+								<p>Pour préparation de la prochaine conférence à Boston, nous avons besoin de commencer à rassembler une liste de sponsors et conférenciers.</p>
+								<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+							</a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+						<h2>Miniatures et bouton séparé</h2>
+						<ul data-role="listview" data-split-icon="gear" data-split-theme="d">
+							<li><a href="index.html">
+								<img src="../_assets/img/album-bb.jpg" />
+								<h3>Broken Bells</h3>
+								</a><p>Broken Bells</p>
+								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+							
+							</a></li>
+							<li><a href="index.html">
+								<img src="../_assets/img/album-hc.jpg" />
+								<h3>Warning</h3>
+								</a><p>Hot Chip</p>
+							</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+							
+							</a></li>
+							<li><a href="index.html">
+								<img src="../_assets/img/album-p.jpg" />
+								<h3>Wolfgang Amadeus Phoenix</h3>
+								</a><p>Phoenix</p>
+								</a><a href="lists-split-purchase.html" data-rel="dialog" data-transition="slideup">Purchase album
+							
+							</a></li>	
+						</ul>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+		
+			
+			<h2>Liste pliable sur toute la largeur</h2>
+
+			<p>En définissant <code>data-inset="false"</code> sur un pliable ou un ensemble de pliable, cela produit un pliable sur toute la largeur (non-intégré), comme une liste sur toute la largeur.</p>
+			
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-inset="false">
+					<div data-role="collapsible">
+						<h2>Boîte d'email</h2>
+						<ul data-role="listview">
+							<li><a href="index.html">Boîte de réception <span class="ui-li-count">12</span></a></li>
+							<li><a href="index.html">Boite d'envoi <span class="ui-li-count">0</span></a></li>
+							<li><a href="index.html">Brouillons <span class="ui-li-count">4</span></a></li>
+							<li><a href="index.html">Envoyé <span class="ui-li-count">328</span></a></li>
+							<li><a href="index.html">Corbeille <span class="ui-li-count">62</span></a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+						<h2>Calendrier</h2>
+						<ul data-role="listview" data-theme="d" data-divider-theme="d">
+							<li data-role="list-divider">Vendredi 8 octobre 2010 <span class="ui-li-count">2</span></li>
+							<li><a href="index.html">
+									<h3>Stephen Weber</h3>
+									</a><p><strong>Vous avez été invité à la réunion Filament Group à Boston, MA</strong></p>
+									<p>Hé Stephen, si vous êtes disponible demain à 10 heures, nous avons une réunion avec l'équipe jQuery.</p>
+									<p class="ui-li-aside"><strong>6:24</strong>PM</p>
+							</a></li>
+							<li><a href="index.html">
+								<h3>Equipe jQuery</h3>
+								</a><p><strong>Planning de la conférence de Boston</strong></p>
+								<p>Pour préparation de la prochaine conférence à Boston, nous avons besoin de commencer à rassembler une liste de sponsors et conférenciers.</p>
+								<p class="ui-li-aside"><strong>9:18</strong>AM</p>
+							</a></li>
+							<li data-role="list-divider">Jeudi 7 Octobre 2010 <span class="ui-li-count">1</span></li>
+							<li><a href="index.html">
+								<h3>Avery Walker</h3>
+								</a><p><strong>Re: Ce soir dîner</strong></p>
+								<p>Bien sûr, planifions la réunion à Cuisine Highland à 8:00 ce soir. Ne peux pas attendre ! </p>
+								<p class="ui-li-aside"><strong>4:48</strong>PM</p>
+							</a></li>
+							<li data-role="list-divider">Mercredi 6 Octobre 2010 <span class="ui-li-count">3</span></li>
+							<li><a href="index.html">
+								<h3>Amazon.com</h3>
+								</a><p><strong>4 Livres pour enfants pour le prix de 3</strong></p>
+								<p>Comme celui qui a acheté des livres pour enfants à partir de notre boutique 4-pour-3, vous pouvez être intéressé par ces livres présentés.</p>
+								<p class="ui-li-aside"><strong>12:47</strong>PM</p>
+							</a></li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+						<h2>Contacts</h2>
+						<ul data-role="listview" data-autodividers="true" data-theme="d" data-divider-theme="d">
+							<li><a href="index.html">Adam Kinkaid</a></li>
+							<li><a href="index.html">Alex Wickerham</a></li>
+							<li><a href="index.html">Avery Johnson</a></li>
+							<li><a href="index.html">Bob Cabot</a></li>
+							<li><a href="index.html">Caleb Booth</a></li>
+							<li><a href="index.html">Christopher Adams</a></li>
+							<li><a href="index.html">Culver James</a></li>	
+						</ul>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h2>Imbriquée</h2>
+			
+			<p>En intégrant des <code>ul</code> ou <code>ol</code> enfant à l'intérieur des éléments de liste, vous pouvez créer des listes imbriquées. Pour définir la couleur du nuancier d'une liste enfant, mettez l'attribut <code>data-theme</code> à l'intérieur de chaque liste.</p>
+
+			<div data-demo-html="true">
+				<ul data-role="listview" data-header-theme="e">
+					<li>Animaux
+						<ul>
+							<li>Animaux de compagnie
+								<ul>
+									<li><a href="index.html">Canaris</a></li>
+									<li><a href="index.html">Chat</a></li>
+									<li><a href="index.html">Chien</a></li>
+								</ul>
+							</li>
+							<li>Animaux de la ferme
+								<ul>
+									<li><a href="index.html">Poulet</a></li>
+									<li><a href="index.html">Vache</a></li>
+									<li><a href="index.html">Mouton</a></li>
+								</ul>
+							</li>
+							<li>Animaux sauvages
+								<ul>
+									<li><a href="index.html">Alligator</a></li>
+									<li><a href="index.html">Ours</a></li>
+									<li><a href="index.html">Zèbre</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+					<li>Couleurs
+						<ul>
+							<li><a href="index.html">Bleu</a></li>
+							<li><a href="index.html">Vert</a></li>
+							<li><a href="index.html">Rouge</a></li>
+						</ul>
+					</li>
+					<li>Véhicules
+						<ul>
+							<li>Voitures
+								<ul>
+									<li><a href="index.html">Audi</a></li>
+									<li><a href="index.html">BMW</a></li>
+									<li><a href="index.html">Volkswagon</a></li>
+								</ul>
+							</li>
+							<li>Avions
+								<ul>
+									<li><a href="index.html">Boeing</a></li>
+									<li><a href="index.html">Embraer</a></li>
+									<li><a href="index.html">Airbus</a></li>
+								</ul>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</div><!--/demo-html -->
+			
+	</div><!-- /content -->
+    
+	<div data-role="footer" data-theme="c" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /jqm-footer -->
+
+
+
+<?php include( '../nav.html' ); ?>
+
+
+
+</div><!-- /page -->
+</body>
+</html>

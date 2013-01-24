@@ -67,14 +67,14 @@
 
 			<h2>Option du bouton d'effacement</h2>
 
-			<p>Pour ajouter un bouton d'effacement à n'importe quelle saisie (comme une zone de recherche), ajoutez l'attribut <code>data-clear-btn="true"</code>. Le texte du bouton d'effacement peut être personnalisé via l'attribut <code>data-clear-btn-text="clear input"</code>. Les boutons de recherche ont le bouton d'effacement par défaut, mais cela peut être contrôlé par cette option. Notez que cette option est disponible pour tous les types d'entrée ci-dessous à l'exception des <code>zones de texte</code>.</p>
+			<p>Pour ajouter un bouton d'effacement à n'importe quelle saisie (comme une zone de recherche), ajoutez l'attribut <code>data-clear-btn="true"</code>. Le texte du bouton d'effacement peut être personnalisé via l'attribut <code>data-clear-btn-text="clear input"</code>. Les boutons de recherche ont le bouton d'effacement par défaut, mais cela ne peut pas être contrôlé par cette option. Notez que cette option est disponible pour tous les types d'entrée ci-dessous à l'exception des <code>zones de texte</code>.</p>
 
 		<pre><code>	
 &lt;label for="clear-demo"&gt;Saisie :&lt;/label&gt;
 &lt;input type="text" name="clear" id="clear-demo" value="" <strong>data-clear-btn="true"</strong> /&gt;
 		</code></pre>
 
-					<p>Ceci va produire une saisie pas aussi grande que la version standard et disposant d'une taille inférieure.</p>
+					<p>Ce balisage crée un champ de texte avec un bouton d'effacement qui devient visible dès qu'un caractère a été saisi.</p>
 			         <label for="clear-demo">Saisie de texte :</label>
 			         <input type="text" name="clear-demo" id="clear-demo" value="" data-clear-btn="true" />
 			

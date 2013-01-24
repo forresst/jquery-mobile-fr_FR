@@ -20,8 +20,33 @@
     } catch(err) {}
   });
 
+$(function(){
+  //this is to allow deeplinks to id's from external pages and from same page links
+  //this will not currently work for multi-page documents if this is needed in the 
+  //future it can be added at that time.
 
+  //This binding handles deeplinks another page
+  $( document ).bind( "pageshow", function(){
+      var match, pos,
+        urlParams = {},
+          pl     = /\+/g,  // Regex for replacing addition symbol with a space
+          search = /([^&=]+)=?([^&]*)/g,
+          decode = function (s) { return decodeURIComponent(s.replace( pl, " " )); },
+          query  = window.location.search.substring(1);
+          
+      while (match = search.exec(query)){
+          urlParams[decode(match[1])] = decode(match[2]);
+        }
 
+        if( typeof urlParams.scrollto !== "undefined" ){
+
+          pos = $("#"+urlParams.scrollto).offset().top;
+          setTimeout( function() {
+            $.mobile.silentScroll( pos );
+          }, 0);
+        }
+  });
+});
 // Affiche la version de jQM
 $(document).on( "pageinit", function() {
 	var version = $.mobile.version || "dev",
@@ -116,28 +141,4 @@ if ( location.protocol.substr(0,4)  === 'file' ||
       $( "div.jqm-footer" ).append( infoadd );
     });
   });
-}
-
-// Aperçu du code source demo
-
-function attachPopupHandler( popup, sources ) {
-	popup.one( "popupbeforeposition", function() {
-		var
-			collapsibleSet = popup.find( "[data-role='collapsible-set']" ),
-			collapsible, pre;
-
-		$.each( sources, function( idx, options ) {
-			collapsible = $( "<div data-role='collapsible' data-collapsed='true' data-theme='" + options.theme + "' data-iconpos='right' data-content-theme='a'>" +
-					"<h1>" + options.title + "</h1>" +
-					"<pre class='brush: " + options.brush + ";'></pre>" +
-				"</div>" );
-			pre = collapsible.find( "pre" );
-			pre.append( options.data.replace( /</gmi, '&lt;' ) );
-			collapsible.appendTo( collapsibleSet );
-			SyntaxHighlighter.highlight( {}, pre[ 0 ] );
-		});
-
-		collapsibleSet.find( "[data-role='collapsible']" ).first().attr( "data-collapsed", "false" );
-		popup.trigger( "create" );
-	});
 }

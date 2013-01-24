@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Titre de Démo - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jquery.mobile.demos.js"></script>
+	<script>
+		// Configure options defaults
+		// Bind to "mobileinit" before you load jquery.mobile.js
+	</script>
+	<script src="../../../js/jquery.mobile.js"></script>
+	<script>
+		// JavaScript here
+	</script>
+	<script id="myScript">
+
+$(function(){
+  //this is to allow deeplinks to id's from external pages and from same page links
+  //this will not currently work for multi-page documents.
+  //This binding handles deeplinks another page
+  $( document ).bind( "pageshow", function(){
+      var match, pos,
+        urlParams = {},
+          pl     = /\+/g,  // Regex for replacing addition symbol with a space
+          search = /([^&=]+)=?([^&]*)/g,
+          decode = function (s) { return decodeURIComponent(s.replace( pl, " " )); },
+          query  = window.location.search.substring(1);
+          
+      while (match = search.exec(query)){
+          urlParams[decode(match[1])] = decode(match[2]);
+        }
+
+        if( typeof urlParams.scrollto !== "undefined" ){
+
+          pos = $("#"+urlParams.scrollto).offset().top;
+          setTimeout( function() {
+            $.mobile.silentScroll( pos );
+          }, 0);
+        }
+  });
+});
+	</script>
+	<style type="text/css">
+		/* new API additions */
+
+dt {  
+	margin: 35px 0 15px 0; 
+	background-color:#ddd; 
+	font-weight:normal;
+}
+dt code { 
+	display:inline-block; 
+	font-weight:bold;
+	color:#56A00E; 
+	padding:3px 7px; 
+	margin-right:10px; 
+	background-color:#fff; 
+}
+dd { 
+	margin-bottom:10px; 
+}
+dd .default { font-weight:bold; }
+dd pre { 
+	margin:0 0 0 0; 
+}
+dd code { font-weight: normal; }
+dd pre code { 
+	margin:0; 
+	border:none; 
+	font-weight:normal; 
+	font-size:100%; 
+	background-color:transparent; 
+}
+dd h4 { margin:15px 0 0 0; }
+		
+.localnav {
+	margin:0 0 20px 0;
+}
+.ui-mobile-viewport .localnav li {
+	float:left;
+}
+.localnav .ui-btn-inner { 
+	padding: .6em 10px; 
+	font-size:80%; 
+}
+	</style>
+</head><body id="top">
+
+	<div data-role="page" class="type-interior">
+
+		<div data-role="header" data-theme="f">
+		<h1>Lien profond</h1>
+		<a href="../../../" data-icon="home" data-iconpos="notext" data-direction="reverse">Accueil</a> <a href="../../nav.html" data-icon="search" data-iconpos="notext" data-rel="dialog" data-transition="fade">Recherche</a>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<div class="content-primary">
+			<h2>Liens Profonds</h2>
+			<h3>Cette page montre comment utiliser des liens profonds (liens qui scrollent vers un ID) dans JQM</h3>
+			<p>Bien que les liens profonds ne sont pas actuellement pris en charge par jQuery Mobile. Grâce à l'utilisation d'une petite liaison d'événement, vous pouvez les faire fonctionner dans la plupart des situations.</p>
+			<div data-demo-js="#myScript">
+			</div>
+			<p>Pour les liens qui défilent vers un id sur la même page, tout ce que vous devez faire est de mettre <code>data-ajax="false"</code> sur le lien et utiliser l'id pour le href comme d'habitude, voici est un exemple </p>
+			<div data-demo-html="true" id="scrollto1">
+				<a href="#calling-slider" data-ajax="false">Appel du curseur</a>
+			</div>
+			<p>Pour faire un lien qui mène à un id d'une autre page, il vous suffit d'ajouter le paramètre de query scrollto=idToScrollTo à la fin de votre lien</p>
+			<div data-demo-html="true" id="scrollto2">
+				<a href="options.html?scrollto=option-highlight"><code>data-highlight="true"</code></a> 
+			</div>
+			<p>Pour faire un lien qui permet de faire défiler vers le haut de la page, il faut juste mettre un id sur votre balise body du haut et un lien vers cet id avec data-ajax="false" <code>href="#top"</code></p>
+			<div data-demo-html="true" id="scrollto2">
+				<a href="#top" data-ajax="false">Retour en haut</a> 
+			</div>
+			<div class="ui-body ui-body-e">
+		<h4 style="margin:.5em 0">Important : Le reste de la page est juste un exemple d'utilisation</h4>
+		<p>Cette page n'est pas une référence pour le widget slider, c'est un exemple de contenu qui ne référence pas cette page pour un usage widget slider ! Pour le widget slider, veuillez regarder <a href="http://api.jquerymobile.com/slider/" title="Lien permanent vers le Widget Slider" rel="bookmark">Slider Widget</a></p></div>
+		<form action="#" method="get">
+			<h2>Curseur</h2>
+
+			<div data-role="controlgroup" data-type="horizontal" class="localnav">
+				<a href="index.html" data-role="button" data-transition="fade" class="ui-btn-active">Basiques</a> <a href="options.html" data-role="button" data-transition="fade">Options</a> <a href="methods.html" data-role="button" data-transition="fade">Méthodes</a> <a href="events.html" data-role="button" data-transition="fade">Événements</a>
+			</div>
+			<div>
+				Aller vers : <a href="#step-increment" data-ajax="false" >Step Increment</a>, <a href="#fill-highlight" data-ajax="false" >Fill Highlight</a>, <a href="#mini-version" data-ajax="false" >Mini version</a>, <a href="#field-containers" data-ajax="false" >Field Containers</a>, <a href="#calling-slider" data-ajax="false" >Calling the slider</a>, <a href="#theme-slider" data-ajax="false" >Theming the slider</a> 
+			</div>
+			<p>Pour ajouter un widget curseur à votre page, utiliser l'<code>input</code> standard avec l'attribut <code>type="range"</code>. L'entrée <code>value</code> est utilisé pour configurer la position de départ du curseur et la valeur est peuplée dans la zone de saisie. Précisez les valeurs des attributs <code>min</code> et <code>max</code> pour régler la fourchette du curseur. Si vous voulez contraindre l'entrée des incréments spécifiques ajouter l'attribut <code>step</code>. Définissez l'attribut <code>value</code> pour régler la valeur initiale. Le framework analysera ces attributs pour configurer le widget curseur. Regardez la <a href="../../api/data-attributes.html">référence des attributs data-</a> pour voir tous les attributs possibles que vous pouvez ajouter aux curseurs.</p>
+
+			<p>Lorsque vous faites glisser le curseur, le framework met à jour la valeur de l'entrée natif (et vice-versa) afin qu'ils soient toujours en phase, ce qui garantit que la valeur est soumise avec le formulaire.</p>
+			<p>Réglez l'attribut <code>for</code> de <code>label</code> pour faire correspondre l'<code>id</code> de l'<code>input</code> ainsi ils sont sémantiquement liés. Il est possible de <a href="../docs-forms.html">cacher le label d'accessibilité</a> si il n'est pas souhaitée dans la mise en page, mais nous avons besoin qu'il soit présent dans le balisage pour des raisons de sémantique et d'accessibilité.</p>
+
+			<p>Le framework trouvera tous les éléments <code>input</code> avec un <code>type="range"</code> et les améliorera automatiquement dans un curseur avec une saisie complémentaire, pas besoin d'appliquer l'attribut <code>data-role</code>. Pour éviter l'amélioration automatique de cette entrée dans un curseur, ajouter l'attribut <code>data-role="none"</code> à l'<code>input</code> et enveloppez les d'un <code>div</code> avec l'attribut <code> data-role="fieldcontain"</code> pour les grouper. Dans cet exemple, les limites acceptables sont de 0 à 100. </p>
+
+<pre><code>
+&lt;label for="slider-1"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider-1" id="slider-1" value="60" min="0" max="100" /&gt;
+</code></pre>
+
+				<p>Le curseur par défaut est affiché avec ces paramètres comme ceci :</p>
+				<label for="slider-1">Saisie d'une valeur :</label>
+				<input type="range" name="slider-1" id="slider-1" value="60" min="0" max="100" />
+				<br/><br/><a href="#top" data-ajax="false">retour en haut</a>
+				<h2 id="step-increment">Définir une incrémentation</h2>
+
+				<p>Pour forcer le curseur à se déplacer avec une incrémentation spécifique, ajoutez l'attribut <code>step</code> à l'input. Par défaut, step est à 1, mais dans cet exemple, step est à 50 et la valeur maximale est 500.</p>
+
+<pre><code>
+&lt;label for="slider-step"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider-step" id="slider-step" value="150" min="0" max="500" <strong>step="50"</strong> /&gt;
+</code></pre>
+
+				<p>Ceci va produire un curseur qui se déplace de 10 en 10. Si la valeur saisie n'est pas valide avec l'incrémentation, la valeur sera réinitialisée vers la valeur la plus proche.</p>
+		        <label for="slider-step">Saisie d'une valeur :</label>
+				<input type="range" name="slider-step" id="slider-step" value="150" min="0" max="500" step="50" />
+				
+				<br/><br/><a href="#top" data-ajax="false">retour en haut</a>
+				<h2 id="fill-highlight">Mette en évidence la partie remplie</h2>
+
+				<p>Pour mettre en évidence une partie remplie sur la piste jusqu'à la position du curseur, ajouter l'attribut  <a href="options.html?scrollto=option-highlight"><code>data-highlight="true"</code></a> à l'input. La partie remplie utilise le nuancier du statut actif. </p>
+
+<pre><code>
+&lt;label for="slider-fill"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" <strong>data-highlight="true"</strong> /&gt;
+</code></pre>
+
+		        <label for="slider-fill">Saisie d'une valeur :</label>
+				<input type="range" name="slider-fill" id="slider-fill" value="60" min="0" max="100" data-highlight="true" />
+	
+				<br/><br/><a href="#top" data-ajax="false">retour en haut</a>
+				<h2 id="mini-version">Version mini</h2>
+
+				<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut  <a href="options.html?scrollto=option-mini"><code>data-mini="true"</code></a> à l'élément pour créer une <a href="../forms-all-mini.html">mini version</a>. </p>
+
+<pre><code>
+&lt;label for="slider-mini"&gt;Curseur :&lt;/label&gt;
+&lt;input type="range" name="slider-mini" id="slider-mini" value="25" min="0" max="100" data-highlight="true" <strong>data-mini="true"</strong> /&gt;
+</code></pre>
+
+				<p>Ceci va produire un curseur pas aussi grand que la version standard et disposant d'une taille inférieure. La saisie a aussi une taille plus petite.</p>
+		        <label for="slider-mini">Saisie d'une valeur :</label>
+				<input type="range" name="slider-mini" id="slider-mini" value="25" min="0" max="100" data-highlight="true" data-mini="true" />
+				<br/><br/><a href="#top" data-ajax="false">retour en haut</a>
+				<h2 id="field-containers">Conteneurs de champs</h2>
+					
+				<p>Optionnellement, enveloppez le balisage du curseur dans un conteneur avec l'attribut  <code>data-role="fieldcontain"</code> afin de les grouper visuellement dans un formulaire plus long. Dans cet exemple, l'attribut <code>step</code> est omis pour permettre toutes les valeurs entières d'être sélectionnées.</p>
+
+
+<pre><code>
+<strong>&lt;div data-role="fieldcontain"&gt;
+</strong>   &lt;label for="slider-2"&gt;Curseur :&lt;/label&gt;
+   &lt;input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100"  /&gt;
+<strong>&lt;/div&gt;
+</strong></code></pre>
+
+			<p>Le curseur est maintenant affiché comme ceci :</p>
+			<div data-role="fieldcontain">
+				<label for="slider-2">Saisie d'une valeur :</label>
+				<input type="range" name="slider-2" id="slider-2" value="25" min="0" max="100" />
+			</div>
+
+			<p>Les curseurs répondent également à des commandes via des touches. Les touches flèche vers la droite, flèche vers le haut et haut de page augmentent la valeur, flèche gauche, flèche vers le bas, et bas de page pour la diminuer. Pour déplacer le curseur à sa valeur minimum ou maximum, utilisez respectivement la touche début et fin.</p>
+
+		<br/><br/><a href="#top" data-ajax="false">retour en haut</a>
+		<h2 id="calling-slider">Appel du plugin curseur</h2>
+
+<p>Ce plugin sera automatiquement initialiser sur n'importe quelle page qui contient un <code>input</code> de texte avec l'attribut <code>type="range"</code>. Cependant, si nécessaire, vous pouvez appeler directement le plugin <code>curseur</code> sur un sélecteur,comme n'importe quel plugin jQuery :</p>
+<pre><code>
+$('input').slider();
+</code></pre>
+
+		<br/><br/><a href="#top" data-ajax="false">retour en haut</a>
+		<h2 id="theme-slider">Thématisation du curseur</h2>
+		<p>Pour définir le nuancier de thème pour le curseur, ajoutez l'attribut  <a href="options.html?scrollto=option-theme"><code>data-theme</code></a> à l'<code>input</code> qui appliquera le thème à la fois à la saisie, au curseur et à la piste. Le nuancier de la piste du curseur peut être réglé séparément en ajoutant l'attribut  <a href="options.html?scrollto=option-track-theme"><code>data-track-theme</code></a> à appliquer à la version de l'état down du nuancier du bouton sélectionné.</p>
+
+		<pre><code>
+&lt;div data-role="fieldcontain"&gt;
+	&lt;label for="slider-3"&gt;Curseur :&lt;/label&gt;
+	&lt;input type="range" name="slider-3" id="slider-3" value="25" min="0" max="100" <strong>data-theme="a" data-track-theme="b"</strong> /&gt;
+&lt;/div&gt;
+		</code></pre>
+
+		<p>Ceci va produire un curseur thématisé :</p>
+		<div data-role="fieldcontain">
+			<label for="slider-3">Saisie d'une valeur :</label>
+			<input type="range" name="slider-3" id="slider-3" value="25" min="0" max="100" data-theme="a" data-track-theme="b" />
+		</div>
+		<br/><br/><a href="#top" data-ajax="false">retour en haut</a>
+		</form>
+	</div><!--/content-primary -->
+
+</div><!-- /content -->
+
+<div class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+</div><!-- /jqm-footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>
+

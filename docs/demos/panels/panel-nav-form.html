@@ -10,130 +10,139 @@
 		<script src="../../../js/jquery.js"></script>
 		<script src="../_assets/js/jquery.mobile.demos.js"></script>
 		<script src="../../../js/jquery.mobile.js"></script>
+        <style id="nav-panel-css">
+			.nav-search .ui-btn-up-a {
+				background-image:none;
+				background-color:#333333;
+			}
+			.nav-search .ui-btn-inner {
+				border-top: 1px solid #888;
+				border-color: rgba(255, 255, 255, .1);
+			}
+			.nav-search .ui-btn.ui-first-child {
+				border-top-width: 0;
+				background: #111;
+			}
+		</style>
+		<style id="add-form-css">
+			.userform { padding:.8em 1.2em; }
+			.userform h2 { color:#555; margin:0.3em 0 .8em 0; padding-bottom:.5em; border-bottom:1px solid rgba(0,0,0,.1); }
+			.userform label { display:block; margin-top:1.2em; }
+			.switch .ui-slider-switch { width: 6.5em !important }
+			.ui-grid-a { margin-top:1em; padding-top:.8em; margin-top:1.4em; border-top:1px solid rgba(0,0,0,.1); }
+        </style>
 	</head>
 	<body>
-		<div data-role="page" class="ui-responsive-panel">
+		<div data-role="page" class="ui-responsive-panel" id="panel-unfixed-page1">
 
 			<div data-role="header" data-theme="f">
 				<h1>Mon App</h1>
 				<a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a> <a href="#add-form" data-icon="plus" data-iconpos="notext">Ajouter</a>
 			</div><!-- /header -->
+            
 			<div data-role="content">
-				<h2>Panneau : Menu + formulaire</h2>
+            
+				<h2>Panneau : Menu reveal + formulaire push</h2>
 
-				<p>Il s'agit d'une page typique qui dispose de deux boutons dans la barre d'entête pour ouvrir les panneaux. Le bouton de gauche ouvre un menu à gauche avec le mode d'affichage reveal. Le bouton de droite ouvre un formulaire à droite dans un panneau overlay.</p>
+				<p>Il s'agit d'une page typique qui dispose de deux boutons dans la barre d'entête pour ouvrir les panneaux. Le bouton de gauche ouvre un menu à gauche avec le mode d'affichage reveal. Le bouton de droite ouvre un formulaire avec le mode d'affichage push.</p>
 				
-				<p>Comme les liens des panneaux sont dans la barre du haut, il n'y a pas vraiment besoin de la fonctionnalité du positionnement fixe sur le panneau car vous devez toujours vous positionner en haut de la page. Le positionnement fixe impacte la finesse de l'animation, il ne concerne donc pas cette démo (<code>data-position-fixed="false"</code>) et le panneau défilera avec la page.</p>
+				<p>Comme les liens des panneaux sont dans la barre du haut, il n'y a pas vraiment besoin de la fonctionnalité du positionnement fixe sur le panneau car vous devez toujours vous positionner en haut de la page.</p>
 				
 				<p>Pour rendre cela responsive, le panneau de gauche reste ouvert et force la page à se retailler sur des grandes largeurs. Cela permet à la fois au menu et à la page d'être utilisés en même temps lorsque plus d'espace est disponible. Ce comportement est contrôlé par des CSS media queries. Vous pouvez en créer un sur mesure par un point d'arrêt spécifique ou utiliser le point d'arrêt prédéfini en ajoutant <code> class="ui-responsive-panel"</code> au conteneur de la page.</p>
 
+                <div data-demo-html="#nav-panel" data-demo-css="#nav-panel-css">
+                	<h4>Balisage et CSS pour le menu gauche reveal.</h4>
+                </div><!--/demo-html -->
+                
+                <div data-demo-html="#add-form" data-demo-css="#add-form-css">
+                	<h4>Balisage et CSS pour le formulaire droit push.</h4>
+                </div><!--/demo-html -->
+
 			</div><!-- /content -->
 
-			<div class="jqm-footer">
-				<p class="jqm-version"></p>
-				<p>Copyright 2013 The jQuery Foundation</p>
-			</div><!-- /jqm-footer -->
-			
-			
-			<style>
-				.nav-search .ui-btn-up-a {
-					background-image:none;
-					background-color:#333333;
-				}
-				.nav-search .ui-btn-inner {
-					border-top: 1px solid #888;
-					border-color: rgba(255, 255, 255, .1);
-				}
-            </style>
 
-				<div data-role="panel" data-position="left" data-position-fixed="false" data-display="reveal" id="nav-panel" data-theme="a">
+			<div data-role="panel" id="nav-panel" data-theme="a">
+            
+            	<ul data-role="listview" data-theme="a" class="nav-search">
+                    <li data-icon="delete"><a href="#" data-rel="close">Fermer le menu</a></li>
+                    <li><a href="#panel-unfixed-page2">Accessibilité</a></li>
+                    <li><a href="#panel-unfixed-page2">Accordéons</a></li>
+                    <li><a href="#panel-unfixed-page2">Modèle de navigation Ajax</a></li>
+                    <li><a href="#panel-unfixed-page2">Anatomie de la page</a></li>
+                    <li><a href="#panel-unfixed-page2">Événements d'animation</a></li>
+                    <li><a href="#panel-unfixed-page2">Séparateurs automatiques de liste</a></li>
+                    <li><a href="#panel-unfixed-page2">Boutons</a></li>
+                    <li><a href="#panel-unfixed-page2"> Icônes des boutons</a></li>
+                    <li><a href="#panel-unfixed-page2">Mise en cache des pages</a></li>
+                    <li><a href="#panel-unfixed-page2">Case à cocher</a></li>
+                    <li><a href="#panel-unfixed-page2">Contenu pliable</a></li>
+                    <li><a href="#panel-unfixed-page2">Listes pliables</a></li>
+                    <li><a href="#panel-unfixed-page2">Référence des attributs data-</a></li>
+                    <li><a href="#panel-unfixed-page2">Boîtes de dialogue</a></li>
+                    <li><a href="#panel-unfixed-page2">Désactivation des éléments de formulaire</a></li>
+                    <li><a href="#panel-unfixed-page2">Injection dynamique des pages</a></li>
+                    <li><a href="#panel-unfixed-page2">API des événements</a></li>
+                    <li><a href="#panel-unfixed-page2">Interrupteur</a></li>
+                    <li><a href="#panel-unfixed-page2">Aperçu des fonctionnalités</a></li>
+                    <li><a href="#panel-unfixed-page2">Barres d'outils fixes</a></li>
+                    <li><a href="#panel-unfixed-page2">Introduction des formulaires</a></li>
+                    <li><a href="#panel-unfixed-page2">Gallerie d'élement de formulaire</a></li>
+                    <li><a href="#panel-unfixed-page2">Barres d'outils pleines écrans</a></li>
+                    <li><a href="#panel-unfixed-page2">Barres d'outils de pied de page</a></li>
+                    <li><a href="#panel-unfixed-page2">Options globales (mobileinit)</a></li>
+                    <li><a href="#panel-unfixed-page2">Groupement des boutons</a></li>
+                    <li><a href="#panel-unfixed-page2">Barres d'outils d'entête</a></li>
+                    <li><a href="#panel-unfixed-page2">Cacher les éléments accessibles</a></li>
+                    <li><a href="#panel-unfixed-page2">Formatage HTML</a></li>
+            	</ul>
+            
+			</div><!-- /panel -->
 
-					<ul data-role="listview" data-theme="a" data-divider-theme="a" style="margin-top:-16px;" class="nav-search">
-						<li data-icon="delete" style="background-color:#111;">
-							<a href="#" data-rel="close">Fermer le menu</a>
-						</li>
-						<li data-filtertext="wai-aria voiceover accessibility screen reader">
-							<a href="../about/accessibility.html">Accessibilité</a>
-						</li>
-						<li data-filtertext="accordions collapsible set collapsible-set collapsed">
-							<a href="../content/content-collapsible-set.html">Accordéons</a>
-						</li>
-						<li data-filtertext="ajax navigation model">
-							<a href="../pages/page-navmodel.html">Modèle de navigation Ajax</a>
-						</li>
-						<li data-filtertext="anatomy of page viewport">
-							<a href="../pages/page-anatomy.html">Anatomie de la page</a>
-						</li>
-						<li data-filtertext="events api animationComplete transition css">
-							<a href="../api/events.html">Événements d'animation</a>
-						</li>
-						<li data-filtertext="listview autodivider">
-							<a href="../lists/lists-autodividers.html">Séparateurs automatiques de liste</a>
-						</li>
-						<li data-filtertext="button link submit cancel image reset mini buttonmarkup enable disable">
-							<a href="../buttons/buttons-types.html">Boutons</a>
-						</li>
-						<li data-filtertext="button icon">
-							<a href="../buttons/buttons-icons.html"> Icônes des boutons</a>
-						</li>
-						<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
-							<a href="../pages/page-cache.html">Mise en cache des pages</a>
-						</li>
-						<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
-							<a href="../forms/checkboxes/">Case à cocher</a>
-						</li>
-						<li data-filtertext="button icon">
-							<a href="buttons/buttons-icons.html"> Icônes des boutons</a>
-						</li>
-						<li data-filtertext="data-prefetch loadpage domCache data-dom-cache size clear cleanup pagehide lazyload spinner loader">
-							<a href="../pages/page-cache.html">Mise en cache des pages</a>
-						</li>
-						<li data-filtertext="input forms multi select checkbox checks grouped horizontal toggle legend">
-							<a href="../forms/checkboxes/">Case à cocher</a>
-						</li>
-					</ul><!-- panel content goes here -->
 
-					
-				</div><!-- /panel -->
+            <div data-role="panel" data-position="right" data-display="push" id="add-form" data-theme="b">
 
-				<style>
-					.userform { padding:.8em 1.2em; }
-					.userform h2 { color:#555; margin:0.3em 0 .8em 0; padding-bottom:.5em; border-bottom:1px solid rgba(0,0,0,.1); }
-					.userform label { display:block; margin-top:1.2em; }
-					.switch .ui-slider-switch { width: 6.5em !important }
-					.ui-grid-a { margin-top:1em; padding-top:.8em; margin-top:1.4em; border-top:1px solid rgba(0,0,0,.1); }
-                </style>
+                <form class="userform">
+                    <h2>Créer un nouvel utilisateur</h2>
+                    <label for="name">Nom</label>
+                    <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
 
-				<div data-role="panel" data-position="right" data-position-fixed="false" data-display="overlay" id="add-form" data-theme="b">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" id="status" value="" data-clear-btn="true" data-mini="true">
 
-					<form class="userform">
-						<h2>Créer un nouvel utilisateur</h2>
-						<label for="name">Nom</label>
-						<input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+                    <label for="password">Mot de passe :</label>
+                    <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
 
-						<label for="email">Email</label>
-						<input type="email" name="email" id="status" value="" data-clear-btn="true" data-mini="true">
+                    <div class="switch">
+                    <label for="status">Statut</label>
+                    <select name="status" id="slider" data-role="slider" data-mini="true">
+                        <option value="off">Inactif</option>
+                        <option value="on">Actif</option>
+                    </select>
+                    </div>
 
-						<label for="password">Mot de passe :</label>
-						<input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+                    <div class="ui-grid-a">
+                        <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true">Annuler</a></div>
+                        <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Enregistrer</a></div>
+                    </div>
+                </form>
 
-						<div class="switch">
-						<label for="status">Statut</label>
-						<select name="status" id="slider" data-role="slider" data-mini="true">
-						    <option value="off">Inactif</option>
-						    <option value="on">Actif</option>
-						</select>
-						</div>
-
-						<div class="ui-grid-a">
-						    <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true">Annuler</a></div>
-						    <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Enregistrer</a></div>
-						</div>
-					</form><!-- panel content goes here -->
-
-					
-				</div><!-- /panel -->
+            </div><!-- /panel -->
 				
 		</div><!-- /page -->
+        
+        <div data-role="page" id="panel-unfixed-page2">
+        
+			<div data-role="header" data-theme="f">
+				<h1>Landing page</h1>
+				<a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+			</div><!-- /header -->
+            
+            <div data-role="content">
+        		<p>Ceci est juste une page.</p>
+                
+                <a href="#panel-unfixed-page1" data-role="button" data-inline="true" data-mini="true" data-icon="back" data-iconpos="left">Retour</a> <a href="../" data-role="button" data-inline="true" data-mini="true" data-icon="home" data-iconpos="left" data-ajax="false">Accueil</a>
+            </div><!-- /content -->
+        
+        </div><!-- /page -->
 	</body>
 </html>

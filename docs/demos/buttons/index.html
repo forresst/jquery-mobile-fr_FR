@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Boutons - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../../css/themes/default/jquery.mobile.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:300,400' rel='stylesheet' type='text/css'>
+	<script src="../../../js/jquery.js"></script>
+	<script src="../_assets/js/jquery.mobile.demos.js"></script>
+	<script src="../../../js/jquery.mobile.js"></script>
+</head>
+<body>
+<div data-role="page" class="demos">
+
+	<div data-role="panel" id="button-sections" data-position="right" data-display="overlay" data-theme="c" class="demo-sections">
+		
+		<ul data-role="listview" data-inset="false" data-theme="d" data-divider-theme="d" class="demo-nav">
+			<li class="demo-nav-header">Sauter vers une section</li>
+            <li><a href="#button-markup" data-ajax="false">Balisage</a></li>
+            <li><a href="#button-inline" data-ajax="false">Aligné</a></li>
+            <li><a href="#button-mini" data-ajax="false">Mini</a></li>
+            <li><a href="#button-theme" data-ajax="false">Thème</a></li>
+			<li><a href="#button-icons" data-ajax="false">Icônes</a></li>
+			<li><a href="#button-icon-position" data-ajax="false">Position d'icône</a></li>
+			<li><a href="#button-vertical-group" data-ajax="false">Groupe vertical</a></li>
+			<li><a href="#button-horizontal-group" data-ajax="false">Groupe horizontal</a></li>
+			<li><a href="#button-corners-shadows" data-ajax="false">Coins &amp; Ombres</a></li>
+        </ul>
+	</div>
+
+	<div data-role="header" data-theme="f">
+		<h1>jQuery Mobile</h1>
+		<a href="#panel-nav" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="../" data-icon="home" data-iconpos="notext" data-ajax="false">Accueil</a>
+	</div><!-- /header -->
+	
+	<div data-role="content" data-theme="c">
+				
+			<h1><a href="http://api.jquerymobile.com/button/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="api-link">API</a> des boutons</h1>
+
+		
+			<p class="demo-intro">Les boutons sont des widgets de base dans jQuery Mobile et sont utilisés dans beaucoup d'autres plugins. Le balisage du bouton est flexible et peut être créé depuis les liens ou les boutons de formulaires. <a href="#button-sections" class="demo-section-link">Sauter vers une section <span class="ui-icon ui-icon-bars">&nbsp;</span></a>
+			</p>
+			
+		
+			
+			
+			<h2 id="button-markup">Balisage</h2>
+			
+			<p>Utilisez les liens d'ancrage (éléments <code>a</code>) pour marquer les boutons de navigation et les éléments <code>input</code> ou <code>button</code> pour la soumission de formulaire. Par défaut, tous les boutons dans le contenu du corps sont stylisés comme élément de bloc-niveau afin qu'ils remplissent la largeur de l'écran :</p>
+			
+			<div data-demo-html="true">			
+				<a href="#" data-role="button">Ancre</a>
+				<form>
+					<button>Bouton</button>
+					<input type="button" value="Saisie">
+					<input type="submit" value="Valider">
+					<input type="reset" value="Remettre">
+				</form>
+			</div><!--/demo-html -->
+			
+			
+			<h2 id="button-inline">Aligné</h2>
+			
+			<p>Si vous avez plusieurs boutons qui doivent se positionner côte à côte sur la même ligne, ajoutez l'attribut <code>data-inline="true"</code> à chaque bouton. Cela stylisera les boutons avec la largeur de leur contenu ainsi les boutons seront positionner sur la même ligne. </p>
+				
+			<div data-demo-html="true">	
+				<p>
+					<a href="#" data-role="button" data-inline="true">Vrai</a> <a href="#" data-role="button" data-inline="true">Faux</a>
+				</p>
+			</div><!--/demo-html -->
+			
+			
+			<h2 id="button-theme">Thème</h2>
+			
+			<p>Les boutons peuvent être attribuées manuellement à n'importe quels nuanciers de couleur des boutons à partir du thème pour ajouter du contraste visuel avec le conteneur, il faut le positionner à l'intérieur en ajoutant l'attribut <code> data-theme</code> sur la balise bouton et une lettre précisant le nuancier. Quand un lien est ajouté à un conteneur, il lui est attribué automatiquement une lettre de nuancier de thème qui correspond à la barre ou la boîte de contenu du son parent pour visuellement intégrer le bouton dans le conteneur parent, comme un caméléon.</p>
+			
+			<div data-demo-html="true">	
+				<p>
+					<a href="#" data-role="button" data-theme="a" data-inline="true">A</a>
+					<a href="#" data-role="button" data-theme="b" data-inline="true">B</a>
+					<a href="#" data-role="button" data-theme="c" data-inline="true">C</a>
+					<a href="#" data-role="button" data-theme="d" data-inline="true">D</a>
+					<a href="#" data-role="button" data-theme="e" data-inline="true">E</a>
+				</p>
+			</div><!--/demo-html -->
+			
+			
+			<h2 id="button-mini">Mini</h2>		  
+			
+			<p>Pour avoir une version plus compacte, qui est utile dans les barres d'outils et les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> au bouton pour créer une version mini</a>. </p> 
+			 
+			<div data-demo-html="true">			
+				<p>
+					<a href="#" data-role="button" data-mini="true" data-inline="true">Annuler</a> <a href="#" data-role="button" data-mini="true" data-inline="true" data-icon="check" data-theme="b">Commander</a>
+				</p>
+			</div><!--/demo-html -->
+			
+
+			
+				  
+			<h2 id="button-icons">Icônes</h2>
+			
+			<p>Une icône peut être ajouté à un bouton en ajoutant un attribut <code> data-icon</code> attribut sur le point d'ancrage en spécifiant l'icône à afficher.</p> 
+			
+			<div data-demo-html="true">			
+				<a href="index.html" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="c" data-inline="true">Plus</a> <a href="index.html" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true">Moins</a> <a href="index.html" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="c" data-inline="true">Actualiser</a> <a href="index.html" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="c" data-inline="true">Transférer</a> <a href="index.html" data-role="button" data-icon="back" data-iconpos="notext" data-theme="c" data-inline="true">Retour</a> <a href="index.html" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true">Grille</a> <a href="index.html" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="c" data-inline="true">Barres de Menu</a> <a href="index.html" data-role="button" data-icon="star" data-iconpos="notext" data-theme="c" data-inline="true">Étoile</a><a href="index.html" data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true">Vérifié</a> <a href="index.html" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="c" data-inline="true">Alerte</a> <a href="index.html" data-role="button" data-icon="info" data-iconpos="notext" data-theme="c" data-inline="true">Info</a> <a href="index.html" data-role="button" data-icon="home" data-iconpos="notext" data-theme="c" data-inline="true">Accueil</a> <a href="index.html" data-role="button" data-icon="search" data-iconpos="notext" data-theme="c" data-inline="true">Rechercher</a> <a href="index.html" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="c" data-inline="true">Modifier</a> <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="c" data-inline="true">Flèche gauche</a> <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="c" data-inline="true">Flèche droite</a> <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="c" data-inline="true">Flèche haut</a> <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="c" data-inline="true">Flèche bas</a>
+			</div><!--/demo-html -->
+
+			
+
+			
+			<h2 id="button-icon-position">Position d'icône</h2>
+			
+			<p>Par défaut, toutes les icônes dans les boutons sont placés à la gauche du texte du bouton. Ce défaut peut être modifiée en utilisant l'attribut <code> data-iconpos</code> pour définir l'icône à la droite (right), au-dessus (top) ou en dessous (bottom) du texte. Vous pouvez également créer un bouton icône seule, en définissant l'attribut  <code>data-iconpos</code> à <code>notext</code>. Le plugin bouton masquera le texte à l'écran, mais l'ajoutera comme un attribut <code>title</code> sur le lien pour fournir un contexte pour les lecteurs d'écran et les appareils qui supportent les infobulles.</p>
+			
+			<div data-demo-html="true">	
+					<a href="#" data-role="button" data-inline="true">Texte seul</a> <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="left" data-inline="true">Gauche</a> <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="right" data-inline="true">Droite</a> <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="top" data-inline="true">Haut</a> <a href="#" data-role="button" data-icon="arrow-d" data-iconpos="bottom" data-inline="true">Bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-inline="true">Icône seule</a>
+			</div><!--/demo-html -->
+			
+			<h2 id="button-vertical-group">Groupe vertical</h2>
+			
+			<p>Pour regrouper, visuellement un ensemble de boutons pour former un seul bloc, enveloppez un ensemble de boutons dans un container avec l'attribut <code>data-role="controlgroup"</code> — le framework créera un groupe de boutons vertical, enlèvera toutes les marges et les ombres portées entre les boutons et laissera seulement  l'arrondi du premier et dernier bouton de la série pour créer un effet de regroupement. </p>
+			
+			<div data-demo-html="true">	
+				<div data-role="controlgroup">
+					<a href="#" data-role="button">Timeline</a>
+					<a href="#" data-role="button">Mentions</a>
+					<a href="#" data-role="button">Retweets</a>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h2 id="button-horizontal-group">Groupe horizontal</h2>
+			
+			<p>En ajoutant l'attribut <code>data-type="horizontal"</code> au container <code>controlgroup</code>, vous pouvez transformer en un groupe horizontal qui positionne les boutons côte à côte et définir une largeur pour être assez grand pour accueillir le contenu.</p>
+			
+			<div data-demo-html="true">	
+				<div data-role="controlgroup" data-type="horizontal">
+					<a href="#" data-role="button">Oui</a> <a href="#" data-role="button">Non</a> <a href="#" data-role="button">Peut être</a>
+				</div>
+			</div><!--/demo-html -->
+			  
+			<p>Boutons minis groupés horizontalement, icônes seulement :</p>
+			<div data-demo-html="true">	
+				<div data-role="controlgroup" data-type="horizontal" data-mini="true">
+				    <a href="#" data-role="button" data-icon="plus" data-theme="b">Ajouter</a> <a href="#" data-role="button" data-icon="delete" data-theme="b">Supprimer</a> <a href="#" data-role="button" data-icon="grid" data-theme="b">Plus</a>
+				</div>
+			</div><!--/demo-html -->
+			
+			<h2 id="button-corners-shadows">Coins &amp; Ombres</h2>
+			
+			<p>Il existe des options pour contrôler les coins arrondis (<code>data-corners</code>), les ombres portées (<code>data-shadow</code>), et l'ombre de l'icône pour la surbrillance sous le disque de l'icône (<code>data-iconshadow</code>).</p>
+			
+			<div data-demo-html="true">			
+				<a href="#" data-role="button" data-icon="gear" data-theme="b">Par défaut</a> <a href="#" data-role="button" data-icon="gear" data-corners="false" data-theme="b">Sans coins arrondis</a> <a href="#" data-role="button" data-icon="gear" data-shadow="false" data-theme="b">Sans ombre</a> <a href="#" data-role="button" data-icon="gear" data-iconshadow="false" data-theme="b">Pas d'ombre du disque de l'icône</a>
+			</div><!--/demo-html -->
+			
+			
+			
+			<h2>Désactivé</h2>
+			
+			<p>Les boutons et les saisie du formulaire peuvent être désactivé via l'attribut <code>disabled</code>. Les liens stylisés comme les boutons, ont les mêmes options visuelles comme sur les boutons d'un formulaire, mais ils ne font pas partie du plugin  <code>bouton</code> ainsi les méthodes de bouton de formulaire (activer, désactiver, de rafraîchissement) ne sont pas pris en charge. Si vous avez besoin de désactiver un lien basé sur le bouton (ou tout autre élément), il est possible de lui appliquer la classe  ui-disabled avec du JavaScript afin de réaliser le même effet.</p>
+			
+			<div data-demo-html="true">			
+				<a href="#" data-role="button" class="ui-disabled">Désactiver une ancre via une classe</a>
+				<form>
+					<button disabled>Bouton avec l'attribut disabled</button>
+					<input type="button" value="Saisie avec l'attribut disabled" disabled>
+				</form>
+			</div><!--/demo-html -->
+			
+	</div><!-- /content -->
+	
+	<div data-role="footer" data-theme="c" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /jqm-footer -->
+	
+
+	
+<?php include( '../nav.html' ); ?>
+    
+
+    
+</div><!-- /page -->
+</body>
+</html>
