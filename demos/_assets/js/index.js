@@ -204,6 +204,16 @@
 	});
 })( jQuery );
 
+  var _gaq = _gaq || [];
+  $(document).ready(function(e) {
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 
+                  '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    }); 
+
 // Désactiver AJAX pour la navigation des fichiers locaux
 if ( location.protocol.substr(0,4)  === 'file' ||
      location.protocol.substr(0,11) === '*-extension' ||
@@ -349,7 +359,18 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 
 $( document ).on( "pageshow",  ".jqm-demos", function() {
 	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
-});
+
+  try {
+      _gaq.push(['_setAccount', 'UA-827525-9']);
+      console.log($.mobile.activePage.attr("data-url"));
+      if ($.mobile.activePage.attr("data-url")) {
+        _gaq.push(['_trackPageview', $.mobile.activePage.attr("data-url")]);
+      } else {
+        _gaq.push(['_trackPageview']);
+      }
+    } catch(err) {}
+
+  });
 
 $( document ).on( "pageshow", ".jqm-demos-search-results", function() {
 	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1], self = this;

@@ -1,6 +1,6 @@
 /*
 * jQuery Mobile 1.4.0pre
-* Git HEAD hash: b43189764d70c0b7684e177ef60878d0eeab4f02 <> Date: Mon Jun 10 2013 20:17:43 UTC
+* Git HEAD hash: b43189764d70c0b7684e177ef60878d0eeab4f02 <> Date: Mon Jun 10 2013 21:37:51 UTC
 * http://jquerymobile.com
 *
 * Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors
