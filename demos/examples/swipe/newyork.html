@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>New York</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="stylesheet" href="swipe-page.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+	<script src="swipe-page.js"></script>
+</head>
+<body>
+
+<div data-role="page" id="newyork" class="demo-page" data-dom-cache="true" data-theme="a" data-next="buenosaires">
+
+    <div data-role="header" data-position="fixed" data-fullscreen="true" data-id="hdr" data-tap-toggle="false">
+        <h1>New York</h1>
+        <a href="swipe-page.html" data-ajax="false" data-direction="reverse" data-icon="delete" data-iconpos="notext" data-shadow="false" data-icon-shadow="false">Retour</a>
+    </div><!-- /header -->
+  
+	<div data-role="content">
+    
+		<div id="trivia-newyork" class="trivia ui-content" data-role="popup" data-position-to="window" data-tolerance="50,30,30,30" data-theme="d">
+        	<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Fermer</a>
+			<p>Bien que de nombreuses légendes existent sur ​​l'origine du surnom de New York : la Grosse Pomme, la plupart des historiens s'accordent à dire que l'origine revient à un écrivain qui a couvert les courses de chevaux dans les années 1920. Dans Le Morning Telegraph, il a écrit que les meilleurs sont souvent appelés à New York comme la Grosse Pomme, ce qui signifie que tout pur-sang qui a couru à New York avait atteint l'apogée de la course. <small>source:&nbsp;nylady.hubpages.com</small></p>
+        </div>
+
+	</div><!-- /content -->
+
+    <div data-role="footer" data-position="fixed" data-fullscreen="true" data-id="ftr" data-tap-toggle="false">
+		<div data-role="controlgroup" class="control ui-btn-left" data-type="horizontal" data-mini="true">
+        	<a href="#" class="prev" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="d">Précédent</a> <a href="#" class="next" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="d">Suivant</a>
+        </div>
+        
+		<a href="#trivia-newyork" data-rel="popup" class="trivia-btn ui-btn-right" data-role="button" data-icon="info" data-iconpos="left" data-theme="d" data-mini="true">Trivia</a>
+    </div><!-- /footer -->
+
+</div><!-- /page -->
+
+</body>
+</html>

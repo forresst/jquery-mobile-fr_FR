@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Positionnement fixe du panneau - Démos jQuery Mobile</title>
+    <link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+    <link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+    <script src="../../_assets/js/index.js"></script>
+    <script src="../../js/jquery.mobile.min.js"></script>
+    <style>
+        .nav-search .ui-btn-up-a {
+            background-image: none;
+            background-color: #333;
+        }
+        .nav-search .ui-btn-inner {
+            border-top: 1px solid #888;
+            border-color: rgba(255, 255, 255, .1);
+        }
+        .nav-search .ui-btn.ui-first-child {
+            border-top-width: 0;
+            background: #111;
+        }
+        .userform {
+			padding: .8em 1.2em;
+		}
+        .userform h2 {
+			color: #555;
+			margin: 0.3em 0 .8em 0;
+			padding-bottom: .5em;
+			border-bottom: 1px solid rgba(0,0,0,.1);
+		}
+        .userform label {
+			display: block;
+			margin-top: 1.2em;
+		}
+        .ui-grid-a {
+			margin-top: 1em;
+			padding-top: .8em;
+			margin-top: 1.4em;
+			border-top: 1px solid rgba(0,0,0,.1);
+		}
+    </style>
+</head>
+<body>
+<div data-role="page" class="jqm-demos ui-responsive-panel" id="panel-fixed-page1">
+
+    <div data-role="header" data-theme="f" data-position="fixed">
+        <h1>Entête fixe</h1>
+        <a href="#nav-panel" data-icon="bars" data-iconpos="notext">Menu</a> <a href="#add-form" data-icon="gear" data-iconpos="notext">Ajouter</a>
+    </div><!-- /header -->
+
+    <div data-role="content" class="jqm-content">
+
+    	<h1>Panneaux</h1>
+
+		<h2>Positionnement fixe</h2>
+
+        <p>Il s'agit d'une page typique qui dispose de deux boutons dans la barre d'entête pour ouvrir les panneaux. Le panneau gauche a le mode d'affichage reveal. Le panneau droit s'ouvre avec le mode overlay. Pour les deux panneaux nous définissons <code>data-position-fixed="true"</code>. Nous avons également défini une position fixe pour l'entête et le pied de page sur cette page.</p>
+
+        <p>Le panneau de gauche contient une longue liste pour démontrer que le framework vérifiera la hauteur du contenu du panneau et "défixera" le panneau de sorte que son contenu puisse défiler. Dans le panneau de droite, il y a un petit formulaire qui montre le positionnement fixe.</p>
+
+		<h2>Responsive</h2>
+
+        <p>Pour rendre cela responsive, vous pouvez augmenter la largeur du navigateur. Cela permet à la fois au menu du panneau reveal et à la page d'être utilisés ensemble lorsqu'il y a plus d'espace disponible. Ce comportement est contrôlé par des CSS media queries. Vous pouvez en créer un, sur mesure par un point d'arrêt spécifique ou utiliser le point d'arrêt prédéfini en ajoutant <code> class="ui-responsive-panel"</code> au conteneur de la page. Nous avons ajouté cette classe sur cette page de démonstration.</p>
+
+        <a href="./" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Retour aux panneaux</a>
+
+		<div data-demo-html="#panel-fixed-page1" data-demo-css="true"></div><!--/demo-html -->
+
+	</div><!-- /content -->
+
+    <div data-role="footer" data-position="fixed" data-theme="f">
+    	<h4>Pied de page fixe</h4>
+    </div><!-- /footer -->
+
+	<div data-role="panel" data-position-fixed="true" data-theme="a" id="nav-panel">
+
+		<ul data-role="listview" data-theme="a" class="nav-search">
+            <li data-icon="delete"><a href="#" data-rel="close">Fermer le menu</a></li>
+                <li><a href="#panel-fixed-page2">Accordéon</a></li>
+                <li><a href="#panel-fixed-page2">Navigation AJAX</a></li>
+                <li><a href="#panel-fixed-page2">Autocomplete</a></li>
+                <li><a href="#panel-fixed-page2">Boutons</a></li>
+                <li><a href="#panel-fixed-page2">Cases à cocher</a></li>
+                <li><a href="#panel-fixed-page2">Pliables</a></li>
+                <li><a href="#panel-fixed-page2">Controlgroup</a></li>
+                <li><a href="#panel-fixed-page2">Boîtes de dialogue</a></li>
+                <li><a href="#panel-fixed-page2">Barres d'outils fixes</a></li>
+                <li><a href="#panel-fixed-page2">Interrupteur</a></li>
+                <li><a href="#panel-fixed-page2">Barre d'outils de pied de page</a></li>
+                <li><a href="#panel-fixed-page2">Éléments de formulaire</a></li>
+                <li><a href="#panel-fixed-page2">Grilles</a></li>
+                <li><a href="#panel-fixed-page2">Barre d'outils d'entête</a></li>
+                <li><a href="#panel-fixed-page2">Icônes</a></li>
+                <li><a href="#panel-fixed-page2">Liens</a></li>
+                <li><a href="#panel-fixed-page2">Listes</a></li>
+                <li><a href="#panel-fixed-page2">Chargeur</a></li>
+                <li><a href="#panel-fixed-page2">Barre de navigation</a></li>
+                <li><a href="#panel-fixed-page2">Barre de navigation persistante</a></li>
+                <li><a href="#panel-fixed-page2">Pages</a></li>
+                <li><a href="#panel-fixed-page2">Nouveau</span></a></li>
+                <li><a href="#panel-fixed-page2">Popup</a></li>
+                <li><a href="#panel-fixed-page2">Radio boutons</a></li>
+                <li><a href="#panel-fixed-page2">Sélection</a></li>
+                <li><a href="#panel-fixed-page2">Curseur seule</a></li>
+                <li><a href="#panel-fixed-page2">Nouveau</span></a></li>
+                <li><a href="#panel-fixed-page2">Nouveau</span></a></li>
+                <li><a href="#panel-fixed-page2">Nouveau</span></a></li>
+                <li><a href="#panel-fixed-page2">Textes de saisie &amp; zone de saisie</a></li>
+                <li><a href="#panel-fixed-page2">Transitions</a></li>
+		</ul>
+
+	</div><!-- /panel -->
+
+	<div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
+
+        <form class="userform">
+
+        	<h2>Connexion</h2>
+
+            <label for="name">Nom de l'utilisateur :</label>
+            <input type="text" name="name" id="name" value="" data-clear-btn="true" data-mini="true">
+
+            <label for="password">Mot de passe :</label>
+            <input type="password" name="password" id="password" value="" data-clear-btn="true" autocomplete="off" data-mini="true">
+
+            <div class="ui-grid-a">
+                <div class="ui-block-a"><a href="#" data-rel="close" data-role="button" data-theme="c" data-mini="true">Annuler</a></div>
+                <div class="ui-block-b"><a href="#" data-rel="close" data-role="button" data-theme="b" data-mini="true">Enregistrer</a></div>
+			</div>
+        </form>
+
+	</div><!-- /panel -->
+
+</div><!-- /page -->
+
+<div data-role="page" id="panel-fixed-page2">
+
+    <div data-role="header" data-theme="f">
+        <h1>Landing page</h1>
+    </div><!-- /header -->
+
+    <div data-role="content" class="jqm-content">
+
+        <p>Ceci est juste une page.</p>
+
+        <a href="#panel-fixed-page1" data-role="button" data-inline="true" data-mini="true" data-icon="back" data-iconpos="left">Retour</a>
+
+    </div><!-- /content -->
+
+</div><!-- /page -->
+</body>
+</html>

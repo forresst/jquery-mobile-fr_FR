@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Transitions - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+
+	<div data-role="page" id="page-success" data-dom-cache="true"><!-- page-->
+		<div data-role="header" data-theme="a">
+			<h1>Page</h1>
+		</div><!-- /header -->
+
+		<div data-role="content" data-theme="d">
+			<p>Cela était un effet de transition de page animée que nous avons ajouté avec un attribut <code>data-transition</code> sur le lien. Cet exemple utilise un thème différent de background pour voir à quoi ça ressemble avec les transitions.</p>
+			<p>Comme cela utilise des animations CSS, cela devrait être accéléré matériellement sur de nombreux appareils mobiles. Pour voir les transitions, le support de la transformation 3D est nécessaire. Si vous ne voyez qu'une transition en fondu, c'est que votre navigateur ou votre appareil ne le supporte pas.</p>
+
+			<form action="#" method="get">
+				<h2>Voici quelques éléments de formulaire</h2>
+
+				<p>Il s'agit de voir si cela ralentit le rendu.</p>
+
+				<div data-role="fieldcontain">
+		         <label for="name">Saisie de texte :</label>
+		         <input type="text" name="name" id="name" value=""  />
+				</div>
+
+				<div data-role="fieldcontain">
+				<label for="textarea">Zone de texte :</label>
+				<textarea cols="40" rows="8" name="textarea" id="textarea"></textarea>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="slider2">Interrupteur :</label>
+					<select name="slider2" id="slider2" data-role="slider">
+						<option value="off">Arrêt</option>
+						<option value="on">Marche</option>
+					</select>
+				</div>
+
+				<div data-role="fieldcontain">
+					<label for="slider">Curseur :</label>
+				 	<input type="range" name="slider" id="slider" value="0" min="0" max="100" data-highlight="true" />
+				</div>
+
+			</form>
+
+			<a href="index.html" data-role="button" data-theme="b" data-rel="back" data-inline="true">Retour</a>
+		</div>
+
+		<div data-role="footer" data-theme="d">
+			<div style="margin:5px 10px;"><!-- To add a bit of spacing -->
+			<label for="search" class="ui-hidden-accessible">Recherche :</label>
+	        <input type="search" name="password" id="search" placeholder="Search..." value="" />
+			</div>
+		</div><!-- /footer -->
+	</div>
+</body>
+</html>

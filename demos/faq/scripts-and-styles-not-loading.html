@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Q&amp;A - jQuery Mobile : Pourquoi mes styles et mes scripts ne se chargent pas ?</title>
+	<link rel="stylesheet"  href="../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos jqm-faq">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+			<h2>Question :</h2>
+
+			<h1>Pourquoi mes styles et mes scripts ne se chargent pas ?</h1>
+
+			<h2>Réponse :</h2>
+
+			<p class="jqm-intro">Le système de navigation AJAX de jQuery Mobile charge uniquement l'enveloppe de la page dans le contenu, les scripts et les styles dans  <code>head</code> sont ignorés donc vous avez besoin de planifier le chargement et l'organisation de ces ressources.</p>
+
+			<p>Lorsque l'utilisateur clique sur un lien dans un site basé sur jQuery Mobile, le comportement par défaut du système de navigation est d'utiliser le <code>href</code> d'un lien pour formuler une requête AJAX (au lieu de permettre le comportement du lien par défaut du navigateur en requêtant le <code>href</code> avec un chargement complet de la page). Quand cette requête Ajax sort, le framework recevra son contenu de texte en entier, mais il injectera seulement le <em>contenu de la réponse de l'élément <code>body</code> (ou plus précisément l'élément <code>data-role="page"</code>, s'il est fourni)</em>, ce qui ne signifie que rien dans le <code>head</code> de la page sera utilisé (à l'exception du titre de la page, qui est récupérée en particulier) . Veuillez noter que le script chargé dynamiquement de cette façon ne garantit pas un ordre de chargement de la même manière que si la page avait été chargée via une requête HTTP normale.</p>
+
+				<p> Cela signifie que tous les scripts et les styles référencés du <code>head</code> d'une page n'auront aucun effet <em>quand une page est chargée via Ajax</em>, mais ils <strong>seront exécutés si la page est demandée normalement via HTTP</strong>. En écrivant les sites jQuery Mobile, les deux scénarios doivent être envisagés. La raison pour laquelle le <code>head</code> d'une page est ignoré, lorsque qu'elle est requêtée via Ajax, est que le potentiel de ré-exécuter le même JavaScript est très élevé (il est courant de faire référence aux mêmes scripts dans chaque page d'un site) . En raison de la complexité pour tenter de contourner ce problème, nous laissons la tâche d'exécution des scripts de la page spécifique pour le développeur et assumons que les scripts du <code>head</code> sont uniquement prévus pour être exécutés une fois par session de navigation.</p>
+
+				<p>L'approche la plus simple lors de la construction d'un site jQuery Mobile est de faire référence au même ensemble de feuilles de style et aux scripts dans le head de chaque page. Si vous avez besoin de charger des scripts ou des styles spécifiques pour une page particulière, nous recommandons la liaison logique à l'événement <code>pageinit</code> (les détails ci-dessous) pour exécuter du code nécessaire quand une page spécifique est créée (qui peut être déterminée par ses <code>id</code> attribuées ou par d'autres manières). Suite à cette approche, cela garantira que le code s'exécute si la page est chargée directement ou est tirée et affichée via AJAX.</p>
+
+				<p>Une autre approche pour l'écriture de script spécifique de page serait d'inclure les scripts à la fin de l'élément <code>body</code> lorsqu'aucun élément <code>data-role=page</code> est défini, ou à l'intérieur du premier élément <code>data-role=page</code>. Si vous incluez vos scripts personnalisés de cette façon, soyez conscient que ces scripts s'exécuteront lorsque cette page sera chargée via AJAX ou une requête régulière HTTP, donc si ces scripts sont les mêmes sur chaque page, vous aurez probablement des problèmes. Si vous incluez les scripts de cette façon, nous vous recommandons d'englober le contenu de votre page dans un élément <code>data-role="page"</code> et de placer des scripts qui sont référencés sur chaque page en dehors de cet élément. Les scripts qui sont uniques à cette page peuvent être placés dans cet élément, afin de s'assurer qu'ils s'exécutent lorsque la page est récupérée via AJAX.</p>
+
+			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">Toutes les Questions &amp; Réponses</a>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+</body>
+</html>

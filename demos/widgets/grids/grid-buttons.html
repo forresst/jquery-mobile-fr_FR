@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Boutons dans les grilles - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+	<style>
+		.my-grid > div {
+			text-align: center;
+		}
+	</style>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+    
+    	<h1>Boutons dans les grilles</h1>
+        
+        <p class="jqm-intro">Sur cette page, vous voyez des exemples où vous pouvez utiliser des grilles pour mettre en page les boutons.</p>
+
+
+        <h2>Basique</h2>
+        
+        <p>Boutons dans les grilles pour obtenir une petite marge à gauche et à droite.</p>
+
+        <div data-demo-html="true">
+            <div class="ui-grid-a">
+                <div class="ui-block-a"><button data-theme="b">Confirmer</button></div>
+                <div class="ui-block-b"><button data-theme="d">Annuler</button></div>
+            </div>
+        </div><!--/demo-html -->
+
+
+        <h2>Icône seule, centrée</h2>
+        
+        <p>Les boutons alignés peuvent être centrés en ajoutant <code>text-align: center;</code> à votre CSS personnalisé.</p>
+
+        <div data-demo-html="true" data-demo-css="true">
+            <div class="ui-grid-d my-grid">
+                <div class="ui-block-a"><button data-icon="home" data-iconpos="notext" data-inline="true">Bouton</button></div>
+                <div class="ui-block-b"><button data-icon="arrow-l" data-iconpos="notext" data-inline="true">Bouton</button></div>
+                <div class="ui-block-c"><button data-icon="grid" data-iconpos="notext" data-inline="true">Bouton</button></div>
+                <div class="ui-block-d"><button data-icon="arrow-r" data-iconpos="notext" data-inline="true">Bouton</button></div>
+                <div class="ui-block-e"><button data-icon="gear" data-iconpos="notext" data-inline="true">Bouton</button></div>
+            </div>
+        </div><!--/demo-html -->
+
+
+        <h2>Taille mini</h2>
+
+        <div data-demo-html="true">
+            <div class="ui-grid-b">
+                <div class="ui-block-a"><a href="#" data-role="button" data-mini="true">Ancre</a></div>
+                <div class="ui-block-b"><button data-mini="true">Bouton</button></div>
+                <div class="ui-block-c"><input type="button" data-mini="true" value="Saisie"></div>
+            </div>
+        </div><!--/demo-html -->
+
+
+        <h2>Sélection &amp; Case à cocher</h2>
+
+        <div data-demo-html="true">
+			<form>
+                <div class="ui-grid-a">
+                    <div class="ui-block-a">
+                        <label for="grid-select-1" class="ui-hidden-accessible">Sélection</label>
+                        <select id="grid-select-1" name="grid-select-1" data-shadow="false">
+                            <option>Sélection</option>
+                            <option value="1">Première Option</option>
+                            <option value="2">Deuxième Option</option>
+                            <option value="3">Troisième Option</option>
+                            <option value="4">Quatrième Option</option>
+                        </select>
+                    </div>
+                    <div class="ui-block-b">
+                        <label for="grid-checkbox-1">Case à cocher</label>
+                        <input type="checkbox" id="grid-checkbox-1">
+                    </div>
+                </div>
+            </form>
+        </div><!--/demo-html -->
+
+
+        <h2>Responsive</h2>
+        
+        <p>Il n'est pas recommandé d'avoir de nombreux boutons avec du texte sur une ligne sur de petits écrans, parce que le texte pourrait être tronqué. Vous pouvez utiliser les <a href="./">grilles responsive</a> pour empiler les boutons sur de petits écrans. Ici, nous utilisons le point d'arrêt prédéfini du framework en ajoutant la classe <code>ui-responsive</code> au conteneur.</p>
+
+        <div data-demo-html="true">
+            <div class="ui-grid-b ui-responsive">
+                <div class="ui-block-a"><a href="#" data-role="button" data-icon="arrow-l">Retour à la commande</a></div>
+                <div class="ui-block-b"><button data-icon="plus">Ajouter des produits</button></div>
+                <div class="ui-block-c"><input type="button" data-icon="check" data-iconpos="right" value="Confirmer la commande"></div>
+            </div>
+        </div><!--/demo-html -->
+
+
+        <h2>Alignement</h2>
+        
+        <p>Utilisez une grille seule pour aligner un seul bouton avec des boutons dans d'autres grilles.</p>
+
+        <div data-demo-html="true">
+            <div class="ui-grid-b ui-responsive">
+                <div class="ui-block-a"><a href="#" data-role="button">Grille B</a></div>
+                <div class="ui-block-b"><a href="#" data-role="button">Grille B</a></div>
+                <div class="ui-block-c"><a href="#" data-role="button">Grille B</a></div>
+            </div>
+            <div class="ui-grid-a ui-responsive">
+                <div class="ui-block-a"><a href="#" data-role="button">Grille A</a></div>
+                <div class="ui-block-b"><a href="#" data-role="button">Grille A</a></div>
+            </div>
+            <div class="ui-grid-solo">
+                <a href="#" data-role="button">Grille Solo</a>
+            </div>
+            <br>
+            <a href="#" data-role="button" data-theme="e">Pas de classe grille</a>
+        </div><!--/demo-html -->
+        
+        
+		<a href="./" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Retour aux grilles</a>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+</body>
+</html>

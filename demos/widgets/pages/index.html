@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pages - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+
+			<h1>Pages <a href="http://api.jquerymobile.com/page/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+
+			<p class="jqm-intro">
+				La page est l'unité primaire de l'interaction dans jQuery Mobile et elle est utilisée pour grouper le contenu dans des vues logiques qui peuvent être animées dans et hors de la vue avec des transitions de page. Un document HTML peut commencer avec une seule "page" et le système de navigation AJAX va charger des pages supplémentaires à la demande dans les DOM lorsque les utilisateurs naviguent. Alternativement, un document HTML peut être construit avec plusieurs «pages» à l'intérieur et le framework fera la transition entre ces vue locales sans avoir besoin de demander le contenu au serveur.
+			</p>
+
+			<h2>La structure d'une page mobile</h2>
+
+			<p>Un site jQuery Mobile doit commencer par un  <code>doctype</code> HTML5 pour profiter pleinement de toutes les fonctionnalités du framework. (Les anciens appareils possédant des navigateurs qui ne comprennent pas le HTML5 vont ignorer le 'doctype' et divers attributs personnalisés.) </p>
+			<p>Dans le <code>head</code>, les références pour jQuery, jQuery Mobile et le CSS du thème mobile sont tous nécessaires pour démarrer les choses. jQuery Mobile 1.3.0 fonctionne avec les versions jQuery de la 1.7.0 à la 1.9.1. La meilleure façon de commencer est de mettre un lien vers les fichiers hébergés sur le CDN de jQuery ou pour de meilleures performances, <a href="http://jquerymobile.com/download-builder/" rel="external">construire un lot personnalisé</a> :</p>
+
+<pre><code>
+<strong>&lt;!DOCTYPE html&gt; </strong>
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;Titre de la page&lt;/title&gt;
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" /&gt;
+	&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+	&lt;script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+	...le contenu se place ici...
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+			<h2>La balise META viewport</h2>
+            
+			<p>Notez ci-dessus qu'il y a une balise META <code>viewport</code> dans le <code>head</code> pour préciser comment le navigateur doit afficher le niveau de zoom de la page et les dimensions. Si ce n'est pas défini, de nombreux navigateurs mobiles vont utiliser une largeur « virtuelle » de la page autour de 900 pixels pour lui permettre de bien travailler avec les sites existants de bureau, mais les écrans peuvent avoir un look dézoomé et trop large. En définissant les attributs de viewport à <code>content="width=device-width, initial-scale=1"</code>, la largeur sera mise à celle de la largeur en pixels de l'écran de l'appareil. </p>
+
+<pre><code>
+&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+</code></pre>
+
+			<p>Ces paramètres ne désactivent pas la capacité de l'utilisateur de zoomer sur les pages, ce qui est agréable dans une perspective d'accessibilité. Il y a un problème mineur dans iOS qui ne définit pas correctement la largeur lors d'un changement d'orientation avec ces paramètres viewport, mais ce sera, espérons le, corrigé dans une future version. Vous pouvez définir d'autres valeurs viewport pour désactiver le zoom, si nécessaire, car cela fait partie du contenu de votre page et non de la bibliothèque. </p>
+
+
+			<h2>A l'intérieur du body : les pages</h2>
+            
+			<p>A l'intérieur de la balise <code>&lt;body&gt;</code>, chaque vue ou "page" sur l'appareil mobile est identifié par un élément (généralement un <code>div</code>) avec l'attribut <code> data-role="page"</code>. </p>
+
+<pre><code>
+&lt;div data-role="page"&gt;
+	...
+&lt;/div&gt;
+</code></pre>
+
+			<p>Au sein du conteneur de la "page", n'importe quel balisage HTML valide peut être utilisé, mais pour les pages typiques de jQuery Mobile, les enfants immédiats d'une « page » sont des divs avec des data-roles <code>"header"</code>, <code>"content"</code> et <code>"footer"</code>.</p>
+
+
+<pre><code>
+&lt;div data-role="page"&gt;
+	&lt;div data-role="header"&gt;...&lt;/div&gt;
+	&lt;div data-role="content"&gt;...&lt;/div&gt;
+	&lt;div data-role="footer"&gt;...&lt;/div&gt;
+&lt;/div&gt;</span>
+</code></pre>
+
+
+<h2>En assemblant le tout : c'est un modèle de page unique standard</h2>
+
+<p>En assemblant la totalité, c'est le modèle passe-partout standard de page, vous devez commencer avec un projet : </p>
+
+<pre><code>
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+	&lt;title&gt;Titre de la page&lt;/title&gt;
+
+	&lt;meta name="viewport" content="width=device-width, initial-scale=1"&gt;
+
+	&lt;link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" /&gt;
+	&lt;script src="http://code.jquery.com/jquery-1.9.1.min.js"&gt;&lt;/script&gt;
+	&lt;script src="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.js"&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+&lt;div data-role="page"&gt;
+
+	&lt;div data-role="header"&gt;
+		&lt;h1&gt;Titre de la page&lt;/h1&gt;
+	&lt;/div&gt;&lt;!-- /header --&gt;
+
+	&lt;div data-role="content"&gt;
+		&lt;p&gt;Le contenu de la page se place ici.&lt;/p&gt;
+	&lt;/div&gt;&lt;!-- /content --&gt;
+
+	&lt;div data-role="footer"&gt;
+		&lt;h4&gt;Pied de page&lt;/h4&gt;
+	&lt;/div&gt;&lt;!-- /footer --&gt;
+&lt;/div&gt;&lt;!-- /page --&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;
+</code></pre>
+
+		<a href="page-template.html" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Modèle de page</a>
+
+		<h2>La structure du modèle multi-page</h2>
+
+			<p>Un unique document HTML peut contenir plusieurs "pages" qui sont chargées ensemble par l'empilage de divs avec le <code> data-role</code> de <code>"page"</code>. Chaque bloc de "page" a besoin d'un ID unique (<code>id="foo"</code>) qui sera utilisé pour relier en interne les "pages" entre elles (<code>href="# foo"</code>). Quand un lien est cliqué, le framework va chercher une "page" interne avec l'ID et la fait apparaitre via une transition.</p>
+
+			<p>Voici un exemple de deux "pages" du site construites avec deux divs jQuery Mobile navigables en liant un ID placé sur l'enveloppe de chaque page. Notez que les ids sur les conteneurs de page sont uniquement nécessaires pour supporter les liens internes des pages, et ils sont facultatifs si chaque page est un document HTML distinct. Voici à quoi correspond  deux pages à l'intérieur de l'élément  <code>body</code>.</p>
+
+<pre><code>
+&lt;body&gt;
+
+&lt;!-- Début de la première page --&gt;
+&lt;div data-role="page" id="foo"&gt;
+
+	&lt;div data-role="header"&gt;
+		&lt;h1&gt;Foo&lt;/h1&gt;
+	&lt;/div&gt;&lt;!-- /header --&gt;
+
+	&lt;div data-role="content"&gt;
+		&lt;p&gt;e suis le premier dans l'ordre de la source donc je suis la page affichée.&lt;/p&gt;
+		&lt;p&gt;Voir la page interne appelée &lt;a href="#bar"&gt;bar&lt;/a&gt;&lt;/p&gt;
+	&lt;/div&gt;&lt;!-- /content --&gt;
+
+	&lt;div data-role="footer"&gt;
+		&lt;h4&gt;Pied de page&lt;/h4&gt;
+	&lt;/div&gt;&lt;!-- /footer --&gt;
+&lt;/div&gt;&lt;!-- /page --&gt;
+
+&lt;!-- Début de la seconde page --&gt;
+&lt;div data-role="page" id="bar"&gt;
+
+	&lt;div data-role="header"&gt;
+		&lt;h1&gt;Bar&lt;/h1&gt;
+	&lt;/div&gt;&lt;!-- /header --&gt;
+
+	&lt;div data-role="content"&gt;
+		&lt;p&gt;e suis le deuxième dans l'ordre de la source donc je suis caché lors du chargement de la page. Je suis juste montré, si un lien qui référence mon ID est cliqué.&lt;/p&gt;
+		&lt;p&gt;&lt;a href="#foo"&gt;Retour vers foo&lt;/a&gt;&lt;/p&gt;
+	&lt;/div&gt;&lt;!-- /content --&gt;
+
+	&lt;div data-role="footer"&gt;
+		&lt;h4&gt;Pied de page&lt;/h4&gt;
+	&lt;/div&gt;&lt;!-- /footer --&gt;
+&lt;/div&gt;&lt;!-- /page --&gt;
+&lt;/body&gt;
+</code></pre>
+
+		<a href="multipage-template.html" class="jqm-button" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right">Voir un modèle multi-page</a>
+
+		<p>MERCI DE NOTER : Puisque nous utilisons le hash pour suivre l'historique de navigation pour toutes les "pages" AJAX, il n'est pas possible actuellement de faire un lien vers une ancre (<code>index.html#foo</code>) sur une page en jQuery Mobile. Car le framework va chercher une "page" avec un <code>id</code> <code>#foo</code> au lieu d'utiliser le comportement natif qui consiste à se déplacer vers le contenu de cet <code>id</code>.</p>
+
+		<p>L'attribut  <code>id</code> de tous vos éléments doivent être non seulement unique sur une page donnée, mais aussi unique à travers les pages d'un site. C'est parce que le modèle de navigation d'une seule page de jQuery Mobile permet à de nombreuses "pages" différentes d'être présentes dans le DOM au même moment. Cette disposition s'applique également lorsque vous utilisez un modèle multi-page, puisque tous les "pages" sur le modèle sont chargés en une seule fois.</p>
+
+	<h2>C'est des conventions, ce n'est pas des obligations</h2>
+
+	<p>Bien que la structure de la page décrite au-dessus est une méthode recommandée pour la construction avec jQuery Mobile d'une application web standard, le framework est très flexible avec la structure du document. Les éléments data-role : page, header, content et footer sont facultatifs et ils sont surtout utiles pour fournir un formatage et une structure de base. L'enveloppement utilisé pour la page est obligatoire pour que l'auto-initialisation fonctionne, mais cela est désormais facultatif pour les documents de page unique donc il n'y a pas l'obligation de tout baliser. Pour une page web avec une mise en page personnalisée, l'ensemble de ces éléments structuraux peuvent être omis, la navigation AJAX et tous les widgets fonctionneront exactement comme ils le font dans la structure passe-partout. En arrière plan, le framework va injecter l'enveloppement de la page si elle n'est pas incluse dans le balisage, car c'est nécessaire pour gérer les pages, mais le balisage de départ peut maintenant être extrêmement simple. </p>
+
+	<p><strong>Notez</strong> que dans une configuration multi-page, vous êtes tenus d'avoir l'enveloppement de page dans votre balisage afin de regrouper le contenu dans plusieurs pages.</p>
+
+	<p><strong>Autre Note :</strong> Si votre body contient aucun divs <code>data-role="page"</code>, jQuery Mobile enveloppe entièrement le contenu du body à l'intérieur d'un div de page comme expliqué au dessus. jQuery Mobile utilise la méthode de jQuery <code>wrapAll()</code> pour faire ceci qui cherche des balises de script à l'intérieur du contenu enveloppé et charge chaque source de script via XHR. Si les scripts sont présents dans le corps, le navigateur termine en les chargeant deux fois. Nous recommandons donc vivement que les documents jQuery Mobile avec des scripts dans leur body contiennent aussi un <code>div</code> avec <code>data-role="page"</code>.
+	</p>
+
+	<h2 id="nav-prefetch">Préchargement des pages</h2>
+
+	<p>Lors de l'utilisation des modèles d'une seule page, vous pouvez précharger les pages dans le DOM afin qu'ils soient disponibles instantanément lorsque l'utilisateur les visites. Pour précharger une page, ajouter l'attribut <code>data-prefetch</code> à un lien qui pointe vers la page. jQuery mobile charge ensuite la page cible en arrière plan après que la page principale soit chargée et que l'événement <code>pagecreate</code> soit déclenché.
+
+	<div data-demo-html="true">
+
+		<a href="../dialog/dialog-alt.html" data-prefetch="true" data-rel="dialog">Ce lien pré-chargera la page</a>
+
+	</div><!--/demo-html -->
+
+  <p>Alternativement, vous pouvez précharger une page par programme en utilisant <code>$.mobile.loadPage()</code> :</p>
+
+<pre><code>
+$.mobile.loadPage( <var>pageUrl</var>, { showLoadMsg: false } );
+</code></pre>
+
+		<h2 id="nav-cache">Cache du DOM</h2>
+
+		<p>Cependant, le maintien d'anciennes pages dans les DOM remplit rapidement la mémoire du navigateur, et peut, sur certains navigateurs mobiles, ralentir ou même planter. jQuery Mobile a un mécanisme simple pour garder le DOM rangé. </p>
+		<p>Chaque fois qu'il charge une page via Ajax, il marque la page pour qu'elle soit retirée du DOM lorsque vous en sortez (techniquement, sur l'événement <code>pagehide</code>). Si vous revisitez une page enlevée, le navigateur peut être en mesure de récupérer le fichier HTML de la page dans son cache. Si ce n'est pas le cas, il recharge le fichier depuis le serveur. (Dans le cas des vues de liste imbriquée, jQuery Mobile supprime toutes les pages qui composent la liste imbriquée une fois que vous accédez à une page qui ne fait pas partie de la liste.)</p>
+
+		<p>Si vous préférez, vous pouvez dire à jQuery Mobile de conserver les pages visitées précédemment dans le DOM au lieu de les éliminer. Cela vous permet de mettre en cache les pages afin qu'elles soient disponibles instantanément si l'utilisateur revient vers elles.</p>
+
+<pre><code>
+$.mobile.page.prototype.options.domCache = true;
+</code></pre>
+
+		<p>Sinon, pour mettre en cache seulement une page particulière, vous pouvez ajouter l'attribut  <code>data-dom-cache="true"</code> au conteneur de la page. </p>
+
+		<p>Pour garder toutes les pages visitées précédemment dans le DOM, définissez l'option <code>domCache</code> sur le plugin page à <code>true</code> comme ceci :</p>
+
+<pre><code>
+<var>pageContainerElement</var>.page({ domCache: true });
+</code></pre>
+
+		<p>Notez que le contenu de la première page n'est pas supprimé du DOM, seules les pages chargées via AJAX. Les pages à l'intérieur d'un modèle multi-page ne sont pas affectées par cette fonction pour tout - jQuery Mobile supprime uniquement les pages chargées via AJAX.</p>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+</body>
+</html>

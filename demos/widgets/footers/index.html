@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Pieds de page - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+
+			<h1>Pieds de page <a href="http://api.jquerymobile.com/footer/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+
+			<p class="jqm-intro">Le pied de page est une barre d'outils au bas de la page qui peut contenir un large éventail de contenus, comme des éléments de formulaire jusqu'à des barres de navigation.
+			</p>
+
+			<h2>Balisage du pied de page</h2>
+
+			<p>La barre <code>footer</code> a la même structure de base qu'une <a href="../headers/">entête</a> sauf qu'elle utilise l'attribut <code> data-role</code> avec la valeur <code>footer</code>. La barre d'outils <code>footer</code> sera thématisé avec le nuancier "a" par défaut (noir dans le thème par défaut) mais vous pouvez facilement définir une couleur de nuancier du thème.</p>
+
+			<div data-demo-html="true">
+				<div data-role="footer" class="ui-bar">
+					<a href="#" data-icon="plus">Ajouter</a> <a href="#" data-icon="arrow-u">Haut</a> <a href="#" data-icon="arrow-d">Bas</a>
+				</div>
+			</div><!-- /demo-html -->
+
+			<p>La page "pied de page" est très similaire à l'entête en termes d'options et de configuration. La principale différence est que le pied de page est conçu pour être moins structuré que l'entête, afin de permettre plus de flexibilité, de sorte que le framework ne place pas automatiquement des boutons à gauche ou à droite comme cela est fait dans l'entête. Étant donné que les pieds de page n'ont pas les mêmes conventions de balisage prescriptible comme les entêtes, nous recommandons l'utilisation de la mise en page <a href="../grids/">grids</a> ou des styles personnalisés pour réaliser la conception que vous voulez dans un pied de page.</p>
+
+				<p>Tout lien ou <a href="../buttons/">balisage de button</a> valide ajouté au pied de page sera automatiquement transformé en un bouton. Pour gagner de l'espace, les boutons dans les barres d'outils sont automatiquement mis avec un style en ligne de sorte que le bouton soit aussi large que le texte et l'icône qu'elle contient.  </p>
+
+				<p>Par défaut les barres d'outils n'ont pas de espacement pour accueillir les barres de navigation et d'autres widgets. Pour inclure un espacement sur la barre, ajouter un <code>class="ui-bar"</code> au pied de page.</p>
+
+			</p>Notez que <code>.ui-bar</code> ne doit pas être ajouté à l'entête ou au pied de page des barres qui s'étendent sur toute la largeur de la page, car l'espacement supplémentaire entraînera un élément sur ​​toute la largeur qui sortira de son conteneur parent. Pour ajouter de l'espace à l'intérieur d'une barre d'outils sur toute la largeur il est recommandé d'envelopper le contenu de la barre d'outils dans un élément, et d'appliquer l'espacement à cet élément.</p>
+
+			<h2>Groupement des boutons</h2>
+
+			<p>Pour regrouper les boutons dans un ensemble de bouton, envelopper les liens dans un éléments avec les attributs  <code> data-role="controlgroup"</code> et <code>data-type="horizontal"</code>.</p>
+
+<code>&lt;div data-role="controlgroup" data-type="horizontal"&gt;</code>
+
+			<p>Cela crée un ensemble groupé de boutons :</p>
+
+			<div data-role="footer" class="ui-bar">
+				<div data-role="footer" class="ui-bar">
+					<div data-role="controlgroup" data-type="horizontal">
+						<a href="#" data-icon="plus">Ajouter</a> <a href="#" data-icon="arrow-u">Haut</a> <a href="#" data-icon="arrow-d">Bas</a>
+					</div>
+				</div>
+			</div>
+
+			<h2>Ajout d'éléments de formulaire</h2>
+
+			<p>Les éléments de <a href="../forms/">formulaire</a> et d'autres contenus peuvent également être ajoutés aux barres d'outils. Voici un exemple de menu de <a href="../selects/">sélection</a>  à l'intérieur d'une barre de pied de page : Nous recommandons l'utilisation des éléments de formulaire de taille mini dans les barres d'outils en ajoutant l'attribut <code>data-mini="true"</code> :</p>
+
+			<div data-role="footer" class="ui-bar">
+				<label for="select-choice-1">Livraison :</label>
+				<select name="select-choice-1" id="select-choice-1" data-theme="a" data-mini="true">
+					<option value="standard">Lent : 7 jours</option>
+					<option value="rush">Rapide : 3 jours</option>
+					<option value="express">Express : Le lendemain</option>
+					<option value="overnight">De nuit</option>
+				</select>
+			</div>
+
+					<h2>Pieds de page persistants et fixes</h2>
+					<p>Dans les situations où le pied de page est un élément de navigation globale, vous pouvez le voir apparaître <a href="../fixed-toolbars/">fixe</a> et il n'est pas scroller dans la vue. Il est aussi possible de faire une barre d'outils fixe <a href="../fixed-toolbars/footer-persist-a.html">persistante</a> ainsi il ne bouge pas pendant les <a href="../transitions/" data-ajax="false">transitions de page</a>. Ceci peut être accompli en utilisant la fonctionnalité persistante du pied de page inclus dans jQuery Mobile.</p>
+
+					<p>Pour faire un pied de page persistant entre les transitions, ajoutez l'attribut<code>data-id</code> pour le pied de page de toutes les pages pertinentes et utilisez le même <code>id</code> pour chaque page. Par exemple, en ajoutant <code>data-id="myfooter"</code> à la page en cours et à la page cible, le framework gardera les ancres de pied de page au même endroit durant l'animation page. <strong>Cet effet fonctionnera correctement seulement si l'entête et le pied de page des barres d'outils sont définis avec <code>data-position="fixed"</code> de sorte qu'ils soient visibles durant la transition.</strong></p>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+</body>
+</html>

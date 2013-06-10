@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Icônes - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+
+        <h1>Icônes</h1>
+
+        <p class="jqm-intro">Un ensemble d'icônes intégré dans jQuery Mobile peut être appliqué aux boutons, aux pliables, aux listes et plus encore.
+        </p>
+
+        <h2>Ensemble d'icône</h2>
+
+        <p>Les attributs <code> data-icon</code> suivants peuvent être référencés pour créer les icônes ci-dessous :</p>
+
+        <div data-demo-html="true">
+            <p><strong>Barres</strong> - data-icon="bars"</p>
+            <a href="index.html" data-role="button" data-icon="bars">Mon bouton</a>
+            <p><strong>Modifier</strong> - data-icon="edit"</p>
+            <a href="index.html" data-role="button" data-icon="edit">Mon bouton</a>
+            <p><strong>Flèche gauche</strong> - data-icon="arrow-l"</p>
+            <a href="index.html" data-role="button" data-icon="arrow-l">Mon bouton</a>
+            <p><strong>Flèche droite</strong> - data-icon="arrow-r"</p>
+            <a href="index.html" data-role="button" data-icon="arrow-r">Mon bouton</a>
+            <p><strong>Flèche haut</strong> - data-icon="arrow-u"</p>
+            <a href="index.html" data-role="button" data-icon="arrow-u">Mon bouton</a>
+            <p><strong>Flèche bas</strong> - data-icon="arrow-d"</p>
+            <a href="index.html" data-role="button" data-icon="arrow-d">Mon bouton</a>
+            <p><strong>Supprimer</strong> - data-icon="delete"</p>
+            <a href="index.html" data-role="button" data-icon="delete">Mon bouton</a>
+            <p><strong>Plus</strong> - data-icon="plus"</p>
+            <a href="index.html" data-role="button" data-icon="plus">Mon bouton</a>
+            <p><strong>Moins</strong> - data-icon="minus"</p>
+            <a href="index.html" data-role="button" data-icon="minus">Mon bouton</a>
+            <p><strong>Coché</strong> - data-icon="check"</p>
+            <a href="index.html" data-role="button" data-icon="check">Mon bouton</a>
+            <p><strong>Mécanisme</strong> - data-icon="gear"</p>
+            <a href="index.html" data-role="button" data-icon="gear">Mon bouton</a>
+            <p><strong>Actualiser</strong> - data-icon="refresh"</p>
+            <a href="index.html" data-role="button" data-icon="refresh">Mon bouton</a>
+            <p><strong>Avancer</strong> - data-icon="forward"</p>
+            <a href="index.html" data-role="button" data-icon="forward">Mon bouton</a>
+            <p><strong>Reculer</strong> - data-icon="back"</p>
+            <a href="index.html" data-role="button" data-icon="back">Mon bouton</a>
+            <p><strong>Grille</strong> - data-icon="grid"</p>
+            <a href="index.html" data-role="button" data-icon="grid">Mon bouton</a>
+            <p><strong>Étoile</strong> - data-icon="star"</p>
+            <a href="index.html" data-role="button" data-icon="star">Mon bouton</a>
+            <p><strong>Alerte</strong> - data-icon="alert"</p>
+            <a href="index.html" data-role="button" data-icon="alert">Mon bouton</a>
+            <p><strong>Info</strong> - data-icon="info"</p>
+            <a href="index.html" data-role="button" data-icon="info">Mon bouton</a>
+            <p><strong>Accueil</strong> - data-icon="home"</p>
+            <a href="index.html" data-role="button" data-icon="home">Mon bouton</a>
+            <p><strong>Rechercher</strong> - data-icon="search"</p>
+            <a href="index.html" data-role="button" data-icon="search">Mon bouton</a>
+        </div><!--/demo-html -->
+
+		<h2>Positionnement d'icône</h2>
+
+		<p>Par défaut, toutes les icônes dans les boutons sont placés à la gauche du texte du bouton. Ce défaut peut être modifiée en utilisant l'attribut <code> data-iconpos</code> pour définir l'icône à la droite (right), au-dessus (top) ou en dessous (bottom) du texte. </p>
+
+		<div data-demo-html="true">
+			<a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="left">Gauche</a> <a href="index.html" data-role="button" data-icon="arrow-r" data-iconpos="right">Droite</a> <a href="index.html" data-role="button" data-icon="arrow-u" data-iconpos="top">Haut</a> <a href="index.html" data-role="button" data-icon="arrow-d" data-iconpos="bottom">Bas</a>
+		</div><!--/demo-html -->
+
+		<h2>Positionnement d'icône seul</h2>
+
+		<p>Vous pouvez également créer un bouton icône seule, en définissant l'attribut  <code> data-iconpos</code> à <code>notext</code>. Le plugin bouton masquera le texte à l'écran, mais l'ajoutera comme un attribut <code>title</code> sur le lien pour fournir un contexte pour les lecteurs d'écran et les appareils qui supportent les infobulles.</p>
+
+        <div data-demo-html="true">
+            <a href="index.html" data-role="button" data-icon="delete" data-iconpos="notext">Supprimer</a>
+        </div><!--/demo-html -->
+
+        <h2>Suppression du disque et de l'ombre</h2>
+
+        <p>Il y a un disque sombre semi-opaque derrière chaque icône afin d'assurer un bon contraste lorsqu'il est placé sur une couleur de fond. Si vous préférez ne pas avoir ce disque, il peut être éliminé par l'ajout de la classe <code>ui-icon-nodisc</code> à l'élément ou son conteneur. Définissez <code>data-iconshadow="false"</code> pour désactiver l'ombre de l'icône.<p>
+
+        <div data-demo-html="true" data-demo-css="#icon-bg-demo">
+            <a href="index.html" class="ui-icon-nodisc" data-role="button" data-iconshadow="false" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">Pas de disque ou ombre</a> <a href="index.html" class="ui-icon-nodisc" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">Pas de disque</a> <a href="index.html" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="notext" data-inline="true">Standard</a>
+
+        </div><!--/demo-html -->
+
+		<p>Exemple de classe étant appliquée à une enveloppe.</p>
+		<div data-demo-html="true">
+		<div class="ui-icon-nodisc"><!-- Class added to the wrapper -->
+			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b" data-iconshadow="false" data-inline="true">Barres</a> <a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Modifier</a> <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Flèche gauche</a> <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Flèche droite</a> <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Flèche haut</a> <a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Flèche bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Supprimer</a> <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Plus</a> <a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Moins</a> <a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Vérifier</a> <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Outils</a> <a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Actualiser</a> <a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Suivant</a> <a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Retour</a> <a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Grille</a> <a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Alerte</a> <a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Info</a> <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Accueil</a> <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="b" data-iconshadow="false"data-inline="true">Rechercher</a>
+		</div>
+		</div><!--/demo-html -->
+
+        <h2>Ensembles d'icône Noir contre Blanc</h2>
+
+        <p>L'icône blanc ou noir est définie au niveau du thème mais vous pouvez modifier ce qui est utilisé en ajoutant la classe <code>ui-icon-alt</code> à l'élément ou à son conteneur. Cela modifie également la couleur qui est utilisé pour les disques.<p>
+
+        <div data-demo-html="true">
+            <a href="index.html" class="ui-icon-alt" data-role="button" data-icon="home" data-iconpos="notext" data-inline="true">Accueil - Icônes noir, pas de disque</a> <a href="index.html" data-role="button" data-icon="home" data-iconpos="notext" data-inline="true">Accueil - Standard</a>
+        </div><!--/demo-html -->
+
+		<p>Exemple de classe étant appliquée à une enveloppe.</p>
+
+		<div data-demo-html="true" class="ui-icon-alt">
+		<div class="ui-icon-alt"><!-- Class added to the wrapper -->
+			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="c" data-inline="true">Barres</a> <a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="c" data-inline="true">Modifier</a> <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="c" data-inline="true">Flèche gauche</a> <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="c" data-inline="true">Flèche droite</a> <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="c" data-inline="true">Flèche haut</a> <a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="c" data-inline="true">Flèche bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="c" data-inline="true">Supprimer</a> <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="c" data-inline="true">Plus</a> <a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true">Moins</a> <a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true">Vérifier</a> <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Outils</a> <a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="c" data-inline="true">Actualiser</a> <a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="c" data-inline="true">Suivant</a> <a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="c" data-inline="true">Retour</a> <a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true">Grille</a> <a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="c" data-inline="true">Alerte</a> <a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="c" data-inline="true">Info</a> <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="c" data-inline="true">Accueil</a> <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="c" data-inline="true">Rechercher</a>
+		</div>
+		</div><!--/demo-html -->
+
+		<p>Exemple de classe appliquée aux <code>UL</code> ou <code>OL</code> pour changer les icônes noires pour élément de la liste.</p>
+		<div data-demo-html="true">
+			<ul data-role="listview" data-inset="true" class="ui-icon-alt">
+				<li><a href="#">Acura</a></li>
+				<li><a href="#">Audi</a></li>
+				<li><a href="#">BMW</a></li>
+				<li><a href="#">Cadillac</a></li>
+				<li><a href="#">Ferrari</a></li>
+			</ul>
+		</div><!--/demo-html -->
+
+		<p>Exemple de classe étant appliquée à un pliable.</p>
+
+		<div data-demo-html="true">
+            <div data-role="collapsible" class="ui-icon-alt" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+                <h4>Entête</h4>
+                <p>Je suis le contenu pliable. Par défaut je suis fermé, mais vous pouvez cliquer sur l'entête pour m'ouvrir.</p>
+            </div>
+        </div><!--/demo-html -->
+
+        <h2>Icônes personnalisées</h2>
+
+        <p>Pour utiliser des icônes personnalisés, spécifiez une valeur <code>data-icon</code> qui a un nom unique, comme <code>myapp-email</code> et le plugin bouton générera une classe en préfixant <code>ui-icon-</code> à la valeur <code> data-icon</code> et l'appliquera au bouton :  <code>ui-icon-myapp-email</code>.</p>
+
+        <p>Vous pouvez alors écrire une règle CSS qui cible la classe <code>ui-icon-myapp-email</code> pour spécifier la source d'arrière plan de l'icône. Afin de maintenir une cohérence visuelle avec le reste des icônes, créez une icône blanche de 18x18 pixels enregistrées au format PNG-8 avec transparence alpha.</p>
+
+        <p> Dans cet exemple, nous pointons juste vers une image d'icône autonome, mais vous pourriez tout aussi bien utiliser une icône de sprite et préciser le positionnement à la place, tout comme le sprite icône que nous utilisons dans le framework.</p>
+
+<pre><code>
+.ui-icon-myapp-email {
+	background-image: url("app-icon-email.png");
+}
+</code></pre>
+
+		<p>Cela va créer l'icône avec une résolution standard, mais de nombreux appareils ont maintenant un affichage en très haute résolution, comme l'écran Retina de l'iPhone 4. Pour ajouter une icône HD, créez une icône de 36x36 pixels (exactement le double de la taille de 18 pixels), et ajoutez la deuxième règle qui utilise le média query <code>-webkit-min-device-pixel-ratio: 2</code> pour cibler une seule règle d'affichage de haute résolution. Précisez l'image de fond pour le fichier d'icône HD et définissez la taille de fond à 18x18 pixels qui s'adaptera sur l'icône 36 pixels dans le même espace de 18 pixels. Le block du média query peut envelopper plusieurs règles d'icône :</p>
+
+<pre><code>
+@media only screen and (-webkit-min-device-pixel-ratio: 2) {
+	.ui-icon-myapp-email {
+		background-image: url("app-icon-email-highres.png");
+		background-size: 18px 18px;
+	}
+	... d'autres règles d'icône HD ici...
+}
+</code></pre>
+
+		<h2>Les icônes et les thèmes</h2>
+
+		<p>Le demi-cercle noir transparent derrière l'icône blanche assure un bon contraste sur n'importe quelle couleur de fond de sorte qu'il fonctionne bien avec le système de thématisation de jQuery Mobile. Voici des exemples d'une même icône positionnée sur une gamme de différents nuanciers de couleurs avec <a href="buttons-themes.html">des boutons thématisés</a>.</p><!-- A themed -->
+
+		
+		<p><strong>Nuancier "a"</strong> boutons thématisés</p>
+
+		<div data-demo-html="true">
+			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="a" data-inline="true">Barres</a> <a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="a" data-inline="true">Modifier</a> <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="a" data-inline="true">Flèche gauche</a> <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="a" data-inline="true">Flèche droite</a> <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="a" data-inline="true">Flèche haut</a> <a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="a" data-inline="true">Flèche bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="a" data-inline="true">Supprimer</a> <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="a" data-inline="true">Plus</a> <a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="a" data-inline="true">Moins</a> <a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="a" data-inline="true">Vérifier</a> <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="a" data-inline="true">Outils</a> <a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="a" data-inline="true">Actualiser</a> <a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="a" data-inline="true">Suivant</a> <a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="a" data-inline="true">Retour</a> <a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="a" data-inline="true">Grille</a> <a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="a" data-inline="true">Alerte</a> <a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="a" data-inline="true">Info</a> <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="a" data-inline="true">Accueil</a> <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="a" data-inline="true">Rechercher</a>
+		</div><!--/demo-html --><!-- B themed -->
+
+		
+		<p><strong>Nuancier "b"</strong> boutons thématisés</p>
+
+		<div data-demo-html="true">
+			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="b" data-inline="true">Barres</a> <a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="b" data-inline="true">Modifier</a> <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="b" data-inline="true">Flèche gauche</a> <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="b" data-inline="true">Flèche droite</a> <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="b" data-inline="true">Flèche haut</a> <a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="b" data-inline="true">Flèche bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="b" data-inline="true">Supprimer</a> <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="b" data-inline="true">Plus</a> <a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="b" data-inline="true">Moins</a> <a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="b" data-inline="true">Vérifier</a> <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="b" data-inline="true">Outils</a> <a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="b" data-inline="true">Actualiser</a> <a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="b" data-inline="true">Suivant</a> <a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="b" data-inline="true">Retour</a> <a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="b" data-inline="true">Grille</a> <a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="b" data-inline="true">Alerte</a> <a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="b" data-inline="true">Info</a> <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="b" data-inline="true">Accueil</a> <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="b" data-inline="true">Rechercher</a>
+		</div><!--/demo-html --><!-- C themed -->
+
+		
+		<p><strong>Nuancier "c"</strong> boutons thématisés</p>
+
+		<div data-demo-html="true">
+			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="c" data-inline="true">Barres</a> <a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="c" data-inline="true">Modifier</a> <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="c" data-inline="true">Flèche gauche</a> <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="c" data-inline="true">Flèche droite</a> <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="c" data-inline="true">Flèche haut</a> <a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="c" data-inline="true">Flèche bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="c" data-inline="true">Supprimer</a> <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="c" data-inline="true">Plus</a> <a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="c" data-inline="true">Moins</a> <a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="c" data-inline="true">Vérifier</a> <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="c" data-inline="true">Outils</a> <a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="c" data-inline="true">Actualiser</a> <a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="c" data-inline="true">Suivant</a> <a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="c" data-inline="true">Retour</a> <a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="c" data-inline="true">Grille</a> <a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="c" data-inline="true">Alerte</a> <a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="c" data-inline="true">Info</a> <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="c" data-inline="true">Accueil</a> <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="c" data-inline="true">Rechercher</a>
+		</div><!--/demo-html --><!-- D themed -->
+
+		
+		<p><strong>Nuancier "d"</strong> boutons thématisés</p>
+
+		<div data-demo-html="true">
+			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="d" data-inline="true">Barres</a> <a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="d" data-inline="true">Modifier</a> <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="d" data-inline="true">Flèche gauche</a> <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="d" data-inline="true">Flèche droite</a> <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="d" data-inline="true">Flèche haut</a> <a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="d" data-inline="true">Flèche bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="d" data-inline="true">Supprimer</a> <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="d" data-inline="true">Plus</a> <a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="d" data-inline="true">Moins</a> <a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="d" data-inline="true">Vérifier</a> <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="d" data-inline="true">Outils</a> <a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="d" data-inline="true">Actualiser</a> <a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="d" data-inline="true">Suivant</a> <a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="d" data-inline="true">Retour</a> <a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="d" data-inline="true">Grille</a> <a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="d" data-inline="true">Alerte</a> <a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="d" data-inline="true">Info</a> <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="d" data-inline="true">Accueil</a> <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="d" data-inline="true">Rechercher</a>
+		</div><!--/demo-html --><!-- E themed -->
+
+		
+		<p><strong>Nuancier "e"</strong> boutons thématisés</p>
+
+		<div data-demo-html="true">
+			<a href="#" data-role="button" data-icon="bars" data-iconpos="notext" data-theme="e" data-inline="true">Barres</a> <a href="#" data-role="button" data-icon="edit" data-iconpos="notext" data-theme="e" data-inline="true">Modifier</a> <a href="#" data-role="button" data-icon="arrow-l" data-iconpos="notext" data-theme="e" data-inline="true">Flèche gauche</a> <a href="#" data-role="button" data-icon="arrow-r" data-iconpos="notext" data-theme="e" data-inline="true">Flèche droite</a> <a href="#" data-role="button" data-icon="arrow-u" data-iconpos="notext" data-theme="e" data-inline="true">Flèche haut</a> <a href="#" data-role="button" data-icon="arrow-d" data-iconpos="notext" data-theme="e" data-inline="true">Flèche bas</a> <a href="#" data-role="button" data-icon="delete" data-iconpos="notext" data-theme="e" data-inline="true">Supprimer</a> <a href="#" data-role="button" data-icon="plus" data-iconpos="notext" data-theme="e" data-inline="true">Plus</a> <a href="#" data-role="button" data-icon="minus" data-iconpos="notext" data-theme="e" data-inline="true">Moins</a> <a href="#" data-role="button" data-icon="check" data-iconpos="notext" data-theme="e" data-inline="true">Vérifier</a> <a href="#" data-role="button" data-icon="gear" data-iconpos="notext" data-theme="e" data-inline="true">Outils</a> <a href="#" data-role="button" data-icon="refresh" data-iconpos="notext" data-theme="e" data-inline="true">Actualiser</a> <a href="#" data-role="button" data-icon="forward" data-iconpos="notext" data-theme="e" data-inline="true">Suivant</a> <a href="#" data-role="button" data-icon="back" data-iconpos="notext" data-theme="e" data-inline="true">Retour</a> <a href="#" data-role="button" data-icon="grid" data-iconpos="notext" data-theme="e" data-inline="true">Grille</a> <a href="#" data-role="button" data-icon="alert" data-iconpos="notext" data-theme="e" data-inline="true">Alerte</a> <a href="#" data-role="button" data-icon="info" data-iconpos="notext" data-theme="e" data-inline="true">Info</a> <a href="#" data-role="button" data-icon="home" data-iconpos="notext" data-theme="e" data-inline="true">Accueil</a> <a href="#" data-role="button" data-icon="search" data-iconpos="notext" data-theme="e" data-inline="true">Rechercher</a>
+		</div><!--/demo-html -->
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+</body>
+</html>

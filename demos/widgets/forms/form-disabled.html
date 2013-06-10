@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Formulaire désactivé - Démos jQuery Mobile</title>
+    <link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+    <link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <script src="../../js/jquery.js"></script>
+    <script src="../../_assets/js/index.js"></script>
+    <script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos">
+
+    <div data-role="header" class="jqm-header">
+        <h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+        <a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+    </div><!-- /header -->
+    
+    <div data-role="content" class="jqm-content">
+    
+        <h1>Éléments de formulaire désactivés</h1>
+    
+        <form action="#" method="get">
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="textinput-1">Saisie de texte :</label>
+                    <input disabled="disabled" type="text" name="textinput-1" id="textinput-1" placeholder="Text input" value="">
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="search-1">Saisie pour recherche :</label>
+                    <input disabled="disabled" type="search" name="search-1" id="search-1" value="">
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="textarea-1">Zone de texte :</label>
+                    <textarea disabled="disabled" cols="40" rows="8" name="textarea-1" id="textarea-1">Zone de texte</textarea>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-native-1">Sélection Native :</label>
+                    <select disabled="disabled" name="select-native-1" id="select-native-1">
+                        <option value="small">Un</option>
+                        <option value="medium">Deux</option>
+                        <option value="large">Trois</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-multiple-1">Sélection multiple personnalisée :</label>
+                    <select disabled="disabled" multiple="multiple" data-native-menu="false" name="select-multiple-1" id="select-multiple-1">
+                        <option value="">Choix :</option>
+                        <option value="small">Un</option>
+                        <option value="medium">Deux</option>
+                        <option value="large">Trois</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <legend>Controlgroup Vertical, boutons :</legend>
+                        <button disabled="disabled" data-icon="home" data-iconpos="right">Un</button> <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Deux"> <a class="ui-disabled" href="#" data-role="button" data-icon="grid" data-iconpos="right">Trois</a>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Controlgroup Horizontal, boutons :</legend>
+                        <button disabled="disabled" data-icon="home" data-iconpos="right">Un</button> <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Deux"> <a class="ui-disabled" href="#" data-role="button" data-icon="grid" data-iconpos="right">Trois</a>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <legend>Controlgroup Vertical, sélection :</legend>
+                        <label for="select-v-1a">Sélection A</label>
+                        <select disabled="disabled" name="select-v-1a" id="select-v-1a">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                        <label for="select-v-1b">Sélection B</label>
+                        <select disabled="disabled" name="select-v-1b" id="select-v-1b">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                        <label for="select-v-1c">Sélection C</label>
+                        <select disabled="disabled" name="select-v-1c" id="select-v-1c">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Controlgroup Horizontal, sélection :</legend>
+                        <label for="select-h-1a">Sélection A</label>
+                        <select disabled="disabled" name="select-h-1a" id="select-h-1a">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                        <label for="select-h-1b">Sélection B</label>
+                        <select disabled="disabled" name="select-h-1b" id="select-h-1b">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                        <label for="select-h-1c">Sélection C</label>
+                        <select disabled="disabled" name="select-h-1c" id="select-h-1c">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Controlgroup Horizontal, mixé :</legend>
+                        <a class="ui-disabled" href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Lien</a> <button disabled="disabled" data-icon="grid" data-iconpos="notext">Bouton</button>
+                        <label for="select-v-1e">Sélection</label>
+                        <select disabled="disabled" name="select-v-1e" id="select-v-1e">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="slider-1">Curseur :</label>
+                    <input disabled="disabled" type="range" name="slider-1" id="slider-1" value="50" min="0" max="100" data-highlight="true">
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="flip-1">Interrupteur :</label>
+                    <select disabled="disabled" name="flip-1" id="flip-1" data-role="slider">
+                        <option value="off">Arrêt</option>
+                        <option value="on">Marche</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <legend>Case à cocher seule :</legend>
+                        <label for="checkbox-1">J'accepte</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-1" id="checkbox-1">
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <legend>Controlgroup Vertical, cases à cocher :</legend>
+                        <input disabled="disabled" type="checkbox" name="checkbox-v-1a" id="checkbox-v-1a">
+                        <label for="checkbox-v-1a">Un</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-v-1b" id="checkbox-v-1b">
+                        <label for="checkbox-v-1b">Deux</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-v-1c" id="checkbox-v-1c">
+                        <label for="checkbox-v-1c">Trois</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup">
+                        <legend>Controlgroup Vertical, radio boutons :</legend>
+                        <input disabled="disabled" type="radio" name="radio-choice-v-1" id="radio-choice-v-1a" value="on" checked="checked">
+                        <label for="radio-choice-v-1a">Un</label>
+                        <input disabled="disabled" type="radio" name="radio-choice-v-1" id="radio-choice-v-1b" value="off">
+                        <label for="radio-choice-v-1b">Deux</label>
+                        <input disabled="disabled" type="radio" name="radio-choice-v-1" id="radio-choice-v-1c" value="other">
+                        <label for="radio-choice-v-1c">Trois</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Controlgroup Horizontal, cases à cocher :</legend>
+                        <input disabled="disabled" type="checkbox" name="checkbox-h-1a" id="checkbox-h-1a">
+                        <label for="checkbox-h-1a">Un</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-h-1b" id="checkbox-h-1b">
+                        <label for="checkbox-h-1b">Deux</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-h-1c" id="checkbox-h-1c">
+                        <label for="checkbox-h-1c">Trois</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal">
+                        <legend>Controlgroup Horizontal, radio boutons :</legend>
+                        <input disabled="disabled" type="radio" name="radio-choice-h-1" id="radio-choice-h-1a" value="on" checked="checked">
+                        <label for="radio-choice-h-1a">Un</label>
+                        <input disabled="disabled" type="radio" name="radio-choice-h-1" id="radio-choice-h-1b" value="off">
+                        <label for="radio-choice-h-1b">Deux</label>
+                        <input disabled="disabled" type="radio" name="radio-choice-h-1" id="radio-choice-h-1c" value="other">
+                        <label for="radio-choice-h-1c">Trois</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="submit-1">Envoyer :</label>
+                    <button disabled="disabled" type="submit" id="submit-1">Valider</button>
+                </div>
+            </div><!--/demo-html -->
+    
+        </form>
+    
+        <h2>Taille mini</h2>
+    
+        <form action="#" method="get">
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="textinput-5">Saisie de texte :</label>
+                    <input disabled="disabled" type="text" name="textinput-5" id="textinput-5" placeholder="Text input" value="" data-mini="true">
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="search-5">Saisie pour recherche :</label>
+                    <input disabled="disabled" type="search" name="search-5" id="search-5" value="" data-mini="true">
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="textarea-5">Zone de texte :</label>
+                    <textarea disabled="disabled" cols="40" rows="8" name="textarea-5" id="textarea-5" data-mini="true">Zone de texte</textarea>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-native-5">Sélection Native :</label>
+                    <select disabled="disabled" name="select-native-5" id="select-native-5" data-mini="true">
+                        <option value="small">Un</option>
+                        <option value="medium">Deux</option>
+                        <option value="large">Trois</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="select-multiple-5">Sélection multiple personnalisée :</label>
+                    <select disabled="disabled" multiple="multiple" data-native-menu="false" name="select-multiple-5" id="select-multiple-5" data-mini="true">
+                        <option value="">Choix :</option>
+                        <option value="small">Un</option>
+                        <option value="medium">Deux</option>
+                        <option value="large">Trois</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Controlgroup Vertical, boutons :</legend>
+                        <button disabled="disabled" data-icon="home" data-iconpos="right">Un</button> <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Deux"> <a href="#" data-role="button" data-icon="grid" data-iconpos="right">Trois</a>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Controlgroup Horizontal, boutons :</legend>
+                        <button disabled="disabled" data-icon="home" data-iconpos="right">Un</button> <input disabled="disabled" type="button" data-icon="back" data-iconpos="right" value="Deux"> <a class="ui-disabled" href="#" data-role="button" data-icon="grid" data-iconpos="right">Trois</a>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Controlgroup Vertical, sélection :</legend>
+                        <label for="select-v-5a">Sélection A</label>
+                        <select disabled="disabled" name="select-v-5a" id="select-v-5a">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                        <label for="select-v-5b">Sélection B</label>
+                        <select disabled="disabled" name="select-v-5b" id="select-v-5b">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                        <label for="select-v-5c">Sélection C</label>
+                        <select disabled="disabled" name="select-v-5c" id="select-v-5c">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Controlgroup Horizontal, sélection :</legend>
+                        <label for="select-h-5a">Sélection A</label>
+                        <select disabled="disabled" name="select-h-5a" id="select-h-5a">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                        <label for="select-h-5b">Sélection B</label>
+                        <select disabled="disabled" name="select-h-5b" id="select-h-5b">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                        <label for="select-h-5c">Sélection C</label>
+                        <select disabled="disabled" name="select-h-5c" id="select-h-5c">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Controlgroup Horizontal, mixé :</legend>
+                        <a class="ui-disabled" href="#" data-role="button" data-icon="arrow-r" data-iconpos="right">Lien</a> <button disabled="disabled" data-icon="grid" data-iconpos="notext">Bouton</button>
+                        <label for="select-v-5e">Sélection</label>
+                        <select disabled="disabled" name="select-v-5e" id="select-v-5e">
+                            <option value="#">Un</option>
+                            <option value="#">Deux</option>
+                            <option value="#">Trois</option>
+                        </select>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="slider-5">Curseur :</label>
+                    <input disabled="disabled" type="range" name="slider-5" id="slider-5" value="50" min="0" max="100" data-highlight="true" data-mini="true">
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="flip-5">Interrupteur :</label>
+                    <select disabled="disabled" name="flip-5" id="flip-5" data-role="slider" data-mini="true">
+                        <option value="off">Arrêt</option>
+                        <option value="on">Marche</option>
+                    </select>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Case à cocher seule :</legend>
+                        <label for="checkbox-5">J'accepte</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-5" id="checkbox-5">
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Controlgroup Vertical, cases à cocher :</legend>
+                        <input disabled="disabled" type="checkbox" name="checkbox-v-5a" id="checkbox-v-5a">
+                        <label for="checkbox-v-5a">Un</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-v-5b" id="checkbox-v-5b">
+                        <label for="checkbox-v-5b">Deux</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-v-5c" id="checkbox-v-5c">
+                        <label for="checkbox-v-5c">Trois</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-mini="true">
+                        <legend>Controlgroup Vertical, radio boutons :</legend>
+                        <input disabled="disabled" type="radio" name="radio-choice-v-5" id="radio-choice-v-5a" value="on" checked="checked">
+                        <label for="radio-choice-v-5a">Un</label>
+                        <input disabled="disabled" type="radio" name="radio-choice-v-5" id="radio-choice-v-5b" value="off">
+                        <label for="radio-choice-v-5b">Deux</label>
+                        <input disabled="disabled" type="radio" name="radio-choice-v-5" id="radio-choice-v-5c" value="other">
+                        <label for="radio-choice-v-5c">Trois</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Controlgroup Horizontal, cases à cocher :</legend>
+                        <input disabled="disabled" type="checkbox" name="checkbox-h-5a" id="checkbox-h-5a">
+                        <label for="checkbox-h-5a">Un</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-h-5b" id="checkbox-h-5b">
+                        <label for="checkbox-h-5b">Deux</label>
+                        <input disabled="disabled" type="checkbox" name="checkbox-h-5c" id="checkbox-h-5c">
+                        <label for="checkbox-h-5c">Trois</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <fieldset data-role="controlgroup" data-type="horizontal" data-mini="true">
+                        <legend>Controlgroup Horizontal, radio boutons :</legend>
+                        <input disabled="disabled" type="radio" name="radio-choice-h-5" id="radio-choice-h-5a" value="on" checked="checked">
+                        <label for="radio-choice-h-5a">Un</label>
+                        <input disabled="disabled" type="radio" name="radio-choice-h-5" id="radio-choice-h-5b" value="off">
+                        <label for="radio-choice-h-5b">Deux</label>
+                        <input disabled="disabled" type="radio" name="radio-choice-h-5" id="radio-choice-h-5c" value="other">
+                        <label for="radio-choice-h-5c">Trois</label>
+                    </fieldset>
+                </div>
+            </div><!--/demo-html -->
+    
+            <div data-demo-html="true">
+                <div data-role="fieldcontain">
+                    <label for="submit-5">Envoyer :</label>
+                    <button disabled="disabled" type="submit" id="submit-5" data-mini="true">Valider</button>
+                </div>
+            </div><!--/demo-html -->
+    
+        </form>
+    
+        <h2>Class ui-disabled</h2>
+    
+        <div data-demo-html="true">
+            <a href="#" data-role="button" class="ui-disabled" data-icon="arrow-r" data-iconpos="right">Bouton de lien</a>
+        </div><!--/demo-html -->
+    
+        <div data-demo-html="true">
+            <a href="#" data-role="button" class="ui-disabled" data-icon="arrow-r" data-iconpos="right" data-mini="true">Bouton de lien</a>
+        </div><!--/demo-html -->
+        
+
+		<a href="./" class="jqm-button" data-ajax="false" data-role="button" data-mini="true" data-inline="true" data-icon="arrow-l" data-iconpos="left">Retour aux formulaires</a>
+
+    
+    </div><!-- /content -->
+
+    <div data-role="footer" class="jqm-footer">
+        <p class="jqm-version"></p>
+        <p>Copyright 2013 The jQuery Foundation</p>
+    </div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+</body>
+</html>

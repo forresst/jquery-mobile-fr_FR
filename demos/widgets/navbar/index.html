@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Barre de navigation - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+
+			<h1>Barre de navigation <a href="http://api.jquerymobile.com/navbar/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+
+			<p class="jqm-intro">jQuery Mobile a un widget de barre de navigation très simple qui est utile pour fournir un maximum de 5 boutons avec des icônes en option dans une barre.
+			</p>
+
+			<h2>Barre de navigation basique</h2>
+
+			<p>Une barre de navigation est codée comme une liste non ordonnée de liens enveloppée dans un élément de conteneur qui contient l'attribut <code> data-role="navbar"</code>. Quand un lien dans la barre de bavigation est cliqué, il porte le statut actif (selected). La classe <code>ui-btn-active</code> est d'abord supprimée de toutes les ancres dans la barre de navigation avant d'être ajouté au lien activé. Si c'est un lien vers une autre page, la classe sera à nouveau supprimée après que la transition soit terminée.</p>
+
+			<p>Pour qu'un élément soit au statut actif, ajoutez <code>class="ui-btn-active"</code> à l'ancre correspondant dans votre balisage. Additionnellement, vous pouvez ajouter une classe <code>ui-state-persist</code> de façon que le framework restaure l'état actif à chaque fois que la page sera affichée tant qu'elle existe dans le DOM.</p>
+
+			<p>Les barres de navigation avec 1 élément sera rendu avec 100% de la largeur.</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" class="ui-btn-active">Un</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
+
+			<p>Les éléments de la barre de navigation sont définis pour diviser l'espace uniformément dans ce cas, chaque bouton est la moitié de largeur de la fenêtre du navigateur:</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" class="ui-btn-active">Un</a></li>
+						<li><a href="#">Deux</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
+
+			<p>L'ajout d'un troisième élément rendra automatiquement chaque bouton avec un tiers de la largeur de la fenêtre du navigateur :</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" class="ui-btn-active">Un</a></li>
+						<li><a href="#">Deux</a></li>
+						<li><a href="#">Trois</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
+
+			<p>L'ajout d'un quatrième élément rendra automatiquement chaque bouton avec un quart de la largeur de la fenêtre du navigateur :</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar" data-grid="c">
+					<ul>
+						<li><a href="#" class="ui-btn-active">Un</a></li>
+						<li><a href="#">Deux</a></li>
+						<li><a href="#">Trois</a></li>
+						<li><a href="#">Quatre</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
+
+			<p>La barre de navigation autorise 5 éléments au maximum, chacun utilise un cinquième de la largeur de la fenêtre du navigateur :
+</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar" data-grid="d">
+					<ul>
+						<li><a href="#" class="ui-btn-active">Un</a></li>
+						<li><a href="#">Deux</a></li>
+						<li><a href="#">Trois</a></li>
+						<li><a href="#">Quatre</a></li>
+						<li><a href="#">Cinq</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
+
+			<h2>Multi-lignes</h2>
+
+			<p>Si plus de 5 éléments sont ajoutés, la barre de navigation s'étendra simplement sur deux lignes :</p>
+
+			<div data-demo-html="true">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" class="ui-btn-active">Un</a></li>
+						<li><a href="#">Deux</a></li>
+						<li><a href="#">Trois</a></li>
+						<li><a href="#">Quatre</a></li>
+						<li><a href="#">Cinq</a></li>
+						<li><a href="#">Six</a></li>
+						<li><a href="#">Sept</a></li>
+						<li><a href="#">Huit</a></li>
+						<li><a href="#">Neuf</a></li>
+						<li><a href="#">Dix</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!--/demo-html -->
+
+			<h2>Barres de navigation dans les entêtes</h2>
+
+			<p>Si vous souhaitez ajouter une barre de navigation en haut de la page, vous pouvez toujours avoir un titre de page et des boutons. Il suffit d'ajouter le conteneur de la barre de navigation à l'intérieur du bloc de l'entête, juste après le titre et les boutons dans l'ordre du code.</p>
+
+			<div data-demo-html="true">
+				<div data-role="header" style="overflow:hidden;">
+					<h1>Je suis l'entête</h1>
+					<a href="#" data-icon="gear" class="ui-btn-right">Options</a>
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#">Un</a></li>
+							<li><a href="#">Deux</a></li>
+							<li><a href="#">Trois</a></li>
+						</ul>
+					</div><!-- /navbar -->
+				</div><!-- /header -->
+			</div><!--/demo-html -->
+
+			<h2>Barres de navigation dans les pied de page</h2>
+
+			<p>Si vous souhaitez ajouter une barre de navigation au bas de la page afin qu'elle agisse plus comme une barre d'onglets, il suffit d'envelopper la la barre de navigation dans un conteneur avec un <code>data-role="footer"</code></p>
+
+			<div data-demo-html="true">
+				<div data-role="footer" style="overflow:hidden;">
+					<h4 style="text-align:center;">Je suis le pied de page</h4>
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#">Un</a></li>
+							<li><a href="#">Deux</a></li>
+							<li><a href="#">Trois</a></li>
+						</ul>
+					</div><!-- /navbar -->
+				</div><!-- /footer -->
+			</div><!--/demo-html -->
+
+			<h2>Persistante</h2>
+
+			<p>Il y a également une variante, une <a href="../fixed-toolbars/footer-persist-a.html">barre de navigation persistante</a> qui fonctionne davantage comme une barre d'onglets qui reste fixe pendant que vous naviguez à travers les pages. Pour qu'un élément soit au statut actif avant l'initialisation de la barre de navigation, ajoutez <code>class="ui-btn-active"</code> à l'ancre correspondant dans votre balisage. Additionnellement, vous pouvez ajouter une classe <code>ui-state-persist</code> de façon que le framework restaure l'état actif à chaque fois que la page sera affichée tant qu'elle existe dans le DOM.</p>
+
+			<h2>Icônes</h2>
+
+			<p>Les icônes peuvent être ajoutées aux éléments de la barre de navigation en ajoutant l'attribut <code> data-icon</code> en spécifiant une  <a href="../icons/">icône mobile standard</a>  pour chaque ancrage. Par défaut, les icônes sont ajoutées au-dessus du texte (<code>data-iconpos="top"</code>). Les exemples suivants ajoutent des icônes à la barre de navigation dans un pied de page.</p>
+
+			<div data-demo-html="true">
+				<div data-role="footer">
+					<div data-role="navbar">
+						<ul>
+							<li><a href="#" data-icon="grid">Sommaire</a></li>
+							<li><a href="#" data-icon="star" class="ui-btn-active">Favoris</a></li>
+							<li><a href="#" data-icon="gear">Configuration</a></li>
+						</ul>
+					</div><!-- /navbar -->
+			</div><!-- /footer -->
+			</div><!--/demo-html -->
+
+			<h2>Position d'icône</h2>
+
+			<p>La position de l'icône est définie <em>sur le conteneur de la barre de navigation</em> plutôt que cela soit défini individuellement sur les liens par souci de cohérence visuelle. Par exemple, pour placer les icônes dessous les textes, ajoutez l'attribut <code> data-iconpos="bottom"</code> au conteneur de la la barre de navigation.</p>
+
+		<div data-demo-html="true">
+			<p>Cela se traduira par un alignement d'icône en bas :</p>
+			<div data-role="footer">
+				<div data-role="navbar" data-iconpos="bottom">
+					<ul>
+						<li><a href="#" data-icon="grid">Sommaire</a></li>
+						<li><a href="#" data-icon="star" class="ui-btn-active">Favoris</a></li>
+						<li><a href="#" data-icon="gear">Configuration</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+			</div><!--/demo-html -->
+
+			<p>La position de l'icône peut être réglée à <code>data-iconpos="left"</code> :</p>
+
+			<div data-demo-html="true">
+			<div data-role="footer">
+				<div data-role="navbar" data-iconpos="left">
+					<ul>
+						<li><a href="#" data-icon="grid">Sommaire</a></li>
+						<li><a href="#" data-icon="star" class="ui-btn-active">Favoris</a></li>
+						<li><a href="#" data-icon="gear">Configuration</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+			</div><!--/demo-html -->
+
+			<p>Ou, la position de l'icône peut être réglée à <code>data-iconpos="right"</code> :</p>
+
+			<div data-demo-html="true">
+			<div data-role="footer">
+				<div data-role="navbar" data-iconpos="right">
+					<ul>
+						<li><a href="#" data-icon="grid">Sommaire</a></li>
+						<li><a href="#" data-icon="star" class="ui-btn-active">Favoris</a></li>
+						<li><a href="#" data-icon="gear">Configuration</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+			</div><!--/demo-html -->
+
+			<h2>Utilisation d'ensembles d'icônes tiers</h2>
+
+			<p>Vous pouvez ajouter l'une des bibliothèques d'icônes populaires comme <a href="http://glyphish.com/">Glyphish</a> pour réaliser un onglet de style iOS qui a de grandes icônes au dessus des étiquettes de texte. Tout ce qui est requis, c'est seulement des styles personnalisés vers un lien vers les icônes et les positionner dans la barre de navigation. Voici un exemple utilisant des icônes et des styles personnalisés Glyphish (affichez le code de la page pour les styles) dans notre la barre de navigation :</p>
+
+			<style>
+				.nav-glyphish-example .ui-btn .ui-btn-inner { padding-top: 40px !important; }
+				.nav-glyphish-example .ui-btn .ui-icon { width: 30px!important; height: 30px!important; margin-left: -15px !important; box-shadow: none!important; -moz-box-shadow: none!important; -webkit-box-shadow: none!important; -webkit-border-radius: 0 !important; border-radius: 0 !important; }
+				#chat .ui-icon { background:  url(../../_assets/img/glyphish-icons/09-chat2.png) 50% 50% no-repeat; background-size: 24px 22px; }
+				#email .ui-icon { background:  url(../../_assets/img/glyphish-icons/18-envelope.png) 50% 50% no-repeat; background-size: 24px 16px;  }
+				#login .ui-icon { background:  url(../../_assets/img/glyphish-icons/30-key.png) 50% 50% no-repeat;  background-size: 12px 26px; }
+				#beer .ui-icon { background:  url(../../_assets/img/glyphish-icons/88-beermug.png) 50% 50% no-repeat;  background-size: 22px 27px; }
+				#coffee .ui-icon { background:  url(../../_assets/img/glyphish-icons/100-coffee.png) 50% 50% no-repeat;  background-size: 20px 24px; }
+				#skull .ui-icon { background:  url(../../_assets/img/glyphish-icons/21-skull.png) 50% 50% no-repeat;  background-size: 22px 24px; }
+			</style>
+
+			<div data-demo-html="true">
+			<div data-role="footer" class="nav-glyphish-example">
+				<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+				<ul>
+					<li><a href="#" id="chat" data-icon="custom">Chat</a></li>
+					<li><a href="#" id="email" data-icon="custom">Email</a></li>
+					<li><a href="#" id="skull" data-icon="custom">Danger</a></li>
+					<li><a href="#" id="beer" data-icon="custom">Bière</a></li>
+					<li><a href="#" id="coffee" data-icon="custom">Café</a></li>
+				</ul>
+				</div>
+			</div>
+			</div><!--/demo-html -->
+
+			<p>Icônes par Joseph Wain / <a href="http://glyphish.com/">glyphish.com</a>. Sous licence <a href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.</p>
+
+			<h2>Thèmes</h2>
+
+			<p>Les barres de navigation héritent du nuancier de thème de leur conteneur parent, tout comme les boutons. Si une la barre de navigation est placée dans l'entête ou le pied de page de la barre d'outils, elle héritera du nuancier "a" de la barre d'outils par défaut pour les barres, sauf si vous définissez ceci dans le balisage. </p>
+			<p>Voici quelques exemples de barres de navigation dans différents nuancier de conteneur qui automatiquement héritent de la lettre du nuancier de leurs parents. Notez que dans ces exemples, au lieu d'utiliser un attribut <code>data-theme</code>, nous ajoutons manuellement les classes de nuancier pour appliquer le nuancier du corps (<code>ui-body-a</code>) et la classe pour ajouter l'espacement standard du corps (ui-body), mais l'héritage fonctionne de la même manière :</p>
+
+			<div data-demo-html="true">
+			<div class="ui-body-a ui-body">
+				<h3>Nuancier "a"</h3>
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" data-icon="grid">A</a></li>
+						<li><a href="#" data-icon="star">B</a></li>
+						<li><a href="#" data-icon="gear">C</a></li>
+						<li><a href="#" data-icon="arrow-l">D</a></li>
+						<li><a href="#" data-icon="arrow-r">E</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /container -->
+			</div><!--/demo-html -->
+
+			<div data-demo-html="true">
+			<div class="ui-body-d ui-body">
+				<h3>Nuancier "d"</h3>
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" data-icon="grid">A</a></li>
+						<li><a href="#" data-icon="star">B</a></li>
+						<li><a href="#" data-icon="gear">C</a></li>
+						<li><a href="#" data-icon="arrow-l">D</a></li>
+						<li><a href="#" data-icon="arrow-r">E</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /container -->
+			</div><!--/demo-html -->
+
+		<p>Pour définir la couleur du thème pour un élément de la barre de navigation, ajoutez l'attribut <code>data-theme</code> pour les liens individuels et spécifiez un nuancier du thème. Notez que l'application d'un nuancier de thème au conteneur de la barre de navigation  <em>n'est pas</em> supporté.</p>
+
+			<div data-demo-html="true">
+			<div data-role="footer">
+				<div data-role="navbar">
+					<ul>
+						<li><a href="#" data-icon="grid"data-theme="a">A</a></li>
+						<li><a href="#" data-icon="star" data-theme="b">B</a></li>
+						<li><a href="#" data-icon="gear" data-theme="c">C</a></li>
+						<li><a href="#" data-icon="arrow-l" data-theme="d">D</a></li>
+						<li><a href="#" data-icon="arrow-r" data-theme="e">E</a></li>
+					</ul>
+				</div><!-- /navbar -->
+			</div><!-- /footer -->
+			</div><!--/demo-html -->
+
+		</div><!-- /content -->
+
+		<div data-role="footer" class="jqm-footer">
+			<p class="jqm-version"></p>
+			<p>Copyright 2013 The jQuery Foundation</p>
+		</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+	
+
+	</div><!-- /page -->
+	</body>
+	</html>

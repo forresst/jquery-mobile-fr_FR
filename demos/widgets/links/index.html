@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Liens - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+
+        <h1>Liens <a href="http://api.jquerymobile.com/grid-layout/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+
+        <p class="jqm-intro">jQuery Mobile est conçu pour fonctionner avec les conventions de liaison d'une page standard et des couches de navigation AJAX en plus pour une compatibilité maximale
+        </p>
+
+        <h2>Liaison de pages</h2>
+
+        <p>Vous pouvez lier des pages et des ressources comme vous le feriez normalement. jQuery Mobile gérera automatiquement les demandes de page dans un modèle de page unique, utilisant Ajax, si cela est possible. Lorsqu'Ajax n'est pas possible (comme une url qui n'est pas dans le même domaine ou si cela est spécifié en utilisant certains attributs sur le lien), une demande http normale est utilisée à la place.</p>
+
+        <p>L'objectif de ce modèle est de permettre aux développeurs de créer des sites Web en utilisant les meilleures pratiques - où les liens ordinaires "fonctionneront" sans aucune configuration spéciale - tout en créant une expérience riche qui ne peut pas être réalisée avec des requêtes HTTP standard.</p>
+
+        <h2>Le comportement  par défaut du lien : AJAX</h2>
+
+        <p>Afin de permettre des transitions de page animée, tous les liens qui pointent vers des pages externes (ex. products.html) seront chargées via AJAX. Pour le faire discrètement, le framework analyse le <code>href</code> du lien pour formuler une requête Ajax (Hijax) et affiche l'icône de chargement. Tout cela se fait automatiquement par jQuery Mobile.</p>
+
+        <p>Si la requête Ajax est réussie, le contenu de la page est ajoutée au DOM, tous les widgets mobiles sont auto-initialisés et la nouvelle page est animée dans la vue avec une transition de page.</p>
+
+        <p>Si la requête Ajax échoue, le framework affiche en superposition un petit message d'erreur (stylisé avec le nuancier "e") qui disparaît après un bref instant afin que ceci ne casse pas le flux de la navigation. Aperçu d'un <a href="notapage.html">exemple de message d'erreur</a>.</p>
+
+        <p><strong>Remarque :</strong> vous ne pouvez pas faire un lien <strong>à</strong> un document multipage avec la navigation AJAX active, car le framework ne fera que charger la première page qu'il trouve, et non l'ensemble des pages internes. Dans ces cas, vous devrez lier sans Ajax (voir la prochaine section) pour actualiser la totalité de la page afin d'empêcher d'éventuelles collisions de hash. Il y a actuellement un <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">plugin subpage</a> qui permet de charger des documents multi-pages.</p>
+
+        <div data-demo-html="true">
+            <p>Exemple :</p>
+            <a href="../../../">Vers la page d'accueil, avec AJAX</a>
+        </div><!--/demo-html -->
+
+        <h2>Liaison sans AJAX</h2>
+
+		<p>Les liens qui pointent vers d'autres domaines ou qui ont les attributs <code>rel="external"</code>, <code>data-ajax="false"</code> ou <code>target</code> ne seront pas chargés avec l'AJAX. Au lieu de cela, ces liens provoqueront un rafraîchissement de la page complète sans transition animée. Les deux attributs (<code>rel="external"</code> et <code>data-ajax="false"</code>) ont le même effet, mais ils ont un sens sémantique différent : <code>rel="external"</code> doit être utilisé lors de la liaison vers un autre site ou un autre domaine, alors que <code>data-ajax="false"</code> est utile pour tout simplement empêcher une page dans votre domaine d'être chargée via AJAX. En raison des restrictions de sécurité, le framework choisit toujours pour les liens vers des domaines externes le comportement sans l'AJAX.</p>
+
+		<div data-demo-html="true">
+            <p>Exemples :</p>
+            <p><a href="../../../" data-ajax="false">Vers la page d'accueil, sans AJAX</a></p>
+            <p><a href="http://www.google.com" rel="external">Google</a></p>
+		</div><!--/demo-html -->
+
+		<p>Dans la version 1.1, nous avons ajouté le support pour l'utilisation de <code>data-ajax="false"</code> sur un conteneur parent qui vous permet d'exclure un grand nombre de liens du système de navigation AJAX. Cela évite le besoin d'ajouter cet attribut pour chaque lien dans un conteneur. Pour activer cette fonctionnalité, <code>$.mobile.ignoreContentEnabled</code> doit être défini à <code>true</code> parce que cette fonctionnalité ajoute une surcharge que nous ne voulons pas activer par défaut.</p>
+
+		<div data-demo-html="true">
+			<ul data-role="listview" data-ajax="false" data-inset="true" data-theme="d">
+	            <li data-role="list-divider">Tous les liens sont non-AJAX</li>
+	            <li><a href="../accordions/">Accordéon</a></li>
+	            <li><a href="../ajax-nav/">Navigation AJAX</a></li>
+	            <li><a href="../autocomplete/">Autocomplete</a></li>
+			</ul>
+		</div><!--/demo-html -->
+
+		<p>Remarque : Lors de la construction d'une application jQuery Mobile, où le système de navigation Ajax sera désactivé globalement ou fréquemment sur des liens individuels, nous vous recommandons de désactiver l'option de configuration globale  <code>$.mobile.pushStateEnabled</code> pour éviter les comportements de navigation incompatibles dans certains navigateurs.</p>
+
+		<h2>Liaison dans un document multi-page</h2>
+
+			<p>Un unique document HTML peut contenir un ou plusieurs conteneurs de "page" en empilant simplement plusieurs divs avec le <code> data-role</code> de <code>"page"</code>. Cela vous permet de construire un petit site ou une application dans un seul document HTML, jQuery Mobile affichera, lorsque la page se chargera, simplement la première "page" qu'il trouvera dans l'ordre du code source.</p>
+
+			<p>Si un lien dans un <a href="../pages/">document multi-page</a> pointe vers une ancre (<code># foo</code>), le framework regardera vers l'enveloppe de la page avec cet ID (<code>id="foo"</code>). S'il trouve une page dans le document HTML, il fera la transition vers la nouvelle page. Vous pouvez facilement naviguer entre les "pages" locales, internes et les pages externes dans jQuery Mobile. Les deux auront le même aspect pour l'utilisateur final, sauf que les pages externes afficheront l'icône AJAX pendant le chargement. Dans les deux cas, jQuery mobile met à jour le hash de l'URL de la page pour activer le support du bouton retour, du lien profond et du marque-page.</p>
+
+		<p>Il est important de noter que si vous avez une liaison d'une page mobile, qui a été chargée via AJAX, à une page qui contient plusieurs pages internes, vous devez ajouter un <code>rel="external"</code> ou un <code>data-ajax="false"</code> au lien. Ceci indique au framework de faire un rechargement de la page complète pour vider le hash AJAX dans l'URL. Cela est essentiel car les pages Ajax utilisent le hash (<code>#</code>) pour suivre l'historique d'AJAX, alors que plusieurs pages internes utilisent le hash pour indiquer les pages internes donc il y aura des conflits dans le hash entre ces deux modes.</p>
+
+		<p>Par exemple, un lien vers une page contenant plusieurs pages internes devrait ressembler à ceci :</p>
+
+			<code>&lt;a href="multipage.html" rel="external"&gt;Lien Multi-page&lt;/a&gt;</code>
+
+		<h2>Liens du bouton "Retour"</h2>
+		<p>Si vous utilisez l'attribut <code>data-rel="back"</code> sur une ancre, tout clic sur cette ancre imitera le bouton retour, remontant une entrée de l'historique et en ignorant le <code>href</code> par défaut de l'ancre. Ceci est particulièrement utile lors de la génération des boutons "back" avec JavaScript, de la même manière qu'un bouton pour fermer une boîte de dialogue. </p>
+		<p>Lorsque vous utilisez cette fonctionnalité dans votre balisage source, bien que les navigateurs qui supportent cette fonctionnalité n'utiliseront pas l'attribut <code>href</code> spécifié, assurez vous de toujours fournir une valeur significative qui pointe actuellement vers l'URL de la page référente afin de permettre à la fonctionnalité de fonctionner pour les utilisateurs de navigateurs de Grade C. Si les utilisateurs peuvent atteindre cette page depuis plus d'une page référante, spécifiez un <code>href</code> judicieux de sorte que la navigation reste logique pour tous les utilisateurs. </p>
+		<p>Aussi, s'il vous plaît, gardez à l'esprit que si vous voulez juste une transition inverse sans réellement retourner dans l'historique, vous devez utiliser à la place l'attribut <code>data-direction="reverse"</code>. Remarque : <code>data-direction="reverse"</code> est destiné à exécuter simplement la version inverse de la transition qui se déroulera sur ce changement de page, tandis que <code>data-rel="back"</code> fait le lien fonctionnellement équivalent à un bouton retour du navigateur et toutes les logiques standard du bouton de retour s'applique. L'ajout de <code>data-direction="reverse"</code> à un lien avec <code>data-rel="back"</code> <b>ne sera pas</b> l'inverse de la transition de page inversée et produira une version "normale" de la transition. </p>
+
+		<h2>Les redirections et les liens vers les répertoires</h2>
+
+		<p>Lors de la liaison à l'index du répertoire (comme href="typesofcats/" à la place de href="typesofcats/index.html"), vous devez fournir un slash. C'est parce que jQuery Mobile suppose que la section après le dernier caractère "/" dans une URL est un nom de fichier, et il va supprimer cette section lors de la création des urls de base à partir duquel les futures pages seront référencées.</p>
+
+		<p>Cependant, vous pouvez contourner ce problème en retournant votre div de page avec un attribut déjà spécifié <code>data-url</code>. Quand vous faites cela, jQuery Mobile utilisera la valeur de l'attribut en mettant à jour l'URL, au lieu de l'URL utilisée pour requêter la page. Cela vous permet également de retourner les URLs qui changent à la suite d'une redirection, par exemple, vous pourriez afficher un formulaire vers "/login.html" mais renvoyer une page vers l'URL "/compte" après une soumission réussie. Cet outil vous permet  dans ces situations de prendre le contrôle de la pile de l'historique de jQuery Mobile. </p>
+
+			<h2>Remarques sur les liens</h2>
+
+			<p>L'environnement non-standard créé par le modèle de navigation de page de jQuery Mobile introduit quelques conditions pour lesquelles vous devez être conscient lors de la construction des pages :</p>
+
+			<ul class="jqm-list">
+			<li><p>Lors de la liaison aux répertoires, sans un nom de fichier dans l'URL, (comme <code>href="typesofcats/"</code> à la place de <code>href="typesofcats/index.html"</code>), vous devez fournir un slash. C'est parce que jQuery Mobile suppose que la section après le dernier caractère "/" dans une URL est un nom de fichier, et il va supprimer cette section lors de la création des URLs de base à partir duquel les futures pages seront référencées.</p></li>
+			<li><p>Les documents chargés via AJAX sélectionneront la première page dans le DOM de ce document qui sera chargée comme un élément de page jQuery Mobile. En conséquence, le développeur doit s'assurer de la gestion des attributs <code>id</code> de la page chargée et des éléments enfants pour éviter toute confusion lors de la manipulation du DOM.</p></li>
+			<li><p>Si vous accédez à un document multi-page, vous devez utiliser un attribut <code>data-ajax="false"</code> sur le lien pour provoquer une actualisation complète de la page dû à la limitation ci-dessus où nous ne chargeons que le nœud de la première page dans une requête AJAX en raison du risque de collisions du hash. Il y a actuellement un <a href="https://github.com/ToddThomson/jQuery-Mobile-Subpage-Widget" rel="external">plugin subpage</a> qui permet de charger des documents multi-page. </p></li>
+			<li><p>Lorsque vous liez les pages intérieures d'un modèle multi-pages, vous ne devriez pas utiliser l'attribut <code>data-ajax="false"</code> car il est d'aucune utilité et il interférera avec les paramètres de transition. </p></li>
+			<li><p>Le nom de la clé de <code>"ui-page"</code> utilisé dans les références des sous-hash d'URL peut être réglé à la valeur que vous souhaitez, afin de se fondre dans la structure de votre URL. Cette valeur est stockée dans <code>jQuery.mobile.subPageUrlKey</code>.</p></li>
+			<li><p>Lorsque vous navigez vers un document jQuery Mobile précédemment chargé depuis un externe <b>ou</b> d'un document interne avec le plugin pushState activé, certains navigateurs chargent et déclenchent l'événement <code>popstate</code> sur le mauvaix document ou pour de mauvaises raisons (deux effets de bords enregistrés à ce jour). Si vous avez régulièrement des liens vers des documents externes et vous trouvezq que l'application se comporte de façon erratique, essayez de désactiver le support pushstate.</p></li>
+			<li><p>jQuery Mobile ne prend pas en charge le paramètre de requête passé vers des pages internes/embarquées mais il y a deux plugins que vous pouvez ajouter à votre projet pour supporter cette fonctionnalité. Il en existe un léger <a href="https://github.com/jblas/jquery-mobile-plugins/tree/master/page-params" rel="external">page params plugin</a> et un plus complet <a href="https://github.com/azicchetti/jquerymobile-router" rel="external">jQuery Mobile router plugin</a> pour utiliser backbone.js ou spine.js. Un nouveau plugin appelé <a href="https://github.com/1Marc/jquery-mobile-routerlite" rel="external">routerlite</a> simplifie cela avec seulement quatre méthodes : routeinit, routechange, pageinit et pagechange.</p></li>
+			<li><p>Certaines applications externes (notamment la mise en œuvre de Facebook OAuth) modifient leur URL de réponse de manière que cela interfère avec jQuery Mobile. En particulier, Facebook ajoute <code>#_=_</code> à la fin du la fonction de rappel. Actuellement, la meilleure solution pour cela est de le retirer de la table de hach avant que jQuery Mobile le charge en utilisant quelque chose comme : <code>if (window.location.hash == "#_=_") window.location.hash = ""; </code>. jQuery Mobile peut ensuite traiter et améliorer la page correctement.</p></li>
+			</ul>
+
+		</div><!-- /content -->
+
+		<div data-role="footer" class="jqm-footer">
+			<p class="jqm-version"></p>
+			<p>Copyright 2013 The jQuery Foundation</p>
+		</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+	
+
+	</div><!-- /page -->
+	</body>
+	</html>

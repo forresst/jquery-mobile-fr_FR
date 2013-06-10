@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Table : Reflow - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+
+			<h1>Table : Reflow <a href="http://api.jquerymobile.com/table-reflow/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+
+			<p class="jqm-intro">Le mode de table reflow fonctionne en pliant les colonnes de la table dans une présentation empilé qui ressemble à des blocs de label/données pour chaque ligne.
+			</p>
+
+			<h2>Reflow basiques</h2>
+			<p>La table responsive reflow ne nécessite qu'une table avec un <code>data-role = "table"</code> sur l'élément table. Il n'est pas nécessaire de définir l'attribut <code>data-mode</code> car <code>reflow</code> est la valeur par défaut. N'oubliez pas d'inclure les éléments <code>thead</code> et <code>tbody</code> dans votre table. Cet exemple utilise également le point d'arrêt responsive prédéfini, appliqué via la classe <code>ui-responsive</code>.</p>
+
+		<div data-demo-html="true">
+		    <table data-role="table" id="movie-table" data-mode="reflow" class="ui-responsive table-stroke">
+		      <thead>
+		        <tr>
+		          <th data-priority="1">Rang</th>
+		          <th data-priority="persist">Titre</th>
+		          <th data-priority="2">Année</th>
+		          <th data-priority="3"><abbr title="Classement de Rotten Tomato">Classement</abbr></th>
+		          <th data-priority="4">Commentaires</th>
+		        </tr>
+		      </thead>
+		      <tbody>
+		        <tr>
+		          <th>1</th>
+		          <td><a href="http://en.wikipedia.org/wiki/Citizen_Kane" data-rel="external">Citizen Kane</a></td>
+		          <td>1941</td>
+		          <td>100%</td>
+		          <td>74</td>
+		        </tr>
+		        <tr>
+		          <th>2</th>
+		          <td><a href="http://en.wikipedia.org/wiki/Casablanca_(film)" data-rel="external">Casablanca</a></td>
+		          <td>1942</td>
+		          <td>97%</td>
+		          <td>64</td>
+		        </tr>
+		        <tr>
+		          <th>3</th>
+		          <td><a href="http://en.wikipedia.org/wiki/The_Godfather" data-rel="external">The Godfather</a></td>
+		          <td>1972</td>
+		          <td>97%</td>
+		          <td>87</td>
+		        </tr>
+		        <tr>
+		          <th>4</th>
+		          <td><a href="http://en.wikipedia.org/wiki/Gone_with_the_Wind_(film)" data-rel="external">Gone with the Wind</a></td>
+		          <td>1939</td>
+		          <td>96%</td>
+		          <td>87</td>
+		        </tr>
+		        <tr>
+		          <th>5</th>
+		          <td><a href="http://en.wikipedia.org/wiki/Lawrence_of_Arabia_(film)" data-rel="external">Lawrence of Arabia</a></td>
+		          <td>1962</td>
+		          <td>94%</td>
+		          <td>87</td>
+		        </tr>
+		        <tr>
+		          <th>6</th>
+		          <td><a href="http://en.wikipedia.org/wiki/Dr._Strangelove" data-rel="external">Dr. Strangelove Or How I Learned to Stop Worrying and Love the Bomb</a></td>
+		          <td>1964</td>
+		          <td>92%</td>
+		          <td>74</td>
+		        </tr>
+		        <tr>
+		          <th>7</th>
+		          <td><a href="http://en.wikipedia.org/wiki/The_Graduate" data-rel="external">The Graduate</a></td>
+		          <td>1967</td>
+		          <td>91%</td>
+		          <td>122</td>
+		        </tr>
+		        <tr>
+		          <th>8</th>
+		          <td><a href="http://en.wikipedia.org/wiki/The_Wizard_of_Oz_(1939_film)" data-rel="external">The Wizard of Oz</a></td>
+		          <td>1939</td>
+		          <td>90%</td>
+		          <td>72</td>
+		        </tr>
+		        <tr>
+		          <th>9</th>
+		          <td><a href="http://en.wikipedia.org/wiki/Singin%27_in_the_Rain" data-rel="external">Singin' in the Rain</a></td>
+		          <td>1952</td>
+		          <td>89%</td>
+		          <td>85</td>
+		        </tr>
+		        <tr>
+		          <th>10</th>
+		          <td class="title"><a href="http://en.wikipedia.org/wiki/Inception" data-rel="external">Inception</a></td>
+		          <td>2010</td>
+		          <td>84%</td>
+		          <td>78</td>
+		        </tr>
+		      </tbody>
+		    </table>
+	</div><!--/demo-html -->
+
+		<h2>Création de table responsive</h2>
+
+		<p>Par défaut, une table avec le mode reflow affichera le style de présentation empilé sur toutes les largeurs d'écran. Les styles pour rendre la table responsive sont ajoutés en appliquant une media query avec des règles pour passer à la présentation de style tableau au-dessus d'une largeur d'écran spécifique.</p>
+		<p>Ceci est réalisé en enroulant quelques règles CSS simples et une media query qui s'applique uniquement aux règles en-dessus d'un point d'arrêt d'une certaine largeur. Les styles font apparaitre les lignes d'entête de table, affichent les cellules sous forme de tableau et masquent les éléments label générés au sein de chacune d'elle. Voici un exemple de media query qui change la présentation à 40em (640 pixels) :  </p>
+
+<pre><code><strong>@media ( min-width: 40em ) {</strong>
+	/* Affiche la ligne entête de la table et définit toutes les cellules à display: table-cell */
+	.my-custom-breakpoint td,
+	.my-custom-breakpoint th,
+	.my-custom-breakpoint tbody th,
+	.my-custom-breakpoint tbody td,
+	.my-custom-breakpoint thead td,
+	.my-custom-breakpoint thead th {
+		display: table-cell;
+		margin: 0;
+	}
+	/* Masque les labels dans chaque cellule */
+	.my-custom-breakpoint td .ui-table-cell-label,
+	.my-custom-breakpoint th .ui-table-cell-label {
+		display: none;
+	}
+<strong>}</strong>
+</code></pre>
+
+		<p>Il est préférable d'utiliser une <code>classe</code> sur la table pour appliquer le point d'arrêt. Ajoutez ces règles à votre feuille de style personnalisée qu'il faut inclure dans le <code>head</code> de la page. Nous vous recommandons de créer un ensemble de classes de point d'arrêt personnalisés qui peut être utilisé pour appliquer des points d'arrêt de table standard dans votre projet.</p>
+
+		<h2>Choisir un point d'arrêt</h2>
+		<p>L'objectif est de déterminer la largeur minimale à laquelle l' <em>ensemble de la table</em> s'adapte confortablement à l'intérieur de l'écran. Trouvez cette largeur en remplissant un tableau avec des données réalistes, puis réglez la fenêtre du navigateur jusqu'à ce que la table corresponde complètement et ait un peu d'espace supplémentaire pour tenir compte des différents rendus des appareils. C'est à cet endroit qu'il faut définir le point d'arrêt qui permute entre l'empilement et le mode de présentation en tableau. Le point d'arrêt de largeur dépend fortement du nombre de colonnes dans la table et le contenu de chaque cellule.</p>
+
+		<h2>L'application d'un point d'arrêt prédéfini</h2>
+		<p>Même si nous vous encourageons vivement à écrire vous-même des points d'arrêt personnalisé, le framework comprend un seul point d'arrêt pré-configuré qui cible le style empilé pour téléphones plus petits et le change pour une présentation en tableau sur les grands téléphones, les tablettes et les appareils de bureau. Pour utiliser ce point d'arrêt prédéfini, ajoutez la classe  <code>ui-responsive</code> à la table pour convertir la présentation empilé pour une présentation sous forme de tableau à partir de 560px (35em). Si ce point d'arrêt ne fonctionne pas pour votre contenu, nous vous encourageons à écrire un point d'arrêt personnalisé tel que décrit ci-dessus.</p>
+
+		<pre><code>&lt;table data-role="table" <strong>class="ui-responsive"</strong>&gt;</code></pre>
+
+		<p></p>
+
+		<h2>Entêtes de colonnes groupées</h2>
+		<p>Il est assez courant de devoir regrouper logiquement plusieurs colonnes sous une même entête de groupe pour les données financières ou scientifiques. Le framework peut supporter la version la plus simple de ceci, en acceptant deux rangées d'entêtes de table (<code>TH</code>), avec la première rangée contenant un simple attribut <code>colspan</code> pour grouper les colonnes en-dessous. Dans cette configuration, le framework ajoutera une classe à l'étiquette de la première cellule de chaque groupe pour vous permettre de styliser celles-ci différemment et fournir une hiérarchie visuelle supplémentaire. </p>
+
+		</div><!-- /content -->
+
+		<div data-role="footer" class="jqm-footer">
+			<p class="jqm-version"></p>
+			<p>Copyright 2013 The jQuery Foundation</p>
+		</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+	
+
+	</div><!-- /page -->
+	</body>
+	</html>

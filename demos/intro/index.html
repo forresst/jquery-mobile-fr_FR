@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Introduction - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+        <h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+
+			<h1>Introduction</h1>
+
+			<p class="jqm-intro">jQuery Mobile est un framework UI tactile conviviale bâtie avec le noyau de jQuery qui fonctionne sur tous les mobiles populaires, tablette et plates-formes de bureau.
+			</p>
+
+			<h2>Introduction</h2>
+
+			<p>jQuery Mobile est un framework UI bâtie avec le noyau de jQuery qui fonctionne sur tous les mobiles populaires, tablette et plates-formes de bureau. Construit avec l'accessibilité et l'accès universel à l'esprit, nous suivons les principes d'amélioration progressive et de <a href="rwd.html">responsive web design (RWD)</a>. Grâce au balisage HTML5 axé sur la configuration, il est facile à apprendre, mais une puissante <a href="http://api.jquerymobile.com/">API</a> rend facile la personnalisation profonde de la bibliothèque.</p>
+
+			<h2>Pages &amp; Boîtes de dialogue</h2>
+
+			<p>Une <a href="../widgets/pages/">page</a> dans jQuery Mobile est composée d'un élément avec un attribut <code> data-role="page"</code>. Au sein du conteneur de la "page", n'importe quel balisage HTML valide peut être utilisé, mais pour les pages typiques de jQuery Mobile, les enfants immédiats d'une « page » sont des divs avec des data-roles <code>"header"</code>, <code>"content"</code> et <code>"footer"</code>. L'exigence de base d'une page est uniquement l'enveloppeur de page pour supporter la navigation, le reste est facultatif. </p>
+
+			<p>Une page peut être appelée comme une <a href="../widgets/dialog/">boîte de dialogue</a>, ainsi la page ressemble à une superposition de type modal. Pour donner l'apparence d'une page standard comme une boîte de dialogue modale, ajouter l'attribut <strong>data-rel="dialog"</strong> sur le lien. Les transitions peuvent aussi être définies sur les liens des boîtes de dialogue.</p>
+
+			<h2>Navigation AJAX &amp; Transitions</h2>
+
+			<p>jQuery Mobile inclut un <a href="../widgets/navigation/" data-ajax="false">système de navigation AJAX</a> pour supporter des <a href="../widgets/transitions/" data-ajax="false">transitions</a> de page animées en mettant automatiquement des "détournements" sur les liens standard et sur les soumissions de formulaire, et en les transformant en requête AJAX. Le bouton retour est entièrement pris en charge et il existe des fonctionnalités de préchargement &amp; cache, d'injection dynamique et des pages de script pour des cas d'utilisation avancés.</p>
+
+			<p>Chaque fois qu'un lien est cliqué ou un formulaire est soumis, cet événement est automatiquement intercepté par le système de navigation AJAX et est utilisé pour émettre une requête AJAX basé sur le <code>href</code> ou sur l'action du formulaire au lieu de recharger la page. Tant que le framework attend la réponse AJAX, une image de chargement est affichée.</p>
+
+			<p>Lorsque la page demandée se charge, jQuery Mobile analyse le document avec un élément contenant l'attribut <code> data-role="page"</code> et insère le code dans le DOM de la page originale. Ensuite, tous les widgets sur la pageont améliorées pour appliquer tous les styles et les comportements. Le reste de la page est éliminé, ainsi les scripts, les feuilles de style ou d'autres informations ne seront pas inclus. Le framework notera également le titre de la page entrante pour mettre à jour le titre lorsque la nouvelle page sera visible.</p>
+
+			<p>Maintenant que la page demandée est dans les DOM et améliorée, elle est animée avec une <a href="../widgets/transitions/" data-ajax="false">transition</a>. Par défaut, le framework applique la transition <strong>fade</strong>. Pour définir un effet de transition personnalisé, ajoutez l'attribut <code>data-transition</code> au lien. </p>
+
+			<h2>Contenu &amp; Widgets</h2>
+
+			<p>À l'intérieur de votre conteneur de contenu, vous pouvez ajouter les éléments HTML standards - titres, listes, paragraphes, etc. Vous pouvez écrire vos propres styles personnalisés pour créer des mises en page personnalisées en ajoutant une feuille de style au <code>head</code> après la feuille de style de jQuery Mobile.</p>
+
+			<p>jQuery Mobile fournit un ensemble de widgets d'interface utilisateur tactile conviviale : <a  href="../widgets/buttons/">boutons</a>, <a href="../widgets/forms/">éléments de formulaire</a>, <a href="../widgets/collapsibles/">pliables</a>, <a href="../widgets/accordions/">accordéons</a>, <a href="../widgets/popup/">popups</a>, <a href="../widgets/dialog/">boîte de dialogue</a>, <a href="../widgets/table-column-toggle/">tables responsive</a> et d'autres encore. Pour de meilleures performances, utilisez le <a href="http://jquerymobile.com/download-builder/" rel="external">download builder</a> pour choisir les composants dont vous avez besoin.</p>
+
+				<h4>Boutons</h4>
+				<p>Il existe plusieurs façons de faire des <a href="../widgets/buttons/" title="buttons-types">boutons</a>, mais la transformation d'un lien en bouton est plus facile à cliquer. Il suffit de commencer avec un lien et de lui ajouter un attribut <code>data-role="button"</code>. Vous pouvez ajouter une <a href="../widgets/icons/">icône</a> avec l'attribut <code>data-icon</code> et éventuellement définir sa position avec l'attribut <code>data-iconpos</code>.</p>
+
+				<div data-demo-html="true">
+				<a href="#" data-role="button" data-icon="star">Bouton étoile</a>
+				</div><!--/demo-html -->
+
+			<h4>Listes</h4>
+			<p>jQuery Mobile comprend un ensemble diversifié de <a href="../widgets/listviews/" title="docs-lists">listes</a> communes qui sont codées comme des listes avec l'ajout d'un <code>data-role="listview"</code>. Voici une simple liste qui a un rôle <code>listview</code>. Nous allons changer l'apparence pour que cela ressemble à un seul bloc en ajoutant un attribut <code>data-inset="true"</code> et nous ajouterons un filtre de recherche dynamique avec <code>data-filter="true"</code>.</p>
+
+			<div data-demo-html="true">
+			<ul data-role="listview" data-inset="true" data-filter="true">
+				<li><a href="#">Acura</a></li>
+				<li><a href="#">Audi</a></li>
+				<li><a href="#">BMW</a></li>
+				<li><a href="#">Cadillac</a></li>
+				<li><a href="#">Ferrari</a></li>
+			</ul>
+			</div><!--/demo-html -->
+
+			<h4>Éléments de formulaire</h4>
+			<p>Le framework contient un ensemble complet d'<a href="../widgets/forms/">éléments de formulaire</a> qui sont automatiquement améliorés en widgets tactiles conviviales et stylisés. Voici un curseur qui est fait avec un nouvel input HTML5 de type range, il n'y a pas besoin de <code>data-role</code>. Assurez vous de l'envelopper dans un élément <code>form</code> et de toujours bien associer un <code>label</code> pour chaque élément du formulaire.</p>
+
+			<div data-demo-html="true">
+			<form>
+				<label for="textinput-s">Saisie de texte :</label>
+				<input type="text" name="textinput-s" id="textinput-s" placeholder="Text input" value="" data-clear-btn="true">
+
+				<label for="select-native-s">Sélection :</label>
+				<select name="select-native-s" id="select-native-s">
+					<option value="small">Un</option>
+					<option value="medium">Deux</option>
+					<option value="large">Trois</option>
+				</select>
+
+				<label for="slider-s">Saisie d'une valeur :</label>
+				<input type="range" name="slider-s" id="slider-s" value="25" min="0" max="100" data-highlight="true"  />
+			</form>
+
+			</div><!--/demo-html -->
+
+			<h2>Responsive Design</h2>
+
+			<p>jQuery Mobile a toujours été conçu pour fonctionner dans un contexte <a href="rwd.html">responsive web design (RWD)</a>, nos documents et formulaires ont quelques éléments responsive dès le début. Tous les widgets sont construits pour être 100% flexible en largeur afin de s'adapter facilement dans n'importe quel système de disposition responsive que vous choisissez de construire. </p>
+
+			<p>La bibliothèque comprend également un certain nombre de widgets comme les <a href="../widgets/grids/">grilles responsive</a>, les <a href="../widgets/table-reflow/">tables reflow</a>, les <a href="../widgets/table-column-toggle/">tables avec choix de colonne</a> et les <a href="../widgets/panels/">panneaux glissants</a>.</p>
+
+			<h2>Thématisation</h2>
+			<p>jQuery Mobile a un framework de thème solide qui supporte jusqu'à 26 ensembles de barre d'outils, de contenu et de bouton, appelé "swatch" (Nuancier). Ajoutez juste l'attribut <code>data-theme="e"</code> à n'importe quels widgets sur cette page : page, entête, liste, curseur ou bouton pour le passer en jaune. Essayez les différentes lettres de nuancier, de a à e dans le thème par défaut pour mélanger et assortir les nuanciers.</p>
+			<p>Astuce intéressante : ajoutez le nuancier du thème à la page et regardez comment tous les widgets se trouvant à l'intérieur du contenu hériteront automatiquement du thème (les entêtes et les pieds de pages n'héritent pas, ils sont par défaut avec le nuancier "a").</p>
+
+			<div data-demo-html="true">
+			<a href="#" data-role="button" data-icon="star" data-theme="a">data-theme="a"</a>
+			<a href="#" data-role="button" data-icon="star" data-theme="b">data-theme="b"</a>
+			<a href="#" data-role="button" data-icon="star" data-theme="c">data-theme="c"</a>
+			<a href="#" data-role="button" data-icon="star" data-theme="d">data-theme="d"</a>
+			<a href="#" data-role="button" data-icon="star" data-theme="e">data-theme="e"</a>
+			</div><!--/demo-html -->
+
+		<p>Lorsque vous êtes prêt à créer un thème personnalisé, utilisez <a href="http://www.jquerymobile.com/themeroller" rel="external">ThemeRoller</a>, puis télécharger le thème personnalisé.</p>
+
+			</div><!-- /content -->
+
+			<div data-role="footer" class="jqm-footer">
+				<p class="jqm-version"></p>
+				<p>Copyright 2013 The jQuery Foundation</p>
+			</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+		
+
+		</div><!-- /page -->
+		</body>
+		</html>
+

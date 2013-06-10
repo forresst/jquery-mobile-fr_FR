@@ -1,79 +1,37 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>jQuery Mobile : Démos et Documentation</title>
-	<link rel="stylesheet"  href="css/themes/default/jquery.mobile.css" />
-	<link rel="stylesheet" href="docs/_assets/css/jqm-docs.css" />
-	<script src="js/jquery.js"></script>
-	<script src="docs/_assets/js/jqm-docs.js"></script>
-	<script src="js/jquery.mobile.js"></script>
-	
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"><!-- Need to get a proper redirect hooked up. Blech. -->
+    <meta charset="utf-8">
+
+    
+    <meta http-equiv="refresh" content="0;url=demos/">
+    <meta name="robots" content="noindex, follow">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery Mobile</title>
+    <link rel="stylesheet"  href="css/themes/default/jquery.mobile.min.css">
+    <link rel="stylesheet" href="demos/_assets/css/jqm-demos.css">
+    <link rel="shortcut icon" href="demos/_assets/favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+    <script src="js/jquery.js"></script>
+    <script src="demos/_assets/js/index.js"></script>
+    <script src="js/jquery.mobile.min.js"></script>
+    <script>
+		$( document ).on( "pageshow", function(){
+			$( "p.message" ).hide().delay( 1500 ).show( "fast" );
+		});
+	</script>
 </head>
 <body>
-<div data-role="page" class="type-home">
-	<div data-role="content">
-		<p class="jqm-version"></p>
+<div data-role="page" class="jqm-demos">
 
-		<div class="content-secondary">
+	<div data-role="content" class="jqm-content">
 
-			<div id="jqm-homeheader">
-				<h1 id="jqm-logo"><img src="docs/_assets/images/jquery-logo.png" alt="Framework jQuery Mobile" /></h1>
-				<p>Un Framework UI optimisé pour les appareils tactiles et construit avec jQuery et HTML5.</p>
-			</div>
+        <p class="message">Il n'y a rien à voir ici. <a href="demos/">Voir la page d'accueil des démos →</a></p>
 
+	</div><!-- /content -->
 
-			<p class="intro"><strong>Bienvenue.</strong> jQuery Mobile est le moyen le plus facile pour construire des sites et des applications qui soient accessibles sur tous les appareils les plus populaires : smartphone, tablette et ordinateur de bureau. Pour jQuery 1.7.0 à 1.9.0.</p>
-
-			<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="f">
-				<li data-role="list-divider">Aperçu</li>
-				<li><a href="docs/about/intro.html">Intro à jQuery Mobile</a></li>
-				<li><a href="docs/about/getting-started.html">Guide de démarrage rapide</a></li>
-				<li><a href="docs/about/features.html">Caractéristiques</a></li>
-				<li><a href="docs/about/accessibility.html">Accessibilité</a></li>
-				<li><a href="docs/about/platforms.html">Plateformes prises en charge</a></li>
-			</ul>
-
-		</div><!--/content-primary-->
-
-		<div class="content-primary">
-			<nav>
-
-
-				<ul data-role="listview" data-inset="true" data-theme="c" data-dividertheme="b">
-					<li data-role="list-divider">Composants</li>
-					<li><a href="docs/pages/index.html">Pages &amp; boîtes de dialogue</a></li>
-					<li><a href="docs/toolbars/index.html">Barres d'outils</a></li>
-					<li><a href="docs/buttons/index.html">Boutons</a></li>
-					<li><a href="docs/content/index.html">Formatage du contenu</a></li>
-					<li><a href="docs/forms/index.html">Éléments de formulaire</a></li>
-					<li><a href="docs/lists/index.html">Listes</a></li>
-					<li><a href="docs/panels/index.html">Panneaux</a></li>
-					<li><a href="docs/tables/index.html">Tables</a></li>
-
-					<li data-role="list-divider">API</li>
-					<li><a href="docs/api/globalconfig.html">Configuration par défaut</a></li>
-					<li><a href="docs/api/events.html">Événements</a></li>
-					<li><a href="docs/api/methods.html">Méthodes &amp; Utilitaires</a></li>
-					<li><a href="docs/api/data-attributes.html">Référence des attributs data-</a></li>
-					<li><a href="docs/api/themes.html">Framework de Thème</a></li>
-
-
-				</ul>
-			</nav>
-		</div>
-
-
-
-	</div>
-
-	<div data-role="footer" class="footer-docs" data-theme="c">
-            <p class="jqm-version"></p>
-			<p>Copyright 2013 The jQuery Foundation</p>
-	</div>
-
-</div>
+</div><!-- /page -->
 </body>
 </html>

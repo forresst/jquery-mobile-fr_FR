@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>RWD Basiques - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+
+      	<h1>Devenir Responsive</h1>
+
+      	<p class="jqm-intro">Le Responsive web design (RWD) est une approche de conception et de technique qui vise à adapter la mise en page et l'interaction d'un site ou d'une application, pour avoir un fonctionnement optimal dans un large éventail de résolutions d'appareils, de densité d'écran et de modes d'interaction avec la même base de code. Le framework a également un certain nombre de widgets responsive comme les <a href="../widgets/grids/">grilles responsive</a>, les <a href="../widgets/table-reflow/">tables reflow</a>, les <a href="../widgets/table-column-toggle/">tables avec choix de colonne</a> et les <a href="../widgets/panels/">panneaux glissants</a>.</p>
+
+		<h2>RWD Basiques</h2>
+      	<p>RWD comporte trois éléments clés :<p>
+      	<ul>
+      		<li><strong>Les media queries CSS</strong>, utilisés pour cibler les styles aux caractéristiques spécifiques des appareils tels que le point d'arrêt de largeur d'écran ou la résolution.</li>
+      		<li><strong>Une grille fluide</strong>, qui spécifie les éléments et les widgets en unités flexibles dans le but de fluidifier le remplissage de leurs conteneurs.</li>
+      		<li><strong>Des images et des médias flexibles</strong>, sont également dimensionnés en unités relatives de sorte qu'ils se redimensionnent pour s'adapter à l'intérieur de leurs conteneurs.</li>
+      	</ul>
+
+      	<p>En créant tous les éléments de l'écran pour qu'ils soient fluides et flexibles, cela permet aux media queries de se concentrer principalement sur le contrôle des règles de présentation pour les conteneurs, les modules à l'intérieur se redimensionnent tout simplement en fonction de leurs conteneurs.</p>
+
+      	<p>Un simple exemple responsive peut être de deux conteneurs empilés, chacun avec un contenu ou des widgets flexibles à l'intérieur. Sur des plus grandes largeurs, les media queries sont utilisés pour positionner les deux conteneurs afin de créer une mise en page sur deux colonnes, pour mieux tirer parti de la plus grande largeur d'écran.</p>
+
+      	<p>Puisque le contenu à l'intérieur de chaque conteneur est conçu pour s'adapter à son parent, les media queries peuvent se concentrer uniquement sur les règles pour faire des colonnes empilées ou positionnées, et de remplacer ou d'ajouter des styles uniquement nécessaires aux grandes largeurs.</p>
+
+		<h2>Amélioration progressive</h2>
+
+      	<p>En plus de ces trois principes fondamentaux RWD, nous préconisons les pratiques d'amélioration progressive. Cela commence toujours avec du HTML sémantique qui fonctionne sur n'importe quel appareil, puis discrètement nous ajoutons des mises en page avancée de CSS et de JS uniquement pour les navigateurs capables. Ceci fournit une base solide pour les optimisations au niveau de l'appareil que RWD fournit et c'est ainsi que la bibliothèque jQuery Mobile est construite.</p>
+
+		<h2>Responsive &amp; responsable</h2>
+
+      	<p>Lorsque vous travaillez avec RWD, il est très important de tenir compte de la performance pour s'assurer que vous n'êtes pas simplement en train de prendre un site lourd de bureau et de le rétrécir pour des écrans mobiles. Nous vous recommandons de suivre une approche "mobile d'abord" pour maintenir le développement axé sur la réduction de bande passante, sur les requêtes du serveur et sur l'optimisation de l'ordre du source.</p>
+
+      	<p>Lors de la construction d'une page, commencez par créer le code HTML le plus léger et le plus sémantique possible. Pensez à la façon dont l'ordre de la source du balisage travaillera si vous n'aviez pas de CSS ou JS. N'incluez pas le code qui est seulement nécessaire pour les grandes fenêtres et qui est caché dans les petites. Au lieu de cela, utilisez AJAX pour charger conditionnellement ces ressources lorsque les écrans plus grands sont détectés par JS.</p>
+
+      	<p>Lors de l'écriture de CSS pour un site ou une application responsive, il est généralement plus efficace d'écrire toute la typographie et les éléments de style de base en dehors d'une media query pour former les styles pour les petits appareils, comme les téléphones. Il s'agit d'une bonne approche parce que la majorité de ces styles de base sont généralement aussi utilisé sur des grandes largeurs, mais dans une mise en page différente et il exploite la puissance des CSS en cascade. Mettez en place des points d'arrêt en utilisant plusieurs media queries <code>min-width</code>  à la mise en page en ajoutant des règles de style qui s'appliqueront qu'au-dessus d'une certaine largeur de l'écran.</p>
+
+      	<p>Pour les images dans vos pages, nous vous recommandons de commencer  dans le balisage avec des images dimensionnées pour les écrans mobiles. Cela n'a aucun sens de se servir d'une photo 1000 pixels de large sur un smartphone avec une résolution max de 480 pixels parce que c'est un gaspillage de bande passante et de mémoire. Au lieu de cela, incluez une image ciblée pour une taille mobile. Ajoutez une règle de style <code>width: 100%;</code> pour rendre à l'échelle les images sur la page ou sur le conteneur, mais pas plus parce que cela aurait l'air flou. </p>
+
+      	<p>Pour les écrans plus larges ou avec une haute résolution, il existe un large éventail de services et de techniques basées sur du JS à condition de charger une image de qualité supérieure. Le prochaine élément <code>picture</code> répondra à la nécessité de gérer des sources d'image multiple nativement dans le HTML et mais il peut être utilisé aujourd'hui avec un script polyfill.</p>
+
+      	<p>Il faut toujours chercher des moyens de limiter le nombre de requêtes du serveur sur une page en concaténant les fichiers dans une seule requête et toujours utiliser la minification et la compression (gzip). </p>
+
+		<h2>Responsive dans jQuery Mobile</h2>
+
+		<p>jQuery Mobile a toujours été conçu pour fonctionner dans un contexte responsive, nos documents et formulaires ont quelques éléments responsive dès le début. Tous les widgets sont construits pour être 100% flexible en largeur afin de s'adapter facilement dans n'importe quel système de disposition responsive que vous choisissez de construire. </p>
+
+		<p>Voici une liste de conseils RWD à garder à l'esprit :</p>
+
+		<ul>
+			<li><strong>Créez une feuille de style de substitution de style et incluez la après la feuille de style du framework jQuery Mobile.</strong> Cela stockera vos styles personnalisés et ajustera  par défaut les widgets et les media queries.</li>
+			<li><strong>Commencez par écrire les styles que vous voulez voir sur les écrans les plus étroits (par exemple "mobile first").</strong> Ceux-ci devraient être en dehors d'un media query. Cette approche de mobile en premier est efficace parce que vous pouvez fixer la typographie de base, les couleurs et les styles pour mobile en sachant que ceux-ci tendent à être également utilisé pour des points d'arrêt plus larges.</li>
+			<li><strong>Choisissez les breakpoints en fonction de votre contenu, et non d'un appareil spécifique.</strong> Comme il existe des appareils de toutes les largeurs possibles, il est plus intelligent de choisir des breakpoints en fonction de l'apparence de votre <em>contenu</em> dans la conception de votre système. Comme vous redimensionnez la fenêtre pour des grandes largeurs, déterminer où votre contenu doit être positionné pour qu'il puisse s'adapter afin de bénéficier d'une plus grande largeur.</li>
+			<li><strong>Écrivez les largeurs des media queries en ems, pas en pixels.</strong> Cela garantit que la mise en page s'adaptera aux changements de taille de police sur des écrans plus larges. Pour calculer la largeur, divisez le point d'arrêt voulu (320px) avec 16px (la taille de la police par défaut) pour obtenir la largeur basé en em (20em). </li>
+			<li><strong>Utilisez les points d'arrêts <code>min-width</code> qui sont construit au dessus des styles de mobile.</strong> Le premier point d'arrêt applique des ajustements de mise en page au dessus des styles standard du mobile afin qu'il puisse être assez léger. D'autres points d'arrêt <code>min-width</code> peuvent être ajoutés pour des écrans encore plus larges dont chacun s'appuie sur ​​les styles de point d'arrêt précédent.</li>
+			<li><strong>Pour remplacer seulement les styles du framework pour des écrans plus petits, utilisez un point d'arrêt <code>max-width</code> à la place.</strong> Cela vous permet de limiter vos remplacements de style qui s'appliquent seulement à une certain largeur inférieure d'écran. Au-dessus de cette largeur, tous les styles normal s'appliqueront ainsi cela est utiles pour certains types de remplacement.</li>
+		</ul>
+
+		<h2>Rassemblement</h2>
+
+		<p>Voici un simple squelette d'une feuille de style "mobile en premier" qui commence avec les styles du mobile, puis construit une disposition responsive en ajoutant deux points d'arrêt :</p>
+
+<pre><code>
+<strong>/* Début des styles de base en dehors d'une media query qui s'appliquent aux mobiles et plus */
+/* Typographie général et éléments de design, conteneurs empilés */
+</strong>body { font-family: Helvetica, san-serif; }
+H1 { color: green; }
+a:link { color:purple; }
+
+/* Empiler les deux contenus de conteneurs */
+.main,
+.sidebar { display:block; width:100%; }
+
+<strong>/* Premier point d'arrêt à 576px */
+/* Hérite des styles mobile, mais le positionnement des conteneurs se fait en colonne */
+</strong>@media all and (min-width: 36em){
+	.main { float: left; width:60%; }
+	.sidebar { float: left; width:40%; }
+}
+
+<strong>/* Second point d'arrêt à 800px */
+/* Ajuste les proportions des colonnes, modifie la base H1 */
+</strong>@media all and (min-width: 50em){
+	.main { width:70%; }
+	.sidebar { width:30%; }
+
+	/* ous pouvez aussi modifier n'importe quel style dans le point d'arrêt */
+	H1 { color: blue; font-size:1.2em }
+}
+</code></pre>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+</body>
+</html>

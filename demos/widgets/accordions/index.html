@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Accordéons - Démos jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+
+			<h1>Accordéons <a href="http://api.jquerymobile.com/collapsible-set/" data-ajax="false" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-r" data-iconpos="right" class="jqm-api-link">API</a></h1>
+
+			<p class="jqm-intro">Un accordéon est créé dans jQuery Mobile en regroupant en regroupant une série de pliables individuels dans un ensemble.
+			</p>
+
+			<h2 id="accordion-markup">Balisage</h2>
+
+			<p>Les ensembles pliable commencent avec exactement le même balisage que les <a href="../collapsibles/" data-ajax="false">pliables individuels</a> qui ont une entête suivi par le contenu du pliable. En ajoutant une enveloppe parent avec l'attribut <code>data-role="collapsible-set"</code> aux pliables, ils seront visualisés de façon groupés et se comporteront comme un accordéon dont une seule section peut être ouvert à la fois.</p>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="c" data-content-theme="d">
+					<div data-role="collapsible">
+						<h3>Section 1</h3>
+						<p>Je suis le contenu pliable pour la section 1</p>
+					</div>
+					<div data-role="collapsible">
+						<h3>Section 2</h3>
+						<p>Je suis le contenu pliable pour la section 2</p>
+
+					</div>
+					<div data-role="collapsible">
+						<h3>Section 3</h3>
+						<p>Je suis le contenu pliable pour la section 3</p>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h2 id="accordion-inline">Intégré contre pleine largeur</h2>
+
+			<p>Pour rendre sur toute la largeur sans coins, ajoutez l'attribut <code>data-inset="false"</code> à l'ensemble. Cela permet de faire ressembler l'ensemble de pliable à une <a href="../listviews/">liste</a> extensible.</p>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-inset="false">
+					<div data-role="collapsible">
+						<h3>Animaux</h3>
+						<ul data-role="listview" data-inset="false">
+							<li>Chats</li>
+							<li>Chiens</li>
+							<li>Lézards</li>
+							<li>Serpents</li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+						<h3>Voitures</h3>
+						<ul data-role="listview" data-inset="false">
+							<li>Acura</li>
+							<li>Audi</li>
+							<li>BMW</li>
+							<li>Cadillac</li>
+						</ul>
+					</div>
+					<div data-role="collapsible">
+						<h3>Planètes</h3>
+						<ul data-role="listview" data-inset="false">
+							<li>Terre</li>
+							<li>Jupiter</li>
+							<li>Mars</li>
+							<li>Mercure</li>
+						</ul>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h2 id="accordion-mini">Mini</h2>
+
+			<p>Pour avoir une version plus compacte, qui est utile dans les espaces restreints, ajoutez l'attribut <code>data-mini="true"</code> à l'ensemble. </p>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-mini="true">
+					<div data-role="collapsible">
+						<h3>Je suis un pliable mini</h3>
+						<p>C'est une bonne chose pour les petits espaces.</p>
+					</div>
+					<div data-role="collapsible">
+						<h3>Je suis un autre mini</h3>
+						<p>Voici le contenu du pliable.</p>
+
+					</div>
+					<div data-role="collapsible">
+						<h3>Un dernier</h3>
+						<p>Un petit morceau de contenu.</p>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h2 id="accordion-icons">Icônes</h2>
+
+			<p>Les icônes par défaut dans les entêtes des pliables peuvent être modifiées en utilisant les attributs <code>data-collapsed-icon</code> et <code>data-expanded-icon</code>, soit au niveau du <code>collapsible-set</code> ou sur un pliable individuel de base..</p>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-collapsed-icon="arrow-r" data-expanded-icon="arrow-d">
+					<div data-role="collapsible">
+						<h3>Icône défini sur l'ensemble</h3>
+						<p>Spécifiez les icônes d'ouverture et de fermeture sur ​​l'ensemble pour l'appliquer à tous les pliables .</p>
+					</div>
+					<div data-role="collapsible">
+						<h3>Icône défini sur l'ensemble</h3>
+						<p>Ce pliable reçoit aussi les icônes de l'ensemble.</p>
+					</div>
+					<div data-role="collapsible" data-collapsed-icon="gear" data-expanded-icon="delete">
+						<h3>Icône défini sur le pliable</h3>
+						<p>Les icônes ici sont appliqué au pliable, ce qui remplace l'ensemble des icônes.</p>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h2 id="accordion-icon-position">Position d'icône</h2>
+
+			<p>L'icône par défaut dans les entêtes des pliables peut être modifiée en utilisant l'attribut <code>data-iconpos</code>, soit au niveau du <code>collapsible-set</code> ou sur un pliable individuel de base.</p>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="c" data-content-theme="d" data-iconpos="right">
+					<div data-role="collapsible">
+						<h3>Droite</h3>
+						<p>Hérite du positionnement de l'icône depuis l'attribut <code>data-iconpos="right"</code> définit sur l'ensemble.</p>
+					</div>
+					<div data-role="collapsible" data-iconpos="left">
+						<h3>Gauche</h3>
+						<p>Définit via l'attribut <code>data-iconpos="left"</code> sur le pliable</p>
+					</div>
+					<div data-role="collapsible" data-iconpos="bottom">
+						<h3>Bas</h3>
+						<p>Définit via l'attribut <code>data-iconpos="bottom"</code> sur le pliable</p>
+					</div>
+					<div data-role="collapsible" data-iconpos="top">
+						<h3>Haut</h3>
+						<p>Définit via l'attribut <code>data-iconpos="top"</code> sur le pliable</p>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h2 id="accordion-corners">Coins</h2>
+			<p>Ajoutez l'attribut <code>data-corners="false"</code> pour avoir un ensemble de pliable intégré sans les coins arrondis.</p>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-corners="false" data-theme="c" data-content-theme="d">
+					<div data-role="collapsible">
+						<h3>Section 1</h3>
+						<p>Contenu pliable</p>
+					</div>
+					<div data-role="collapsible">
+						<h3>Section 2</h3>
+						<p>Contenu pliable</p>
+
+					</div>
+					<div data-role="collapsible">
+						<h3>Section 3</h3>
+						<p>Contenu pliable</p>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<h2 id="accordion-theme">Thème</h2>
+
+			<p>Ajoutez l'attribut <code>data-theme</code> à l'ensemble pour définir pour l'ensemble, la couleur de chaque entête de pliable. Ajoutez l'attribut <code>data-content-theme</code> pour spécifier la couleur du contenu du pliable. </p>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-theme="a" data-content-theme="a">
+					<div data-role="collapsible">
+						<h3>1 - Thème A</h3>
+						<p>Contenu du thème A</p>
+					</div>
+					<div data-role="collapsible">
+						<h3>2 - Thème B</h3>
+						<p>Contenu du thème A</p>
+					</div>
+				</div>
+			</div><!--/demo-html -->
+
+			<p>Pour avoir des sections individuelles différentes dans un groupe de style, ajouter les attributs <code>data-theme</code> et <code>data-content-theme</code> pour les pliables spécifiques.</p>
+
+			<div data-demo-html="true">
+				<div data-role="collapsible-set" data-content-theme="c">
+					<div data-role="collapsible" data-theme="b" data-content-theme="b">
+						<h3>Section entête, nuancier B</h3>
+						<p>Contenu pliable, nuancier "b"</p>
+					</div>
+					<div data-role="collapsible" data-theme="a" data-content-theme="a">
+						<h3>Section entête, nuancier A</h3>
+						<p>Contenu pliable, nuancier "a"</p>
+					</div>
+					<div data-role="collapsible" data-theme="e" data-content-theme="d">
+						<h3>Section entête, nuancier E</h3>
+						<p>Contenu pliable, nuancier "d"</p>
+					</div>
+				</div>
+		</div><!--/demo-html -->
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+</body>
+</html>

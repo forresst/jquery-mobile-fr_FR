@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Q&amp;A - jQuery Mobile Demos - Comment dois-je configurer PhoneGap/Cordova ?</title>
+	<link rel="stylesheet"  href="../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../favicon.ico">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../js/jquery.js"></script>
+	<script src="../_assets/js/index.js"></script>
+	<script src="../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos jqm-faq">
+
+	<div data-role="header" class="jqm-header">
+		<h1 class="jqm-logo"><a href="../"><img src="../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../search.html' ); ?>
+	</div><!-- /header -->
+
+	<div data-role="content" class="jqm-content">
+			<h2>Question :</h2>
+
+			<h1>Comment dois-je configurer PhoneGap/Cordova ?</h1>
+
+			<h2>Réponse :</h2>
+
+			<p class="jqm-intro">Depuis PhoneGap/Cordova est souvent utilisé en conjonction avec jQuery Mobile, nous avons voulu offrir quelques conseils et recommandations pour vous aider à démarrer. <a href="http://phonegap.com/" rel="external">PhoneGap</a> est une plateforme d'application HTML5 qui permet aux développeurs de concevoir des applications natives avec les technologies web et d'obtenir un accès aux API et aux app stores. Les applications sont construites comme des pages HTML normales et envellopées pour fonctionner comme une application native ou dans un UIWebView ou WebView (un navigateur sans chrome, dénommé ci-après comme un WebView). </p>
+
+			<h2>Aperçu</h2>
+
+			<p>Le document de l'application initiale est chargé par l'application PhoneGap par une URL locale file://. Cela signifie que si vous souhaitez extraire les pages du serveur distant de votre entreprise (téléphone de maison), vous devez vous référer à eux avec des URL absolues à votre serveur. Parce que votre document provient d'une URL file://, le chargement des pages ou des ressources de votre serveur distant est considéré comme une requête inter-domaine qui peut être bloquée dans certains scénarios. </p>
+
+			<p>Votre capacité à accéder des pages inter-domaine dans une application jQuery Mobile PhoneGap est contrôlé par deux choses principales :  <code>$.support.cors</code> et <code>$.mobile.allowCrossDomainPages</code>, et peut également être influencé par la fonctionnalité liste blanche plus tard dans les construction de PhoneGap.</p>
+
+			<h2>$.support.cors</h2>
+
+			<p>Au cœur de jQuery, il y a un booléen <a href="http://api.jquery.com/jQuery.support/" rel="external">$.support.cors</a> qui indique si oui ou non jQuery pense que le navigateur supporte la fonctionnalité W3C "<a href="http://www.w3.org/TR/cors/" rel="external">Partage des ressources inter-origine (Cross-Origin Resource Sharing)</a>" afin de supporter les requêtes inter-domaines.</p>
+
+			<p>Comme jQuery Mobile repose sur la fonctionnalité $.ajax() du noyau de jQuery,<code>$.support.cors</code> doit être défini à <code>true</code> pour dire à  <code>$.ajax</code> de charger des pages inter-domaines. Nous avons entendu dire que webviews sur certaines plateformes, comme le BlackBerry, supporte le chargement inter-domaine, mais que le noyau de jQuery définit la valeur de <code>$.support.cors</code> incorrectement  à <code>false</code> ce qui désactive les requêtes $.ajax() inter-domaines et cela causera l'échec de chargement de la page ou des ressources. </p>
+
+			<h2>$.mobile.buttonMarkup.hoverDelay</h2>
+
+			<p>Si vous trouvez que l'état down/hover du bouton (listes, boutons, liens etc) est léthargique, le paramétrage <code>$.mobile.buttonMarkup.hoverDelay</code> peut être utile. Cela réduira le temps entre l'événement tactile et l'application de la classe concernée, mais il aura également plus de chance que la même classe soit appliquée même lorsque l'utilisateur fait du défilement (par exemple, au cours d'une longue liste de liens).</p>
+
+			<h2>$.mobile.allowCrossDomainPages</h2>
+
+			<p>Lorsque jQuery Mobile tente de charger une page externe, la requête passe par <code>$.mobile.loadPage()</code>. Ceci permettra seulement les requêtes inter-domaines si l'option de configuration <code>$.mobile.allowCrossDomainPages</code> est définie à <code>true</code>. Parce que le framework jQuery Mobile piste quelle page est considérée au sein de hash de location du navigateur, il est possible pour une attaque par script inter-site (XSS) de se produire si le code XSS en question peut manipuler le hash et le définir à une URL inter-domaine de son choix. Ceci est la raison principale pour que le paramètre par défaut pour <code>$.mobile.allowCrossDomainPages</code> soit défini sur <code>false</code>.</p>
+
+			<p>Ainsi dans les applications PhoneGap qui doivent "phone home" en chargeant des ressources hors d'un serveur distant, <code>$.support.cors</code> ET <code>$.mobile.allowCrossDomainPages</code> doivent être définis sur <code>true</code>. L'option <code>$.mobile.allowCrossDomainPages</code> doit être définie avant que toute requête inter-domaine soit faite ainsi nous recommandons son emballage dans un gestionnaire de <code>mobileinit</code> :</p>
+
+<pre><code>
+$( document ).on( "mobileinit", function() {
+    // Faites vos changements de configuration du framework jQuery Mobile ici !
+
+    $.mobile.allowCrossDomainPages = true;
+});
+</code></pre>
+
+			<h2>$.mobile.phonegapNavigationEnabled</h2>
+
+			<p>Sur Android, PhoneGap a un helper spécial de navigation mis en place pour contourner des problèmes avec Honeycomb, <code>navigator.app.backHistory</code> qui remplace <code>window.history.back</code>. Pour la plupart des applications jQuery Mobile ce n'est pas nécessaire d'avoir des connaissances ou de faire usage de cette helper car que l'objet historique de vanilla fonctionne très bien pour le hashchange et remplace les altérations d'état de l'historique du navigateur intégré. <b>Si et seulement si</b> votre application PhoneGap utilise un rafraîchissement de page complet (par exemple, pour la validation de formulaire) et que vous souhaitez soutenir la plateforme Android, veuillez vous assurez de mettre <code>$.mobile.phonegapNavigationEnabled = true</code> soit dans l'appel de <code>mobileinit</code> ou n'importe où avant l'interaction de l'utilisateur sur la page. Celui-ci remplace les appels à <code>window.history.back</code> par des appels à la méthode du helper de PhoneGap atténuant ainsi les problèmes de navigation de l'historique liés à l'actualisation de la page entière sur les appareils Android.</p>
+
+			<h2>Liste blanche de PhoneGap</h2>
+
+			<p>PhoneGap 1.0 a introduit l'idée de liste blanche de serveurs où son webview interne est autorisé pour faire des requêtes inter-domaine. Vous pouvez trouvez plus d'infos sur le <a href="http://wiki.phonegap.com/w/page/40796976/Install%20the%20latest%20%28trunk%29%20source%20of%20iOS%20PhoneGap">wiki de PhoneGap</a>.</p>
+
+			<p>Cependant, toutes les plateformes ne prennent pas en charge cette fonctionnalité de liste blanche donc veuillez consulter pour plus de détails la documentation PhoneGap. Les anciennes versions de PhoneGap par défaut avant la 1.0 permettaient les requêtes inter-domaine à un serveur.</p>
+
+			<h2>Plus de trucs et astuces</h2>
+
+			<p>Voici quelques conseils supplémentaires qui ne sont pas spécifiquement liés à PhoneGap, mais qui sont bonnes à savoir :</p>
+
+			<p><strong>Nous recommandons de désactiver la fonctionnalité pushState pour les applications installées </strong> parce qu'il y a des cas où l'avantage de cette fonction peut provoquer un comportement inattendu de navigation et puisque les URL ne sont pas visibles dans un webview, c'est pas la peine garder ceci actif dans ces situations.</p>
+			
+			<p>Utilisez le code suivant pour désactiver pushState. Comme l'événement mobileinit est déclenché immédiatement, vous devez lier votre gestionnaire d'événements avant que jQuery Mobile soit chargé.</p>
+		
+<pre><code>
+$(document).bind("mobileinit", function(){
+	$.mobile.pushStateEnabled = false;
+});
+</code></pre>
+
+			<p><strong>Android applique un timeout lors du chargement des URL dans un webview</strong> qui peut être trop court pour vos besoins. Vous pouvez modifier ce délai en éditant une classe Java générée par le plugin Eclipse pour Android :</p>
+			<code>super.setIntegerProperty("loadUrlTimeoutValue", 60000);</code>
+
+			<p><strong>Evitez les underscores dans les fichiers et les répertoires</strong> car Phonegap risque de ne pas charger les fichiers contenus dans Android. C'est un <a href="http://code.google.com/p/android/issues/detail?id=5343" data-ajax="false">problème</a> connu.</p>
+
+			<p><strong>Essayez <code>animation-fill-mode</code> pour réduire les transitions clignotantes</strong> mais méfiez vous car nous avons découvert que certains appareils, comme le Nexus 7, exécutent très lentement les animations lorsque cette propriété CSS est en cours. Nous vous recommandons de cibler soigneusement et de tester à fond pour s'assurer que cela n'a pas d'impact sur la flexibilité. Pour voir comment ajouter ceci à votre CSS, voir <a href="https://github.com/jquery/jquery-mobile/commit/fbbcf9e16ed2978547f1460c66f533157714371d" data-ajax="false">ce commit</a>.</p>
+
+			<h2>Construction d'applications UIWebView avec jQuery Mobile</h2>
+
+			<p>Il est important de noter lors de la création d'une personnalisation, non-Phonegap, le contrôle de <code>UIWebView</code> pour une application iOS, vous devez utiliser la méthode <code>loadRequest</code> de préférence à <code>loadData</code> pour supporter le bouton retour. Le bout de code suivant est un exemple de chargement de  <code>default.html</code> dans votre contrôleur de vue.</p>
+
+<pre><code>- (void)viewDidLoad
+{
+    [super viewDidLoad];
+    NSString *fullURL = [[NSBundle mainBundle] pathForResource:@"dialog" ofType:@"html"];
+    NSURL *url = [NSURL fileURLWithPath:fullURL];
+    NSURLRequest *requestObj = [NSURLRequest requestWithURL:url];
+    [webView loadRequest:requestObj];
+}</code></pre>
+
+			<a href="index.html" class="jqm-button" data-role="button" data-inline="true" data-mini="true" data-icon="arrow-l" data-iconpos="left">Toutes les Questions &amp; Réponses</a>
+
+	</div><!-- /content -->
+
+	<div data-role="footer" class="jqm-footer">
+		<p class="jqm-version"></p>
+		<p>Copyright 2013 The jQuery Foundation</p>
+	</div><!-- /footer -->
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+</body>
+</html>

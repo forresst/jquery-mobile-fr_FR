@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Barres d'outils fixes - Framework jQuery Mobile</title>
+	<link rel="stylesheet"  href="../../css/themes/default/jquery.mobile.min.css">
+	<link rel="stylesheet" href="../../_assets/css/jqm-demos.css">
+	<link rel="shortcut icon" href="../../favicon.ico">
+	<link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700">
+	<script src="../../js/jquery.js"></script>
+	<script src="../../_assets/js/index.js"></script>
+	<script src="../../js/jquery.mobile.min.js"></script>
+</head>
+<body>
+<div data-role="page" class="jqm-demos" data-quicklinks="true">
+
+    <div data-role="header" data-position="fixed" class="jqm-header">
+        <h1 class="jqm-logo"><a href="../../"><img src="../../_assets/img/jquery-logo.png" alt="Framework jQuery Mobile"></a></h1>
+		<a href="#" class="jqm-navmenu-link" data-icon="bars" data-iconpos="notext">Navigation</a> <a href="#" class="jqm-search-link" data-icon="search" data-iconpos="notext">Recherche</a> <?php include( '../../search.html' ); ?>
+	</div><!-- /header -->
+
+    <div data-role="content" class="jqm-content">
+
+    	<h1>Barres d'outils fixes</h1>
+
+		<p class="jqm-intro">Dans les navigateurs qui supportent <code>position: fixed</code>, (la plupart des navigateurs de bureaux, iOS5+, Android 2.2+, BlackBerry 6, et d'autres), les barres d'outils qui utilisent le plugin "fixedtoolbar" seront fixées à la partie supérieure ou inférieure de la fenêtre, tandis que le contenu de la page défilera librement entre les deux. Dans les navigateurs qui ne supportent pas le positionnement fixe, les barres d'outils resteront positionnées dans le flux, en haut ou en bas de la page. </p>
+
+		<h2>Fixe basiques</h2>
+		<p>Pour activer ce comportement sur ​​une entête ou un pied de page, ajoutez l'attribut <code>data-position="fixed"</code> à un élément header ou footer de JQuery Mobile.</p>
+
+		<p>Exemple de balisage d'une entête fixe :</p>
+
+<pre><code>
+&lt;div data-role="header" <strong>data-position="fixed"</strong>&gt;
+	&lt;h1&gt;Entête fixe !&lt;/h1&gt;
+&lt;/div&gt;
+</code></pre>
+
+		<p>Exemple de balisage d'un pied de page fixe :</p>
+
+<pre><code>
+&lt;div data-role="footer" <strong>data-position="fixed"</strong>&gt;
+	&lt;h1&gt;Pied de page fixe !&lt;/h1&gt;
+&lt;/div&gt;
+</code></pre>
+
+		<h2>Barres d'outils pleines écrans</h2>
+        
+		<p>Les barres d'outils <a href="bars-fullscreen.html">plein écran</a> se positionnent en haut du contenu à chaque fois qu'elles sont visibles, et à la différence des barres d'outils fixes habituelles, les barres d'outils "plein écran" ne se replient pas vers un positionnement statique lors d'un basculement. Au lieu de cela, elles disparaissent entièrement de l'écran. Les barres d'outils "plein écran" sont idéales pour les interfaces plus immersive, comme une visionneuse de photos qui est censé remplir tout l'écran avec la photo.</p>
+
+		<p>Pour activer cette option sur une entête ou un pied de page fixe, ajouter l'attribut <code>data-fullscreen</code> à l'élément.</p>
+
+<pre><code>
+&lt;div data-role="header" data-position="fixed" data-fullscreen="true"&gt;
+	&lt;h1&gt;Entête fixe !&lt;/h1&gt;
+&lt;/div&gt;
+</code></pre>
+
+		<h2>Formulaires dans les barres d'outils</h2>
+
+		<p>Bien que tous les éléments de formulaire sont maintenant testés pour fonctionner correctement dans les barres d'outils <em>statiques</em> pour jQuery Mobile 1.1, nous vous recommandons de nombreux tests lors de l'utilisation des éléments de formulaire dans  les barres d'outils <em>fixed</em> ou dans tous les éléments <code>position: fixed</code>. Cela peut potentiellement déclencher un certain nombre de problèmes imprévisibles dans différents navigateurs mobiles, Android 2.2/2.3 en particulier (détaillé dans les <b>Problèmes connus dans Android 2.2/2.3</b>).</p>
+
+		<h2>Les changements dans jQuery Mobile 1.1</h2>
+
+		<p>Avant la version 1.1, jQuery Mobile utilisait dynamiquement les barres d'outils repositionnées pour donner l'effet d'une entête fixe, car très peu de navigateurs mobiles supportaient la propriété CSS <code>position:fixed</code>. Et en simulant une fixation grâce à l'utilisation de "faux" JavaScript,  le comportement du débordement du défilement réduisait le nombre de navigateur supporté, en plus cela se comportait de façon anormale sur certaines plateformes. Ce comportement n'était pas idéal et jQuery Mobile 1.1 a pris une nouvelle approche pour les barres d'outils fixes qui permet un support beaucoup plus large. Le framework offre de véritables barres d'outils fixes sur les nombreuses plateformes populaires, au lieu d'un positionnement statique dégradé pour les plateformes ne pouvant le supporter.</p>
+
+		<h3>Polyfill pour les anciennes plateformes</h3>
+		<p>Le plugin de barre d'outils fixe se dégrade gracieusement dans les plateformes qui ne supportent pas correctement le CSS <code>position:fixed</code> , comme l'iOS4.3. Si vous avez encore besoin de supporter les barres d'outils fixes sur cette plateforme (avec le comportement afficher/Masquer) qui était incluse dans les versions précédentes, Filament Group a développé un polyfill que vous pouvez utiliser.</p>
+
+		<ul><li><a href="http://slashdot.org/">Slashdot</a></li><li><a href="http://www.intel.com/">Intel</a></li></ul>
+		<ul>
+				<li><a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">C'est le dépôt du code Github avec les CSS et JavaScript requis pour le polyfill des barres d'outils fixes</a></li>
+				<li><a href="http://filamentgroup.github.com/jQuery-Mobile-FixedToolbar-Legacy-Polyfill/">L'URL de démonstration en utilisant le code dans le dépôt ci-dessus</a></li>
+		</ul>
+
+		<p>Il suffit d'inclure les fichiers CSS et JS après vos références à jQuery Mobile et les barres d'outils fixes travailleront de la même manière que jQuery Mobile 1.0 dans iOS4.3, avec l'ajout de la nouvelle API pour le plugin fixedtoolbar 1.1.</p>
+
+		<p>Si vous avez des améliorations à suggérer, faites un fork du <a href="https://github.com/filamentgroup/jQuery-Mobile-FixedToolbar-Legacy-Polyfill">gist</a> sur github et faites le nous savoir !</p>
+
+		<h2>Problème connu avec les contrôles de formulaire à l'intérieur des barres d'outils fixes et de scroll par programmation</h2>
+		<p>Un problème obscur existe dans iOS5 et certaines plateformes Android où le contrôle de formulaire placé à l'intérieur de conteneurs fixes peut perdre sa zone active lorsque la fenêtre est par programmation scroller (en utilisant  <code>window.scrollTo</code> par exemple). Ce n'est pas un problème spécifique à jQuery Mobile, mais à cause de cela, nous recommandons de ne pas faire défiler un document par programmation lors de l'utilisation des contrôles de formulaire à l'intérieur de barre d'outils fixe de jQuery Mobile. <a href="https://github.com/scottjehl/Device-Bugs/issues/1">Ce ticket</a> du <a href="https://github.com/scottjehl/Device-Bugs/">projet des bugs d'appareils</a> explique ce problème plus en détail.</p>
+
+		<h2>Problèmes connus dans Android 2.2/2.3</h2>
+		<p>La mise en œuvre de <code>position: fixed;</code> dans Android 2.2/2.3 peut, en conjonction avec des styles apparemment sans rapport avec des modèles de balisage, provoquer un certain nombre de problème étrange en particulier dans le cas des éléments  <code>position: absolute</code> à l'intérieur d'éléments <code>position: fixed</code>. Bien que nous ayons fait de notre mieux pour contourner un certain nombre de ces bugs uniques relevant de la bibliothèque, notez que des styles personnalisés peuvent causer un certain nombre de problèmes.</p>
+		<ul>
+			<li>Les éléments de formulaire situés ailleurs sur la page des menus de sélection  en particulier, peuvent ne pas répondre à une interaction utilisateur quand un élément <em>vide</em> positionné en absolu est placé dans un élément à position fixe. Dans de rares cas et spécifiques à Android 2.2, cela peut causer sur <em>la totalité des pages</em> un échec à une interaction utilisateur. Cela peut apparemment être résolu en ajoutant n'importe quel caractère à l'élément positionné en  absolu, y compris un espace insécable, et même dans certains cas des espaces.</li>
+			<li>Le problème ci-dessus peut également être déclenché par une image positionné en absolu à l'intérieur d'un élément en position fixe, mais <em>seulement</em> lorsque cette image est utilisée avec <em>autre chose que ses dimensions inhérentes</em>. Si une hauteur ou une largeur est spécifiée sur l'image en utilisant le CSS, ou si le src de l'image n'est pas valide (donc n'ayant pas de hauteur et de largeur inhérente), ce problème peut se produire. Si une image par exemple de 50x50 pixels est placée dans un élément fixe et est laissé à ses dimensions inhérentes, cette question ne semble pas se produire.</li>
+			<li>Quand un élément <code>position: fixed</code> apparaît n'importe où sur une page, la plupart des transformations 2D CSS échoueront. Curieusement, seuls les transformations <code>translate</code> semblent ne pas être affectées par cela. Encore plus étrange, ce problème est résolu en réglant le CSS <code>opacity</code> à .9 ou moins sur le parent de l'élément fixe.</li>
+			<li>La combinaison de <code>position: fixed</code> et des propriétés overflow est à éviter, car les deux ensembles sont connus pour causer des problèmes imprévisibles dans les anciennes versions de l'OS Android.</li>
+			<li>Tout élément qui déclenche le clavier à l'écran, lorsqu'il est placé dans un élément <code>position: fixed</code>, ne parviendra pas à répondre à la saisie de l'utilisateur lorsque vous utilisez autre chose que le clavier par défaut. Cela inclut Swype, XT9 ou, à priori, toute méthode de saisie en dehors de la norme non-intuitive du clavier.</li>
+		</ul>
+
+		<p>Alors que nous allons continuer à essayer de trouver des façons d'atténuer ces bugs du mieux que nous le pouvons, nous vous conseillons actuellement lors de l'implémentation des barres d'outils fixes contenant des styles utilisateur compliqués et des éléments de formulaire de faire de nombreux essais dans toutes les versions du navigateur natif d'Android.</p>
+
+		<h2>N'est plus pris en charge : touchOverflowEnabled</h2>
+
+		<p>Avant la version 1.1 de jQuery Mobile, le véritable support de la barre d'outils fixe dépendait du support natif du navigateur avec la propriété CSS <code>overflow-scrolling: touch</code>, qui est actuellement pris en charge que par iOS5. Depuis la version 1.1, jQuery Mobile n'utilise plus du tout cette propriété CSS. Nous avons enlevé tous les usages internes de cette propriété dans le framework, toutefois, nous avons laissé l'objet $.mobile défini globalement pour éviter que sa suppression puisse causer des problèmes avec les applications existantes. Cette propriété est marquée pour suppression, donc s'il vous plaît mettez à jour votre code pour ne plus l'utiliser. Cependant, le test du support pour cette propriété reste défini sous <code>$.support</code> et nous n'avons pas l'intention d'enlever ce test pour l'instant. </p>
+
+
+    </div><!-- /content -->
+    
+    <div data-role="footer" data-theme="f" data-position="fixed">
+    	<h1>Pied de page fixe</h1>
+    </div>
+    <div data-role="panel" class="jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+        <ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+            <li data-role="list-divider">Navigation jquery-fr.com</li>
+			      <li><a href="http://www.jquery-fr.com" rel="external">Documentation française jQuery</a></li>
+            <li><a href="http://www.jquery-fr.com/forum" rel="external">Forum français dédié à jQuery</a></li>
+            <li data-role="list-divider">Démos jQuery Mobile</li>
+			<li><a href="./">Accueil</a></li>
+            <li><a href="intro/">Introduction</a></li>
+            <li><a href="examples/">Plusieurs démos</a></li>
+            <li><a href="faq/">Questions &amp; Réponses</a></li>
+			<li><a href="intro/rwd.html">Devenir Responsive</a></li>
+            <li data-role="list-divider">Référence Widget</li>
+<li data-section="Widgets" data-filtertext="accordions collapsible sets content formatting grouped inset mini"><a href="widgets/accordions/">Accordéon</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax navigation navigate event method"><a href="widgets/navigation/" data-ajax="false">Navigation AJAX</a></li>
+
+<li data-section="Widgets" data-filtertext="autocomplete filter reveal listviews remote listviewbeforefilter placeholder"><a href="widgets/autocomplete/" data-ajax="false">Autocomplete</a></li>
+
+<li data-section="Widgets" data-filtertext="buttons inputs forms inline theme grouped icons mini disabled"><a href="widgets/buttons/" data-ajax="false">Boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="checkboxes checkboxradio inputs forms mini disabled"><a href="widgets/checkbox/">Cases à cocher</a></li>
+
+<li data-section="Widgets" data-filtertext="collapsibles content formatting"><a href="widgets/collapsibles/" data-ajax="false">Pliables</a></li>
+
+<li data-section="Widgets" data-filtertext="controlgroups selects checkboxradio buttons horizontal vertical"><a href="widgets/controlgroups/">Controlgroup</a></li>
+
+<li data-section="Widgets" data-filtertext="dialogs modal popups"><a href="widgets/dialog/">Boîtes de dialogue</a></li>
+
+<li data-section="Widgets" data-filtertext="fixed toolbars headers footers sections fullscreen"><a href="widgets/fixed-toolbars/">Barres d'outils fixes</a></li>
+
+<li data-section="Widgets" data-filtertext="flip toggle switch binary slider selects forms disabled"><a href="widgets/sliders/switch.html" data-ajax="false">Interrupteur</a></li>
+
+<li data-section="Widgets" data-filtertext="footer toolbars footers sections"><a href="widgets/footers/">Barre d'outils de pied de page</a></li>
+
+<li data-section="Widgets" data-filtertext="forms inputs slider button range toggle switch label disabled accessible fieldcontains elements"><a href="widgets/forms/">Éléments de formulaire</a></li>
+
+<li data-section="Widgets" data-filtertext="grids columns blocks content formatting rwd responsive"><a href="widgets/grids/">Grilles</a></li>
+
+<li data-section="Widgets" data-filtertext="header toolbars fixed fullscreen sections"><a href="widgets/headers/">Barre d'outils d'entête</a></li>
+
+<li data-section="Widgets" data-filtertext="icons buttons disc position"><a href="widgets/icons/">Icônes</a></li>
+
+<li data-section="Widgets" data-filtertext="links navigation ajax prefetch cache"><a href="widgets/links/">Liens</a></li>
+
+<li data-section="Widgets" data-filtertext="listviews thumbnails icons nested split button collapsible ul ol"><a href="widgets/listviews/" data-ajax="false">Listes</a></li>
+
+<li data-section="Widgets" data-filtertext="ajax loader overlay spinner pages"><a href="widgets/loader/" data-ajax="false">Chargeur</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars navmenu toolbars links icons footer header"><a href="widgets/navbar/" data-ajax="false">Barre de navigation</a></li>
+
+<li data-section="Widgets" data-filtertext="navbars persistent header footer links navmenu"><a href="widgets/fixed-toolbars/footer-persist-a.html">Barre de navigation persistante</a></li>
+
+<li data-section="Widgets" data-filtertext="pages single multipage templates ajax nav"><a href="widgets/pages/">Pages</a></li>
+
+<li data-section="Widgets" data-filtertext="panels sliding nav modal transition display reveal overlay push rwd responsive"><a href="widgets/panels/">Panneaux <span class="ui-li-count">Nouveauté</span></a></li>
+
+<li data-section="Widgets" data-filtertext="popup dialog modal transition tooltip lightbox form overlay screen flip pop fade transition"><a href="widgets/popup/">Popup</a></li>
+
+<li data-section="Widgets" data-filtertext="radiobuttons checkboxradio inputs forms disabled grouped"><a href="widgets/radiobuttons/">Radio boutons</a></li>
+
+<li data-section="Widgets" data-filtertext="selectmenus custom native multiple optgroup disabled forms"><a href="widgets/selects/">Sélection</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, single sliders range inputs forms disabled"><a href="widgets/sliders/" data-ajax="false">Curseur seule</a></li>
+
+<li data-section="Widgets" data-filtertext="slider, dual range sliders rangesliders inputs forms disabled"><a href="widgets/sliders/rangeslider.html" data-ajax="false">Curseur, fourchette <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables column th td toggle responsive tables rwd hide show tabular"><a href="widgets/table-column-toggle/">Table, column toggle <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="tables reflow th td responsive rwd columns tabular"><a href="widgets/table-reflow/">Table, reflow <span class="ui-li-count">Nouveau</span></a></li>
+
+<li data-section="Widgets" data-filtertext="text inputs textarea numeric email tel file date time month clear pattern placeholder forms"><a href="widgets/textinputs/">Textes de saisie &amp; zone de saisie</a></li>
+
+<li data-section="Widgets" data-filtertext="page transitions animated pages ajax navigation flip slide fade pop" data-ajax="false"><a href="widgets/transitions/" data-ajax="false">Transitions</a></li>
+
+        
+        </ul>
+	</div><!-- /panel -->
+
+
+
+
+</div><!-- /page -->
+
+</body>
+</html>
