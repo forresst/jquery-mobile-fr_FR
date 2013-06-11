@@ -1,19 +1,9 @@
-  var _gaq = _gaq || [];
-  $(document).ready(function(e) {
-    (function() {
-      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 
-                  '.google-analytics.com/ga.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-    })();
-    }); 
-
-// Désactiver AJAX pour la navigation des fichiers locaux
+// Turn off AJAX for local file browsing
 if ( location.protocol.substr(0,4)  === 'file' ||
      location.protocol.substr(0,11) === '*-extension' ||
      location.protocol.substr(0,6)  === 'widget' ) {
 
-	// ommencez avec des liens avec seulement un slash final et qui ne sont pas des liens externes
+	// Start with links with only the trailing slash and that aren't external links
 	var fixLinks = function() {
 		$( "a[href$='/'], a[href='.'], a[href='..']" ).not( "[rel='external']" ).each( function() {
 			if( !$( this ).attr( "href" ).match("http") ){
@@ -22,19 +12,19 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 		});
 	};
 
-	// corriger les liens de la page initiale
+	// Fix the links for the initial page
 	$( fixLinks );
 
-	// corriger les liens pour les chargements ultérieures de page AJAX
+	// Fix the links for subsequent ajax page loads
 	$( document ).on( 'pagecreate', fixLinks );
 
-	// Vérifie pour voir si AJAX peut être utilisé. Cette commande fait une demande rapide ajax et bloque la page jusqu'à ce que c'est fait
+	// Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
 	$.ajax({
 		url: '.',
 		async: false,
 		isLocal: true
 	}).error(function() {
-		// Ajax ne fonctionne pas, donc on le désactive
+		// Ajax doesn't work so turn it off
 		$( document ).on( "mobileinit", function() {
 			$.mobile.ajaxEnabled = false;
 			
@@ -45,8 +35,8 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 			});
 			
 			message
-			.append( "<h3 style='margin:0 0 .3em; padding:0; font-size:1em; font-weight: bold; color:#fff;'>Remarque : Il est possible que la navigation ne fonctionne pas si la documentation est visualisée localement</h3>" )
-			.append( "<p style='margin:0; font-size:.9em; color:#fff;'>La navigation axée AJAX qui est utilisée dans la documentation de jQuery Mobile peut avoir besoin d'être visualisée sur un serveur web pour fonctionner dans certains navigateurs. Si vous voyez un message d'erreur lorsque vous cliquez sur un lien, essayez un autre navigateur ou <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help' style='color:white'>consultez l'aide</a>.</p>" );
+			.append( "<h3 style='margin:0 0 .3em; padding:0; font-size:1em; font-weight: bold; color:#fff;'>Note: Navigation may not work if viewed locally</h3>" )
+			.append( "<p style='margin:0; font-size:.9em; color:#fff;'>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help' style='color:white'>view help</a>.</p>" );
 			
 			$( document ).on( "pagecreate", function( event ) {
 				$( event.target ).append( message );
@@ -56,7 +46,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 }
 
 
-// affiche la version de jQM
+// display the version of jQM
 $( document ).on( "pageinit", function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
@@ -82,12 +72,12 @@ $( document ).on( "pageinit", function() {
 $( document ).on( "pageinit", ".jqm-demos", function() {
 	var page = $( this );
 
-	// Panneau du menu global
+	// global navmenu panel
 	$( ".jqm-navmenu-link" ).on( "click", function() {
 		page.find( ".jqm-navmenu-panel" ).panel( "open" );
 	});
 
-	// Recherche globale
+	// global search
 	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
@@ -139,7 +129,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		icon: false,
 		filter: true,
 		filterReveal: true,
-		filterPlaceholder: "Recherche...",
+		filterPlaceholder: "Search...",
   		arrowKeyNav: true,
   		enterToNav: true,
   		highlight: true
@@ -153,18 +143,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 
 $( document ).on( "pageshow",  ".jqm-demos", function() {
 	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
-
-  try {
-      _gaq.push(['_setAccount', 'UA-827525-9']);
-      console.log($.mobile.activePage.attr("data-url"));
-      if ($.mobile.activePage.attr("data-url")) {
-        _gaq.push(['_trackPageview', $.mobile.activePage.attr("data-url")]);
-      } else {
-        _gaq.push(['_trackPageview']);
-      }
-    } catch(err) {}
-
-  });
+});
 
 $( document ).on( "pageshow", ".jqm-demos-search-results", function() {
 	var search = $.mobile.path.parseUrl( window.location.href ).search.split( "=" )[1], self = this;

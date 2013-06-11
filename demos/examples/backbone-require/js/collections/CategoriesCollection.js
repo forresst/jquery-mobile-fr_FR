@@ -1,24 +1,24 @@
 // Category Collection
 // ===================
 
-// Inclure les dépendances de fichier
+// Includes file dependencies
 define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, CategoryModel ) {
 
-    // Étendre Backbone.Router
+    // Extends Backbone.Router
     var Collection = Backbone.Collection.extend( {
 
-        // Le constructeur de Collection
+        // The Collection constructor
         initialize: function( models, options ) {
 
-            // Définit la propriété instance de type (par exemple animals)
+            // Sets the type instance property (ie. animals)
             this.type = options.type;
 
         },
 
-        // Définit la propriété modèle de la collection en Category Model
+        // Sets the Collection model property to be a Category Model
         model: CategoryModel,
 
-        // Exemples de données JSON qui dans une application réelle viendra très probablement à partir d'un service Web REST
+        // Sample JSON data that in a real app will most likely come from a REST web service
         jsonArray: [
 
             { "category": "animals", "type": "Pets" },
@@ -49,50 +49,50 @@ define([ "jquery","backbone","models/CategoryModel" ], function( $, Backbone, Ca
 
         ],
 
-        // Redéfinition de la méthode Backbone.sync (la méthode Backbone.fetch appelle la méthode sync lorsque vous essayez de récupérer les données)
+        // Overriding the Backbone.sync method (the Backbone.fetch method calls the sync method when trying to fetch data)
         sync: function( method, model, options ) {
 
-            // Variables Locales
+            // Local Variables
             // ===============
 
-            // Instancie  un tableau vide
+            // Instantiates an empty array
             var categories = [],
 
-                // Stocke le context de this dans la variable self
+                // Stores the this context in the self variable
                 self = this,
 
-                // Créé un objet  jQuery Deferred
+                // Creates a jQuery Deferred Object
                 deferred = $.Deferred();
 
-            // Utilise un setTimeout pour imiter une application du monde réel qui récupère des données de manière asynchrone
+            // Uses a setTimeout to mimic a real world application that retrieves data asynchronously
             setTimeout( function() {
 
-                // Filtre les échantillons ci-dessus des données JSON pour retourner un tableau correct de type category
+                // Filters the above sample JSON data to return an array of only the correct category type
                 categories = _.filter( self.jsonArray, function( row ) {
 
                     return row.category === self.type;
 
                 } );
 
-                // Appelle la méthode options.success et passe un tableau d'objets (En interne cela sauve ces objets comme des modèles à la collection actuelle)
+                // Calls the options.success method and passes an array of objects (Internally saves these objects as models to the current collection)
                 options.success( categories );
 
-                // Déclenche la méthode personnalisé `added` (qui écoute la Vue Category)
+                // Triggers the custom `added` method (which the Category View listens for)
                 self.trigger( "added" );
 
-                // Resolve l'objetdeferred (ce qui déclenche la méthode changePage à l'intérieur du routeur Category)
+                // Resolves the deferred object (this triggers the changePage method inside of the Category Router)
                 deferred.resolve();
 
             }, 1000);
 
-            // Retourne l'objet deferred
+            // Returns the deferred object
             return deferred;
 
         }
 
     } );
 
-    // Retourne la classe Model
+    // Returns the Model class
     return Collection;
 
 } );

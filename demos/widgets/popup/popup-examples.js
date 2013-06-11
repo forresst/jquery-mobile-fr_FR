@@ -1,4 +1,4 @@
-// exemples de popup
+// popup examples
 $( document ).on( "pageinit", function() {
 
 	$( ".photopopup" ).on({
@@ -40,7 +40,7 @@ $( document ).on( "pageinit", function() {
 	 
 	$( "#popupVideo" ).on({
 		popupbeforeposition: function() {
-			// appelle notre fonction scale() pour récupérer la largeur et la hauteur
+			// call our custom function scale() to get the width and height 
 			var size = scale( 497, 298, 15, 1 ),
 				w = size.width,
 				h = size.height;

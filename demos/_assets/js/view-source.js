@@ -1,4 +1,4 @@
-// Aperçu du code source demo
+// View demo source code
 
 function attachPopupHandler( popup, sources ) {
 	popup.one( "popupbeforeposition", function() {
@@ -99,7 +99,7 @@ function makeButton() {
 	a.setAttribute( "data-mini", "true" );
 	a.setAttribute( "data-inline", "true" );
 	a.setAttribute( "data-shadow", "false" );
-	a.innerHTML = "Voir la source";
+	a.innerHTML = "View Source";
 
 	d.appendChild( a );
 
@@ -117,7 +117,7 @@ $.fn.viewSourceCode = function() {
 			data,
 			sources = [];
 
-		// Collecter le code source avant de commencer l'amélioration
+		// Collect source code before it becomes enhanced
 
 		if ( self.is( "[data-demo-html]" ) ) {
 			if ( self.attr( "data-demo-html" ) === "true" ) {
@@ -134,7 +134,7 @@ $.fn.viewSourceCode = function() {
 					data = incoming;
 				})
 				.error( function() {
-					data = "// Échec pour charger la source PHP";
+					data = "// Failed to retrieve PHP source code";
 				});
 
 			sources.push( { title: "PHP", theme: "d", brush: "php", data: fixData( data ) } );
@@ -162,7 +162,7 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 });
 
 $( document ).on( "pageinit", function( e ) {
-	// évite le défilement de la page pendant le défilement du code source
+	// prevent page scroll while scrolling source code
 	$( document ).on( "mousewheel", ".jqm-view-source .ui-collapsible-content", function( event, delta ) {
 		if ( delta > 0 && $( this ).scrollTop() === 0 ) {
 			event.preventDefault();
@@ -171,19 +171,19 @@ $( document ).on( "pageinit", function( e ) {
 		}
 	});
 	
-	// reposition lorqu'on bascule entre html / js / css
+	// reposition when switching between html / js / css
 	$( e.target ).delegate( ".jqm-view-source .ui-collapsible", "expand", function() {
 		$( this ).parents( ":mobile-popup" ).popup( "reposition", { positionTo: "window" } );
 	});
 
 	$( e.target ).delegate( ".jqm-view-source", "popupbeforeposition", function() {
-		// hauteur max : hauteur écran - tolérance (2*30px) - 42px pour chaque entête de pliable
+		// max height: screen height - tolerance (2*30px) - 42px for each collapsible heading
 		var x = $( this ).find( ".ui-collapsible" ).length,
 			maxHeight = $.mobile.getScreenHeight() - 60 - ( x * 42 );
 
 		$( this ).find( ".ui-collapsible-content" ).css( "max-height", maxHeight + "px" );
 
-		// garder les numéros de lignes et les lignes de code en phase
+		// keep line numbers and code lines in sync
 		$(".ui-collapsible:not(.ui-collapsible-collapsed) .gutter", this ).find( ".line" ).css( "height", "");
 
 		$(".ui-collapsible:not(.ui-collapsible-collapsed) .code", this ).find( ".line" ).each( function() {

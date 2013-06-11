@@ -1,25 +1,25 @@
 // Mobile Router
 // =============
 
-// Inclure les dépendances de fichier
+// Includes file dependencies
 define([ "jquery","backbone", "../models/CategoryModel", "../collections/CategoriesCollection", "../views/CategoryView" ], function( $, Backbone, CategoryModel, CategoriesCollection, CategoryView ) {
 
-    // Étendre Backbone.Router
+    // Extends Backbone.Router
     var CategoryRouter = Backbone.Router.extend( {
 
-        // Le constructeur de Router
+        // The Router constructor
         initialize: function() {
 
-            // Instancie une nouvelle Vue Category de Animal
+            // Instantiates a new Animal Category View
             this.animalsView = new CategoryView( { el: "#animals", collection: new CategoriesCollection( [] , { type: "animals" } ) } );
 
-            // Instancie une nouvelle Vue Category de Colors
+            // Instantiates a new Colors Category View
             this.colorsView = new CategoryView( { el: "#colors", collection: new CategoriesCollection( [] , { type: "colors" } ) } );
 
-            // Instancie une nouvelle Vue Category de Vehicles
+            // Instantiates a new Vehicles Category View
             this.vehiclesView = new CategoryView( { el: "#vehicles", collection: new CategoriesCollection( [] , { type: "vehicles" } ) } );
 
-            // Appelle Backbone pour commencer à regarder les événements hashchange
+            // Tells Backbone to start watching for hashchange events
             Backbone.history.start();
 
         },
@@ -27,48 +27,48 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
         // Backbone.js Routes
         routes: {
 
-            // Quand il n'y a pas de hash sur l'url, la méthode home est appelée
+            // When there is no hash bang on the url, the home method is called
             "": "home",
 
-            // Quand #category? est sur l'url, la méthode category est appelée
+            // When #category? is on the url, the category method is called
             "category?:type": "category"
 
         },
 
-        // Méthode home
+        // Home method
         home: function() {
 
-            // Change par programmation vers la page categories
+            // Programatically changes to the categories page
             $.mobile.changePage( "#categories" , { reverse: false, changeHash: false } );
 
         },
 
-        // La méthode Category dont le type est passé en paramètre ajoute le hash dans l'url
+        // Category method that passes in the type that is appended to the url hash
         category: function(type) {
 
-            // Stocke la vue courante de Category dans la variable currentView
+            // Stores the current Category View  inside of the currentView variable
             var currentView = this[ type + "View" ];
 
-            // S'il n'y a pas de collections dans la Vue courante de Category
+            // If there are no collections in the current Category View
             if(!currentView.collection.length) {
 
-                // Affiche l'icône de chargement de jQuery Mobile
+                // Show's the jQuery Mobile loading icon
                 $.mobile.loading( "show" );
 
-                // Récupère la collection des modèles de  Category  pour la Vue  Category courante
+                // Fetches the Collection of Category Models for the current Category View
                 currentView.collection.fetch().done( function() {
 
-                    // Change par programmation vers la page courante categories
+                    // Programatically changes to the current categories page
                     $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
     
                 } );
 
             }
 
-            // S'il y a déjà des collections dans la Vue courante de Category
+            // If there already collections in the current Category View
             else {
 
-                // Change par programmation vers la page courante categories
+                // Programatically changes to the current categories page
                 $.mobile.changePage( "#" + type, { reverse: false, changeHash: false } );
 
             }
@@ -77,7 +77,7 @@ define([ "jquery","backbone", "../models/CategoryModel", "../collections/Categor
 
     } );
 
-    // Retourne la classe Router
+    // Returns the Router class
     return CategoryRouter;
 
 } );

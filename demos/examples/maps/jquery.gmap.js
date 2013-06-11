@@ -4,11 +4,11 @@
  * 	$.gmap({ ...options... })
  * 	$.gmap('addMarkers', data)
  * 
- * L'objet jQuery étant mapifié doit avoir un attribut : data-initial-view="lat,lng,zoom"
+ * The jQuery object being mapified must have an attribute: data-initial-view="lat,lng,zoom"
  * 
- * Options de configuration :
+ * Configuration options:
  * 
- * 	loadingMessage : une chaine de caractère pour le message de chargement. Par défaut : "Loading..."
+ * 	loadingMessage: a string for the loading overlay. Default: "Loading..."
  *  autoAddMarkers: boolean. If true, a marker is automatically added for each item with the  
  *  	attribute data-marker-info="lat,lng". If the element or any descendant has the class
  *  	"ui-gmap-marker-content", then an infobox containing that content will be shown when
