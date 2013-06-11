@@ -1,10 +1,10 @@
-// Sets the require.js configuration for your application.
+// Définit la configuration de require.js pour votre application.
 require.config( {
 
       // 3rd party script alias names (Easier to type "jquery" than "libs/jquery-1.8.2.min")
       paths: {
 
-            // Core Libraries
+            // Libraries principales
             "jquery": "libs/jquery",
             "jquerymobile": "libs/jquerymobile",
             "underscore": "libs/lodash",
@@ -12,7 +12,7 @@ require.config( {
 
       },
 
-      // Sets the configuration for your third party scripts that are not AMD compatible
+      // Définit la configuration des scripts tiers pour vos scripts tiers qui ne sont pas compatible AMD
       shim: {
 
             "backbone": {
@@ -24,22 +24,22 @@ require.config( {
 
 } );
 
-// Includes File Dependencies
+// Inclure les dépendances de fichier
 require([ "jquery", "backbone", "routers/mobileRouter" ], function( $, Backbone, Mobile ) {
 
 	$( document ).on( "mobileinit",
-		// Set up the "mobileinit" handler before requiring jQuery Mobile's module
+		// Met en place le gestionnaire "mobileinit" avant d'exiger le module jQuery Mobile
 		function() {
-			// Prevents all anchor click handling including the addition of active button state and alternate link bluring.
+			// Empêche toute manipulation de clic des ancres, en incluant l'état ​​du bouton actif et le flou du lien.
 			$.mobile.linkBindingEnabled = false;
 
-			// Disabling this will prevent jQuery Mobile from handling hash changes
+			// La désactivation de ceci, empêchera jQuery Mobile de traiter des changements de hash
 			$.mobile.hashListeningEnabled = false;
 		}
 	)
 
 	require( [ "jquerymobile" ], function() {
-		// Instantiates a new Backbone.js Mobile Router
+		// Instancie un nouveau Routeur Mobile de Backbone.js
 		this.router = new Mobile();
 	});
 } );

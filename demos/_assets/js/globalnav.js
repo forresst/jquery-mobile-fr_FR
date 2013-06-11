@@ -27,7 +27,9 @@
 					
 				this.element.find( "a" ).each(function() {
 					var href = base + $( this ).attr( "href" );
-					$( this ).attr( "href", href );
+					if (href.lastIndexOf("http://www.jquery-fr.com") === -1) {
+                                                                                                                           $( this ).attr( "href", href );
+                                                                                                                        }
 				});
 			}
 		});

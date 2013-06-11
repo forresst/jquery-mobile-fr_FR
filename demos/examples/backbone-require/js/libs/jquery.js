@@ -5,7 +5,7 @@
  * Includes Sizzle.js
  * http://sizzlejs.com/
  *
- * Copyright 2010, 2013 jQuery Foundation and other contributors
+ * Copyright 2010, 2013 jQuery Fondation et autres contributeurs
  * Released under the MIT license
  * http://jquery.org/license
  *
@@ -3662,7 +3662,7 @@ jQuery.each( ("blur focus focusin focusout load resize scroll unload click dblcl
 });
 /*!
  * Sizzle CSS Selector Engine
- * Copyright 2010, 2013 jQuery Foundation and other contributors
+ * Copyright 2010, 2013 jQuery Fondation et autres contributeurs
  * Released under the MIT license
  * http://sizzlejs.com/
  */

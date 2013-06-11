@@ -1,6 +1,6 @@
 /*
 * jQuery Mobile 1.4.0pre
-* Git HEAD hash: b43189764d70c0b7684e177ef60878d0eeab4f02 <> Date: Tue Jun 11 2013 20:48:49 UTC
+* Git HEAD hash: b43189764d70c0b7684e177ef60878d0eeab4f02 <> Date: Tue Jun 11 2013 21:22:19 UTC
 * http://jquerymobile.com
 *
 * Copyright 2010, 2013 jQuery Foundation, Inc. and other contributors
@@ -1627,7 +1627,7 @@ function transform3dTest() {
 
 	el = document.createElement( "div" );
 	transforms = {
-		// We’re omitting Opera for the time being; MS uses unprefixed.
+		// Weâ€™re omitting Opera for the time being; MS uses unprefixed.
 		"MozTransform": "-moz-transform",
 		"transform": "transform"
 	};

@@ -1,15 +1,15 @@
 // Category Model
 // ==============
 
-// Includes file dependencies
+// Inclure les dépendances de fichier
 define([ "jquery", "backbone" ], function( $, Backbone ) {
 
-    // The Model constructor
+    // Le constructeur de Model
     var Model = Backbone.Model.extend( {
 
     } );
 
-    // Returns the Model class
+    // Retourne la classe Model
     return Model;
 
 } );

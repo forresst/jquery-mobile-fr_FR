@@ -27,7 +27,9 @@
 					
 				this.element.find( "a" ).each(function() {
 					var href = base + $( this ).attr( "href" );
-					$( this ).attr( "href", href );
+					if (href.lastIndexOf("http://www.jquery-fr.com") === -1) {
+                                                                                                                           $( this ).attr( "href", href );
+                                                                                                                        }
 				});
 			}
 		});
@@ -145,7 +147,7 @@
 			_create:function(){
 				var self = this,
 					bodyid = "ui-page-top",
-					panel = "<div data-role='panel' class='jqm-nav-panel jqm-quicklink-panel' data-position='right' data-display='overlay' data-theme='c'><ul data-role='listview' data-inset='false' data-theme='d' data-divider-theme='d' data-icon='false' class='jqm-list'><li data-role='list-divider'>Jump to section</li></ul></div>",
+					panel = "<div data-role='panel' class='jqm-nav-panel jqm-quicklink-panel' data-position='right' data-display='overlay' data-theme='c'><ul data-role='listview' data-inset='false' data-theme='d' data-divider-theme='d' data-icon='false' class='jqm-list'><li data-role='list-divider'>Aller à la section</li></ul></div>",
 					first = true,
 					h2dictionary = new Object();
 					if(typeof $("body").attr("id") === "undefined"){
@@ -165,9 +167,9 @@
 
 						h2dictionary[id] =  text;
 						if(!first){
-							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-link'>Return to top<span class='ui-icon ui-icon-arrow-u'>&nbsp;</span></a>");
+							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-link'>Retourner en haut<span class='ui-icon ui-icon-arrow-u'>&nbsp;</span></a>");
 						} else {
-							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink ui-link jqm-open-quicklink-panel'>Jump to section<span class='ui-icon ui-icon-bars'>&nbsp;</span></a>");
+							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink ui-link jqm-open-quicklink-panel'>Aller à la section<span class='ui-icon ui-icon-bars'>&nbsp;</span></a>");
 						}
 						first = false;
 					});
@@ -204,12 +206,21 @@
 	});
 })( jQuery );
 
-// Turn off AJAX for local file browsing
+var _gaq = _gaq || [];
+$(document).ready(function(e) {
+   (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + 
+               '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+   })();
+});
+// Désactiver AJAX pour la navigation des fichiers locaux
 if ( location.protocol.substr(0,4)  === 'file' ||
      location.protocol.substr(0,11) === '*-extension' ||
      location.protocol.substr(0,6)  === 'widget' ) {
 
-	// Start with links with only the trailing slash and that aren't external links
+	// Commencez avec des liens avec seulement un slash final et qui ne sont pas des liens externes
 	var fixLinks = function() {
 		$( "a[href$='/'], a[href='.'], a[href='..']" ).not( "[rel='external']" ).each( function() {
 			if( !$( this ).attr( "href" ).match("http") ){
@@ -218,19 +229,19 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 		});
 	};
 
-	// Fix the links for the initial page
+	// corriger les liens de la page initiale
 	$( fixLinks );
 
-	// Fix the links for subsequent ajax page loads
+	// corriger les liens pour les chargements ultérieures de page AJAX
 	$( document ).on( 'pagecreate', fixLinks );
 
-	// Check to see if ajax can be used. This does a quick ajax request and blocks the page until its done
+	// Vérifie pour voir si AJAX peut être utilisé. Cette commande fait une demande rapide ajax et bloque la page jusqu'à ce que c'est fait
 	$.ajax({
 		url: '.',
 		async: false,
 		isLocal: true
 	}).error(function() {
-		// Ajax doesn't work so turn it off
+		// Ajax ne fonctionne pas, donc on le désactive
 		$( document ).on( "mobileinit", function() {
 			$.mobile.ajaxEnabled = false;
 			
@@ -241,8 +252,8 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 			});
 			
 			message
-			.append( "<h3 style='margin:0 0 .3em; padding:0; font-size:1em; font-weight: bold; color:#fff;'>Note: Navigation may not work if viewed locally</h3>" )
-			.append( "<p style='margin:0; font-size:.9em; color:#fff;'>The AJAX-based navigation used throughout the jQuery Mobile docs may need to be viewed on a web server to work in certain browsers. If you see an error message when you click a link, try a different browser or <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help' style='color:white'>view help</a>.</p>" );
+			.append( "<h3 style='margin:0 0 .3em; padding:0; font-size:1em; font-weight: bold; color:#fff;'>Remarque : Il est possible que la navigation ne fonctionne pas si la documentation est visualisée localement</h3>" )
+			.append( "<p style='margin:0; font-size:.9em; color:#fff;'>La navigation axée AJAX qui est utilisée dans la documentation de jQuery Mobile peut avoir besoin d'être visualisée sur un serveur web pour fonctionner dans certains navigateurs. Si vous voyez un message d'erreur lorsque vous cliquez sur un lien, essayez un autre navigateur ou <a href='https://github.com/jquery/jquery-mobile/wiki/Downloadable-Docs-Help' style='color:white'>consultez l'aide</a>.</p>" );
 			
 			$( document ).on( "pagecreate", function( event ) {
 				$( event.target ).append( message );
@@ -252,7 +263,7 @@ if ( location.protocol.substr(0,4)  === 'file' ||
 }
 
 
-// display the version of jQM
+// affiche la version de jQM
 $( document ).on( "pageinit", function() {
 	var version = $.mobile.version || "dev",
 		words = version.split( "-" ),
@@ -278,12 +289,12 @@ $( document ).on( "pageinit", function() {
 $( document ).on( "pageinit", ".jqm-demos", function() {
 	var page = $( this );
 
-	// global navmenu panel
+	// Panneau du menu global
 	$( ".jqm-navmenu-link" ).on( "click", function() {
 		page.find( ".jqm-navmenu-panel" ).panel( "open" );
 	});
 
-	// global search
+	// Recherche globale
 	$( this ).find( ".jqm-search ul.jqm-list" ).listview({
 		globalNav: "demos",
 		inset: true,
@@ -335,7 +346,7 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 		icon: false,
 		filter: true,
 		filterReveal: true,
-		filterPlaceholder: "Search...",
+		filterPlaceholder: "Recherche...",
   		arrowKeyNav: true,
   		enterToNav: true,
   		highlight: true
@@ -349,6 +360,14 @@ $( document ).on( "pageinit", ".jqm-demos", function() {
 
 $( document ).on( "pageshow",  ".jqm-demos", function() {
 	$( this ).find( ".jqm-search input" ).attr( "autocomplete", "off" ).attr( "autocorrect", "off" );
+  try {
+      _gaq.push(['_setAccount', 'UA-827525-9']);
+      if ($.mobile.activePage.attr("data-url")) {
+        _gaq.push(['_trackPageview', $.mobile.activePage.attr("data-url")]);
+      } else {
+        _gaq.push(['_trackPageview']);
+      }
+    } catch(err) {}
 });
 
 $( document ).on( "pageshow", ".jqm-demos-search-results", function() {
@@ -532,7 +551,7 @@ $( document ).on( "mobileinit", function() {
 
 });
 
-// View demo source code
+// Aperçu du code source demo
 
 function attachPopupHandler( popup, sources ) {
 	popup.one( "popupbeforeposition", function() {
@@ -633,7 +652,7 @@ function makeButton() {
 	a.setAttribute( "data-mini", "true" );
 	a.setAttribute( "data-inline", "true" );
 	a.setAttribute( "data-shadow", "false" );
-	a.innerHTML = "View Source";
+	a.innerHTML = "Voir la source";
 
 	d.appendChild( a );
 
@@ -651,7 +670,7 @@ $.fn.viewSourceCode = function() {
 			data,
 			sources = [];
 
-		// Collect source code before it becomes enhanced
+		// Collecter le code source avant de commencer l'amélioration
 
 		if ( self.is( "[data-demo-html]" ) ) {
 			if ( self.attr( "data-demo-html" ) === "true" ) {
@@ -668,7 +687,7 @@ $.fn.viewSourceCode = function() {
 					data = incoming;
 				})
 				.error( function() {
-					data = "// Failed to retrieve PHP source code";
+					data = "// Échec pour charger la source PHP";
 				});
 
 			sources.push( { title: "PHP", theme: "d", brush: "php", data: fixData( data ) } );
@@ -696,7 +715,7 @@ $( document ).on( "pagebeforecreate", "[data-role='page']", function() {
 });
 
 $( document ).on( "pageinit", function( e ) {
-	// prevent page scroll while scrolling source code
+	// évite le défilement de la page pendant le défilement du code source
 	$( document ).on( "mousewheel", ".jqm-view-source .ui-collapsible-content", function( event, delta ) {
 		if ( delta > 0 && $( this ).scrollTop() === 0 ) {
 			event.preventDefault();
@@ -705,19 +724,19 @@ $( document ).on( "pageinit", function( e ) {
 		}
 	});
 	
-	// reposition when switching between html / js / css
+	// reposition lorqu'on bascule entre html / js / css
 	$( e.target ).delegate( ".jqm-view-source .ui-collapsible", "expand", function() {
 		$( this ).parents( ":mobile-popup" ).popup( "reposition", { positionTo: "window" } );
 	});
 
 	$( e.target ).delegate( ".jqm-view-source", "popupbeforeposition", function() {
-		// max height: screen height - tolerance (2*30px) - 42px for each collapsible heading
+		// hauteur max : hauteur écran - tolérance (2*30px) - 42px pour chaque entête de pliable
 		var x = $( this ).find( ".ui-collapsible" ).length,
 			maxHeight = $.mobile.getScreenHeight() - 60 - ( x * 42 );
 
 		$( this ).find( ".ui-collapsible-content" ).css( "max-height", maxHeight + "px" );
 
-		// keep line numbers and code lines in sync
+		// garder les numéros de lignes et les lignes de code en phase
 		$(".ui-collapsible:not(.ui-collapsible-collapsed) .gutter", this ).find( ".line" ).css( "height", "");
 
 		$(".ui-collapsible:not(.ui-collapsible-collapsed) .code", this ).find( ".line" ).each( function() {

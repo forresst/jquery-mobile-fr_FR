@@ -109,7 +109,7 @@
 			_create:function(){
 				var self = this,
 					bodyid = "ui-page-top",
-					panel = "<div data-role='panel' class='jqm-nav-panel jqm-quicklink-panel' data-position='right' data-display='overlay' data-theme='c'><ul data-role='listview' data-inset='false' data-theme='d' data-divider-theme='d' data-icon='false' class='jqm-list'><li data-role='list-divider'>Jump to section</li></ul></div>",
+					panel = "<div data-role='panel' class='jqm-nav-panel jqm-quicklink-panel' data-position='right' data-display='overlay' data-theme='c'><ul data-role='listview' data-inset='false' data-theme='d' data-divider-theme='d' data-icon='false' class='jqm-list'><li data-role='list-divider'>Aller à la section</li></ul></div>",
 					first = true,
 					h2dictionary = new Object();
 					if(typeof $("body").attr("id") === "undefined"){
@@ -129,9 +129,9 @@
 
 						h2dictionary[id] =  text;
 						if(!first){
-							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-link'>Return to top<span class='ui-icon ui-icon-arrow-u'>&nbsp;</span></a>");
+							$(this).before( "<a href='#" + bodyid + "' class='jqm-deeplink ui-link'>Retourner en haut<span class='ui-icon ui-icon-arrow-u'>&nbsp;</span></a>");
 						} else {
-							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink ui-link jqm-open-quicklink-panel'>Jump to section<span class='ui-icon ui-icon-bars'>&nbsp;</span></a>");
+							$(this).before("<a href='#' data-ajax='false' class='jqm-deeplink ui-link jqm-open-quicklink-panel'>Aller à la section<span class='ui-icon ui-icon-bars'>&nbsp;</span></a>");
 						}
 						first = false;
 					});

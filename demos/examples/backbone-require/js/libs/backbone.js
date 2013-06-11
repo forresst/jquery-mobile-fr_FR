@@ -885,7 +885,7 @@
     // initialization logic.
     initialize: function(){},
 
-    // Manually bind a single named route to a callback. For example:
+    // Manually bind a single named route to a callback. Par exemple :
     //
     //     this.route('search/:query/p:num', 'search', function(query, num) {
     //       ...

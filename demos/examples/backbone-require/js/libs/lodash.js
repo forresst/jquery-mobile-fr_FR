@@ -1843,7 +1843,7 @@
   }
 
   /**
-   * Creates an object composed of keys returned from running each element of
+   u* Creates an object composed of keys returned from running each element of
    * `collection` through a `callback`. The corresponding value of each key is
    * the number of times the key was returned by `callback`. The `callback` is
    * bound to `thisArg` and invoked with three arguments; (value, index|key, collection).
@@ -1989,7 +1989,7 @@
   var forEach = createIterator(forEachIteratorOptions);
 
   /**
-   * Creates an object composed of keys returned from running each element of
+   u* Creates an object composed of keys returned from running each element of
    * `collection` through a `callback`. The corresponding value of each key is an
    * array of elements passed to `callback` that returned the key. The `callback`
    * is bound to `thisArg` and invoked with three arguments; (value, index|key, collection).

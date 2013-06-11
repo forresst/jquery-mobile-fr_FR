@@ -362,7 +362,7 @@
  * jQuery UI Widget v1.10.0pre - 2012-11-13 (ff055a0c353c3c8ce6e5bfa07ad7cb03e8885bc5)
  * http://jqueryui.com
  *
- * Copyright 2010, 2013 jQuery Foundation and other contributors
+ * Copyright 2010, 2013 jQuery Fondation et autres contributeurs
  * Released under the MIT license.
  * http://jquery.org/license
  *
@@ -1241,7 +1241,7 @@ function transform3dTest() {
 
 	var el = document.createElement( "div" ),
 		transforms = {
-			// We’re omitting Opera for the time being; MS uses unprefixed.
+			// Weâ€™re omitting Opera for the time being; MS uses unprefixed.
 			'MozTransform':'-moz-transform',
 			'transform':'transform'
 		};

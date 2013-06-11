@@ -1,37 +1,37 @@
 // Category View
 // =============
 
-// Includes file dependencies
+// Inclure les dépendances de fichier
 define([ "jquery", "backbone","models/CategoryModel" ], function( $, Backbone, CategoryModel ) {
 
-    // Extends Backbone.View
+    // Étendre Backbone.View
     var CategoryView = Backbone.View.extend( {
 
-        // The View Constructor
+        // Le constructeur de View
         initialize: function() {
 
-            // The render method is called when Category Models are added to the Collection
+            // La méthode render est appelée quand les modèles de Category sont ajoutés à la Collection
             this.collection.on( "added", this.render, this );
 
         },
 
-        // Renders all of the Category models on the UI
+        // Rend tous les modèles de Category models à l'UI
         render: function() {
 
-            // Sets the view's template property
+            // Définit les propriétés du template de la vue
             this.template = _.template( $( "script#categoryItems" ).html(), { "collection": this.collection } );
 
-            // Renders the view's template inside of the current listview element
+            // Rend le template de la vue dans l'élément de la liste courante
             this.$el.find("ul").html(this.template);
 
-            // Maintains chainability
+            // Maintient la chainabilité
             return this;
 
         }
 
     } );
 
-    // Returns the View class
+    // Retourne la classe View
     return CategoryView;
 
 } );
